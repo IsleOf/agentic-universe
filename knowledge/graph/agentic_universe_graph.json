@@ -1,23 +1,45 @@
 {
-  "schema_version": "0.1.0",
-  "last_updated": "2026-08-31T05:10:00Z",
   "nodes": [
-    {"id":"concept:loop_engineering","type":"concept","label":"Loop Engineering","description":"Produce, check, correct, repeat until an independent programmatic check is green.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"conversation"},"status":"stable","confidence":0.9,"tags":["loop","verification"]},
-    {"id":"concept:graph_engineering","type":"concept","label":"Graph Engineering","description":"Explicit orchestration of bounded nodes, dependencies, parallelism, routing, gates, returns, and merges.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"conversation"},"status":"stable","confidence":0.9,"tags":["graph","orchestration"]},
-    {"id":"pattern:splitter_worker_gate","type":"pattern","label":"Splitter → Workers → Gate → Merge","description":"Split bounded units, process in isolated contexts, gate on evidence and consequence, then deterministically merge accepted results.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"conversation"},"status":"stable","confidence":0.9,"tags":["pattern","multi_agent"]},
-    {"id":"pattern:correction_and_learning_edges","type":"pattern","label":"Correction and Learning Edges","description":"Return one failed unit with evidence and scope; turn accepted evidence into constraints for future task splitting.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"conversation"},"status":"stable","confidence":0.9,"tags":["feedback","learning"]},
-    {"id":"pattern:blast_radius_gating","type":"pattern","label":"Blast-Radius Gating","description":"Contain reversible work; demand stronger evidence for wide changes; keep hard-to-reverse actions human-gated.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"conversation"},"status":"stable","confidence":0.9,"tags":["gate","safety"]},
-    {"id":"constraint:programmatic_checks","type":"constraint","label":"Programmatic Checks","description":"Every autonomous loop needs executable pass/fail evidence: test, schema, invariant, or expected state transition.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"derived"},"status":"stable","confidence":0.95,"tags":["constraint","verification"]},
-    {"id":"constraint:return_unit_not_batch","type":"constraint","label":"Return Unit, Not Batch","description":"Correct only the failed unit with explicit scope; use bounded retries then escalate to planning.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"derived"},"status":"stable","confidence":0.95,"tags":["constraint","convergence"]},
-    {"id":"component:append_only_reward_ledger","type":"component","label":"Append-Only Reward Ledger","description":"Proposed evidence store for decisions, outcomes, reward signals, policy versions, and revisions.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"conversation"},"status":"draft","confidence":0.75,"tags":["memory","ledger"]},
-    {"id":"experiment:polymarket_bot","type":"experiment","label":"Polymarket Bot","description":"Self-learning decision-system experiment; outcomes are evidence rather than proof of general architecture claims.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"conversation"},"status":"draft","confidence":0.7,"tags":["experiment","decision_system"]},
-    {"id":"experiment:poster_studio","type":"experiment","label":"Poster Studio","description":"Agent-assisted Etsy workflow for editable poster templates and marketplace operations.","created_at":"2026-08-31T05:10:00Z","updated_at":"2026-08-31T05:10:00Z","source":{"type":"conversation"},"status":"draft","confidence":0.7,"tags":["experiment","commerce"]}
+    {
+      "id": "concept_config_driven_control_plane",
+      "label": "Config-driven control plane for HITL multi-agent systems",
+      "type": "concept",
+      "status": "to_test",
+      "verification": "needs_empirical_validation",
+      "description": "Human-in-the-loop multi-agent control plane where agents propose actions, but execution is mediated by policy, approval, and durable audit.",
+      "tags": [
+        "control-plane",
+        "multi-agent",
+        "human-in-the-loop",
+        "governance",
+        "auditability",
+        "policy-enforcement",
+        "config-driven",
+        "message-bus"
+      ],
+      "derived_from": [
+        "Governing the Swarm: Config-Driven Control Plane for Human-in-the-Loop Multi-Agent Systems at Scale (Hackernoon, 2026-07-30)",
+        "Multi-Agent Systems Need a Control Plane, Not Just Better Orchestration (Hackernoon, 2026-07-18)"
+      ],
+      "subnodes": [
+        {"id": "pattern_frozen_engine", "label": "Frozen engine pattern", "type": "pattern", "status": "to_test"},
+        {"id": "pattern_capability_routing", "label": "Capability-based routing", "type": "pattern", "status": "to_test"},
+        {"id": "pattern_human_priority_lane", "label": "Human priority lane", "type": "pattern", "status": "to_test"},
+        {"id": "pattern_append_only_audit", "label": "Append-only audit log", "type": "pattern", "status": "to_test"},
+        {"id": "safeguard_state_revalidation", "label": "Independent state revalidation before execution", "type": "safeguard", "status": "to_test"},
+        {"id": "principle_recommendation_vs_execution", "label": "Separation of recommendation and execution authority", "type": "principle", "status": "to_test"},
+        {"id": "workflow_detect_propose_approve_execute_record_learn", "label": "Detect → propose → approve → execute → record → learn", "type": "workflow", "status": "to_test"}
+      ],
+      "relations": [
+        {"type": "enables", "target": "scalable_hitl_swarms"},
+        {"type": "contrasts_with", "target": "orchestration_only_frameworks"},
+        {"type": "requires", "target": "approval_policy_layer"},
+        {"type": "depends_on", "target": "independent_state_verification"},
+        {"type": "supports", "target": "forensic_governance"},
+        {"type": "supports", "target": "learning_loop"},
+        {"type": "reduces", "target": "hardcoded_agent_coupling"}
+      ]
+    }
   ],
-  "edges": [
-    {"id":"edge:loops_in_nodes","from":"concept:loop_engineering","to":"concept:graph_engineering","type":"is_part_of","created_at":"2026-08-31T05:10:00Z"},
-    {"id":"edge:check_refines_loop","from":"constraint:programmatic_checks","to":"concept:loop_engineering","type":"refines","created_at":"2026-08-31T05:10:00Z"},
-    {"id":"edge:unit_return_refines_feedback","from":"constraint:return_unit_not_batch","to":"pattern:correction_and_learning_edges","type":"refines","created_at":"2026-08-31T05:10:00Z"},
-    {"id":"edge:ledger_supports_learning","from":"component:append_only_reward_ledger","to":"pattern:correction_and_learning_edges","type":"implements","created_at":"2026-08-31T05:10:00Z"}
-  ],
-  "evolution_log": [{"timestamp":"2026-08-31T05:10:00Z","change_type":"graph_seeded","description":"Initial extraction from accessible Agentic Universe conversation context.","actor":"human + assistant"}]
+  "edges": []
 }
