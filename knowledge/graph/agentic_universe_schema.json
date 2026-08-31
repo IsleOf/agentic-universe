@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agentic Universe Knowledge Graph Schema",
+  "description": "Evolving schema for a curated Agentic Universe graph with approach families, evidence, and verification metadata.",
+  "type": "object",
+  "required": ["nodes", "edges"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "type"],
+        "properties": {
+          "id": {"type": "string"},
+          "label": {"type": "string"},
+          "type": {"type": "string", "enum": ["concept","pattern","principle","workflow","loop","safeguard","approach","runtime_observation","evaluation_result","trace_segment","reward_ledger_entry","conversation_archive","conversation_summary","process","test_scenario","verification_suite","approach_comparison","emergent_behavior"]},
+          "status": {"type": "string", "enum": ["speculative","to_test","in_experiment","stable_theory","verified","controversial","deprecated"]},
+          "verification_state": {"type": "string", "enum": ["needs_empirical_validation","partially_validated","validated_in_sandbox","validated_in_production","refuted","inconclusive"]},
+          "approach_family": {"type": "string"},
+          "branch_key": {"type": "string"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "description": {"type": "string"},
+          "tags": {"type": "array", "items": {"type": "string"}},
+          "derived_from": {"type": "array", "items": {"type": "string"}},
+          "evidence_links": {"type": "array", "items": {"type": "string"}},
+          "subnodes": {"type": "array", "items": {"type": "object", "required": ["id","label","type"], "properties": {"id": {"type": "string"}, "label": {"type": "string"}, "type": {"type": "string"}, "status": {"type": "string"}, "verification_state": {"type": "string"}, "approach_family": {"type": "string"}, "branch_key": {"type": "string"}, "description": {"type": "string"}}}},
+          "relations": {"type": "array", "items": {"type": "object", "required": ["type","target"], "properties": {"type": {"type": "string"}, "target": {"type": "string"}}}}
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id","source","target","type"],
+        "properties": {
+          "id": {"type": "string"}, "source": {"type": "string"}, "target": {"type": "string"}, "type": {"type": "string"}, "status": {"type": "string"}, "verification_state": {"type": "string"}, "approach_family": {"type": "string"}, "branch_key": {"type": "string"}, "confidence": {"type": "number", "minimum": 0, "maximum": 1}, "description": {"type": "string"}, "tags": {"type": "array", "items": {"type": "string"}}, "derived_from": {"type": "array", "items": {"type": "string"}}, "evidence_links": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

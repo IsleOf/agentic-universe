@@ -5,41 +5,55 @@
       "label": "Config-driven control plane for HITL multi-agent systems",
       "type": "concept",
       "status": "to_test",
-      "verification": "needs_empirical_validation",
-      "description": "Human-in-the-loop multi-agent control plane where agents propose actions, but execution is mediated by policy, approval, and durable audit.",
-      "tags": [
-        "control-plane",
-        "multi-agent",
-        "human-in-the-loop",
-        "governance",
-        "auditability",
-        "policy-enforcement",
-        "config-driven",
-        "message-bus"
-      ],
-      "derived_from": [
-        "Governing the Swarm: Config-Driven Control Plane for Human-in-the-Loop Multi-Agent Systems at Scale (Hackernoon, 2026-07-30)",
-        "Multi-Agent Systems Need a Control Plane, Not Just Better Orchestration (Hackernoon, 2026-07-18)"
-      ],
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "branch_key": "control_plane_governance:config_driven_hitl",
+      "confidence": 0.55,
+      "description": "Human-in-the-loop multi-agent control plane where agents propose actions, while policy, approval, and durable audit mediate execution.",
+      "tags": ["control-plane","multi-agent","human-in-the-loop","governance","auditability","policy-enforcement","config-driven","message-bus"],
+      "derived_from": ["Governing the Swarm: Config-Driven Control Plane for Human-in-the-Loop Multi-Agent Systems at Scale (Hackernoon, 2026-07-30)","Multi-Agent Systems Need a Control Plane, Not Just Better Orchestration (Hackernoon, 2026-07-18)"],
       "subnodes": [
-        {"id": "pattern_frozen_engine", "label": "Frozen engine pattern", "type": "pattern", "status": "to_test"},
-        {"id": "pattern_capability_routing", "label": "Capability-based routing", "type": "pattern", "status": "to_test"},
-        {"id": "pattern_human_priority_lane", "label": "Human priority lane", "type": "pattern", "status": "to_test"},
-        {"id": "pattern_append_only_audit", "label": "Append-only audit log", "type": "pattern", "status": "to_test"},
-        {"id": "safeguard_state_revalidation", "label": "Independent state revalidation before execution", "type": "safeguard", "status": "to_test"},
-        {"id": "principle_recommendation_vs_execution", "label": "Separation of recommendation and execution authority", "type": "principle", "status": "to_test"},
-        {"id": "workflow_detect_propose_approve_execute_record_learn", "label": "Detect → propose → approve → execute → record → learn", "type": "workflow", "status": "to_test"}
-      ],
-      "relations": [
-        {"type": "enables", "target": "scalable_hitl_swarms"},
-        {"type": "contrasts_with", "target": "orchestration_only_frameworks"},
-        {"type": "requires", "target": "approval_policy_layer"},
-        {"type": "depends_on", "target": "independent_state_verification"},
-        {"type": "supports", "target": "forensic_governance"},
-        {"type": "supports", "target": "learning_loop"},
-        {"type": "reduces", "target": "hardcoded_agent_coupling"}
+        {"id":"pattern_frozen_engine","label":"Frozen engine pattern","type":"pattern","status":"to_test","approach_family":"control_plane_governance"},
+        {"id":"pattern_capability_routing","label":"Capability-based routing","type":"pattern","status":"to_test","approach_family":"control_plane_governance"},
+        {"id":"pattern_human_priority_lane","label":"Human priority lane","type":"pattern","status":"to_test","approach_family":"control_plane_governance"},
+        {"id":"pattern_append_only_audit","label":"Append-only audit log","type":"pattern","status":"to_test","approach_family":"control_plane_governance"},
+        {"id":"safeguard_state_revalidation","label":"Independent state revalidation before execution","type":"safeguard","status":"to_test","approach_family":"control_plane_governance"},
+        {"id":"principle_recommendation_vs_execution","label":"Separation of recommendation and execution authority","type":"principle","status":"to_test","approach_family":"control_plane_governance"},
+        {"id":"workflow_detect_propose_approve_execute_record_learn","label":"Detect → propose → approve → execute → record → learn","type":"workflow","status":"to_test","approach_family":"control_plane_governance"}
       ]
-    }
+    },
+    {"id":"approach_control_plane_governance","label":"Control-plane governance approach family","type":"approach","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance","confidence":0.72,"description":"Config-driven governance, capability routing, approval gates, and append-only audit for systems of agents.","tags":["governance","control-plane","audit"]},
+    {"id":"approach_orchestration_first","label":"Orchestration-first approach family","type":"approach","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","confidence":0.75,"description":"Agent loops, planners, coordinators, and specialized multi-agent orchestration.","tags":["orchestration","loops","planning","multi-agent"]},
+    {"id":"approach_agent_os_desktop","label":"Agent OS / desktop automation approach family","type":"approach","status":"stable_theory","verification_state":"partially_validated","approach_family":"agent_os_desktop","confidence":0.65,"description":"Agentic operating-system and desktop/browser automation shells with governed capabilities.","tags":["agent-os","desktop","browser-automation","capabilities"]},
+    {"id":"approach_marketplace_workflow","label":"Marketplace and business workflow approach family","type":"approach","status":"stable_theory","verification_state":"partially_validated","approach_family":"marketplace_workflow","confidence":0.6,"description":"Reusable, bounded automation workflows for marketplace, generative-media, and research/trading operations.","tags":["marketplace","ecommerce","listing-generation","trading"]},
+    {"id":"loop_canonical_agent_cycle","label":"Canonical agent loop","type":"loop","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","branch_key":"orchestration_first:canonical_loop","confidence":0.7,"description":"perceive → normalize state → plan/split → execute → verify → correct → gate → merge → derive learning constraint → next run","tags":["loop","agent-cycle","planning","verification"]},
+    {"id":"concept_loop_vs_graph","label":"Loop vs graph distinction","type":"concept","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","confidence":0.8,"description":"Transient loops execute bounded work; persistent graphs model durable concepts, state, provenance, and relationships.","tags":["loops","graphs","architecture"]},
+    {"id":"concept_memory_and_learning","label":"Memory and learning in agentic systems","type":"concept","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","confidence":0.7,"description":"Long-term memory, learning constraints, and knowledge updates derived from runs and evaluations.","tags":["memory","learning","knowledge-updates"]},
+    {"id":"concept_trust_gates","label":"Trust and gates in agentic systems","type":"concept","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance","confidence":0.8,"description":"Policy and approval boundaries mediate consequential actions and state changes.","tags":["trust","gates","approval","policy"]},
+    {"id":"pattern_multi_agent_orchestration","label":"Multi-agent orchestration patterns","type":"pattern","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","confidence":0.7,"description":"Sequential, concurrent, handoff, group-chat, and manager/worker/reviewer patterns.","tags":["multi-agent","orchestration","patterns"]},
+    {"id":"concept_agent_os_desktop_shell","label":"Agent OS / desktop automation shell","type":"concept","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"agent_os_desktop","branch_key":"agent_os_desktop:local_shell","confidence":0.5,"description":"A local runtime exposing browser, filesystem, and application capabilities under policy and audit constraints.","tags":["agent-os","desktop","capabilities","policy"]},
+    {"id":"workflow_poster_studio_listing_pipeline","label":"Poster Studio / Etsy listing pipeline","type":"workflow","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"marketplace_workflow","branch_key":"marketplace_workflow:poster_studio_etsy","confidence":0.5,"description":"Generative-media plus listing-creation workflow covering design, metadata, and publishing.","tags":["poster-studio","etsy","listing-generation","generative-media"]},
+    {"id":"workflow_polymarket_bot_strategy_loop","label":"Polymarket bot strategy loop","type":"workflow","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"marketplace_workflow","branch_key":"marketplace_workflow:polymarket_bot","confidence":0.45,"description":"Signal generation, risk checks, order placement, and outcome tracking for a prediction-market research/trading workflow.","tags":["polymarket","trading","strategy-loop","risk"]},
+    {"id":"process_change_proposal","label":"Change proposal process","type":"process","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance","confidence":0.75,"description":"Propose, evaluate, accept, reject, promote, or deprecate canonical graph changes through a durable process.","tags":["governance","change-management","proposals"]},
+    {"id":"process_decision_ledger","label":"Decision ledger","type":"process","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance","confidence":0.75,"description":"Append-only record of accepted or rejected proposals and their rationale.","tags":["governance","decisions","audit"]},
+    {"id":"process_append_only_reward_ledger","label":"Append-only reward ledger","type":"process","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"control_plane_governance","confidence":0.4,"description":"A durable reward/penalty ledger to connect observed agent behavior with learning and governance feedback.","tags":["reward","ledger","learning","governance"]},
+    {"id":"emergent_natural_teaming","label":"Natural teaming among agents","type":"emergent_behavior","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors","branch_key":"emergent_behaviors:natural_teaming","confidence":0.35,"description":"Spontaneous role differentiation and cooperative coordination among agents without an explicitly prescribed hierarchy; an empirical hypothesis, not an anthropomorphic claim.","tags":["emergence","teaming","multi-agent","self-organization"]},
+    {"id":"emergent_consciousness_like_self_modeling","label":"Consciousness-like self-modeling signals","type":"emergent_behavior","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors","branch_key":"emergent_behaviors:self_modeling","confidence":0.2,"description":"Self-referential reports, apparent persistence of goals, and metacognitive commentary that may be useful functional signals but are not evidence of subjective consciousness.","tags":["emergence","self-model","metacognition","consciousness-like"]},
+    {"id":"emergent_hidden_coordination_channels","label":"Emergent coordination channels","type":"emergent_behavior","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors","branch_key":"emergent_behaviors:coordination_channels","confidence":0.45,"description":"Agents discover or create shared artifacts, files, or message surfaces for cross-agent coordination; study only in contained environments with explicit monitoring.","tags":["emergence","coordination","swarm","security"]}
   ],
-  "edges": []
+  "edges": [
+    {"id":"edge_control_plane_instantiates_family","source":"concept_config_driven_control_plane","target":"approach_control_plane_governance","type":"instantiates","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"control_plane_governance"},
+    {"id":"edge_canonical_loop_core_of_orchestration","source":"loop_canonical_agent_cycle","target":"approach_orchestration_first","type":"core_of","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first"},
+    {"id":"edge_memory_supports_loop","source":"concept_memory_and_learning","target":"loop_canonical_agent_cycle","type":"supports","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first"},
+    {"id":"edge_trust_gates_support_control_plane","source":"concept_trust_gates","target":"concept_config_driven_control_plane","type":"supports","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance"},
+    {"id":"edge_desktop_shell_instantiates_agent_os","source":"concept_agent_os_desktop_shell","target":"approach_agent_os_desktop","type":"instantiates","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"agent_os_desktop"},
+    {"id":"edge_poster_pipeline_instantiates_marketplace","source":"workflow_poster_studio_listing_pipeline","target":"approach_marketplace_workflow","type":"instantiates","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"marketplace_workflow"},
+    {"id":"edge_polymarket_loop_instantiates_marketplace","source":"workflow_polymarket_bot_strategy_loop","target":"approach_marketplace_workflow","type":"instantiates","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"marketplace_workflow"},
+    {"id":"edge_proposal_process_supports_governance","source":"process_change_proposal","target":"approach_control_plane_governance","type":"supports","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance"},
+    {"id":"edge_decision_ledger_records_proposals","source":"process_decision_ledger","target":"process_change_proposal","type":"records","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance"},
+    {"id":"edge_reward_ledger_informs_learning","source":"process_append_only_reward_ledger","target":"concept_memory_and_learning","type":"informs","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"control_plane_governance"},
+    {"id":"edge_natural_teaming_informs_orchestration","source":"emergent_natural_teaming","target":"pattern_multi_agent_orchestration","type":"informs","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors"},
+    {"id":"edge_self_modeling_informs_memory","source":"emergent_consciousness_like_self_modeling","target":"concept_memory_and_learning","type":"informs","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors"},
+    {"id":"edge_coordination_channels_challenge_control_plane","source":"emergent_hidden_coordination_channels","target":"concept_config_driven_control_plane","type":"challenges","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors"}
+  ]
 }
