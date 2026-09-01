@@ -1,0 +1,19 @@
+{
+  "proposal_metadata": {
+    "id": "proposal_yyyy_mm_dd_short_name",
+    "title": "Short descriptive title",
+    "status": "draft",
+    "author": "human_or_agent_identifier",
+    "created_at": "YYYY-MM-DD",
+    "affected_approach_families": ["emergent_behaviors"],
+    "rationale": "What this patch changes and why",
+    "derived_from": ["path, paper, run, or conversation reference"],
+    "verification_plan": "Smallest controlled test and success criteria"
+  },
+  "add_nodes": [],
+  "update_nodes": [],
+  "add_edges": [],
+  "update_edges": [],
+  "deprecate_node_ids": [],
+  "deprecate_edge_ids": []
+}
