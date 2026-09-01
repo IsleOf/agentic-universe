@@ -1,0 +1,108 @@
+{
+  "proposal_metadata": {
+    "id": "proposal_2026_09_01_evidence_substrate",
+    "title": "Evidence substrate, single-vs-multi-agent baseline, and promotion gate",
+    "status": "draft",
+    "author": "claude_cowork_opus5",
+    "created_at": "2026-09-01",
+    "affected_approach_families": ["control_plane_governance", "orchestration_first"],
+    "rationale": "11 of 19 nodes are marked stable_theory / partially_validated, 1 has derived_from, and 0 have evidence_links. On the project's own written evidence standard none of the 11 qualify for that status. Adds a promotion gate, the missing baseline experiment, and a result slot for it. Deliberately does not demote existing nodes: that is an owner decision, presented as three options in the companion markdown.",
+    "derived_from": [
+      "docs/graph_state_2026-09.md (Evidence standards; experiment 1)",
+      "docs/claude_desktop_handover.md (operating rules 4-6; definition of done)",
+      "knowledge/graph/agentic_universe_graph.json at commit ef4ed3e (field-level counts)"
+    ],
+    "verification_plan": "Strong single-agent-with-tools baseline vs manager/worker/reviewer harness at equal total token budget on one bounded task family with an executable check. Matching correctness at higher cost is recorded as a negative result for orchestration_first."
+  },
+  "add_nodes": [
+    {
+      "id": "principle_evidence_before_promotion",
+      "label": "Evidence before promotion",
+      "type": "principle",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "branch_key": "control_plane_governance:evidence_standards",
+      "confidence": 0.6,
+      "description": "A node's status may be raised only when a named, replayable evidence artifact is linked in evidence_links. Absent that, the node stays speculative or to_test however plausible it seems. Confidence values are drawn from anchored bands rather than continuous estimates, since continuous values imply precision the evidence does not support. Adding speculative nodes stays cheap; the gate applies only to raising status.",
+      "tags": ["governance", "evidence", "promotion", "epistemics", "confidence-rubric"],
+      "derived_from": ["docs/graph_state_2026-09.md", "docs/claude_desktop_handover.md"],
+      "evidence_links": ["evolution/proposals/2026-09-01_evidence-substrate-and-promotion-gate.md"]
+    },
+    {
+      "id": "verification_suite_single_vs_multi_agent_baseline",
+      "label": "Single agent with tools vs manager/worker/reviewer harness",
+      "type": "verification_suite",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:baseline_comparison",
+      "confidence": 0.5,
+      "description": "The load-bearing test for the orchestration_first family. One capable agent with deterministic tools against a manager/worker/reviewer harness on a bounded task family with an executable check, at equal total token budget. The single-agent arm must be genuinely well-tooled; a weak baseline would manufacture support for the family it is meant to test.",
+      "tags": ["experiment", "baseline", "controlled-comparison", "orchestration", "cost"],
+      "derived_from": ["docs/graph_state_2026-09.md (experiment 1)"],
+      "evidence_links": ["evolution/proposals/2026-09-01_evidence-substrate-and-promotion-gate.md"]
+    },
+    {
+      "id": "approach_comparison_single_agent_vs_orchestrated",
+      "label": "Comparison result: single agent vs orchestrated harness",
+      "type": "approach_comparison",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:baseline_comparison",
+      "confidence": 0.3,
+      "description": "Result slot for the baseline comparison, so a finding has a defined home and cannot be absorbed silently into prose. Must record the task family and refuse to generalize beyond it; a single bounded task cannot support a general claim about multi-agent value.",
+      "tags": ["comparison", "result", "evaluation", "scope-limited"],
+      "derived_from": ["docs/graph_state_2026-09.md (experiment 1)"],
+      "evidence_links": ["evolution/proposals/2026-09-01_evidence-substrate-and-promotion-gate.md"]
+    }
+  ],
+  "update_nodes": [],
+  "add_edges": [
+    {
+      "id": "edge_promotion_gate_constrains_proposal_process",
+      "source": "principle_evidence_before_promotion",
+      "target": "process_change_proposal",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.6,
+      "description": "Makes the written evidence standard an enforceable condition of the proposal process rather than an aspiration."
+    },
+    {
+      "id": "edge_baseline_suite_tests_orchestration_family",
+      "source": "verification_suite_single_vs_multi_agent_baseline",
+      "target": "approach_orchestration_first",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_comparison_records_baseline_suite",
+      "source": "approach_comparison_single_agent_vs_orchestrated",
+      "target": "verification_suite_single_vs_multi_agent_baseline",
+      "type": "records",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.4
+    },
+    {
+      "id": "edge_promotion_gate_supports_decision_ledger",
+      "source": "principle_evidence_before_promotion",
+      "target": "process_decision_ledger",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.5
+    }
+  ],
+  "update_edges": [],
+  "deprecate_node_ids": [],
+  "deprecate_edge_ids": []
+}

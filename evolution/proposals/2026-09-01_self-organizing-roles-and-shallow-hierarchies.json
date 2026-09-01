@@ -1,0 +1,132 @@
+{
+  "proposal_metadata": {
+    "id": "proposal_2026_09_01_self_organizing_roles",
+    "title": "Self-organizing roles, hierarchy depth, and specialization failure modes",
+    "status": "draft",
+    "author": "claude_cowork_opus5",
+    "created_at": "2026-09-01",
+    "affected_approach_families": ["emergent_behaviors", "orchestration_first"],
+    "rationale": "Splits role differentiation from cooperation (currently fused in emergent_natural_teaming), makes coordination depth an explicit variable, and adds the failure-mode hypothesis so the emergent cluster does not model only upside.",
+    "derived_from": [
+      "docs/graph_state_2026-09.md (emergent hypotheses; experiments 4-5)",
+      "knowledge/graph/agentic_universe_graph.json (emergent_natural_teaming)",
+      "architecture/foundations.md (worker scope isolation rule)"
+    ],
+    "verification_plan": "Assigned-role baseline vs minimal-scaffold swarm plus a depth sweep; differentiation measured as divergence in per-agent tool-use and message-class distributions, scored blind to condition. See companion markdown proposal."
+  },
+  "add_nodes": [
+    {
+      "id": "emergent_self_organizing_roles",
+      "label": "Self-organizing role differentiation",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:self_organizing_roles",
+      "confidence": 0.35,
+      "description": "Agents given a shared task and minimal scaffolding adopt distinguishable functional roles. Deliberately narrower than emergent_natural_teaming: this node claims differentiation only, not cooperation, so the two can be measured and refuted independently. Roles must be identified from behavioural traces, never from agent self-report.",
+      "tags": ["emergence", "self-organization", "roles", "specialization", "multi-agent"],
+      "derived_from": ["docs/graph_state_2026-09.md", "knowledge/graph/agentic_universe_graph.json"],
+      "evidence_links": ["evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"]
+    },
+    {
+      "id": "pattern_shallow_hierarchy",
+      "label": "Shallow coordination hierarchy (depth as a variable)",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:hierarchy_depth",
+      "confidence": 0.4,
+      "description": "Treats coordination depth as an explicit tunable rather than an implicit constant of manager/worker/reviewer arrangements. Hypothesis: beyond depth 2, added layers cost more in coordination tokens and instruction drift than they recover in task decomposition quality.",
+      "tags": ["hierarchy", "depth", "coordination", "orchestration", "multi-agent"],
+      "derived_from": ["docs/graph_state_2026-09.md"],
+      "evidence_links": ["evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"]
+    },
+    {
+      "id": "emergent_role_specialization_failure_modes",
+      "label": "Failure modes of role specialization",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:specialization_risks",
+      "confidence": 0.35,
+      "description": "Specialization may introduce bottlenecks, false consensus, hidden cross-agent dependencies, and fragile key-agent single points of failure. Held at the same confidence as the capability hypothesis it challenges, so the cluster does not encode a preference for upside as a finding.",
+      "tags": ["emergence", "failure-modes", "bottleneck", "false-consensus", "fragility", "safety"],
+      "derived_from": ["docs/graph_state_2026-09.md (experiment 5)"],
+      "evidence_links": ["evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"]
+    },
+    {
+      "id": "test_scenario_assigned_vs_emergent_roles",
+      "label": "Test: assigned roles vs minimal-scaffold swarm, with depth sweep",
+      "type": "test_scenario",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:role_evaluation",
+      "confidence": 0.4,
+      "description": "Assigned manager/worker/reviewer baseline vs identical agents with no assigned roles, plus a depth sweep at constant agent count to separate depth effects from specialization effects. Includes deliberate mid-run removal of the highest-load agent to probe key-agent fragility.",
+      "tags": ["experiment", "controlled-comparison", "roles", "depth", "fragility"],
+      "derived_from": ["docs/graph_state_2026-09.md (experiments 4-5)"],
+      "evidence_links": ["evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"]
+    }
+  ],
+  "update_nodes": [],
+  "add_edges": [
+    {
+      "id": "edge_self_organizing_roles_refines_natural_teaming",
+      "source": "emergent_self_organizing_roles",
+      "target": "emergent_natural_teaming",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "Separates the differentiation claim from the cooperation claim currently fused in the parent node."
+    },
+    {
+      "id": "edge_shallow_hierarchy_extends_orchestration_patterns",
+      "source": "pattern_shallow_hierarchy",
+      "target": "pattern_multi_agent_orchestration",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.4
+    },
+    {
+      "id": "edge_specialization_failures_challenge_self_organizing_roles",
+      "source": "emergent_role_specialization_failure_modes",
+      "target": "emergent_self_organizing_roles",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.35
+    },
+    {
+      "id": "edge_specialization_failures_challenge_shallow_hierarchy",
+      "source": "emergent_role_specialization_failure_modes",
+      "target": "pattern_shallow_hierarchy",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.35
+    },
+    {
+      "id": "edge_role_test_verifies_self_organizing_roles",
+      "source": "test_scenario_assigned_vs_emergent_roles",
+      "target": "emergent_self_organizing_roles",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45
+    }
+  ],
+  "update_edges": [],
+  "deprecate_node_ids": [],
+  "deprecate_edge_ids": []
+}

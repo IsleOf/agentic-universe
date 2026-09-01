@@ -1,0 +1,109 @@
+{
+  "proposal_metadata": {
+    "id": "proposal_2026_09_01_supervisor_live_steering",
+    "title": "Supervisor-worker live steering and procedure distillation",
+    "status": "draft",
+    "author": "claude_cowork_opus5",
+    "created_at": "2026-09-01",
+    "affected_approach_families": ["emergent_behaviors", "orchestration_first"],
+    "rationale": "The canonical loop models runs as atomic. Adds separate nodes for mid-run bounded steering and post-verification procedure distillation so experimental results can be attributed to one mechanism rather than both.",
+    "derived_from": [
+      "docs/graph_state_2026-09.md (highest-value next experiments 1-2)",
+      "architecture/foundations.md (return-a-unit and escalation rules)"
+    ],
+    "verification_plan": "Static-handoff baseline vs bounded-steering supervisor at equal total token budget; measure attempts-to-green, cost per green unit, and supervisor-attributable regressions. See companion markdown proposal."
+  },
+  "add_nodes": [
+    {
+      "id": "pattern_supervisor_live_steering",
+      "label": "Supervisor live steering with bounded intervention budget",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:live_self_improvement",
+      "confidence": 0.35,
+      "description": "A supervisor observes worker progress mid-run and may issue a bounded number of scoped corrections before the unit completes. The intervention budget is definitional: an unbounded supervisor is a second executor sharing the worker's scope, not a steering mechanism.",
+      "tags": ["supervisor", "steering", "live-correction", "multi-agent", "intervention-budget"],
+      "derived_from": ["docs/graph_state_2026-09.md", "architecture/foundations.md"],
+      "evidence_links": ["evolution/proposals/2026-09-01_supervisor-live-steering-and-procedure-distillation.md"]
+    },
+    {
+      "id": "process_procedure_distillation",
+      "label": "Post-verification procedure distillation",
+      "type": "process",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:live_self_improvement",
+      "confidence": 0.3,
+      "description": "After a run whose verification passed, extract a reusable procedure and make it available to later runs. Admissible only from runs carrying an executable check; the distilled procedure retains the identity of the check that authorised it, so weak checks cannot launder a trajectory into policy.",
+      "tags": ["distillation", "procedures", "learning", "reuse", "provenance"],
+      "derived_from": ["docs/graph_state_2026-09.md"],
+      "evidence_links": ["evolution/proposals/2026-09-01_supervisor-live-steering-and-procedure-distillation.md"]
+    },
+    {
+      "id": "test_scenario_steering_vs_static_handoff",
+      "label": "Test: bounded steering vs static handoff at equal budget",
+      "type": "test_scenario",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:steering_evaluation",
+      "confidence": 0.4,
+      "description": "Controlled comparison on one bounded task family: static handoff baseline vs supervisor with <=3 interventions per unit, total token budget held equal so gains cannot be attributed to extra spend. Primary metric is attempts-to-green; guard metric is supervisor-attributable regression rate.",
+      "tags": ["experiment", "baseline", "controlled-comparison", "steering"],
+      "derived_from": ["docs/graph_state_2026-09.md"],
+      "evidence_links": ["evolution/proposals/2026-09-01_supervisor-live-steering-and-procedure-distillation.md"]
+    }
+  ],
+  "update_nodes": [],
+  "add_edges": [
+    {
+      "id": "edge_steering_extends_orchestration_patterns",
+      "source": "pattern_supervisor_live_steering",
+      "target": "pattern_multi_agent_orchestration",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "Adds a mid-run intervention arrangement to the existing sequential/concurrent/handoff/manager-worker-reviewer set."
+    },
+    {
+      "id": "edge_steering_intervenes_in_canonical_loop",
+      "source": "pattern_supervisor_live_steering",
+      "target": "loop_canonical_agent_cycle",
+      "type": "modifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.4,
+      "description": "Inserts an intervention point between execute and verify, where the loop currently assumes an atomic unit."
+    },
+    {
+      "id": "edge_distillation_informs_memory_and_learning",
+      "source": "process_procedure_distillation",
+      "target": "concept_memory_and_learning",
+      "type": "implements",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.3,
+      "description": "Gives the memory/learning concept a concrete mechanism for what is retained across runs."
+    },
+    {
+      "id": "edge_steering_test_verifies_steering_pattern",
+      "source": "test_scenario_steering_vs_static_handoff",
+      "target": "pattern_supervisor_live_steering",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45
+    }
+  ],
+  "update_edges": [],
+  "deprecate_node_ids": [],
+  "deprecate_edge_ids": []
+}

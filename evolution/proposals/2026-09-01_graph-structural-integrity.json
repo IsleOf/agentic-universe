@@ -1,0 +1,47 @@
+{
+  "proposal_metadata": {
+    "id": "proposal_2026_09_01_graph_structural_integrity",
+    "title": "Subnode addressability, orphan repair, and lost graph metadata",
+    "status": "draft",
+    "author": "claude_cowork_opus5",
+    "created_at": "2026-09-01",
+    "affected_approach_families": ["control_plane_governance", "orchestration_first"],
+    "rationale": "Four mechanical defects at commit ef4ed3e: (1) seven subnodes of concept_config_driven_control_plane are unaddressable because validator and proposal checker collect top-level IDs only, so edges to them fail validation; (2) concept_loop_vs_graph is an orphan; (3) pattern_multi_agent_orchestration has no edge to its own approach family while three other proposals are about to attach to it; (4) schema_version, last_updated and evolution_log were dropped after the seed commit and evolution/decision-ledger/ does not exist. This patch carries the two edge fixes; the tooling and repository items need code changes and an owner decision.",
+    "derived_from": [
+      "knowledge/graph/agentic_universe_graph.json at ef4ed3e",
+      "tools/knowledge_graph.py lines 28 and 63",
+      "seed graph at commit c9986bc",
+      "docs/claude_desktop_handover.md (repository map)"
+    ],
+    "verification_plan": "validate still returns VALID; a test edge targeting pattern_append_only_audit passes check-proposal where it previously failed; orphan count 0; node count unchanged by this patch."
+  },
+  "add_nodes": [],
+  "update_nodes": [],
+  "add_edges": [
+    {
+      "id": "edge_loop_vs_graph_grounds_orchestration",
+      "source": "concept_loop_vs_graph",
+      "target": "approach_orchestration_first",
+      "type": "grounds",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.7,
+      "description": "Attaches the only fully disconnected node in the graph. The transient-loop / durable-graph distinction is the founding premise of the orchestration family and was previously linked to nothing."
+    },
+    {
+      "id": "edge_orchestration_patterns_instantiate_family",
+      "source": "pattern_multi_agent_orchestration",
+      "target": "approach_orchestration_first",
+      "type": "instantiates",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.7,
+      "description": "Matches the instantiates/core_of convention every other approach family already follows. The pattern is about to become a hub for three further proposals while structurally unrooted."
+    }
+  ],
+  "update_edges": [],
+  "deprecate_node_ids": [],
+  "deprecate_edge_ids": []
+}

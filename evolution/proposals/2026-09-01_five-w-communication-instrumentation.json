@@ -1,0 +1,96 @@
+{
+  "proposal_metadata": {
+    "id": "proposal_2026_09_01_five_w_instrumentation",
+    "title": "Five-W communication instrumentation and topology analysis",
+    "status": "draft",
+    "author": "claude_cowork_opus5",
+    "created_at": "2026-09-01",
+    "affected_approach_families": ["emergent_behaviors", "control_plane_governance"],
+    "rationale": "Five-W message records are the measurement substrate the other emergent-behaviour experiments depend on, not a parallel hypothesis. Complete records of sanctioned channels are also what make emergent_hidden_coordination_channels testable in principle, via the gap between observed coordination and logged messages.",
+    "derived_from": [
+      "docs/graph_state_2026-09.md (experiment 3 and the dependency structure of experiments 1-5)",
+      "knowledge/graph/agentic_universe_graph.json (emergent_hidden_coordination_channels, pattern_append_only_audit)",
+      "architecture/foundations.md (named artifact on every dependency edge)"
+    ],
+    "verification_plan": "Instrument all sanctioned messages; require >=98% field coverage at <5% token overhead and demonstrate that topology analysis recovers explicitly assigned roles in a control condition before using it to detect emergent ones."
+  },
+  "add_nodes": [
+    {
+      "id": "pattern_five_w_message_instrumentation",
+      "label": "Five-W message instrumentation (who, what, when, why, which channel)",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:communication_topology",
+      "confidence": 0.55,
+      "description": "Every inter-agent message carries sender/receiver, content class from a versioned taxonomy, timestamp, declared purpose captured at the sending call site, and channel identifier. Declared purpose is a claim about intent and is analysed as such, never as evidence of function.",
+      "tags": ["instrumentation", "communication", "five-ws", "observability", "audit", "multi-agent"],
+      "derived_from": ["docs/graph_state_2026-09.md", "architecture/foundations.md"],
+      "evidence_links": ["evolution/proposals/2026-09-01_five-w-communication-instrumentation.md"]
+    },
+    {
+      "id": "verification_suite_communication_topology",
+      "label": "Communication topology verification suite",
+      "type": "verification_suite",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:communication_topology",
+      "confidence": 0.5,
+      "description": "Analysis layer over Five-W records: topology density and centralization, per-agent message-class distributions, timing patterns, and the sanctioned-vs-observed coordination gap. Gated by a control condition: it must recover explicitly assigned roles before being trusted to detect emergent ones.",
+      "tags": ["evaluation", "topology", "analysis", "coordination-gap", "observability"],
+      "derived_from": ["docs/graph_state_2026-09.md"],
+      "evidence_links": ["evolution/proposals/2026-09-01_five-w-communication-instrumentation.md"]
+    }
+  ],
+  "update_nodes": [],
+  "add_edges": [
+    {
+      "id": "edge_five_w_supports_orchestration_patterns",
+      "source": "pattern_five_w_message_instrumentation",
+      "target": "pattern_multi_agent_orchestration",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Makes the coordination structure of any orchestration pattern observable rather than assumed."
+    },
+    {
+      "id": "edge_five_w_detects_hidden_coordination",
+      "source": "pattern_five_w_message_instrumentation",
+      "target": "emergent_hidden_coordination_channels",
+      "type": "detects",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Complete records of sanctioned channels make unsanctioned coordination detectable as outcome dependency with no corresponding message path. Evidence of unexplained coordination, never proof of its absence."
+    },
+    {
+      "id": "edge_topology_suite_measures_five_w",
+      "source": "verification_suite_communication_topology",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_five_w_supports_control_plane_audit",
+      "source": "pattern_five_w_message_instrumentation",
+      "target": "concept_config_driven_control_plane",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.45,
+      "description": "Concrete instance of the append-only audit surface the control-plane concept already claims as a subnode."
+    }
+  ],
+  "update_edges": [],
+  "deprecate_node_ids": [],
+  "deprecate_edge_ids": []
+}
