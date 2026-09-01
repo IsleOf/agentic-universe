@@ -1,8 +1,12 @@
 # Proposal: Self-organizing roles and shallow hierarchies
 
+> **ACCEPTED and merged into the canonical graph, 2026-09-01**, under the
+> emergence-first posture (`docs/emergence_first_posture.md`). Decision record:
+> `evolution/decision-ledger/2026-09-01_emergence-first-rebaseline.md`.
+
 - **Date:** 2026-09-01
 - **Author / agent:** Claude (Cowork session, claude-opus-5)
-- **Status:** awaiting_review
+- **Status:** accepted
 - **Affected approach family:** `emergent_behaviors`
 - **Affected graph node IDs:** `emergent_natural_teaming`, `pattern_multi_agent_orchestration`
 

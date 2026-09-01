@@ -1,8 +1,12 @@
 # Proposal: Five-W communication instrumentation for multi-agent swarms
 
+> **ACCEPTED and merged into the canonical graph, 2026-09-01**, under the
+> emergence-first posture (`docs/emergence_first_posture.md`). Decision record:
+> `evolution/decision-ledger/2026-09-01_emergence-first-rebaseline.md`.
+
 - **Date:** 2026-09-01
 - **Author / agent:** Claude (Cowork session, claude-opus-5)
-- **Status:** awaiting_review
+- **Status:** accepted
 - **Affected approach family:** `emergent_behaviors`, `control_plane_governance`
 - **Affected graph node IDs:** `pattern_multi_agent_orchestration`, `emergent_hidden_coordination_channels`, `pattern_append_only_audit` (subnode)
 

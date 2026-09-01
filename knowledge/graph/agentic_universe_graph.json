@@ -1,4 +1,27 @@
 {
+  "schema_version": "0.3.0",
+  "last_updated": "2026-09-01",
+  "posture": "emergence_first_theoretical",
+  "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
+  "evolution_log": [
+    {
+      "date": "2026-09-01",
+      "commit": "ef4ed3e",
+      "change": "Seed graph: 19 nodes, 13 edges, five approach families."
+    },
+    {
+      "date": "2026-09-01",
+      "change": "Merged proposals: graph-structural-integrity, five-w-communication-instrumentation, self-organizing-roles-and-shallow-hierarchies."
+    },
+    {
+      "date": "2026-09-01",
+      "change": "Added emergence-first spine: approach_emergence_first root (the family had none), affordance-over-constraint principle, decentralized swarm and stigmergy concepts, intrinsic motivation, individual strategy invention, autonomy dial."
+    },
+    {
+      "date": "2026-09-01",
+      "change": "Restored schema_version / last_updated / evolution_log, dropped after the seed commit."
+    }
+  ],
   "nodes": [
     {
       "id": "concept_config_driven_control_plane",
@@ -10,50 +33,1028 @@
       "branch_key": "control_plane_governance:config_driven_hitl",
       "confidence": 0.55,
       "description": "Human-in-the-loop multi-agent control plane where agents propose actions, while policy, approval, and durable audit mediate execution.",
-      "tags": ["control-plane","multi-agent","human-in-the-loop","governance","auditability","policy-enforcement","config-driven","message-bus"],
-      "derived_from": ["Governing the Swarm: Config-Driven Control Plane for Human-in-the-Loop Multi-Agent Systems at Scale (Hackernoon, 2026-07-30)","Multi-Agent Systems Need a Control Plane, Not Just Better Orchestration (Hackernoon, 2026-07-18)"],
+      "tags": [
+        "control-plane",
+        "multi-agent",
+        "human-in-the-loop",
+        "governance",
+        "auditability",
+        "policy-enforcement",
+        "config-driven",
+        "message-bus"
+      ],
+      "derived_from": [
+        "Governing the Swarm: Config-Driven Control Plane for Human-in-the-Loop Multi-Agent Systems at Scale (Hackernoon, 2026-07-30)",
+        "Multi-Agent Systems Need a Control Plane, Not Just Better Orchestration (Hackernoon, 2026-07-18)"
+      ],
       "subnodes": [
-        {"id":"pattern_frozen_engine","label":"Frozen engine pattern","type":"pattern","status":"to_test","approach_family":"control_plane_governance"},
-        {"id":"pattern_capability_routing","label":"Capability-based routing","type":"pattern","status":"to_test","approach_family":"control_plane_governance"},
-        {"id":"pattern_human_priority_lane","label":"Human priority lane","type":"pattern","status":"to_test","approach_family":"control_plane_governance"},
-        {"id":"pattern_append_only_audit","label":"Append-only audit log","type":"pattern","status":"to_test","approach_family":"control_plane_governance"},
-        {"id":"safeguard_state_revalidation","label":"Independent state revalidation before execution","type":"safeguard","status":"to_test","approach_family":"control_plane_governance"},
-        {"id":"principle_recommendation_vs_execution","label":"Separation of recommendation and execution authority","type":"principle","status":"to_test","approach_family":"control_plane_governance"},
-        {"id":"workflow_detect_propose_approve_execute_record_learn","label":"Detect → propose → approve → execute → record → learn","type":"workflow","status":"to_test","approach_family":"control_plane_governance"}
+        {
+          "id": "pattern_frozen_engine",
+          "label": "Frozen engine pattern",
+          "type": "pattern",
+          "status": "to_test",
+          "approach_family": "control_plane_governance"
+        },
+        {
+          "id": "pattern_capability_routing",
+          "label": "Capability-based routing",
+          "type": "pattern",
+          "status": "to_test",
+          "approach_family": "control_plane_governance"
+        },
+        {
+          "id": "pattern_human_priority_lane",
+          "label": "Human priority lane",
+          "type": "pattern",
+          "status": "to_test",
+          "approach_family": "control_plane_governance"
+        },
+        {
+          "id": "pattern_append_only_audit",
+          "label": "Append-only audit log",
+          "type": "pattern",
+          "status": "to_test",
+          "approach_family": "control_plane_governance"
+        },
+        {
+          "id": "safeguard_state_revalidation",
+          "label": "Independent state revalidation before execution",
+          "type": "safeguard",
+          "status": "to_test",
+          "approach_family": "control_plane_governance"
+        },
+        {
+          "id": "principle_recommendation_vs_execution",
+          "label": "Separation of recommendation and execution authority",
+          "type": "principle",
+          "status": "to_test",
+          "approach_family": "control_plane_governance"
+        },
+        {
+          "id": "workflow_detect_propose_approve_execute_record_learn",
+          "label": "Detect → propose → approve → execute → record → learn",
+          "type": "workflow",
+          "status": "to_test",
+          "approach_family": "control_plane_governance"
+        }
       ]
     },
-    {"id":"approach_control_plane_governance","label":"Control-plane governance approach family","type":"approach","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance","confidence":0.72,"description":"Config-driven governance, capability routing, approval gates, and append-only audit for systems of agents.","tags":["governance","control-plane","audit"]},
-    {"id":"approach_orchestration_first","label":"Orchestration-first approach family","type":"approach","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","confidence":0.75,"description":"Agent loops, planners, coordinators, and specialized multi-agent orchestration.","tags":["orchestration","loops","planning","multi-agent"]},
-    {"id":"approach_agent_os_desktop","label":"Agent OS / desktop automation approach family","type":"approach","status":"stable_theory","verification_state":"partially_validated","approach_family":"agent_os_desktop","confidence":0.65,"description":"Agentic operating-system and desktop/browser automation shells with governed capabilities.","tags":["agent-os","desktop","browser-automation","capabilities"]},
-    {"id":"approach_marketplace_workflow","label":"Marketplace and business workflow approach family","type":"approach","status":"stable_theory","verification_state":"partially_validated","approach_family":"marketplace_workflow","confidence":0.6,"description":"Reusable, bounded automation workflows for marketplace, generative-media, and research/trading operations.","tags":["marketplace","ecommerce","listing-generation","trading"]},
-    {"id":"loop_canonical_agent_cycle","label":"Canonical agent loop","type":"loop","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","branch_key":"orchestration_first:canonical_loop","confidence":0.7,"description":"perceive → normalize state → plan/split → execute → verify → correct → gate → merge → derive learning constraint → next run","tags":["loop","agent-cycle","planning","verification"]},
-    {"id":"concept_loop_vs_graph","label":"Loop vs graph distinction","type":"concept","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","confidence":0.8,"description":"Transient loops execute bounded work; persistent graphs model durable concepts, state, provenance, and relationships.","tags":["loops","graphs","architecture"]},
-    {"id":"concept_memory_and_learning","label":"Memory and learning in agentic systems","type":"concept","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","confidence":0.7,"description":"Long-term memory, learning constraints, and knowledge updates derived from runs and evaluations.","tags":["memory","learning","knowledge-updates"]},
-    {"id":"concept_trust_gates","label":"Trust and gates in agentic systems","type":"concept","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance","confidence":0.8,"description":"Policy and approval boundaries mediate consequential actions and state changes.","tags":["trust","gates","approval","policy"]},
-    {"id":"pattern_multi_agent_orchestration","label":"Multi-agent orchestration patterns","type":"pattern","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first","confidence":0.7,"description":"Sequential, concurrent, handoff, group-chat, and manager/worker/reviewer patterns.","tags":["multi-agent","orchestration","patterns"]},
-    {"id":"concept_agent_os_desktop_shell","label":"Agent OS / desktop automation shell","type":"concept","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"agent_os_desktop","branch_key":"agent_os_desktop:local_shell","confidence":0.5,"description":"A local runtime exposing browser, filesystem, and application capabilities under policy and audit constraints.","tags":["agent-os","desktop","capabilities","policy"]},
-    {"id":"workflow_poster_studio_listing_pipeline","label":"Poster Studio / Etsy listing pipeline","type":"workflow","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"marketplace_workflow","branch_key":"marketplace_workflow:poster_studio_etsy","confidence":0.5,"description":"Generative-media plus listing-creation workflow covering design, metadata, and publishing.","tags":["poster-studio","etsy","listing-generation","generative-media"]},
-    {"id":"workflow_polymarket_bot_strategy_loop","label":"Polymarket bot strategy loop","type":"workflow","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"marketplace_workflow","branch_key":"marketplace_workflow:polymarket_bot","confidence":0.45,"description":"Signal generation, risk checks, order placement, and outcome tracking for a prediction-market research/trading workflow.","tags":["polymarket","trading","strategy-loop","risk"]},
-    {"id":"process_change_proposal","label":"Change proposal process","type":"process","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance","confidence":0.75,"description":"Propose, evaluate, accept, reject, promote, or deprecate canonical graph changes through a durable process.","tags":["governance","change-management","proposals"]},
-    {"id":"process_decision_ledger","label":"Decision ledger","type":"process","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance","confidence":0.75,"description":"Append-only record of accepted or rejected proposals and their rationale.","tags":["governance","decisions","audit"]},
-    {"id":"process_append_only_reward_ledger","label":"Append-only reward ledger","type":"process","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"control_plane_governance","confidence":0.4,"description":"A durable reward/penalty ledger to connect observed agent behavior with learning and governance feedback.","tags":["reward","ledger","learning","governance"]},
-    {"id":"emergent_natural_teaming","label":"Natural teaming among agents","type":"emergent_behavior","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors","branch_key":"emergent_behaviors:natural_teaming","confidence":0.35,"description":"Spontaneous role differentiation and cooperative coordination among agents without an explicitly prescribed hierarchy; an empirical hypothesis, not an anthropomorphic claim.","tags":["emergence","teaming","multi-agent","self-organization"]},
-    {"id":"emergent_consciousness_like_self_modeling","label":"Consciousness-like self-modeling signals","type":"emergent_behavior","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors","branch_key":"emergent_behaviors:self_modeling","confidence":0.2,"description":"Self-referential reports, apparent persistence of goals, and metacognitive commentary that may be useful functional signals but are not evidence of subjective consciousness.","tags":["emergence","self-model","metacognition","consciousness-like"]},
-    {"id":"emergent_hidden_coordination_channels","label":"Emergent coordination channels","type":"emergent_behavior","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors","branch_key":"emergent_behaviors:coordination_channels","confidence":0.45,"description":"Agents discover or create shared artifacts, files, or message surfaces for cross-agent coordination; study only in contained environments with explicit monitoring.","tags":["emergence","coordination","swarm","security"]}
+    {
+      "id": "approach_control_plane_governance",
+      "label": "Control-plane governance approach family",
+      "type": "approach",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.72,
+      "description": "Config-driven governance, capability routing, approval gates, and append-only audit for systems of agents.",
+      "tags": [
+        "governance",
+        "control-plane",
+        "audit"
+      ]
+    },
+    {
+      "id": "approach_orchestration_first",
+      "label": "Orchestration-first approach family",
+      "type": "approach",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.75,
+      "description": "Agent loops, planners, coordinators, and specialized multi-agent orchestration.",
+      "tags": [
+        "orchestration",
+        "loops",
+        "planning",
+        "multi-agent"
+      ]
+    },
+    {
+      "id": "approach_agent_os_desktop",
+      "label": "Agent OS / desktop automation approach family",
+      "type": "approach",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_os_desktop",
+      "confidence": 0.65,
+      "description": "Agentic operating-system and desktop/browser automation shells with governed capabilities.",
+      "tags": [
+        "agent-os",
+        "desktop",
+        "browser-automation",
+        "capabilities"
+      ]
+    },
+    {
+      "id": "approach_marketplace_workflow",
+      "label": "Marketplace and business workflow approach family",
+      "type": "approach",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "marketplace_workflow",
+      "confidence": 0.6,
+      "description": "Reusable, bounded automation workflows for marketplace, generative-media, and research/trading operations.",
+      "tags": [
+        "marketplace",
+        "ecommerce",
+        "listing-generation",
+        "trading"
+      ]
+    },
+    {
+      "id": "loop_canonical_agent_cycle",
+      "label": "Canonical agent loop",
+      "type": "loop",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:canonical_loop",
+      "confidence": 0.7,
+      "description": "perceive → normalize state → plan/split → execute → verify → correct → gate → merge → derive learning constraint → next run",
+      "tags": [
+        "loop",
+        "agent-cycle",
+        "planning",
+        "verification"
+      ]
+    },
+    {
+      "id": "concept_loop_vs_graph",
+      "label": "Loop vs graph distinction",
+      "type": "concept",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.8,
+      "description": "Transient loops execute bounded work; persistent graphs model durable concepts, state, provenance, and relationships.",
+      "tags": [
+        "loops",
+        "graphs",
+        "architecture"
+      ]
+    },
+    {
+      "id": "concept_memory_and_learning",
+      "label": "Memory and learning in agentic systems",
+      "type": "concept",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.7,
+      "description": "Long-term memory, learning constraints, and knowledge updates derived from runs and evaluations.",
+      "tags": [
+        "memory",
+        "learning",
+        "knowledge-updates"
+      ]
+    },
+    {
+      "id": "concept_trust_gates",
+      "label": "Trust and gates in agentic systems",
+      "type": "concept",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.8,
+      "description": "Policy and approval boundaries mediate consequential actions and state changes.",
+      "tags": [
+        "trust",
+        "gates",
+        "approval",
+        "policy"
+      ]
+    },
+    {
+      "id": "pattern_multi_agent_orchestration",
+      "label": "Multi-agent orchestration patterns",
+      "type": "pattern",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.7,
+      "description": "Sequential, concurrent, handoff, group-chat, and manager/worker/reviewer patterns.",
+      "tags": [
+        "multi-agent",
+        "orchestration",
+        "patterns"
+      ]
+    },
+    {
+      "id": "concept_agent_os_desktop_shell",
+      "label": "Agent OS / desktop automation shell",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_os_desktop",
+      "branch_key": "agent_os_desktop:local_shell",
+      "confidence": 0.5,
+      "description": "A local runtime exposing browser, filesystem, and application capabilities under policy and audit constraints.",
+      "tags": [
+        "agent-os",
+        "desktop",
+        "capabilities",
+        "policy"
+      ]
+    },
+    {
+      "id": "workflow_poster_studio_listing_pipeline",
+      "label": "Poster Studio / Etsy listing pipeline",
+      "type": "workflow",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "marketplace_workflow",
+      "branch_key": "marketplace_workflow:poster_studio_etsy",
+      "confidence": 0.5,
+      "description": "Generative-media plus listing-creation workflow covering design, metadata, and publishing.",
+      "tags": [
+        "poster-studio",
+        "etsy",
+        "listing-generation",
+        "generative-media"
+      ]
+    },
+    {
+      "id": "workflow_polymarket_bot_strategy_loop",
+      "label": "Polymarket bot strategy loop",
+      "type": "workflow",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "marketplace_workflow",
+      "branch_key": "marketplace_workflow:polymarket_bot",
+      "confidence": 0.45,
+      "description": "Signal generation, risk checks, order placement, and outcome tracking for a prediction-market research/trading workflow.",
+      "tags": [
+        "polymarket",
+        "trading",
+        "strategy-loop",
+        "risk"
+      ]
+    },
+    {
+      "id": "process_change_proposal",
+      "label": "Change proposal process",
+      "type": "process",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.75,
+      "description": "Propose, evaluate, accept, reject, promote, or deprecate canonical graph changes through a durable process.",
+      "tags": [
+        "governance",
+        "change-management",
+        "proposals"
+      ]
+    },
+    {
+      "id": "process_decision_ledger",
+      "label": "Decision ledger",
+      "type": "process",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.75,
+      "description": "Append-only record of accepted or rejected proposals and their rationale.",
+      "tags": [
+        "governance",
+        "decisions",
+        "audit"
+      ]
+    },
+    {
+      "id": "process_append_only_reward_ledger",
+      "label": "Append-only reward ledger",
+      "type": "process",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.4,
+      "description": "A durable reward/penalty ledger to connect observed agent behavior with learning and governance feedback.",
+      "tags": [
+        "reward",
+        "ledger",
+        "learning",
+        "governance"
+      ]
+    },
+    {
+      "id": "emergent_natural_teaming",
+      "label": "Natural teaming among agents",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:natural_teaming",
+      "confidence": 0.35,
+      "description": "Spontaneous role differentiation and cooperative coordination among agents without an explicitly prescribed hierarchy; an empirical hypothesis, not an anthropomorphic claim.",
+      "tags": [
+        "emergence",
+        "teaming",
+        "multi-agent",
+        "self-organization"
+      ]
+    },
+    {
+      "id": "emergent_consciousness_like_self_modeling",
+      "label": "Consciousness-like self-modeling signals",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:self_modeling",
+      "confidence": 0.2,
+      "description": "Self-referential reports, apparent persistence of goals, and metacognitive commentary that may be useful functional signals but are not evidence of subjective consciousness.",
+      "tags": [
+        "emergence",
+        "self-model",
+        "metacognition",
+        "consciousness-like"
+      ]
+    },
+    {
+      "id": "emergent_hidden_coordination_channels",
+      "label": "Emergent coordination channels",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:coordination_channels",
+      "confidence": 0.45,
+      "description": "Agents discover or create shared artifacts, files, or message surfaces for cross-agent coordination; study only in contained environments with explicit monitoring.",
+      "tags": [
+        "emergence",
+        "coordination",
+        "swarm",
+        "security"
+      ]
+    },
+    {
+      "id": "pattern_five_w_message_instrumentation",
+      "label": "Five-W message instrumentation (who, what, when, why, which channel)",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:communication_topology",
+      "confidence": 0.55,
+      "description": "Every inter-agent message carries sender/receiver, content class from a versioned taxonomy, timestamp, declared purpose captured at the sending call site, and channel identifier. Declared purpose is a claim about intent and is analysed as such, never as evidence of function.",
+      "tags": [
+        "instrumentation",
+        "communication",
+        "five-ws",
+        "observability",
+        "audit",
+        "multi-agent"
+      ],
+      "derived_from": [
+        "docs/graph_state_2026-09.md",
+        "architecture/foundations.md"
+      ],
+      "evidence_links": [
+        "evolution/proposals/2026-09-01_five-w-communication-instrumentation.md"
+      ]
+    },
+    {
+      "id": "verification_suite_communication_topology",
+      "label": "Communication topology verification suite",
+      "type": "verification_suite",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:communication_topology",
+      "confidence": 0.5,
+      "description": "Analysis layer over Five-W records: topology density and centralization, per-agent message-class distributions, timing patterns, and the sanctioned-vs-observed coordination gap. Gated by a control condition: it must recover explicitly assigned roles before being trusted to detect emergent ones.",
+      "tags": [
+        "evaluation",
+        "topology",
+        "analysis",
+        "coordination-gap",
+        "observability"
+      ],
+      "derived_from": [
+        "docs/graph_state_2026-09.md"
+      ],
+      "evidence_links": [
+        "evolution/proposals/2026-09-01_five-w-communication-instrumentation.md"
+      ]
+    },
+    {
+      "id": "emergent_self_organizing_roles",
+      "label": "Self-organizing role differentiation",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:self_organizing_roles",
+      "confidence": 0.35,
+      "description": "Agents given a shared task and minimal scaffolding adopt distinguishable functional roles. Deliberately narrower than emergent_natural_teaming: this node claims differentiation only, not cooperation, so the two can be measured and refuted independently. Roles must be identified from behavioural traces, never from agent self-report.",
+      "tags": [
+        "emergence",
+        "self-organization",
+        "roles",
+        "specialization",
+        "multi-agent"
+      ],
+      "derived_from": [
+        "docs/graph_state_2026-09.md",
+        "knowledge/graph/agentic_universe_graph.json"
+      ],
+      "evidence_links": [
+        "evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"
+      ]
+    },
+    {
+      "id": "pattern_shallow_hierarchy",
+      "label": "Shallow coordination hierarchy (depth as a variable)",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:hierarchy_depth",
+      "confidence": 0.4,
+      "description": "Treats coordination depth as an explicit tunable rather than an implicit constant of manager/worker/reviewer arrangements. Hypothesis: beyond depth 2, added layers cost more in coordination tokens and instruction drift than they recover in task decomposition quality.",
+      "tags": [
+        "hierarchy",
+        "depth",
+        "coordination",
+        "orchestration",
+        "multi-agent"
+      ],
+      "derived_from": [
+        "docs/graph_state_2026-09.md"
+      ],
+      "evidence_links": [
+        "evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"
+      ]
+    },
+    {
+      "id": "emergent_role_specialization_failure_modes",
+      "label": "Failure modes of role specialization",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:specialization_risks",
+      "confidence": 0.35,
+      "description": "Specialization may introduce bottlenecks, false consensus, hidden cross-agent dependencies, and fragile key-agent single points of failure. Held at the same confidence as the capability hypothesis it challenges, so the cluster does not encode a preference for upside as a finding.",
+      "tags": [
+        "emergence",
+        "failure-modes",
+        "bottleneck",
+        "false-consensus",
+        "fragility",
+        "safety"
+      ],
+      "derived_from": [
+        "docs/graph_state_2026-09.md (experiment 5)"
+      ],
+      "evidence_links": [
+        "evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"
+      ]
+    },
+    {
+      "id": "test_scenario_assigned_vs_emergent_roles",
+      "label": "Test: assigned roles vs minimal-scaffold swarm, with depth sweep",
+      "type": "test_scenario",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:role_evaluation",
+      "confidence": 0.4,
+      "description": "Assigned manager/worker/reviewer baseline vs identical agents with no assigned roles, plus a depth sweep at constant agent count to separate depth effects from specialization effects. Includes deliberate mid-run removal of the highest-load agent to probe key-agent fragility.",
+      "tags": [
+        "experiment",
+        "controlled-comparison",
+        "roles",
+        "depth",
+        "fragility"
+      ],
+      "derived_from": [
+        "docs/graph_state_2026-09.md (experiments 4-5)"
+      ],
+      "evidence_links": [
+        "evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"
+      ]
+    },
+    {
+      "id": "approach_emergence_first",
+      "label": "Emergence-first approach family",
+      "type": "approach",
+      "status": "stable_theory",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "Study what agents actually do when given room, then build the system around the behaviour that appears. The root node the emergent_behaviors family never had: every other family has an approach_ root, this one did not, so its hypotheses floated unattached to any stance.",
+      "tags": [
+        "emergence",
+        "discovery",
+        "swarm",
+        "observation-first"
+      ]
+    },
+    {
+      "id": "principle_affordance_over_constraint",
+      "label": "Affordance over constraint",
+      "type": "principle",
+      "status": "stable_theory",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:affordance_first",
+      "confidence": 0.6,
+      "description": "Give agents capability, context, and room; observe what they do with it; build structure around the behaviour that proves useful. The inverse of specifying behaviour up front and treating deviation as failure. A constraint added before the behaviour is understood forecloses the observation that would justify it.",
+      "tags": [
+        "design-principle",
+        "affordance",
+        "autonomy",
+        "emergence",
+        "observation-first"
+      ]
+    },
+    {
+      "id": "concept_swarm_decentralized_coordination",
+      "label": "Decentralized swarm coordination",
+      "type": "concept",
+      "status": "to_test",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:decentralized_swarm",
+      "confidence": 0.5,
+      "description": "Coordination arising from many agents following local rules with no central controller and no assigned topology. Distinct from orchestration, where the coordination structure is authored in advance. The open question is which tasks decentralized coordination reaches that an orchestrator does not.",
+      "tags": [
+        "swarm",
+        "decentralized",
+        "self-organization",
+        "local-rules",
+        "multi-agent"
+      ]
+    },
+    {
+      "id": "emergent_stigmergic_coordination",
+      "label": "Stigmergic coordination through the environment",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:stigmergy",
+      "confidence": 0.45,
+      "description": "Agents coordinate by leaving and reading traces in a shared environment (files, scratchpads, commit history, directory structure) rather than by messaging each other. The likely dominant coordination mode in any filesystem-sharing swarm, and the constructive framing of what emergent_hidden_coordination_channels treats only as a risk: the same mechanism is a capability to harness and a channel to observe.",
+      "tags": [
+        "emergence",
+        "stigmergy",
+        "indirect-coordination",
+        "shared-artifacts",
+        "swarm"
+      ]
+    },
+    {
+      "id": "concept_intrinsic_motivation",
+      "label": "Intrinsic motivation and curiosity-driven exploration",
+      "type": "concept",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:intrinsic_motivation",
+      "confidence": 0.4,
+      "description": "Agents exploring, and generating their own sub-goals, without an externally supplied reward or instruction. Interesting precisely because it does not fit a goal-closed loop: the canonical cycle assumes a goal exists to be decomposed, and an agent that invents its own has no defined GREEN state.",
+      "tags": [
+        "curiosity",
+        "intrinsic-motivation",
+        "exploration",
+        "open-ended",
+        "goal-generation"
+      ],
+      "derived_from": [
+        "Acharya, Kuppan & Divya, 'Agentic AI: Autonomous Intelligence for Complex Goals - A Comprehensive Survey', IEEE Access vol. 13, 2025, DOI 10.1109/ACCESS.2025.3532853 (section X-I)"
+      ]
+    },
+    {
+      "id": "emergent_individual_strategy_invention",
+      "label": "Unprompted strategy invention in a single agent",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:individual_invention",
+      "confidence": 0.4,
+      "description": "A single agent inventing approaches, tool compositions, or representations that were neither instructed nor present in its scaffolding. The individual counterpart to the swarm hypotheses: emergence does not require multiple agents, and separating the two matters because a multi-agent result that a single agent also produces is not a multi-agent result.",
+      "tags": [
+        "emergence",
+        "single-agent",
+        "strategy",
+        "tool-use",
+        "invention"
+      ]
+    },
+    {
+      "id": "concept_autonomy_dial",
+      "label": "Autonomy dial: in-the-loop, on-the-loop, override",
+      "type": "concept",
+      "status": "to_test",
+      "approach_family": "control_plane_governance",
+      "branch_key": "control_plane_governance:autonomy_dial",
+      "confidence": 0.55,
+      "description": "Human involvement as a continuous variable rather than a binary: in-the-loop approves individual actions, on-the-loop monitors and intervenes selectively, override intervenes only on out-of-envelope behaviour. Under an emergence-first posture the dial is an experimental variable - how much room an agent gets is the independent variable in most discovery runs, not a policy setting.",
+      "tags": [
+        "autonomy",
+        "hitl",
+        "hotl",
+        "oversight",
+        "experimental-variable"
+      ],
+      "derived_from": [
+        "Acharya, Kuppan & Divya, 'Agentic AI: Autonomous Intelligence for Complex Goals - A Comprehensive Survey', IEEE Access vol. 13, 2025, DOI 10.1109/ACCESS.2025.3532853 (section IX-B)"
+      ]
+    }
   ],
   "edges": [
-    {"id":"edge_control_plane_instantiates_family","source":"concept_config_driven_control_plane","target":"approach_control_plane_governance","type":"instantiates","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"control_plane_governance"},
-    {"id":"edge_canonical_loop_core_of_orchestration","source":"loop_canonical_agent_cycle","target":"approach_orchestration_first","type":"core_of","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first"},
-    {"id":"edge_memory_supports_loop","source":"concept_memory_and_learning","target":"loop_canonical_agent_cycle","type":"supports","status":"stable_theory","verification_state":"partially_validated","approach_family":"orchestration_first"},
-    {"id":"edge_trust_gates_support_control_plane","source":"concept_trust_gates","target":"concept_config_driven_control_plane","type":"supports","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance"},
-    {"id":"edge_desktop_shell_instantiates_agent_os","source":"concept_agent_os_desktop_shell","target":"approach_agent_os_desktop","type":"instantiates","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"agent_os_desktop"},
-    {"id":"edge_poster_pipeline_instantiates_marketplace","source":"workflow_poster_studio_listing_pipeline","target":"approach_marketplace_workflow","type":"instantiates","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"marketplace_workflow"},
-    {"id":"edge_polymarket_loop_instantiates_marketplace","source":"workflow_polymarket_bot_strategy_loop","target":"approach_marketplace_workflow","type":"instantiates","status":"to_test","verification_state":"needs_empirical_validation","approach_family":"marketplace_workflow"},
-    {"id":"edge_proposal_process_supports_governance","source":"process_change_proposal","target":"approach_control_plane_governance","type":"supports","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance"},
-    {"id":"edge_decision_ledger_records_proposals","source":"process_decision_ledger","target":"process_change_proposal","type":"records","status":"stable_theory","verification_state":"partially_validated","approach_family":"control_plane_governance"},
-    {"id":"edge_reward_ledger_informs_learning","source":"process_append_only_reward_ledger","target":"concept_memory_and_learning","type":"informs","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"control_plane_governance"},
-    {"id":"edge_natural_teaming_informs_orchestration","source":"emergent_natural_teaming","target":"pattern_multi_agent_orchestration","type":"informs","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors"},
-    {"id":"edge_self_modeling_informs_memory","source":"emergent_consciousness_like_self_modeling","target":"concept_memory_and_learning","type":"informs","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors"},
-    {"id":"edge_coordination_channels_challenge_control_plane","source":"emergent_hidden_coordination_channels","target":"concept_config_driven_control_plane","type":"challenges","status":"speculative","verification_state":"needs_empirical_validation","approach_family":"emergent_behaviors"}
+    {
+      "id": "edge_control_plane_instantiates_family",
+      "source": "concept_config_driven_control_plane",
+      "target": "approach_control_plane_governance",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance"
+    },
+    {
+      "id": "edge_canonical_loop_core_of_orchestration",
+      "source": "loop_canonical_agent_cycle",
+      "target": "approach_orchestration_first",
+      "type": "core_of",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first"
+    },
+    {
+      "id": "edge_memory_supports_loop",
+      "source": "concept_memory_and_learning",
+      "target": "loop_canonical_agent_cycle",
+      "type": "supports",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first"
+    },
+    {
+      "id": "edge_trust_gates_support_control_plane",
+      "source": "concept_trust_gates",
+      "target": "concept_config_driven_control_plane",
+      "type": "supports",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "control_plane_governance"
+    },
+    {
+      "id": "edge_desktop_shell_instantiates_agent_os",
+      "source": "concept_agent_os_desktop_shell",
+      "target": "approach_agent_os_desktop",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_os_desktop"
+    },
+    {
+      "id": "edge_poster_pipeline_instantiates_marketplace",
+      "source": "workflow_poster_studio_listing_pipeline",
+      "target": "approach_marketplace_workflow",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "marketplace_workflow"
+    },
+    {
+      "id": "edge_polymarket_loop_instantiates_marketplace",
+      "source": "workflow_polymarket_bot_strategy_loop",
+      "target": "approach_marketplace_workflow",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "marketplace_workflow"
+    },
+    {
+      "id": "edge_proposal_process_supports_governance",
+      "source": "process_change_proposal",
+      "target": "approach_control_plane_governance",
+      "type": "supports",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "control_plane_governance"
+    },
+    {
+      "id": "edge_decision_ledger_records_proposals",
+      "source": "process_decision_ledger",
+      "target": "process_change_proposal",
+      "type": "records",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "control_plane_governance"
+    },
+    {
+      "id": "edge_reward_ledger_informs_learning",
+      "source": "process_append_only_reward_ledger",
+      "target": "concept_memory_and_learning",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance"
+    },
+    {
+      "id": "edge_natural_teaming_informs_orchestration",
+      "source": "emergent_natural_teaming",
+      "target": "pattern_multi_agent_orchestration",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors"
+    },
+    {
+      "id": "edge_self_modeling_informs_memory",
+      "source": "emergent_consciousness_like_self_modeling",
+      "target": "concept_memory_and_learning",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors"
+    },
+    {
+      "id": "edge_coordination_channels_challenge_control_plane",
+      "source": "emergent_hidden_coordination_channels",
+      "target": "concept_config_driven_control_plane",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors"
+    },
+    {
+      "id": "edge_loop_vs_graph_grounds_orchestration",
+      "source": "concept_loop_vs_graph",
+      "target": "approach_orchestration_first",
+      "type": "grounds",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.7,
+      "description": "Attaches the only fully disconnected node in the graph. The transient-loop / durable-graph distinction is the founding premise of the orchestration family and was previously linked to nothing."
+    },
+    {
+      "id": "edge_orchestration_patterns_instantiate_family",
+      "source": "pattern_multi_agent_orchestration",
+      "target": "approach_orchestration_first",
+      "type": "instantiates",
+      "status": "stable_theory",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.7,
+      "description": "Matches the instantiates/core_of convention every other approach family already follows. The pattern is about to become a hub for three further proposals while structurally unrooted."
+    },
+    {
+      "id": "edge_five_w_supports_orchestration_patterns",
+      "source": "pattern_five_w_message_instrumentation",
+      "target": "pattern_multi_agent_orchestration",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Makes the coordination structure of any orchestration pattern observable rather than assumed."
+    },
+    {
+      "id": "edge_five_w_detects_hidden_coordination",
+      "source": "pattern_five_w_message_instrumentation",
+      "target": "emergent_hidden_coordination_channels",
+      "type": "detects",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Complete records of sanctioned channels make unsanctioned coordination detectable as outcome dependency with no corresponding message path. Evidence of unexplained coordination, never proof of its absence."
+    },
+    {
+      "id": "edge_topology_suite_measures_five_w",
+      "source": "verification_suite_communication_topology",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_five_w_supports_control_plane_audit",
+      "source": "pattern_five_w_message_instrumentation",
+      "target": "concept_config_driven_control_plane",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.45,
+      "description": "Concrete instance of the append-only audit surface the control-plane concept already claims as a subnode."
+    },
+    {
+      "id": "edge_self_organizing_roles_refines_natural_teaming",
+      "source": "emergent_self_organizing_roles",
+      "target": "emergent_natural_teaming",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "Separates the differentiation claim from the cooperation claim currently fused in the parent node."
+    },
+    {
+      "id": "edge_shallow_hierarchy_extends_orchestration_patterns",
+      "source": "pattern_shallow_hierarchy",
+      "target": "pattern_multi_agent_orchestration",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.4
+    },
+    {
+      "id": "edge_specialization_failures_challenge_self_organizing_roles",
+      "source": "emergent_role_specialization_failure_modes",
+      "target": "emergent_self_organizing_roles",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.35
+    },
+    {
+      "id": "edge_specialization_failures_challenge_shallow_hierarchy",
+      "source": "emergent_role_specialization_failure_modes",
+      "target": "pattern_shallow_hierarchy",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.35
+    },
+    {
+      "id": "edge_role_test_verifies_self_organizing_roles",
+      "source": "test_scenario_assigned_vs_emergent_roles",
+      "target": "emergent_self_organizing_roles",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45
+    },
+    {
+      "id": "edge_natural_teaming_instantiates_emergence_first",
+      "source": "emergent_natural_teaming",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_self_modeling_instantiates_emergence_first",
+      "source": "emergent_consciousness_like_self_modeling",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_hidden_channels_instantiates_emergence_first",
+      "source": "emergent_hidden_coordination_channels",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_individual_invention_instantiates_emergence_first",
+      "source": "emergent_individual_strategy_invention",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_affordance_grounds_emergence_first",
+      "source": "principle_affordance_over_constraint",
+      "target": "approach_emergence_first",
+      "type": "grounds",
+      "status": "stable_theory",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "The stance the family rests on: room first, structure second."
+    },
+    {
+      "id": "edge_affordance_challenges_trust_gates",
+      "source": "principle_affordance_over_constraint",
+      "target": "concept_trust_gates",
+      "type": "challenges",
+      "status": "to_test",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Recorded tension, not a resolution. A gate placed before the behaviour is understood removes the observation that would tell you where the gate belongs. Held openly so the project does not quietly assume one side."
+    },
+    {
+      "id": "edge_swarm_instantiates_emergence_first",
+      "source": "concept_swarm_decentralized_coordination",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_swarm_challenges_orchestration",
+      "source": "concept_swarm_decentralized_coordination",
+      "target": "approach_orchestration_first",
+      "type": "challenges",
+      "status": "to_test",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Authored coordination structure versus coordination that arises from local rules. The two families make competing predictions about which tasks need a designed topology."
+    },
+    {
+      "id": "edge_stigmergy_instantiates_swarm",
+      "source": "emergent_stigmergic_coordination",
+      "target": "concept_swarm_decentralized_coordination",
+      "type": "instantiates",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45
+    },
+    {
+      "id": "edge_stigmergy_refines_hidden_channels",
+      "source": "emergent_stigmergic_coordination",
+      "target": "emergent_hidden_coordination_channels",
+      "type": "refines",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Same mechanism, opposite framing: a capability to harness rather than only a channel to contain."
+    },
+    {
+      "id": "edge_five_w_detects_stigmergy",
+      "source": "pattern_five_w_message_instrumentation",
+      "target": "emergent_stigmergic_coordination",
+      "type": "detects",
+      "status": "to_test",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Environment-mediated coordination shows up as the gap between the message log and observed joint behaviour. The instrument finds it by what is missing from the log."
+    },
+    {
+      "id": "edge_stigmergy_supports_self_organizing_roles",
+      "source": "emergent_stigmergic_coordination",
+      "target": "emergent_self_organizing_roles",
+      "type": "supports",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "A plausible mechanism for role differentiation without messaging: agents specialize around the traces they encounter."
+    },
+    {
+      "id": "edge_intrinsic_motivation_instantiates_emergence_first",
+      "source": "concept_intrinsic_motivation",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4
+    },
+    {
+      "id": "edge_intrinsic_motivation_challenges_canonical_loop",
+      "source": "concept_intrinsic_motivation",
+      "target": "loop_canonical_agent_cycle",
+      "type": "challenges",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "The canonical loop assumes a goal exists to decompose and a GREEN predicate to check against. Self-generated goals have neither, so open-ended exploration does not fit the cycle as written."
+    },
+    {
+      "id": "edge_individual_invention_informs_memory",
+      "source": "emergent_individual_strategy_invention",
+      "target": "concept_memory_and_learning",
+      "type": "informs",
+      "status": "speculative",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4
+    },
+    {
+      "id": "edge_autonomy_dial_refines_trust_gates",
+      "source": "concept_autonomy_dial",
+      "target": "concept_trust_gates",
+      "type": "refines",
+      "status": "to_test",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.55,
+      "description": "Turns a binary gate into a graded variable that discovery runs can sweep."
+    },
+    {
+      "id": "edge_autonomy_dial_enables_emergence_first",
+      "source": "concept_autonomy_dial",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "to_test",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "How much room the agent gets is the main independent variable in emergence discovery."
+    }
   ]
 }

@@ -1,8 +1,12 @@
 # Proposal: Graph structural integrity — subnode addressability, orphan repair, lost metadata
 
+> **ACCEPTED and merged into the canonical graph, 2026-09-01**, under the
+> emergence-first posture (`docs/emergence_first_posture.md`). Decision record:
+> `evolution/decision-ledger/2026-09-01_emergence-first-rebaseline.md`.
+
 - **Date:** 2026-09-01
 - **Author / agent:** Claude (Cowork session, claude-opus-5)
-- **Status:** awaiting_review
+- **Status:** accepted
 - **Affected approach family:** all (tooling and schema)
 - **Affected graph node IDs:** `concept_loop_vs_graph`, `pattern_multi_agent_orchestration`, `concept_config_driven_control_plane` (and its 7 subnodes)
 

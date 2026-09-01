@@ -2,15 +2,19 @@
 
 External material — papers, articles, repositories, benchmark results — recorded as **claims**, not findings.
 
-## The rule
+## Current posture: open ingest
 
-A source never becomes a graph node directly. It enters here, and may then *propose* a node through `evolution/proposals/`. This is the same barrier that applies to runtime evidence and to agent output: nothing promotes itself.
+The project is in an emergence-first theoretical phase (`docs/emergence_first_posture.md`). **The falsifier-required ingest gate is suspended.** File anything that suggests a mechanism worth modelling, and take ideas from it straight into the graph if they're interesting.
 
-A published paper is not evidence that its claim holds in this project's context. It is evidence that someone reported the claim, under conditions recorded in the source file. Treat the abstract as a hypothesis with an author attached.
+One thing still worth keeping, because it's free: a published paper is not evidence that its claim holds here. It's evidence that someone reported it, under conditions recorded in the source file. Note the study type and move on.
 
-## Ingest gate
+**Read for mechanisms, not for conclusions.** In this phase a survey's bibliography is usually worth more than its argument, and a paper's discarded intuition is often worth more than its headline result.
 
-**No source record is filed unless it names what result would falsify its claim.** A folder of abstracts is not research. This field is what stops the directory filling with plausible-sounding summaries that nobody can act on.
+## Ingest gate (suspended — restore with the verification phase)
+
+> No source record is filed unless it names what result would falsify its claim. A folder of abstracts is not research. This field is what stops the directory filling with plausible-sounding summaries that nobody can act on.
+
+Kept verbatim because it will be right again. It is wrong *now* — during model-building the plausible-sounding summary is exactly the raw material.
 
 ## Where to sweep
 

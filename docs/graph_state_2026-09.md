@@ -1,5 +1,14 @@
 # Agentic Universe Graph State — September 2026
 
+> **Partially superseded, 2026-09-01.** The graph is now 32 nodes / 41 edges and
+> the "Evidence standards" section below is suspended for the emergence-first
+> theoretical phase — see `docs/emergence_first_posture.md`. The family table and
+> concept list remain accurate but no longer include the emergence-first spine
+> (`approach_emergence_first`, `principle_affordance_over_constraint`,
+> `concept_swarm_decentralized_coordination`, `emergent_stigmergic_coordination`,
+> `concept_intrinsic_motivation`, `emergent_individual_strategy_invention`,
+> `concept_autonomy_dial`). Read the graph JSON as the source of truth.
+
 ## Purpose
 
 This note is a human- and agent-readable orientation layer for the canonical graph. It is not a replacement for `knowledge/graph/agentic_universe_graph.json`; it summarizes the graph's current structure, active hypotheses, and highest-value next experiments.

@@ -1,8 +1,13 @@
 # Proposal: Evidence substrate, baseline comparison, and a promotion gate
 
+> **HELD — not merged.** Deferred with the verification programme it belongs to
+> (`docs/research_operating_plan.md`). Revisit when the theoretical model is
+> structurally complete. Decision record:
+> `evolution/decision-ledger/2026-09-01_emergence-first-rebaseline.md`.
+
 - **Date:** 2026-09-01
 - **Author / agent:** Claude (Cowork session, claude-opus-5)
-- **Status:** awaiting_review
+- **Status:** held
 - **Affected approach family:** `control_plane_governance`, `orchestration_first`
 - **Affected graph node IDs:** all 11 nodes currently at `status: stable_theory`; `process_change_proposal`; `approach_orchestration_first`
 

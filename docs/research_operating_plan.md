@@ -1,6 +1,13 @@
 # Research Operating Plan
 
-**Status:** draft for owner review · **Date:** 2026-09-01 · **Author:** Claude (Cowork session, claude-opus-5)
+> **DEFERRED — not the active posture.** As of 2026-09-01 the project is in an
+> emergence-first theoretical phase and the gates described below are suspended.
+> See `docs/emergence_first_posture.md`. This document is kept intact, not
+> discarded: it is the verification programme to restore once the theoretical
+> model is structurally complete. Nothing in it was judged wrong — it was judged
+> premature.
+
+**Status:** deferred · **Date:** 2026-09-01 · **Author:** Claude (Cowork session, claude-opus-5)
 
 ## The constraint this plan is built around
 

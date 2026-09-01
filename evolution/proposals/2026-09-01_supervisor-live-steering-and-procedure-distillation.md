@@ -1,8 +1,13 @@
 # Proposal: Supervisor–worker live steering and procedure distillation
 
+> **HELD — not merged.** Deferred with the verification programme it belongs to
+> (`docs/research_operating_plan.md`). Revisit when the theoretical model is
+> structurally complete. Decision record:
+> `evolution/decision-ledger/2026-09-01_emergence-first-rebaseline.md`.
+
 - **Date:** 2026-09-01
 - **Author / agent:** Claude (Cowork session, claude-opus-5)
-- **Status:** awaiting_review
+- **Status:** held
 - **Affected approach family:** `emergent_behaviors`, `orchestration_first`
 - **Affected graph node IDs:** `pattern_multi_agent_orchestration`, `concept_memory_and_learning`, `loop_canonical_agent_cycle`
 

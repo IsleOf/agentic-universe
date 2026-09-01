@@ -13,6 +13,23 @@ def load_json(path):
     with path.open(encoding="utf-8") as handle:
         return json.load(handle)
 
+def collect_ids(nodes):
+    """All addressable IDs: top-level nodes and their subnodes.
+
+    Subnodes carry IDs and are therefore edge targets. Collecting only
+    top-level IDs made seven control-plane subnodes unaddressable.
+    """
+    ids = []
+    for node in nodes:
+        if not isinstance(node, dict):
+            continue
+        if node.get("id"):
+            ids.append(node["id"])
+        for sub in node.get("subnodes", []) or []:
+            if isinstance(sub, dict) and sub.get("id"):
+                ids.append(sub["id"])
+    return ids
+
 def validate_graph(graph):
     errors = []
     if not isinstance(graph, dict):
@@ -25,9 +42,9 @@ def validate_graph(graph):
         errors.append("edges must be an array.")
     if errors:
         return errors
-    ids = [node.get("id") for node in nodes if isinstance(node, dict)]
+    ids = collect_ids(nodes)
     if len(ids) != len(set(ids)):
-        errors.append("Node IDs must be unique.")
+        errors.append("Node IDs must be unique (subnode IDs share the namespace).")
     node_ids = set(ids)
     for index, node in enumerate(nodes):
         if not isinstance(node, dict):
@@ -60,7 +77,7 @@ def check_patch(patch, graph):
     errors = []
     if not isinstance(patch, dict) or "proposal_metadata" not in patch:
         return ["Proposal must be an object with proposal_metadata."]
-    known_nodes = {node["id"] for node in graph["nodes"] if isinstance(node, dict) and "id" in node}
+    known_nodes = set(collect_ids(graph["nodes"]))
     new_nodes = patch.get("add_nodes", [])
     new_ids = set()
     for index, node in enumerate(new_nodes):
