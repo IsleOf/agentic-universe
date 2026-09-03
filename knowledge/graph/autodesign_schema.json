@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AutoDesign Etsy Poster Shop Schema",
+  "description": "Schema for AutoDesign-driven competitor extraction + novel design generation for Etsy poster shops.",
+  "type": "object",
+  "required": ["nodes", "edges"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label", "summary"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["shop", "product", "design_element", "style", "trend", "agent", "dataset", "metric", "pipeline"] },
+          "label": { "type": "string" },
+          "summary": { "type": "string" },
+          "source": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "metrics": {
+            "type": "object",
+            "properties": {
+              "posterbench_score": { "type": "number" },
+              "conversion_rate": { "type": "number" },
+              "revenue_per_day": { "type": "number" },
+              "review_score": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "relation"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "relation": { "type": "string" }
+        }
+      }
+    }
+  }
+}

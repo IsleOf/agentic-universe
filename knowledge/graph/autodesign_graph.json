@@ -1,0 +1,123 @@
+{
+  "_comment": "AutoDesign Etsy Poster Shop graph — competitor extraction + novel design generation. Adapt to autodesign_schema.json and validate with tools/knowledge_graph.py before applying.",
+  "proposal": "evolution/proposals/2026-09-03-autodesign-etsy-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {
+      "id": "shop-etsy-your-shop",
+      "type": "shop",
+      "label": "Your Etsy poster shop",
+      "summary": "Target shop for AutoDesign optimization.",
+      "source": "https://etsy.com/shop/your-shop",
+      "tags": ["shop", "etsy"],
+      "metrics": { "posterbench_score": 54.99, "conversion_rate": 0.03, "revenue_per_day": 150, "review_score": 4.6 }
+    },
+    {
+      "id": "shop-etsy-competitor-a",
+      "type": "shop",
+      "label": "Competitor A (top seller)",
+      "summary": "Top-selling competitor shop for design extraction.",
+      "source": "https://etsy.com/shop/competitor-a",
+      "tags": ["shop", "etsy", "competitor"],
+      "metrics": { "posterbench_score": 67.39, "conversion_rate": 0.06, "revenue_per_day": 450, "review_score": 4.8 }
+    },
+    {
+      "id": "product-vintage-travel-poster",
+      "type": "product",
+      "label": "Vintage travel poster (top seller)",
+      "summary": "Extracted top-selling design from Competitor A.",
+      "source": "https://etsy.com/listing/123456",
+      "tags": ["product", "vintage", "travel"],
+      "metrics": { "posterbench_score": 72.1, "conversion_rate": 0.08, "revenue_per_day": 120, "review_score": 4.9 }
+    },
+    {
+      "id": "design_element-color_palette_retro",
+      "type": "design_element",
+      "label": "Retro color palette",
+      "summary": "Extracted design element: warm retro colors (mustard, teal, cream).",
+      "source": "AutoDesign extraction",
+      "tags": ["design_element", "color", "retro"]
+    },
+    {
+      "id": "design_element-typography_art_deco",
+      "type": "design_element",
+      "label": "Art Deco typography",
+      "summary": "Extracted design element: bold Art Deco fonts.",
+      "source": "AutoDesign extraction",
+      "tags": ["design_element", "typography", "art_deco"]
+    },
+    {
+      "id": "style-vintage_travel",
+      "type": "style",
+      "label": "Vintage travel style",
+      "summary": "Style cluster: vintage travel posters with retro colors + Art Deco typography.",
+      "source": "AutoDesign clustering",
+      "tags": ["style", "vintage", "travel"]
+    },
+    {
+      "id": "trend-2026_retro_revival",
+      "type": "trend",
+      "label": "2026 retro revival trend",
+      "summary": "Emerging trend: retro revival in home decor (2026).",
+      "source": "Google Trends + Etsy search data",
+      "tags": ["trend", "retro", "2026"]
+    },
+    {
+      "id": "agent-autodesign_extractor",
+      "type": "agent",
+      "label": "AutoDesign extractor agent",
+      "summary": "Agent that extracts design elements from competitor listings (images, titles, tags, reviews).",
+      "source": "https://github.com/Yaxin9Luo/AutoDesign",
+      "tags": ["agent", "extraction", "autodesign"]
+    },
+    {
+      "id": "agent-autodesign_generator",
+      "type": "agent",
+      "label": "AutoDesign generator agent",
+      "summary": "Agent that generates novel designs by recombining extracted elements + trend signals.",
+      "source": "https://github.com/Yaxin9Luo/AutoDesign",
+      "tags": ["agent", "generation", "autodesign"]
+    },
+    {
+      "id": "dataset-etsy_competitor_listings",
+      "type": "dataset",
+      "label": "Etsy competitor listings dataset",
+      "summary": "Scraped dataset of top-selling competitor listings (images, titles, tags, reviews, prices).",
+      "source": "Etsy scraper",
+      "tags": ["dataset", "competitor", "etsy"]
+    },
+    {
+      "id": "metric-posterbench_score",
+      "type": "metric",
+      "label": "PosterBench score",
+      "summary": "AutoDesign's PosterBench score (0–100) for design quality.",
+      "source": "https://arxiv.org/abs/2608.13560",
+      "tags": ["metric", "posterbench"]
+    },
+    {
+      "id": "pipeline-autodesign_optimization",
+      "type": "pipeline",
+      "label": "AutoDesign optimization pipeline",
+      "summary": "Meta-harness optimization loop: extract → cluster → generate → evaluate (PosterBench) → iterate.",
+      "source": "https://arxiv.org/abs/2608.13560",
+      "tags": ["pipeline", "autodesign", "optimization"]
+    }
+  ],
+  "edges": [
+    { "from": "shop-etsy-competitor-a", "to": "product-vintage-travel-poster", "relation": "sells" },
+    { "from": "product-vintage-travel-poster", "to": "design_element-color_palette_retro", "relation": "contains" },
+    { "from": "product-vintage-travel-poster", "to": "design_element-typography_art_deco", "relation": "contains" },
+    { "from": "design_element-color_palette_retro", "to": "style-vintage_travel", "relation": "belongs_to" },
+    { "from": "design_element-typography_art_deco", "to": "style-vintage_travel", "relation": "belongs_to" },
+    { "from": "style-vintage_travel", "to": "trend-2026_retro_revival", "relation": "aligned_with" },
+    { "from": "agent-autodesign_extractor", "to": "dataset-etsy_competitor_listings", "relation": "populates" },
+    { "from": "agent-autodesign_extractor", "to": "design_element-color_palette_retro", "relation": "extracts" },
+    { "from": "agent-autodesign_extractor", "to": "design_element-typography_art_deco", "relation": "extracts" },
+    { "from": "agent-autodesign_generator", "to": "style-vintage_travel", "relation": "uses" },
+    { "from": "agent-autodesign_generator", "to": "trend-2026_retro_revival", "relation": "uses" },
+    { "from": "pipeline-autodesign_optimization", "to": "agent-autodesign_extractor", "relation": "orchestrates" },
+    { "from": "pipeline-autodesign_optimization", "to": "agent-autodesign_generator", "relation": "orchestrates" },
+    { "from": "pipeline-autodesign_optimization", "to": "metric-posterbench_score", "relation": "optimizes" },
+    { "from": "shop-etsy-your-shop", "to": "pipeline-autodesign_optimization", "relation": "optimized_by" }
+  ]
+}
