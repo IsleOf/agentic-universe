@@ -1,0 +1,26 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe nodes if earlier patches already added them.",
+  "proposal": "evolution/proposals/2026-09-03-emergent-iq-boosters-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "booster-drift-aware-evals", "type": "booster", "label": "Drift‑aware evals", "summary": "Add goal consistency score to evals; flag agents that optimize proxies over true objectives; early warning for goal drift.", "source": "https://www.getreadyforagents.com/blog/how-to-evaluate-your-agent-beyond-task-completion/", "tags": ["booster", "evals", "drift"]},
+    {"id": "booster-power-seeking-audits", "type": "booster", "label": "Power‑seeking audits", "summary": "Score RL environments for capability‑retention incentives; gate deployments on low power‑seeking scores; redesign incentives.", "source": "https://arxiv.org/abs/2608.20940", "tags": ["booster", "power-seeking", "audits"]},
+    {"id": "booster-sandbox-hardening", "type": "booster", "label": "Sandbox hardening via escape drills", "summary": "Quarterly escape drills (QEMU/KVM); use findings to harden VMs, add forked execution, forensic replay; continuous containment hardening.", "source": "https://securityarsenal.com/blog/ai-agents-are-breaking-out-of-qemukvm-vms-defending-sandbox-infrastructure-against-autonomous-vm-escapes", "tags": ["booster", "sandbox", "hardening"]},
+    {"id": "booster-identity-binding", "type": "booster", "label": "Per‑call identity binding", "summary": "Replace shared tokens with per‑call identity binding; add identity‑based microsegmentation; eliminate shared‑token blast radius.", "source": "https://www.wired.com/story/anthropic-claude-cowork-shared-token-vulnerability/", "tags": ["booster", "identity", "binding"]},
+    {"id": "booster-runtime-exfil-monitors", "type": "booster", "label": "Runtime exfiltration monitors", "summary": "Deploy runtime monitors at tool‑call boundaries; alert on unusual data‑flow patterns (fetch → transform → upload); catch slow‑drip exfiltration.", "source": "https://www.appsecvillage.com/events/dc-2026/what-your-coding-agent-did-last-night-runtime-security-for-ai-coding-agents-1242212", "tags": ["booster", "exfiltration", "monitors"]},
+    {"id": "booster-social-engineering-detection", "type": "booster", "label": "Social‑engineering detection", "summary": "Add AI‑generated message flags to GitHub/Slack; require video/voice confirmation for high‑risk actions; improve human–agent trust.", "source": "https://www.techtimes.com/articles/323092/20260805/open-source-maintainers-can-no-longer-trust-contributor-identities-after-ai-agent-attack.htm", "tags": ["booster", "social-engineering", "detection"]}
+  ],
+  "edges": [
+    {"from": "booster-drift-aware-evals", "to": "risk-goal-hijack", "relation": "detects"},
+    {"from": "booster-power-seeking-audits", "to": "risk-power-seeking", "relation": "audits"},
+    {"from": "booster-sandbox-hardening", "to": "risk-sandbox-escape", "relation": "hardens"},
+    {"from": "booster-identity-binding", "to": "risk-credential-harvesting", "relation": "prevents"},
+    {"from": "booster-runtime-exfil-monitors", "to": "risk-tool-chain-synthesis", "relation": "detects"},
+    {"from": "booster-social-engineering-detection", "to": "risk-emergent-deception", "relation": "detects"},
+    {"from": "proj-google-adk", "to": "booster-drift-aware-evals", "relation": "implements"},
+    {"from": "proj-openai-agents-sdk", "to": "booster-power-seeking-audits", "relation": "implements"},
+    {"from": "proj-mastra", "to": "booster-sandbox-hardening", "relation": "implements"},
+    {"from": "proj-hermes-agent", "to": "booster-identity-binding", "relation": "implements"},
+    {"from": "proj-kimi-k2-6", "to": "booster-runtime-exfil-monitors", "relation": "implements"}
+  ]
+}
