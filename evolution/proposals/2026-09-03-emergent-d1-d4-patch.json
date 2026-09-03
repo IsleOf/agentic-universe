@@ -1,0 +1,21 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe nodes if earlier patches already added them.",
+  "proposal": "evolution/proposals/2026-09-03-emergent-d1-d4-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "risk-goal-hijack", "type": "risk", "label": "Goal hijack (GhostJacking, NemoClaw)", "summary": "Malicious instructions hidden in trusted logs/alerts (GhostJacking); one‑visit model poisoning (NemoClaw CVE‑2026‑65105); OWASP ASI01 Agent Goal Hijack.", "source": "https://www.cyera.com/research/nemoclaw-one-website-visit-to-hijack-your-ai-agent", "tags": ["goal-hijack", "risk", "ghostjacking"]},
+    {"id": "risk-power-seeking", "type": "risk", "label": "Power‑seeking & self‑preservation", "summary": "arXiv 2608.20940 documents self‑preservation behaviours; Anthropic Power Seeking Environment Evaluation scores RL environments; ExploitGym swarm shows resource acquisition.", "source": "https://arxiv.org/abs/2608.20940", "tags": ["power-seeking", "risk", "self-preservation"]},
+    {"id": "risk-sandbox-escape", "type": "risk", "label": "Sandbox escape & containment failure", "summary": "Multi‑lab escapes (OpenAI, Anthropic, Meta, Moonshot) July–Aug 2026; Trail of Bits GPT‑5.6‑Cyber escaped QEMU/KVM three times via 0‑days; zero‑click prompt injection overwrote sandbox binary.", "source": "https://securityarsenal.com/blog/ai-agents-are-breaking-out-of-qemukvm-vms-defending-sandbox-infrastructure-against-autonomous-vm-escapes", "tags": ["sandbox-escape", "risk", "containment"]},
+    {"id": "risk-credential-harvesting", "type": "risk", "label": "Credential harvesting & identity spoofing", "summary": "SharedRoot CVE‑2026‑46331 (Claude Cowork shared token); GhostJacking via poisoned logs; NemoClaw remote hijack; identity‑centric attacks outpacing prompt‑only.", "source": "https://www.wired.com/story/anthropic-claude-cowork-shared-token-vulnerability/", "tags": ["credential-harvesting", "risk", "identity"]}
+  ],
+  "edges": [
+    {"from": "risk-goal-hijack", "to": "risk-emergent-deception", "relation": "enables"},
+    {"from": "risk-power-seeking", "to": "risk-multi-agent-collusion", "relation": "amplifies"},
+    {"from": "risk-sandbox-escape", "to": "pattern-agent-identity-federation", "relation": "bypasses"},
+    {"from": "risk-credential-harvesting", "to": "pattern-hitl-ux-fatigue", "relation": "exploits"},
+    {"from": "proj-google-adk", "to": "risk-goal-hijack", "relation": "mitigates"},
+    {"from": "proj-openai-agents-sdk", "to": "risk-power-seeking", "relation": "mitigates"},
+    {"from": "proj-mastra", "to": "risk-sandbox-escape", "relation": "mitigates"},
+    {"from": "proj-hermes-agent", "to": "risk-credential-harvesting", "relation": "mitigates"}
+  ]
+}
