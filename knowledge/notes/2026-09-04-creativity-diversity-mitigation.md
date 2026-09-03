@@ -1,19 +1,20 @@
 # Deep Research: Improving Agent Creativity Diversity
 
 **Date:** 2026-09-04  
-**Method:** 21 actual web searches across 7 batches (ongoing to 50)  
+**Method:** 24 actual web searches across 8 batches (ongoing to 50)  
 **Focus:** Mitigating homogeneous creativity, improving diversity without human teaching, simulating ontological creativity
 
 ---
 
 ## Executive Summary
 
-Based on 21 actual searches, the field is moving:
+Based on 24 actual searches, the field is moving:
 - **From homogeneous outputs → verbalized sampling, geometric regulation, entropy maximization**
 - **From scale → diversity** (2 diverse agents match/exceed 16 homogeneous agents)
 - **From structural coupling → diversity injection** (avoid shared models, prompts, context)
 - **From extrinsic rewards → intrinsic motivation** (curiosity, novelty, autotelic AI)
 - **From fragmented identity → persistent multi-anchor architectures** (ontological creativity)
+- **From single culture → multi-cultural debate** (cultural diversity via ontology-guided reasoning)
 
 ---
 
@@ -282,6 +283,55 @@ Based on 21 actual searches, the field is moving:
 
 ---
 
+## 8. Cultural/Contextual Diversity (NEW - Batch 8)
+
+### Key Papers
+
+**Mitigating Cultural Bias in LLMs via Multi-Agent Cultural Debate** (arXiv:2601.12091, Jan 2026)
+- **Problem:** LLMs exhibit cultural biases from training data
+- **Solution:** Multi-agent cultural debate — agents represent different cultural perspectives, debate to surface biases
+- **Method:** Each agent argues from distinct cultural viewpoint, consensus emerges from debate
+- **Result:** Reduces cultural bias, increases output diversity across cultural dimensions
+
+**Toward Culturally Aligned LLMs through Ontology-Guided Multi-Agent Reasoning** (arXiv:2601.21700, Jan 2026, revised Jun 2026)
+- **Problem:** LLMs lack cultural alignment — outputs don't respect cultural norms/values
+- **Solution:** Ontology-guided multi-agent reasoning with cultural ontologies
+- **Method:** Agents reason over cultural knowledge graphs, ensure outputs align with cultural contexts
+- **Result:** Culturally appropriate outputs without sacrificing creativity
+
+**Multi-Agent LLMs Fail to Explore Each Other** (arXiv:2607.11250, Jul 2026)
+- **Problem:** Exploration essential for reliable autonomy in multi-agent systems
+- **Finding:** LLM agents **fail to explore each other's outputs** — converge quickly without diversity injection
+- **Implication:** Need explicit exploration mechanisms for multi-agent creativity
+
+**Learning Agent-Compatible Context Management for Long-Horizon Tasks** (arXiv:2605.30785, May 2026)
+- **Problem:** Long-horizon tasks require context management
+- **Solution:** Adaptive Context Management (AdaCoM) — external LLM manages context of frozen agent
+- **Method:** Flexible modification actions + end-to-end RL
+- **Result:** Improved long-horizon performance with diverse context strategies
+
+**Context Engineering: From Prompts to Corporate Multi-Agent Systems** (arXiv:2603.09619, Mar 2026)
+- **Argument:** Prompt engineering necessary but insufficient for multi-agent systems
+- **Proposal:** **Context engineering** — design context structures for agent collaboration
+- **Implication:** Context diversity (not just prompt diversity) drives output diversity
+
+**Memory in the Age of AI Agents** (arXiv:2512.13564, Dec 2025)
+- **Survey:** Up-to-date landscape of agent memory research
+- **Finding:** Memory architectures critically impact diversity — diverse memory retrieval → diverse outputs
+- **Implication:** Memory diversity is lever for creativity diversity
+
+**The Future of AI is Many, Not One** (arXiv:2603.29075, Mar 2026)
+- **Argument:** Current AI thinking is fundamentally individual (single model, single user)
+- **Proposal:** **Pluralistic AI** — many models, many perspectives, many users
+- **Implication:** Diversity at all levels (model, context, user) increases creativity
+
+**Magic, Madness, Heaven, Sin: LLM Output Diversity is Everything and Nothing** (arXiv:2604.01504, Apr 2026)
+- **Finding:** LLM output diversity studied across generation, reasoning, alignment, representational analysis
+- **Conclusion:** Diversity is both critical (for creativity, robustness) and elusive (hard to measure, preserve)
+- **Implication:** Need better diversity metrics + preservation methods
+
+---
+
 ## Key Takeaways
 
 1. **Mode collapse is fundamental** — post-training alignment reduces diversity, but can be mitigated via verbalized sampling, geometric regulation, entropy maximization
@@ -298,6 +348,12 @@ Based on 21 actual searches, the field is moving:
 
 7. **Persona diversity increases output diversity** — parametric social identity injection, blind peer review from diverse personas, human-AI teams with varied personas
 
+8. **Cultural diversity requires explicit mechanisms** — multi-agent cultural debate, ontology-guided reasoning with cultural knowledge graphs
+
+9. **Context/memory engineering matters** — AdaCoM, context engineering, diverse memory retrieval drive output diversity
+
+10. **Pluralistic AI > individual AI** — many models, perspectives, users increases creativity
+
 ---
 
 ## Next Actions
@@ -309,12 +365,15 @@ Based on 21 actual searches, the field is moving:
 5. **Deploy persona diversity** — parametric social identity injection for varied outputs
 6. **Improve steering interfaces** — AI Steerability 360 toolkit for precision control
 7. **Use diverse simulators** — avoid single mode-collapsed simulator for RL training
+8. **Implement multi-agent cultural debate** — reduce cultural bias, increase cross-cultural diversity
+9. **Engineer context structures** — AdaCoM for long-horizon diverse outputs
+10. **Adopt pluralistic AI** — many models, perspectives, users
 
 ---
 
 ## Search Methodology
 
-- **21 actual web searches** across 7 batches (ongoing to 50)
+- **24 actual web searches** across 8 batches (ongoing to 50)
 - **Sources:** arXiv, peer-reviewed venues (ICML, ACL), technical reports
 - **Date range:** 2025-09 to 2026-09 (recency_filter: year)
 - **Focus:** Academic/research-grounded, no marketing blog content
@@ -322,8 +381,7 @@ Based on 21 actual searches, the field is moving:
 
 ---
 
-**Status:** 21/50 searches completed. Continuing with Batches 8–17 to cover:
-- Cultural/contextual diversity
+**Status:** 24/50 searches completed. Continuing with Batches 9–17 to cover:
 - Adversarial diversity (generator-discriminator)
 - Temperature/sampling strategies
 - Multi-perspective reasoning
