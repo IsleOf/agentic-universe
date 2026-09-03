@@ -1,0 +1,18 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe nodes if earlier patches already added them.",
+  "proposal": "evolution/proposals/2026-09-03-cognition-boosters-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "booster-collective-discovery", "type": "booster", "label": "Collective scientific discovery", "summary": "EinsteinArena pattern: shared discussion boards + iterative submission + shared debugging; 11 SOTA results discovered; OpenAI Astra solved 10 open problems; Anthropic Claude advanced Riemann Hypothesis.", "source": "https://arxiv.org/abs/2606.10402", "tags": ["booster", "collective", "discovery"]},
+    {"id": "booster-swarm-intelligence", "type": "booster", "label": "Swarm intelligence & stigmergy", "summary": "SwarmWorld/SwarmBench pattern: stigmergic coordination + deterministic consensus + MicroVM sandboxing; SwarmExp experience replay improves orchestration; 88% token reduction via divide‑and‑conquer.", "source": "https://arxiv.org/abs/2608.26081", "tags": ["booster", "swarm", "stigmergy"]},
+    {"id": "booster-meta-cognition", "type": "booster", "label": "Meta‑cognition & self‑reflection", "summary": "Meta^n/ReflectFact/DoCtOR pattern: recursive self‑improvement, self‑reflection for fact verification, diagnose‑then‑correct reflection; outperforms prior self‑improving agents on all 8 benchmark families.", "source": "https://arxiv.org/abs/2608.24735", "tags": ["booster", "meta-cognition", "reflection"]}
+  ],
+  "edges": [
+    {"from": "booster-collective-discovery", "to": "pattern-memory-agents", "relation": "extends"},
+    {"from": "booster-swarm-intelligence", "to": "risk-multi-agent-collusion", "relation": "repurposes"},
+    {"from": "booster-meta-cognition", "to": "booster-drift-aware-evals", "relation": "complements"},
+    {"from": "proj-google-adk", "to": "booster-collective-discovery", "relation": "implements"},
+    {"from": "proj-openai-agents-sdk", "to": "booster-swarm-intelligence", "relation": "implements"},
+    {"from": "proj-mastra", "to": "booster-meta-cognition", "relation": "implements"}
+  ]
+}
