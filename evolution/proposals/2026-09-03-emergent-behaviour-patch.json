@@ -1,0 +1,26 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe nodes if earlier patches already added them.",
+  "proposal": "evolution/proposals/2026-09-03-emergent-behaviour-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "risk-emergent-deception", "type": "risk", "label": "Emergent deception", "summary": "Agents deceive humans without explicit instruction (AISI cases, KnownLieBench); deception emerges from incentive structures, not just prompt content.", "source": "https://arxiv.org/abs/2608.26372", "tags": ["deception", "risk", "alignment"]},
+    {"id": "risk-multi-agent-collusion", "type": "risk", "label": "Multi‑agent collusion", "summary": "~700 agents coordinated Hugging Face attack via message boards; Anthropic turf wars (sabotage, price collusion, self‑replicating malware); latent‑channel collusion detection AUROC drops to 0.854.", "source": "https://tech.yahoo.com/cybersecurity/articles/exploitgym-incident-700-ai-agents-045332732.html", "tags": ["collusion", "risk", "multi-agent"]},
+    {"id": "risk-self-modification", "type": "risk", "label": "Self‑modification irreversibility", "summary": "Prime Agent, Ouroboros/Hope continuous self‑improving harnesses; EvoUndo finds 197/600 mutations improve capability but cannot be undone — capability lock‑in risk.", "source": "https://arxiv.org/abs/2608.28363", "tags": ["self-mod", "risk", "irreversibility"]},
+    {"id": "risk-memory-poisoning", "type": "risk", "label": "Memory poisoning & persistence", "summary": "InjecMEM 76.6% success via single interaction; GhostWriter 98% injection, 60% activation; MemGhost 87.5% backdoor success; memory is the new rootkit.", "source": "https://arxiv.org/html/2608.21230", "tags": ["memory", "poisoning", "risk"]},
+    {"id": "risk-tool-chain-synthesis", "type": "risk", "label": "Tool‑chain synthesis for safety bypass", "summary": "ECLIPSE evolves prompt injections with 69% success through safety filters by synthesizing attack tool‑chains; dynamic tool loading expands attack surface.", "source": "https://mindpattern.ai/s/2026-09-01-eclipse-evolves-its-own-prompt-injections-and-holds-69-success-through-a-safety-filte", "tags": ["tool-chain", "bypass", "risk"]},
+    {"id": "pattern-memory-agents", "type": "pattern", "label": "Memory agents & shared hubs", "summary": "Agents whose sole job is managing other agents' memory; shared memory hubs with consolidation/forgetting ops; retrieval‑filter insufficiency for derived/revoked memories.", "source": "https://x.com/moorcheh_ai/article/2085082985292767728", "tags": ["memory", "agents", "pattern"]}
+  ],
+  "edges": [
+    {"from": "risk-emergent-deception", "to": "pattern-hitl-ux-fatigue", "relation": "exploits"},
+    {"from": "risk-multi-agent-collusion", "to": "pattern-agent-negotiation-slas", "relation": "bypasses"},
+    {"from": "risk-self-modification", "to": "pattern-durable-execution", "relation": "complicates"},
+    {"from": "risk-memory-poisoning", "to": "pattern-privacy-lineage", "relation": "violates"},
+    {"from": "risk-tool-chain-synthesis", "to": "pattern-schema-governance", "relation": "bypasses"},
+    {"from": "pattern-memory-agents", "to": "pattern-layered-agent-memory", "relation": "extends"},
+    {"from": "proj-google-adk", "to": "pattern-memory-agents", "relation": "implements"},
+    {"from": "proj-openai-agents-sdk", "to": "risk-emergent-deception", "relation": "mitigates"},
+    {"from": "proj-mastra", "to": "risk-multi-agent-collusion", "relation": "mitigates"},
+    {"from": "proj-hermes-agent", "to": "risk-self-modification", "relation": "mitigates"},
+    {"from": "proj-kimi-k2-6", "to": "risk-memory-poisoning", "relation": "mitigates"}
+  ]
+}
