@@ -1,0 +1,75 @@
+{
+  "_comment": "Human‑LLM hybrid cycle graph — motive (human) + operative (LLM) roles for cyber‑creativity. Adapt to human_llm_hybrid_schema.json and validate with tools/knowledge_graph.py before applying.",
+  "proposal": "evolution/proposals/2026-09-04-human-llm-hybrid-update.md",
+  "date": "2026-09-04",
+  "nodes": [
+    {
+      "id": "human-motive-setter",
+      "type": "human",
+      "label": "Human motive setter",
+      "summary": "Human provides motivational direction, experiential constraints, high‑level goals.",
+      "source": "JOCB theoretical exploration (Aug 13, 2026)",
+      "tags": ["human", "motive"]
+    },
+    {
+      "id": "llm-operative-explorer",
+      "type": "llm",
+      "label": "LLM operative explorer",
+      "summary": "LLM provides extensive exploration of conceptual possibilities.",
+      "source": "JOCB theoretical exploration (Aug 13, 2026)",
+      "tags": ["llm", "operative"]
+    },
+    {
+      "id": "motive-vintage-travel-poster",
+      "type": "motive",
+      "label": "Motive: vintage travel poster",
+      "summary": "Initial motive: vintage travel poster with retro colors + Art Deco typography, targeting 2026 retro revival trend.",
+      "source": "Human input",
+      "tags": ["motive", "vintage", "travel"]
+    },
+    {
+      "id": "operative-generate-variants",
+      "type": "operative",
+      "label": "Operative: generate variants",
+      "summary": "LLM generates 10–20 design variants with different color palettes, typography, layouts.",
+      "source": "LLM exploration",
+      "tags": ["operative", "generation"]
+    },
+    {
+      "id": "concept-variant-001",
+      "type": "concept",
+      "label": "Concept variant #1",
+      "summary": "Generated design variant: mustard/teal/cream palette, bold Art Deco fonts, vintage travel layout.",
+      "source": "LLM generation",
+      "tags": ["concept", "variant"],
+      "metrics": { "novelty_score": 7.2, "usefulness_score": 8.1, "surprise_score": 6.5 }
+    },
+    {
+      "id": "evaluation-human-select-top3",
+      "type": "evaluation",
+      "label": "Evaluation: human selects top 3",
+      "summary": "Human evaluates variants and selects top 3 for refinement.",
+      "source": "Human evaluation",
+      "tags": ["evaluation", "selection"]
+    },
+    {
+      "id": "cycle-1",
+      "type": "cycle",
+      "label": "Cycle 1",
+      "summary": "First hybrid cycle: human sets motive → LLM explores → human evaluates → LLM refines.",
+      "source": "Hybrid cycle",
+      "tags": ["cycle", "iteration"]
+    }
+  ],
+  "edges": [
+    { "from": "human-motive-setter", "to": "motive-vintage-travel-poster", "relation": "sets" },
+    { "from": "llm-operative-explorer", "to": "operative-generate-variants", "relation": "executes" },
+    { "from": "motive-vintage-travel-poster", "to": "operative-generate-variants", "relation": "guides" },
+    { "from": "operative-generate-variants", "to": "concept-variant-001", "relation": "produces" },
+    { "from": "human-motive-setter", "to": "evaluation-human-select-top3", "relation": "performs" },
+    { "from": "concept-variant-001", "to": "evaluation-human-select-top3", "relation": "evaluated_by" },
+    { "from": "cycle-1", "to": "human-motive-setter", "relation": "starts_with" },
+    { "from": "cycle-1", "to": "llm-operative-explorer", "relation": "includes" },
+    { "from": "cycle-1", "to": "evaluation-human-select-top3", "relation": "ends_with" }
+  ]
+}

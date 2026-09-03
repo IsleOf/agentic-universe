@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Human‑LLM Hybrid Cycle Schema",
+  "description": "Schema for human‑LLM hybrid cycle of concept generation (motive + operative roles).",
+  "type": "object",
+  "required": ["nodes", "edges"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label", "summary"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["human", "llm", "motive", "operative", "concept", "evaluation", "cycle"] },
+          "label": { "type": "string" },
+          "summary": { "type": "string" },
+          "source": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "metrics": {
+            "type": "object",
+            "properties": {
+              "novelty_score": { "type": "number" },
+              "usefulness_score": { "type": "number" },
+              "surprise_score": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "relation"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "relation": { "type": "string" }
+        }
+      }
+    }
+  }
+}
