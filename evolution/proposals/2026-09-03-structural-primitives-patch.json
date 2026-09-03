@@ -1,0 +1,29 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe protocol/benchmark/deprecation nodes if earlier patches already added them.",
+  "proposal": "evolution/proposals/2026-09-03-structural-primitives-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "protocol-a2a", "type": "protocol", "label": "A2A (Agent2Agent) protocol", "summary": "Open standard for agent‑to‑agent communication: signed Agent Cards, multi‑tenancy, gRPC; joined Agentic AI Foundation (Aug 2026). Horizontal layer for task negotiation/delegation across org boundaries.", "source": "https://a2a-protocol.org", "tags": ["protocol", "a2a", "multi-agent"]},
+    {"id": "protocol-mcp", "type": "protocol", "label": "MCP (Model Context Protocol) 2026-07-28", "summary": "Vertical layer for agent→tools/data access; 2026-07-28 spec made core stateless (no initialize handshake, no session ID); cacheable lists, MRTR, header-based routing, hardened OAuth/OIDC.", "source": "https://modelcontextprotocol.io", "tags": ["protocol", "mcp", "tools"]},
+    {"id": "benchmark-lhtb", "type": "benchmark", "label": "Long-Horizon Terminal-Bench (LHTB)", "summary": "46 tasks, hundreds of episodes, 90-minute budgets; 64.6% partial progress, 4.3% cross 0.95 reward; mean 9.9M tokens, 85.3 minutes/task. Exposes completion cliff for frontier agents.", "source": "https://arxiv.org/abs/2607.08964", "tags": ["benchmark", "long-horizon"]},
+    {"id": "deprecation-openai-assistants-2026-08-26", "type": "deprecation", "label": "OpenAI Assistants API sunset (2026-08-26)", "summary": "Hard shutdown; replacement is Responses + Conversations APIs; no automated thread migration.", "source": "https://developers.openai.com/api/docs/deprecations", "tags": ["deprecation", "openai"]},
+    {"id": "deprecation-openai-agent-builder-evals-2026-11-30", "type": "deprecation", "label": "OpenAI Agent Builder + Evals + v1/prompts shutdown (2026-11-30)", "summary": "Announced Jun 3, 2026; Evals read-only Oct 31, 2026; full shutdown Nov 30, 2026. Migrate to Agents SDK / Responses API.", "source": "https://developers.openai.com/api/docs/deprecations", "tags": ["deprecation", "openai"]},
+    {"id": "pattern-progressive-skill-disclosure", "type": "pattern", "label": "Progressive skill/tool disclosure", "summary": "Three-layer loading (L1 metadata ~100 tokens, L2 instructions ≤5k tokens, L3 resources on demand); inject 3–5 skills/tools per step; log injected schemas; measure retrieval precision as catalogs grow. Mitigates SkillBloat token-amplification attacks.", "source": "https://arxiv.org/abs/2608.14036", "tags": ["skills", "context", "progressive-disclosure"]},
+    {"id": "pattern-parallel-swarm-reconciliation", "type": "pattern", "label": "Parallel swarm + reconciliation", "summary": "Internal task decomposition across 20–300 parallel sub-agents; reconcile outputs; track amplification ratio (system horizon / agent horizon); expect model-native swarm primitives from more vendors.", "source": "https://arxiv.org/abs/2607.08964", "tags": ["parallelism", "swarm", "reconciliation"]},
+    {"id": "pattern-fleet-gateway-registry", "type": "pattern", "label": "Fleet gateway registry", "summary": "Persistent registry of local/cloud/SSH/remote gateways with health checks; unify bot/chat rosters across gateways; durable agent-to-agent messaging (Hermes hermes peer).",
+    {"id": "proj-kimi-k2-6", "type": "external-project", "label": "Kimi K2.6 (Moonshot AI)", "summary": "Open-weight 1T MoE (32B active/token); Agent Swarm scales to 300 parallel sub-agents, 4,000 coordinated steps/run; ~4.5×·faster than single-agent sequential; PARL trains only the orchestrator.", "source": "https://www.kimi.ai", "tags": ["model", "swarm", "parallel"]}
+  ],
+  "edges": [
+    {"from": "protocol-a2a", "to": "protocol-mcp", "relation": "complements"},
+    {"from": "protocol-a2a", "to": "pattern-fleet-gateway-registry", "relation": "supports"},
+    {"from": "protocol-mcp", "to": "pattern-progressive-skill-disclosure", "relation": "supports"},
+    {"from": "benchmark-lhtb", "to": "pattern-parallel-swarm-reconciliation", "relation": "measured-by"},
+    {"from": "deprecation-openai-assistants-2026-08-26", "to": "pattern-progressive-skill-disclosure", "relation": "motivates"},
+    {"from": "deprecation-openai-agent-builder-evals-2026-11-30", "to": "pattern-progressive-skill-disclosure", "relation": "motivates"},
+    {"from": "proj-kimi-k2-6", "to": "pattern-parallel-swarm-reconciliation", "relation": "implements"},
+    {"from": "proj-google-adk", "to": "pattern-progressive-skill-disclosure", "relation": "implements"},
+    {"from": "proj-hermes-agent", "to": "pattern-fleet-gateway-registry", "relation": "implements"},
+    {"from": "pattern-parallel-swarm-reconciliation", "to": "pattern-massive-parallel-swarm", "relation": "extends"},
+    {"from": "pattern-fleet-gateway-registry", "to": "pattern-multi-gateway-fleet", "relation": "extends"}
+  ]
+}
