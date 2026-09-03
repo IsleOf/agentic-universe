@@ -1,0 +1,25 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe nodes if earlier patches already added them.",
+  "proposal": "evolution/proposals/2026-09-03-attack-surface-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "pattern-skill-allowlist-registry", "type": "pattern", "label": "Skill allowlist registry", "summary": "Internal skill registry with signed skills, version pinning, and retrieval precision monitoring; log injected schemas; treat skills as executable code from untrusted sources.", "source": "https://arxiv.org/abs/2608.21929", "tags": ["skills", "security", "allowlist"]},
+    {"id": "governance-mcp-allowlist", "type": "governance", "label": "MCP server allowlist (GitHub Copilot)", "summary": "Enterprise managed settings with allowedMcpServers/deniedMcpServers; enforced in Copilot app, CLI, VS Code; deny‑wins, fail‑closed default; URL and argv matchers.", "source": "https://github.blog/2026-08-06-copilot-mcp-allowlists", "tags": ["governance", "mcp", "allowlist"]},
+    {"id": "runtime-aos-split", "type": "runtime", "label": "Agentic OS vs runtime split", "summary": "Two internal planes — Control & Governance (intent, policy, trust, authority, audit, HITL) and Runtime & Coordination (lifecycle, workflow, model/tool routing, context/memory, scheduling, traffic, assurance).",
+    {"id": "pattern-compaction-safety", "type": "pattern", "label": "Compaction safety", "summary": "Compact to schema (JSON) not prose; validate state on transitions; keep policies outside the agent's edit surface, enforced at the gateway; measure policy violations before/after compaction.", "source": "https://arxiv.org/abs/2608.26263", "tags": ["compaction", "safety", "state"]},
+    {"id": "pattern-fleet-control-plane", "type": "pattern", "label": "Fleet control plane", "summary": "Persistent gateway registry with health checks; unify bot/chat rosters; measure operator overhead reduction; support bot‑to‑bot DMs across gateways (Hermes hermes peer).",
+    {"id": "proj-openai-agents-sdk", "type": "external-project", "label": "OpenAI Agents SDK", "summary": "Native sandbox execution, model‑native harness; Responses API is the primary primitive for agent runs; Agents SDK updated Aug 2026 with sandbox + harness.", "source": "https://openai.com/index/the-next-evolution-of-the-agents-sdk/", "tags": ["sdk", "openai", "sandbox"]},
+    {"id": "proj-mastra", "type": "external-project", "label": "Mastra (TypeScript agent framework)", "summary": "TypeScript‑first, batteries‑included (agents, workflows, memory, evals, MCP, Studio); closest to full‑stack agent framework in TS.", "source": "https://mastra.ai", "tags": ["framework", "typescript", "mastra"]}
+  ],
+  "edges": [
+    {"from": "pattern-skill-allowlist-registry", "to": "pattern-progressive-skill-disclosure", "relation": "complements"},
+    {"from": "governance-mcp-allowlist", "to": "protocol-mcp", "relation": "governs"},
+    {"from": "runtime-aos-split", "to": "pattern-compaction-safety", "relation": "enforces"},
+    {"from": "pattern-compaction-safety", "to": "pattern-layered-agent-memory", "relation": "extends"},
+    {"from": "pattern-fleet-control-plane", "to": "pattern-multi-gateway-fleet", "relation": "extends"},
+    {"from": "proj-openai-agents-sdk", "to": "runtime-aos-split", "relation": "implements"},
+    {"from": "proj-mastra", "to": "pattern-fleet-control-plane", "relation": "implements"},
+    {"from": "proj-google-adk", "to": "pattern-skill-allowlist-registry", "relation": "implements"},
+    {"from": "proj-hermes-agent", "to": "pattern-fleet-control-plane", "relation": "implements"}
+  ]
+}
