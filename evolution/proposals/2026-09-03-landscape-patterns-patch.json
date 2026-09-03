@@ -1,0 +1,26 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe proj-hermes-agent if earlier patches were applied.",
+  "proposal": "evolution/proposals/2026-09-03-landscape-patterns-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "pattern-dynamic-tool-injection", "type": "pattern", "label": "Dynamic tool schema injection", "summary": "Inject only the tool schemas needed for the current step instead of flooding context; maintain a catalog + selector; log injected schemas for auditability (Swarms v15 DynamicToolLoader pattern).", "source": "community write-ups (Sept 2026)", "tags": ["context", "tools", "cost"]},
+    {"id": "pattern-cyclic-graph-orchestration", "type": "pattern", "label": "Cyclic graph orchestration (LangGraph-style)", "summary": "Structure multi-agent workflows as explicit cyclic graphs with human-in-the-loop gates; deterministic branching to prevent loops/drift in compliance-sensitive flows.", "source": "LangGraph", "tags": ["orchestration", "determinism", "compliance"]},
+    {"id": "pattern-massive-parallel-swarm", "type": "pattern", "label": "Massive parallel sub-agent routing", "summary": "Internal task decomposition + failure recovery across hundreds of parallel sub-agents (Kimi K2.6-style); track amplification ratio (system horizon / agent horizon).", "source": "Kimi K2.6 (Moonshot AI)", "tags": ["parallelism", "swarm", "emergence"]},
+    {"id": "pattern-containerized-agent-workers", "type": "pattern", "label": "Containerized agent worker pools", "summary": "Lead agent breaks goals into tasks, dispatches to containerized specialized workers, preserves a global shared memory pool; map to ECC worktree isolation (superset, orca, dmux).", "source": "agent-swarm.dev (Desplega) + ECC ecosystem", "tags": ["isolation", "multi-agent", "memory"]},
+    {"id": "pattern-multi-gateway-fleet", "type": "pattern", "label": "Multi-gateway fleet control plane", "summary": "Persistent registry of local/cloud/SSH/remote agents with health checks; durable agent-to-agent messaging (Hermes hermes peer) instead of fire-and-forget.", "source": "Hermes Agent v0.21.0", "tags": ["fleet", "a2a", "observability"]}
+  ],
+  "edges": [
+    {"from": "pattern-dynamic-tool-injection", "to": "pattern-layered-agent-memory", "relation": "supports"},
+    {"from": "pattern-dynamic-tool-injection", "to": "pattern-context-economics", "relation": "feeds"},
+    {"from": "pattern-cyclic-graph-orchestration", "to": "pattern-hooks-enforcement", "relation": "extends"},
+    {"from": "pattern-cyclic-graph-orchestration", "to": "pattern-plan-canvas-hitl", "relation": "supports"},
+    {"from": "pattern-massive-parallel-swarm", "to": "pattern-horizon-amplification", "relation": "implements"},
+    {"from": "pattern-massive-parallel-swarm", "to": "pattern-pressure-field-coordination", "relation": "alternative-to"},
+    {"from": "pattern-containerized-agent-workers", "to": "pattern-layered-agent-memory", "relation": "depends-on"},
+    {"from": "pattern-containerized-agent-workers", "to": "pattern-cyclic-graph-orchestration", "relation": "supports"},
+    {"from": "proj-hermes-agent", "to": "pattern-multi-gateway-fleet", "relation": "implements"},
+    {"from": "pattern-multi-gateway-fleet", "to": "pattern-agent-peer-comms", "relation": "requires"},
+    {"from": "proj-agent-zero", "to": "pattern-dynamic-tool-injection", "relation": "relates-to"},
+    {"from": "proj-pi", "to": "pattern-containerized-agent-workers", "relation": "contrasts-with"}
+  ]
+}
