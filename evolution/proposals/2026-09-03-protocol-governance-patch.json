@@ -1,0 +1,32 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe proj-hermes-agent if earlier patches were applied.",
+  "proposal": "evolution/proposals/2026-09-03-protocol-governance-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "protocol-a2a", "type": "protocol", "label": "A2A (Agent2Agent) protocol", "summary": "Open standard for agent‑to‑agent communication: signed Agent Cards, multi‑tenancy, three bindings; joined Agentic AI Foundation (Aug 2026). Horizontal layer for task negotiation/delegation across org boundaries.", "source": "https://a2a-protocol.org", "tags": ["protocol", "a2a", "multi-agent"]},
+    {"id": "protocol-mcp", "type": "protocol", "label": "MCP (Model Context Protocol)", "summary": "Vertical layer for agent→tools/data access; 2026‑07‑28 spec made core stateless; hosted under Agentic AI Foundation alongside A2A.", "source": "https://modelcontextprotocol.io", "tags": ["protocol", "mcp", "tools"]},
+    {"id": "proj-google-adk", "type": "external-project", "label": "Google ADK (Agent Development Kit)", "summary": "Code‑first Python framework for building/evaluating/deploying agents; ADK 2.0 ships Agent Skills with progressive disclosure and a structured Task API for agent‑to‑agent delegation.", "source": "https://github.com/google/adk-python", "tags": ["framework", "google", "skills"]},
+    {"id": "pattern-hitl-approval-gates", "type": "pattern", "label": "Human‑in‑the‑loop approval gates", "summary": "Place gates on irreversible/high‑blast‑radius actions; log who approved what and why; audit gates quarterly and remove zero‑catch gates over 90 days. Required by AEGIS/CSA guidance; verify enforcement (gates often don't actually stop).",
+    {"id": "pattern-progressive-skill-disclosure", "type": "pattern", "label": "Progressive skill/tool disclosure", "summary": "List/load/run skill model; inject 3–5 skills/tools per step; log injected schemas; measure retrieval precision as catalogs grow. Mitigates SkillBloat token‑amplification attacks.",
+    {"id": "pattern-compaction-as-primitive", "type": "pattern", "label": "Compaction as a first‑class primitive", "summary": "Compact to schema (JSON) not prose; validate state on transitions; enable compaction in harness history pipelines; measure long‑horizon reward, not just task success.",
+    {"id": "deprecation-openai-assistants-2026-08-26", "type": "deprecation", "label": "OpenAI Assistants API sunset (2026‑08‑26)", "summary": "Assistants API removed; replacement is Responses + Conversations APIs. Agent Builder/Evals close Nov 30, 2026. Migration targets are themselves deprecated in some docs — plan exit carefully.", "source": "https://help.openai.com/en/articles/8550641-assistants-api-v2-faq.pdf", "tags": ["deprecation", "openai"]},
+    {"id": "deprecation-azure-assistants-2026-08-26", "type": "deprecation", "label": "Azure Assistants API retired (2026‑08‑26)", "summary": "Azure OpenAI Assistants retired same day; migration target is Microsoft Foundry Agents (classic retires Mar 31, 2027).",
+    {"id": "benchmark-lhtb", "type": "benchmark", "label": "Long‑Horizon Terminal‑Bench (LHTB)", "summary": "46 tasks over hundreds of steps with 90‑minute budgets; measures sustained useful work in a containerized terminal. Frontier models show meaningful gaps.", "source": "https://github.com/zli12321/LHTB", "tags": ["benchmark", "long-horizon"]}
+  ],
+  "edges": [
+    {"from": "protocol-a2a", "to": "protocol-mcp", "relation": "complements"},
+    {"from": "protocol-a2a", "to": "pattern-multi-gateway-fleet", "relation": "supports"},
+    {"from": "protocol-mcp", "to": "pattern-dynamic-tool-injection", "relation": "supports"},
+    {"from": "proj-google-adk", "to": "pattern-progressive-skill-disclosure", "relation": "implements"},
+    {"from": "proj-google-adk", "to": "pattern-hitl-approval-gates", "relation": "relates-to"},
+    {"from": "pattern-hitl-approval-gates", "to": "pattern-cyclic-graph-orchestration", "relation": "requires"},
+    {"from": "pattern-compaction-as-primitive", "to": "pattern-layered-agent-memory", "relation": "extends"},
+    {"from": "pattern-compaction-as-primitive", "to": "benchmark-lhtb", "relation": "measured-by"},
+    {"from": "deprecation-openai-assistants-2026-08-26", "to": "pattern-compaction-as-primitive", "relation": "motivates"},
+    {"from": "deprecation-azure-assistants-2026-08-26", "to": "pattern-compaction-as-primitive", "relation": "motivates"},
+    {"from": "proj-hermes-agent", "to": "protocol-mcp", "relation": "uses"},
+    {"from": "proj-agent-zero", "to": "protocol-mcp", "relation": "uses"},
+    {"from": "proj-opencode", "to": "protocol-mcp", "relation": "uses"},
+    {"from": "proj-pi", "to": "protocol-mcp", "relation": "avoids"}
+  ]
+}
