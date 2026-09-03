@@ -1,0 +1,28 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe nodes if earlier patches already added them.",
+  "proposal": "evolution/proposals/2026-09-03-next-frontier-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "pattern-agent-negotiation-slas", "type": "pattern", "label": "Agent negotiation & SLAs", "summary": "A2A as the negotiation/contract layer; encode SLAs (latency, cost caps, approval requirements) in Agent Cards; log negotiation traces for audit.", "source": "https://a2a-protocol.org", "tags": ["negotiation", "sla", "a2a"]},
+    {"id": "pattern-multi-tenant-control", "type": "pattern", "label": "Multi‑tenant control & isolation", "summary": "Enforce tenant isolation at the data layer (row‑level security, geo‑partitioning); centralize policy/permissions replication; prevent memory poisoning across tenants.", "source": "https://www.cockroachlabs.com/blog/multi-tenant-ai-agents-why-data-isolation-starts-at-the-database/", "tags": ["multi-tenant", "isolation", "governance"]},
+    {"id": "pattern-durable-execution", "type": "pattern", "label": "Durable execution & checkpoint/merge", "summary": "Model agent workflows as durable state machines with journaled steps; support human approval gates that survive restarts; use signed history for audit/attestation.", "source": "https://arxiv.org/abs/2608.22928", "tags": ["durable", "checkpoint", "merge"]},
+    {"id": "pattern-marketplace-reputation", "type": "pattern", "label": "Marketplace & reputation", "summary": "Agent registries with signed skills, version pinning, and reputation signals; enforce allowlists for MCP servers; tag telemetry for cost attribution and chargeback.", "source": "https://tenable.com/cyberagents-exchange", "tags": ["marketplace", "reputation", "skills"]},
+    {"id": "pattern-multi-modal-verification", "type": "pattern", "label": "Multi‑modal verification", "summary": "Treat multi‑modal outputs as unverified unless backed by external validators; use agentic video understanding to reduce token cost but validate key claims with independent checks.", "source": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/", "tags": ["multi-modal", "verification", "video"]},
+    {"id": "pattern-privacy-preserving-learning", "type": "pattern", "label": "Privacy‑preserving learning", "summary": "Deploy agents close to data (per region/tenant); use federated learning for cross‑org model updates; apply differential privacy to feature reconstruction; audit persona skills for leakage.", "source": "https://arxiv.org/abs/2608.20518", "tags": ["privacy", "federated", "learning"]},
+    {"id": "pattern-agent-native-cicd", "type": "pattern", "label": "Agent‑native CI/CD", "summary": "Pre‑merge checks, CI gates, release sign‑off, production feedback that writes tests; durable workflows with signed history for audit; instrument traces with span‑level inputs/outputs.", "source": "https://www.testmuai.com/blog/continuous-agent-testing/", "tags": ["ci-cd", "testing", "durable"]}
+  ],
+  "edges": [
+    {"from": "pattern-agent-negotiation-slas", "to": "protocol-a2a", "relation": "implements"},
+    {"from": "pattern-multi-tenant-control", "to": "pattern-schema-governance", "relation": "enforces"},
+    {"from": "pattern-durable-execution", "to": "pattern-runtime-verification", "relation": "extends"},
+    {"from": "pattern-marketplace-reputation", "to": "pattern-skill-allowlist-registry", "relation": "complements"},
+    {"from": "pattern-multi-modal-verification", "to": "pattern-red-team-forensics", "relation": "extends"},
+    {"from": "pattern-privacy-preserving-learning", "to": "pattern-privacy-lineage", "relation": "extends"},
+    {"from": "pattern-agent-native-cicd", "to": "pattern-durable-execution", "relation": "requires"},
+    {"from": "proj-google-adk", "to": "pattern-agent-negotiation-slas", "relation": "implements"},
+    {"from": "proj-openai-agents-sdk", "to": "pattern-multi-tenant-control", "relation": "implements"},
+    {"from": "proj-mastra", "to": "pattern-durable-execution", "relation": "implements"},
+    {"from": "proj-hermes-agent", "to": "pattern-marketplace-reputation", "relation": "implements"},
+    {"from": "proj-kimi-k2-6", "to": "pattern-multi-modal-verification", "relation": "implements"}
+  ]
+}
