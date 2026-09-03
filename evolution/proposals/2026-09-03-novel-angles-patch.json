@@ -1,0 +1,30 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe nodes if earlier patches already added them.",
+  "proposal": "evolution/proposals/2026-09-03-novel-angles-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "pattern-cost-utility-control", "type": "pattern", "label": "Cost‑utility control", "summary": "Real‑time caps, anomaly detection, per‑tool cost tags; hard session caps, exponential backoff, max iteration limits; measure cost vs aggregate task utility.", "source": "https://arxiv.org/abs/2608.26195", "tags": ["cost", "utility", "control"]},
+    {"id": "pattern-schema-governance", "type": "pattern", "label": "Schema governance", "summary": "Explicit tool output schemas; validate on ingress/egress; version agent APIs; treat structured outputs as untrusted until validated.", "source": "https://nhimg.org/articles/structured-outputs-need-schemas-validation-and-authorization/", "tags": ["schema", "governance", "validation"]},
+    {"id": "pattern-hitl-ux-fatigue", "type": "pattern", "label": "HITL UX & approval fatigue", "summary": "Approval dashboards with evidence panels, one‑click overrides, timeout→reject semantics; instrument abstain rates and queue age; design for rejection, not just approval.", "source": "https://workos.com/blog/approval-fatigue-agent-governance", "tags": ["hitl", "ux", "fatigue"]},
+    {"id": "pattern-agent-identity-federation", "type": "pattern", "label": "Agent identity & federation", "summary": "SPIFFE‑like agent identities, DPoP, Workload Identity Federation; attenuated delegation chains; centralize agent registries for multi‑tenant governance.", "source": "https://www.ietf.org/archive/id/draft-reece-wimse-cross-org-delegation-02.html", "tags": ["identity", "federation", "trust"]},
+    {"id": "pattern-runtime-verification", "type": "pattern", "label": "Runtime verification", "summary": "Temporal logic policies (Dogwood/Cedar+temporal); proof‑carrying patches; runtime attestation (TRACE, IETF RATS/EAT, in‑toto, SCITT); instrument evidence outside agent boundary.", "source": "https://aws.amazon.com/blogs/opensource/introducing-dogwood-runtime-verification-for-ai-agents/", "tags": ["formal", "verification", "runtime"]},
+    {"id": "pattern-physical-edge-agents", "type": "pattern", "label": "Physical & edge agents", "summary": "Physical safety layers (Anthropic MHS); digital twins as world models; edge runtimes for latency‑sensitive or region‑bound workloads.", "source": "https://arxiv.org/abs/2608.22657", "tags": ["physical", "edge", "digital-twin"]},
+    {"id": "pattern-red-team-forensics", "type": "pattern", "label": "Red‑team & forensics", "summary": "Executable red‑team exercises (REDAgentBench, MiDojo, DeepTeam); trace debugging, first‑divergence analysis; NIST‑aligned IR runbooks for agent incidents.", "source": "https://arxiv.org/abs/2608.10669", "tags": ["red-team", "forensics", "security"]},
+    {"id": "pattern-privacy-lineage", "type": "pattern", "label": "Privacy & lineage", "summary": "Runtime evidence for residency/GDPR; agent registries with lineage tracking; deploy agents close to data; centralize only metadata/performance signals.", "source": "https://nhimg.org/articles/privacy-and-data-residency-for-ai-agents-requires-runtime-evidence/", "tags": ["privacy", "lineage", "gdpr"]}
+  ],
+  "edges": [
+    {"from": "pattern-cost-utility-control", "to": "pattern-progressive-skill-disclosure", "relation": "complements"},
+    {"from": "pattern-schema-governance", "to": "pattern-dynamic-tool-injection", "relation": "enforces"},
+    {"from": "pattern-hitl-ux-fatigue", "to": "pattern-layered-agent-memory", "relation": "extends"},
+    {"from": "pattern-agent-identity-federation", "to": "protocol-a2a", "relation": "supports"},
+    {"from": "pattern-runtime-verification", "to": "governance-mcp-allowlist", "relation": "enforces"},
+    {"from": "pattern-physical-edge-agents", "to": "pattern-massive-parallel-swarm", "relation": "extends"},
+    {"from": "pattern-red-team-forensics", "to": "pattern-multi-gateway-fleet", "relation": "extends"},
+    {"from": "pattern-privacy-lineage", "to": "pattern-skill-allowlist-registry", "relation": "complements"},
+    {"from": "proj-google-adk", "to": "pattern-cost-utility-control", "relation": "implements"},
+    {"from": "proj-openai-agents-sdk", "to": "pattern-schema-governance", "relation": "implements"},
+    {"from": "proj-mastra", "to": "pattern-hitl-ux-fatigue", "relation": "implements"},
+    {"from": "proj-hermes-agent", "to": "pattern-agent-identity-federation", "relation": "implements"},
+    {"from": "proj-kimi-k2-6", "to": "pattern-physical-edge-agents", "relation": "implements"}
+  ]
+}
