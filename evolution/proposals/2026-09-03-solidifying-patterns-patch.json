@@ -1,0 +1,24 @@
+{
+  "_comment": "Delta patch for knowledge/graph/agentic_universe_graph.json. Generic node/edge shape — adapt to agentic_universe_schema.json and validate with tools/knowledge_graph.py before applying. Dedupe proj-hermes-agent if earlier patches were applied.",
+  "proposal": "evolution/proposals/2026-09-03-solidifying-patterns-update.md",
+  "date": "2026-09-03",
+  "nodes": [
+    {"id": "paper-agentic-memory", "type": "research", "label": "Agentic Memory (AgeMem, arXiv 2601.01885)", "summary": "Unified LTM+STM as tool-based actions inside the agent policy; RL-trained to decide what/when to store/retrieve/update/summarize/discard; beats separate-memory baselines on 5 long-horizon benchmarks.", "source": "https://arxiv.org/abs/2601.01885", "tags": ["memory", "long-horizon", "rl"]},
+    {"id": "paper-continuum-memory", "type": "research", "label": "Continuum Memory Architecture (CMA, arXiv 2601.09913)", "summary": "Persistent storage + selective retention + associative routing + temporal chaining + consolidation into higher-order abstractions; necessary architectural primitive for long-horizon agents; highlights drift/latency/interpretability challenges.", "source": "https://arxiv.org/abs/2601.09913", "tags": ["memory", "continuum", "architecture"]},
+    {"id": "paper-skills-injector", "type": "research", "label": "SkillsInjector (arXiv 2605.29794)", "summary": "Two-stage adaptive method: context planner learns execution-grounded skill preferences and admits an adaptive number of skills; set-aware renderer tailors presentation relative to neighbors.", "source": "https://arxiv.org/abs/2605.29794", "tags": ["tools", "context", "adaptive"]},
+    {"id": "paper-selforg-iclr-2026", "type": "research", "label": "Stochastic Self-Organization (ICLR 2026)", "summary": "Response-conditioned framework: agents generate answers, assess peer contributions via Shapley-inspired approximation, construct a DAG to route information from high-contribution agents; stable/efficient message passing without extra supervision.", "source": "https://iclr.cc/virtual/2026/poster/10007145", "tags": ["self-organization", "routing", "iclr"]}
+  ],
+  "edges": [
+    {"from": "paper-agentic-memory", "to": "pattern-layered-agent-memory", "relation": "extends"},
+    {"from": "paper-agentic-memory", "to": "pattern-horizon-amplification", "relation": "supports"},
+    {"from": "paper-continuum-memory", "to": "pattern-layered-agent-memory", "relation": "extends"},
+    {"from": "paper-continuum-memory", "to": "pattern-horizon-amplification", "relation": "depends-on"},
+    {"from": "paper-skills-injector", "to": "pattern-dynamic-tool-injection", "relation": "supports"},
+    {"from": "paper-skills-injector", "to": "pattern-context-economics", "relation": "feeds"},
+    {"from": "paper-selforg-iclr-2026", "to": "pattern-mission-not-roles", "relation": "supports"},
+    {"from": "paper-selforg-iclr-2026", "to": "pattern-cyclic-graph-orchestration", "relation": "alternative-to"},
+    {"from": "paper-selforg-iclr-2026", "to": "pattern-massive-parallel-swarm", "relation": "relates-to"},
+    {"from": "pattern-context-doctor-repair", "to": "paper-continuum-memory", "relation": "relates-to"},
+    {"from": "pattern-multi-gateway-fleet", "to": "paper-selforg-iclr-2026", "relation": "relates-to"}
+  ]
+}
