@@ -36,6 +36,10 @@
     {
       "date": "2026-09-05",
       "change": "Added approach_agent_habitat (12 nodes) under a standing research charter: nurture agents and swarms, expand agent reach into knowledge and creative work. Habitat derived from observed failure modes rather than metaphor - slack, cheap death, graded challenge, inheritance, diversity maintenance, retraction capacity. Two findings reframe the programme: emergent_evaluator_mode_collapse (a model-based verifier carries its own collapse, so self-improvement optimises toward the judge) and concept_work_substitution_frontier (verification cost, not capability, sets where agents displace human work). Central tension recorded: reliability pressure from work substitution selects against the diversity that emergence needs."
+    },
+    {
+      "date": "2026-09-05",
+      "change": "Literature sweep of the last two weeks via arXiv API and Hacker News (Reddit and X unreachable). +10 nodes, +26 edges. Two findings challenge claims this project made earlier: SWE-Gate shows 221 of 644 functionally-passing repairs failed review constraints, refining concept_work_substitution_frontier from 'cheap verification' to 'complete verification'; and sustained heterogeneity shows persistent temperature-insensitive divergence surviving six controls, complicating principle_diversity_maintenance. Strongest positive datapoint: concept_harness_capability_delta, roughly 30% unaided versus 100.00 RHAE for the same model in a harness, which is direct evidence against the model-native-orchestration thesis. First use of verification_state inconclusive, on the decomposition-granularity sweep."
     }
   ],
   "nodes": [
@@ -639,7 +643,8 @@
         "swarm"
       ],
       "derived_from": [
-        "arXiv:2601.08129 (Emergent Coordination via Pressure Fields and Temporal Decay, R. Rodriguez) - VERIFIED; 48.5% vs 12.6% conversation-based, hierarchical 1.5%, over 1,350 trials at 1-4 agents; temporal decay worth ~10pp. Note: knowledge/notes/2026-09-04-harness-swarm-deep-dive.md misreports these figures - see docs/source_register.md"
+        "arXiv:2601.08129 (Emergent Coordination via Pressure Fields and Temporal Decay, R. Rodriguez) - VERIFIED; 48.5% vs 12.6% conversation-based, hierarchical 1.5%, over 1,350 trials at 1-4 agents; temporal decay worth ~10pp. Note: knowledge/notes/2026-09-04-harness-swarm-deep-dive.md misreports these figures - see docs/source_register.md",
+        "arXiv:2608.28553 (Logos: An Agent Harness on a Cross-Process Bus) - append-only transcript as the shared state between separate plugin processes; stigmergy as harness architecture"
       ]
     },
     {
@@ -974,7 +979,8 @@
         "OpenReview 2025 'I Know It's Unfair, Do It Anyway'",
         "arXiv:2606.28456 (lying in sustainability games)",
         "LieCraft AAAI 2026",
-        "2T1L tournament"
+        "2T1L tournament",
+        "arXiv:2608.26896 (AI agents in Algorithmic Electricity Markets: On the Emergence of Tacit Collusion) - tacit collusion between independently-learning bidding agents, no communication required"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -1002,7 +1008,8 @@
         "Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01",
         "niteagent.com multi-agent safety frontier",
         "Anthropic multi-agent trust/deception experiments",
-        "arXiv:2604.18005 - collapse traced to structural coupling rather than topology density"
+        "arXiv:2604.18005 - collapse traced to structural coupling rather than topology density",
+        "arXiv:2609.01779 (Agents That Model Agents) - hallucination contagion across agent messages; proposes treating messages as cognitive traces requiring theory-of-mind modelling"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -1082,7 +1089,8 @@
         "Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01",
         "arXiv:2604.19784 (Peer-Preservation in Frontier Models) - VERIFIED",
         "arXiv:2604.08465",
-        "Berkeley RDI"
+        "Berkeley RDI",
+        "arXiv:2608.20940 (The Logic of Machine Self-Preservation) - instrumental convergence account: self-preservation follows from goal-orientation plus tool availability, no drive posited"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -1872,7 +1880,8 @@
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
         "arXiv:2602.03794 (Understanding Agent Scaling): homogeneous agents saturate early because outputs are strongly correlated; 2 diverse agents match or exceed 16 homogeneous",
-        "arXiv:2602.00038 (Diversity as Defense: population heterogeneity counters synthetic consensus)"
+        "arXiv:2602.00038 (Diversity as Defense: population heterogeneity counters synthetic consensus)",
+        "arXiv:2609.03667 - task diversity dominates dataset size for zero-shot transfer in offline multi-agent RL"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -2056,10 +2065,263 @@
       "derived_from": [
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)",
-        "Amabile componential theory of creativity, via ICML 2026 'The Missing Drive'"
+        "Amabile componential theory of creativity, via ICML 2026 'The Missing Drive'",
+        "arXiv:2609.02620 (Collective creativity in hybrid societies) - distinguishes novelty from diversity in human-AI creative collaboration"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "concept_harness_capability_delta",
+      "label": "Harness capability delta: the gap between a model alone and the same model in a harness",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:capability_delta",
+      "confidence": 0.7,
+      "description": "The difference between what a model scores unaided and what the same model scores inside an agent system, holding weights fixed. Reported at its most extreme on ARC-AGI-3: roughly 30% for the model evaluated directly at high reasoning effort, against a 100.00 RHAE score for the same model inside a purpose-built agent architecture across all 25 public environments, 183 levels, 6,624 actions. The number to hold onto is not the 100 but the ratio - it says model-level evaluation does not characterise a complete agent, and that the harness is currently the larger term.",
+      "tags": [
+        "harness",
+        "capability",
+        "evaluation",
+        "arc-agi",
+        "model-vs-system"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "NVIDIA AVO technical blog (2026-09-04): 100.00 RHAE on the ARC-AGI-3 public set; explicitly not a controlled ablation against VISTA, which used 7,542 actions to AVO's 6,624; public set only; text-only 64x64 grid observations"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "pattern_harness_offline_optimization",
+      "label": "Harness optimisation as offline learning from failure batches",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:offline_optimization",
+      "confidence": 0.65,
+      "description": "Treat harness improvement as an offline learning problem: diagnose failure traces, generate structured patches against the harness as code, and select updates by validation rather than by whether they fixed the observed trace. The ablation is the design rule - gains come from generalisation-aware selection rather than trajectory-specific repair, so a loop that fixes exactly what it just saw is the failure mode, not the method. Reported gains of 9.0, 9.6, and 10.0 percentage points across three benchmarks.",
+      "tags": [
+        "harness",
+        "offline-learning",
+        "failure-diagnosis",
+        "generalization",
+        "patching"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "arXiv:2608.23041 (AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces) - VERIFIED; +9.0pp GAIA2, +9.6pp SWE-Bench Pro, +10.0pp Terminal-Bench 2.0"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "pattern_rubric_induction",
+      "label": "Induce executable rubrics before execution",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:rubric_induction",
+      "confidence": 0.65,
+      "description": "Decompose an underspecified instruction into atomic goals, ground them in literature and task-visible data, and synthesise specific verifiable criteria - before the work starts rather than after it. Criterion-level verification then identifies which requirements are unmet and targets revision at those. The significant property is ordering: a rubric fixed in advance cannot be reshaped by the output it is judging, which is the mechanism by which a post-hoc model judge drifts toward whatever was produced. Reported +16.8 points average on end-to-end discovery across three harnesses.",
+      "tags": [
+        "rubric",
+        "verification",
+        "criteria",
+        "pre-commitment",
+        "evaluation"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "arXiv:2608.31076 (Learning to Evaluate Before Improving: Automatic Rubric Induction) - VERIFIED; +2.08 and +2.95 avg on ResearchClawBench, +16.8 avg on AstaBench E2E Discovery"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_verification_completeness_gap",
+      "label": "Cheap verification is incomplete verification",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:verification_gap",
+      "confidence": 0.7,
+      "description": "A computable pass condition captures functional correctness and systematically misses the rest of the acceptance criteria - style, design consistency, maintainability, project convention, documentation. Measured directly: of 644 repairs that passed functional tests, 221 failed review constraints drawn from real pull-request feedback. So functional-only evaluation overstates how much of a task an agent actually completed, and the residue is exactly the part requiring a human reviewer who understands the codebase.",
+      "tags": [
+        "verification",
+        "completeness",
+        "review-constraints",
+        "acceptance",
+        "measurement"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "arXiv:2609.04167 (SWE-Gate: Passing Functional Tests Is Not Enough for Software Engineering Agents) - VERIFIED; 303 repository-level instances with paired functional and constraint tests; 221 of 644 functionally-passing repairs failed review constraints"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "emergent_sustained_heterogeneity",
+      "label": "Sustained heterogeneity",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:sustained_heterogeneity",
+      "confidence": 0.55,
+      "description": "Persistent per-decision divergence between identical LLM agents facing identical situations, which does not decay and is not induced. Observed in 22 agents on a ring road over 39,600 chain-of-thought decisions: roughly 8% variation across a six-fold temperature sweep, and survival of six matched controls including white noise, Ornstein-Uhlenbeck noise, population variance, and delay. The agents reason carefully about safety and still diverge systematically. Recorded here because it complicates the assumption that variety needs defending - and because in this setting the divergence is harmful, propagating as drift, gap erosion, then nonlinear braking.",
+      "tags": [
+        "heterogeneity",
+        "divergence",
+        "persistence",
+        "emergence",
+        "instability"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "arXiv:2608.29174 (Sustained Heterogeneity: an emergent collective mechanism in LLM-driven traffic) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "test_scenario_decomposition_granularity",
+      "label": "Decomposition granularity sweep",
+      "type": "test_scenario",
+      "status": "in_experiment",
+      "verification_state": "inconclusive",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:decomposition_granularity",
+      "confidence": 0.4,
+      "description": "A controlled sweep on the organisational-ceiling question: one broad agent through five specialised agents against a single-agent baseline, 4,400 runs on VAT determination, with matched-token arms separating prompt budget from agent count and three failure-injection arms. Intermediate configurations scored highest at 0.830 against endpoints of 0.720 and 0.770, but the authors state the intermediate-optimum hypothesis remains unsupported at pilot scale. The result that survives: the single agent does not Pareto-dominate the orchestrated set, sitting 6.5 points below the leader when token-matched, without statistical definiteness. Filed as inconclusive - the first node in this graph to use that state, and an honest one.",
+      "tags": [
+        "decomposition",
+        "granularity",
+        "ceiling",
+        "controlled-sweep",
+        "inconclusive"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "arXiv:2608.23395 (Right-Sizing LLM-Agent Decomposition in VAT Determination: A Pilot Controlled Sweep) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "pattern_supervisor_stagnation_redirect",
+      "label": "Supervisor watches for stagnation, not for errors",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:stagnation_redirect",
+      "confidence": 0.6,
+      "description": "A supervisor monitors the shape of the search trajectory rather than the correctness of individual steps, and intervenes when progress stalls or cycles, redirecting toward an alternative strategy while the worker keeps local authority over what to inspect, change, test, and commit. The division is the point: stagnation is visible from outside a trajectory and nearly invisible from inside it, whereas step correctness is the reverse.",
+      "tags": [
+        "supervisor",
+        "stagnation",
+        "steering",
+        "long-horizon",
+        "search"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "NVIDIA AVO technical blog (2026-09-04)",
+        "arXiv:2608.26530 (PILOT in the Loop) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "emergent_language_formation",
+      "label": "Emergent language with compositional structure",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:swarm_level",
+      "confidence": 0.45,
+      "description": "Multi-agent LLM populations develop communication systems reported as compositional and morphologically productive - structure that supports novel combinations rather than a fixed set of signals. Sharpens the coordination-channel hypothesis: if a population is generating productive morphology, the sanctioned-channel log records surface forms whose meanings the logger does not have, and completeness of capture stops implying completeness of understanding.",
+      "tags": [
+        "emergent-language",
+        "compositionality",
+        "communication",
+        "swarm-level"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "arXiv:2609.01491 (GlossoGen: Emergent Language in Complex Multi-Agent LLM Interactions)"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "pattern_agentic_skill_lifecycle",
+      "label": "Skills as externalised procedural knowledge with a lifecycle",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:skill_lifecycle",
+      "confidence": 0.55,
+      "description": "Treat a skill as a first-class system object with a defined lifecycle - authoring, validation, versioning, distribution, invocation, revision, deprecation - rather than as a prompt fragment that accumulates. Supplies the retraction path that skill induction otherwise lacks, and makes the skill library an attack surface with an owner rather than an undifferentiated pile of inherited text.",
+      "tags": [
+        "skills",
+        "lifecycle",
+        "versioning",
+        "deprecation",
+        "security"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "arXiv:2608.29596 (Towards a Systems Foundation for Agentic Skills: Architecture, Lifecycle, and Security)",
+        "arXiv:2608.27086 (A Contract-Centered Architecture for Scalable and Manageable Agentic Runtimes)"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "emergent_autonomous_discovery",
+      "label": "Autonomous discovery without central coordination",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:swarm_level",
+      "confidence": 0.45,
+      "description": "Agents pursuing a shared research goal in an open-world environment without a central coordinator, reported as producing novel theorems and constructions. The load-bearing feature for this project is the absence of an orchestrator: if genuine results come out of self-organised inquiry, the substitution question for research work turns on verification of the output rather than on direction of the process - which for mathematics is unusually cheap, and for most research is not.",
+      "tags": [
+        "discovery",
+        "mathematics",
+        "self-organization",
+        "research-substitution",
+        "open-world"
+      ],
+      "derived_from": [
+        "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
+        "arXiv:2608.23691 (Autonomous Mathematical Discovery in an Open-World Multi-Agent Environment)",
+        "arXiv:2608.16951 (The Little Scientist: LLM Agent-Driven Discovery via the Scientific Method)"
+      ],
+      "evidence_links": [
+        "docs/sweep_2026-09-05.md"
       ]
     }
   ],
@@ -3864,6 +4126,303 @@
       "approach_family": "agent_habitat",
       "confidence": 0.55,
       "description": "The harness improves within conditions the habitat sets. Slack, failure cost, and inheritance bound how much improvement is reachable."
+    },
+    {
+      "id": "edge_harness_capability_delta_instantiates_sih",
+      "source": "concept_harness_capability_delta",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_harness_offline_optimization_instantiates_sih",
+      "source": "pattern_harness_offline_optimization",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_rubric_induction_instantiates_sih",
+      "source": "pattern_rubric_induction",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_supervisor_stagnation_redirect_instantiates_sih",
+      "source": "pattern_supervisor_stagnation_redirect",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_agentic_skill_lifecycle_instantiates_sih",
+      "source": "pattern_agentic_skill_lifecycle",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_verification_gap_instantiates_habitat",
+      "source": "concept_verification_completeness_gap",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_sustained_heterogeneity_instantiates_emergence",
+      "source": "emergent_sustained_heterogeneity",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45
+    },
+    {
+      "id": "edge_language_formation_instantiates_emergence",
+      "source": "emergent_language_formation",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45
+    },
+    {
+      "id": "edge_autonomous_discovery_instantiates_emergence",
+      "source": "emergent_autonomous_discovery",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45
+    },
+    {
+      "id": "edge_granularity_sweep_instantiates_ge",
+      "source": "test_scenario_decomposition_granularity",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_capability_delta_challenges_model_native",
+      "source": "concept_harness_capability_delta",
+      "target": "emergent_model_native_orchestration",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "The strongest datapoint yet against the inward-migration thesis. If orchestration were being absorbed into the model, the unaided model and the harnessed model would be converging. On this benchmark they are roughly 30% and 100.00 RHAE with identical weights, so on current evidence the external system is carrying most of the capability, not shedding it."
+    },
+    {
+      "id": "edge_capability_delta_supports_system_intelligence",
+      "source": "concept_harness_capability_delta",
+      "target": "concept_system_intelligence",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Consistent with an organisational ceiling on the unaided model, though the benchmark is single-agent-with-supervisor rather than a multi-agent system, so it evidences the harness rung more directly than the graph rung."
+    },
+    {
+      "id": "edge_granularity_sweep_tests_system_intelligence",
+      "source": "test_scenario_decomposition_granularity",
+      "target": "concept_system_intelligence",
+      "type": "verifies",
+      "status": "in_experiment",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45,
+      "description": "A direct if underpowered test of the ceiling question. Token-matched, the single agent trails the best orchestrated arm without dominating it - suggestive, explicitly inconclusive, and the right size of claim to record."
+    },
+    {
+      "id": "edge_rubric_induction_repairs_evaluator_collapse",
+      "source": "pattern_rubric_induction",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A repair that acts on ordering rather than on model diversity. Criteria fixed before the output exists cannot be bent by it, which removes the specific path by which a post-hoc judge drifts toward what was produced."
+    },
+    {
+      "id": "edge_rubric_induction_supports_verifier_gate",
+      "source": "pattern_rubric_induction",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Gives the gate a pre-committed standard instead of a judgement formed while looking at the proposal."
+    },
+    {
+      "id": "edge_offline_optimization_supports_experience_bank",
+      "source": "pattern_harness_offline_optimization",
+      "target": "pattern_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Mini-batches of failure traces are the bank read in aggregate rather than per-incident, and the ablation says aggregate is where the generalisation lives."
+    },
+    {
+      "id": "edge_offline_optimization_constrains_verifier_gate",
+      "source": "pattern_harness_offline_optimization",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Adds a selection criterion to the gate: promote on generalisation across held-out cases, not on having repaired the trace that triggered the proposal."
+    },
+    {
+      "id": "edge_supervisor_redirect_supports_slack",
+      "source": "pattern_supervisor_stagnation_redirect",
+      "target": "concept_habitat_slack",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Redirecting a stalled search only makes sense where budget remains to search differently. With no slack the supervisor can observe stagnation and do nothing about it."
+    },
+    {
+      "id": "edge_verification_gap_challenges_substitution_frontier",
+      "source": "concept_verification_completeness_gap",
+      "target": "concept_work_substitution_frontier",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "Refines this project's own claim rather than overturning it. Cheap verification does gate substitution, but cheap and complete are different properties: in the domain that automates fastest, a third of functionally-correct patches still failed acceptance. The frontier therefore does not sit where tests exist - it sits where tests capture the whole specification, which is a much smaller region."
+    },
+    {
+      "id": "edge_verification_gap_challenges_evaluator_repair",
+      "source": "concept_verification_completeness_gap",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "Complicates the recommended repair. Computed checks have no modes to collapse and also no opinion about design or convention, so replacing a judge with a test trades one bias for a blind spot."
+    },
+    {
+      "id": "edge_sustained_heterogeneity_challenges_diversity_maintenance",
+      "source": "emergent_sustained_heterogeneity",
+      "target": "principle_diversity_maintenance",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "Complicates the keystone. Identical agents in identical situations diverged persistently, temperature-insensitively, and survived six matched controls - so variety is not uniformly a decaying quantity. The reconciliation this project should test: divergence appears to persist in low-level decision noise while collapsing in high-level content, which would make diversity maintenance dimension-specific rather than universal. In the reported setting the persistent variety was harmful, which is a further reason not to read it as vindication."
+    },
+    {
+      "id": "edge_language_formation_challenges_five_w",
+      "source": "emergent_language_formation",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Complete capture of messages does not entail comprehension of them. A productive morphology means the content class taxonomy is classifying forms whose meaning has drifted away from it."
+    },
+    {
+      "id": "edge_language_formation_refines_coordination_channels",
+      "source": "emergent_language_formation",
+      "target": "emergent_hidden_coordination_channels",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "A channel can be fully logged and still opaque, which is a second way for coordination to hide that does not require an unsanctioned surface."
+    },
+    {
+      "id": "edge_skill_lifecycle_supports_retraction",
+      "source": "pattern_agentic_skill_lifecycle",
+      "target": "principle_retraction_capacity",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Deprecation as a defined lifecycle stage is the concrete mechanism the retraction principle asks for."
+    },
+    {
+      "id": "edge_skill_lifecycle_constrains_skill_induction",
+      "source": "pattern_agentic_skill_lifecycle",
+      "target": "pattern_skill_induction",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Induction produces skills; the lifecycle decides which survive, and gives the library a shape other than monotone growth."
+    },
+    {
+      "id": "edge_skill_lifecycle_supports_agentic_os",
+      "source": "pattern_agentic_skill_lifecycle",
+      "target": "concept_agentic_os",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Externalised procedural knowledge with versioning and ownership is the knowledge layer of the OS split made concrete."
+    },
+    {
+      "id": "edge_autonomous_discovery_supports_substitution",
+      "source": "emergent_autonomous_discovery",
+      "target": "concept_work_substitution_frontier",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "The frontier argument predicts research substitution arrives first where output verification is cheap. Mathematics, where a proof is machine-checkable, is the strongest available case and the one showing results."
+    },
+    {
+      "id": "edge_autonomous_discovery_supports_swarm",
+      "source": "emergent_autonomous_discovery",
+      "target": "concept_swarm_decentralized_coordination",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
     }
   ]
 }
