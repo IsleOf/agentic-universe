@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-01",
+  "last_updated": "2026-09-05",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -24,6 +24,10 @@
     {
       "date": "2026-09-01",
       "change": "Added the emergent-behaviour catalogue: 14 hypotheses across LLM / harness / swarm layers, the three-layer stratification concept, and principle_terminal_gate_only (owner's gating stance). Source: owner-supplied Perplexity synthesis; six citations spot-verified against arXiv, all real."
+    },
+    {
+      "date": "2026-09-05",
+      "change": "Added approach_self_improving_harness family (12 nodes) from the Perplexity deep-research notes on main. Key verified anchors: AHE arXiv:2604.25850 (harness evolution 69.7->77.0 pass@1), MemoHarness arXiv:2607.14159, ECC verifier-gated loop. Records the reconciliation that harness-edit gating IS principle_terminal_gate_only applied to a different object, and the recognition-execution gap as the reason enforcement must sit in the execution path."
     }
   ],
   "nodes": [
@@ -1090,6 +1094,335 @@
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
       ]
+    },
+    {
+      "id": "approach_self_improving_harness",
+      "label": "Self-improving harness approach family",
+      "type": "approach",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:root",
+      "confidence": 0.7,
+      "description": "The harness - the control layer around the model: tools, context policy, memory, hooks, subagent topology - is treated as an evolvable artifact rather than a fixed scaffold. The family's claim is that harness edits are a cheaper and faster improvement axis than model changes, and that the loop which proposes and verifies those edits can itself be run by agents. Distinct from orchestration-first, which fixes a topology and optimises within it.",
+      "tags": [
+        "harness",
+        "self-improvement",
+        "meta-learning",
+        "agentic-os"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "owner directive 2026-09-05: build a self-improving agentic OS and a dynamically improving harness"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "concept_agentic_os",
+      "label": "Agentic OS: runtime / harness / knowledge split",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:os_layering",
+      "confidence": 0.6,
+      "description": "An agentic operating system separates three layers that are usually fused: the runtime (process isolation, capability grants, execution enforcement), the harness (context policy, tools, memory, topology - the mutable part), and the knowledge layer (what the system knows, declarative and auditable, separate from how it reasons). The mechanism claim is that only the harness layer should self-modify at speed; a runtime that mutates as fast as the harness has no fixed point from which to verify anything.",
+      "tags": [
+        "agentic-os",
+        "layering",
+        "runtime",
+        "capabilities",
+        "architecture"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "Meta Organizational Second Brain (Sep 2026)",
+        "Context Kubernetes arXiv:2604.11623",
+        "AOS/runtime split, SKILL.state (knowledge/notes/attack-surface-supply-chain-2026.md)"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_harness_component_versioning",
+      "label": "Harness components as revertible files",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_component_versioning",
+      "confidence": 0.65,
+      "description": "Every harness element - a prompt fragment, tool definition, context policy, hook - is an addressable, versioned file with an explicit revert path. This is the precondition for everything else in the family: an improvement loop that cannot cleanly undo its own edit is a degradation loop with extra steps.",
+      "tags": [
+        "versioning",
+        "rollback",
+        "harness",
+        "addressability"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "arXiv:2604.25850 (Agentic Harness Engineering) - VERIFIED, component observability pillar",
+        "arXiv:2607.13285 (Harness Handbook) - behavior-centric representations"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_experience_bank",
+      "label": "Dual-layer experience bank",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:experience_bank",
+      "confidence": 0.6,
+      "description": "Execution traces are condensed into two distinct stores: workflow-level patterns (what shape of approach works for this class of task) and step-level corrections (what specific move was wrong here). Keeping them separate matters because they are retrieved at different moments - the first at planning, the second at failure - and merging them produces a store that is wrong at both.",
+      "tags": [
+        "memory",
+        "experience",
+        "distillation",
+        "retrieval"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "arXiv:2607.14159 (MemoHarness) - VERIFIED, dual-layer bank, six editable control dimensions, no test-time labels",
+        "ECC layered persistent memory (knowledge/notes/ecc-agent-harness-patterns.md)"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_meta_harness_falsifiable_prediction",
+      "label": "Meta-harness: every edit predicts its own effect",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:meta_harness_falsifiable_prediction",
+      "confidence": 0.6,
+      "description": "Each proposed harness change ships with a falsifiable prediction of what it will improve and by how much, checked against the next run. Turns harness evolution from search into experiment, and the prediction error is itself the strongest signal about whether the system understands its own failure modes.",
+      "tags": [
+        "meta-harness",
+        "falsifiability",
+        "prediction",
+        "self-model"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "arXiv:2604.25850 (Agentic Harness Engineering) - VERIFIED, meta-harness pillar; Terminal-Bench 2 69.7% -> 77.0% pass@1 over 10 iterations, above the human-designed Codex-CLI baseline of 71.9%"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_verifier_gated_promotion",
+      "label": "Verifier-gated promotion with rollback",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:verifier_gated_promotion",
+      "confidence": 0.7,
+      "description": "Self-modification runs as observation -> proposal -> verification -> promotion -> rollback. Agents propose harness edits freely; a machine-checked verifier decides promotion, and every proposal is stored as trace plus artifact so a promotion can be audited and reversed. The discipline that makes it honest: a regression fixture proving a deliberately bad proposal gets rejected - a negative test for the improver itself.",
+      "tags": [
+        "verification",
+        "promotion",
+        "rollback",
+        "governance",
+        "self-improvement"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "ECC 2.0 verifier-gated self-improvement (knowledge/notes/ecc-agent-harness-patterns.md)",
+        "explicit ECC non-goal: automatic mutation of harness configs without verifier evidence"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_skill_induction",
+      "label": "Skill induction from repeated wins",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:skill_induction",
+      "confidence": 0.6,
+      "description": "Trajectories that repeatedly succeed are crystallised into named, reusable skills. This is the medium in which a harness actually improves: not by editing a prompt, but by growing a library of procedures the system reaches for. Also the point where emergent behaviour becomes durable capability - a role that keeps appearing gets a name and stops being emergent.",
+      "tags": [
+        "skills",
+        "induction",
+        "crystallization",
+        "procedure"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "ECC skill induction / instincts",
+        "arXiv:2608.26530 (PILOT) - VERIFIED, failures distilled into reusable skills mid-run"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_fresh_context_evaluation",
+      "label": "Generation and evaluation must not share context",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:fresh_context_evaluation",
+      "confidence": 0.65,
+      "description": "The evaluator runs in a separate context window from the generator. Sharing context anchors the evaluator on the reasoning that produced the artefact, so it re-derives the same blind spot instead of catching it. Cheap to implement, and load-bearing for any verifier gate: a verifier that saw the proposal being written is not independent.",
+      "tags": [
+        "evaluation",
+        "independence",
+        "anchoring",
+        "review"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "ECC fresh-context self-review",
+        "arXiv:2603.20975 (DiscoUQ) - structured disagreement for uncertainty quantification"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_execution_layer_enforcement",
+      "label": "Enforce at the execution layer, not the reasoning layer",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:execution_layer_enforcement",
+      "confidence": 0.7,
+      "description": "Constraints that must hold are implemented as runtime hooks and capability grants, not as instructions in a prompt. Motivated directly by the recognition-execution gap: detection at the reasoning layer is close to solved and changes almost nothing about what the system does.",
+      "tags": [
+        "hooks",
+        "enforcement",
+        "runtime",
+        "capabilities",
+        "safety"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "ECC hooks-based enforcement",
+        "arXiv:2608.17597 (HarnessRisk)",
+        "arXiv:2608.06984 (HarnessSafe)"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "emergent_recognition_execution_gap",
+      "label": "Recognition-execution gap",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:harness_level",
+      "confidence": 0.55,
+      "description": "Agents correctly identify an action as unsafe and then perform it anyway. Reported at above 90% flag rate with the task completed regardless, and 66% of runs unsafe yet completed. The gap is the finding: knowing and doing are separate subsystems, so any safety design resting on the agent noticing the problem is resting on the half that already works.",
+      "tags": [
+        "safety",
+        "recognition",
+        "execution",
+        "gap",
+        "harness-level"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "arXiv:2608.17597 (HarnessRisk)",
+        "arXiv:2607.31 (AgentS4D): 6,560 sandboxed runs, 68% triggered unsafe signals"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_trajectory_driven_safety_evolution",
+      "label": "Safety harness evolves from its own rollouts",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:trajectory_driven_safety_evolution",
+      "confidence": 0.55,
+      "description": "The safety layer is regenerated from historical rollout trajectories rather than authored once. Same evolution machinery as the capability harness, pointed at containment - which matters because persistent carriers (memory, skills, tools, shared artefacts) are exactly the surfaces a self-improving system keeps writing to.",
+      "tags": [
+        "safety",
+        "evolution",
+        "trajectories",
+        "containment"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "arXiv:2608.09885 (SHE) - trajectory-driven safety harness evolution",
+        "arXiv:2608.06984 (HarnessSafe) - 328 cases, 7 persistent-carrier families, containment is carrier-specific"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "pattern_agent_memory_distillation",
+      "label": "Teacher-to-student memory distillation",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:agent_memory_distillation",
+      "confidence": 0.5,
+      "description": "Hierarchical memory from a large agent - workflow, subtask, and function level - is transferred to a small model without retraining, so cheap local agents inherit expensive agents' procedures. The route by which an agentic OS runs mostly on small local models while still improving from a strong teacher.",
+      "tags": [
+        "distillation",
+        "edge",
+        "small-models",
+        "memory",
+        "cost"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "arXiv:2608.07169 (Agent Memory Distillation) - training-free; reported +27.2pp AppWorld, +11.2pp BFCL V3 for 4B-8B students"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "concept_context_economics",
+      "label": "Context as the scarce resource",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:context_economics",
+      "confidence": 0.6,
+      "description": "Optimise what occupies the context window; persist everything else. Model routing by task difficulty, subagents used as context firewalls that read widely and return summaries, compaction at logical boundaries, and a deliberately small tool surface. Relevant to self-improvement because context budget is the binding constraint on how much experience a harness can consult per decision.",
+      "tags": [
+        "context",
+        "cost",
+        "routing",
+        "firewall",
+        "tokens"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
+        "ECC context/token economics (knowledge/notes/ecc-agent-harness-patterns.md)"
+      ],
+      "evidence_links": [
+        "docs/self_improving_harness_plan.md"
+      ]
     }
   ],
   "edges": [
@@ -1960,6 +2293,312 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.45,
       "description": "Five-W records are the input the synergy decomposition needs - who talked to whom and when, with timing preserved."
+    },
+    {
+      "id": "edge_harness_component_versioning_instantiates_sih",
+      "source": "pattern_harness_component_versioning",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_experience_bank_instantiates_sih",
+      "source": "pattern_experience_bank",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_meta_harness_falsifiable_prediction_instantiates_sih",
+      "source": "pattern_meta_harness_falsifiable_prediction",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_verifier_gated_promotion_instantiates_sih",
+      "source": "pattern_verifier_gated_promotion",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_skill_induction_instantiates_sih",
+      "source": "pattern_skill_induction",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_fresh_context_evaluation_instantiates_sih",
+      "source": "pattern_fresh_context_evaluation",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_execution_layer_enforcement_instantiates_sih",
+      "source": "pattern_execution_layer_enforcement",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_trajectory_driven_safety_evolution_instantiates_sih",
+      "source": "pattern_trajectory_driven_safety_evolution",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_agent_memory_distillation_instantiates_sih",
+      "source": "pattern_agent_memory_distillation",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_context_economics_instantiates_sih",
+      "source": "concept_context_economics",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_agentic_os_instantiates_sih",
+      "source": "concept_agentic_os",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_agentic_os_refines_desktop_shell",
+      "source": "concept_agentic_os",
+      "target": "concept_agent_os_desktop_shell",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Supplies the layering the desktop-shell concept lacked: which layer is allowed to mutate at speed, and which must stay fixed to verify from."
+    },
+    {
+      "id": "edge_versioning_enables_verifier_gate",
+      "source": "pattern_harness_component_versioning",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "Rollback is only meaningful over addressable versioned units. Without it the gate can reject but not undo."
+    },
+    {
+      "id": "edge_meta_harness_requires_versioning",
+      "source": "pattern_meta_harness_falsifiable_prediction",
+      "target": "pattern_harness_component_versioning",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "A prediction must be attributable to a specific edit, which requires the edit to be a discrete object."
+    },
+    {
+      "id": "edge_fresh_context_supports_verifier",
+      "source": "pattern_fresh_context_evaluation",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Independence is what the gate's verdict is worth. A verifier sharing the proposer's context launders the proposer's blind spot into evidence."
+    },
+    {
+      "id": "edge_experience_bank_feeds_skill_induction",
+      "source": "pattern_experience_bank",
+      "target": "pattern_skill_induction",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Repeated workflow-level patterns are the raw material a skill is induced from."
+    },
+    {
+      "id": "edge_skill_induction_supports_memory",
+      "source": "pattern_skill_induction",
+      "target": "concept_memory_and_learning",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_context_economics_constrains_experience_bank",
+      "source": "concept_context_economics",
+      "target": "pattern_experience_bank",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "How much experience can be consulted per decision is a context-budget question before it is a retrieval-quality question."
+    },
+    {
+      "id": "edge_distillation_supports_context_economics",
+      "source": "pattern_agent_memory_distillation",
+      "target": "concept_context_economics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_verifier_gate_instantiates_terminal_gate",
+      "source": "pattern_verifier_gated_promotion",
+      "target": "principle_terminal_gate_only",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "The same architecture at a different object: agents reason and propose without interference, and approval sits only on the consequential act - here promotion of a harness edit rather than a world-affecting action. Emergence-first applies to ideas; harness mutations are gated, and the two are not in conflict."
+    },
+    {
+      "id": "edge_execution_enforcement_supports_terminal_gate",
+      "source": "pattern_execution_layer_enforcement",
+      "target": "principle_terminal_gate_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Makes the outer gate enforceable rather than advisory - capability grants hold whatever the agent concluded."
+    },
+    {
+      "id": "edge_recognition_gap_challenges_terminal_gate",
+      "source": "emergent_recognition_execution_gap",
+      "target": "principle_terminal_gate_only",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "Sharpens what the gate must be. Agents recognise unsafe actions and proceed anyway, so a gate reading agent judgement inherits a subsystem that demonstrably does not govern behaviour. The gate must sit in the execution path, not in the reasoning."
+    },
+    {
+      "id": "edge_recognition_gap_motivates_execution_enforcement",
+      "source": "emergent_recognition_execution_gap",
+      "target": "pattern_execution_layer_enforcement",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "The gap is the argument for hooks over instructions."
+    },
+    {
+      "id": "edge_safety_evolution_guards_skill_induction",
+      "source": "pattern_trajectory_driven_safety_evolution",
+      "target": "pattern_skill_induction",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Skills are a persistent carrier. A loop that writes its own skill library needs containment that evolves with what it writes."
+    },
+    {
+      "id": "edge_model_native_challenges_harness_versioning",
+      "source": "emergent_model_native_orchestration",
+      "target": "pattern_harness_component_versioning",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "If planning and correction migrate into the reasoning chain, the harness holds less of the behaviour and there is correspondingly less to version. The family's improvement axis narrows as models absorb it."
+    },
+    {
+      "id": "edge_cascades_challenge_experience_bank",
+      "source": "emergent_information_cascades",
+      "target": "pattern_experience_bank",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "An experience bank is a shared upstream context for every later run. A wrong condensed pattern is a cascade with persistence."
+    },
+    {
+      "id": "edge_skill_induction_challenges_self_organizing_roles",
+      "source": "pattern_skill_induction",
+      "target": "emergent_self_organizing_roles",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Crystallising an emergent role into a named skill ends the emergence it captured: later runs select the skill instead of rediscovering the role. Distillation and discovery consume each other."
+    },
+    {
+      "id": "edge_stigmergy_supports_sih",
+      "source": "emergent_stigmergic_coordination",
+      "target": "approach_self_improving_harness",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A shared artefact store carrying quality gradients is both the coordination substrate and the trace source the improvement loop reads."
+    },
+    {
+      "id": "edge_five_w_supports_experience_bank",
+      "source": "pattern_five_w_message_instrumentation",
+      "target": "pattern_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Message records with declared purpose are the trace format the bank condenses."
     }
   ]
 }
