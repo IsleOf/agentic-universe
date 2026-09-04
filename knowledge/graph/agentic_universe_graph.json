@@ -28,6 +28,10 @@
     {
       "date": "2026-09-05",
       "change": "Added approach_self_improving_harness family (12 nodes) from the Perplexity deep-research notes on main. Key verified anchors: AHE arXiv:2604.25850 (harness evolution 69.7->77.0 pass@1), MemoHarness arXiv:2607.14159, ECC verifier-gated loop. Records the reconciliation that harness-edit gating IS principle_terminal_gate_only applied to a different object, and the recognition-execution gap as the reason enforcement must sit in the execution path."
+    },
+    {
+      "date": "2026-09-05",
+      "change": "Added approach_graph_engineering (9 nodes) from three owner-supplied videos, read via their primary sources rather than transcripts. Headline: independent convergence on architecture this project already holds - arXiv:2608.21156 proposes task/agent/runtime-state graphs matching concept_agentic_os and reaches concept_loop_vs_graph from the opposite direction; Huawei openJiuwen ships evaluation-driven harness optimisation, a third implementation of approach_self_improving_harness. Also records emergent_additive_growth_bias, a warning aimed at this repo's own curation."
     }
   ],
   "nodes": [
@@ -200,6 +204,9 @@
         "loops",
         "graphs",
         "architecture"
+      ],
+      "derived_from": [
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED - loop engineering and graph engineering as successive paradigms with distinct units of design"
       ]
     },
     {
@@ -312,6 +319,9 @@
         "governance",
         "change-management",
         "proposals"
+      ],
+      "derived_from": [
+        "arXiv:2608.29612 (ASKS: LLMs Interpret, Embeddings Organize, Graphs Emerge; Ran, Zhang, Wu, Yang, Li) - VERIFIED - deterministic validation of source-attributed deltas as an unattended form of the same barrier"
       ]
     },
     {
@@ -1113,7 +1123,8 @@
       ],
       "derived_from": [
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
-        "owner directive 2026-09-05: build a self-improving agentic OS and a dynamically improving harness"
+        "owner directive 2026-09-05: build a self-improving agentic OS and a dynamically improving harness",
+        "openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm - Auto Harness optimised end-to-end from evaluation with no weight training; Skill Self-Evolution from error signals"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -1140,7 +1151,8 @@
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
         "Meta Organizational Second Brain (Sep 2026)",
         "Context Kubernetes arXiv:2604.11623",
-        "AOS/runtime split, SKILL.state (knowledge/notes/attack-surface-supply-chain-2026.md)"
+        "AOS/runtime split, SKILL.state (knowledge/notes/attack-surface-supply-chain-2026.md)",
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED - independently proposes task / agent-coordination / runtime-state graphs as the three system-level structures, converging on this layering"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -1265,7 +1277,8 @@
       "derived_from": [
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
         "ECC skill induction / instincts",
-        "arXiv:2608.26530 (PILOT) - VERIFIED, failures distilled into reusable skills mid-run"
+        "arXiv:2608.26530 (PILOT) - VERIFIED, failures distilled into reusable skills mid-run",
+        "openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -1422,6 +1435,283 @@
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
+      ]
+    },
+    {
+      "id": "approach_graph_engineering",
+      "label": "Graph-engineering approach family",
+      "type": "approach",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:root",
+      "confidence": 0.65,
+      "description": "Organise an agent system by building explicit, dynamic graph structures over tasks, agents, and runtime state, rather than by optimising any individual agent's prompt, context, or loop. The unit of design is the system's structure, not the call. Distinct from this repo's existing knowledge graph, which models durable concepts - here the graphs are executable and rewritten during a run.",
+      "tags": [
+        "graph-engineering",
+        "system-level",
+        "orchestration",
+        "structure"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "concept_engineering_paradigm_ladder",
+      "label": "Paradigm ladder: prompt -> context -> harness -> loop -> graph",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:paradigm_ladder",
+      "confidence": 0.7,
+      "description": "Five paradigms distinguished by the unit they optimise: prompt and context engineering act on a single model call, harness engineering on one agent's tools and memory across calls, loop engineering on one agent's iterative decision cycle, and graph engineering on the structure of a multi-agent system. Useful because it locates a design choice at a level rather than treating all agent work as one undifferentiated problem - and because it says which rung a given technique cannot fix.",
+      "tags": [
+        "taxonomy",
+        "paradigm",
+        "levels",
+        "orientation"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "concept_system_intelligence",
+      "label": "System intelligence and the organisational ceiling",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:system_intelligence",
+      "confidence": 0.6,
+      "description": "The claim that a single agent hits an organisational ceiling independent of its raw capability: tasks needing heterogeneous expertise, interdependent subtasks, parallel execution, independent verification, and persistent state exceed what one agent's context and loop can hold. System intelligence is then the ability to decompose objectives, allocate them across heterogeneous agents, coordinate interdependent execution, and maintain state across a task lifecycle. Falsifiable in the right direction: if the ceiling is real, a stronger single model should not close the gap.",
+      "tags": [
+        "system-intelligence",
+        "ceiling",
+        "coordination",
+        "multi-agent"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "pattern_task_organization_graph",
+      "label": "Task organisation graph",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:task_organization_graph",
+      "confidence": 0.6,
+      "description": "Objectives modelled as goal-decomposition graphs (subgoals with precedence edges) and workflow graphs (concrete operators with data and control flow). The payoff is not tidiness but parallelism: an agent loop serialises interdependent work because a loop has one cursor, whereas explicit dependency edges expose what can run concurrently.",
+      "tags": [
+        "task-graph",
+        "decomposition",
+        "dependencies",
+        "parallelism"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED",
+        "HuggingGPT, LLMCompiler (plan compiled to dataflow DAG for parallel dispatch)"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "pattern_agent_coordination_graph",
+      "label": "Agent coordination graph",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:agent_coordination_graph",
+      "confidence": 0.55,
+      "description": "Three overlaid structures: capability graphs mapping skills and resources to agents, team graphs assigning roles and collaboration structure, and communication graphs specifying who may exchange information with whom. Addresses role confusion and confirmation bias in single-agent self-delegation by making role boundaries explicit objects rather than prompt conventions.",
+      "tags": [
+        "agent-graph",
+        "capability",
+        "roles",
+        "communication-topology"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED",
+        "SkillGraph, Captain Agent (recruits and reorganises experts as requirements emerge)"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "pattern_runtime_state_graph",
+      "label": "Runtime state graph",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:runtime_state_graph",
+      "confidence": 0.65,
+      "description": "Execution progress, event log, state transitions, and failure records held as an explicit graph rather than as accumulated context. The consequence that matters: context-based state cannot isolate a failure or support fine-grained recovery, because everything is entangled in one window. A state graph makes a run auditable and resumable at a specific node.",
+      "tags": [
+        "state",
+        "audit",
+        "recovery",
+        "failure-isolation",
+        "observability"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED",
+        "ResearchLoop (durable control state, evidence-based lifecycle transitions)",
+        "Proof-or-Stop (binds accepted evidence to state before permitting a transition)"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "pattern_runtime_adaptive_workflow",
+      "label": "Workflow rewritten during execution",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:runtime_adaptive_workflow",
+      "confidence": 0.55,
+      "description": "The operator subgraph is generated and adjusted from intermediate feedback mid-run, instead of committing to a workflow before execution. Contrasted with pre-execution search over workflow code. The distinction is where adaptation lives: in an offline optimiser or in the running system - and only the second can respond to what this particular run discovered.",
+      "tags": [
+        "adaptive",
+        "runtime",
+        "workflow",
+        "feedback"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED",
+        "DyFlow (execution-adaptive subgraph generation)",
+        "AFlow, AutoFlow (pre-execution search)",
+        "TDAG, Flow (task graphs refined from intermediate results)"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "pattern_agent_driven_graph_compilation",
+      "label": "Agent-driven compilation of sources into a graph",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:agent_driven_graph_compilation",
+      "confidence": 0.6,
+      "description": "A source document is compiled into two parallel outputs - a human-readable view and machine-facing semantics - then deterministic checks convert the semantics into a document-local delta, and embedding geometry plus explicit graph rules integrate that delta into persistent state. Each ingest is an inspectable state transition, and both compiled views stay linked to the preserved source record. The automated form of what this repo does by hand through proposals.",
+      "tags": [
+        "ingestion",
+        "compilation",
+        "provenance",
+        "knowledge-graph",
+        "automation"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.29612 (ASKS: LLMs Interpret, Embeddings Organize, Graphs Emerge; Ran, Zhang, Wu, Yang, Li) - VERIFIED",
+        "case study: 56 chronologically ordered papers from one tensor-network research programme"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "pattern_graph_delta_as_change_unit",
+      "label": "Document-local delta as the unit of change",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:graph_delta_as_change_unit",
+      "confidence": 0.65,
+      "description": "Changes enter a knowledge graph as scoped, source-attributed deltas that are validated deterministically before integration, never as direct edits. Keeps provenance intact and every state transition inspectable. This repo already implements the idea manually as JSON patches under evolution/proposals - the pattern names it and shows it running unattended.",
+      "tags": [
+        "delta",
+        "patch",
+        "provenance",
+        "validation",
+        "change-management"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.29612 (ASKS: LLMs Interpret, Embeddings Organize, Graphs Emerge; Ran, Zhang, Wu, Yang, Li) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "emergent_additive_growth_bias",
+      "label": "Additive-only growth in curated graphs",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:graph_dynamics",
+      "confidence": 0.5,
+      "description": "An agent-maintained knowledge graph ingesting a coherent literature stream showed stable hub organisation with predominantly additive canonical-node growth - it accumulated, and rarely retracted. Measured over 56 chronologically ordered papers via branch survival, cross-paper support, lineage, coverage, and churn. The concern for any such system, this repo included: a graph that only grows cannot refute, and monotone growth is what an unfalsifiable knowledge base looks like from the outside.",
+      "tags": [
+        "graph-dynamics",
+        "monotonicity",
+        "refutation",
+        "churn",
+        "curation"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "arXiv:2608.29612 (ASKS: LLMs Interpret, Embeddings Organize, Graphs Emerge; Ran, Zhang, Wu, Yang, Li) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "pattern_evaluation_driven_harness_optimization",
+      "label": "Evaluation-driven harness optimisation in production",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:evaluation_driven_optimization",
+      "confidence": 0.6,
+      "description": "A deployed system optimises its own harness end-to-end from evaluation signal, with no model-weight training, and separately rewrites skill definitions when it detects error signals or user dissatisfaction. Reported as shipped product behaviour rather than a benchmark result - which is the value and the caveat: independent evidence that the loop is buildable, and no numbers attached.",
+      "tags": [
+        "auto-harness",
+        "skill-evolution",
+        "production",
+        "evaluation-driven"
+      ],
+      "derived_from": [
+        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
+        "openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm",
+        "leader-and-teammates decomposition, distributed swarm across processes and machines, HITL stage handoffs, per-team token budgeting"
+      ],
+      "evidence_links": [
+        "docs/graph_engineering_convergence.md"
       ]
     }
   ],
@@ -2599,6 +2889,271 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "Message records with declared purpose are the trace format the bank condenses."
+    },
+    {
+      "id": "edge_engineering_paradigm_ladder_instantiates_ge",
+      "source": "concept_engineering_paradigm_ladder",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_system_intelligence_instantiates_ge",
+      "source": "concept_system_intelligence",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_task_organization_graph_instantiates_ge",
+      "source": "pattern_task_organization_graph",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_agent_coordination_graph_instantiates_ge",
+      "source": "pattern_agent_coordination_graph",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_runtime_state_graph_instantiates_ge",
+      "source": "pattern_runtime_state_graph",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_runtime_adaptive_workflow_instantiates_ge",
+      "source": "pattern_runtime_adaptive_workflow",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_agent_driven_graph_compilation_instantiates_ge",
+      "source": "pattern_agent_driven_graph_compilation",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_graph_delta_as_change_unit_instantiates_ge",
+      "source": "pattern_graph_delta_as_change_unit",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_paradigm_ladder_supports_loop_vs_graph",
+      "source": "concept_engineering_paradigm_ladder",
+      "target": "concept_loop_vs_graph",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.65,
+      "description": "Independent convergence on this project's founding distinction. A 36-author survey arrives at loop engineering and graph engineering as successive paradigms with different units of design, which is the loop-versus-graph claim reached from the opposite direction."
+    },
+    {
+      "id": "edge_paradigm_ladder_locates_sih",
+      "source": "concept_engineering_paradigm_ladder",
+      "target": "approach_self_improving_harness",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "Places this project's harness work on a named rung and marks its boundary: harness engineering optimises one agent's resources, so system-structure problems are out of its reach by construction."
+    },
+    {
+      "id": "edge_state_graph_supports_agentic_os",
+      "source": "pattern_runtime_state_graph",
+      "target": "concept_agentic_os",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "Supplies the concrete form of the knowledge-and-state layer the OS split calls for: durable, addressable, separate from the context window."
+    },
+    {
+      "id": "edge_state_graph_supports_versioning",
+      "source": "pattern_runtime_state_graph",
+      "target": "pattern_harness_component_versioning",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "Failure isolation and node-level resume are what make a harness edit attributable to an outcome."
+    },
+    {
+      "id": "edge_coordination_graph_refines_five_w",
+      "source": "pattern_agent_coordination_graph",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "Communication graphs are the prescriptive form of what Five-W records describe. Holding both makes the sanctioned topology and the observed one directly comparable - which is the hidden-channel test."
+    },
+    {
+      "id": "edge_task_graph_supports_shallow_hierarchy",
+      "source": "pattern_task_organization_graph",
+      "target": "pattern_shallow_hierarchy",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_compilation_uses_delta",
+      "source": "pattern_agent_driven_graph_compilation",
+      "target": "pattern_graph_delta_as_change_unit",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_delta_refines_change_proposal",
+      "source": "pattern_graph_delta_as_change_unit",
+      "target": "process_change_proposal",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "Names what this repo's proposal files already are, and shows the same barrier running unattended with deterministic validation in place of human review. The open owner question about whether tooling changes need proposals is the same question at a different scale."
+    },
+    {
+      "id": "edge_compilation_supports_experience_bank",
+      "source": "pattern_agent_driven_graph_compilation",
+      "target": "pattern_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Same shape as the harness experience bank: condense a stream of raw records into retrievable structure while keeping the source recoverable."
+    },
+    {
+      "id": "edge_additive_growth_challenges_compilation",
+      "source": "emergent_additive_growth_bias",
+      "target": "pattern_agent_driven_graph_compilation",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The pipeline's own case study is the evidence against it: automated ingest accumulated nodes and seldom retracted any. Throughput without retraction produces a graph that cannot be wrong."
+    },
+    {
+      "id": "edge_additive_growth_challenges_proposal_process",
+      "source": "emergent_additive_growth_bias",
+      "target": "process_change_proposal",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "Applies directly to this repo, which has never recorded a rejection or a demotion. Monotone growth is the failure mode, whether the curator is an agent or a person."
+    },
+    {
+      "id": "edge_system_intelligence_challenges_model_native",
+      "source": "concept_system_intelligence",
+      "target": "emergent_model_native_orchestration",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "Two opposed predictions about where orchestration ends up. System intelligence says a single agent has an organisational ceiling that must be met by externalising structure into graphs; model-native orchestration says planning and coordination keep migrating inward and the external scaffold thins out. They cannot both be the trend. Whichever holds decides how much of this project's architecture survives."
+    },
+    {
+      "id": "edge_model_native_challenges_graph_engineering",
+      "source": "emergent_model_native_orchestration",
+      "target": "approach_graph_engineering",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "If coordination is absorbed into the reasoning chain, explicit coordination graphs become description rather than mechanism."
+    },
+    {
+      "id": "edge_adaptive_workflow_supports_sih",
+      "source": "pattern_runtime_adaptive_workflow",
+      "target": "approach_self_improving_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Mid-run structural rewriting is the same move as mid-run harness editing, applied to the task graph instead of the control layer."
+    },
+    {
+      "id": "edge_eval_driven_optimization_instantiates_sih",
+      "source": "pattern_evaluation_driven_harness_optimization",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Third independent implementation of the family, after AHE and MemoHarness, and the first one shipped as a product."
+    },
+    {
+      "id": "edge_eval_driven_supports_skill_induction",
+      "source": "pattern_evaluation_driven_harness_optimization",
+      "target": "pattern_skill_induction",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Skill definitions rewritten from error signals and user dissatisfaction - induction driven by failure as well as by repeated success."
+    },
+    {
+      "id": "edge_eval_driven_needs_verifier_gate",
+      "source": "pattern_evaluation_driven_harness_optimization",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A system rewriting its own skills from dissatisfaction signals needs the promotion gate most: user dissatisfaction is a noisy, gameable target."
     }
   ]
 }
