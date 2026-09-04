@@ -40,6 +40,10 @@
     {
       "date": "2026-09-05",
       "change": "Literature sweep of the last two weeks via arXiv API and Hacker News (Reddit and X unreachable). +10 nodes, +26 edges. Two findings challenge claims this project made earlier: SWE-Gate shows 221 of 644 functionally-passing repairs failed review constraints, refining concept_work_substitution_frontier from 'cheap verification' to 'complete verification'; and sustained heterogeneity shows persistent temperature-insensitive divergence surviving six controls, complicating principle_diversity_maintenance. Strongest positive datapoint: concept_harness_capability_delta, roughly 30% unaided versus 100.00 RHAE for the same model in a harness, which is direct evidence against the model-native-orchestration thesis. First use of verification_state inconclusive, on the decomposition-granularity sweep."
+    },
+    {
+      "date": "2026-09-05",
+      "change": "Analysed three owner-supplied videos via locally-fetched transcripts (youtube-transcript skill). Corrected pattern_evaluation_driven_harness_optimization after checking the associated paper's own results table: the apples-to-apples same-backend comparison is +0.24pp against +-1.1/1.2pp uncertainty, not the +3.39pp headline, which swaps to a stronger backend model; no ablations were run, acknowledged by the authors. Generalised this as concept_benchmark_headline_substitution, a third citation-risk class after fabrication and note-summary drift. Added two structural critiques of arXiv:2608.21156 from independent analysis: concept_ontology_known_unknowns_limit (a fixed ontology - including this repo's own schema - can only find gaps within categories it already has) and concept_system_intelligence_boundary_problem (the individual/system split does not survive a harness that spawns sub-agents with shared state; loop and graph read as orthogonal, not sequential). Added concept_layer_specific_clocks, sharpening concept_agentic_os with three named progress variables instead of one shared one."
     }
   ],
   "nodes": [
@@ -1712,11 +1716,11 @@
       "label": "Evaluation-driven harness optimisation in production",
       "type": "pattern",
       "status": "to_test",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "inconclusive",
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:evaluation_driven_optimization",
-      "confidence": 0.6,
-      "description": "A deployed system optimises its own harness end-to-end from evaluation signal, with no model-weight training, and separately rewrites skill definitions when it detects error signals or user dissatisfaction. Reported as shipped product behaviour rather than a benchmark result - which is the value and the caveat: independent evidence that the loop is buildable, and no numbers attached.",
+      "confidence": 0.4,
+      "description": "A deployed system optimises its own harness end-to-end from evaluation signal, with no model-weight training, and separately rewrites skill definitions when it detects error signals or user dissatisfaction. The associated paper (arXiv:2608.27969) reports headline gains of +3.39pp (Terminal-Bench 2.1) and +3.4pp (SWE-bench Verified) over the strongest selected leaderboard baseline - but the apples-to-apples comparison, same backend model on both sides (openJiuwen+Fable5 84.04%+-1.12 vs Claude Code+Fable5 83.8%+-1.2), is +0.24 points, smaller than the reported uncertainty. The Terminal-Bench headline figure comes from swapping to a stronger backend (GPT-5.6 Sol) rather than from the harness; the SWE-bench baseline (Claude 4.5 Opus live-SWE-agent, 79.2%) is an older model. The authors' own Limitations section states no component-level ablations were run, and their cost-utility formulation is explicitly 'a conceptual lens... rather than a numerical optimization algorithm.' Kept in the graph as a real, checkable data point rather than removed - the corrected reading is itself the finding.",
       "tags": [
         "auto-harness",
         "skill-evolution",
@@ -1724,12 +1728,12 @@
         "evaluation-driven"
       ],
       "derived_from": [
-        "owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts",
-        "openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm",
-        "leader-and-teammates decomposition, distributed swarm across processes and machines, HITL stage handoffs, per-team token budgeting"
+        "openJiuwen / jiuwenswarm (Huawei Technologies) - repo README, product-level claims",
+        "arXiv:2608.27969 (openJiuwen: Beyond Static Harnesses for Long-Horizon Coding Agents) - VERIFIED, full results table checked",
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill"
       ],
       "evidence_links": [
-        "docs/graph_engineering_convergence.md"
+        "docs/video_analysis_2026-09-05.md"
       ]
     },
     {
@@ -2292,7 +2296,8 @@
       "derived_from": [
         "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
         "arXiv:2608.29596 (Towards a Systems Foundation for Agentic Skills: Architecture, Lifecycle, and Security)",
-        "arXiv:2608.27086 (A Contract-Centered Architecture for Scalable and Manageable Agentic Runtimes)"
+        "arXiv:2608.27086 (A Contract-Centered Architecture for Scalable and Manageable Agentic Runtimes)",
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill - six-tuple skill formalism (activation condition, instruction, constraints/preconditions, tool/interface compatibility, execution policy, intended state-transition effects) and the format evolution ladder natural-language markdown -> structured DSL -> executable/contract-based (verifiable pre/post-conditions) -> adaptive self-learning, both per arXiv:2608.29596 as summarised in the video; not independently verified against the paper's own notation"
       ],
       "evidence_links": [
         "docs/sweep_2026-09-05.md"
@@ -2322,6 +2327,200 @@
       ],
       "evidence_links": [
         "docs/sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_benchmark_headline_substitution",
+      "label": "Benchmark headline substitution",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:headline_substitution",
+      "confidence": 0.6,
+      "description": "A paper's headline number is produced by a comparison that is not causally isolated to the contribution being claimed - a stronger backend model, a stale baseline, or a favourably selected leaderboard subset - while the actual controlled comparison, present in the paper's own tables, shows an effect within or near the noise. Distinct from fabrication or misreported figures: every number is real and traceable, and the abstract's own wording is often a tell, e.g. 'strongest selected leaderboard point estimate' rather than 'strongest leaderboard entry.' This is now the second distinct citation-risk class found in this project's own literature, after outright number-drift in a research note - existence-checking and claim-checking are still not the same operation, and this is a third thing to check beyond both: whether the checkable number is the one doing the causal work the headline claims for it.",
+      "tags": [
+        "methodology",
+        "benchmarking",
+        "reporting",
+        "integrity",
+        "verification"
+      ],
+      "derived_from": [
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill",
+        "arXiv:2608.27969 (openJiuwen: Beyond Static Harnesses for Long-Horizon Coding Agents) - VERIFIED, full results table checked"
+      ],
+      "evidence_links": [
+        "docs/video_analysis_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "pattern_three_layer_verification",
+      "label": "Three separable verification layers per action",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:three_layer_verification",
+      "confidence": 0.6,
+      "description": "Every agent action answers three separate questions that most harnesses collapse into one: did the tool call itself execute (action execution), did it break an assumption held elsewhere in the system (consistency - a returned-type change three files away invalidating an equality check), and does the accumulated state now satisfy the original request (task completion). A harness that only checks the first reports success on work that silently broke something else. Concretely a refinement of concept_verification_completeness_gap: it names the layer where the completeness gap actually opens, between execution and consistency, not between functional and non-functional requirements.",
+      "tags": [
+        "verification",
+        "layered",
+        "consistency",
+        "completion",
+        "harness-design"
+      ],
+      "derived_from": [
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill",
+        "arXiv:2608.27969 (openJiuwen: Beyond Static Harnesses for Long-Horizon Coding Agents) - VERIFIED, full results table checked"
+      ],
+      "evidence_links": [
+        "docs/video_analysis_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "pattern_shared_execution_substrate",
+      "label": "One execution core reused across topologies",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:shared_substrate",
+      "confidence": 0.5,
+      "description": "The inner-loop execution semantics stay identical whether the caller is a single agent, a delegated sub-agent, or a node in a swarm - only the topology around the core changes. Decouples scaling the number of agents from rebuilding orchestration logic each time. Worth keeping as a design idea independent of the paper's weak empirical support: the claim that this reduces engineering complexity is asserted, not measured, in the source paper.",
+      "tags": [
+        "execution-core",
+        "topology",
+        "reuse",
+        "single-to-swarm"
+      ],
+      "derived_from": [
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill",
+        "arXiv:2608.27969 (openJiuwen: Beyond Static Harnesses for Long-Horizon Coding Agents) - VERIFIED, full results table checked"
+      ],
+      "evidence_links": [
+        "docs/video_analysis_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_layer_specific_clocks",
+      "label": "Each system layer evolves on its own clock",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:layer_clocks",
+      "confidence": 0.6,
+      "description": "Runtime state advances on interaction time t; procedural skill memory advances on an evolution-cycle counter k, incremented when a skill is revised or a new one is learned; the knowledge graph advances on a source-ingestion counter n, incremented per document compiled in. These are not the same variable and should not share a symbol - a skill can be five evolution-cycles old while the runtime is thirty interaction-steps into the current task, and conflating the two clocks is a source of exactly the kind of category confusion concept_agentic_os warns against in its layering. Sharpens the OS split from three layers into three layers each with a named, distinct progress variable - which is what makes attribution (which layer produced this change, and when) actually computable rather than asserted.",
+      "tags": [
+        "clocks",
+        "state",
+        "layering",
+        "attribution",
+        "agentic-os"
+      ],
+      "derived_from": [
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill"
+      ],
+      "evidence_links": [
+        "docs/video_analysis_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_knowledge_to_skill_feedback",
+      "label": "Speculative: knowledge graph improving the skill library",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:cross_layer_feedback",
+      "confidence": 0.3,
+      "description": "A cross-layer feedback path in which the accumulated knowledge graph - what the system has learned about a domain - is used to propose or refine entries in the procedural skill library, rather than the two layers evolving independently. Not in either source paper; the video's own presenter flags it explicitly as his own next-architecture idea rather than a reported result, and it is recorded here at that confidence for exactly that reason. Directly relevant to this project, which maintains both a knowledge graph and (via pattern_skill_induction) a procedural-memory concept without a wired path between them.",
+      "tags": [
+        "feedback",
+        "knowledge-to-skill",
+        "speculative",
+        "cross-layer"
+      ],
+      "derived_from": [
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill - presenter's own stated idea, explicitly marked as speculative and outside the source paper"
+      ],
+      "evidence_links": [
+        "docs/video_analysis_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_ontology_known_unknowns_limit",
+      "label": "A fixed ontology can only find known unknowns",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:ontology_limits",
+      "confidence": 0.65,
+      "description": "An ontology fixed at design time can represent absence within its own categories - a known gap, a missing value for a defined attribute - but cannot represent a category, relation, or entity type it never conceived of. It detects known unknowns and is structurally blind to unknown unknowns. A consequence stated sharply in the source critique: a perfectly self-consistent ontology can encode a perfectly wrong theory, because internal consistency is a property of the structure, not of its correspondence to the world. Self-applies directly: this repository's own schema (knowledge/graph/agentic_universe_schema.json) fixes a closed enum of node types, statuses, and verification states, which is exactly this kind of ontology - it can flag a node with a missing evidence_link, and it cannot represent a phenomenon that does not fit any existing type without a schema change proposed and reviewed as such.",
+      "tags": [
+        "ontology",
+        "epistemology",
+        "limits",
+        "unknown-unknowns",
+        "self-application"
+      ],
+      "derived_from": [
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill",
+        "arXiv:2608.21156 (critiqued directly, not endorsed)"
+      ],
+      "evidence_links": [
+        "docs/video_analysis_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_system_intelligence_boundary_problem",
+      "label": "The individual/system intelligence boundary is not well-defined",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:boundary_problem",
+      "confidence": 0.55,
+      "description": "concept_system_intelligence's clean split - one agent is individual intelligence, two or more coordinated agents is system intelligence - does not survive a simple case: a single harness that spawns sub-agents, manages a task queue, and maintains shared state across them. Is that one system or several? The source critique argues the distinction is doing definitional work it cannot support, and that loop (temporal dynamics, x_t to x_t+1) and graph (relational structure) are better read as orthogonal dimensions every non-trivial agent system needs simultaneously, not as sequential rungs one climbs from individual to system. Directly qualifies concept_engineering_paradigm_ladder and concept_system_intelligence rather than replacing them - the ladder remains a useful historical account of where research attention moved; it is a weaker claim about what any given system architecturally requires.",
+      "tags": [
+        "boundary",
+        "definition",
+        "individual-vs-system",
+        "critique"
+      ],
+      "derived_from": [
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill",
+        "arXiv:2608.21156 (critiqued directly, not endorsed)"
+      ],
+      "evidence_links": [
+        "docs/video_analysis_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_structure_maintenance_cost",
+      "label": "Graph structure is not free to build or to keep current",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:maintenance_cost",
+      "confidence": 0.55,
+      "description": "Explicit task, agent, and state graphs must be built and kept current, and that construction and upkeep is itself a cost the graph-engineering literature does not net against the benefit it reports. The source critique states this plainly: the survey does not establish when the infrastructure provides a net benefit over a simpler agent loop, and a graph can become its own bottleneck. Ties directly to concept_context_economics - graph maintenance competes for the same budget as everything else a harness spends tokens and turns on - and to this project's own emergent_additive_growth_bias, since a knowledge graph is exactly this kind of structure whose upkeep cost is easy to defer noticing.",
+      "tags": [
+        "cost",
+        "maintenance",
+        "graph-overhead",
+        "net-benefit"
+      ],
+      "derived_from": [
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill",
+        "arXiv:2608.21156 (critiqued directly, not endorsed)"
+      ],
+      "evidence_links": [
+        "docs/video_analysis_2026-09-05.md"
       ]
     }
   ],
@@ -4423,6 +4622,239 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "emergent_behaviors",
       "confidence": 0.5
+    },
+    {
+      "id": "edge_benchmark_headline_substitution_instantiates_sih",
+      "source": "concept_benchmark_headline_substitution",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_three_layer_verification_instantiates_sih",
+      "source": "pattern_three_layer_verification",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_shared_execution_substrate_instantiates_sih",
+      "source": "pattern_shared_execution_substrate",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_layer_specific_clocks_instantiates_sih",
+      "source": "concept_layer_specific_clocks",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_ontology_known_unknowns_limit_instantiates_ge",
+      "source": "concept_ontology_known_unknowns_limit",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_system_intelligence_boundary_problem_instantiates_ge",
+      "source": "concept_system_intelligence_boundary_problem",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_structure_maintenance_cost_instantiates_ge",
+      "source": "concept_structure_maintenance_cost",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_headline_substitution_challenges_eval_driven",
+      "source": "concept_benchmark_headline_substitution",
+      "target": "pattern_evaluation_driven_harness_optimization",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The specific instance that surfaced the pattern. Same-backend comparison is +0.24pp against +-1.12/1.2pp reported uncertainty; the headline +3.39pp swaps to a stronger backend model."
+    },
+    {
+      "id": "edge_headline_substitution_challenges_capability_delta",
+      "source": "concept_benchmark_headline_substitution",
+      "target": "concept_harness_capability_delta",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "A caution on the AVO datapoint too, not only on openJiuwen. AVO's own post flags the VISTA comparison as explicitly not a controlled ablation - the same discipline applies: check what varied between the two numbers before reading the gap as the harness's contribution."
+    },
+    {
+      "id": "edge_three_layer_verification_refines_completeness_gap",
+      "source": "pattern_three_layer_verification",
+      "target": "concept_verification_completeness_gap",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Locates the gap at a specific layer boundary - between action execution and downstream consistency - rather than only between functional and non-functional requirements."
+    },
+    {
+      "id": "edge_shared_substrate_supports_agentic_os",
+      "source": "pattern_shared_execution_substrate",
+      "target": "concept_agentic_os",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "One execution core across topologies is a concrete argument for keeping the runtime layer fixed while topology (a harness or swarm concern) varies above it."
+    },
+    {
+      "id": "edge_layer_clocks_refines_agentic_os",
+      "source": "concept_layer_specific_clocks",
+      "target": "concept_agentic_os",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Turns the three-layer split into three layers each with a named, distinct progress variable, which is what makes cross-layer attribution computable instead of asserted."
+    },
+    {
+      "id": "edge_layer_clocks_refines_state_graph",
+      "source": "concept_layer_specific_clocks",
+      "target": "pattern_runtime_state_graph",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Runtime state graphs track x_t on interaction time; this names the two other clocks (k for skills, n for graph ingestion) the same discipline should extend to."
+    },
+    {
+      "id": "edge_knowledge_skill_feedback_speculative_on_agentic_os",
+      "source": "concept_knowledge_to_skill_feedback",
+      "target": "concept_agentic_os",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.35,
+      "description": "Speculative wiring between the knowledge and harness layers, recorded at low confidence because it is the video presenter's own unstated-in-paper idea."
+    },
+    {
+      "id": "edge_boundary_problem_challenges_system_intelligence",
+      "source": "concept_system_intelligence_boundary_problem",
+      "target": "concept_system_intelligence",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "A single harness spawning sub-agents with shared state does not sort cleanly into either side of the individual/system split the concept relies on."
+    },
+    {
+      "id": "edge_boundary_problem_challenges_paradigm_ladder",
+      "source": "concept_system_intelligence_boundary_problem",
+      "target": "concept_engineering_paradigm_ladder",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "Loop and graph read as orthogonal dimensions - temporal dynamics versus relational structure - that a real system needs simultaneously, not as sequential rungs one climbs from individual to system intelligence. The ladder stays useful as a history of research attention; it is a weaker claim about architectural necessity."
+    },
+    {
+      "id": "edge_ontology_limit_challenges_additive_growth",
+      "source": "concept_ontology_known_unknowns_limit",
+      "target": "emergent_additive_growth_bias",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "A second angle on the same failure. A schema that only grows adds instances within existing categories - the ontology's blind spot to unconceived categories means the graph cannot even register the shape of what it is missing, only that a slot is empty."
+    },
+    {
+      "id": "edge_ontology_limit_informs_habitat",
+      "source": "concept_ontology_known_unknowns_limit",
+      "target": "approach_agent_habitat",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.4
+    },
+    {
+      "id": "edge_maintenance_cost_constrains_graph_engineering",
+      "source": "concept_structure_maintenance_cost",
+      "target": "approach_graph_engineering",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "The family's own literature does not net maintenance cost against reported benefit; recorded as an open condition on every pattern in the family, not a rejection of it."
+    },
+    {
+      "id": "edge_maintenance_cost_supports_context_economics",
+      "source": "concept_structure_maintenance_cost",
+      "target": "concept_context_economics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_maintenance_cost_supports_additive_growth",
+      "source": "concept_structure_maintenance_cost",
+      "target": "emergent_additive_growth_bias",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Unmaintained structure is one concrete mechanism by which a graph accumulates without anyone noticing the cost - the upkeep that would surface the cost is the thing being skipped."
+    },
+    {
+      "id": "edge_boundary_problem_supports_decoupling",
+      "source": "concept_system_intelligence_boundary_problem",
+      "target": "pattern_structural_decoupling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "Independent restatement: two agent instances create organisational separation without necessarily creating epistemic independence, which is the same diagnosis pattern_structural_decoupling makes from the diversity-collapse literature."
     }
   ]
 }

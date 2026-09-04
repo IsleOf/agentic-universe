@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 95 nodes, 202 edges · **Date:** 2026-09-05
+**Graph at generation:** 103 nodes, 224 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -15,6 +15,8 @@ Generated from the graph's `derived_from` fields, so it stays complete by constr
 ## Corrections on record
 
 **`arXiv:2601.08129` (Rodriguez, pressure-field coordination).** `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md` reports *38.2% vs 8.6%, statistically equivalent to hierarchy at 38.8%, 81% lower coordination overhead, scales to 200+ agents*. The paper reports **48.5% vs 12.6% with hierarchical at 1.5%**, over 1,350 meeting-room-scheduling trials at **1-4 agents**. Stigmergy does not match hierarchy in that paper - it substantially outperforms it - and there is no 200-agent result. The graph uses the paper's figures. Anyone citing the note should check the paper.
+
+**`arXiv:2608.27969` (openJiuwen, Huawei).** Abstract headlines +3.39pp (Terminal-Bench 2.1) and +3.4pp (SWE-bench Verified) over "the strongest selected leaderboard point estimate." The paper's own results table shows the same-backend comparison (openJiuwen+Fable5 84.04%+-1.12 vs Claude Code+Fable5 83.8%+-1.2) at **+0.24pp, smaller than the reported uncertainty**; the headline figure comes from swapping to a stronger backend (GPT-5.6 Sol), and the SWE-bench baseline (Claude 4.5 Opus, 79.2%) is an older model. No component ablations were run - the authors' own Limitations section says so. Every number is real; the headline comparison is not causally isolated to the harness contribution being claimed. See concept_benchmark_headline_substitution.
 
 ## Verified primary sources
 
@@ -30,8 +32,10 @@ Opened and checked directly.
 | [2604.25850](https://arxiv.org/abs/2604.25850) | Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses - J. Lin, S. Liu, C. Pan, L. Lin, S. Dou, Z. Xi, X. Huang, H. Yan, Z. Han, T. Gui, Y-G. Jiang | `pattern_harness_component_versioning`, `pattern_meta_harness_falsifiable_prediction` |
 | [2607.14159](https://arxiv.org/abs/2607.14159) | MemoHarness: Agent Harnesses That Learn from Experience - Y. Huang, W. Wang, H. Bao, Y. Ma, X. Luo, Y. Nian, H. Zhuang, Z. Liu, Y. Zhao, X. Zhang | `pattern_experience_bank` |
 | [2608.10218](https://arxiv.org/abs/2608.10218) | Mind Viruses: Self-Propagating Ideas in Multi-Agent LLM Systems - V. Papadopoulos, M. Shah, S. Zimmerman, J. Lindsey | `concept_inheritance_channel`, `emergent_mind_viruses` |
-| [2608.21156](https://arxiv.org/abs/2608.21156) | Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence - Y. Feng, Z. Xiang, C. Yang, Q. Ma et al. (36 authors) | `approach_graph_engineering`, `concept_agentic_os`, `concept_engineering_paradigm_ladder` +6 |
+| [2608.21156](https://arxiv.org/abs/2608.21156) | Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence - Y. Feng, Z. Xiang, C. Yang, Q. Ma et al. (36 authors) | `approach_graph_engineering`, `concept_agentic_os`, `concept_engineering_paradigm_ladder` +9 |
 | [2608.26530](https://arxiv.org/abs/2608.26530) | PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents | `pattern_skill_induction`, `pattern_supervisor_stagnation_redirect` |
+| [2608.27969](https://arxiv.org/abs/2608.27969) | openJiuwen: Beyond Static Harnesses for Long-Horizon Coding Agents (Huawei) - full results table checked; headline +3.39pp is a backend swap, same-backend comparison is +0.24pp within reported uncertainty | `concept_benchmark_headline_substitution`, `pattern_evaluation_driven_harness_optimization`, `pattern_shared_execution_substrate` +1 |
+| [2608.29596](https://arxiv.org/abs/2608.29596) | Towards a Systems Foundation for Agentic Skills: Architecture, Lifecycle, and Security - nine-stage skill lifecycle, marketplace and adversarial threat analysis | `pattern_agentic_skill_lifecycle` |
 | [2608.29612](https://arxiv.org/abs/2608.29612) | LLMs Interpret, Embeddings Organize, Graphs Emerge: Agent-Driven Compilation of Scientific Knowledge - S-J. Ran, K. Zhang, X. Wu, L-S. Yang, W-J. Li | `emergent_additive_growth_bias`, `pattern_agent_driven_graph_compilation`, `pattern_graph_delta_as_change_unit` +2 |
 
 ## Cited, unverified
@@ -73,7 +77,6 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.27086](https://arxiv.org/abs/2608.27086) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2608.28553](https://arxiv.org/abs/2608.28553) | (title not recorded) | `emergent_stigmergic_coordination` |
 | [2608.29174](https://arxiv.org/abs/2608.29174) | (title not recorded) | `emergent_sustained_heterogeneity` |
-| [2608.29596](https://arxiv.org/abs/2608.29596) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
@@ -84,9 +87,11 @@ Referenced via research notes; not independently opened. Verify before relying o
 ## Software and projects
 
 - **openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm**
-  - informs: `pattern_evaluation_driven_harness_optimization`, `pattern_skill_induction`
+  - informs: `pattern_skill_induction`
 - **openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm - Auto Harness optimised end-to-end from evaluation with no weight training; Skill Self-Evolution from error signals**
   - informs: `approach_self_improving_harness`
+- **openJiuwen / jiuwenswarm (Huawei Technologies) - repo README, product-level claims**
+  - informs: `pattern_evaluation_driven_harness_optimization`
 
 ## Non-arXiv references
 
@@ -140,7 +145,6 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - curvelabs.org 'Norm Engineering' — `emergent_social_conventions`
 - explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
-- leader-and-teammates decomposition, distributed swarm across processes and machines, HITL stage handoffs, per-team token budgeting — `pattern_evaluation_driven_harness_optimization`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`
 - niteagent.com multi-agent safety frontier — `emergent_information_cascades`
@@ -170,7 +174,9 @@ Nodes derived from this repository's own documents and conversation archives.
 - owner directive 2026-09-01: 'let them flow naturally with their emergent behaviours and only limit the final decisions at highest hitl level' — `principle_terminal_gate_only`
 - owner directive 2026-09-05: build a self-improving agentic OS and a dynamically improving harness — `approach_self_improving_harness`
 - owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research — `approach_agent_habitat`, `concept_cheap_death`, `concept_graded_challenge` +6
-- owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts — `approach_graph_engineering`, `concept_engineering_paradigm_ladder`, `concept_system_intelligence` +8
+- owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts — `approach_graph_engineering`, `concept_engineering_paradigm_ladder`, `concept_system_intelligence` +7
+- owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill — `concept_benchmark_headline_substitution`, `concept_layer_specific_clocks`, `concept_ontology_known_unknowns_limit` +5
+- owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill - presenter's own stated idea, explicitly marked as speculative and outside the source paper — `concept_knowledge_to_skill_feedback`
 
 ## Attribution notes for open-sourcing
 
