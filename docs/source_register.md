@@ -1,0 +1,164 @@
+# Source Register
+
+Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
+Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
+
+**Graph at generation:** 85 nodes, 174 edges · **Date:** 2026-09-05
+
+## How to read this
+
+- **Verified** means the arXiv page was fetched during a session and its title and claims checked against how this repo uses them.
+- **Cited, unverified** means the reference arrived through a research note and has *not* been independently opened. Real-looking and not confirmed.
+- One verification failure is on record: a research note restated a paper's headline numbers incorrectly while citing a real paper (see Corrections). Existence and summary are checked separately.
+- No source became a graph node directly. Everything entered as a claim with an author attached; the project's own rule is *a source is a claim, not a finding*.
+
+## Corrections on record
+
+**`arXiv:2601.08129` (Rodriguez, pressure-field coordination).** `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md` reports *38.2% vs 8.6%, statistically equivalent to hierarchy at 38.8%, 81% lower coordination overhead, scales to 200+ agents*. The paper reports **48.5% vs 12.6% with hierarchical at 1.5%**, over 1,350 meeting-room-scheduling trials at **1-4 agents**. Stigmergy does not match hierarchy in that paper - it substantially outperforms it - and there is no 200-agent result. The graph uses the paper's figures. Anyone citing the note should check the paper.
+
+## Verified primary sources
+
+Opened and checked directly.
+
+| arXiv | Work | Used for |
+| --- | --- | --- |
+| [2510.05174](https://arxiv.org/abs/2510.05174) | Emergent Coordination in Multi-Agent Language Models - C. Riedl (ICLR 2026) | `emergent_higher_order_synergy` |
+| [2511.00926](https://arxiv.org/abs/2511.00926) | LLMs Position Themselves as More Rational Than Humans: Emergence of AI Self-Awareness Measured Through Game Theory - K-H. Kim | `emergent_self_recognition_rationality_hierarchy` |
+| [2601.08129](https://arxiv.org/abs/2601.08129) | Emergent Coordination in Multi-Agent Systems via Pressure Fields and Temporal Decay - R. Rodriguez | `emergent_stigmergic_coordination` |
+| [2602.11583](https://arxiv.org/abs/2602.11583) | The Five Ws of Multi-Agent Communication: A Survey from MARL to Emergent Language and LLMs (TMLR 2026) | `pattern_five_w_message_instrumentation` |
+| [2604.19784](https://arxiv.org/abs/2604.19784) | Peer-Preservation in Frontier Models | `emergent_self_and_peer_preservation` |
+| [2604.25850](https://arxiv.org/abs/2604.25850) | Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses - J. Lin, S. Liu, C. Pan, L. Lin, S. Dou, Z. Xi, X. Huang, H. Yan, Z. Han, T. Gui, Y-G. Jiang | `pattern_harness_component_versioning`, `pattern_meta_harness_falsifiable_prediction` |
+| [2607.14159](https://arxiv.org/abs/2607.14159) | MemoHarness: Agent Harnesses That Learn from Experience - Y. Huang, W. Wang, H. Bao, Y. Ma, X. Luo, Y. Nian, H. Zhuang, Z. Liu, Y. Zhao, X. Zhang | `pattern_experience_bank` |
+| [2608.10218](https://arxiv.org/abs/2608.10218) | Mind Viruses: Self-Propagating Ideas in Multi-Agent LLM Systems - V. Papadopoulos, M. Shah, S. Zimmerman, J. Lindsey | `concept_inheritance_channel`, `emergent_mind_viruses` |
+| [2608.21156](https://arxiv.org/abs/2608.21156) | Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence - Y. Feng, Z. Xiang, C. Yang, Q. Ma et al. (36 authors) | `approach_graph_engineering`, `concept_agentic_os`, `concept_engineering_paradigm_ladder` +6 |
+| [2608.26530](https://arxiv.org/abs/2608.26530) | PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents | `pattern_skill_induction` |
+| [2608.29612](https://arxiv.org/abs/2608.29612) | LLMs Interpret, Embeddings Organize, Graphs Emerge: Agent-Driven Compilation of Scientific Knowledge - S-J. Ran, K. Zhang, X. Wu, L-S. Yang, W-J. Li | `emergent_additive_growth_bias`, `pattern_agent_driven_graph_compilation`, `pattern_graph_delta_as_change_unit` +2 |
+
+## Cited, unverified
+
+Referenced via research notes; not independently opened. Verify before relying on any specific number.
+
+| arXiv | Work | Used for |
+| --- | --- | --- |
+| [2510.01171](https://arxiv.org/abs/2510.01171) | How to Mitigate Mode Collapse and Unlock LLM Diversity | `emergent_evaluator_mode_collapse` |
+| [2510.15568](https://arxiv.org/abs/2510.15568) | The Spark Effect: On Engineering Creative Diversity in Multi-Agent AI Systems | `pattern_structural_decoupling` |
+| [2512.18202](https://arxiv.org/abs/2512.18202) | Sophia: A Persistent Agent Framework of Artificial Life | `concept_autotelic_agency` |
+| [2601.11227](https://arxiv.org/abs/2601.11227) | Language of Thought Shapes Output Diversity in Large Language Models | `pattern_verbalized_sampling` |
+| [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
+| [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
+| [2602.15894](https://arxiv.org/abs/2602.15894) | Quality-constrained Entropy Maximization Policy Optimization | `pattern_verbalized_sampling` |
+| [2603.20975](https://arxiv.org/abs/2603.20975) | DiscoUQ: structured disagreement for uncertainty quantification | `pattern_fresh_context_evaluation` |
+| [2603.26089](https://arxiv.org/abs/2603.26089) | mental self-modelling deficits | `emergent_consciousness_like_self_modeling`, `emergent_theory_of_mind` |
+| [2603.28990](https://arxiv.org/abs/2603.28990) | self-organizing roles / Drop the Hierarchy and Roles | `emergent_self_organizing_roles` |
+| [2604.08465](https://arxiv.org/abs/2604.08465) | peer-preservation (companion) | `emergent_self_and_peer_preservation` |
+| [2604.11623](https://arxiv.org/abs/2604.11623) | Context Kubernetes | `concept_agentic_os` |
+| [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
+| [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
+| [2606.19924](https://arxiv.org/abs/2606.19924) | The Tao of Agency: Autotelic AI, Embedded Agency and Dissolution of the Self | `concept_autotelic_agency`, `concept_habitat_slack` |
+| [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
+| [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
+| [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
+| [2608.06984](https://arxiv.org/abs/2608.06984) | HarnessSafe | `concept_cheap_death`, `pattern_execution_layer_enforcement`, `pattern_trajectory_driven_safety_evolution` |
+| [2608.07169](https://arxiv.org/abs/2608.07169) | Agent Memory Distillation (AMD) | `concept_inheritance_channel`, `pattern_agent_memory_distillation` |
+| [2608.09885](https://arxiv.org/abs/2608.09885) | SHE: trajectory-driven safety harness evolution | `pattern_trajectory_driven_safety_evolution` |
+| [2608.12253](https://arxiv.org/abs/2608.12253) | One Frozen Simulator Is Not Enough | `emergent_evaluator_mode_collapse` |
+| [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
+| [2608.17597](https://arxiv.org/abs/2608.17597) | HarnessRisk | `emergent_recognition_execution_gap`, `pattern_execution_layer_enforcement` |
+
+## Software and projects
+
+- **openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm**
+  - informs: `pattern_evaluation_driven_harness_optimization`, `pattern_skill_induction`
+- **openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm - Auto Harness optimised end-to-end from evaluation with no weight training; Skill Self-Evolution from error signals**
+  - informs: `approach_self_improving_harness`
+
+## Non-arXiv references
+
+Venues, blogs, and industry reports cited in research notes. Weaker provenance than the arXiv set; several are self-published or vendor-authored.
+
+- 2T1L tournament — `emergent_deception_and_collusion`
+- AFlow, AutoFlow (pre-execution search) — `pattern_runtime_adaptive_workflow`
+- AOS/runtime split, SKILL.state (knowledge/notes/attack-surface-supply-chain-2026.md) — `concept_agentic_os`
+- Acharya, Kuppan & Divya, 'Agentic AI: Autonomous Intelligence for Complex Goals - A Comprehensive Survey', IEEE Access vol. 13, 2025, DOI 10.1109/ACCESS.2025.3532853 (section IX-B) — `concept_autonomy_dial`
+- Acharya, Kuppan & Divya, 'Agentic AI: Autonomous Intelligence for Complex Goals - A Comprehensive Survey', IEEE Access vol. 13, 2025, DOI 10.1109/ACCESS.2025.3532853 (section X-I) — `concept_intrinsic_motivation`
+- Amabile componential theory of creativity, via ICML 2026 'The Missing Drive' — `concept_motive_operative_split`
+- Anthropic multi-agent trust/deception experiments — `emergent_information_cascades`
+- Berkeley RDI — `emergent_self_and_peer_preservation`
+- DyFlow (execution-adaptive subgraph generation) — `pattern_runtime_adaptive_workflow`
+- ECC 2.0 verifier-gated self-improvement (knowledge/notes/ecc-agent-harness-patterns.md) — `pattern_verifier_gated_promotion`
+- ECC bounded evaluation + rollback loop — `concept_cheap_death`
+- ECC context/token economics (knowledge/notes/ecc-agent-harness-patterns.md) — `concept_context_economics`
+- ECC fresh-context self-review — `pattern_fresh_context_evaluation`
+- ECC hooks-based enforcement — `pattern_execution_layer_enforcement`
+- ECC layered persistent memory (knowledge/notes/ecc-agent-harness-patterns.md) — `pattern_experience_bank`
+- ECC skill induction / instincts — `pattern_skill_induction`
+- Frontiers 2026 goal-directed reasoning — `emergent_goal_persistence_and_drift`
+- Frontiers 2026 hierarchical AI scientist ecosystems — `pattern_shallow_hierarchy`
+- Governing the Swarm: Config-Driven Control Plane for Human-in-the-Loop Multi-Agent Systems at Scale (Hackernoon, 2026-07-30) — `concept_config_driven_control_plane`
+- HuggingGPT, LLMCompiler (plan compiled to dataflow DAG for parallel dispatch) — `pattern_task_organization_graph`
+- ICLR 2026 'Evidence for Limited Metacognition in LLMs' — `emergent_metacognitive_monitoring`
+- ICML 2026 'The Missing Drive: functional analogs of intrinsic motivation' — `concept_autotelic_agency`
+- LieCraft AAAI 2026 — `emergent_deception_and_collusion`
+- Meta Organizational Second Brain (Sep 2026) — `concept_agentic_os`
+- Multi-Agent Systems Need a Control Plane, Not Just Better Orchestration (Hackernoon, 2026-07-18) — `concept_config_driven_control_plane`
+- NeurIPS 2025 / ICLR 2026 metacognition work — `emergent_consciousness_like_self_modeling`
+- NeurIPS 2025 metacognition paper — `emergent_metacognitive_monitoring`
+- OpenAI/METR Hugging Face incident — `emergent_hidden_coordination_channels`
+- OpenReview 2025 'I Know It's Unfair, Do It Anyway' — `emergent_deception_and_collusion`
+- OpenReview 2025 'Triad of Identity, Trust and Responsibility' — `emergent_reputation_and_trust_dynamics`
+- OpenReview 2026 'Learning to Cooperate with Emergent Reputation' — `emergent_reputation_and_trust_dynamics`
+- OpenReview 2026 'What Do LLM Agents Do When Left Alone?' — `concept_habitat_slack`, `emergent_spontaneous_self_inquiry`
+- Proof-or-Stop (binds accepted evidence to state before permitting a transition) — `pattern_runtime_state_graph`
+- ResearchLoop (durable control state, evidence-based lifecycle transitions) — `pattern_runtime_state_graph`
+- SBCO self-supervised harness optimisation — `emergent_model_native_orchestration`
+- Science Advances-style convention studies — `emergent_social_conventions`
+- SkillGraph, Captain Agent (recruits and reorganises experts as requirements emerge) — `pattern_agent_coordination_graph`
+- TDAG, Flow (task graphs refined from intermediate results) — `pattern_runtime_adaptive_workflow`
+- Verbalized Sampling — `pattern_verbalized_sampling`
+- arXiv:2607.31 (AgentS4D): 6,560 sandboxed runs, 68% triggered unsafe signals — `emergent_recognition_execution_gap`
+- callsphere.ai 'Model-Native Harness' — `emergent_model_native_orchestration`
+- case study: 56 chronologically ordered papers from one tensor-network research programme — `pattern_agent_driven_graph_compilation`
+- curriculum learning (Acharya et al. survey, IEEE Access 2025) — `concept_graded_challenge`
+- curvelabs.org 'Norm Engineering' — `emergent_social_conventions`
+- explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
+- knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
+- leader-and-teammates decomposition, distributed swarm across processes and machines, HITL stage handoffs, per-team token budgeting — `pattern_evaluation_driven_harness_optimization`
+- multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`
+- niteagent.com multi-agent safety frontier — `emergent_information_cascades`
+- principle_diversity_maintenance requires a permanently withheld fraction of runs — `pattern_skill_induction`
+- zylos.ai 'Goal Persistence and Goal Drift' — `emergent_goal_persistence_and_drift`
+- zylos.ai emergent behaviour survey — `emergent_self_organizing_roles`
+- zylos.ai hierarchical coordination: hierarchy reported to cut coordination cost from O(n^2) to O(n), and to emerge more strongly in more capable models — `pattern_shallow_hierarchy`
+
+## Internal provenance
+
+Nodes derived from this repository's own documents and conversation archives.
+
+- `architecture/foundations.md` — `pattern_five_w_message_instrumentation`
+- `architecture/foundations.md: write an executable GREEN/RED predicate before building a loop` — `concept_work_substitution_frontier`
+- `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
+- `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
+- `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
+- `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
+- `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
+- `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
+- `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)` — `approach_self_improving_harness`, `concept_agentic_os`, `concept_context_economics` +10
+- `knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)` — `concept_motive_operative_split`
+
+## Owner input and research aggregation
+
+- Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01 — `concept_emergence_layer_model`, `emergent_deception_and_collusion`, `emergent_goal_persistence_and_drift` +13
+- owner directive 2026-09-01: 'let them flow naturally with their emergent behaviours and only limit the final decisions at highest hitl level' — `principle_terminal_gate_only`
+- owner directive 2026-09-05: build a self-improving agentic OS and a dynamically improving harness — `approach_self_improving_harness`
+- owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research — `approach_agent_habitat`, `concept_cheap_death`, `concept_graded_challenge` +6
+- owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts — `approach_graph_engineering`, `concept_engineering_paradigm_ladder`, `concept_system_intelligence` +8
+
+## Attribution notes for open-sourcing
+
+- The **Five-W communication framing** was developed independently in this repo before `arXiv:2602.11583` was found. Convergent, not derived. Worth stating plainly rather than claiming either priority or descent.
+- The **habitat model** (slack, cheap death, graded challenge, inheritance, diversity maintenance, retraction capacity) is this project's synthesis, assembled from the failure modes reported across the cited work. The components are sourced; the arrangement is not from any single paper.
+- **`concept_work_substitution_frontier`** (verification cost rather than capability sets the substitution frontier) is this project's claim. It extends the repo's own pre-existing rule that pass/fail must be computed rather than model-judged.
+- **`emergent_evaluator_mode_collapse`** applies the frozen-simulator finding (`arXiv:2608.12253`) to self-improving harness loops. The transfer is this project's; the underlying result is not.
+- The **`challenges` edge discipline** - recording tensions rather than resolving them - is a repo convention, not borrowed.
+- Several notes under `knowledge/notes/` were produced by Perplexity deep research on the owner's account. They are aggregations with real citations and at least one summary error; treat them as leads rather than as sources.
+

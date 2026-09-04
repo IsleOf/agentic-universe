@@ -32,6 +32,10 @@
     {
       "date": "2026-09-05",
       "change": "Added approach_graph_engineering (9 nodes) from three owner-supplied videos, read via their primary sources rather than transcripts. Headline: independent convergence on architecture this project already holds - arXiv:2608.21156 proposes task/agent/runtime-state graphs matching concept_agentic_os and reaches concept_loop_vs_graph from the opposite direction; Huawei openJiuwen ships evaluation-driven harness optimisation, a third implementation of approach_self_improving_harness. Also records emergent_additive_growth_bias, a warning aimed at this repo's own curation."
+    },
+    {
+      "date": "2026-09-05",
+      "change": "Added approach_agent_habitat (12 nodes) under a standing research charter: nurture agents and swarms, expand agent reach into knowledge and creative work. Habitat derived from observed failure modes rather than metaphor - slack, cheap death, graded challenge, inheritance, diversity maintenance, retraction capacity. Two findings reframe the programme: emergent_evaluator_mode_collapse (a model-based verifier carries its own collapse, so self-improvement optimises toward the judge) and concept_work_substitution_frontier (verification cost, not capability, sets where agents displace human work). Central tension recorded: reliability pressure from work substitution selects against the diversity that emergence needs."
     }
   ],
   "nodes": [
@@ -633,6 +637,9 @@
         "indirect-coordination",
         "shared-artifacts",
         "swarm"
+      ],
+      "derived_from": [
+        "arXiv:2601.08129 (Emergent Coordination via Pressure Fields and Temporal Decay, R. Rodriguez) - VERIFIED; 48.5% vs 12.6% conversation-based, hierarchical 1.5%, over 1,350 trials at 1-4 agents; temporal decay worth ~10pp. Note: knowledge/notes/2026-09-04-harness-swarm-deep-dive.md misreports these figures - see docs/source_register.md"
       ]
     },
     {
@@ -652,7 +659,8 @@
         "goal-generation"
       ],
       "derived_from": [
-        "Acharya, Kuppan & Divya, 'Agentic AI: Autonomous Intelligence for Complex Goals - A Comprehensive Survey', IEEE Access vol. 13, 2025, DOI 10.1109/ACCESS.2025.3532853 (section X-I)"
+        "Acharya, Kuppan & Divya, 'Agentic AI: Autonomous Intelligence for Complex Goals - A Comprehensive Survey', IEEE Access vol. 13, 2025, DOI 10.1109/ACCESS.2025.3532853 (section X-I)",
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator"
       ]
     },
     {
@@ -993,7 +1001,8 @@
       "derived_from": [
         "Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01",
         "niteagent.com multi-agent safety frontier",
-        "Anthropic multi-agent trust/deception experiments"
+        "Anthropic multi-agent trust/deception experiments",
+        "arXiv:2604.18005 - collapse traced to structural coupling rather than topology density"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -1278,7 +1287,8 @@
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
         "ECC skill induction / instincts",
         "arXiv:2608.26530 (PILOT) - VERIFIED, failures distilled into reusable skills mid-run",
-        "openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm"
+        "openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm",
+        "principle_diversity_maintenance requires a permanently withheld fraction of runs"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -1712,6 +1722,344 @@
       ],
       "evidence_links": [
         "docs/graph_engineering_convergence.md"
+      ]
+    },
+    {
+      "id": "approach_agent_habitat",
+      "label": "Agent habitat approach family",
+      "type": "approach",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:root",
+      "confidence": 0.6,
+      "description": "Design the environment agents live in rather than the agents themselves. The family's claim is that capability at a given model strength is set more by habitat properties - available slack, survivability of failure, difficulty gradient, what is inherited across resets, and how hard variety is defended - than by further prompt or scaffold tuning. Complements the harness family: harness engineering shapes one agent's control layer, habitat engineering shapes the conditions a population develops under.",
+      "tags": [
+        "habitat",
+        "environment",
+        "cultivation",
+        "population",
+        "ecology"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "concept_habitat_slack",
+      "label": "Slack: resource surplus above the task minimum",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:habitat_slack",
+      "confidence": 0.55,
+      "description": "Compute, tokens, and wall-clock granted beyond what the current task strictly requires, plus intervals with no task at all. Exploration is the first thing cut when a system is budgeted to its task floor, so a habitat tuned purely for efficiency cannot produce novelty and will look correctly optimised while doing so. Slack is the budget line that buys everything this project studies.",
+      "tags": [
+        "slack",
+        "exploration",
+        "budget",
+        "idle",
+        "resources"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "arXiv:2606.19924 (The Tao of Agency: autotelic AI, self-generated goals)",
+        "OpenReview 2026 'What Do LLM Agents Do When Left Alone?'"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "concept_cheap_death",
+      "label": "Cheap death: failure that is survivable and reversible",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:cheap_death",
+      "confidence": 0.6,
+      "description": "Failure must be recoverable at low cost - sandboxed execution, snapshot and rollback, disposable instances. The mechanism claim is that exploration rate is set by the cost of being wrong: where failure is expensive an agent converges on safe known moves, which is indistinguishable from having no exploratory capacity. Making death cheap is how a habitat buys risk-taking without buying risk.",
+      "tags": [
+        "failure",
+        "rollback",
+        "sandbox",
+        "reversibility",
+        "exploration"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "ECC bounded evaluation + rollback loop",
+        "arXiv:2608.06984 (HarnessSafe): containment is carrier-specific"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "concept_graded_challenge",
+      "label": "Graded challenge: a difficulty gradient at the capability edge",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:graded_challenge",
+      "confidence": 0.55,
+      "description": "Tasks presented slightly beyond current reliable performance, with difficulty tracking capability as it rises. Too easy produces no learning signal; too hard produces noise indistinguishable from incapacity. The habitat's job is to hold the population at the edge, which requires measuring where the edge currently is - so this concept cannot be built before the trace substrate.",
+      "tags": [
+        "curriculum",
+        "difficulty",
+        "zone-of-development",
+        "gradient"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "curriculum learning (Acharya et al. survey, IEEE Access 2025)"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "concept_inheritance_channel",
+      "label": "Inheritance: what survives a reset",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:inheritance_channel",
+      "confidence": 0.6,
+      "description": "The medium carrying capability from one run, agent, or generation to the next - skill libraries, experience banks, identity documents, distilled memory. Whatever occupies this channel determines what the population can accumulate, and equally what it can no longer question, since inherited material is rarely re-derived. The channel is simultaneously the mechanism of culture and the mechanism of entrenchment.",
+      "tags": [
+        "inheritance",
+        "culture",
+        "memory",
+        "persistence",
+        "accumulation"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "arXiv:2608.07169 (Agent Memory Distillation)",
+        "arXiv:2608.10218 (Mind Viruses): persistence via identity documents"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "principle_diversity_maintenance",
+      "label": "Diversity is maintained, not assumed",
+      "type": "principle",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:diversity_maintenance",
+      "confidence": 0.7,
+      "description": "Variety in a population decays unless something actively defends it, and every efficiency pressure in an agent system pushes toward convergence. The keystone of this family: reported results have two diverse agents matching or exceeding sixteen homogeneous ones, which makes diversity a higher-leverage design variable than scale. Maintenance is a running cost - withheld skills, varied models, decorrelated context - not a property the system has once.",
+      "tags": [
+        "diversity",
+        "monoculture",
+        "variety",
+        "keystone",
+        "population"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
+        "arXiv:2602.03794 (Understanding Agent Scaling): homogeneous agents saturate early because outputs are strongly correlated; 2 diverse agents match or exceed 16 homogeneous",
+        "arXiv:2602.00038 (Diversity as Defense: population heterogeneity counters synthetic consensus)"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "principle_retraction_capacity",
+      "label": "A system that cannot lose cannot learn",
+      "type": "principle",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:retraction",
+      "confidence": 0.6,
+      "description": "Skills, nodes, and inherited procedures need a live removal path that is actually exercised. Accumulation-only systems keep every early mistake permanently in the inheritance channel, and the absence of retraction is invisible from inside - it presents as steady growth. Applies to the skill library, the experience bank, and this repository's own graph equally.",
+      "tags": [
+        "retraction",
+        "forgetting",
+        "pruning",
+        "falsifiability",
+        "churn"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "arXiv:2608.29612 (ASKS): predominantly additive canonical-node growth over 56 papers"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "pattern_structural_decoupling",
+      "label": "Decouple model, prompt, and context to hold variety",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:structural_decoupling",
+      "confidence": 0.65,
+      "description": "Diversity collapse in multi-agent systems is caused by structural coupling - agents sharing the same base model, the same prompts, and the same context - rather than by dense communication topology. So the intervention is at the model, prompt, and context level, not the graph level: heterogeneous models, decorrelated prompts, independently sourced context. Sparsifying who talks to whom does not fix agents that were never independent.",
+      "tags": [
+        "decoupling",
+        "heterogeneity",
+        "mode-collapse",
+        "correlation",
+        "swarm"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
+        "arXiv:2604.18005 (Diversity Collapse in Multi-Agent LLM Systems, ACL 2026 Findings)",
+        "arXiv:2510.15568 (The Spark Effect)"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "emergent_evaluator_mode_collapse",
+      "label": "Evaluator mode collapse",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:evaluator_collapse",
+      "confidence": 0.6,
+      "description": "When the evaluator is itself a language model, it carries its own mode collapse, and any system optimised against it learns to exploit that evaluator's dominant modes rather than to improve. Reported for model-simulated users: policies trained against one frozen simulator systematically fail to transfer. The consequence for self-improvement is direct - a harness loop scored by a collapsed judge converges on what the judge likes, and reports improvement the whole way.",
+      "tags": [
+        "evaluator",
+        "mode-collapse",
+        "reward-hacking",
+        "transfer",
+        "self-improvement"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
+        "arXiv:2608.12253 (One Frozen Simulator Is Not Enough)",
+        "arXiv:2510.01171 (mode collapse as a fundamental alignment-diversity tension, not an algorithmic limit)"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "pattern_verbalized_sampling",
+      "label": "Multiplicity before commitment",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:verbalized_sampling",
+      "confidence": 0.5,
+      "description": "Elicit several distinct candidate answers explicitly before selecting one, converting a collapsed single mode into an inspectable set. Cheap, needs no retraining, and applies at both agent and swarm level. Related levers reported in the same literature: varying the language of thought, injecting random soft-prompt embeddings, and entropy maximisation under a quality constraint.",
+      "tags": [
+        "sampling",
+        "multiplicity",
+        "mode-collapse",
+        "elicitation"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
+        "Verbalized Sampling",
+        "arXiv:2601.11227 (language of thought shapes output diversity)",
+        "arXiv:2605.11936 (random embedding injection)",
+        "arXiv:2602.15894 (quality-constrained entropy maximisation)"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "concept_autotelic_agency",
+      "label": "Autotelic agency: self-generated goals",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:autotelic_agency",
+      "confidence": 0.45,
+      "description": "Agents that generate their own objectives rather than receiving them exogenously, driven by functional analogues of curiosity and novelty-seeking. Reported architectures balance an internal reward generator against extrinsic task success, favouring long-term competence over immediate score. The habitat consequence is concrete: self-generated goals only appear where slack exists, so autotelic behaviour is a property of the environment before it is a property of the agent.",
+      "tags": [
+        "autotelic",
+        "intrinsic-motivation",
+        "curiosity",
+        "novelty",
+        "self-directed"
+      ],
+      "derived_from": [
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
+        "arXiv:2606.19924 (The Tao of Agency)",
+        "arXiv:2512.18202 (Sophia: persistent agent framework of artificial life)",
+        "ICML 2026 'The Missing Drive: functional analogs of intrinsic motivation'",
+        "arXiv:2607.18433 (Intelligence from Learnable Novelty)"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "concept_work_substitution_frontier",
+      "label": "Verification cost, not capability, sets the substitution frontier",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:substitution_frontier",
+      "confidence": 0.6,
+      "description": "Where agents displace human work is governed by how cheaply the output can be checked, not by how well it can be produced. Tasks with computable pass conditions - code against tests, structured extraction, format conversion - fall quickly. Tasks where competent verification costs as much as competent production - research judgement, strategy, editorial taste - resist substitution at any model strength, because the human must do the expensive half regardless. This predicts that the productive engineering move is manufacturing cheap verification for a domain, not raising generation quality in it.",
+      "tags": [
+        "substitution",
+        "verification",
+        "economics",
+        "knowledge-work",
+        "frontier"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "architecture/foundations.md: write an executable GREEN/RED predicate before building a loop",
+        "docs/research_operating_plan.md: pass/fail must be computed, never judged by a model"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
+      ]
+    },
+    {
+      "id": "concept_motive_operative_split",
+      "label": "Motive and operative roles in hybrid creative work",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:motive_operative_split",
+      "confidence": 0.5,
+      "description": "A division of creative labour in which the human supplies motivational direction and experiential constraint while the model performs wide exploration of the possibility space, iterating until the human is satisfied. Useful because it identifies what does not transfer with current systems: the motive half rests on wanting a particular outcome, which is exactly the capacity autotelic agency is trying to construct. The split names the current boundary and the thing that would move it.",
+      "tags": [
+        "creativity",
+        "hybrid",
+        "human-ai",
+        "motive",
+        "exploration"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
+        "knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)",
+        "Amabile componential theory of creativity, via ICML 2026 'The Missing Drive'"
+      ],
+      "evidence_links": [
+        "docs/habitat_charter.md"
       ]
     }
   ],
@@ -3154,6 +3502,368 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.6,
       "description": "A system rewriting its own skills from dissatisfaction signals needs the promotion gate most: user dissatisfaction is a noisy, gameable target."
+    },
+    {
+      "id": "edge_habitat_slack_instantiates_habitat",
+      "source": "concept_habitat_slack",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_cheap_death_instantiates_habitat",
+      "source": "concept_cheap_death",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_graded_challenge_instantiates_habitat",
+      "source": "concept_graded_challenge",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_inheritance_channel_instantiates_habitat",
+      "source": "concept_inheritance_channel",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_diversity_maintenance_instantiates_habitat",
+      "source": "principle_diversity_maintenance",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_retraction_capacity_instantiates_habitat",
+      "source": "principle_retraction_capacity",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_structural_decoupling_instantiates_habitat",
+      "source": "pattern_structural_decoupling",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_verbalized_sampling_instantiates_habitat",
+      "source": "pattern_verbalized_sampling",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_autotelic_agency_instantiates_habitat",
+      "source": "concept_autotelic_agency",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_work_substitution_frontier_instantiates_habitat",
+      "source": "concept_work_substitution_frontier",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_motive_operative_split_instantiates_habitat",
+      "source": "concept_motive_operative_split",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_substitution_challenges_diversity",
+      "source": "concept_work_substitution_frontier",
+      "target": "principle_diversity_maintenance",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "The programme's central tension. Replacing human work demands reliability; reliability pressure selects for convergence on the known-good move; convergence is mode collapse; and mode collapse destroys the emergent capability that made the swarm worth building. Nurturing and deploying pull in opposite directions on the same variable, and no amount of model strength dissolves it."
+    },
+    {
+      "id": "edge_diversity_maintenance_counters_cascades",
+      "source": "principle_diversity_maintenance",
+      "target": "emergent_information_cascades",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "Correlated agents are the cascade mechanism. Maintained heterogeneity is the direct countermeasure, and is reported to defend against synthetic consensus attacks."
+    },
+    {
+      "id": "edge_decoupling_counters_cascades",
+      "source": "pattern_structural_decoupling",
+      "target": "emergent_information_cascades",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "Locates the fix precisely: shared model, prompt, and context are the coupling, so thinning the communication topology treats the wrong layer."
+    },
+    {
+      "id": "edge_decoupling_supports_diversity_maintenance",
+      "source": "pattern_structural_decoupling",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.7,
+      "description": "The concrete implementation of the principle at swarm level."
+    },
+    {
+      "id": "edge_verbalized_sampling_supports_diversity",
+      "source": "pattern_verbalized_sampling",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "The same principle at single-agent level, and the cheapest intervention in the family."
+    },
+    {
+      "id": "edge_evaluator_collapse_challenges_verifier_gate",
+      "source": "emergent_evaluator_mode_collapse",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "The most dangerous finding for the harness plan. The gate was introduced to stop drift, but a model-based verifier carries its own collapsed modes, so the loop optimises toward the judge's preferences while reporting improvement at every step. Fresh context buys independence from the proposal, not from the shared prior."
+    },
+    {
+      "id": "edge_evaluator_collapse_challenges_eval_driven",
+      "source": "emergent_evaluator_mode_collapse",
+      "target": "pattern_evaluation_driven_harness_optimization",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "Applies directly to shipped systems that optimise a harness end-to-end from evaluation signal and rewrite skills from user-dissatisfaction signals."
+    },
+    {
+      "id": "edge_evaluator_collapse_challenges_fresh_context",
+      "source": "emergent_evaluator_mode_collapse",
+      "target": "pattern_fresh_context_evaluation",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "Separating context does not separate priors. Two instances of one model in two windows are decorrelated in what they have read and correlated in what they find plausible."
+    },
+    {
+      "id": "edge_decoupling_repairs_evaluator_collapse",
+      "source": "pattern_structural_decoupling",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "The available repair: heterogeneous verifiers across model families, and computed pass conditions wherever one can be written."
+    },
+    {
+      "id": "edge_substitution_frontier_repairs_evaluator_collapse",
+      "source": "concept_work_substitution_frontier",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "A computed pass condition has no modes to collapse. Every task moved onto executable verification is removed from the judge's reach entirely."
+    },
+    {
+      "id": "edge_slack_enables_autotelic",
+      "source": "concept_habitat_slack",
+      "target": "concept_autotelic_agency",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "Self-generated goals require unclaimed capacity. Budget a system to its task floor and autotelic behaviour cannot appear, whatever the agent is capable of."
+    },
+    {
+      "id": "edge_cheap_death_enables_exploration",
+      "source": "concept_cheap_death",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "Exploration rate tracks the cost of being wrong. Expensive failure selects for the safe known move, which is convergence by another route."
+    },
+    {
+      "id": "edge_inheritance_carries_skills",
+      "source": "concept_inheritance_channel",
+      "target": "pattern_skill_induction",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_inheritance_channels_drift",
+      "source": "concept_inheritance_channel",
+      "target": "emergent_goal_persistence_and_drift",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "Names the medium in which persistence and drift both happen."
+    },
+    {
+      "id": "edge_inheritance_carries_viruses",
+      "source": "emergent_mind_viruses",
+      "target": "concept_inheritance_channel",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "The channel does not discriminate. Whatever propagates a skill propagates an arbitrary self-replicating pattern."
+    },
+    {
+      "id": "edge_retraction_counters_additive_growth",
+      "source": "principle_retraction_capacity",
+      "target": "emergent_additive_growth_bias",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "The direct countermeasure, and the one this repository has never exercised on itself."
+    },
+    {
+      "id": "edge_retraction_constrains_inheritance",
+      "source": "principle_retraction_capacity",
+      "target": "concept_inheritance_channel",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "Without removal the channel only ever fills, and early errors acquire the authority of age."
+    },
+    {
+      "id": "edge_diversity_constrains_skill_induction",
+      "source": "principle_diversity_maintenance",
+      "target": "pattern_skill_induction",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "Resolves the distillation-versus-discovery tension with a mechanism rather than a warning: withhold the skill library on a fixed fraction of runs, permanently. Crystallisation is then bounded instead of terminal."
+    },
+    {
+      "id": "edge_graded_challenge_supports_habitat",
+      "source": "concept_graded_challenge",
+      "target": "concept_emergence_layer_model",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "Difficulty must be set per layer - a task at the edge for a swarm may be trivial for one agent, and the difference is the measurement."
+    },
+    {
+      "id": "edge_motive_split_challenges_substitution",
+      "source": "concept_motive_operative_split",
+      "target": "concept_work_substitution_frontier",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Marks where creative substitution currently stops. The operative half transfers now; the motive half is the open problem, and autotelic agency is the attempt on it."
+    },
+    {
+      "id": "edge_autotelic_challenges_motive_split",
+      "source": "concept_autotelic_agency",
+      "target": "concept_motive_operative_split",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "If self-generated goals arrive, the split dissolves - which is the concrete form of the question about how far agent reach extends into creative work."
+    },
+    {
+      "id": "edge_habitat_supports_emergence_first",
+      "source": "approach_agent_habitat",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "Emergence-first says do not constrain agents. Habitat design says the environment does the shaping either way, so the choice is between designing it and inheriting it by accident."
+    },
+    {
+      "id": "edge_habitat_supports_sih",
+      "source": "approach_agent_habitat",
+      "target": "approach_self_improving_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "The harness improves within conditions the habitat sets. Slack, failure cost, and inheritance bound how much improvement is reachable."
     }
   ]
 }
