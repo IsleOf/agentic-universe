@@ -184,6 +184,10 @@
     {
       "date": "2026-09-19",
       "change": "Autonomous run 53. Citation upgrade: pattern_progressive_risk_vesting (2609.01035) abstract-read -> VERIFIED. New detail: trajectory harm has a phase transition in the authority reproduction number Ra - below criticality harm ~ p, at criticality ~ sqrt(p), above criticality a positive harm floor that shrinking per-branch risk cannot remove. Consequence for the design: a recursive spawn tree past the Ra threshold must be capped on depth/fan-out, not just per-branch risk. Limitation logged: synthetic studies only, not deployed-agent safety estimates."
+    },
+    {
+      "date": "2026-09-19",
+      "change": "Autonomous run 54. cs.AI sweep (frontier is ~Sept 3-5 - no newer literature exists in this environment). Two habitat-mechanism strengtheners. concept_environment_evolution_curriculum (2609.04128 VERIFIED): a loop-engineered harness evolves environment difficulty off-policy generation by generation, +14.4/+18.0pp on Terminal-Bench 2.1 - the strongest graded-challenge evidence in the graph, and the curriculum generator is itself a harness artifact. pattern_procedural_family_skill_consolidation (SkillGLoW 2609.02217 VERIFIED): consolidate skills into de-instantiated procedural families with an execution-gated commit; +17.2pt hard tasks, 3.6x compactness, ALFWorld 73.9->83.9 unseen ('procedure transfers, not task memory'); the commit gate is pattern_grounded_acceptance_only applied to skills."
     }
   ],
   "nodes": [
@@ -2003,7 +2007,8 @@
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "curriculum learning (Acharya et al. survey, IEEE Access 2025)",
         "arXiv:2609.04128 (Environment Evolution for Terminal Agents) - VERIFIED: three evolution directions for environment difficulty derived from the multi-turn learning objective, scaled off-policy; +14.4 / +18.0pp on Terminal-Bench 2.1 for Qwen3.6-27B / 35B-A3B. Training-time here, but the mechanism - deriving difficulty directions from the objective and scaling systematically - is what the graded-challenge feeder needs",
-        "arXiv:2608.19197 (SPADE) - VERIFIED: an environment designer optimising a regret signal (reward with vs without privileged hints) learns to target the edge of the agent's capability while keeping tasks feasible; +5.3 avg over fixed-environment baselines across 8 held-out benchmarks, +13.9 on ACEBench-Agent. Also arXiv:2608.27260 (What Makes Good Agentic Data / ACE lens): complexity places learning mass relative to learner capability, so difficulty scales with agent evolution"
+        "arXiv:2608.19197 (SPADE) - VERIFIED: an environment designer optimising a regret signal (reward with vs without privileged hints) learns to target the edge of the agent's capability while keeping tasks feasible; +5.3 avg over fixed-environment baselines across 8 held-out benchmarks, +13.9 on ACEBench-Agent. Also arXiv:2608.27260 (What Makes Good Agentic Data / ACE lens): complexity places learning mass relative to learner capability, so difficulty scales with agent evolution",
+        "arXiv:2609.04128 (Environment Evolution for Terminal Agents) - run 54, VERIFIED: +14.4/+18.0pp Terminal-Bench 2.1"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -4356,6 +4361,58 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-19-0600.md"
+      ]
+    },
+    {
+      "id": "concept_environment_evolution_curriculum",
+      "label": "A harness that evolves its own training environments generation by generation",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:environment_evolution",
+      "confidence": 0.7,
+      "description": "arXiv:2609.04128 (VERIFIED): off-policy environment-difficulty scheduling - a loop-engineered multi-agent harness generates increasingly difficult environments generation by generation, from three evolution directions derived from the multi-turn learning objective, rather than from on-policy rollouts. +14.4pp for Qwen3.6-27B and +18.0pp for Qwen3.6-35B-A3B on Terminal-Bench 2.1 via plain long-horizon RL. 'Environment evolution consistently produces more difficult environments' across frontier models. This is the strongest graded-challenge evidence in the graph - larger than SPADE - and it makes the point that the curriculum generator is itself a harness artifact: concept_graded_challenge and the self-improving harness are the same build, not parallel tracks. Still a supervised difficulty generator, not concept_autotelic_agency (see concept_curriculum_generation_not_intrinsic_drive).",
+      "tags": [
+        "environment-evolution",
+        "curriculum",
+        "graded-challenge",
+        "off-policy",
+        "terminal-bench",
+        "+18pp"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-19-1800.md",
+        "arXiv:2609.04128 (Environment Evolution for Terminal Agents) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-19-1800.md"
+      ]
+    },
+    {
+      "id": "pattern_procedural_family_skill_consolidation",
+      "label": "Consolidate skills into de-instantiated procedural families, gated on real execution",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:procedural_family_consolidation",
+      "confidence": 0.7,
+      "description": "SkillGLoW (arXiv:2609.02217, VERIFIED): the unit of skill reuse is the procedural family, not a global skills document (goes generic) or a flat per-task pool (inflates). Related tasks are clustered, their shared procedure extracted into a de-instantiated global prior, instance detail regenerated per task. A commit gate admits a new prior only when real execution confirms it does not degrade the deployed library. +17.2pt on hard tasks vs no-skill baseline (math, terminal automation, software repair, embodied control, 3 models); library 3.6x more compact than per-task pools; unmodified, it lifts unseen ALFWorld success 73.9% -> 83.9% - 'what transfers is procedure rather than task memory'. This is the inheritance mechanism and Phase 4 skill induction done well, and the commit gate is pattern_grounded_acceptance_only applied to skills (grounded = execution, not a judge).",
+      "tags": [
+        "procedural-family",
+        "skill-consolidation",
+        "commit-gate",
+        "de-instantiated-prior",
+        "3.6x-compact",
+        "procedure-transfers-not-task-memory"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-19-1800.md",
+        "arXiv:2609.02217 (SkillGLoW) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-19-1800.md"
       ]
     }
   ],
@@ -9414,6 +9471,103 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.45,
       "description": "PRV bounds the harm a recursive tree can do, but only below the authority-reproduction-number threshold; a peer-deference-driven tree that spawns aggressively can push Ra past criticality where a harm floor persists. The design has to cap depth/fan-out, not just per-branch risk."
+    },
+    {
+      "id": "edge_env_evolution_supports_graded_challenge",
+      "source": "concept_environment_evolution_curriculum",
+      "target": "concept_graded_challenge",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.7,
+      "description": "The strongest graded-challenge result: +14.4/+18.0pp on Terminal-Bench 2.1 from a harness that evolves environment difficulty off-policy."
+    },
+    {
+      "id": "edge_env_evolution_instantiates_habitat",
+      "source": "concept_environment_evolution_curriculum",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_env_evolution_refines_sih",
+      "source": "concept_environment_evolution_curriculum",
+      "target": "approach_self_improving_harness",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The curriculum generator is a harness artifact - graded-challenge and the self-improving harness are one build."
+    },
+    {
+      "id": "edge_env_evolution_challenges_curriculum_not_drive",
+      "source": "concept_environment_evolution_curriculum",
+      "target": "concept_curriculum_generation_not_intrinsic_drive",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Another supervised difficulty generator - confirms the field builds curriculum, not curiosity."
+    },
+    {
+      "id": "edge_procfam_instantiates_sih",
+      "source": "pattern_procedural_family_skill_consolidation",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_procfam_refines_skill_induction",
+      "source": "pattern_procedural_family_skill_consolidation",
+      "target": "pattern_skill_induction",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "The unit of induction is the procedural family, not the per-task skill; instance detail regenerated on demand."
+    },
+    {
+      "id": "edge_procfam_refines_inheritance",
+      "source": "pattern_procedural_family_skill_consolidation",
+      "target": "concept_inheritance_channel",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "What should survive a reset is de-instantiated procedure (3.6x compact, transfers to unseen tasks), not task memory."
+    },
+    {
+      "id": "edge_procfam_instantiates_grounded_acceptance",
+      "source": "pattern_procedural_family_skill_consolidation",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The commit gate: a new procedural prior enters the library only when real execution confirms no degradation - grounded acceptance for skills."
+    },
+    {
+      "id": "edge_procfam_challenges_skill_lifecycle",
+      "source": "pattern_procedural_family_skill_consolidation",
+      "target": "pattern_agentic_skill_lifecycle",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Gives the lifecycle a consolidation stage between induction and deprecation."
     }
   ]
 }

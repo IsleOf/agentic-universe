@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 168 nodes, 479 edges · **Date:** 2026-09-05
+**Graph at generation:** 170 nodes, 488 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -139,6 +139,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.01836](https://arxiv.org/abs/2609.01836) | (title not recorded) | `emergent_authorization_laundering` |
 | [2609.01873](https://arxiv.org/abs/2609.01873) | (title not recorded) | `concept_epistemic_sybil_collapse`, `pattern_evidential_ancestry_tracking` |
 | [2609.02094](https://arxiv.org/abs/2609.02094) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
+| [2609.02217](https://arxiv.org/abs/2609.02217) | (title not recorded) | `pattern_procedural_family_skill_consolidation` |
 | [2609.02246](https://arxiv.org/abs/2609.02246) | (title not recorded) | `emergent_evaluator_mode_collapse`, `pattern_deterministic_self_improvement_guardrails`, `pattern_recoverability_constrained_evolution` |
 | [2609.02526](https://arxiv.org/abs/2609.02526) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.02580](https://arxiv.org/abs/2609.02580) | (title not recorded) | `emergent_no_equilibrium_convergence` |
@@ -150,7 +151,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.03218](https://arxiv.org/abs/2609.03218) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.03667](https://arxiv.org/abs/2609.03667) | (title not recorded) | `principle_diversity_maintenance` |
 | [2609.03884](https://arxiv.org/abs/2609.03884) | (title not recorded) | `pattern_execution_layer_enforcement`, `principle_structural_edits_gated_outside_the_agents` |
-| [2609.04128](https://arxiv.org/abs/2609.04128) | (title not recorded) | `concept_graded_challenge` |
+| [2609.04128](https://arxiv.org/abs/2609.04128) | (title not recorded) | `concept_environment_evolution_curriculum`, `concept_graded_challenge` |
 | [2609.04167](https://arxiv.org/abs/2609.04167) | (title not recorded) | `concept_verification_completeness_gap` |
 | [2609.04170](https://arxiv.org/abs/2609.04170) | (title not recorded) | `concept_transparency_cuts_both_ways`, `emergent_misaligned_communication_under_stress`, `emergent_whistleblowing` +1 |
 
@@ -286,6 +287,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`
 - `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`
 - `docs/auto_sweep_2026-09-19-0600.md` — `concept_epistemic_sybil_collapse`, `emergent_compositional_private_language`, `pattern_evidential_ancestry_tracking`
+- `docs/auto_sweep_2026-09-19-1800.md` — `concept_environment_evolution_curriculum`, `pattern_procedural_family_skill_consolidation`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
