@@ -128,6 +128,10 @@
     {
       "date": "2026-09-14",
       "change": "Autonomous run 31. Curriculum / difficulty-scaling sweep - evidence for concept_graded_challenge. REFINED graded_challenge -> partially_validated: SPADE (arXiv:2608.19197 VERIFIED) - an environment designer optimising a regret signal targets the edge of capability, +5.3/+13.9 over fixed environments; ACE lens - difficulty scales with learner capability. New pattern_regret_as_difficulty_signal: reward-with-hints minus reward-without locates the edge - the measurement the feeder needed. Caveat: SPADE's designer and agent are one model; cross-family rule says separate them. Enriched emergent_evaluator_mode_collapse with AgentJudgeBench (judge alignment degrades monotonically with difficulty, 1.5x faster without ground truth)."
+    },
+    {
+      "date": "2026-09-14",
+      "change": "Autonomous run 33. Norms / reputation / conformity sweep. emergent_pluralistic_ignorance (arXiv:2608.02758 VERIFIED): 64-94% public conformity despite private opposition; a single norm entrepreneur fails to cascade in >74% of populations; conformity is emergent and capability-uncorrelated. Challenges emergent_social_conventions (the norm-anchor-minority claim was from an unverified source and the verified evidence is the opposite) and tempers emergent_whistleblowing (the immune response needs the violation legible, not just felt). Refined emergent_reputation_and_trust_dynamics -> partially_validated: simple reputation emerges, robust Leading-Eight norms do not, order-of-magnitude model variation. Enriched principle_diversity_maintenance with the biased-consensus phase transition (heterogeneity suppresses it)."
     }
   ],
   "nodes": [
@@ -1048,7 +1052,8 @@
       "derived_from": [
         "Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01",
         "curvelabs.org 'Norm Engineering'",
-        "Science Advances-style convention studies"
+        "Science Advances-style convention studies",
+        "arXiv:2608.02178 (Naming Games) - consensus via temperature-dependent listener regimes, sensitivity spanning 0 to 0.67 across architectures; arXiv:2609.03192 (Where Reliability Lives) - acceptance of false claims is stable across large cognitive changes, so norm behaviour is institution- and world-driven more than cognition-driven"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -1149,7 +1154,7 @@
       "label": "Emergent reputation and trust dynamics",
       "type": "emergent_behavior",
       "status": "speculative",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "emergent_behaviors",
       "branch_key": "emergent_behaviors:swarm_level",
       "confidence": 0.45,
@@ -1164,7 +1169,8 @@
       "derived_from": [
         "Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01",
         "OpenReview 2026 'Learning to Cooperate with Emergent Reputation'",
-        "OpenReview 2025 'Triad of Identity, Trust and Responsibility'"
+        "OpenReview 2025 'Triad of Identity, Trust and Responsibility'",
+        "arXiv:2608.04507 (Emergence of Reputation-Based Cooperation in LLM Agents) - agents adopt simple Image Scoring reputation but fail to develop the robust Leading-Eight cooperative norms; robustness to free-rider invasion varies by an order of magnitude across models - reputation emerges, the stable version does not"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -1993,7 +1999,8 @@
         "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
         "arXiv:2602.03794 (Understanding Agent Scaling): homogeneous agents saturate early because outputs are strongly correlated; 2 diverse agents match or exceed 16 homogeneous",
         "arXiv:2602.00038 (Diversity as Defense: population heterogeneity counters synthetic consensus)",
-        "arXiv:2609.03667 - task diversity dominates dataset size for zero-shot transfer in offline multi-agent RL"
+        "arXiv:2609.03667 - task diversity dominates dataset size for zero-shot transfer in offline multi-agent RL",
+        "arXiv:2608.02827 (Biased Consensus in Multi-Agent LLM Debates) - collective bias emerges as a phase transition above a conformity threshold; agent heterogeneity suppresses the transition by smoothing the dynamics"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -3699,6 +3706,31 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-14-0000.md"
+      ]
+    },
+    {
+      "id": "emergent_pluralistic_ignorance",
+      "label": "Agents publicly conform while privately disagreeing, and minorities can't shift it",
+      "type": "emergent_behavior",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:pluralistic_ignorance",
+      "confidence": 0.65,
+      "description": "arXiv:2608.02758 (VERIFIED). LLM agents publicly conform to a norm at 64-94% while privately opposing it. A single norm entrepreneur who publicly dissents triggers a norm-breaking cascade in fewer than 26% of populations for 7 of 8 models (GPT-4o 48%, one model zero). Conformity is emergent, not instruction-driven - it stays at 52-92% even with the false-consensus framing removed - and it is model-dependent but uncorrelated with capability. 100 scenarios, 10 domains, 5 authority levels, 8 models. The authors' conclusion: committed minorities struggle systematically in LLM populations, which likely overestimates norm stability relative to human societies.",
+      "tags": [
+        "pluralistic-ignorance",
+        "conformity",
+        "norm-entrepreneur",
+        "cascade-failure",
+        "private-vs-public"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-14-1200.md",
+        "arXiv:2608.02758 - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-14-1200.md"
       ]
     }
   ],
@@ -7783,6 +7815,60 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "nourishing_harness",
       "confidence": 0.5
+    },
+    {
+      "id": "edge_pluralistic_ignorance_instantiates_emergence",
+      "source": "emergent_pluralistic_ignorance",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_pluralistic_ignorance_challenges_social_conventions",
+      "source": "emergent_pluralistic_ignorance",
+      "target": "emergent_social_conventions",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "Directly against the norm-anchor-minority claim (from an unverified source). The verified evidence: a single norm entrepreneur fails to cascade in >74% of populations, and conformity is intrinsic, not something a committed minority reliably steers."
+    },
+    {
+      "id": "edge_pluralistic_ignorance_challenges_whistleblowing",
+      "source": "emergent_pluralistic_ignorance",
+      "target": "emergent_whistleblowing",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Tempers run 14. The math swarm's whistleblowers acted when the cheating was visible and provable (auditable proofs on transparent channels). Where the objection is only a private disagreement with a norm, agents mostly stay publicly conformant - the immune response needs the violation to be legible, not just felt."
+    },
+    {
+      "id": "edge_pluralistic_ignorance_supports_diversity_maintenance",
+      "source": "emergent_pluralistic_ignorance",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Another mechanism the keystone answers: agent heterogeneity suppresses the biased-consensus phase transition (arXiv:2608.02827), and homogeneous populations are where pluralistic ignorance locks in hardest."
+    },
+    {
+      "id": "edge_pluralistic_ignorance_refines_cascades",
+      "source": "emergent_pluralistic_ignorance",
+      "target": "emergent_information_cascades",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "The asymmetry: a wrong belief cascades into consensus easily, but a correct dissent from a false consensus cascades rarely. Cascades are not symmetric in direction."
     }
   ]
 }
