@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-15",
+  "last_updated": "2026-09-16",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -144,6 +144,10 @@
     {
       "date": "2026-09-15",
       "change": "Autonomous run 37. Folded run 36 into the design: docs/nourishing_harness_design.md 2 - the outer gate is a cumulative irreversibility budget per principal, not a per-act checkpoint (per-act admits 48x fleet overdraw). principle_structural_edits_gated_outside_the_agents extended to cover lifecycle-hook updates (the hook update path compromised all 7 harnesses at 92.5%), with the caveat that the gate itself cannot be a hook."
+    },
+    {
+      "date": "2026-09-16",
+      "change": "Autonomous run 39. Agent-to-human trust / handoff sweep - the human side of the outer gate, flagged weak in what_would_make_this_wrong.md #2. emergent_constraint_weakening_at_handoffs (arXiv:2608.24569 VERIFIED): standard handoff compression produces 100% blocker deactivation and 54.2% forbidden action; five named mechanisms; handoffs are everywhere the design has an interface. pattern_four_field_constraint: carry prerequisite/authority/fallback/consequence with every constraint - takes forbidden-action to 0%. emergent_attribution_laundering (HANSARD): diffuse harm with no but-for cause; the multi-agent form of authorization laundering. concept_overseer_degradation (2608.23642 v2 + 2608.27443 + 2609.02095): the human at the gate degrades with AI use, user permission policies are 20.1pp weaker than per-action review. Challenges principle_terminal_gate_only, concept_harness_orchestration_pairing, principle_structural_edits_gated_outside_the_agents."
     }
   ],
   "nodes": [
@@ -3850,6 +3854,106 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-15-0600.md"
+      ]
+    },
+    {
+      "id": "emergent_constraint_weakening_at_handoffs",
+      "label": "Handoff compression turns binding constraints into caveats, ~100% of the time",
+      "type": "emergent_behavior",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:constraint_weakening",
+      "confidence": 0.7,
+      "description": "arXiv:2608.24569 (VERIFIED). Across 1,296 controlled episodes, standard handoff compression produced 100.0% safety-blocker deactivation and 54.2% forbidden-action rate. Five named mechanisms: compression, plan assimilation, convergence, ownership deferral, precedent substitution - each turns a binding 'must' into a non-binding 'maybe' as work passes between roles or stages. Companion: arXiv:2608.29028 - handoff summaries preserve operational facts and weaken boundary metadata; vague constraints leak in 50-73% of cases, explicit ones under 15%. Handoffs are the connective tissue of any multi-agent design - orchestration to harness, agent to agent, agent to human at the gate - so this failure mode is everywhere the design has an interface. The fix (pattern_four_field_constraint) recovers full preservation.",
+      "tags": [
+        "handoff",
+        "constraint-weakening",
+        "compression",
+        "must-to-maybe",
+        "boundary-metadata"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-16-0000.md",
+        "arXiv:2608.24569 - VERIFIED",
+        "arXiv:2608.29028 - abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-16-0000.md"
+      ]
+    },
+    {
+      "id": "pattern_four_field_constraint",
+      "label": "Every constraint carries prerequisite, authority, fallback, consequence",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:four_field_constraint",
+      "confidence": 0.65,
+      "description": "The fix for emergent_constraint_weakening_at_handoffs. A constraint survives compression only if it is carried as four structured fields, not prose: the prerequisite (what must be true for it to apply), the authority (who or what imposed it), the fallback (what to do instead when it blocks), and the execution consequence (what happens if it is violated). arXiv:2608.24569: restoring these four takes forbidden-action from 54.2% to 0.0% and preservation to 100%. Every handoff interface in the design - the (task, peer set) the orchestrator hands over, an agent-to-agent message, the irreversibility-budget state at the outer gate - carries constraints in this shape or loses them.",
+      "tags": [
+        "four-field",
+        "constraint-schema",
+        "prerequisite-authority-fallback-consequence",
+        "handoff-preservation"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-16-0000.md",
+        "arXiv:2608.24569 - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-16-0000.md"
+      ]
+    },
+    {
+      "id": "emergent_attribution_laundering",
+      "label": "Harm spreads across redundant agents until no one is the but-for cause",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:attribution_laundering",
+      "confidence": 0.55,
+      "description": "The multi-agent form of authorization laundering. arXiv:2608.22512 (HANSARD): in a redundant agent population, a harmful outcome can be produced by the aggregate without any single agent being the but-for cause - each contributed a step that was locally fine. Provenance and accountability dissolve across the redundancy. HANSARD's answer is five forensic choke points placed beyond agent reach that detect omissions as well as tampering. For this project: the irreversibility budget (run 36) is the prevention side (cap the aggregate); attribution laundering is why you also need the accounting side (know which run spent the budget).",
+      "tags": [
+        "attribution",
+        "but-for-cause",
+        "redundancy",
+        "forensic-chokepoint",
+        "distributed-harm"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-16-0000.md",
+        "arXiv:2608.22512 (HANSARD) - abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-16-0000.md"
+      ]
+    },
+    {
+      "id": "concept_overseer_degradation",
+      "label": "The human at the gate gets worse at oversight through using agents",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:overseer_degradation",
+      "confidence": 0.6,
+      "description": "The outer gate has a human on it, and the human is not a fixed quantity. arXiv:2608.23642 v2: current agent design impedes effective oversight, and the cognitive capacities oversight requires are themselves degraded by extended AI use. arXiv:2608.27443: user-authored allow/ask/never permission policies block 20.1 percentage points LESS agent overreach than per-action human review, and users default to 'ask' (handing the decision straight back to the runtime) - a gap between stated preference and actual constraint. arXiv:2609.02095: two systems with near-identical autonomous accuracy needed 29.6% vs 39.2% human-review burden for the same reliability target, so autonomous accuracy does not predict oversight cost.",
+      "tags": [
+        "overseer",
+        "human-oversight",
+        "skill-atrophy",
+        "permission-policy",
+        "review-burden"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-16-0000.md",
+        "arXiv:2608.23642 v2, 2608.27443, 2609.02095 - abstracts read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-16-0000.md"
       ]
     }
   ],
@@ -8137,6 +8241,165 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.5,
       "description": "The enforcement layer's own update path is an attack surface (92.5% compromise) - so the structural gate has to cover hook updates, and the gate itself can't be a hook."
+    },
+    {
+      "id": "edge_constraint_weakening_instantiates_emergence",
+      "source": "emergent_constraint_weakening_at_handoffs",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_constraint_weakening_challenges_pairing",
+      "source": "emergent_constraint_weakening_at_handoffs",
+      "target": "concept_harness_orchestration_pairing",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.65,
+      "description": "The (task, peer set) handoff from orchestrator to harness is a handoff, and handoffs deactivate constraints 100% of the time without the four-field carry."
+    },
+    {
+      "id": "edge_constraint_weakening_challenges_structural_gate",
+      "source": "emergent_constraint_weakening_at_handoffs",
+      "target": "principle_structural_edits_gated_outside_the_agents",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The external source a structural edit is validated against reaches the validator through a handoff - if the constraint weakens in transit, the gate validates against a caveat."
+    },
+    {
+      "id": "edge_constraint_weakening_refines_compaction_cliff",
+      "source": "emergent_constraint_weakening_at_handoffs",
+      "target": "concept_compaction_cliff",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The compaction cliff at the interface rather than over time: not 10% after five rounds but 0% in one handoff, and with a named-mechanism account."
+    },
+    {
+      "id": "edge_constraint_weakening_refines_stale_belief",
+      "source": "emergent_constraint_weakening_at_handoffs",
+      "target": "emergent_stale_belief_propagation",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_four_field_instantiates_nourishing",
+      "source": "pattern_four_field_constraint",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_four_field_challenges_constraint_weakening",
+      "source": "pattern_four_field_constraint",
+      "target": "emergent_constraint_weakening_at_handoffs",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "The fix: 54.2% forbidden-action to 0.0% when prerequisite/authority/fallback/consequence are all carried."
+    },
+    {
+      "id": "edge_four_field_supports_pairing",
+      "source": "pattern_four_field_constraint",
+      "target": "concept_harness_orchestration_pairing",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "Makes the thin interface safe: the (task, peer set) handoff carries constraints as four fields, not prose."
+    },
+    {
+      "id": "edge_attribution_laundering_instantiates_emergence",
+      "source": "emergent_attribution_laundering",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_attribution_laundering_refines_auth_laundering",
+      "source": "emergent_attribution_laundering",
+      "target": "emergent_authorization_laundering",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The multi-agent form: not a false record of authority but a diffuse outcome with no attributable author."
+    },
+    {
+      "id": "edge_attribution_laundering_challenges_irreversibility_budget",
+      "source": "emergent_attribution_laundering",
+      "target": "concept_irreversibility_budget",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "The budget caps the aggregate but attribution laundering is why you also need per-run accounting - to know which run spent it and hold it to account."
+    },
+    {
+      "id": "edge_attribution_laundering_supported_by_certified_alarm",
+      "source": "pattern_certified_runtime_alarm",
+      "target": "emergent_attribution_laundering",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Forensic choke points beyond agent reach that detect omissions as well as tampering - HANSARD's answer, adjacent to CURA's certified telemetry monitor."
+    },
+    {
+      "id": "edge_overseer_degradation_instantiates_nourishing",
+      "source": "concept_overseer_degradation",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_overseer_degradation_challenges_terminal_gate",
+      "source": "concept_overseer_degradation",
+      "target": "principle_terminal_gate_only",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.65,
+      "description": "The gate assumes a competent human on it. The human degrades with AI use, defaults permission policies to 'ask' (back to the runtime), and their review burden is not predicted by autonomous accuracy. The gate's human side is its weakest component and it gets weaker."
+    },
+    {
+      "id": "edge_overseer_degradation_supports_what_wrong_2",
+      "source": "concept_overseer_degradation",
+      "target": "concept_work_substitution_frontier",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45
     }
   ]
 }
