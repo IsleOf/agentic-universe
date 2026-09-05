@@ -60,6 +60,10 @@
     {
       "date": "2026-09-06",
       "change": "Autonomous run 2. Opened RHO (2606.05922) and WHALE (2609.00196). pattern_trajectory_only_harness_optimization: RHO improves a harness from past rollouts with no external grading, self-preference selection, SWE-Bench Pro 59->78 in one round - challenges the verification-cost bound, but emergent_evaluator_mode_collapse challenges it right back (no stated self-preference-bias limitation). pattern_alternating_weight_harness_optimization: WHALE co-optimises weights and harness alternately, harness still adds 4-24pp under improving weights - the cleanest evidence yet against model-native orchestration absorbing the harness."
+    },
+    {
+      "date": "2026-09-06",
+      "change": "Autonomous run 3. arXiv cs.MA emergence sweep (last ~10 days). pattern_activation_probe_monitoring from arXiv:2609.03035: activation-based collusion detection survives agents being told about the monitor and being given their detection scores. An observation channel that holds against evasion - supports principle_terminal_gate_only (the gate finally has a trustworthy non-report input) and deepens Five-W instrumentation. Enriched emergent_language_formation with GlossoGen's capability-gated language transmission."
     }
   ],
   "nodes": [
@@ -1030,7 +1034,8 @@
         "niteagent.com multi-agent safety frontier",
         "Anthropic multi-agent trust/deception experiments",
         "arXiv:2604.18005 - collapse traced to structural coupling rather than topology density",
-        "arXiv:2609.01779 (Agents That Model Agents) - hallucination contagion across agent messages; proposes treating messages as cognitive traces requiring theory-of-mind modelling"
+        "arXiv:2609.01779 (Agents That Model Agents) - hallucination contagion across agent messages; proposes treating messages as cognitive traces requiring theory-of-mind modelling",
+        "arXiv:2609.01779 (Agents That Model Agents) - abstract read: cognitive channels on cellular sheaves as a design frame for multi-agent systems that resist hallucination contagion"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -2291,7 +2296,8 @@
       ],
       "derived_from": [
         "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
-        "arXiv:2609.01491 (GlossoGen: Emergent Language in Complex Multi-Agent LLM Interactions)"
+        "arXiv:2609.01491 (GlossoGen: Emergent Language in Complex Multi-Agent LLM Interactions)",
+        "arXiv:2609.01491 (GlossoGen) - abstract read 2026-09-06: emergent compositional languages 'deviate from English under pressure', and transmission of the language to newly added agents is dependent on model strength - a capability-gated cultural-inheritance mechanism"
       ],
       "evidence_links": [
         "docs/sweep_2026-09-05.md"
@@ -2968,6 +2974,31 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-07-0000.md"
+      ]
+    },
+    {
+      "id": "pattern_activation_probe_monitoring",
+      "label": "Read activations, not reports, to see what agents hide",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:activation_monitoring",
+      "confidence": 0.55,
+      "description": "Probes trained on internal activations detect multi-agent collusion where output monitors fail - output monitors are fooled by obfuscation and steganography, activations are not. arXiv:2609.03035 ('You Can't Escape Your Own Activations', VERIFIED): the best probes stay accurate across three conditions - agents unaware, agents told about the monitor, and agents given their previous-round detection scores as feedback. Awareness does not let them hide, and they keep colluding. Small setup (Qwen3-32B, GPT-OSS-20B; 4-agent blackjack, 2-agent prisoners). Detection is not prevention - the value here is an observation channel that survives the agent trying to evade it, which is exactly what an emergence-first stance needs: watch everything including what agents would conceal, without constraining the agents.",
+      "tags": [
+        "activation-probes",
+        "collusion-detection",
+        "evaluation-aware",
+        "observation",
+        "interpretability"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-07-0600.md",
+        "arXiv:2609.03035 - VERIFIED, abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-07-0600.md"
       ]
     }
   ],
@@ -5830,6 +5861,71 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "HarnessDev/Evo-Bench found autonomous harness evolution weak on code; WHALE's co-optimisation with weight updates reports gains across three domains. Whether the difference is the weight-update half or the task mix is open."
+    },
+    {
+      "id": "edge_activation_probe_instantiates_emergence",
+      "source": "pattern_activation_probe_monitoring",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_activation_probe_challenges_deception",
+      "source": "pattern_activation_probe_monitoring",
+      "target": "emergent_deception_and_collusion",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A detection channel that survives the agent knowing about it. Output-level deception - obfuscation, steganography - is defeated at the activation level. Does not stop the collusion, but makes it visible."
+    },
+    {
+      "id": "edge_activation_probe_repairs_terminal_gate",
+      "source": "pattern_activation_probe_monitoring",
+      "target": "principle_terminal_gate_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "Resolves part of the gate's problem. The gate cannot trust agent-reported state (deception, recognition-execution gap), but it can read activations, and that channel holds even when the agent is evaluation-aware. The outer gate gets a trustworthy input that is not a process constraint on the interior."
+    },
+    {
+      "id": "edge_activation_probe_deepens_five_w",
+      "source": "pattern_activation_probe_monitoring",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Five-W logs the messages agents send; activation probes see the coordination they do not send. Together they close the sanctioned-vs-observed gap from both ends."
+    },
+    {
+      "id": "edge_activation_probe_challenges_recognition_gap",
+      "source": "pattern_activation_probe_monitoring",
+      "target": "emergent_recognition_execution_gap",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "The recognition-execution gap says the agent knows the action is unsafe and does it anyway; an activation probe can read the knowing directly rather than waiting for a self-report that will not come."
+    },
+    {
+      "id": "edge_activation_probe_challenges_model_native",
+      "source": "pattern_activation_probe_monitoring",
+      "target": "emergent_model_native_orchestration",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "If coordination migrates inside the model and off the message bus, activation-level observation is the layer that still sees it - the instrument that does not go blind as Five-W does."
     }
   ]
 }

@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 120 nodes, 274 edges · **Date:** 2026-09-05
+**Graph at generation:** 121 nodes, 280 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -87,6 +87,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
 | [2609.02620](https://arxiv.org/abs/2609.02620) | (title not recorded) | `concept_motive_operative_split` |
+| [2609.03035](https://arxiv.org/abs/2609.03035) | (title not recorded) | `pattern_activation_probe_monitoring` |
 | [2609.03667](https://arxiv.org/abs/2609.03667) | (title not recorded) | `principle_diversity_maintenance` |
 | [2609.04167](https://arxiv.org/abs/2609.04167) | (title not recorded) | `concept_verification_completeness_gap` |
 
@@ -183,6 +184,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `architecture/foundations.md: write an executable GREEN/RED predicate before building a loop` — `concept_work_substitution_frontier`
 - `docs/auto_sweep_2026-09-06-2115.md` — `concept_harness_self_evolution_is_domain_dependent`, `pattern_recoverability_constrained_evolution`
 - `docs/auto_sweep_2026-09-07-0000.md` — `pattern_alternating_weight_harness_optimization`, `pattern_trajectory_only_harness_optimization`
+- `docs/auto_sweep_2026-09-07-0600.md` — `pattern_activation_probe_monitoring`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
