@@ -142,13 +142,13 @@ def recover_roles(topology):
     betw = _betweenness(actors, edges)
     roles = {}
 
+    n_actors = max(len(actors), 1)
+    betw_cut = 2 if n_actors <= 6 else 1  # betweenness scales down as the graph grows
+
     for a in actors:
         f = feats[a]
         total_io = f["msg_out"] + f["msg_in"]
-        if total_io == 0 and f["tool_calls"] == 0 and f["claims"] == 0 \
-           and f["steps_opened"] == 0:
-            roles[a] = "isolate"
-            continue
+        originates = f["tool_calls"] + f["claims"] + f["steps_opened"] + f["spawns"]
 
         sent = Counter(f["sent_class"])
         recv = Counter(f["recv_class"])
@@ -156,8 +156,14 @@ def recover_roles(topology):
         planlike = sent.get("task", 0) + sent.get("coordination", 0)
         critlike = sent.get("critique", 0) + sent.get("answer", 0)
         worklike = f["tool_calls"] + f["claims"] + sent.get("result", 0)
-        originates = f["tool_calls"] + f["claims"] + f["steps_opened"] + f["spawns"]
         io_balance = min(f["msg_in"], f["msg_out"]) / max(f["msg_in"], f["msg_out"], 1)
+        substantive = planlike + critlike + worklike + recv.get("task", 0)
+
+        # isolate: originates nothing and carries no substantive traffic. A lone
+        # status ping still counts as isolate (`watcher` in the noisy control).
+        if originates == 0 and substantive == 0 and total_io <= 1:
+            roles[a] = "isolate"
+            continue
 
         # planner: opens bounded units of work and/or originates directives to a
         # fan-out of actors. Checked first — a planner is a hub, so it would
@@ -168,12 +174,14 @@ def recover_roles(topology):
         ):
             roles[a] = "planner"
             continue
-        # router: relays — in-traffic and out-traffic are balanced and of the
-        # same classes, it sits on paths between non-adjacent actors, and it
-        # originates nothing of its own.
+        # router: relays — its out-traffic is mostly a rebroadcast of its
+        # in-traffic (same classes), balanced, and it originates nothing. The
+        # relayed-fraction test is primary; betweenness is a secondary confirm
+        # so a two-hop relay in a small graph isn't missed.
         relayed = sum(min(sent.get(c, 0), recv.get(c, 0)) for c in set(sent) | set(recv))
-        if betw.get(a, 0) >= 2 and originates == 0 and io_balance >= 0.6 \
-           and relayed >= max(1, f["msg_out"] // 2):
+        relay_frac = relayed / max(f["msg_out"], 1)
+        if originates == 0 and io_balance >= 0.6 and relay_frac >= 0.8 \
+           and f["msg_out"] >= 1 and (betw.get(a, 0) >= betw_cut or relay_frac == 1.0):
             roles[a] = "router"
             continue
         # verifier: receives results/proposals, answers with critique/sign-off,
@@ -243,7 +251,65 @@ def synth_control_trace(sink):
     return assigned
 
 
+def synth_noisy_control_trace(sink):
+    """A harder control: partial role overlap and multi-role actors.
+
+    Each actor still has a *dominant* assigned role, but the behaviour is
+    deliberately muddied — a lead who also does hands-on work, a worker who
+    reviews a peer, two routers splitting relay duty, a mostly-silent observer
+    who nonetheless sends one status ping. This is where rule-based recovery is
+    expected to fray; the point is to find the fraying, not to hide it.
+    """
+    rec = Recorder(run_id="noisy-control", sink=sink)
+    assigned = {
+        "lead": "planner",       # plans, but also opens a tool call itself
+        "dev-1": "worker",       # normal worker
+        "dev-2": "worker",       # worker who also critiques dev-1
+        "reviewer": "verifier",  # normal verifier
+        "relay-a": "router",     # relay, half the traffic
+        "relay-b": "router",     # relay, other half
+        "watcher": "isolate",    # sends exactly one status message, else silent
+    }
+
+    rec.step("lead", "t1", "open")
+    for w in ("dev-1", "dev-2"):
+        rec.message("lead", w, "task", "assign a subtask", "direct")
+    # lead also gets hands dirty (noise: planner doing worker things)
+    lc = rec.tool_call("lead", "python", "prototype the tricky bit")
+    rec.tool_result("lead", lc, ok=True, token_cost={"in": 400, "out": 20})
+
+    for w, root, relay in (("dev-1", "spec-A", "relay-a"), ("dev-2", "spec-B", "relay-b")):
+        c = rec.tool_call(w, "python", "implement subtask")
+        rec.tool_result(w, c, ok=True, token_cost={"in": 800, "out": 25})
+        rec.claim(w, f"{w} result", [root])
+        rec.message(w, relay, "result", "submit for review", "direct")
+        rec.message(relay, "reviewer", "result", "relay to reviewer", "direct")
+        rec.message("reviewer", relay, "critique", "review notes", "direct")
+        rec.message(relay, w, "critique", "relay review", "direct")
+
+    # noise: dev-2 also critiques dev-1's work directly
+    rec.message("dev-2", "dev-1", "critique", "peer note on dev-1 approach", "direct")
+
+    rec.message("reviewer", "lead", "answer", "sign-off", "direct")
+    rec.message("watcher", "lead", "status", "still watching, nothing to report", "broadcast")
+    rec.step("lead", "t1", "close")
+    rec.close()
+    return assigned
+
+
 # --- cli --------------------------------------------------------------
+
+def _validate_text(text):
+    import os
+    import tempfile
+    with tempfile.NamedTemporaryFile("w", suffix=".jsonl", delete=False,
+                                     encoding="utf-8") as fh:
+        fh.write(text)
+        tmp = fh.name
+    try:
+        return validate_trace(tmp)
+    finally:
+        os.unlink(tmp)
 
 def _cli(argv=None):
     parser = argparse.ArgumentParser(description="Phase 0 topology / role recovery gate.")
@@ -252,6 +318,8 @@ def _cli(argv=None):
     r.add_argument("path")
     g = sub.add_parser("selftest", help="run the control-condition gate")
     g.add_argument("--threshold", type=float, default=0.80)
+    g.add_argument("--noisy", action="store_true",
+                   help="also run the harder partial-role-overlap control (Phase 0.2)")
     args = parser.parse_args(argv)
 
     if args.cmd == "recover":
@@ -266,32 +334,33 @@ def _cli(argv=None):
         return 0
 
     if args.cmd == "selftest":
-        buf = io.StringIO()
-        assigned = synth_control_trace(buf)
-        text = buf.getvalue()
+        def run_control(name, synth, gating):
+            buf = io.StringIO()
+            assigned = synth(buf)
+            text = buf.getvalue()
+            n, errors = _validate_text(text)
+            events = [json.loads(l) for l in text.splitlines() if l.strip()]
+            roles = recover_roles(build_topology(events))
+            acc, misses = score_recovery(roles, assigned)
+            print(f"[{name}] {n} events, {len(errors)} schema errors")
+            print(f"  assigned : {json.dumps(assigned)}")
+            print(f"  recovered: {json.dumps(roles)}")
+            print(f"  accuracy : {acc:.2f}  (threshold {args.threshold:.2f})")
+            for a, want, got in misses:
+                print(f"    MISS {a}: assigned {want}, recovered {got}")
+            passed = not errors and acc >= args.threshold
+            if gating:
+                print(f"  GATE {'GREEN' if passed else 'RED'}")
+            return passed, acc
 
-        import os
-        import tempfile
-        with tempfile.NamedTemporaryFile("w", suffix=".jsonl", delete=False,
-                                         encoding="utf-8") as fh:
-            fh.write(text)
-            tmp = fh.name
-        n, errors = validate_trace(tmp)
-        os.unlink(tmp)
-
-        events = [json.loads(l) for l in text.splitlines() if l.strip()]
-        topo = build_topology(events)
-        roles = recover_roles(topo)
-        acc, misses = score_recovery(roles, assigned)
-
-        print(f"control trace: {n} events, {len(errors)} schema errors")
-        print(f"assigned : {json.dumps(assigned)}")
-        print(f"recovered: {json.dumps(roles)}")
-        print(f"role recovery accuracy: {acc:.2f}  (threshold {args.threshold:.2f})")
-        for a, want, got in misses:
-            print(f"  MISS {a}: assigned {want}, recovered {got}")
-        ok = not errors and acc >= args.threshold
-        print("GATE", "GREEN" if ok else "RED")
+        ok, _ = run_control("clean control", synth_control_trace, gating=True)
+        if args.noisy:
+            print()
+            noisy_ok, noisy_acc = run_control("noisy control (Phase 0.2, non-gating)",
+                                              synth_noisy_control_trace, gating=False)
+            print(f"\n  noisy control is diagnostic, not a gate — records where "
+                  f"rule-based recovery frays ({noisy_acc:.2f}).")
+        print("\nGATE", "GREEN" if ok else "RED")
         return 0 if ok else 1
 
     return 2
