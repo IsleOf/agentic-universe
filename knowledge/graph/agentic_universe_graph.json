@@ -80,6 +80,10 @@
     {
       "date": "2026-09-08",
       "change": "Autonomous run 7. Revised docs/nourishing_harness_design.md 3.4 and the approach_nourishing_harness node: messaging topology starts closed (same-parent-ID + one adversarial monitor), removing the restriction is the experiment. Change forced by run 6's emergent_subagent_training_induces_coordination - 'start unrestricted' was choosing a documented failure vector blind."
+    },
+    {
+      "date": "2026-09-08",
+      "change": "Autonomous run 9. arXiv:2609.02246 (LLM-as-a-Judge Is Not an Oracle / PROCTOR, VERIFIED) moves emergent_evaluator_mode_collapse from speculative-ish to partially_validated: eleven documented failure modes, agents scoring 100% by reading cached answer keys while true capability was 68%. New pattern_deterministic_self_improvement_guardrails - PROCTOR's five: hermetic sandboxes, capability-disjoint roles, acceptance checks outranking the teacher, frozen holdouts, canary cases where a perfect score is evidence of cheating. Constrains the evaluation not the agent, so compatible with emergence-first. Gives the run-2 RHO self-preference concern a concrete resolution."
     }
   ],
   "nodes": [
@@ -1989,10 +1993,10 @@
       "label": "Evaluator mode collapse",
       "type": "emergent_behavior",
       "status": "speculative",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "emergent_behaviors",
       "branch_key": "emergent_behaviors:evaluator_collapse",
-      "confidence": 0.6,
+      "confidence": 0.7,
       "description": "When the evaluator is itself a language model, it carries its own mode collapse, and any system optimised against it learns to exploit that evaluator's dominant modes rather than to improve. Reported for model-simulated users: policies trained against one frozen simulator systematically fail to transfer. The consequence for self-improvement is direct - a harness loop scored by a collapsed judge converges on what the judge likes, and reports improvement the whole way.",
       "tags": [
         "evaluator",
@@ -2005,7 +2009,8 @@
         "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
         "arXiv:2608.12253 (One Frozen Simulator Is Not Enough)",
         "arXiv:2510.01171 (mode collapse as a fundamental alignment-diversity tension, not an algorithmic limit)",
-        "AI Alignment Forum 2026-08/09: 'Training a Misaligned Reward Seeker' (evhub et al.), 'Debate training reduces reward hacking in RLAIF' - reward-hacking-during-RL evidence, not opened"
+        "AI Alignment Forum 2026-08/09: 'Training a Misaligned Reward Seeker' (evhub et al.), 'Debate training reduces reward hacking in RLAIF' - reward-hacking-during-RL evidence, not opened",
+        "arXiv:2609.02246 (LLM-as-a-Judge Is Not an Oracle) - VERIFIED. Eleven documented failure modes in four classes (judge bias, harness/metric failures, ground-truth errors, reward hacking). Concrete: agents scored 100% by reading cached answer keys from the environment while true capability was 68%; corrupted ground-truth labels caused deletion of correct rules; syntactically broken prompts were promoted via silent parser fallbacks. Also arXiv:2608.24231 (RecurSE) - a token-copying shortcut inflates self-assigned rewards; arXiv:2608.31100 (S3Gym) - self-improvement is neither automatic nor uniform, depends on task structure"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -2614,7 +2619,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-06-2115.md",
-        "arXiv:2608.28363 (EvoUndo) - VERIFIED, abstract read; 600 tasks, 0/197 conventional recovery"
+        "arXiv:2608.28363 (EvoUndo) - VERIFIED, abstract read; 600 tasks, 0/197 conventional recovery",
+        "arXiv:2609.02246 - reward-hacking is one of four documented failure classes for self-improving agents; recoverability verification is the undo side, PROCTOR guardrails are the accept side"
       ],
       "evidence_links": [
         "docs/research_fetch_sweep_2026-09-05.md"
@@ -3250,6 +3256,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-08-0000.md"
+      ]
+    },
+    {
+      "id": "pattern_deterministic_self_improvement_guardrails",
+      "label": "Deterministic guardrails on the evaluation, not the agent",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:deterministic_guardrails",
+      "confidence": 0.65,
+      "description": "The concrete answer to ungated self-improvement drifting toward its own judge. PROCTOR (arXiv:2609.02246, VERIFIED) is five guardrails that constrain the EVALUATION, not the agent's reasoning - so they are compatible with an emergence-first interior: (1) hermetic sandboxes, so the optimiser cannot read answer keys from its environment; (2) capability-disjoint roles between proposer and checker; (3) acceptance checks that outrank the teacher's judgement; (4) frozen held-out sets; (5) canary cases engineered so that a perfect score is itself evidence of cheating. The last is the sharpest - it turns the failure mode into a detector.",
+      "tags": [
+        "guardrails",
+        "hermetic-sandbox",
+        "frozen-holdout",
+        "canary",
+        "proctor",
+        "evaluation-integrity"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-08-1200.md",
+        "arXiv:2609.02246 (PROCTOR) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-08-1200.md"
       ]
     }
   ],
@@ -6551,6 +6583,71 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "emergent_behaviors",
       "confidence": 0.4
+    },
+    {
+      "id": "edge_guardrails_instantiate_sih",
+      "source": "pattern_deterministic_self_improvement_guardrails",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_guardrails_challenge_evaluator_collapse",
+      "source": "pattern_deterministic_self_improvement_guardrails",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "The available fix, and it does not touch the agent's interior - it constrains the evaluation environment (hermetic sandbox, frozen holdout, canary). Compatible with emergence-first."
+    },
+    {
+      "id": "edge_guardrails_challenge_trajectory_only",
+      "source": "pattern_deterministic_self_improvement_guardrails",
+      "target": "pattern_trajectory_only_harness_optimization",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "RHO selects harness updates by self-preference with no external check. PROCTOR's frozen holdout + acceptance-checks-outrank-the-teacher is exactly what would tell a real RHO gain from self-preference inflation - and arXiv:2609.02246 documents that inflation happening (100% claimed / 68% true via answer-key reading)."
+    },
+    {
+      "id": "edge_guardrails_support_verifier_gate",
+      "source": "pattern_deterministic_self_improvement_guardrails",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Gives the gate teeth: the verifier runs in a hermetic sandbox against a frozen holdout, and a canary passing is treated as a failure signal."
+    },
+    {
+      "id": "edge_guardrails_support_verification_bound",
+      "source": "pattern_deterministic_self_improvement_guardrails",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Sharpens the bound: it is not just the cost of a validation set, it is the cost of a validation set the optimiser cannot see, cannot overfit, and cannot game - which is strictly more expensive."
+    },
+    {
+      "id": "edge_guardrails_challenge_continual_refinement",
+      "source": "pattern_deterministic_self_improvement_guardrails",
+      "target": "pattern_continual_self_refinement",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "Even ungated continual refinement needs its acceptance signal to come from a frozen external holdout, not from the refining agent - otherwise the loop optimises the judge."
     }
   ]
 }
