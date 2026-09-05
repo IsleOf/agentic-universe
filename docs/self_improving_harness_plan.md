@@ -67,11 +67,13 @@ Already the top of the emergence probe catalogue; it is now also the input forma
 
 **Status (run 60):** built in `tools/trace_substrate.py` (schema `phase0.1` + `Recorder` + validator), `tools/topology_recover.py` (interaction graph + deterministic role recovery), `tools/phase0_selftest.py` (the GREEN/RED predicate). Full writeup: `docs/phase0_trace_substrate.md`. The gate passes — role recovery is **1.00 on the control condition** (planner / workers / verifier / router / isolate), threshold was 0.80. Every event also carries `layer` (`concept_emergence_layer_model`) and `language` (`concept_interaction_language_shifts_emergence`), and `CLAIM` events carry `evidence_roots` (`pattern_evidential_ancestry_tracking`). Secrets are scrubbed before write; raw `.jsonl` is gitignored. Open: role recovery on a *noisy* control (Phase 0.2) — not a blocker for Phase 1.
 
-### Phase 1 — Harness as versioned artifact
+### Phase 1 — Harness as versioned artifact — **framework built (run 62)**
 
 Decompose the current harness into addressable files: prompt fragments, tool definitions, context policy, hooks, subagent topology. Each with a version and a revert path. No evolution yet — just make the surface addressable.
 
 **Done when** any single component can be swapped and reverted without touching anything else, and `git log` on the harness directory reads as a change history.
+
+**Status (run 62):** `tools/harness_registry.py` — a `Registry` over `runtime/harness/<kind>/<name>` (kinds: prompt / tool / context / hook / topology), each component a body file plus a `history.json` version chain that retains every version's body (exact revert — the purpose-built recovery `pattern_recoverability_constrained_evolution` requires). `set()` no-ops on unchanged bodies; `revert()` is itself recorded append-only; `manifest()` hashes the whole harness state and `Recorder(harness_manifest=...)` stamps it into the run's trace, so a result is attributable to exact component versions. Selftest GREEN. Full writeup: `docs/phase1_harness_registry.md`. **Not done:** no real harness is decomposed into it yet — that is the adapter work (§ below), which also produces the first non-synthetic trace.
 
 ### Phase 2 — Experience bank
 

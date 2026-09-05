@@ -169,7 +169,7 @@ class Recorder:
     """
 
     def __init__(self, run_id=None, layer="swarm", language="en",
-                 trace_dir=TRACE_DIR, sink=None):
+                 trace_dir=TRACE_DIR, sink=None, harness_manifest=None):
         self.run_id = run_id or f"run-{int(time.time())}-{uuid.uuid4().hex[:8]}"
         self.layer = layer
         self.language = language
@@ -183,6 +183,11 @@ class Recorder:
             self._own_sink = True
         else:
             self._path = None
+        # tie the run to a harness state (Phase 1): stamp the manifest hash so a
+        # result can be attributed to the exact component versions that produced it
+        if harness_manifest is not None:
+            self.emit("NOTE", actor="harness", text="harness manifest",
+                      harness_manifest=harness_manifest)
 
     # -- low level --
     def emit(self, kind, actor, **fields):

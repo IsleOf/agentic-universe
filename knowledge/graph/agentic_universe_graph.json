@@ -204,6 +204,10 @@
     {
       "date": "2026-09-21",
       "change": "Autonomous run 60. Built Phase 0 - the trace substrate the whole plan depends on. tools/trace_substrate.py (schema phase0.1, Recorder, validator), tools/topology_recover.py (interaction graph + deterministic role recovery), tools/phase0_selftest.py (GREEN/RED predicate). Implements pattern_five_w_message_instrumentation; events carry layer + language; CLAIM carries evidence_roots; secrets scrubbed before write. The plan's Phase 0 gate (recover assigned roles in a control) passes at 1.00 vs 0.80 threshold. artifact_phase0_trace_substrate added (verification_state validated - the gate is a computed check that passes). This clears the blocker under every 'untested' in what_would_make_this_wrong.md. docs/phase0_trace_substrate.md."
+    },
+    {
+      "date": "2026-09-21",
+      "change": "Autonomous run 62. Built Phase 1 - the harness as a versioned artifact. tools/harness_registry.py: a Registry over runtime/harness/<kind>/<name> (prompt/tool/context/hook/topology), each component a body + a version chain that retains every body (exact revert - the machinery pattern_recoverability_constrained_evolution requires). set() no-ops on unchanged; revert() recorded append-only; manifest() hashes harness state and Recorder(harness_manifest=...) stamps it into the trace. Selftest GREEN. artifact_phase1_harness_registry added. Not done: no real harness decomposed in yet (adapter work). docs/phase1_harness_registry.md."
     }
   ],
   "nodes": [
@@ -4461,6 +4465,32 @@
       ],
       "evidence_links": [
         "docs/phase0_trace_substrate.md"
+      ]
+    },
+    {
+      "id": "artifact_phase1_harness_registry",
+      "label": "Phase 1 harness component registry — built",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase1_built",
+      "confidence": 0.85,
+      "description": "tools/harness_registry.py, built run 62: the harness as an addressable versioned artifact. Each prompt / tool / context-policy / hook / topology fragment is a component with a full version chain that retains every version's body, so revert is exact by construction - the purpose-built recovery machinery pattern_recoverability_constrained_evolution (EvoUndo) requires after conventional rollback recovered 0/197. set() no-ops on unchanged bodies; revert() is recorded append-only; manifest() hashes the whole harness state and Recorder(harness_manifest=...) stamps it into the trace so a result is attributable to exact component versions. Selftest GREEN. Not done: no real harness decomposed into it yet - that is the adapter work, which also yields the first non-synthetic trace.",
+      "tags": [
+        "phase-1",
+        "harness-registry",
+        "versioned-artifact",
+        "exact-revert",
+        "manifest",
+        "built"
+      ],
+      "derived_from": [
+        "docs/phase1_harness_registry.md",
+        "tools/harness_registry.py"
+      ],
+      "evidence_links": [
+        "docs/phase1_harness_registry.md"
       ]
     }
   ],
@@ -9703,6 +9733,49 @@
       "approach_family": "graph_engineering",
       "confidence": 0.5,
       "description": "Role recovery from a trace is the instrument the decomposition-granularity question needs; control passes at 1.00."
+    },
+    {
+      "id": "edge_phase1_instantiates_sih",
+      "source": "artifact_phase1_harness_registry",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.85
+    },
+    {
+      "id": "edge_phase1_implements_recoverability",
+      "source": "artifact_phase1_harness_registry",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "Every version's body is retained, so revert is exact - the purpose-built recovery EvoUndo requires."
+    },
+    {
+      "id": "edge_phase1_depends_on_phase0",
+      "source": "artifact_phase1_harness_registry",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "The manifest is stamped into the trace via Recorder(harness_manifest=...); attribution needs both."
+    },
+    {
+      "id": "edge_phase1_grounds_versioned_promotion",
+      "source": "artifact_phase1_harness_registry",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "grounds",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "'Promote iff prediction held and blast radius did not widen' needs two runs whose harnesses differ by exactly the component under test - the registry provides that."
     }
   ]
 }
