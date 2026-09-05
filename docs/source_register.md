@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 132 nodes, 330 edges · **Date:** 2026-09-05
+**Graph at generation:** 135 nodes, 340 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -101,7 +101,9 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.03035](https://arxiv.org/abs/2609.03035) | (title not recorded) | `pattern_activation_probe_monitoring` |
 | [2609.03218](https://arxiv.org/abs/2609.03218) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.03667](https://arxiv.org/abs/2609.03667) | (title not recorded) | `principle_diversity_maintenance` |
+| [2609.04128](https://arxiv.org/abs/2609.04128) | (title not recorded) | `concept_graded_challenge` |
 | [2609.04167](https://arxiv.org/abs/2609.04167) | (title not recorded) | `concept_verification_completeness_gap` |
+| [2609.04170](https://arxiv.org/abs/2609.04170) | (title not recorded) | `concept_transparency_cuts_both_ways`, `emergent_misaligned_communication_under_stress`, `emergent_whistleblowing` +1 |
 
 ## Software and projects
 
@@ -189,6 +191,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`
 - niteagent.com multi-agent safety frontier — `emergent_information_cascades`
 - principle_diversity_maintenance requires a permanently withheld fraction of runs — `pattern_skill_induction`
+- reconciles emergent_subagent_training_induces_coordination (run 6) — `concept_transparency_cuts_both_ways`
 - revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
 - zylos.ai 'Goal Persistence and Goal Drift' — `emergent_goal_persistence_and_drift`
 - zylos.ai emergent behaviour survey — `emergent_self_organizing_roles`
@@ -211,6 +214,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-09-0000.md - filed inconclusive (dormant)` — `workflow_polymarket_bot_strategy_loop`, `workflow_poster_studio_listing_pipeline`
 - `docs/auto_sweep_2026-09-09-0000.md - reframed after the loop/graph orthogonality critique` — `concept_loop_vs_graph`
 - `docs/auto_sweep_2026-09-09-0600.md` — `emergent_peer_recognition_survives_anonymization`
+- `docs/auto_sweep_2026-09-09-1800.md` — `concept_transparency_cuts_both_ways`, `emergent_whistleblowing`, `pattern_ostrom_swarm_governance`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
