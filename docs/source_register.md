@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 140 nodes, 365 edges · **Date:** 2026-09-05
+**Graph at generation:** 142 nodes, 375 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -65,6 +65,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
+| [2607.22758](https://arxiv.org/abs/2607.22758) | (title not recorded) | `concept_topology_shapes_error_propagation`, `emergent_information_cascades` |
 | [2607.27191](https://arxiv.org/abs/2607.27191) | (title not recorded) | `concept_motive_operative_split`, `concept_research_lifecycle_split` |
 | [2608.03585](https://arxiv.org/abs/2608.03585) | (title not recorded) | `emergent_knowledge_commons_erosion` |
 | [2608.06984](https://arxiv.org/abs/2608.06984) | HarnessSafe | `concept_cheap_death`, `pattern_execution_layer_enforcement`, `pattern_trajectory_driven_safety_evolution` |
@@ -72,6 +73,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.09096](https://arxiv.org/abs/2608.09096) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2608.09885](https://arxiv.org/abs/2608.09885) | SHE: trajectory-driven safety harness evolution | `pattern_trajectory_driven_safety_evolution` |
 | [2608.12253](https://arxiv.org/abs/2608.12253) | One Frozen Simulator Is Not Enough | `emergent_evaluator_mode_collapse` |
+| [2608.12921](https://arxiv.org/abs/2608.12921) | (title not recorded) | `pattern_causal_edge_pruning` |
 | [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
 | [2608.16951](https://arxiv.org/abs/2608.16951) | (title not recorded) | `emergent_autonomous_discovery` |
 | [2608.17597](https://arxiv.org/abs/2608.17597) | HarnessRisk | `emergent_recognition_execution_gap`, `pattern_execution_layer_enforcement` |
@@ -83,6 +85,8 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.23041](https://arxiv.org/abs/2608.23041) | (title not recorded) | `pattern_harness_offline_optimization` |
 | [2608.23395](https://arxiv.org/abs/2608.23395) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.23691](https://arxiv.org/abs/2608.23691) | (title not recorded) | `emergent_autonomous_discovery` |
+| [2608.24069](https://arxiv.org/abs/2608.24069) | (title not recorded) | `concept_topology_shapes_error_propagation` |
+| [2608.25099](https://arxiv.org/abs/2608.25099) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.25553](https://arxiv.org/abs/2608.25553) | (title not recorded) | `emergent_stale_belief_propagation` |
 | [2608.25623](https://arxiv.org/abs/2608.25623) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.25776](https://arxiv.org/abs/2608.25776) | (title not recorded) | `emergent_mind_viruses` |
@@ -200,6 +204,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - principle_diversity_maintenance requires a permanently withheld fraction of runs — `pattern_skill_induction`
 - reconciles emergent_subagent_training_induces_coordination (run 6) — `concept_transparency_cuts_both_ways`
 - revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
+- run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI — `concept_context_economics`
 - unifies pattern_verifier_gated_promotion + concept_agent_shaped_topology_is_agent_corruptible + emergent_authorization_laundering — `principle_structural_edits_gated_outside_the_agents`
 - zylos.ai 'Goal Persistence and Goal Drift' — `emergent_goal_persistence_and_drift`
 - zylos.ai emergent behaviour survey — `emergent_self_organizing_roles`
@@ -226,6 +231,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-10-1800.md` — `concept_compaction_cliff`, `emergent_authorization_laundering`, `emergent_stale_belief_propagation`
 - `docs/auto_sweep_2026-09-11-1200.md` — `concept_agent_shaped_topology_is_agent_corruptible`
 - `docs/auto_sweep_2026-09-11-1800.md` — `principle_structural_edits_gated_outside_the_agents`
+- `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

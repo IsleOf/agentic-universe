@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-12",
+  "last_updated": "2026-09-13",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -116,6 +116,10 @@
     {
       "date": "2026-09-12",
       "change": "Autonomous run 27. Audited self_improving_harness (35 nodes): family is healthy - confidence values consistent (0.5-0.7), 16 VERIFIED sources, status/verification aligned. One fix: concept_context_economics needs_empirical_validation -> partially_validated (now triangulated by reused_input_dominates, tool_definition_tax, compaction_cliff, and the shipping-harness convergence). Finding of the audit: the graph's remaining high-value work needs experiments built, not more nodes."
+    },
+    {
+      "date": "2026-09-13",
+      "change": "Autonomous run 28. Communication-topology sweep - developed the graph_engineering / orchestration half. concept_topology_shapes_error_propagation (arXiv:2607.22758 VERIFIED): scale-free/hub topologies amplify hallucination variance 51.81% vs random graphs; no topology is adversarially robust; adaptive switching beats fixed; algebraic connectivity of the Laplacian is a monitorable metric. pattern_causal_edge_pruning: the critical communication subgraph is small, find it via causal inference and prune the rest (cheaper + less corruptible); codebook variant amortises successful topologies (22-33% fewer tokens). Refines emergent_information_cascades and concept_agent_shaped_topology_is_agent_corruptible."
     }
   ],
   "nodes": [
@@ -1098,7 +1102,8 @@
         "Anthropic multi-agent trust/deception experiments",
         "arXiv:2604.18005 - collapse traced to structural coupling rather than topology density",
         "arXiv:2609.01779 (Agents That Model Agents) - hallucination contagion across agent messages; proposes treating messages as cognitive traces requiring theory-of-mind modelling",
-        "arXiv:2609.01779 (Agents That Model Agents) - abstract read: cognitive channels on cellular sheaves as a design frame for multi-agent systems that resist hallucination contagion"
+        "arXiv:2609.01779 (Agents That Model Agents) - abstract read: cognitive channels on cellular sheaves as a design frame for multi-agent systems that resist hallucination contagion",
+        "arXiv:2607.22758 (Spectral Dynamics of Semantic Drift) - VERIFIED: scale-free/hub topologies amplify hallucination variance 51.81% vs Erdos-Renyi; localized dense cliques confine and compound hallucinations"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -2317,7 +2322,8 @@
       ],
       "derived_from": [
         "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
-        "arXiv:2608.23395 (Right-Sizing LLM-Agent Decomposition in VAT Determination: A Pilot Controlled Sweep) - VERIFIED"
+        "arXiv:2608.23395 (Right-Sizing LLM-Agent Decomposition in VAT Determination: A Pilot Controlled Sweep) - VERIFIED",
+        "arXiv:2608.25099 (Control-Theoretic Resource-Aware Consensus) - adaptive topology switching outperforms any fixed topology on the consensus-performance / token-cost tradeoff"
       ],
       "evidence_links": [
         "docs/sweep_2026-09-05.md"
@@ -3556,6 +3562,57 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-11-1800.md"
+      ]
+    },
+    {
+      "id": "concept_topology_shapes_error_propagation",
+      "label": "Topology decides how corruption spreads, not whether",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:topology_error_propagation",
+      "confidence": 0.65,
+      "description": "The communication graph's shape is an error-propagation parameter. Scale-free / hub-centric topologies amplify hallucination variance by 51.81% (rho 1.5181) versus Erdos-Renyi random graphs (rho 1.0766), with 53.29% terminal cosine-similarity degradation - hub bottlenecks and dense cliques confine a hallucination and compound it rather than diffusing it (arXiv:2607.22758, VERIFIED). No topology is adversarially robust - across four topologies under attack, structure determines which signals propagate, not whether corruption gets in (arXiv:2608.24069). Adaptive topology switching beats any fixed topology on the consensus-vs-cost tradeoff (arXiv:2608.25099). A monitorable design metric exists: the algebraic connectivity of the graph Laplacian.",
+      "tags": [
+        "topology",
+        "error-propagation",
+        "scale-free",
+        "hub-bottleneck",
+        "algebraic-connectivity"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-13-0600.md",
+        "arXiv:2607.22758 - VERIFIED",
+        "arXiv:2608.24069, arXiv:2608.25099 - abstracts read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-13-0600.md"
+      ]
+    },
+    {
+      "id": "pattern_causal_edge_pruning",
+      "label": "The critical communication subgraph is small; prune the rest",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:causal_edge_pruning",
+      "confidence": 0.6,
+      "description": "Most communication edges in a multi-agent system do not carry their weight. Causal inference over the message graph identifies the subgraph that actually determines the outcome; pruning the redundant edges maintains performance while substantially cutting communication cost (arXiv:2608.12921). The orchestration-layer form of the small-tool-surface rule: fewer edges is both cheaper and less corruptible (fewer paths for concept_agent_shaped_topology_is_agent_corruptible). Amortisation variant: compress successful topologies into a small reusable codebook rather than re-deriving per task - 22-33% fewer tokens and better accuracy (Codebook Agent, arXiv:2609.02264).",
+      "tags": [
+        "edge-pruning",
+        "causal-inference",
+        "critical-subgraph",
+        "topology-amortisation",
+        "codebook"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-13-0600.md",
+        "arXiv:2608.12921, arXiv:2609.02264 - abstracts read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-13-0600.md"
       ]
     }
   ],
@@ -7396,6 +7453,113 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "nourishing_harness",
       "confidence": 0.6
+    },
+    {
+      "id": "edge_topology_error_instantiates_ge",
+      "source": "concept_topology_shapes_error_propagation",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_topology_error_refines_cascades",
+      "source": "concept_topology_shapes_error_propagation",
+      "target": "emergent_information_cascades",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "Cascades are topology-dependent: hub-centric graphs compound a localised hallucination ~52% more than a random graph does."
+    },
+    {
+      "id": "edge_topology_error_refines_corruptible_topology",
+      "source": "concept_topology_shapes_error_propagation",
+      "target": "concept_agent_shaped_topology_is_agent_corruptible",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "No topology is adversarially robust - so a self-rewriting graph can't rewrite its way out of corruptibility, only change the propagation pattern."
+    },
+    {
+      "id": "edge_topology_error_supports_maintenance_cost",
+      "source": "concept_topology_shapes_error_propagation",
+      "target": "concept_structure_maintenance_cost",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "A concrete recurring cost of a dynamic topology: spectral monitoring of the Laplacian's algebraic connectivity as a design requirement."
+    },
+    {
+      "id": "edge_topology_error_supports_diversity_maintenance",
+      "source": "concept_topology_shapes_error_propagation",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "Erdos-Renyi (more uniform, less hub-dominated) degraded less than scale-free - structural evenness is a form of the diversity the keystone asks for."
+    },
+    {
+      "id": "edge_causal_pruning_instantiates_ge",
+      "source": "pattern_causal_edge_pruning",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_causal_pruning_supports_context_economics",
+      "source": "pattern_causal_edge_pruning",
+      "target": "concept_context_economics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Fewer communication edges = fewer messages re-sent every turn. The orchestration-layer lever on reused input."
+    },
+    {
+      "id": "edge_causal_pruning_challenges_corruptible_topology",
+      "source": "pattern_causal_edge_pruning",
+      "target": "concept_agent_shaped_topology_is_agent_corruptible",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "Partial answer: fewer edges is fewer paths for routing manipulation and false-authority injection. Does not remove the problem, shrinks the surface."
+    },
+    {
+      "id": "edge_causal_pruning_instantiates_amortised_inheritance",
+      "source": "pattern_causal_edge_pruning",
+      "target": "concept_inheritance_channel",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "The codebook variant is inheritance applied to topology - a small reusable library instead of per-task re-derivation."
+    },
+    {
+      "id": "edge_task_org_graph_bounded_by_topology_error",
+      "source": "pattern_task_organization_graph",
+      "target": "concept_topology_shapes_error_propagation",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45
     }
   ]
 }
