@@ -1,0 +1,25 @@
+{
+  "proposal_metadata": {
+    "id": "proposal_2026_09_09_nourishing_harness",
+    "title": "The Nourishing Harness",
+    "status": "awaiting_review",
+    "author": "claude_sonnet_5_autonomous_loop",
+    "created_at": "2026-09-09",
+    "affected_approach_families": ["nourishing_harness", "agent_habitat", "self_improving_harness", "emergent_behaviors", "graph_engineering"],
+    "rationale": "Per-agent execution environment designed to feed emergent behaviour, paired with (not fused to) the orchestration graph. One outer gate; ungated interior; four layers (substrate, nourishment, ungated continual refinement, society). Nodes already merged under the emergence-first open-ingest posture across autonomous runs 1-16; this file is the consolidated review artifact.",
+    "derived_from": [
+      "docs/nourishing_harness_design.md",
+      "docs/harness_field_study_2026-09-06.md",
+      "docs/auto_sweep_2026-09-06 through 2026-09-10 (sixteen runs)",
+      "arXiv:2608.27969, 2608.28363, 2609.02246, 2609.04170, 2606.09854, 2609.00196; LessWrong 8oFYZdXkTaNGRtcn8"
+    ],
+    "verification_plan": "Single-agent baseline with computed pass/fail; add nourishment processes one at a time measuring quality and cost at equal total budget; run the consciousness-cluster / peer-preservation / cascade probes from docs/emergence_probe_catalogue.md. Success: measurable capability or exploration gain at equal budget without challenge-edge behaviours escaping containment."
+  },
+  "add_nodes": [],
+  "update_nodes": [],
+  "add_edges": [],
+  "update_edges": [],
+  "deprecate_node_ids": [],
+  "deprecate_edge_ids": [],
+  "_note": "Empty patch: the graph changes were applied directly across autonomous runs 1-16 per the emergence-first posture (proposals are optional change-notes). See evolution/proposals/2026-09-09_nourishing-harness.md and knowledge/graph/agentic_universe_graph.json approach_nourishing_harness."
+}
