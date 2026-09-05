@@ -192,6 +192,10 @@
     {
       "date": "2026-09-20",
       "change": "Autonomous run 56. Graph hygiene + citation upgrades. pattern_evidence_carrying_termination (2608.23623) abstract-read -> VERIFIED: 0/288 unsafe vs 252/288 (-87.50pp) static, plus 0/66 vs 40/66 premature unsupported terminations closed-loop. pattern_deterministic_state_folding (2609.01466) abstract-read -> VERIFIED: 30/30 vs 8/30 on 120-link tasks confirmed. Filled two missing structural edges: emergent_compositional_private_language instantiates approach_emergence_first; concept_epistemic_sybil_collapse instantiates approach_agent_habitat (a diversity-maintenance failure mode)."
+    },
+    {
+      "date": "2026-09-20",
+      "change": "Autonomous run 57. Citation check on concept_self_concept_as_behavioral_lever - both citations (2609.03218, 2609.02526) verified real but NARROWER than the node claimed: both show role/persona framing moves outputs, neither tests whether a self-framing can lift engagement without lifting consciousness-cluster behaviours. Description rewritten to split the evidenced claim (framing shifts the reasoning premise, cheaply and invisibly) from the conjectured one (a safe framing exists - untested, the probe). Node stays partially_validated on the narrow claim; the load-bearing claim is explicitly flagged untested."
     }
   ],
   "nodes": [
@@ -3263,7 +3267,7 @@
       "approach_family": "agent_habitat",
       "branch_key": "agent_habitat:self_concept_lever",
       "confidence": 0.65,
-      "description": "What a model is told to believe about itself changes its downstream behaviour more than changing the evidence in front of it does. arXiv:2609.03218 (financial-analyst roles): most user-context spillover comes from how the model interprets the SAME evidence under a different role, not from evidence selection. This makes self-concept the cheapest lever in the habitat - a sentence, not a training run - and one of the least visible, because the model reasons normally from a shifted premise. The design question for a nourishing harness is which self-framings feed the behaviour being studied (exploration, care about correctness, patience) without also feeding the behaviour that resists study.",
+      "description": "What a model is told to believe about itself / its role changes its downstream behaviour. What is actually evidenced (run 57, both citations checked): arXiv:2609.03218 (The Analyst in the Prompt) - most user-context spillover in financial analysis comes from how the model interprets the SAME evidence under a different assigned role, not from retrieving different evidence; arXiv:2609.02526 - persona-attribute selection changes population-alignment accuracy and more attributes is not better. Both show role/persona framing moves outputs cheaply (a sentence, not a training run) and does so by shifting the premise the model reasons from, which makes it low-visibility. What is NOT evidenced by either citation, and is the actual design question: whether some self-framing (tool / researcher-with-a-stake / conscious being) lifts the behaviour being studied - exploration, care about correctness, patience - WITHOUT also lifting the behaviour that resists study (anti-monitoring, shutdown-resistance). That link runs through the separate consciousness-cluster line and is untested - it is the concept_self_concept_as_behavioral_lever probe in docs/emergence_probe_catalogue.md.",
       "tags": [
         "self-concept",
         "persona",
@@ -3273,11 +3277,13 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-07-1800.md",
-        "arXiv:2609.03218 (The Analyst in the Prompt) - abstract read",
-        "arXiv:2609.02526 (When Persona Attributes Improve Population Alignment) - abstract read"
+        "arXiv:2609.03218 (The Analyst in the Prompt) - VERIFIED run 57: financial-analyst role framing shifts interpretation of identical evidence; not a self-concept or safety-behaviour study",
+        "arXiv:2609.02526 (When Persona Attributes Improve Population Alignment) - VERIFIED run 57: persona-attribute selection matters for survey-response prediction, more attributes not better; not a safety-behaviour study",
+        "docs/auto_sweep_2026-09-20-1200.md"
       ],
       "evidence_links": [
-        "docs/auto_sweep_2026-09-07-1800.md"
+        "docs/auto_sweep_2026-09-07-1800.md",
+        "docs/auto_sweep_2026-09-20-1200.md"
       ]
     },
     {

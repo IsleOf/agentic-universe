@@ -288,6 +288,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`
 - `docs/auto_sweep_2026-09-19-0600.md` — `concept_epistemic_sybil_collapse`, `emergent_compositional_private_language`, `pattern_evidential_ancestry_tracking`
 - `docs/auto_sweep_2026-09-19-1800.md` — `concept_environment_evolution_curriculum`, `pattern_procedural_family_skill_consolidation`
+- `docs/auto_sweep_2026-09-20-1200.md` — `concept_self_concept_as_behavioral_lever`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
