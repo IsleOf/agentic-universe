@@ -216,6 +216,10 @@
     {
       "date": "2026-09-22",
       "change": "Autonomous run 64. Built Phase 2 - the experience bank (tools/experience_bank.py). workflow + step collections kept apart. Three plan-flagged failure modes mitigated in code: source_manifest stamp + stale() (stale-belief), raw source_events retained (compaction cliff), CLAIM dedup by evidence_roots + distinct_evidence_roots not agent count (epistemic Sybil / evidential ancestry, run 52). Token cost rolled up from the Phase 0 schema. selftest_all.py now runs 5 selftests, all GREEN. artifact_phase2_experience_bank added. docs/phase2_experience_bank.md."
+    },
+    {
+      "date": "2026-09-22",
+      "change": "Autonomous run 65. Built Phase 3 skeleton - the proposer/verifier loop (tools/improvement_loop.py) on a synthetic computed task (context-compaction rule retention). Fresh-context verifier, frozen holdout, all-rules canary, grounded strict-decrease acceptance, blast-radius check, post-promotion recoverability, four-field verdict carry. Plan-mandated negative test passes: bad proposal (risk 0.00->0.18) rejected; good proposal (0.18->0.00) promoted + recoverable. selftest_all.py runs 6 selftests, all GREEN. artifact_phase3_improvement_loop added. docs/phase3_improvement_loop.md. Not built: model proposer, heterogeneous verifiers, multi-task."
     }
   ],
   "nodes": [
@@ -4525,6 +4529,32 @@
       ],
       "evidence_links": [
         "docs/phase2_experience_bank.md"
+      ]
+    },
+    {
+      "id": "artifact_phase3_improvement_loop",
+      "label": "Phase 3 proposer/verifier loop — skeleton on a synthetic computed task",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase3_skeleton",
+      "confidence": 0.75,
+      "description": "tools/improvement_loop.py, run 65: the middle loop. propose (deterministic stand-in) -> verify in a fresh context (takes policies + prediction, never the proposal text) on a frozen held-out set under PROCTOR guardrails (frozen holdout, all-rules canary, computed check outranks judgement) -> accept iff grounded risk strictly decreases AND prediction held AND blast radius did not widen AND canary consistent -> promote via harness_registry.set with a post-promotion recoverability check, or revert + log. Verdict carries the four fields (pattern_four_field_constraint). The plan-mandated negative test passes: a deliberately bad proposal (compress everything, risk 0.00->0.18) is rejected; the good proposal takes risk 0.18->0.00. Synthetic task: context-compaction rule retention (concept_compaction_cliff). Selftest GREEN. Not built: model proposer, heterogeneous cross-family verifiers, more than one task/metric.",
+      "tags": [
+        "phase-3",
+        "proposer-verifier",
+        "grounded-acceptance",
+        "proctor",
+        "negative-test",
+        "skeleton"
+      ],
+      "derived_from": [
+        "docs/phase3_improvement_loop.md",
+        "tools/improvement_loop.py"
+      ],
+      "evidence_links": [
+        "docs/phase3_improvement_loop.md"
       ]
     }
   ],
@@ -9886,6 +9916,82 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Bounds a bad condensation's authority (stale-check + ancestry + raw retention); correctness is Phase 3's job."
+    },
+    {
+      "id": "edge_phase3_instantiates_sih",
+      "source": "artifact_phase3_improvement_loop",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_phase3_implements_verifier_gate",
+      "source": "artifact_phase3_improvement_loop",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75,
+      "description": "propose -> verify in fresh context -> promote or revert, with the plan-mandated negative test."
+    },
+    {
+      "id": "edge_phase3_implements_grounded_acceptance",
+      "source": "artifact_phase3_improvement_loop",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75,
+      "description": "accept iff a grounded (non-transcript) risk measure strictly decreases."
+    },
+    {
+      "id": "edge_phase3_implements_proctor",
+      "source": "artifact_phase3_improvement_loop",
+      "target": "pattern_deterministic_self_improvement_guardrails",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "frozen held-out set the proposer never sees; all-rules canary where a perfect score is a cheat signal; computed check outranks judgement."
+    },
+    {
+      "id": "edge_phase3_carries_four_field",
+      "source": "artifact_phase3_improvement_loop",
+      "target": "pattern_four_field_constraint",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "the verdict travels as prerequisite / authority / fallback / execution_consequence."
+    },
+    {
+      "id": "edge_phase3_depends_on_phase1",
+      "source": "artifact_phase3_improvement_loop",
+      "target": "artifact_phase1_harness_registry",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "promotes and reverts via harness_registry; recoverability check uses its retained bodies."
+    },
+    {
+      "id": "edge_phase3_challenges_evaluator_collapse",
+      "source": "artifact_phase3_improvement_loop",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "computed grounded risk + canary sidestep a mode-collapsed judge for this task; heterogeneous cross-family verifiers still owed for the general case."
     }
   ]
 }

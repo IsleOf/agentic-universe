@@ -25,6 +25,7 @@ JOBS = [
     ("harness_registry.py", ["selftest"]),
     ("harness_demo.py", []),
     ("experience_bank.py", ["selftest"]),
+    ("improvement_loop.py", ["selftest"]),
 ]
 
 

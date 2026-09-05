@@ -19,8 +19,10 @@ Pure stdlib, no network, matches `tools/knowledge_graph.py` house style.
 
 ## The event schema (`phase0.1`)
 
-Every event carries the common fields `event_id, ts, kind, run_id, actor, layer,
-language`. Eight kinds:
+Every event carries the common fields `event_id, seq, ts, kind, run_id, actor,
+layer, language`. `seq` is a monotonic per-run counter and is the **reliable
+order key** — `ts` can collide on consecutive events at clock resolution (this
+bit the experience-bank condensation once, run 65). Eight kinds:
 
 - **MESSAGE** — one agent addressing another or the human. Carries the full
   Five-W set (`pattern_five_w_message_instrumentation`): **sender, receiver,

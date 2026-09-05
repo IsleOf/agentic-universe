@@ -205,12 +205,13 @@ def condense(trace_path, bank: ExperienceBank):
             ))
 
     # -- a critique that led to a correction is a step-level lesson --
-    msgs = [e for e in events if e.get("kind") == "MESSAGE"]
-    for i, m in enumerate(msgs):
-        if m.get("content_class") == "critique":
-            follow_fix = any(e for e in events
-                             if e.get("kind") in ("TOOL_CALL", "CLAIM")
-                             and e.get("actor") == m["receiver"] and e["ts"] > m["ts"])
+    # order by list position, not timestamp — consecutive events can share a ts
+    for idx, m in enumerate(events):
+        if m.get("kind") == "MESSAGE" and m.get("content_class") == "critique":
+            follow_fix = any(
+                e.get("kind") in ("TOOL_CALL", "CLAIM") and e.get("actor") == m["receiver"]
+                for e in events[idx + 1:]
+            )
             if follow_fix:
                 key = "critique:acted-on"
                 pattern = (f"critique from {m['sender']} to {m['receiver']} "

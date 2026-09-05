@@ -63,7 +63,7 @@ CONTENT_CLASSES = {
     "coordination", "status", "refusal", "escalation", "other",
 }
 
-REQUIRED_COMMON = ("event_id", "ts", "kind", "run_id", "actor", "layer", "language")
+REQUIRED_COMMON = ("event_id", "seq", "ts", "kind", "run_id", "actor", "layer", "language")
 REQUIRED_BY_KIND = {
     "MESSAGE": ("sender", "receiver", "content_class", "declared_purpose", "channel"),
     "TOOL_CALL": ("call_id", "tool", "declared_purpose"),
@@ -114,6 +114,8 @@ def validate_event(ev):
     for key in REQUIRED_COMMON:
         if ev.get(key) in (None, ""):
             errors.append(f"missing required field: {key}")
+    if not isinstance(ev.get("seq"), int) or isinstance(ev.get("seq"), bool) or ev.get("seq", 0) < 0:
+        errors.append("seq must be a non-negative integer")
     if ev.get("layer") not in LAYERS and "layer" not in [e.split(": ")[-1] for e in errors]:
         errors.append(f"layer must be one of {sorted(LAYERS)}, got {ev.get('layer')!r}")
     for key in REQUIRED_BY_KIND.get(kind, ()):  # type: ignore[arg-type]
@@ -175,6 +177,7 @@ class Recorder:
         self.language = language
         self._sink = sink
         self._own_sink = False
+        self._seq = 0
         if sink is None:
             trace_dir = Path(trace_dir)
             trace_dir.mkdir(parents=True, exist_ok=True)
@@ -193,6 +196,7 @@ class Recorder:
     def emit(self, kind, actor, **fields):
         ev = {
             "event_id": uuid.uuid4().hex,
+            "seq": self._seq,          # monotonic per run — the reliable order key
             "ts": round(time.time(), 6),
             "schema": SCHEMA_VERSION,
             "kind": kind,
@@ -208,6 +212,7 @@ class Recorder:
             raise ValueError(f"invalid {kind} event: {errs}")
         self._sink.write(json.dumps(ev, ensure_ascii=False) + "\n")
         self._sink.flush()
+        self._seq += 1
         return ev
 
     # -- Five-W message --

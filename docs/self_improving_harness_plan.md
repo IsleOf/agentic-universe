@@ -85,9 +85,9 @@ Condense traces into two stores kept deliberately apart: **workflow-level** (wha
 
 **Status (run 64):** `tools/experience_bank.py` — `workflow` and `step` collections in separate directories with separate retrieval keys. Every entry carries `source_manifest` (the harness state it was condensed under) and `bank.stale(current_manifest)` returns entries whose source changed — re-verify before reuse. Raw `source_events` retained on every entry. `condense()` dedupes `CLAIM` events by `evidence_roots` and entries record `distinct_evidence_roots`, never an agent count (`pattern_evidential_ancestry_tracking`, run 52 — added since this section was written). Token-cost roll-up from `TOOL_RESULT.token_cost`. Selftest GREEN; `tools/selftest_all.py` runs all five. Full writeup: `docs/phase2_experience_bank.md`. **Not done:** retrieval is substring-match on a key (needs a real task/error signature); no condensation *correctness* gate (that is Phase 3); synthetic traces only.
 
-### Phase 3 — Proposer + verifier loop
+### Phase 3 — Proposer + verifier loop — **skeleton built on a synthetic computed task (run 65)**
 
-The middle loop closes here.
+The middle loop closes here. Skeleton: `tools/improvement_loop.py` — propose (deterministic stand-in) -> verify in a fresh context on a frozen held-out set under PROCTOR guardrails (frozen holdout, canary, computed check outranks judgement) -> accept iff grounded risk strictly decreases AND prediction held AND blast radius did not widen AND canary consistent -> promote via `harness_registry.set` with a post-promotion recoverability check, or revert and log. Verdict carries the four fields. The plan-mandated negative test passes: a deliberately bad proposal (compress everything) is rejected. Selftest GREEN. Full writeup + spec-to-code mapping: `docs/phase3_improvement_loop.md`. Not built: model proposer, heterogeneous cross-family verifiers, more than one task/metric.
 
 1. **Proposer** reads traces and the experience bank, emits a harness edit **plus a falsifiable prediction** of what improves and by how much.
 2. **Verifier** runs in a **fresh context** on a held-out scenario set. Never sees the proposal being written.
