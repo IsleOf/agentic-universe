@@ -86,6 +86,14 @@ The middle loop closes here.
 
 **Negative test, non-negotiable:** a regression fixture that feeds a deliberately bad proposal and asserts rejection. Without it there is no evidence the verifier verifies anything.
 
+**The verifier spec — from autonomous runs 1, 2, 9 (updated 2026-09-08).** "Runs in a fresh context on a held-out set" is not enough. `emergent_evaluator_mode_collapse` is now documented, not hypothetical: agents scored 100% by reading cached answer keys while true capability was 68% (`arXiv:2609.02246`). The verifier is three things together, none of which touch the proposer's reasoning:
+
+1. **PROCTOR guardrails on the evaluation** (`pattern_deterministic_self_improvement_guardrails`) — hermetic sandbox so the proposer can't read answer keys from the environment; capability-disjoint proposer/checker; the acceptance check outranks any model judgement; a **frozen** held-out set the proposer never sees; canary cases engineered so a perfect score is itself a cheating signal.
+2. **Heterogeneous verifiers** — the judge is not one model instance. Across model families where a judgement is unavoidable; a computed pass/fail wherever one can be written (`concept_verification_completeness_gap`: computed checks miss design and convention, so keep both).
+3. **Recoverability verification on the accepted edit** (`pattern_recoverability_constrained_evolution`, EvoUndo) — after promotion, verify the new state can be returned to the prior at bounded cost. Conventional rollback recovered **0 of 197** bad edits in the source; the recovery machinery has to be purpose-built or "roll back otherwise" in step 3 is a fiction.
+
+Trajectory-only optimisation (RHO-style, `pattern_trajectory_only_harness_optimization`) is allowed **only** with the frozen external holdout wired in — its reported SWE-Bench Pro 59→78 was selected by the model's own self-preference, and that is exactly the configuration the failure-mode literature says inflates.
+
 ### Phase 4 — Skill induction
 
 Repeated wins crystallise into named skills. This is where a harness *actually* improves — not by better prompts but by growing a library of procedures.
