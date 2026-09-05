@@ -112,6 +112,10 @@
     {
       "date": "2026-09-12",
       "change": "Autonomous run 24. Status reconciliation - the autonomous runs added verification_state:partially_validated to nodes with verified sources but left status:speculative. Promoted 8 emergent_behaviors nodes speculative->to_test (self_and_peer_preservation, evaluator_mode_collapse, sustained_heterogeneity, knowledge_commons_erosion, consciousness_cluster, peer_recognition_survives_anonymization, whistleblowing, authorization_laundering) - each has a VERIFIED source documenting the phenomenon, so the open question is whether/how it applies here, not whether it is real. Promoted verification_state on 3 further concept/emergent nodes with verified sources. Two nodes (subagent_training_induces_coordination, stale_belief_propagation) left speculative - sources cited not opened."
+    },
+    {
+      "date": "2026-09-12",
+      "change": "Autonomous run 27. Audited self_improving_harness (35 nodes): family is healthy - confidence values consistent (0.5-0.7), 16 VERIFIED sources, status/verification aligned. One fix: concept_context_economics needs_empirical_validation -> partially_validated (now triangulated by reused_input_dominates, tool_definition_tax, compaction_cliff, and the shipping-harness convergence). Finding of the audit: the graph's remaining high-value work needs experiments built, not more nodes."
     }
   ],
   "nodes": [
@@ -1524,10 +1528,10 @@
       "label": "Context as the scarce resource",
       "type": "concept",
       "status": "to_test",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:context_economics",
-      "confidence": 0.6,
+      "confidence": 0.65,
       "description": "Optimise what occupies the context window; persist everything else. Model routing by task difficulty, subagents used as context firewalls that read widely and return summaries, compaction at logical boundaries, and a deliberately small tool surface. Relevant to self-improvement because context budget is the binding constraint on how much experience a harness can consult per decision.",
       "tags": [
         "context",
@@ -1539,7 +1543,8 @@
       "derived_from": [
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
         "ECC context/token economics (knowledge/notes/ecc-agent-harness-patterns.md)",
-        "docs/harness_field_study_2026-09-06.md - Agent Zero Context Window Usage Indicator, Hermes lean-tail compression as default: token cost is now first-class UI across shipping harnesses"
+        "docs/harness_field_study_2026-09-06.md - Agent Zero Context Window Usage Indicator, Hermes lean-tail compression as default: token cost is now first-class UI across shipping harnesses",
+        "run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
