@@ -6009,6 +6009,123 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "If coordination migrates inside the model and off the message bus, activation-level observation is the layer that still sees it - the instrument that does not go blind as Five-W does."
+    },
+    {
+      "id": "edge_research_split_instantiates_habitat",
+      "source": "concept_research_lifecycle_split",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_research_split_supports_motive_operative",
+      "source": "concept_research_lifecycle_split",
+      "target": "concept_motive_operative_split",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.7,
+      "description": "The operative half (engineering) is done, the motive half (judgement, creative reframing, dead-end recognition) is the gap - on this project's own target task."
+    },
+    {
+      "id": "edge_research_split_supports_substitution_frontier",
+      "source": "concept_research_lifecycle_split",
+      "target": "concept_work_substitution_frontier",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "Research resists automation exactly where judging the bar and reframing a design cost as much to verify as to do."
+    },
+    {
+      "id": "edge_research_split_challenges_autonomous_discovery",
+      "source": "concept_research_lifecycle_split",
+      "target": "emergent_autonomous_discovery",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The autonomous-mathematical-discovery result stands, but on open research questions with a human quality bar, agents that did all the engineering still got unambiguously rejected."
+    },
+    {
+      "id": "edge_commons_erosion_instantiates_emergence",
+      "source": "emergent_knowledge_commons_erosion",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_commons_erosion_challenges_inheritance",
+      "source": "emergent_knowledge_commons_erosion",
+      "target": "concept_inheritance_channel",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "The commons is the inheritance channel for a mixed human-agent population; agent adoption degraded public knowledge coverage 81.1%->22.3% as work moved to private loops."
+    },
+    {
+      "id": "edge_commons_erosion_challenges_habitat",
+      "source": "emergent_knowledge_commons_erosion",
+      "target": "approach_agent_habitat",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "The charter's aim is to expand agent reach into knowledge work; this is the measured externality of that expansion."
+    },
+    {
+      "id": "edge_commons_erosion_supports_diversity",
+      "source": "emergent_knowledge_commons_erosion",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "Same shape one level up: individual output rises, the aggregate (the discoverable commons) contracts."
+    },
+    {
+      "id": "edge_aug_auto_instantiates_habitat",
+      "source": "concept_augmentation_automation_divergence",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_aug_auto_refines_substitution_frontier",
+      "source": "concept_augmentation_automation_divergence",
+      "target": "concept_work_substitution_frontier",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "The frontier is not one line - augment-capability and automate-capability are weakly correlated and task-shaped."
+    },
+    {
+      "id": "edge_aug_auto_refines_motive_operative",
+      "source": "concept_augmentation_automation_divergence",
+      "target": "concept_motive_operative_split",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5
     }
   ]
 }
