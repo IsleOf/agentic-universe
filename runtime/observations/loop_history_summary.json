@@ -1,23 +1,22 @@
 {
-  "generated_by": "tools/loop_adapter.py replay (full evolution_log)",
+  "generated_by": "tools/loop_adapter.py replay + tools/loop_metrics.py compute",
   "harness": "agentic-universe-research-loop (single agent)",
   "harness_manifest_hash": "a0a320e06a4204c4",
-  "runs_replayed": 54,
-  "trace_events": 329,
-  "event_kinds": {
-    "NOTE": 1,
-    "STEP": 108,
-    "TOOL_CALL": 54,
-    "TOOL_RESULT": 54,
-    "ARTIFACT": 54,
-    "CLAIM": 58
+  "metrics": {
+    "runs": 56,
+    "live_runs_recorded": 1,
+    "total_events": 363,
+    "mean_events_per_run": 6.5,
+    "verified_citation_fraction": 0.397,
+    "graph_write_rate": 0.429,
+    "validation_pass_rate": 1.0,
+    "distinct_evidence_roots": 54,
+    "evidence_root_reuse": 0.056,
+    "reused_roots": [
+      "arXiv:2609.02580",
+      "arXiv:2609.03035",
+      "arXiv:2609.04128"
+    ]
   },
-  "distinct_arxiv_evidence_roots": 54,
-  "sources_cited_by_more_than_one_run": {
-    "arXiv:2608.21156": 2,
-    "arXiv:2609.03035": 2,
-    "arXiv:2609.04128": 2,
-    "arXiv:2609.02580": 2
-  },
-  "note": "raw trace is gitignored (operating rule 9); this is the committed summary. Regenerate: python tools/loop_adapter.py replay"
+  "note": "raw trace gitignored (rule 9); regenerate: python tools/loop_adapter.py replay"
 }

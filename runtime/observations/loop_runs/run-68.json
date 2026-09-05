@@ -1,0 +1,18 @@
+{
+  "run": 68,
+  "increment": "Phase 3 on real traces: loop_metrics.py + honest verification gap",
+  "ok": true,
+  "harness_manifest_hash": "a0a320e06a4204c4",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-68.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

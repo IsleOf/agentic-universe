@@ -228,6 +228,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 67. Built tools/loop_session.py - a LoopSession context manager the loop wraps its work in, so each run emits Phase 0 events live (cite/tool/graph_write/note/commit) instead of being reconstructed from the evolution_log afterwards. Writes a committed per-run summary + a gitignored raw trace. SKILL.md updated to require it. Run 67 is the first live-recorded run. selftest_all.py runs 8 selftests, all GREEN. artifact_loop_session_live_recording added. Fixed a Windows path bug (relative_to across drives)."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 68. Built tools/loop_metrics.py - real metrics over the loop trace corpus (verified_citation_fraction 0.40, graph_write_rate 0.43, validation_pass_rate 1.00, evidence_root_reuse 0.06). propose_loop_edit() turns a below-threshold metric into a concrete loop-harness edit + prediction. Honest verification split: validation_pass_rate is computably verifiable, quality metrics are blocked on a frozen held-out research-task set that does not exist. Fixed the adapter to tag VERIFIED citations trust=full and to overwrite (not append) on replay. selftest_all.py runs 9 selftests, all GREEN. artifact_loop_metrics_phase3_real added."
     }
   ],
   "nodes": [
@@ -4615,6 +4619,32 @@
       ],
       "evidence_links": [
         "docs/phase0_live_recording.md"
+      ]
+    },
+    {
+      "id": "artifact_loop_metrics_phase3_real",
+      "label": "Phase 3 on real traces — the metrics layer + honest verification gap",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase3_real_signal",
+      "confidence": 0.75,
+      "description": "tools/loop_metrics.py, run 68: computes real metrics over the loop trace corpus (verified_citation_fraction 0.40, graph_write_rate 0.43, validation_pass_rate 1.00, evidence_root_reuse 0.06). propose_loop_edit() turns a below-threshold metric into a concrete loop-harness edit + falsifiable prediction. Honest split: validation_pass_rate has computable verification (replay + count invalid commits); verified_citation_fraction and any quality metric are BLOCKED on a frozen held-out research-task set that does not exist - the proposer produces a grounded proposal, a human promotes it, the next 10 runs are the deferred verification. Same shape as pattern_grounded_acceptance_only under a missing oracle. Replayed metrics are a floor not a measurement (evolution_log is sparse); live recording fixes it forward.",
+      "tags": [
+        "phase-3",
+        "real-signal",
+        "loop-metrics",
+        "verification-gap",
+        "held-out-set-needed"
+      ],
+      "derived_from": [
+        "docs/phase3_loop_metrics.md",
+        "tools/loop_metrics.py",
+        "runtime/observations/loop_history_summary.json"
+      ],
+      "evidence_links": [
+        "docs/phase3_loop_metrics.md"
       ]
     }
   ],
@@ -10147,6 +10177,59 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.65,
       "description": "Real per-run traces are the input Phase 3's proposer needs instead of the synthetic compaction task."
+    },
+    {
+      "id": "edge_loopmetrics_instantiates_sih",
+      "source": "artifact_loop_metrics_phase3_real",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_loopmetrics_depends_on_liverec",
+      "source": "artifact_loop_metrics_phase3_real",
+      "target": "artifact_loop_session_live_recording",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_loopmetrics_realizes_phase3",
+      "source": "artifact_loop_metrics_phase3_real",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "supports",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75,
+      "description": "Gives the Phase 3 proposer real signal instead of the synthetic compaction task; verification stays split."
+    },
+    {
+      "id": "edge_loopmetrics_challenges_grounded_acceptance",
+      "source": "artifact_loop_metrics_phase3_real",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Grounded acceptance needs a grounded risk measure AND an oracle to evaluate it; the loop harness has the measure but not the oracle. The pattern degrades to 'grounded proposal, deferred verification'."
+    },
+    {
+      "id": "edge_loopmetrics_surfaces_sybil",
+      "source": "artifact_loop_metrics_phase3_real",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "informs",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "evidence_root_reuse = 0.06: three arXiv sources cited by more than one run - the ancestry concentration a swarm would need to dedupe."
     }
   ]
 }

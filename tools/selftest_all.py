@@ -28,6 +28,7 @@ JOBS = [
     ("improvement_loop.py", ["selftest"]),
     ("loop_adapter.py", ["selftest"]),
     ("loop_session.py", ["selftest"]),
+    ("loop_metrics.py", ["selftest"]),
 ]
 
 

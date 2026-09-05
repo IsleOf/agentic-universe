@@ -111,7 +111,7 @@ def replay_history(graph_path, rec: Recorder, limit=None):
         verified = set(_VERIFIED_RE.findall(text))
         for axid in sorted(verified):
             rec.claim("researcher", f"folded a VERIFIED finding from arXiv:{axid}",
-                      [f"arXiv:{axid}"], layer="harness")
+                      [f"arXiv:{axid}"], layer="harness", trust="full")
             n_claims += 1
 
         # any other arXiv ids mentioned but not verified -> lower-trust claim
@@ -121,14 +121,19 @@ def replay_history(graph_path, rec: Recorder, limit=None):
                       [f"arXiv:{axid}"], layer="harness", trust="low")
             n_claims += 1
 
-        # graph writes -> ARTIFACT
+        # graph writes -> ARTIFACT. The evolution_log records deltas
+        # inconsistently, so fall back to keyword evidence of a graph edit.
         em = _EDGES_RE.search(text)
         nm = _NODES_RE.search(text)
-        if em or nm:
+        wrote_graph = bool(em or nm) or bool(re.search(
+            r"\b(added?|new node|edges?|enrich|node added|instantiates|"
+            r"challenges edge|deprecat|inconclusive)\b", text, re.I))
+        if wrote_graph:
             rec.artifact("researcher", "knowledge/graph/agentic_universe_graph.json", "write",
                          layer="harness",
                          delta={"edges": em.groups() if em else None,
-                                "nodes": nm.groups() if nm else None})
+                                "nodes": nm.groups() if nm else None,
+                                "evidence": "delta" if (em or nm) else "keyword"})
             n_artifacts += 1
 
         # a validation tool call every run
@@ -222,6 +227,9 @@ def _cli(argv=None):
     if args.cmd == "replay":
         reg = Registry()
         seed_loop_harness(reg)
+        stale = ROOT / "runtime" / "traces" / "loop-history.jsonl"
+        if stale.exists():
+            stale.unlink()  # replay is a full regeneration, not an append
         rec = Recorder(run_id="loop-history", layer="harness", language="en",
                        harness_manifest=reg.manifest())
         counts = replay_history(GRAPH, rec, limit=args.limit)
