@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-06",
+  "last_updated": "2026-09-07",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -64,6 +64,10 @@
     {
       "date": "2026-09-06",
       "change": "Autonomous run 3. arXiv cs.MA emergence sweep (last ~10 days). pattern_activation_probe_monitoring from arXiv:2609.03035: activation-based collusion detection survives agents being told about the monitor and being given their detection scores. An observation channel that holds against evasion - supports principle_terminal_gate_only (the gate finally has a trustworthy non-report input) and deepens Five-W instrumentation. Enriched emergent_language_formation with GlossoGen's capability-gated language transmission."
+    },
+    {
+      "date": "2026-09-07",
+      "change": "Autonomous run 4. First sweep of the work-substitution dimension (cs.HC / econ.GN / cs.CY). concept_research_lifecycle_split from arXiv:2607.27191 - frontier agents did all engineering on two unpublished NeurIPS papers, both rejected by the authors; the operative half of research is automatable, the motive half (judgement, reframing, dead-end recognition) is not. emergent_knowledge_commons_erosion from arXiv:2608.03585 - agent adoption raised individual throughput 39% while public knowledge coverage dropped 81.1%->22.3% as work moved to private loops; challenges concept_inheritance_channel and the charter's own expansion aim. concept_augmentation_automation_divergence from CentaurBench + cognitive-profile work - augment and automate are distinct weakly-correlated capabilities, task-shaped not model-shaped."
     }
   ],
   "nodes": [
@@ -2068,7 +2072,8 @@
       "derived_from": [
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "architecture/foundations.md: write an executable GREEN/RED predicate before building a loop",
-        "docs/research_operating_plan.md: pass/fail must be computed, never judged by a model"
+        "docs/research_operating_plan.md: pass/fail must be computed, never judged by a model",
+        "arXiv:2608.18398 (LEDGER) - 'productivity bottleneck shifts from producing outputs to auditing whether they are correct'; arXiv:2607.27155 (OmegaUse-OfficeVal) - agents cheaper and faster on 100 office tasks but not at human-level deliverable quality"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -2095,7 +2100,8 @@
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)",
         "Amabile componential theory of creativity, via ICML 2026 'The Missing Drive'",
-        "arXiv:2609.02620 (Collective creativity in hybrid societies) - distinguishes novelty from diversity in human-AI creative collaboration"
+        "arXiv:2609.02620 (Collective creativity in hybrid societies) - distinguishes novelty from diversity in human-AI creative collaboration",
+        "arXiv:2607.27191 - agents did all engineering on two unpublished NeurIPS papers, both rejected by the authors for research-judgement / creativity / backtracking failures; arXiv:2608.09023 (AI-AI co-creation beat human pairs on rated creativity/novelty, 1,212 ideas - the counter-case, on rated-novelty rather than valued creative work)"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -2999,6 +3005,83 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-07-0600.md"
+      ]
+    },
+    {
+      "id": "concept_research_lifecycle_split",
+      "label": "Agents do the engineering of research, not the judgement",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:research_lifecycle_split",
+      "confidence": 0.7,
+      "description": "The sharpest test yet of concept_motive_operative_split, on this project's own target task. arXiv:2607.27191 (VERIFIED) put frontier agents on two UNPUBLISHED NeurIPS 2026 papers - six days, thousands of dollars of compute, graded by the original authors. The agents completed all of the engineering with no human help, and both submissions were unambiguously rejected. Five named failure modes: poor judgement about the bar for publishable research; uncreative responses to shortcomings in the research design; ineffective backtracking from dead ends; poor resource awareness; instruction drift. The operative half of research is automatable now; the motive half - knowing what is worth doing, reframing when stuck, recognising a dead end - is not.",
+      "tags": [
+        "research-automation",
+        "motive-operative",
+        "judgement",
+        "backtracking",
+        "neurips-shadow-eval"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-07-1200.md",
+        "arXiv:2607.27191 (Can AI agents conduct open-ended AI research?) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-07-1200.md"
+      ]
+    },
+    {
+      "id": "emergent_knowledge_commons_erosion",
+      "label": "Agent adoption privatises the knowledge commons others learn from",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:commons_erosion",
+      "confidence": 0.6,
+      "description": "A measured societal-level effect of agent adoption in open-source communities (arXiv:2608.03585, VERIFIED). Adopters (26% of developers, the already-active and well-connected) completed 39% more tasks in less than half the time. But developer-to-developer interaction fell from 32.4% to 11.6%, 40.3% of work moved into private human-agent self-loops, and public knowledge coverage - how well the docs and code from a scenario answer later retrieval queries - dropped from 81.1% to 22.3%. The individual gets faster; the shared substrate that made the work learnable for the next person degrades. The commons is an inheritance channel for a mixed human-agent population, and this is concept_inheritance_channel eroding under exactly the adoption this project's aim would accelerate.",
+      "tags": [
+        "commons",
+        "externality",
+        "privatisation",
+        "open-source",
+        "inheritance",
+        "societal-emergence"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-07-1200.md",
+        "arXiv:2608.03585 (From Social Coding to Agentic Coding) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-07-1200.md"
+      ]
+    },
+    {
+      "id": "concept_augmentation_automation_divergence",
+      "label": "Augmenting and automating are different capabilities, weakly correlated",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:aug_auto_divergence",
+      "confidence": 0.6,
+      "description": "How good an agent is at assisting a human on a task and how good it is at doing the task alone are only modestly correlated - assistance quality is an incomplete proxy for automation ability, and they need separate benchmarks (CentaurBench, arXiv:2608.18554). A companion finding: agents differ more across cognitive dimensions than across model families, so task-fit matters more than model choice (arXiv:2608.25623). The substitution frontier is not a single line agents advance along - it is task-shaped and regime-shaped, and 'this model is better' does not tell you which side of the augment/automate boundary a given task sits on.",
+      "tags": [
+        "augmentation",
+        "automation",
+        "benchmark-divergence",
+        "task-fit",
+        "cognitive-profile"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-07-1200.md",
+        "arXiv:2608.18554 (CentaurBench) - abstract read",
+        "arXiv:2608.25623 (cognitive-capability profiles) - abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-07-1200.md"
       ]
     }
   ],

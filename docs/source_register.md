@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 121 nodes, 280 edges · **Date:** 2026-09-05
+**Graph at generation:** 124 nodes, 280 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -63,6 +63,8 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
+| [2607.27191](https://arxiv.org/abs/2607.27191) | (title not recorded) | `concept_motive_operative_split`, `concept_research_lifecycle_split` |
+| [2608.03585](https://arxiv.org/abs/2608.03585) | (title not recorded) | `emergent_knowledge_commons_erosion` |
 | [2608.06984](https://arxiv.org/abs/2608.06984) | HarnessSafe | `concept_cheap_death`, `pattern_execution_layer_enforcement`, `pattern_trajectory_driven_safety_evolution` |
 | [2608.07169](https://arxiv.org/abs/2608.07169) | Agent Memory Distillation (AMD) | `concept_inheritance_channel`, `pattern_agent_memory_distillation` |
 | [2608.09096](https://arxiv.org/abs/2608.09096) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
@@ -71,10 +73,13 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
 | [2608.16951](https://arxiv.org/abs/2608.16951) | (title not recorded) | `emergent_autonomous_discovery` |
 | [2608.17597](https://arxiv.org/abs/2608.17597) | HarnessRisk | `emergent_recognition_execution_gap`, `pattern_execution_layer_enforcement` |
+| [2608.18398](https://arxiv.org/abs/2608.18398) | (title not recorded) | `concept_work_substitution_frontier` |
+| [2608.18554](https://arxiv.org/abs/2608.18554) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.20940](https://arxiv.org/abs/2608.20940) | (title not recorded) | `emergent_self_and_peer_preservation` |
 | [2608.23041](https://arxiv.org/abs/2608.23041) | (title not recorded) | `pattern_harness_offline_optimization` |
 | [2608.23395](https://arxiv.org/abs/2608.23395) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.23691](https://arxiv.org/abs/2608.23691) | (title not recorded) | `emergent_autonomous_discovery` |
+| [2608.25623](https://arxiv.org/abs/2608.25623) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.26896](https://arxiv.org/abs/2608.26896) | (title not recorded) | `emergent_deception_and_collusion` |
 | [2608.27086](https://arxiv.org/abs/2608.27086) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2608.27311](https://arxiv.org/abs/2608.27311) | (title not recorded) | `concept_verification_is_the_binding_constraint` |
@@ -185,6 +190,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-06-2115.md` — `concept_harness_self_evolution_is_domain_dependent`, `pattern_recoverability_constrained_evolution`
 - `docs/auto_sweep_2026-09-07-0000.md` — `pattern_alternating_weight_harness_optimization`, `pattern_trajectory_only_harness_optimization`
 - `docs/auto_sweep_2026-09-07-0600.md` — `pattern_activation_probe_monitoring`
+- `docs/auto_sweep_2026-09-07-1200.md` — `concept_augmentation_automation_divergence`, `concept_research_lifecycle_split`, `emergent_knowledge_commons_erosion`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
