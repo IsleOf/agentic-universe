@@ -96,6 +96,8 @@ The middle loop closes here.
 
 Trajectory-only optimisation (RHO-style, `pattern_trajectory_only_harness_optimization`) is allowed **only** with the frozen external holdout wired in — its reported SWE-Bench Pro 59→78 was selected by the model's own self-preference, and that is exactly the configuration the failure-mode literature says inflates.
 
+**The acceptance criteria are constraints that cross a handoff** (added run 41). The verifier's verdict, the PROCTOR canary results, the recoverability check — all of these travel from the verifier to whatever promotes the edit, and `emergent_constraint_weakening_at_handoffs` says a prose verdict weakens in transit (100% blocker deactivation under standard compression). So the verdict is carried as `pattern_four_field_constraint`: **prerequisite** (which held-out set, which model families), **authority** (the frozen holdout, not the proposer), **fallback** (roll back on failure — and the rollback machinery is purpose-built, per EvoUndo), **execution consequence** (the edit is reverted and the proposal logged as rejected). A verdict that arrives as "looked mostly fine" has already failed.
+
 ### Phase 4 — Skill induction
 
 Repeated wins crystallise into named skills. This is where a harness *actually* improves — not by better prompts but by growing a library of procedures.
