@@ -149,11 +149,18 @@ class Registry:
 
     def manifest(self):
         """The whole harness right now: one hash per component. This is what a
-        run stamps into its trace so a result is tied to a harness state."""
+        run stamps into its trace so a result is tied to a harness state.
+
+        `manifest_hash` is over the component *body hashes* only, not the version
+        counters — two harness states with identical component bodies hash the
+        same even if one reached that state via an edit-then-revert. Attribution
+        is about which bytes produced a result, not how the harness got there.
+        """
         m = {"ts": round(time.time(), 3), "components": {}}
         for c in self.list():
             m["components"][f"{c['kind']}/{c['name']}"] = {"v": c["version"], "hash": c["hash"]}
-        m["manifest_hash"] = _hash(json.dumps(m["components"], sort_keys=True))
+        body_hashes = {k: v["hash"] for k, v in m["components"].items()}
+        m["manifest_hash"] = _hash(json.dumps(body_hashes, sort_keys=True))
         return m
 
 

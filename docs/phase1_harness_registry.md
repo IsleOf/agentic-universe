@@ -74,6 +74,24 @@ from them.
 - **No evolution.** `set()` is called by a human or an adapter, not by a
   proposer. Phase 3.
 
+## Integration (run 63)
+
+`tools/harness_demo.py` wires the three pieces together on one synthetic run — a
+planner/worker/verifier team doing a bounded unit of VAT work (produce → check →
+correct → GREEN), using Registry-defined components, recorded with the manifest
+stamped in, roles then recovered from the trace. It asserts: the trace validates,
+the manifest in the trace matches the registry, role recovery matches the
+assigned team, and a mid-run edit-then-revert restores the manifest hash exactly.
+
+This caught a real design bug: `manifest_hash` originally included each
+component's version counter, so an edit-then-revert produced a *different* hash
+even though every body was identical. Fixed — the manifest hash is now over
+component **body hashes** only. Attribution is about which bytes produced a
+result, not how the harness reached that state. `INTEGRATION GREEN`.
+
+`tools/selftest_all.py` runs all four selftests (trace, topology, registry,
+demo): `BUILD SELFTEST: GREEN`. `phase0_selftest.py` is now a thin alias for it.
+
 ## Next
 
 1. A thin adapter: map a real harness's prompt/tool/context surface onto
