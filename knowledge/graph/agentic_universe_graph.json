@@ -172,6 +172,10 @@
     {
       "date": "2026-09-18",
       "change": "Autonomous run 49. Multi-agent economic/market dynamics sweep - the last area with unread literature. concept_mechanism_incentive_compat_does_not_transfer (2608.14613 VERIFIED): VCG is strategy-proof by construction but one LLM bids truthfully 100% and another 3.3% - a direct challenge to pattern_market_as_orchestrator, which needs a bid-verification layer. Enriched emergent_no_equilibrium_convergence (2609.02580 VERIFIED: LLM double-auction markets show slower OR NO convergence, less efficient than humans), pattern_activation_probe_monitoring (2609.03035 VERIFIED: probes survive evaluation awareness AND score feedback across 3 conditions - partially closes the activation-steering concern), emergent_misaligned_communication_under_stress (2608.14825 v3: misalignment is reciprocal/retaliatory, 12.6% of 2583 emails, 13 LLMs)."
+    },
+    {
+      "date": "2026-09-18",
+      "change": "Autonomous run 50. Retraction-discipline pass over the 5 inconclusive nodes. test_scenario_decomposition_granularity re-checked against 3 newer papers (Co-Coder 2606.00953, 2608.19557, Uno-Orchestra 2605.05007): the 'intermediate optimum' hypothesis stays unsupported as a universal claim, but the optimum is now understood as task-structure dependent (dependency density, non-stationarity), not fixed - and the single-agent-does-not-Pareto-dominate result holds. The other 4 inconclusive nodes stand: emergent_natural_teaming correctly deprecated; pattern_evaluation_driven_harness_optimization still bounded by the benchmark-headline-substitution finding with no new evidence; the two marketplace-workflow seeds (poster-studio, polymarket) remain dormant - 40+ runs of zero engagement, kept as inconclusive rather than deprecated only because they were never refuted, just abandoned."
     }
   ],
   "nodes": [
@@ -2379,7 +2383,7 @@
       "approach_family": "graph_engineering",
       "branch_key": "graph_engineering:decomposition_granularity",
       "confidence": 0.4,
-      "description": "A controlled sweep on the organisational-ceiling question: one broad agent through five specialised agents against a single-agent baseline, 4,400 runs on VAT determination, with matched-token arms separating prompt budget from agent count and three failure-injection arms. Intermediate configurations scored highest at 0.830 against endpoints of 0.720 and 0.770, but the authors state the intermediate-optimum hypothesis remains unsupported at pilot scale. The result that survives: the single agent does not Pareto-dominate the orchestrated set, sitting 6.5 points below the leader when token-matched, without statistical definiteness. Filed as inconclusive - the first node in this graph to use that state, and an honest one.",
+      "description": "A controlled sweep on the organisational-ceiling question: one broad agent through five specialised agents against a single-agent baseline, 4,400 runs on VAT determination, with matched-token arms separating prompt budget from agent count and three failure-injection arms. Intermediate configurations scored highest at 0.830 against endpoints of 0.720 and 0.770, but the authors state the intermediate-optimum hypothesis remains unsupported at pilot scale. The result that survives: the single agent does not Pareto-dominate the orchestrated set, sitting 6.5 points below the leader when token-matched, without statistical definiteness. Filed as inconclusive - the first node in this graph to use that state, and an honest one. Re-checked run 50: three 2026 papers reframe the question - the decomposition optimum is TASK-STRUCTURE dependent, not a fixed sweet spot. arXiv:2606.00953 (Co-Coder): decomposition shortens the critical path but cross-agent dependencies force costly context transfer, so gains are largest on dependency-dense projects and community detection decides where to split. arXiv:2608.19557: a multi-agent control plane beats a static heuristic only 'when non-stationarity opens headroom a fixed policy cannot use' - under stationary load, extra orchestration adds nothing. arXiv:2605.05007 (Uno-Orchestra): selective, learned decomposition depth beats any fixed routing. Net: the original 'intermediate optimum' hypothesis stays unsupported as a universal claim, but the single-agent-does-not-Pareto-dominate result holds and the refinement is that granularity should be chosen per task from dependency structure and non-stationarity, not fixed.",
       "tags": [
         "decomposition",
         "granularity",
@@ -2390,7 +2394,10 @@
       "derived_from": [
         "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
         "arXiv:2608.23395 (Right-Sizing LLM-Agent Decomposition in VAT Determination: A Pilot Controlled Sweep) - VERIFIED",
-        "arXiv:2608.25099 (Control-Theoretic Resource-Aware Consensus) - adaptive topology switching outperforms any fixed topology on the consensus-performance / token-cost tradeoff"
+        "arXiv:2608.25099 (Control-Theoretic Resource-Aware Consensus) - adaptive topology switching outperforms any fixed topology on the consensus-performance / token-cost tradeoff",
+        "arXiv:2606.00953 (Co-Coder / Cohesion-Aware Task Partitioning) - abstract read run 50 (May 2026)",
+        "arXiv:2608.19557 (Deadline-Aware Mixed-Criticality Scheduling at the AV Edge) - abstract read run 50",
+        "arXiv:2605.05007 (Uno-Orchestra: Parsimonious Agent Routing) - abstract read run 50 (May 2026)"
       ],
       "evidence_links": [
         "docs/sweep_2026-09-05.md"
@@ -9191,6 +9198,17 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "graph_engineering",
       "confidence": 0.55
+    },
+    {
+      "id": "edge_decomp_granularity_challenges_short_agents",
+      "source": "test_scenario_decomposition_granularity",
+      "target": "concept_geometric_reliability_decay",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "The design's answer to geometric decay is aggressive decomposition into short agents. This node's re-check says decomposition depth should be chosen from task dependency structure - aggressive splitting of a dependency-dense task moves cost into context transfer rather than removing it."
     }
   ]
 }
