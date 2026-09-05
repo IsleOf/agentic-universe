@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 156 nodes, 430 edges · **Date:** 2026-09-05
+**Graph at generation:** 159 nodes, 443 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -99,6 +99,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.23867](https://arxiv.org/abs/2608.23867) | (title not recorded) | `concept_introspection_is_a_report_channel_problem`, `pattern_market_as_orchestrator` |
 | [2608.24069](https://arxiv.org/abs/2608.24069) | (title not recorded) | `concept_topology_shapes_error_propagation` |
 | [2608.24569](https://arxiv.org/abs/2608.24569) | (title not recorded) | `emergent_constraint_weakening_at_handoffs`, `pattern_four_field_constraint` |
+| [2608.24876](https://arxiv.org/abs/2608.24876) | (title not recorded) | `pattern_code_as_context` |
 | [2608.25099](https://arxiv.org/abs/2608.25099) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.25553](https://arxiv.org/abs/2608.25553) | (title not recorded) | `emergent_stale_belief_propagation` |
 | [2608.25623](https://arxiv.org/abs/2608.25623) | (title not recorded) | `concept_augmentation_automation_divergence` |
@@ -114,13 +115,17 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.28553](https://arxiv.org/abs/2608.28553) | (title not recorded) | `emergent_stigmergic_coordination` |
 | [2608.29028](https://arxiv.org/abs/2608.29028) | (title not recorded) | `emergent_constraint_weakening_at_handoffs` |
 | [2608.29174](https://arxiv.org/abs/2608.29174) | (title not recorded) | `emergent_sustained_heterogeneity` |
+| [2608.30147](https://arxiv.org/abs/2608.30147) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.30980](https://arxiv.org/abs/2608.30980) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
 | [2609.00196](https://arxiv.org/abs/2609.00196) | (title not recorded) | `pattern_alternating_weight_harness_optimization` |
 | [2609.00275](https://arxiv.org/abs/2609.00275) | (title not recorded) | `concept_irreversibility_budget` |
 | [2609.01058](https://arxiv.org/abs/2609.01058) | (title not recorded) | `concept_curriculum_generation_not_intrinsic_drive` |
+| [2609.01245](https://arxiv.org/abs/2609.01245) | (title not recorded) | `concept_geometric_reliability_decay` |
 | [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
+| [2609.01466](https://arxiv.org/abs/2609.01466) | (title not recorded) | `pattern_deterministic_state_folding` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
+| [2609.01660](https://arxiv.org/abs/2609.01660) | (title not recorded) | `concept_step_count_is_the_horizon_limit` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
 | [2609.01836](https://arxiv.org/abs/2609.01836) | (title not recorded) | `emergent_authorization_laundering` |
 | [2609.02094](https://arxiv.org/abs/2609.02094) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
@@ -264,6 +269,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-15-0600.md` — `concept_irreversibility_budget`, `pattern_certified_runtime_alarm`, `pattern_provenance_based_authority`
 - `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `emergent_attribution_laundering`, `emergent_constraint_weakening_at_handoffs` +1
 - `docs/auto_sweep_2026-09-16-1800.md` — `emergent_no_equilibrium_convergence`, `pattern_market_as_orchestrator`
+- `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_step_count_is_the_horizon_limit`, `pattern_deterministic_state_folding`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

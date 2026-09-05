@@ -10,7 +10,7 @@ The per-agent execution environment, designed to *feed* emergent behaviour rathe
 
 The loop-vs-graph critique (`concept_system_intelligence_boundary_problem`) settled this: relational structure and temporal dynamics are orthogonal, and a real system needs both. So:
 
-- **Orchestration** owns the graph: which agent does what, task dependencies, routing, the swarm topology. This is `approach_graph_engineering`.
+- **Orchestration** owns task allocation and coordination structure: which agent does what, task dependencies, routing, the swarm topology. This is `approach_graph_engineering`. *It need not be a graph* — `pattern_market_as_orchestrator` (agents bid on tasks, VCG pricing, allocation by bid + reputation) beat a centralized planner in AgentLance, and reuses the harness's reputation surface and continual-refinement notes. Open: whether a market-based orchestrator *stabilises*, given `emergent_no_equilibrium_convergence`. The design is agnostic between a pruned graph and a market; both feed the same thin `(task, peers, constraints)` interface.
 - **The nourishing harness** owns what runs inside each node of that graph: the execution substrate, the habitat mechanisms, self-refinement, the society surface.
 
 The interface between them is deliberately thin. Orchestration hands the harness `(scoped task, peer set, constraints)`. The harness hands back `(trace)`. Topology can change without rebuilding runtimes; runtimes can be nourished without touching topology. This is the clean form of openJiuwen's "shared execution substrate across topologies."

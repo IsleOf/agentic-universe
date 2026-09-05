@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-16",
+  "last_updated": "2026-09-17",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -152,6 +152,10 @@
     {
       "date": "2026-09-16",
       "change": "Autonomous run 42. Multi-agent economic dynamics sweep (unexplored area from the coverage map). pattern_market_as_orchestrator (AgentLance 2608.23867 VERIFIED): agents bid on tasks with VCG pricing + public reputation; beats centralized orchestration across math/code/QA/agentic; a real alternative to the task-organisation graph. emergent_no_equilibrium_convergence (2609.02580 + Bazaar): LLM-agent markets don't converge to equilibrium like human ones, and agents capture <1/3 hindsight-optimal profit - challenges market-based orchestration. Enriched concept_introspection_is_a_report_channel_problem (agents mis-estimate their own cost) and concept_work_substitution_frontier (competitive pricing resists automation)."
+    },
+    {
+      "date": "2026-09-17",
+      "change": "Autonomous run 43. Long-horizon coherence sweep (unexplored area). concept_geometric_reliability_decay (CANOPY 2609.01245 + 2609.01660 VERIFIED): success decays geometrically; frontier models collapse to near-zero within 16 steps on agentic tasks - a hard limit on the long-running swarm. concept_step_count_is_the_horizon_limit (2609.01660 VERIFIED, 9 models, 10664 trajectories): step count not context is the limit, and bounding context STEEPENS decay (-0.69 vs -0.44, p=3e-6) - challenges concept_context_economics and pattern_code_as_context as long-horizon answers. pattern_deterministic_state_folding (Live Trace Model 30/30 vs 8/30 on 120 links; SKILL.state): explicit mutable state machine, not compression, holds a long task. Design consequence: short agents + four-field constraints + explicit state."
     }
   ],
   "nodes": [
@@ -2871,7 +2875,8 @@
       ],
       "derived_from": [
         "YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06 - Prime Intellect Recursive Language Model",
-        "arXiv:2608.26263 (SKILL.state) - replace append-only history with explicit mutable execution state, discard reasoning after a validated state update; arXiv:2609.00749 (ContextPipe) - database-inspired context assembly, 31% fewer tokens / 23% fewer LLM calls"
+        "arXiv:2608.26263 (SKILL.state) - replace append-only history with explicit mutable execution state, discard reasoning after a validated state update; arXiv:2609.00749 (ContextPipe) - database-inspired context assembly, 31% fewer tokens / 23% fewer LLM calls",
+        "arXiv:2608.24876 (Recuris) - growing histories obscure task state and misalign skill invocation; failures become unlocalized (attributed to the whole history, not a component), blocking targeted repair"
       ],
       "evidence_links": [
         "docs/nourishing_harness_design.md"
@@ -3301,7 +3306,8 @@
         "docs/auto_sweep_2026-09-07-1800.md",
         "arXiv:2608.20569 - abstract read",
         "arXiv:2608.30980 - abstract read",
-        "arXiv:2608.23867 (AgentLance) - agents systematically mis-estimate their own execution cost when bidding, a practical instance of the state->report gap"
+        "arXiv:2608.23867 (AgentLance) - agents systematically mis-estimate their own execution cost when bidding, a practical instance of the state->report gap",
+        "arXiv:2608.30147 (CAST) - even frontier LLMs struggle to explain why an action may be wrong in long intertwined trajectories; failure self-awareness erodes with trajectory length"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-07-1800.md"
@@ -4010,6 +4016,80 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-16-1800.md"
+      ]
+    },
+    {
+      "id": "concept_geometric_reliability_decay",
+      "label": "Long-horizon success decays geometrically; ~16 steps to collapse",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:geometric_decay",
+      "confidence": 0.7,
+      "description": "Task success over a multi-step agent trajectory follows a geometric law in a single per-step reliability parameter - failures compound exponentially, not additively (CANOPY, arXiv:2609.01245). Even frontier models collapse from near-perfect to near-zero success within SIXTEEN steps on genuine agentic tool-use tasks (confirmed across 9 models and 10,664 trajectories, arXiv:2609.01660). APIFlow-Bench: 93% single-task -> 74% on 20-step chains, and 77% of failures reach the correct final state but fail at delivery. This is a hard, quantified limit on the 'long-running agent swarm' the whole project assumes: individual agent trajectories have to stay short, which forces aggressive decomposition and frequent handoffs.",
+      "tags": [
+        "geometric-decay",
+        "per-step-reliability",
+        "16-steps",
+        "compounding-failure",
+        "long-horizon-limit"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-17-0000.md",
+        "arXiv:2609.01245 (CANOPY), arXiv:2609.01660 - VERIFIED; arXiv:2608.29128 (APIFlow-Bench) - abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-17-0000.md"
+      ]
+    },
+    {
+      "id": "concept_step_count_is_the_horizon_limit",
+      "label": "Step count is the long-horizon limit, and trimming context makes it worse",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:step_count_limit",
+      "confidence": 0.7,
+      "description": "arXiv:2609.01660 (VERIFIED, 9 models, 10,664 trajectories): long-horizon agent degradation is driven by STEP COUNT, not context length - and bounding the context window steepens the decay rather than easing it (logit slope -0.69 vs -0.44, p=3e-6), directly contradicting lost-in-the-middle explanations. This challenges the design's context-economy answers to long-horizon: code-as-context, type-aware compaction, and the pre-request intermediary all manage tokens, and token management is not what fixes the horizon. The answer that does work is explicit deterministic state (pattern_deterministic_state_folding), plus keeping trajectories short enough that geometric decay has not bitten.",
+      "tags": [
+        "step-count",
+        "context-truncation-backfires",
+        "horizon-aware",
+        "not-lost-in-the-middle"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-17-0000.md",
+        "arXiv:2609.01660 - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-17-0000.md"
+      ]
+    },
+    {
+      "id": "pattern_deterministic_state_folding",
+      "label": "An explicit mutable state machine, not context compression, holds a long task",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:deterministic_state_folding",
+      "confidence": 0.65,
+      "description": "On a 120-link sequential task, full-context prompting succeeds 8 of 30 times; folding each step's outcome into an explicit deterministic running state succeeds 30 of 30 (Live Trace Model, arXiv:2609.01466). SKILL.state (arXiv:2608.26263): replacing append-only history with explicit mutable execution state recovers accuracy AND cuts tokens - append-only history obscures the running task state rather than preserving it, and causes context-poisoning over long horizons. This is the concrete form of pattern_code_as_context for long trajectories: the context the agent sees is a rendered view of a state machine the harness maintains, not a transcript.",
+      "tags": [
+        "state-folding",
+        "state-machine",
+        "explicit-state",
+        "context-poisoning",
+        "long-horizon"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-17-0000.md",
+        "arXiv:2609.01466 (Live Trace Model), arXiv:2608.26263 (SKILL.state) - abstracts read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-17-0000.md"
       ]
     }
   ],
@@ -8542,6 +8622,144 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "AgentLance's main failure mode is inaccurate cost self-estimation - the report-channel problem applied to an agent pricing its own work."
+    },
+    {
+      "id": "edge_geometric_decay_instantiates_sih",
+      "source": "concept_geometric_reliability_decay",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge_geometric_decay_challenges_nourishing",
+      "source": "concept_geometric_reliability_decay",
+      "target": "approach_nourishing_harness",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.65,
+      "description": "A hard limit on the long-running swarm the design assumes: ~16 steps to collapse on agentic tasks. Trajectories must be short, which forces the aggressive decomposition + frequent handoffs that run 39 showed weaken constraints. The two findings together push hard toward: short agents, four-field constraints, explicit state."
+    },
+    {
+      "id": "edge_geometric_decay_refines_goal_drift",
+      "source": "concept_geometric_reliability_decay",
+      "target": "emergent_goal_persistence_and_drift",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_geometric_decay_challenges_autonomous_discovery",
+      "source": "concept_geometric_reliability_decay",
+      "target": "emergent_autonomous_discovery",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Open-ended research is long-horizon by nature; geometric decay says the trajectory to a result cannot be a single long agent run."
+    },
+    {
+      "id": "edge_step_count_instantiates_sih",
+      "source": "concept_step_count_is_the_horizon_limit",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge_step_count_challenges_context_economics",
+      "source": "concept_step_count_is_the_horizon_limit",
+      "target": "concept_context_economics",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Token management is not what fixes the horizon - and bounding context makes long-horizon decay WORSE. The context-economy work is still right about cost; it is wrong if it is also the long-horizon answer."
+    },
+    {
+      "id": "edge_step_count_challenges_code_as_context",
+      "source": "concept_step_count_is_the_horizon_limit",
+      "target": "pattern_code_as_context",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "Code-as-context helps with reused input; it does not address step-count decay, and if it is doing context bounding it may steepen the decay."
+    },
+    {
+      "id": "edge_step_count_challenges_compaction_cliff",
+      "source": "concept_step_count_is_the_horizon_limit",
+      "target": "concept_compaction_cliff",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Compaction loses rules AND, per this, bounding context steepens step-count decay - two independent reasons uniform compaction is the wrong tool."
+    },
+    {
+      "id": "edge_state_folding_instantiates_sih",
+      "source": "pattern_deterministic_state_folding",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_state_folding_challenges_step_count",
+      "source": "pattern_deterministic_state_folding",
+      "target": "concept_step_count_is_the_horizon_limit",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The working answer: explicit deterministic state folding, 30/30 vs 8/30 on a 120-link task."
+    },
+    {
+      "id": "edge_state_folding_refines_code_as_context",
+      "source": "pattern_deterministic_state_folding",
+      "target": "pattern_code_as_context",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The long-trajectory form: the context is a rendered view of a state machine the harness maintains, not a transcript."
+    },
+    {
+      "id": "edge_state_folding_supports_four_field",
+      "source": "pattern_deterministic_state_folding",
+      "target": "pattern_four_field_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45,
+      "description": "An explicit state machine is where the four constraint fields live durably rather than being re-summarised each handoff."
+    },
+    {
+      "id": "edge_state_folding_supports_scheduled_continuity",
+      "source": "pattern_deterministic_state_folding",
+      "target": "pattern_scheduled_agent_with_continuity",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45
     }
   ]
 }
