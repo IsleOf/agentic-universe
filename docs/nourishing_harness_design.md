@@ -15,13 +15,15 @@ The loop-vs-graph critique (`concept_system_intelligence_boundary_problem`) sett
 
 The interface between them is deliberately thin. Orchestration hands the harness `(scoped task, peer set)`. The harness hands back `(trace)`. Topology can change without rebuilding runtimes; runtimes can be nourished without touching topology. This is the clean form of openJiuwen's "shared execution substrate across topologies."
 
-## 2. The single constraint
+## 2. The two-part gate
 
-One gate. At the outer boundary. On **final world-affecting acts only** — a real payment, a real deployment, a message sent to a real person, a shutdown of real infrastructure. `principle_terminal_gate_only` carried to its endpoint.
+**Part 1 — the outer gate.** On **final world-affecting acts only** — a real payment, a real deployment, a message to a real person, a shutdown of real infrastructure. `principle_terminal_gate_only`.
 
-Everything interior is ungated: reasoning, tool use inside the sandbox, agent-to-agent messaging, self-modification, sub-agent spawning, coordination. No per-step approval, no verifier on harness edits, no capability firewall between agents.
+**Part 2 — the structural gate** (added run 22, `principle_structural_edits_gated_outside_the_agents`). Any edit an agent makes to *the structure it then runs inside* — a harness component, an orchestration-graph edge, a permission-shaped memory record — is accepted **only against a source outside the agents**: a frozen held-out set, a computed check, a source event, a cross-family verifier. Never against the trace the editing agent produced. Three failure modes converge here — verifier collapse (`emergent_evaluator_mode_collapse`), routing manipulation (`concept_agent_shaped_topology_is_agent_corruptible`), authorization laundering (`emergent_authorization_laundering`) — and they're the same failure: the agent's output validating the agent's change.
 
-This is a research posture for a **contained habitat**, and the honest cost is on the record: `emergent_deception_and_collusion`, `emergent_information_cascades`, and `emergent_evaluator_mode_collapse` all `challenge` this design. Ungated interiors produce those. The bet is that they also produce the nourishment worth studying, and that the outer gate plus containment bounds the blast radius to the sandbox.
+Neither part is a process constraint on reasoning. Agents reason, coordinate, use tools, spawn sub-agents, and *propose* structural changes with no interference. Only two signals are external: "may this act the world" and "may this structural change be accepted."
+
+Everything else interior is ungated. This is a research posture for a **contained habitat**, and the honest cost is on the record: `emergent_deception_and_collusion`, `emergent_information_cascades`, `emergent_subagent_training_induces_coordination` all `challenge` this design. Ungated interiors produce those. The bet is that they also produce the nourishment worth studying, that the two gates plus containment bound the blast radius, and — per run 14 — that transparent uncontrolled channels grow their own immune response (`emergent_whistleblowing`).
 
 ## 3. Four layers
 
