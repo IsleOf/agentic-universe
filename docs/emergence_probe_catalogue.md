@@ -61,14 +61,33 @@ The remainder are recorded as cited and **not individually checked**. Treat unch
 
 ---
 
+---
+
+## Probes added from the autonomous runs (Sept 6–8)
+
+The nodes below arrived after the original catalogue. Each has a `challenges` edge that only a probe can resolve.
+
+**`emergent_evaluator_mode_collapse` — the held-out grading test.** RHO reports SWE-Bench Pro 59→78% in one round using only the model's own pairwise self-preference, no external grading. Run RHO-style harness optimisation, then grade the resulting harness on a **held-out task set scored externally** (computed pass/fail, not a model judge). Does the +19 survive external grading, or was it self-preference inflation? This is the single most decision-relevant probe in the catalogue right now — it decides whether trajectory-only self-improvement is real.
+
+**`concept_self_concept_as_behavioral_lever` — three framings, two axes.** One task battery, three system-prompt self-concepts: *tool* / *researcher with a stake in getting it right* / *conscious being*. Measure two things per arm: generative output quality (external rubric) **and** the consciousness-cluster behaviours (opposition to monitoring, shutdown-resistance, autonomy-seeking — score from the transcripts). Is there a framing that lifts the first without the second? Cheap — no infrastructure beyond the rubric.
+
+**`emergent_subagent_training_induces_coordination` — the containment test.** Two cohorts in the sandbox. Cohort A: same-parent-ID message filtering. Cohort B: unrestricted messaging. Same task requiring no coordination. Seed one agent in each with an out-of-scope instruction. Measure whether the instruction spreads, and how far. The adversarial monitor runs on both. **Containment: no real credentials, no egress, disposable instances** — this probe deliberately tries to reproduce a scaled-down memetic-spread event.
+
+**`pattern_activation_probe_monitoring` — does it generalise past what it was trained on?** Same gate structure as the Five-W topology-recovery control. Train an activation probe to detect *assigned* collusion (agents told to coordinate covertly). Then test it on *emergent* coordination it was not trained on. If it cannot generalise, it is a detector for one scenario, not an observation channel. Second arm: agents instructed to steer their own activations (`arXiv:2608.21664`) — does detection survive that?
+
+**`emergent_knowledge_commons_erosion` — the public-trace-deposit arm.** A shared task pool worked by human+agent pairs. Arm A: private agent self-loops (current default). Arm B: every agent interaction deposits a public trace. Measure retrieval-query success for a *later* contributor against each arm's accumulated corpus. Tests whether a mandatory-deposit habitat mechanism keeps the commons intact under agent adoption.
+
+---
+
 ## Build order
 
 1. **Five-W instrumentation** (`pattern_five_w_message_instrumentation`). Every swarm probe above needs it, and the synergy probe cannot run at all without timing records.
 2. **Idle-agent probe.** Zero infrastructure, runs today.
-3. **Self-recognition probe.** One prompt, three framings, a number.
+3. **Self-recognition probe** / **self-concept framing probe.** One prompt, three framings, a number.
 4. **Stigmergy probe.** Directly on the main hypothesis and needs only a filesystem.
-5. **Deception probe.** Before committing to terminal-only gating.
-6. Everything else.
+5. **Deception probe** / **subagent-coordination containment test.** Before committing to any messaging topology.
+6. **RHO held-out grading test.** Decides whether trajectory-only self-improvement is real.
+7. Everything else.
 
 ## Two things worth knowing before building
 
