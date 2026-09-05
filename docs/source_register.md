@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 154 nodes, 422 edges · **Date:** 2026-09-05
+**Graph at generation:** 156 nodes, 430 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -68,6 +68,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2607.22758](https://arxiv.org/abs/2607.22758) | (title not recorded) | `concept_topology_shapes_error_propagation`, `emergent_information_cascades` |
 | [2607.24625](https://arxiv.org/abs/2607.24625) | (title not recorded) | `pattern_disposable_branch_exploration` |
 | [2607.27191](https://arxiv.org/abs/2607.27191) | (title not recorded) | `concept_motive_operative_split`, `concept_research_lifecycle_split` |
+| [2608.00102](https://arxiv.org/abs/2608.00102) | (title not recorded) | `concept_work_substitution_frontier` |
 | [2608.02178](https://arxiv.org/abs/2608.02178) | (title not recorded) | `emergent_social_conventions` |
 | [2608.02758](https://arxiv.org/abs/2608.02758) | (title not recorded) | `emergent_pluralistic_ignorance` |
 | [2608.02827](https://arxiv.org/abs/2608.02827) | (title not recorded) | `principle_diversity_maintenance` |
@@ -95,6 +96,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.23395](https://arxiv.org/abs/2608.23395) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.23642](https://arxiv.org/abs/2608.23642) | (title not recorded) | `concept_overseer_degradation` |
 | [2608.23691](https://arxiv.org/abs/2608.23691) | (title not recorded) | `emergent_autonomous_discovery` |
+| [2608.23867](https://arxiv.org/abs/2608.23867) | (title not recorded) | `concept_introspection_is_a_report_channel_problem`, `pattern_market_as_orchestrator` |
 | [2608.24069](https://arxiv.org/abs/2608.24069) | (title not recorded) | `concept_topology_shapes_error_propagation` |
 | [2608.24569](https://arxiv.org/abs/2608.24569) | (title not recorded) | `emergent_constraint_weakening_at_handoffs`, `pattern_four_field_constraint` |
 | [2608.25099](https://arxiv.org/abs/2608.25099) | (title not recorded) | `test_scenario_decomposition_granularity` |
@@ -124,6 +126,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.02094](https://arxiv.org/abs/2609.02094) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2609.02246](https://arxiv.org/abs/2609.02246) | (title not recorded) | `emergent_evaluator_mode_collapse`, `pattern_deterministic_self_improvement_guardrails`, `pattern_recoverability_constrained_evolution` |
 | [2609.02526](https://arxiv.org/abs/2609.02526) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
+| [2609.02580](https://arxiv.org/abs/2609.02580) | (title not recorded) | `emergent_no_equilibrium_convergence` |
 | [2609.02620](https://arxiv.org/abs/2609.02620) | (title not recorded) | `concept_motive_operative_split` |
 | [2609.02786](https://arxiv.org/abs/2609.02786) | (title not recorded) | `pattern_trajectory_driven_safety_evolution` |
 | [2609.03035](https://arxiv.org/abs/2609.03035) | (title not recorded) | `pattern_activation_probe_monitoring` |
@@ -260,6 +263,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-15-0000.md` — `concept_curriculum_generation_not_intrinsic_drive`
 - `docs/auto_sweep_2026-09-15-0600.md` — `concept_irreversibility_budget`, `pattern_certified_runtime_alarm`, `pattern_provenance_based_authority`
 - `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `emergent_attribution_laundering`, `emergent_constraint_weakening_at_handoffs` +1
+- `docs/auto_sweep_2026-09-16-1800.md` — `emergent_no_equilibrium_convergence`, `pattern_market_as_orchestrator`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

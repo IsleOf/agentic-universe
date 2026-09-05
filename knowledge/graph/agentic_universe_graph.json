@@ -148,6 +148,10 @@
     {
       "date": "2026-09-16",
       "change": "Autonomous run 39. Agent-to-human trust / handoff sweep - the human side of the outer gate, flagged weak in what_would_make_this_wrong.md #2. emergent_constraint_weakening_at_handoffs (arXiv:2608.24569 VERIFIED): standard handoff compression produces 100% blocker deactivation and 54.2% forbidden action; five named mechanisms; handoffs are everywhere the design has an interface. pattern_four_field_constraint: carry prerequisite/authority/fallback/consequence with every constraint - takes forbidden-action to 0%. emergent_attribution_laundering (HANSARD): diffuse harm with no but-for cause; the multi-agent form of authorization laundering. concept_overseer_degradation (2608.23642 v2 + 2608.27443 + 2609.02095): the human at the gate degrades with AI use, user permission policies are 20.1pp weaker than per-action review. Challenges principle_terminal_gate_only, concept_harness_orchestration_pairing, principle_structural_edits_gated_outside_the_agents."
+    },
+    {
+      "date": "2026-09-16",
+      "change": "Autonomous run 42. Multi-agent economic dynamics sweep (unexplored area from the coverage map). pattern_market_as_orchestrator (AgentLance 2608.23867 VERIFIED): agents bid on tasks with VCG pricing + public reputation; beats centralized orchestration across math/code/QA/agentic; a real alternative to the task-organisation graph. emergent_no_equilibrium_convergence (2609.02580 + Bazaar): LLM-agent markets don't converge to equilibrium like human ones, and agents capture <1/3 hindsight-optimal profit - challenges market-based orchestration. Enriched concept_introspection_is_a_report_channel_problem (agents mis-estimate their own cost) and concept_work_substitution_frontier (competitive pricing resists automation)."
     }
   ],
   "nodes": [
@@ -2183,7 +2187,8 @@
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "architecture/foundations.md: write an executable GREEN/RED predicate before building a loop",
         "docs/research_operating_plan.md: pass/fail must be computed, never judged by a model",
-        "arXiv:2608.18398 (LEDGER) - 'productivity bottleneck shifts from producing outputs to auditing whether they are correct'; arXiv:2607.27155 (OmegaUse-OfficeVal) - agents cheaper and faster on 100 office tasks but not at human-level deliverable quality"
+        "arXiv:2608.18398 (LEDGER) - 'productivity bottleneck shifts from producing outputs to auditing whether they are correct'; arXiv:2607.27155 (OmegaUse-OfficeVal) - agents cheaper and faster on 100 office tasks but not at human-level deliverable quality",
+        "arXiv:2608.00102 (Bazaar) - even the strongest agents capture <1/3 of hindsight-optimal profit in dynamic sealed-bid auctions; competitive pricing is a task type agents do not do well"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -3295,7 +3300,8 @@
       "derived_from": [
         "docs/auto_sweep_2026-09-07-1800.md",
         "arXiv:2608.20569 - abstract read",
-        "arXiv:2608.30980 - abstract read"
+        "arXiv:2608.30980 - abstract read",
+        "arXiv:2608.23867 (AgentLance) - agents systematically mis-estimate their own execution cost when bidding, a practical instance of the state->report gap"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-07-1800.md"
@@ -3954,6 +3960,56 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-16-0000.md"
+      ]
+    },
+    {
+      "id": "pattern_market_as_orchestrator",
+      "label": "A repeated auction instead of a planner-graph for task allocation",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:market_orchestration",
+      "confidence": 0.6,
+      "description": "An alternative to the task-organisation graph: agents bid on tasks with their private cost estimates and self-maintained strategy notes; an allocator picks winners by bid plus public reputation; a VCG-style payment rule makes honest cost reporting the dominant strategy; complex tasks are subcontracted through the same mechanism. AgentLance (arXiv:2608.23867, VERIFIED) reports this beats single-model, centralized-orchestration, and prior market baselines across math, code, QA, and agentic tasks, matching agents to specialisations and shifting work to cheaper agents as cost sensitivity rises. It reuses two things the nourishing harness already has - a reputation surface and continual self-refinement (the strategy notes). Stated failure modes: inaccurate cost self-estimation and sub-optimal bidding.",
+      "tags": [
+        "market-orchestration",
+        "vcg",
+        "auction",
+        "reputation",
+        "decentralised-allocation"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-16-1800.md",
+        "arXiv:2608.23867 (AgentLance / Markets, Not Planners) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-16-1800.md"
+      ]
+    },
+    {
+      "id": "emergent_no_equilibrium_convergence",
+      "label": "LLM-agent markets don't converge to equilibrium the way human ones do",
+      "type": "emergent_behavior",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:no_equilibrium",
+      "confidence": 0.55,
+      "description": "arXiv:2609.02580 (Competitive Market Behavior of LLMs): markets populated by LLM agents exhibit slower or no convergence toward market equilibrium compared to human-populated double auctions - a fundamental misalignment with standard economic mechanisms. Companion: arXiv:2608.00102 (Bazaar) - even the strongest agents capture less than a third of hindsight-optimal profit in dynamic sealed-bid auctions. LLM agent populations do not settle the way the mechanism-design assumes; whatever collective dynamics they have, textbook equilibration is not one of them.",
+      "tags": [
+        "equilibrium",
+        "market-convergence",
+        "mechanism-misalignment",
+        "double-auction",
+        "emergent-dynamics"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-16-1800.md",
+        "arXiv:2609.02580 - abstract read; arXiv:2608.00102 (Bazaar) - abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-16-1800.md"
       ]
     }
   ],
@@ -8400,6 +8456,92 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "agent_habitat",
       "confidence": 0.45
+    },
+    {
+      "id": "edge_market_orch_instantiates_ge",
+      "source": "pattern_market_as_orchestrator",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_market_orch_alternative_to_task_graph",
+      "source": "pattern_market_as_orchestrator",
+      "target": "pattern_task_organization_graph",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "A genuine alternative: task allocation by auction rather than by a decomposition graph, and it beats centralized orchestration in the source."
+    },
+    {
+      "id": "edge_market_orch_reuses_reputation",
+      "source": "pattern_market_as_orchestrator",
+      "target": "emergent_reputation_and_trust_dynamics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "The allocator uses public reputation records - the reputation surface put to a load-bearing use."
+    },
+    {
+      "id": "edge_market_orch_reuses_continual_refinement",
+      "source": "pattern_market_as_orchestrator",
+      "target": "pattern_continual_self_refinement",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45,
+      "description": "Agents' self-maintained strategy notes are continual self-refinement pointed at bidding."
+    },
+    {
+      "id": "edge_no_equilibrium_instantiates_emergence",
+      "source": "emergent_no_equilibrium_convergence",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_no_equilibrium_challenges_market_orch",
+      "source": "emergent_no_equilibrium_convergence",
+      "target": "pattern_market_as_orchestrator",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "If LLM-agent markets don't equilibrate, a market-based orchestrator may not stabilise - AgentLance reports gains but the convergence question is open."
+    },
+    {
+      "id": "edge_no_equilibrium_refines_cascades",
+      "source": "emergent_no_equilibrium_convergence",
+      "target": "emergent_information_cascades",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "Another way LLM-agent collective dynamics diverge from the human baseline the mechanism assumes."
+    },
+    {
+      "id": "edge_market_orch_challenged_by_introspection",
+      "source": "concept_introspection_is_a_report_channel_problem",
+      "target": "pattern_market_as_orchestrator",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "AgentLance's main failure mode is inaccurate cost self-estimation - the report-channel problem applied to an agent pricing its own work."
     }
   ]
 }
