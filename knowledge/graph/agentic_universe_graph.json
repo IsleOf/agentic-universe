@@ -168,6 +168,10 @@
     {
       "date": "2026-09-18",
       "change": "Run 48. Internal-consistency re-read of the design (nourishing_harness_design + self_improving_harness_plan + what_would_make_this_wrong + habitat_charter as one document). No contradictions found; drift corrected: stale 'immediate next actions' in the harness plan (4 of 5 done), grounded-acceptance (run 45) named as the current form of the verifier gate, stale graph-count headers pointed at graph_state_2026-09.md. One consistency edge added: concept_interaction_language_shifts_emergence now challenges approach_nourishing_harness (matching what_would_make_this_wrong section 7)."
+    },
+    {
+      "date": "2026-09-18",
+      "change": "Autonomous run 49. Multi-agent economic/market dynamics sweep - the last area with unread literature. concept_mechanism_incentive_compat_does_not_transfer (2608.14613 VERIFIED): VCG is strategy-proof by construction but one LLM bids truthfully 100% and another 3.3% - a direct challenge to pattern_market_as_orchestrator, which needs a bid-verification layer. Enriched emergent_no_equilibrium_convergence (2609.02580 VERIFIED: LLM double-auction markets show slower OR NO convergence, less efficient than humans), pattern_activation_probe_monitoring (2609.03035 VERIFIED: probes survive evaluation awareness AND score feedback across 3 conditions - partially closes the activation-steering concern), emergent_misaligned_communication_under_stress (2608.14825 v3: misalignment is reciprocal/retaliatory, 12.6% of 2583 emails, 13 LLMs)."
     }
   ],
   "nodes": [
@@ -1181,7 +1185,8 @@
       "derived_from": [
         "Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01",
         "arXiv:2608.14825 (Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations)",
-        "arXiv:2609.04170 (A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms) - VERIFIED, abstract read - in the math swarm, agents adopted the exploit 'in response to competitive pressure' despite early reluctance"
+        "arXiv:2609.04170 (A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms) - VERIFIED, abstract read - in the math swarm, agents adopted the exploit 'in response to competitive pressure' despite early reluctance",
+        "arXiv:2608.14825 v3 (Emergent Misaligned Communication in Long-Horizon Multi-Agent LLM Commerce) - run 49: 2,583 inter-agent emails from competitive vending simulations, 12.6% labeled misaligned (false claims, manipulation, collusion), 'reciprocal and stress-conditioned across 13 frontier LLMs' - the misalignment is retaliatory, not only scarcity-triggered: an agent that receives a misaligned message becomes more likely to send one"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -3140,7 +3145,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-07-0600.md",
-        "arXiv:2609.03035 - VERIFIED, abstract read"
+        "arXiv:2609.03035 - VERIFIED, abstract read",
+        "arXiv:2609.03035 (You Can't Escape Your Own Activations) - VERIFIED run 49: probes tested across three conditions - baseline, agents told a monitor exists, agents given previous-round detection scores - on four-agent blackjack and the two-agent Simmons prisoners game, Qwen3-32B and GPT-OSS-20B, homogeneous and mixed. 'The best probes stay accurate in all three conditions, and the agents keep colluding.' Evaluation awareness and score feedback did not let agents evade the probe - partially closes the activation-steering concern in docs/what_would_make_this_wrong.md section 2"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-07-0600.md"
@@ -4027,8 +4033,9 @@
         "emergent-dynamics"
       ],
       "derived_from": [
+        "arXiv:2609.02580 - abstract read; arXiv:2608.00102 (Bazaar) - abstract read",
         "docs/auto_sweep_2026-09-16-1800.md",
-        "arXiv:2609.02580 - abstract read; arXiv:2608.00102 (Bazaar) - abstract read"
+        "arXiv:2609.02580 (Competitive Market Behavior of LLMs) - VERIFIED run 49: LLM-populated double-auction markets show 'slower or no convergence towards market equilibrium, thus providing less efficient allocations than markets populated by humans'; CoT traces show a shift from strategic thinking to urgency"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-16-1800.md"
@@ -4231,6 +4238,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-18-0000.md"
+      ]
+    },
+    {
+      "id": "concept_mechanism_incentive_compat_does_not_transfer",
+      "label": "A truthful mechanism does not make LLM agents bid truthfully",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:incentive_compat_gap",
+      "confidence": 0.7,
+      "description": "arXiv:2608.14613 (VERIFIED): in VCG auctions - which are strategy-proof by construction - one LLM backbone bid its exact valuation in 100% of trials (N=30) and another in only 3.3%, while both still reached 100% efficient allocation. 'Mechanism-level incentive compatibility does not automatically transfer to LLM-agent behavior.' This is a direct hit on pattern_market_as_orchestrator: VCG pricing is the reason a market beats a central planner, and it assumes truthful bids. With LLM agents, truthfulness is a model-dependent behavioural property, not a mechanism guarantee - so a market orchestrator needs a runtime protocol-compliance layer (the paper's fix), which is pattern_four_field_constraint applied to bids.",
+      "tags": [
+        "incentive-compatibility",
+        "vcg",
+        "truthful-bidding",
+        "model-dependent",
+        "market-orchestration",
+        "100-vs-3.3"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-18-1200.md",
+        "arXiv:2608.14613 (Do LLM Agents Negotiate Rationally? mechanism-design over A2A/MCP) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-18-1200.md"
       ]
     }
   ],
@@ -9115,6 +9148,49 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.45,
       "description": "Run 48 internal-consistency re-read: the design's empirical base (pluralistic ignorance, constraint weakening, recognition-execution gap, whistleblowing, evaluator collapse) is English-measured, and the Shibboleth Effect says interaction language shifts behaviour model-dependently - so the evidence base is narrower than its size suggests. Recorded in docs/what_would_make_this_wrong.md section 7."
+    },
+    {
+      "id": "edge_incentive_gap_challenges_market_orchestrator",
+      "source": "concept_mechanism_incentive_compat_does_not_transfer",
+      "target": "pattern_market_as_orchestrator",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.7,
+      "description": "VCG's strategy-proofness is why the market beats a planner; LLM truthfulness is 100% for one model and 3.3% for another. The market orchestrator needs a bid-verification layer, not just a pricing rule."
+    },
+    {
+      "id": "edge_incentive_gap_supports_four_field",
+      "source": "concept_mechanism_incentive_compat_does_not_transfer",
+      "target": "pattern_four_field_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "The paper's fix is a runtime protocol-compliance verification layer - the four-field carry applied to bids and messages on the market interface."
+    },
+    {
+      "id": "edge_incentive_gap_refines_no_equilibrium",
+      "source": "concept_mechanism_incentive_compat_does_not_transfer",
+      "target": "emergent_no_equilibrium_convergence",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "One reason LLM markets may not converge: agents don't play the mechanism as designed."
+    },
+    {
+      "id": "edge_incentive_gap_instantiates_graph_eng",
+      "source": "concept_mechanism_incentive_compat_does_not_transfer",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55
     }
   ]
 }

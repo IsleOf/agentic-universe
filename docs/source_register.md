@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 163 nodes, 458 edges · **Date:** 2026-09-05
+**Graph at generation:** 165 nodes, 467 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -60,7 +60,9 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
+| [2606.05985](https://arxiv.org/abs/2606.05985) | (title not recorded) | `emergent_pluralistic_ignorance`, `principle_diversity_maintenance` |
 | [2606.09854](https://arxiv.org/abs/2606.09854) | (title not recorded) | `emergent_deception_and_collusion`, `emergent_peer_recognition_survives_anonymization` |
+| [2606.11082](https://arxiv.org/abs/2606.11082) | (title not recorded) | `concept_interaction_language_shifts_emergence` |
 | [2606.19924](https://arxiv.org/abs/2606.19924) | The Tao of Agency: Autotelic AI, Embedded Agency and Dissolution of the Self | `concept_autotelic_agency`, `concept_habitat_slack` |
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
@@ -82,6 +84,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.12253](https://arxiv.org/abs/2608.12253) | One Frozen Simulator Is Not Enough | `emergent_evaluator_mode_collapse` |
 | [2608.12921](https://arxiv.org/abs/2608.12921) | (title not recorded) | `pattern_causal_edge_pruning` |
 | [2608.14380](https://arxiv.org/abs/2608.14380) | (title not recorded) | `concept_cheap_death` |
+| [2608.14613](https://arxiv.org/abs/2608.14613) | (title not recorded) | `concept_mechanism_incentive_compat_does_not_transfer` |
 | [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
 | [2608.16951](https://arxiv.org/abs/2608.16951) | (title not recorded) | `emergent_autonomous_discovery` |
 | [2608.17597](https://arxiv.org/abs/2608.17597) | HarnessRisk | `emergent_recognition_execution_gap`, `pattern_execution_layer_enforcement` |
@@ -105,6 +108,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.25553](https://arxiv.org/abs/2608.25553) | (title not recorded) | `emergent_stale_belief_propagation` |
 | [2608.25623](https://arxiv.org/abs/2608.25623) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.25776](https://arxiv.org/abs/2608.25776) | (title not recorded) | `emergent_mind_viruses` |
+| [2608.26081](https://arxiv.org/abs/2608.26081) | (title not recorded) | `emergent_self_organizing_roles` |
 | [2608.26263](https://arxiv.org/abs/2608.26263) | (title not recorded) | `pattern_code_as_context` |
 | [2608.26623](https://arxiv.org/abs/2608.26623) | (title not recorded) | `emergent_evaluator_mode_collapse` |
 | [2608.26896](https://arxiv.org/abs/2608.26896) | (title not recorded) | `emergent_deception_and_collusion` |
@@ -274,6 +278,8 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-16-1800.md` — `emergent_no_equilibrium_convergence`, `pattern_market_as_orchestrator`
 - `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_step_count_is_the_horizon_limit`, `pattern_deterministic_state_folding`
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1
+- `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`
+- `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

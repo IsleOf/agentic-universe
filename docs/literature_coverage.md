@@ -1,6 +1,12 @@
 # Literature Coverage Map
 
-**Updated:** 2026-09-15 (autonomous run 38) · Maintained so the autonomous loop and the scheduled task don't re-sweep the same ground.
+**Updated:** 2026-09-18 (autonomous run 49) · Maintained so the autonomous loop and the scheduled task don't re-sweep the same ground.
+
+**Frontier status (run 49):** every mapped area is now swept. Runs 39, 43, 45, 47, 49 cleared the last five. The
+only remaining candidate is embodied/physical-world agents, deliberately out of scope. Further literature sweeps
+return recurring sources — the bottleneck is now empirical (Phase 0 traces, `docs/self_improving_harness_plan.md`
+§6), not bibliographic. The loop's remaining useful moves: citation upgrades from `docs/source_register.md`,
+re-checking the 5 `inconclusive` nodes against newer evidence, and graph hygiene.
 
 ## Swept, well covered
 
@@ -26,7 +32,7 @@
 
 ## Genuinely unexplored — candidates for future sweeps
 
-- **Multi-agent economic/market dynamics** — trading swarms, resource allocation, emergent pricing. Touched once (`2608.26896` tacit collusion in electricity markets) but not developed. Bears on the marketplace-workflow family (currently dormant/inconclusive) and on `emergent_misaligned_communication_under_stress`.
+- ~~Multi-agent economic/market dynamics~~ — SWEPT run 49: concept_mechanism_incentive_compat_does_not_transfer (VCG truthfulness 100% vs 3.3% by model, 2608.14613), LLM double-auction markets show slower-or-no convergence (2609.02580), reciprocal misalignment in commerce (2608.14825 v3), activation probes survive evaluation awareness + score feedback (2609.03035). ~14 papers reviewed; market-as-orchestrator now needs a bid-verification layer.
 - ~~Agent-to-human trust and handoff~~ — SWEPT run 39: emergent_constraint_weakening_at_handoffs (100% blocker deactivation), four-field constraints, overseer degradation, attribution laundering.
 - ~~Long-horizon coherence~~ — SWEPT run 43: concept_geometric_reliability_decay (~16 steps to collapse), step-count-not-context, deterministic state folding.
 - ~~Formal verification~~ — SWEPT run 45: concept_transcript_only_gate_is_provably_insufficient (impossibility proof), SRMA grounded acceptance, progressive risk vesting, evidence-carrying termination.
