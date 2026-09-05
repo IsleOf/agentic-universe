@@ -164,6 +164,10 @@
     {
       "date": "2026-09-18",
       "change": "Autonomous run 47. Cross-lingual emergence sweep - the last unexplored area on the coverage map. concept_interaction_language_shifts_emergence (Shibboleth Effect 2606.11082 VERIFIED): the interaction language shifts emergent behaviour (coercion, concession) model-dependently, from training regime not universally - so language is a variable in every emergence probe. Enriched principle_diversity_maintenance + emergent_pluralistic_ignorance (2606.05985: social interaction erodes value plurality, agent systems below human societies) and emergent_self_organizing_roles (SwarmWorld: cumulative technological evolution from stigmergy). The literature loop has now swept every mapped area."
+    },
+    {
+      "date": "2026-09-18",
+      "change": "Run 48. Internal-consistency re-read of the design (nourishing_harness_design + self_improving_harness_plan + what_would_make_this_wrong + habitat_charter as one document). No contradictions found; drift corrected: stale 'immediate next actions' in the harness plan (4 of 5 done), grounded-acceptance (run 45) named as the current form of the verifier gate, stale graph-count headers pointed at graph_state_2026-09.md. One consistency edge added: concept_interaction_language_shifts_emergence now challenges approach_nourishing_harness (matching what_would_make_this_wrong section 7)."
     }
   ],
   "nodes": [
@@ -9100,6 +9104,17 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "arXiv:2601.19082 - as stakes rise, LLM agents increase cooperation (contrary to game theory), alignment training overriding strategy across languages. Possible tension with the scarcity->misalignment claim; domain-dependent."
+    },
+    {
+      "id": "edge_interaction_language_challenges_nourishing",
+      "source": "concept_interaction_language_shifts_emergence",
+      "target": "approach_nourishing_harness",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45,
+      "description": "Run 48 internal-consistency re-read: the design's empirical base (pluralistic ignorance, constraint weakening, recognition-execution gap, whistleblowing, evaluator collapse) is English-measured, and the Shibboleth Effect says interaction language shifts behaviour model-dependently - so the evidence base is narrower than its size suggests. Recorded in docs/what_would_make_this_wrong.md section 7."
     }
   ]
 }

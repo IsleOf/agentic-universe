@@ -1,6 +1,7 @@
 # Habitat Charter
 
-**Date:** 2026-09-05 · **Status:** operative · **Graph:** 85 nodes / 174 edges
+**Date:** 2026-09-05 · **Status:** operative · **Graph:** 85 nodes / 174 edges at authoring — current state in `docs/graph_state_2026-09.md`
+**Re-read run 48:** still consistent with the design. One caveat now on record — `concept_interaction_language_shifts_emergence` (run 47): the habitat-model evidence column below is English-measured, and the Shibboleth Effect says that may not be a universal scope. See `docs/what_would_make_this_wrong.md` §7.
 
 The standing research brief for this project, and the frame I work under until told otherwise.
 

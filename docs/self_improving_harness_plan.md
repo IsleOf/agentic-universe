@@ -1,7 +1,7 @@
 # Forward Plan: Self-Improving Agentic OS
 
-**Date:** 2026-09-05 · **Target:** a self-improving agentic OS with a dynamically improving harness
-**Graph:** 61 nodes / 115 edges · **Supersedes as active plan:** `docs/emergence_first_posture.md` (posture unchanged, now has a build target)
+**Date:** 2026-09-05 · last reconciled run 48 · **Target:** a self-improving agentic OS with a dynamically improving harness
+**Graph:** 61 nodes / 115 edges at authoring — current state in `docs/graph_state_2026-09.md` · **Supersedes as active plan:** `docs/emergence_first_posture.md` (posture unchanged, now has a build target)
 
 ---
 
@@ -33,6 +33,8 @@ The emergence-first posture says: don't constrain agents, gate only the final co
 Recorded in the graph as `pattern_verifier_gated_promotion` *instantiates* `principle_terminal_gate_only`. Ideas stay free; mutations to the thing running the ideas are gated. A self-improving system without that gate does not stay still — it drifts, and drift is indistinguishable from improvement without a verifier.
 
 ECC states the rule as an explicit non-goal: *no automatic mutation of harness configs without verifier evidence*. Worth adopting verbatim.
+
+**Reconciliation with the nourishing design (run 48).** `docs/nourishing_harness_design.md` §3.3 makes the interior continual-refinement loop *ungated for the proposal* and gated only at *acceptance into standing behaviour*, and run 45 gave that acceptance test its current form: `pattern_grounded_acceptance_only` (SRMA) — an edit becomes standing behaviour iff a **grounded, non-transcript** risk measure strictly decreases, and by `concept_transcript_only_gate_is_provably_insufficient` no transcript-only rule can do better than chance on hard cases. So "verifier gate" throughout this plan should be read as *grounded-acceptance gate*: the Phase 3 verifier spec below (PROCTOR + heterogeneous + recoverability + four-field verdict) is the concrete instantiation, not a competing mechanism.
 
 ## 3. Three loops
 
@@ -131,11 +133,15 @@ Not a parallel track — the probe catalogue answers questions this architecture
 
 ## 6. Immediate next actions
 
-1. **Merge the September research into the graph.** Done for the harness family (12 nodes). The remaining notes — collective misalignment, protocol/A2A, attack surface, creativity diversity — are not yet represented.
-2. **Fix or discard the 13 Perplexity patches** (see §7). None currently apply.
-3. **Build Phase 0.** Nothing in this plan starts without traces.
-4. **Push the branch.** Four commits now, still blocked on credentials.
-5. **Unhold the PILOT/supervisor proposal.** `arXiv:2608.26530` is verified and its distillation half is Phase 4.
+**Status as of run 48.** Items 1–5 below are the original list; four of five are done.
+
+1. ~~Merge the September research into the graph.~~ Done, and 100+ nodes past it — the literature loop has swept every mapped area (`docs/literature_coverage.md`).
+2. ~~Fix or discard the 13 Perplexity patches.~~ Superseded — the graph was grown by direct edits under the emergence-first posture; the patches were treated as prose per §7's verdict.
+3. **Build Phase 0 (traces).** Still the real blocker. Nothing in this plan is measurable without it, and every "untested" in `docs/what_would_make_this_wrong.md` traces back to this not existing yet. This is the one action that has not moved.
+4. ~~Push the branch.~~ Done; the autonomous loop commits and pushes to `proposals/2026-09-01-emergent-behaviour-cluster` each run.
+5. ~~Unhold the PILOT/supervisor proposal.~~ Superseded by `evolution/proposals/2026-09-09_nourishing-harness` (run 16), which is `awaiting_review`.
+
+**The single highest-value next move is still Phase 0.** The design has accumulated ~9 findings-driven revisions and a stack of untested compositions (short-agent + four-field + folded-state + budget-gate + cross-family-verifier, none run together). None of that resolves without a trace substrate to measure against. Until Phase 0 exists, further literature sweeps have diminishing returns — the frontier is swept and the bottleneck is empirical, not bibliographic.
 
 ## 7. Audit of the September commits
 

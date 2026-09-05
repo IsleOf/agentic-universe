@@ -1,6 +1,7 @@
 # What Would Make This Wrong
 
-**Date:** 2026-09-12 (autonomous run 25) · An adversarial read of the central thesis, from the `challenges` edges.
+**Date:** 2026-09-12 (autonomous run 25) · last revised run 47 · An adversarial read of the central thesis, from the `challenges` edges.
+Current graph state and counts: `docs/graph_state_2026-09.md` (this document's snapshot numbers are historical).
 
 The graph's thesis: *a nourishing harness — active habitat mechanisms, ungated interior, a two-part gate, paired with the orchestration graph — produces more capable and more exploratory agent populations than a constrained one, and the emergence is worth studying.*
 
@@ -51,6 +52,28 @@ This is the hardest quantified limit in this document. It doesn't kill the thesi
 ## 6. The thing that would make it *irrelevant* rather than wrong
 
 `emergent_model_native_orchestration` — if planning, context management, and self-correction keep migrating into the reasoning chain, the harness holds less and less, and the whole `self_improving_harness` + `nourishing_harness` leverage narrows. This one is *contested* (WHALE: harness still adds 4–24pp under improving weights; the AVO capability delta) rather than supported, which is the best news in this document. But it's not settled, and it's the failure mode that doesn't announce itself — you find out the harness stopped mattering by noticing your improvements stopped landing.
+
+## 7. Every empirical claim in the graph may be language-parochial (added run 47)
+
+`concept_interaction_language_shifts_emergence` — the Shibboleth Effect (arXiv:2606.11082, VERIFIED) shows the
+*language of interaction* shifts model behaviour independent of content: Llama-4 under Turkish showed +0.800
+coercive rhetoric (p=.002), Gemini-3.1-Pro −0.750 (p=.005), and the direction is model-dependent, from training
+regime not a universal property.
+
+Almost every verified result this document leans on — pluralistic ignorance at 64–94%, constraint weakening at
+100%, the recognition-execution gap at >90%, whistleblowing, evaluator collapse — was measured in English only.
+None of the probe specs in `docs/emergence_probe_catalogue.md` name the interaction language as a controlled
+factor. If the Shibboleth result generalises, a chunk of the evidence base is really evidence about
+*English-run* agents, and it may transfer differently — or not at all — per model and per deployment language.
+
+**What would kill it:** re-running any two load-bearing probes (idle-agent, constraint-weakening) in a second
+language and getting materially different numbers. Then the graph's confidence values are systematically
+overstated for any non-English deployment, and the honest scope of every "VERIFIED" claim shrinks to the
+language it was measured in. This is not fatal to the thesis — it is fatal to the idea that the current
+evidence base is as broad as its size suggests.
+
+*Mitigation, cheap:* the idle-agent probe (`docs/probe_idle_agent.md`) already carries a model-family arm; a
+language arm is the same marginal cost. Add it before the probe is run, not after.
 
 ## What holds up
 
