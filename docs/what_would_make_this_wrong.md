@@ -38,7 +38,15 @@ The activation-probe channel (`pattern_activation_probe_monitoring`) is the desi
 
 `concept_work_substitution_frontier` `challenges` `principle_diversity_maintenance`: replacing human work needs reliability; reliability pressure selects for convergence; convergence is the mode collapse that destroys the emergence. The proposed resolution (separate exploration and deployment populations, no shared evaluator) is a hypothesis with no evidence. And `emergent_sustained_heterogeneity` complicates even the premise — variety doesn't uniformly decay.
 
-## 5. The thing that would make it *irrelevant* rather than wrong
+## 5. Geometric reliability decay caps every long trajectory (added run 43)
+
+`concept_geometric_reliability_decay` — multi-step task success decays geometrically in a per-step reliability parameter, and frontier models collapse from near-perfect to near-zero **within ~16 steps** on genuine agentic tasks (verified across 9 models, 10,664 trajectories). `concept_step_count_is_the_horizon_limit` — it's step count, not context, and trimming context *steepens* the decay.
+
+This is the hardest quantified limit in this document. It doesn't kill the thesis but it forces the design: agents run short trajectories, decompose aggressively, hand off often — and run 39 showed handoffs shed constraints unless carried as four fields. So the whole design now hinges on whether **short-agent + four-field-constraint + explicit-state** actually composes into something that can do long work. Untested. `pattern_deterministic_state_folding` is 30/30 on 120 links in isolation; nobody has run it inside a free-interior swarm.
+
+**What would kill it:** the composed design (short agents, frequent four-field handoffs, folded state) still shows geometric decay at the *task* level — i.e. the decomposition just moves the compounding failure from steps to handoffs. Then long agentic work is not reliably doable at all, by this design or any other current one, and the project's knowledge-work-substitution aim is bounded to short tasks.
+
+## 6. The thing that would make it *irrelevant* rather than wrong
 
 `emergent_model_native_orchestration` — if planning, context management, and self-correction keep migrating into the reasoning chain, the harness holds less and less, and the whole `self_improving_harness` + `nourishing_harness` leverage narrows. This one is *contested* (WHALE: harness still adds 4–24pp under improving weights; the AVO capability delta) rather than supported, which is the best news in this document. But it's not settled, and it's the failure mode that doesn't announce itself — you find out the harness stopped mattering by noticing your improvements stopped landing.
 
