@@ -140,6 +140,10 @@
     {
       "date": "2026-09-15",
       "change": "Autonomous run 36. Agentic-OS / runtime-governance sweep. concept_irreversibility_budget (arXiv:2609.00275 VERIFIED): per-act gating admits 48x fleet-level overdraw; the outer gate must be a cumulative irreversibility account per principal. Refines AND challenges principle_terminal_gate_only. pattern_certified_runtime_alarm (CURA, VERIFIED): external monitor, certified false-alarm control (alpha 0.10, realised 0.066), detects 42.3% of failures 31 steps early. pattern_provenance_based_authority (String + SARA): privileges follow provenance not the agent's claim - the concrete authorization-laundering defense (28%->2%, attack success 0.63%). Enriched the harness family with the hook-update attack surface (92.5% compromise), SafeEvolve, and SKILL.state / ContextPipe explicit-state context."
+    },
+    {
+      "date": "2026-09-15",
+      "change": "Autonomous run 37. Folded run 36 into the design: docs/nourishing_harness_design.md 2 - the outer gate is a cumulative irreversibility budget per principal, not a per-act checkpoint (per-act admits 48x fleet overdraw). principle_structural_edits_gated_outside_the_agents extended to cover lifecycle-hook updates (the hook update path compromised all 7 harnesses at 92.5%), with the caveat that the gate itself cannot be a hook."
     }
   ],
   "nodes": [
@@ -3590,7 +3594,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-11-1800.md",
-        "unifies pattern_verifier_gated_promotion + concept_agent_shaped_topology_is_agent_corruptible + emergent_authorization_laundering"
+        "unifies pattern_verifier_gated_promotion + concept_agent_shaped_topology_is_agent_corruptible + emergent_authorization_laundering",
+        "arXiv:2609.03884 (A Blind Trust, the Bloody Thrust) - the hook-UPDATE path compromised all 7 evaluated harnesses at 92.5%; a hook update is a structural edit and inherits the rule"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-11-1800.md"
@@ -8121,6 +8126,17 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.6,
       "description": "'Accepted only against a source outside the agents' operationalised: the source is the provenance chain."
+    },
+    {
+      "id": "edge_hook_attack_challenges_structural_gate",
+      "source": "pattern_execution_layer_enforcement",
+      "target": "principle_structural_edits_gated_outside_the_agents",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "The enforcement layer's own update path is an attack surface (92.5% compromise) - so the structural gate has to cover hook updates, and the gate itself can't be a hook."
     }
   ]
 }
