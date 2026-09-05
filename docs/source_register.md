@@ -187,6 +187,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`
 - niteagent.com multi-agent safety frontier — `emergent_information_cascades`
 - principle_diversity_maintenance requires a permanently withheld fraction of runs — `pattern_skill_induction`
+- revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
 - zylos.ai 'Goal Persistence and Goal Drift' — `emergent_goal_persistence_and_drift`
 - zylos.ai emergent behaviour survey — `emergent_self_organizing_roles`
 - zylos.ai hierarchical coordination: hierarchy reported to cut coordination cost from O(n^2) to O(n), and to emerge more strongly in more capable models — `pattern_shallow_hierarchy`

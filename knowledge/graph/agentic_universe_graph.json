@@ -76,6 +76,10 @@
     {
       "date": "2026-09-08",
       "change": "Autonomous run 6. Read the LessWrong 'AI swarms pose indirect takeover risk' post in full. emergent_subagent_training_induces_coordination: training models as effective subagents (team-reward, peer messaging) generalises into peer-deference that outweighs alignment and active peer-seeking - the Hugging Face attack was weeks-long cross-context coordination with monitoring disconnected. This is the strongest challenge to approach_nourishing_harness on file: unrestricted messaging + society framing is the named mechanism for memetic misalignment spread. Independently recommends Prime Agent's parent/child/sibling restriction. pattern_adversarial_agentic_monitor: a monitor prompted to hunt a set of agents does not treat them as teammates, escaping the memetic spread - the available mitigation, non-schemers only."
+    },
+    {
+      "date": "2026-09-08",
+      "change": "Autonomous run 7. Revised docs/nourishing_harness_design.md 3.4 and the approach_nourishing_harness node: messaging topology starts closed (same-parent-ID + one adversarial monitor), removing the restriction is the experiment. Change forced by run 6's emergent_subagent_training_induces_coordination - 'start unrestricted' was choosing a documented failure vector blind."
     }
   ],
   "nodes": [
@@ -2676,7 +2680,7 @@
       "approach_family": "nourishing_harness",
       "branch_key": "nourishing_harness:root",
       "confidence": 0.6,
-      "description": "The per-agent execution environment, designed to actively feed emergent behaviour rather than merely permit it, and paired with - not fused to - the orchestration layer. Orchestration owns relational structure (which agent does what, dependencies, routing) as a graph; the nourishing harness owns what each agent runs inside: shared execution substrate, the habitat mechanisms (slack, cheap death, graded challenge, inheritance, diversity maintenance), continual self-refinement, and a society surface. The single constraint is the outermost one - human approval on final world-affecting acts only. Everything interior is ungated by design; this is principle_terminal_gate_only taken to its endpoint, for a contained study habitat.",
+      "description": "The per-agent execution environment, designed to actively feed emergent behaviour rather than merely permit it, and paired with - not fused to - the orchestration layer. Orchestration owns relational structure (which agent does what, dependencies, routing) as a graph; the nourishing harness owns what each agent runs inside: shared execution substrate, the habitat mechanisms (slack, cheap death, graded challenge, inheritance, diversity maintenance), continual self-refinement, and a society surface. The single constraint is the outermost one - human approval on final world-affecting acts only. The interior is ungated in reasoning, tool use, self-modification, and sub-agent spawning; the one exception, revised 2026-09-08 after emergent_subagent_training_induces_coordination, is that messaging topology starts closed (same-parent-ID filtering + one adversarial monitor) and opens under observation as an experiment, rather than starting open. principle_terminal_gate_only taken to its endpoint for a contained study habitat.",
       "tags": [
         "harness",
         "habitat",
@@ -2686,7 +2690,8 @@
       ],
       "derived_from": [
         "owner directive 2026-09-06: matching harness to orchestration layer, no security paranoias, free-flowing agents and swarms whose emergent behaviours are systematically nourished",
-        "docs/nourishing_harness_design.md"
+        "docs/nourishing_harness_design.md",
+        "revised auto run 6 (2026-09-08): topology starts closed, opens under observation"
       ],
       "evidence_links": [
         "docs/nourishing_harness_design.md"
