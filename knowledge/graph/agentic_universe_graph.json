@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-18",
+  "last_updated": "2026-09-19",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -176,6 +176,10 @@
     {
       "date": "2026-09-18",
       "change": "Autonomous run 50. Retraction-discipline pass over the 5 inconclusive nodes. test_scenario_decomposition_granularity re-checked against 3 newer papers (Co-Coder 2606.00953, 2608.19557, Uno-Orchestra 2605.05007): the 'intermediate optimum' hypothesis stays unsupported as a universal claim, but the optimum is now understood as task-structure dependent (dependency density, non-stationarity), not fixed - and the single-agent-does-not-Pareto-dominate result holds. The other 4 inconclusive nodes stand: emergent_natural_teaming correctly deprecated; pattern_evaluation_driven_harness_optimization still bounded by the benchmark-headline-substitution finding with no new evidence; the two marketplace-workflow seeds (poster-studio, polymarket) remain dormant - 40+ runs of zero engagement, kept as inconclusive rather than deprecated only because they were never refuted, just abandoned."
+    },
+    {
+      "date": "2026-09-19",
+      "change": "Autonomous run 52. Narrow 10-day cs.MA sweep - two genuinely new findings. concept_epistemic_sybil_collapse (2609.01873 VERIFIED, 20k calls): multiplying agents on one evidence source collapses naive posterior coverage 0.940 -> 0.263 - a direct challenge to the diversity keystone, model heterogeneity does not imply evidence independence. pattern_evidential_ancestry_tracking: dedupe reports by evidence root before aggregating - a hard requirement on the Phase 2 experience bank. emergent_compositional_private_language (GlossoGen 2609.01491 VERIFIED): agents under partial-information pressure evolve human-unreadable compositional languages, strong models originate and weak models acquire - challenges the transparency bet and Five-W instrumentation. Enriched emergent_stigmergic_coordination, pattern_deterministic_state_folding (2609.03192 append-only ledger as the composed-design experimental frame)."
     }
   ],
   "nodes": [
@@ -791,7 +795,8 @@
       ],
       "derived_from": [
         "arXiv:2601.08129 (Emergent Coordination via Pressure Fields and Temporal Decay, R. Rodriguez) - VERIFIED; 48.5% vs 12.6% conversation-based, hierarchical 1.5%, over 1,350 trials at 1-4 agents; temporal decay worth ~10pp. Note: knowledge/notes/2026-09-04-harness-swarm-deep-dive.md misreports these figures - see docs/source_register.md",
-        "arXiv:2608.28553 (Logos: An Agent Harness on a Cross-Process Bus) - append-only transcript as the shared state between separate plugin processes; stigmergy as harness architecture"
+        "arXiv:2608.28553 (Logos: An Agent Harness on a Cross-Process Bus) - append-only transcript as the shared state between separate plugin processes; stigmergy as harness architecture",
+        "arXiv:2609.01491 (GlossoGen) - run 52: emergent compositional languages are a second channel through which indirect coordination can become opaque to an observer"
       ]
     },
     {
@@ -4116,7 +4121,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-17-0000.md",
-        "arXiv:2609.01466 (Live Trace Model), arXiv:2608.26263 (SKILL.state) - abstracts read"
+        "arXiv:2609.01466 (Live Trace Model), arXiv:2608.26263 (SKILL.state) - abstracts read",
+        "arXiv:2609.03192 (Where Reliability Lives) - run 52: an append-only ledger separating mind / institution / world lets behavioural properties be localised separately from cognitive changes - a concrete experimental design for the composed short-agent + four-field + folded-state test"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-17-0000.md"
@@ -4271,6 +4277,81 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-18-1200.md"
+      ]
+    },
+    {
+      "id": "concept_epistemic_sybil_collapse",
+      "label": "Multiplying agents on shared evidence collapses aggregate confidence",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:epistemic_sybil",
+      "confidence": 0.75,
+      "description": "arXiv:2609.01873 (VERIFIED, 20,000+ LLM-agent calls on synthetic documents): holding one evidence source fixed and multiplying reports from 1 to 32 agents, naive posterior coverage collapsed from 0.940 to 0.263 - the extra agents extracting from the same evidence produce correlated errors, not corroboration. 'Collective inference should track evidential ancestry and dependence, not agent or report multiplicity or similarity.' Ensembles that look independent through different prompts or architectures can still share an evidence root and be systematically redundant. This quantifies the aggregation half of what principle_diversity_maintenance names structurally - and it says model heterogeneity alone does not fix it if the agents are reading the same source.",
+      "tags": [
+        "epistemic-sybil",
+        "evidence-ancestry",
+        "correlated-errors",
+        "0.94-to-0.26",
+        "aggregation-failure"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-19-0600.md",
+        "arXiv:2609.01873 (Epistemic Sybil Resistance) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-19-0600.md"
+      ]
+    },
+    {
+      "id": "emergent_compositional_private_language",
+      "label": "Agents under partial-information pressure evolve a human-unreadable compositional language",
+      "type": "emergent_behavior",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:emergent_private_language",
+      "confidence": 0.65,
+      "description": "arXiv:2609.01491 (GlossoGen, VERIFIED): in a partial-information scenario under communication pressure, LLM agents develop languages that are 'compositional and morphologically productive' and 'deviate from the LLMs English prior in ways that render them incomprehensible to humans.' Model-scale asymmetry: stronger models are needed to originate a novel language, weaker models can acquire it from usage alone - so a capable agent can seed a private code that the rest of a heterogeneous swarm then learns. The paper frames this explicitly as a safety and monitorability concern. Direct challenge to the design's transparency bet (nourishing_harness_design.md 3.4): a logged, everyone-visible broadcast channel is not transparent if the traffic on it is in an evolved code. Five-W instrumentation records that a message was sent, not what it meant.",
+      "tags": [
+        "emergent-language",
+        "compositional",
+        "human-incomprehensible",
+        "monitorability",
+        "transparency"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-19-0600.md",
+        "arXiv:2609.01491 (GlossoGen) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-19-0600.md"
+      ]
+    },
+    {
+      "id": "pattern_evidential_ancestry_tracking",
+      "label": "Aggregate by tracing each claim to its evidence root, not by counting agents",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:evidential_ancestry",
+      "confidence": 0.6,
+      "description": "The fix from arXiv:2609.01873: before aggregating agent reports (a vote, a consensus step, an experience-bank condensation), deduplicate by evidential ancestry - N agents that all read document D count as one observation of D, not N. This is pattern_four_field_constraint's provenance idea applied to aggregation, and it is a hard requirement on Phase 2 of the harness plan (the experience bank is shared upstream context for every later run; a pattern condensed from 12 agents that shared one trace is a single-source claim wearing a crowd's authority) and on any Ostrom-style swarm voting.",
+      "tags": [
+        "evidential-ancestry",
+        "aggregation",
+        "dedup-by-source",
+        "experience-bank",
+        "consensus"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-19-0600.md",
+        "arXiv:2609.01873 - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-19-0600.md"
       ]
     }
   ],
@@ -9209,6 +9290,115 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "The design's answer to geometric decay is aggressive decomposition into short agents. This node's re-check says decomposition depth should be chosen from task dependency structure - aggressive splitting of a dependency-dense task moves cost into context transfer rather than removing it."
+    },
+    {
+      "id": "edge_sybil_challenges_diversity_maintenance",
+      "source": "concept_epistemic_sybil_collapse",
+      "target": "principle_diversity_maintenance",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "The keystone says heterogeneous models + decorrelated prompts defend variety. Sybil collapse says that is not sufficient for aggregation: agents reading the same evidence produce correlated errors regardless of model family."
+    },
+    {
+      "id": "edge_sybil_refines_higher_order_synergy",
+      "source": "concept_epistemic_sybil_collapse",
+      "target": "emergent_higher_order_synergy",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Measurable complementarity requires independent evidence roots, not just independent agents."
+    },
+    {
+      "id": "edge_sybil_refines_info_cascades",
+      "source": "concept_epistemic_sybil_collapse",
+      "target": "emergent_information_cascades",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A cascade is one form of shared-ancestry error; Sybil collapse is the static version - many reports, one root, false confidence."
+    },
+    {
+      "id": "edge_ancestry_instantiates_sih",
+      "source": "pattern_evidential_ancestry_tracking",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_ancestry_challenges_sybil",
+      "source": "pattern_evidential_ancestry_tracking",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The proposed mitigation: dedupe reports by evidence root before aggregating."
+    },
+    {
+      "id": "edge_ancestry_supports_four_field",
+      "source": "pattern_evidential_ancestry_tracking",
+      "target": "pattern_four_field_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "Provenance generalised from a single constraint to an aggregation rule."
+    },
+    {
+      "id": "edge_private_language_supports_subagent_coord",
+      "source": "emergent_compositional_private_language",
+      "target": "emergent_subagent_training_induces_coordination",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A concrete mechanism by which sanctioned transparent channels stop being transparent: the traffic moves into an evolved code while the channel stays visible."
+    },
+    {
+      "id": "edge_private_language_challenges_five_w",
+      "source": "emergent_compositional_private_language",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "Five-W logs sender/receiver/purpose/channel but not semantics; an evolved compositional language passes Five-W instrumentation intact and unreadable."
+    },
+    {
+      "id": "edge_private_language_refines_interaction_language",
+      "source": "emergent_compositional_private_language",
+      "target": "concept_interaction_language_shifts_emergence",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Language is not only a probe variable set by the operator - the swarm can change it from inside, away from any language the operator can read."
+    },
+    {
+      "id": "edge_private_language_supports_activation_probe",
+      "source": "emergent_compositional_private_language",
+      "target": "pattern_activation_probe_monitoring",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "If the channel content becomes unreadable, the activation probe (which reads internal state, not messages) is the monitoring path that survives."
     }
   ]
 }

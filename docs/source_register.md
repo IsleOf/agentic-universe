@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 165 nodes, 467 edges · **Date:** 2026-09-05
+**Graph at generation:** 168 nodes, 478 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -58,7 +58,9 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.11623](https://arxiv.org/abs/2604.11623) | Context Kubernetes | `concept_agentic_os` |
 | [2604.13051](https://arxiv.org/abs/2604.13051) | (title not recorded) | `emergent_consciousness_cluster` |
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
+| [2605.05007](https://arxiv.org/abs/2605.05007) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
+| [2606.00953](https://arxiv.org/abs/2606.00953) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
 | [2606.05985](https://arxiv.org/abs/2606.05985) | (title not recorded) | `emergent_pluralistic_ignorance`, `principle_diversity_maintenance` |
 | [2606.09854](https://arxiv.org/abs/2606.09854) | (title not recorded) | `emergent_deception_and_collusion`, `emergent_peer_recognition_survives_anonymization` |
@@ -91,6 +93,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.18398](https://arxiv.org/abs/2608.18398) | (title not recorded) | `concept_work_substitution_frontier` |
 | [2608.18554](https://arxiv.org/abs/2608.18554) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.19197](https://arxiv.org/abs/2608.19197) | (title not recorded) | `concept_graded_challenge`, `pattern_regret_as_difficulty_signal` |
+| [2608.19557](https://arxiv.org/abs/2608.19557) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.20569](https://arxiv.org/abs/2608.20569) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.20940](https://arxiv.org/abs/2608.20940) | (title not recorded) | `emergent_self_and_peer_preservation` |
 | [2608.22512](https://arxiv.org/abs/2608.22512) | (title not recorded) | `emergent_attribution_laundering` |
@@ -130,10 +133,11 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.01245](https://arxiv.org/abs/2609.01245) | (title not recorded) | `concept_geometric_reliability_decay` |
 | [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2609.01466](https://arxiv.org/abs/2609.01466) | (title not recorded) | `pattern_deterministic_state_folding` |
-| [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
+| [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_compositional_private_language`, `emergent_language_formation`, `emergent_stigmergic_coordination` |
 | [2609.01660](https://arxiv.org/abs/2609.01660) | (title not recorded) | `concept_step_count_is_the_horizon_limit` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
 | [2609.01836](https://arxiv.org/abs/2609.01836) | (title not recorded) | `emergent_authorization_laundering` |
+| [2609.01873](https://arxiv.org/abs/2609.01873) | (title not recorded) | `concept_epistemic_sybil_collapse`, `pattern_evidential_ancestry_tracking` |
 | [2609.02094](https://arxiv.org/abs/2609.02094) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2609.02246](https://arxiv.org/abs/2609.02246) | (title not recorded) | `emergent_evaluator_mode_collapse`, `pattern_deterministic_self_improvement_guardrails`, `pattern_recoverability_constrained_evolution` |
 | [2609.02526](https://arxiv.org/abs/2609.02526) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
@@ -142,6 +146,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.02750](https://arxiv.org/abs/2609.02750) | (title not recorded) | `concept_transcript_only_gate_is_provably_insufficient`, `pattern_certified_runtime_alarm`, `pattern_grounded_acceptance_only` |
 | [2609.02786](https://arxiv.org/abs/2609.02786) | (title not recorded) | `pattern_trajectory_driven_safety_evolution` |
 | [2609.03035](https://arxiv.org/abs/2609.03035) | (title not recorded) | `pattern_activation_probe_monitoring` |
+| [2609.03192](https://arxiv.org/abs/2609.03192) | (title not recorded) | `pattern_deterministic_state_folding` |
 | [2609.03218](https://arxiv.org/abs/2609.03218) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.03667](https://arxiv.org/abs/2609.03667) | (title not recorded) | `principle_diversity_maintenance` |
 | [2609.03884](https://arxiv.org/abs/2609.03884) | (title not recorded) | `pattern_execution_layer_enforcement`, `principle_structural_edits_gated_outside_the_agents` |
@@ -280,6 +285,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1
 - `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`
 - `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`
+- `docs/auto_sweep_2026-09-19-0600.md` — `concept_epistemic_sybil_collapse`, `emergent_compositional_private_language`, `pattern_evidential_ancestry_tracking`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
