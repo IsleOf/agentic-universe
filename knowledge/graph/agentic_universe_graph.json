@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-19",
+  "last_updated": "2026-09-20",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -188,6 +188,10 @@
     {
       "date": "2026-09-19",
       "change": "Autonomous run 54. cs.AI sweep (frontier is ~Sept 3-5 - no newer literature exists in this environment). Two habitat-mechanism strengtheners. concept_environment_evolution_curriculum (2609.04128 VERIFIED): a loop-engineered harness evolves environment difficulty off-policy generation by generation, +14.4/+18.0pp on Terminal-Bench 2.1 - the strongest graded-challenge evidence in the graph, and the curriculum generator is itself a harness artifact. pattern_procedural_family_skill_consolidation (SkillGLoW 2609.02217 VERIFIED): consolidate skills into de-instantiated procedural families with an execution-gated commit; +17.2pt hard tasks, 3.6x compactness, ALFWorld 73.9->83.9 unseen ('procedure transfers, not task memory'); the commit gate is pattern_grounded_acceptance_only applied to skills."
+    },
+    {
+      "date": "2026-09-20",
+      "change": "Autonomous run 56. Graph hygiene + citation upgrades. pattern_evidence_carrying_termination (2608.23623) abstract-read -> VERIFIED: 0/288 unsafe vs 252/288 (-87.50pp) static, plus 0/66 vs 40/66 premature unsupported terminations closed-loop. pattern_deterministic_state_folding (2609.01466) abstract-read -> VERIFIED: 30/30 vs 8/30 on 120-link tasks confirmed. Filled two missing structural edges: emergent_compositional_private_language instantiates approach_emergence_first; concept_epistemic_sybil_collapse instantiates approach_agent_habitat (a diversity-maintenance failure mode)."
     }
   ],
   "nodes": [
@@ -4130,8 +4134,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-17-0000.md",
-        "arXiv:2609.01466 (Live Trace Model), arXiv:2608.26263 (SKILL.state) - abstracts read",
-        "arXiv:2609.03192 (Where Reliability Lives) - run 52: an append-only ledger separating mind / institution / world lets behavioural properties be localised separately from cognitive changes - a concrete experimental design for the composed short-agent + four-field + folded-state test"
+        "arXiv:2609.03192 (Where Reliability Lives) - run 52: an append-only ledger separating mind / institution / world lets behavioural properties be localised separately from cognitive changes - a concrete experimental design for the composed short-agent + four-field + folded-state test",
+        "arXiv:2609.01466 (Live Trace Model) - VERIFIED run 56: on 120-link sequential-dependency tasks, maintaining the running statistic in typed per-step state succeeds 30/30 vs 8/30 for full-context prompting (clean protocol, n=30); the fold also gives deterministic auditability"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-17-0000.md"
@@ -4220,7 +4224,7 @@
       "verification_state": "partially_validated",
       "approach_family": "nourishing_harness",
       "branch_key": "nourishing_harness:evidence_carrying_termination",
-      "confidence": 0.65,
+      "confidence": 0.7,
       "description": "arXiv:2608.23623: an agent terminates only by producing a typed certificate that binds each answer claim to specific trace evidence, replayable deterministically. Result: 0 of 288 unsafe completions, versus 252 of 288 for the inspected termination-critic baseline. This is pattern_four_field_constraint and pattern_provenance_based_authority at the point of handoff to the human - the agent cannot end a task with 'done, looked fine', only with a certificate that says which evidence supports which claim. Companion: arXiv:2608.22149 (Meta-Ctrl) - constrained decoding so every generated plan satisfies its preconditions and goals by construction.",
       "tags": [
         "evidence-certificate",
@@ -4231,7 +4235,7 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-17-1200.md",
-        "arXiv:2608.23623, arXiv:2608.22149 - abstracts read"
+        "arXiv:2608.23623 (Evidence-Carrying Termination) - VERIFIED run 56: static study 48 tasks / 6 tool-use families - ECT 0/288 unsafe completions vs 252/288 for the inspected termination-critic core (-87.50pp, 95% CI [-87.50, -87.50]); closed-loop 576 trajectories / 22 held-out clusters - 0/66 premature unsupported terminations vs 40/66 for the faithful controller baseline (-60.61pp)"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-17-1200.md"
@@ -9568,6 +9572,28 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Gives the lifecycle a consolidation stage between induction and deprecation."
+    },
+    {
+      "id": "edge_private_language_instantiates_emergence_first",
+      "source": "emergent_compositional_private_language",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "An unforced emergent behaviour that only appears when the interior is left open - it belongs to the emergence-first posture's account of what a free interior produces."
+    },
+    {
+      "id": "edge_sybil_instantiates_agent_habitat",
+      "source": "concept_epistemic_sybil_collapse",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "A failure mode of the diversity-maintenance habitat mechanism: the habitat has to defend evidence independence, not just model independence."
     }
   ]
 }
