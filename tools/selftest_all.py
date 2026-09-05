@@ -24,6 +24,7 @@ JOBS = [
     ("topology_recover.py", ["selftest", "--noisy"]),
     ("harness_registry.py", ["selftest"]),
     ("harness_demo.py", []),
+    ("experience_bank.py", ["selftest"]),
 ]
 
 

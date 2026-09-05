@@ -72,7 +72,7 @@ def run_scenario(reg: Registry, sink):
         rec.tool_result(w, cid, ok=True, summary="ok", token_cost={"in": 1100, "out": 35})
         rec.claim(w, f"{w} VAT subtotal computed", [root])
         rec.message(w, "verifier", "result", "submit subtotal for check", "direct")
-    rec.message("verifier", "planner", "critique", "worker-2 rounding is off by 0.01", "direct")
+    rec.message("verifier", "worker-2", "critique", "worker-2 rounding is off by 0.01", "direct")
     # correct-a-bounded-unit loop
     cid = rec.tool_call("worker-2", "python", "fix rounding and recompute")
     rec.tool_result("worker-2", cid, ok=True, token_cost={"in": 300, "out": 12})

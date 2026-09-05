@@ -212,6 +212,10 @@
     {
       "date": "2026-09-22",
       "change": "Autonomous run 63. End-to-end integration demo (tools/harness_demo.py): a planner/worker/verifier team does one bounded unit of work using Registry-defined harness components, recorded via Recorder with the manifest stamped in, then topology_recover reconstructs the roles from the trace. Caught a real design bug: manifest_hash included version counters, so edit-then-revert did not restore it - fixed to hash component body hashes only (attribution is about which bytes produced a result, not how the harness got there). tools/selftest_all.py runs all four selftests: BUILD SELFTEST GREEN."
+    },
+    {
+      "date": "2026-09-22",
+      "change": "Autonomous run 64. Built Phase 2 - the experience bank (tools/experience_bank.py). workflow + step collections kept apart. Three plan-flagged failure modes mitigated in code: source_manifest stamp + stale() (stale-belief), raw source_events retained (compaction cliff), CLAIM dedup by evidence_roots + distinct_evidence_roots not agent count (epistemic Sybil / evidential ancestry, run 52). Token cost rolled up from the Phase 0 schema. selftest_all.py now runs 5 selftests, all GREEN. artifact_phase2_experience_bank added. docs/phase2_experience_bank.md."
     }
   ],
   "nodes": [
@@ -4495,6 +4499,32 @@
       ],
       "evidence_links": [
         "docs/phase1_harness_registry.md"
+      ]
+    },
+    {
+      "id": "artifact_phase2_experience_bank",
+      "label": "Phase 2 experience bank — built against the Phase 0 schema",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase2_built",
+      "confidence": 0.8,
+      "description": "tools/experience_bank.py, run 64: workflow and step collections kept apart with separate retrieval keys. Every entry stamped with source_manifest; bank.stale(current) returns entries whose harness source changed (emergent_stale_belief_propagation mitigation). Raw source_events retained (concept_compaction_cliff mitigation). condense() dedupes CLAIM events by evidence_roots and entries record distinct_evidence_roots not an agent count (pattern_evidential_ancestry_tracking / concept_epistemic_sybil_collapse mitigation). Token cost rolled up from TOOL_RESULT.token_cost. Selftest GREEN. Not done: retrieval is substring match (needs a real signature); no condensation correctness gate (Phase 3); synthetic traces only.",
+      "tags": [
+        "phase-2",
+        "experience-bank",
+        "stale-check",
+        "ancestry-dedup",
+        "raw-retention",
+        "built"
+      ],
+      "derived_from": [
+        "docs/phase2_experience_bank.md",
+        "tools/experience_bank.py"
+      ],
+      "evidence_links": [
+        "docs/phase2_experience_bank.md"
       ]
     }
   ],
@@ -9791,6 +9821,71 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.8,
       "description": "tools/harness_demo.py (run 63) exercises registry + recorder + topology recovery as one unit: trace validates, the manifest in the trace matches the registry, role recovery matches the assigned team, and an edit-then-revert restores the manifest hash exactly. INTEGRATION GREEN."
+    },
+    {
+      "id": "edge_phase2_instantiates_sih",
+      "source": "artifact_phase2_experience_bank",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_phase2_depends_on_phase0",
+      "source": "artifact_phase2_experience_bank",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "Condenses Phase 0 traces; uses CLAIM.evidence_roots and TOOL_RESULT.token_cost directly."
+    },
+    {
+      "id": "edge_phase2_implements_ancestry",
+      "source": "artifact_phase2_experience_bank",
+      "target": "pattern_evidential_ancestry_tracking",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "condense() dedupes claims by evidence root; entries record distinct_evidence_roots, never an agent count."
+    },
+    {
+      "id": "edge_phase2_challenges_stale_belief",
+      "source": "artifact_phase2_experience_bank",
+      "target": "emergent_stale_belief_propagation",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Every entry carries its source manifest; stale() forces re-verification when the harness source changes."
+    },
+    {
+      "id": "edge_phase2_challenges_compaction_cliff",
+      "source": "artifact_phase2_experience_bank",
+      "target": "concept_compaction_cliff",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Raw source_events retained on every entry - the condensation is an index over the trace, not a replacement."
+    },
+    {
+      "id": "edge_phase2_challenges_info_cascades",
+      "source": "artifact_phase2_experience_bank",
+      "target": "emergent_information_cascades",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Bounds a bad condensation's authority (stale-check + ancestry + raw retention); correctness is Phase 3's job."
     }
   ]
 }

@@ -75,13 +75,15 @@ Decompose the current harness into addressable files: prompt fragments, tool def
 
 **Status (run 62):** `tools/harness_registry.py` — a `Registry` over `runtime/harness/<kind>/<name>` (kinds: prompt / tool / context / hook / topology), each component a body file plus a `history.json` version chain that retains every version's body (exact revert — the purpose-built recovery `pattern_recoverability_constrained_evolution` requires). `set()` no-ops on unchanged bodies; `revert()` is itself recorded append-only; `manifest()` hashes the whole harness state and `Recorder(harness_manifest=...)` stamps it into the run's trace, so a result is attributable to exact component versions. Selftest GREEN. Full writeup: `docs/phase1_harness_registry.md`. **Not done:** no real harness is decomposed into it yet — that is the adapter work (§ below), which also produces the first non-synthetic trace.
 
-### Phase 2 — Experience bank
+### Phase 2 — Experience bank — **built against the Phase 0 schema (run 64)**
 
 Condense traces into two stores kept deliberately apart: **workflow-level** (what shape of approach works for this task class, retrieved at planning) and **step-level** (what specific move was wrong here, retrieved at failure). Merging them yields a store that is wrong at both moments.
 
 **Watch:** three `challenges` edges land here. `emergent_information_cascades` — the bank is shared upstream context for every later run; a wrongly condensed pattern is a cascade with persistence. `emergent_stale_belief_propagation` (run 18) — a condensed pattern is a "settled" record by construction, and agents re-verify those at ~23% (74–77% stale-consistent decisions when the situation has moved). `concept_compaction_cliff` (run 18) — condensation preferentially loses the normative content.
 
 **So:** keep the raw trace alongside every condensation (traceback + eviction); stamp every bank entry with the source-record version it was derived from and force re-verification when that source changes; and never let a rule or constraint exist only in condensed form.
+
+**Status (run 64):** `tools/experience_bank.py` — `workflow` and `step` collections in separate directories with separate retrieval keys. Every entry carries `source_manifest` (the harness state it was condensed under) and `bank.stale(current_manifest)` returns entries whose source changed — re-verify before reuse. Raw `source_events` retained on every entry. `condense()` dedupes `CLAIM` events by `evidence_roots` and entries record `distinct_evidence_roots`, never an agent count (`pattern_evidential_ancestry_tracking`, run 52 — added since this section was written). Token-cost roll-up from `TOOL_RESULT.token_cost`. Selftest GREEN; `tools/selftest_all.py` runs all five. Full writeup: `docs/phase2_experience_bank.md`. **Not done:** retrieval is substring-match on a key (needs a real task/error signature); no condensation *correctness* gate (that is Phase 3); synthetic traces only.
 
 ### Phase 3 — Proposer + verifier loop
 
