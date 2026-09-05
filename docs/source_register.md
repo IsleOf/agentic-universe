@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 142 nodes, 375 edges · **Date:** 2026-09-05
+**Graph at generation:** 144 nodes, 383 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -66,14 +66,17 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
 | [2607.22758](https://arxiv.org/abs/2607.22758) | (title not recorded) | `concept_topology_shapes_error_propagation`, `emergent_information_cascades` |
+| [2607.24625](https://arxiv.org/abs/2607.24625) | (title not recorded) | `pattern_disposable_branch_exploration` |
 | [2607.27191](https://arxiv.org/abs/2607.27191) | (title not recorded) | `concept_motive_operative_split`, `concept_research_lifecycle_split` |
 | [2608.03585](https://arxiv.org/abs/2608.03585) | (title not recorded) | `emergent_knowledge_commons_erosion` |
 | [2608.06984](https://arxiv.org/abs/2608.06984) | HarnessSafe | `concept_cheap_death`, `pattern_execution_layer_enforcement`, `pattern_trajectory_driven_safety_evolution` |
 | [2608.07169](https://arxiv.org/abs/2608.07169) | Agent Memory Distillation (AMD) | `concept_inheritance_channel`, `pattern_agent_memory_distillation` |
+| [2608.08523](https://arxiv.org/abs/2608.08523) | (title not recorded) | `pattern_checkpoint_and_switch` |
 | [2608.09096](https://arxiv.org/abs/2608.09096) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2608.09885](https://arxiv.org/abs/2608.09885) | SHE: trajectory-driven safety harness evolution | `pattern_trajectory_driven_safety_evolution` |
 | [2608.12253](https://arxiv.org/abs/2608.12253) | One Frozen Simulator Is Not Enough | `emergent_evaluator_mode_collapse` |
 | [2608.12921](https://arxiv.org/abs/2608.12921) | (title not recorded) | `pattern_causal_edge_pruning` |
+| [2608.14380](https://arxiv.org/abs/2608.14380) | (title not recorded) | `concept_cheap_death` |
 | [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
 | [2608.16951](https://arxiv.org/abs/2608.16951) | (title not recorded) | `emergent_autonomous_discovery` |
 | [2608.17597](https://arxiv.org/abs/2608.17597) | HarnessRisk | `emergent_recognition_execution_gap`, `pattern_execution_layer_enforcement` |
@@ -232,6 +235,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-11-1200.md` — `concept_agent_shaped_topology_is_agent_corruptible`
 - `docs/auto_sweep_2026-09-11-1800.md` — `principle_structural_edits_gated_outside_the_agents`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
+- `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

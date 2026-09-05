@@ -120,6 +120,10 @@
     {
       "date": "2026-09-13",
       "change": "Autonomous run 28. Communication-topology sweep - developed the graph_engineering / orchestration half. concept_topology_shapes_error_propagation (arXiv:2607.22758 VERIFIED): scale-free/hub topologies amplify hallucination variance 51.81% vs random graphs; no topology is adversarially robust; adaptive switching beats fixed; algebraic connectivity of the Laplacian is a monitorable metric. pattern_causal_edge_pruning: the critical communication subgraph is small, find it via causal inference and prune the rest (cheaper + less corruptible); codebook variant amortises successful topologies (22-33% fewer tokens). Refines emergent_information_cascades and concept_agent_shaped_topology_is_agent_corruptible."
+    },
+    {
+      "date": "2026-09-13",
+      "change": "Autonomous run 30. Recovery-mechanism sweep - evidence for concept_cheap_death, which was asserted. REFINED cheap_death -> partially_validated: cheap recovery buys DELIBERATE exploration (checkpoint, try alternative, roll back with what failure taught) and shifts agents toward verification-seeking, NOT reckless gambling - a better claim for the habitat model. pattern_disposable_branch_exploration (APPA): untrusted work in a confined recovery envelope, taint absorbed locally, bounded exit - same shape as the structural gate one level down. pattern_checkpoint_and_switch (2608.08523 + AgentRewind): on stall, roll back and switch to a behaviourally distinct archived policy - the worker-side counterpart to supervisor stagnation-redirect."
     }
   ],
   "nodes": [
@@ -1888,11 +1892,11 @@
       "label": "Cheap death: failure that is survivable and reversible",
       "type": "concept",
       "status": "to_test",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "agent_habitat",
       "branch_key": "agent_habitat:cheap_death",
-      "confidence": 0.6,
-      "description": "Failure must be recoverable at low cost - sandboxed execution, snapshot and rollback, disposable instances. The mechanism claim is that exploration rate is set by the cost of being wrong: where failure is expensive an agent converges on safe known moves, which is indistinguishable from having no exploratory capacity. Making death cheap is how a habitat buys risk-taking without buying risk.",
+      "confidence": 0.65,
+      "description": "Failure must be recoverable at low cost - sandboxed execution, snapshot and rollback, disposable instances. The mechanism claim is that exploration rate is set by the cost of being wrong: where failure is expensive an agent converges on safe known moves, which is indistinguishable from having no exploratory capacity. Making death cheap is how a habitat buys risk-taking without buying risk. REFINED 2026-09-13: the mechanism is more specific than 'cheap failure -> more risk-taking'. A sweep of recovery-mechanism work (AgentRewind 2608.14380 VERIFIED, PACE-Bench 2608.14441, diverse-planning-policies 2608.08523, APPA 2607.24625) shows cheap recovery buys DELIBERATE exploration - checkpoint, try an alternative, roll back with what the failure taught, try another - and shifts agents toward verification-seeking (simulator-grounded reflection beats unverified self-revision). It does not produce reckless gambling. This is a better claim for the habitat model: cheap death funds methodical strategy-space search, which is exactly the exploration worth having.",
       "tags": [
         "failure",
         "rollback",
@@ -1903,7 +1907,8 @@
       "derived_from": [
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "ECC bounded evaluation + rollback loop",
-        "arXiv:2608.06984 (HarnessSafe): containment is carrier-specific"
+        "arXiv:2608.06984 (HarnessSafe): containment is carrier-specific",
+        "arXiv:2608.14380 (AgentRewind) - VERIFIED; 2608.14441 (PACE-Bench), 2608.08523, 2607.24625 (APPA) - abstracts read"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -3613,6 +3618,56 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-13-0600.md"
+      ]
+    },
+    {
+      "id": "pattern_disposable_branch_exploration",
+      "label": "Untrusted exploration in a confined recovery envelope",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:disposable_branch",
+      "confidence": 0.6,
+      "description": "Risky or untrusted work runs in a disposable child branch that absorbs any taint locally and exits only through shape-bounded channels (APPA, arXiv:2607.24625). The branch can do anything; what leaves it is constrained, not what happens inside it. This is the concrete implementation of concept_cheap_death for the nourishing harness - and it is the same shape as principle_structural_edits_gated_outside_the_agents one level down: the interior is free, the boundary is where acceptance happens. Ties cheap death to the two-part gate: a disposable branch is where an agent explores a structural edit before it is proposed for external validation.",
+      "tags": [
+        "disposable-branch",
+        "taint-containment",
+        "bounded-channel",
+        "cheap-death",
+        "confined-exploration"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-13-1800.md",
+        "arXiv:2607.24625 (APPA) - abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-13-1800.md"
+      ]
+    },
+    {
+      "id": "pattern_checkpoint_and_switch",
+      "label": "On stall, roll back and switch to a behaviourally distinct policy",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:checkpoint_switch",
+      "confidence": 0.55,
+      "description": "When an agent detects persistent stall, it rolls back to the latest checkpoint and switches to a behaviourally distinct archived policy rather than continuing to push the stuck approach (arXiv:2608.08523). The worker-side counterpart to pattern_supervisor_stagnation_redirect: the supervisor watches the trajectory shape from outside; this is the agent doing the same for itself, with a library of distinct policies to fall back to. Requires checkpointing (AgentRewind: aligned checkpoints of agent context AND controlled environment) and an archive of distinct policies to switch between - the diversity-maintenance store put to a second use.",
+      "tags": [
+        "checkpoint",
+        "policy-switch",
+        "stall-detection",
+        "self-redirect",
+        "policy-archive"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-13-1800.md",
+        "arXiv:2608.08523, arXiv:2608.14380 (AgentRewind) - abstracts read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-13-1800.md"
       ]
     }
   ],
@@ -7560,6 +7615,91 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "graph_engineering",
       "confidence": 0.45
+    },
+    {
+      "id": "edge_disposable_branch_instantiates_habitat",
+      "source": "pattern_disposable_branch_exploration",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_disposable_branch_implements_cheap_death",
+      "source": "pattern_disposable_branch_exploration",
+      "target": "concept_cheap_death",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "The concrete build: disposable child branch, taint absorbed locally, bounded exit channel."
+    },
+    {
+      "id": "edge_disposable_branch_same_shape_as_structural_gate",
+      "source": "pattern_disposable_branch_exploration",
+      "target": "principle_structural_edits_gated_outside_the_agents",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "Same shape one level down - free interior, gated boundary. A disposable branch is where a structural edit is explored before external validation."
+    },
+    {
+      "id": "edge_disposable_branch_supports_nourishing",
+      "source": "pattern_disposable_branch_exploration",
+      "target": "approach_nourishing_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_checkpoint_switch_instantiates_sih",
+      "source": "pattern_checkpoint_and_switch",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_checkpoint_switch_complements_supervisor_redirect",
+      "source": "pattern_checkpoint_and_switch",
+      "target": "pattern_supervisor_stagnation_redirect",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Worker-side counterpart: the supervisor watches trajectory shape from outside, this is the agent doing it for itself."
+    },
+    {
+      "id": "edge_checkpoint_switch_depends_on_cheap_death",
+      "source": "pattern_checkpoint_and_switch",
+      "target": "concept_cheap_death",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "Rolling back to a checkpoint only works if checkpointing is cheap - AgentRewind's aligned context+environment checkpoints."
+    },
+    {
+      "id": "edge_checkpoint_switch_reuses_diversity_store",
+      "source": "pattern_checkpoint_and_switch",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "The archive of behaviourally distinct policies is the diversity-maintenance store put to a second use - a maintained population of approaches is also a fallback library."
     }
   ]
 }
