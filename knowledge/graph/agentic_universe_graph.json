@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-05",
+  "last_updated": "2026-09-06",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -48,6 +48,10 @@
     {
       "date": "2026-09-05",
       "change": "First sweep with the research-fetch skill (Semantic Scholar citation graph + AI Alignment Forum). +4 nodes, +11 edges. The AHE citation set shows harness self-evolution became a 15+-system subfield in weeks (concept_harness_evolution_subfield). Two reported-influential systems name mechanisms this project had asserted: EvoUndo -> pattern_recoverability_constrained_evolution (retraction as a precondition on the edit, not cleanup after), and behaviour-aware verification work -> concept_verification_is_the_binding_constraint (verification cost bounds safe self-modification, the harness-layer form of the substitution frontier). Also pattern_debate_against_reward_hacking as a third evaluator-collapse repair (speculative - from a forum post, not a read paper). All S2-sourced papers marked as indexed-not-opened per the register convention."
+    },
+    {
+      "date": "2026-09-06",
+      "change": "Added approach_nourishing_harness (9 nodes, ~22 edges): the per-agent execution environment designed to feed emergence, paired with - not fused to - the orchestration graph. Single gate at the outer boundary only. From two videos (the four-way open-source harness comparison; Nate B. Jones on reused input) and a 30-day GitHub read of Hermes/OpenClaw/Agent Zero/OpenCode/Prime Agent/DeepSeek Harness. Key nodes: pattern_continual_self_refinement (Prime Agent - ungated self-modification, challenges pattern_verifier_gated_promotion head-on), pattern_code_as_context (RLM), pattern_pre_request_intermediary (a layer before the model call that can skip it), concept_reused_input_dominates (measured 96%), concept_tool_definition_tax (~55k tokens for 4 servers), concept_harness_convergence_2026_09 (agent society as UI, scheduled agents that learn, token cost first-class, recovery as the maintenance frontier)."
     }
   ],
   "nodes": [
@@ -1459,7 +1463,8 @@
       ],
       "derived_from": [
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
-        "ECC context/token economics (knowledge/notes/ecc-agent-harness-patterns.md)"
+        "ECC context/token economics (knowledge/notes/ecc-agent-harness-patterns.md)",
+        "docs/harness_field_study_2026-09-06.md - Agent Zero Context Window Usage Indicator, Hermes lean-tail compression as default: token cost is now first-class UI across shipping harnesses"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -2253,7 +2258,8 @@
       "derived_from": [
         "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
         "NVIDIA AVO technical blog (2026-09-04)",
-        "arXiv:2608.26530 (PILOT in the Loop) - VERIFIED"
+        "arXiv:2608.26530 (PILOT in the Loop) - VERIFIED",
+        "GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes v0.21.0: sub-agents can be steered live mid-flight, shipped"
       ],
       "evidence_links": [
         "docs/sweep_2026-09-05.md"
@@ -2627,6 +2633,255 @@
       ],
       "evidence_links": [
         "docs/research_fetch_sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "approach_nourishing_harness",
+      "label": "Nourishing harness approach family",
+      "type": "approach",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:root",
+      "confidence": 0.6,
+      "description": "The per-agent execution environment, designed to actively feed emergent behaviour rather than merely permit it, and paired with - not fused to - the orchestration layer. Orchestration owns relational structure (which agent does what, dependencies, routing) as a graph; the nourishing harness owns what each agent runs inside: shared execution substrate, the habitat mechanisms (slack, cheap death, graded challenge, inheritance, diversity maintenance), continual self-refinement, and a society surface. The single constraint is the outermost one - human approval on final world-affecting acts only. Everything interior is ungated by design; this is principle_terminal_gate_only taken to its endpoint, for a contained study habitat.",
+      "tags": [
+        "harness",
+        "habitat",
+        "emergence",
+        "nourishment",
+        "orchestration-pair"
+      ],
+      "derived_from": [
+        "owner directive 2026-09-06: matching harness to orchestration layer, no security paranoias, free-flowing agents and swarms whose emergent behaviours are systematically nourished",
+        "docs/nourishing_harness_design.md"
+      ],
+      "evidence_links": [
+        "docs/nourishing_harness_design.md"
+      ]
+    },
+    {
+      "id": "concept_harness_orchestration_pairing",
+      "label": "Harness and orchestration as paired, separable layers",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:harness_orchestration_pairing",
+      "confidence": 0.65,
+      "description": "Orchestration is relational structure - a graph over tasks, agents, and dependencies (approach_graph_engineering). The harness is the per-agent execution environment that graph's nodes run inside. Keeping them separate means the swarm topology can change without rebuilding each agent's runtime, and the runtime can be nourished without touching topology. The pairing interface is thin: orchestration hands the harness a scoped task and a peer set; the harness hands back a trace. This is the clean version of what pattern_shared_execution_substrate (openJiuwen) and the loop-vs-graph orthogonality critique both point at.",
+      "tags": [
+        "pairing",
+        "separation-of-concerns",
+        "orchestration",
+        "harness",
+        "interface"
+      ],
+      "derived_from": [
+        "docs/nourishing_harness_design.md",
+        "arXiv:2608.21156 loop/graph orthogonality critique",
+        "arXiv:2608.27969 shared execution substrate"
+      ],
+      "evidence_links": [
+        "docs/nourishing_harness_design.md"
+      ]
+    },
+    {
+      "id": "pattern_continual_self_refinement",
+      "label": "Continual harness: agents edit their own operating instructions",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:continual_self_refinement",
+      "confidence": 0.6,
+      "description": "Prompts, learned skills, and sub-agent definitions are persistent editable state that the agent modifies itself and that carries across sessions - a user or the agent runs a refine step ('always write tests first') and it becomes standing behaviour, not a per-session note. Distinct from the verifier-gated harness loop: this is direct, immediate, ungated self-modification, matching the emergence-first stance. Prime Agent ships this as its headline feature. The open question it raises for this project: without a gate, what stops the refinement loop from drifting - and the honest answer under emergence-first is nothing, that is the point, and diversity maintenance plus cheap rollback are the only checks.",
+      "tags": [
+        "continual-harness",
+        "self-modification",
+        "persistent-state",
+        "refine",
+        "ungated"
+      ],
+      "derived_from": [
+        "YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06 - Prime Intellect 'continual harness' / /refine",
+        "arXiv:2608.26530 PILOT distillation"
+      ],
+      "evidence_links": [
+        "docs/nourishing_harness_design.md"
+      ]
+    },
+    {
+      "id": "pattern_code_as_context",
+      "label": "Context as a manipulable variable, not a text wall",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:code_as_context",
+      "confidence": 0.55,
+      "description": "The agent is given a persistent code kernel (an IPython session) in which tools, skills, and sub-agents are just callable code, and the conversation context is an object the agent inspects and rewrites programmatically rather than a transcript it re-reads. Prime Agent's Recursive Language Model. Reported to use fewer tokens - running functions over data directly avoids the tool-call round-trip - and it makes context management something the agent does in code rather than something the harness does to it. Bears on concept_context_economics: the largest single lever on reused input is not compression, it is not accumulating the transcript in the first place.",
+      "tags": [
+        "rlm",
+        "code-kernel",
+        "context-as-variable",
+        "ipython",
+        "token-efficiency"
+      ],
+      "derived_from": [
+        "YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06 - Prime Intellect Recursive Language Model"
+      ],
+      "evidence_links": [
+        "docs/nourishing_harness_design.md"
+      ]
+    },
+    {
+      "id": "pattern_pre_request_intermediary",
+      "label": "A layer that runs before the model call and can skip it",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:pre_request_intermediary",
+      "confidence": 0.6,
+      "description": "An intermediary sitting between the agent and the model provider, acting before the request goes up: it can return a cached or previously-accepted answer with no model call, run a fixed local recipe, select only the useful passages to forward, enforce hard size limits, or stop the call entirely. The architectural point, from the source: a skill or instruction that runs inside the agent loop is always too late - by the time the model reads it, the conversation, standing instructions, and tool definitions are already in the envelope. Context optimisation that matters has to live outside and before the call.",
+      "tags": [
+        "intermediary",
+        "pre-request",
+        "cache",
+        "model-call-skip",
+        "hard-limits"
+      ],
+      "derived_from": [
+        "YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - 'Ringer' framework; 'a skill cannot make the call it is inside of any smaller'"
+      ],
+      "evidence_links": [
+        "docs/nourishing_harness_design.md"
+      ]
+    },
+    {
+      "id": "concept_reused_input_dominates",
+      "label": "Reused input is ~96% of token spend",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:reused_input",
+      "confidence": 0.7,
+      "description": "The message a user or agent types is a rounding error against the call it rides in. A measured working day: 3.77B tokens through one workspace, 3.59B (96%) reused input - the transcript, standing instructions, and tool definitions re-sent from the top every turn because that is how stateless models fake memory. Every output token is billed again as input on every subsequent turn, compounding. A failed answer's retry carries the whole context a second and third time. This is the concrete size of the problem concept_context_economics names, and it is not being fixed at the lab layer - the incentive runs the other way - so it is a harness responsibility.",
+      "tags": [
+        "reused-input",
+        "token-economics",
+        "measured",
+        "context",
+        "retry-cost"
+      ],
+      "derived_from": [
+        "YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - Nate B. Jones tracker: 3.77B tokens/day, 3.59B reused input, 143 Codex threads"
+      ],
+      "evidence_links": [
+        "docs/harness_field_study_2026-09-06.md"
+      ]
+    },
+    {
+      "id": "concept_tool_definition_tax",
+      "label": "Tool definitions cost tokens before the model acts",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:tool_tax",
+      "confidence": 0.65,
+      "description": "Every connected tool ships its description - what it does, when to use it, its arguments - as model input on every call, before the model does anything. Reported: ~55,000 tokens of tool definitions for a four-server setup (GitHub, Slack, Sentry, Grafana). So a large tool surface is a standing tax on every turn, which is the measured basis for the 'small tool surface' / '<10 MCP servers' rule and for dynamic tool loading (load only the tools the current job can use; multi-query tool_search with stemming, as Hermes ships).",
+      "tags": [
+        "tool-definitions",
+        "mcp-tax",
+        "dynamic-tool-loading",
+        "context",
+        "measured"
+      ],
+      "derived_from": [
+        "YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - Anthropic tool-definition token measurement",
+        "GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes multi-query tool_search"
+      ],
+      "evidence_links": [
+        "docs/harness_field_study_2026-09-06.md"
+      ]
+    },
+    {
+      "id": "concept_harness_convergence_2026_09",
+      "label": "What the shipping harnesses converged on, Sept 2026",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:field_convergence",
+      "confidence": 0.7,
+      "description": "A 30-day read of Hermes Agent (v0.21.0 'Pantheon'), OpenClaw (v2026.9.2, ~389k stars), Agent Zero (v2.11), OpenCode (v1.18.x), plus Prime Agent and DeepSeek Harness. Convergent, across independent teams: (1) the agent society as first-class UI - named agents with faces, group rooms, bot-to-bot messaging (Hermes Bot Mode); (2) scheduled agents that learn between runs - cron with persistent memory and per-job reasoning effort (Hermes); (3) live sub-agent steering mid-flight; (4) token cost made visible and first-class - usage rings, price/cache-hit readouts, lean-tail compression as default (Agent Zero, Hermes); (5) harness-boundary output repair - fix malformed tool-call JSON before dispatch (Agent Zero Context Doctor); (6) recovery as the maintenance frontier - the mature harnesses spend most commits on not losing state across restarts and updates (OpenClaw, Prime Agent disk-cursor outbox); (7) the harness drives its own persistent authenticated browser (Hermes, Agent Zero shared Chromium). OpenCode's 30-day changelog is almost entirely provider plumbing and bugfixes - 'polished breadth' means the innovation budget goes elsewhere.",
+      "tags": [
+        "field-study",
+        "convergence",
+        "hermes",
+        "openclaw",
+        "agent-zero",
+        "opencode"
+      ],
+      "derived_from": [
+        "docs/harness_field_study_2026-09-06.md",
+        "GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github)",
+        "YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06"
+      ],
+      "evidence_links": [
+        "docs/harness_field_study_2026-09-06.md"
+      ]
+    },
+    {
+      "id": "pattern_agent_society_surface",
+      "label": "Agents as a society you interact with, not a toolbox",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:agent_society_surface",
+      "confidence": 0.55,
+      "description": "Every agent profile gets a name, a deterministic avatar, and a place in shared group rooms; agents message each other and the human in the same surface, as a team rather than as invoked tools. Hermes ships this bundled and default-on. For this project it is a ready-made substrate for the swarm-level emergence probes - reputation, norms, social conventions, coordination - because the interaction surface already treats agents as persistent named parties with visible relationships.",
+      "tags": [
+        "society",
+        "named-agents",
+        "group-rooms",
+        "bot-to-bot",
+        "swarm-surface"
+      ],
+      "derived_from": [
+        "GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes v0.21.0 Bot Mode"
+      ],
+      "evidence_links": [
+        "docs/nourishing_harness_design.md"
+      ]
+    },
+    {
+      "id": "pattern_scheduled_agent_with_continuity",
+      "label": "Scheduled agents that learn between runs",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:scheduled_continuity",
+      "confidence": 0.6,
+      "description": "A cron-triggered agent that loads and updates persistent memory each run, carries a durable per-job notepad, and can be given its own reasoning-effort setting - so a scheduled task accumulates rather than restarting cold. Hermes ships this. It is the operational form of concept_inheritance_channel on the time axis, and the mechanism this project should use to keep a research loop advancing across sessions without a human re-priming it each time.",
+      "tags": [
+        "cron",
+        "continuity",
+        "persistent-memory",
+        "scheduled-agent",
+        "inheritance"
+      ],
+      "derived_from": [
+        "GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes cron jobs gained persistent memory and per-job reasoning effort",
+        "owner directive 2026-09-06: cron job that picks up the goal and forces research to continue"
+      ],
+      "evidence_links": [
+        "docs/harness_field_study_2026-09-06.md"
       ]
     }
   ],
@@ -5078,6 +5333,267 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "emergent_behaviors",
       "confidence": 0.4
+    },
+    {
+      "id": "edge_harness_orchestration_pairing_instantiates_nh",
+      "source": "concept_harness_orchestration_pairing",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_continual_self_refinement_instantiates_nh",
+      "source": "pattern_continual_self_refinement",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_code_as_context_instantiates_nh",
+      "source": "pattern_code_as_context",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_pre_request_intermediary_instantiates_nh",
+      "source": "pattern_pre_request_intermediary",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_agent_society_surface_instantiates_nh",
+      "source": "pattern_agent_society_surface",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_nh_pairs_with_orchestration",
+      "source": "approach_nourishing_harness",
+      "target": "approach_graph_engineering",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "The pairing: the graph carries topology, the harness carries the per-agent runtime. Neither subsumes the other - the loop/graph orthogonality critique made structural."
+    },
+    {
+      "id": "edge_nh_instantiates_habitat",
+      "source": "approach_nourishing_harness",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "The harness is where the six habitat mechanisms are actually implemented - slack allocator, cheap-death sandbox, graded-challenge feeder, inheritance channel, diversity maintainer, retraction path."
+    },
+    {
+      "id": "edge_nh_instantiates_emergence_first",
+      "source": "approach_nourishing_harness",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "'Systematically nourished' is emergence-first with an active verb: not just declining to constrain, but building the environment that feeds the behaviour."
+    },
+    {
+      "id": "edge_nh_endpoint_of_terminal_gate",
+      "source": "approach_nourishing_harness",
+      "target": "principle_terminal_gate_only",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "One gate, at the outer boundary, on world-affecting acts. Everything interior ungated. This is the principle carried to its limit for a contained habitat."
+    },
+    {
+      "id": "edge_continual_refinement_challenges_verifier_gate",
+      "source": "pattern_continual_self_refinement",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Direct opposition. The verifier gate stops harness drift by checking every edit; continual self-refinement applies edits immediately and ungated. Under emergence-first the second wins and drift is accepted as the cost of the behaviour; the only checks left are diversity maintenance and cheap rollback."
+    },
+    {
+      "id": "edge_continual_refinement_needs_recoverability",
+      "source": "pattern_continual_self_refinement",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "If refinement is ungated, cheap and complete rollback is the entire safety story. EvoUndo's recoverability constraint is the one check compatible with ungated self-modification."
+    },
+    {
+      "id": "edge_diversity_maintenance_bounds_continual_refinement",
+      "source": "principle_diversity_maintenance",
+      "target": "pattern_continual_self_refinement",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "Ungated refinement across a population converges it unless diversity is actively defended - heterogeneous starting prompts, a withheld-refinement fraction."
+    },
+    {
+      "id": "edge_reused_input_instantiates_context_economics",
+      "source": "concept_reused_input_dominates",
+      "target": "concept_context_economics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge_tool_tax_instantiates_context_economics",
+      "source": "concept_tool_definition_tax",
+      "target": "concept_context_economics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_code_as_context_repairs_reused_input",
+      "source": "pattern_code_as_context",
+      "target": "concept_reused_input_dominates",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The strongest lever on reused input: an agent that holds context as a code object it prunes programmatically never accumulates the transcript that gets re-sent."
+    },
+    {
+      "id": "edge_pre_request_intermediary_cuts_reused_input",
+      "source": "pattern_pre_request_intermediary",
+      "target": "concept_reused_input_dominates",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "A cache hit or local recipe returns an answer for zero tokens - the whole call, not just the typed part."
+    },
+    {
+      "id": "edge_pre_request_intermediary_supports_context_economics",
+      "source": "pattern_pre_request_intermediary",
+      "target": "concept_context_economics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_field_convergence_supports_capability_delta",
+      "source": "concept_harness_convergence_2026_09",
+      "target": "concept_harness_capability_delta",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Independent teams spending their whole innovation budget on the harness layer is a scaled bet the capability delta is real."
+    },
+    {
+      "id": "edge_society_surface_supports_swarm_probes",
+      "source": "pattern_agent_society_surface",
+      "target": "verification_suite_communication_topology",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A shipped surface where agents are persistent named parties with visible relationships is a ready substrate for the reputation, norm, and coordination probes."
+    },
+    {
+      "id": "edge_society_surface_supports_reputation",
+      "source": "pattern_agent_society_surface",
+      "target": "emergent_reputation_and_trust_dynamics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_scheduled_continuity_instantiates_inheritance",
+      "source": "pattern_scheduled_agent_with_continuity",
+      "target": "concept_inheritance_channel",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_scheduled_continuity_supports_nh",
+      "source": "pattern_scheduled_agent_with_continuity",
+      "target": "approach_nourishing_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_field_convergence_instantiates_sih",
+      "source": "concept_harness_convergence_2026_09",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_reused_input_instantiates_sih",
+      "source": "concept_reused_input_dominates",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_tool_tax_instantiates_sih",
+      "source": "concept_tool_definition_tax",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
     }
   ]
 }

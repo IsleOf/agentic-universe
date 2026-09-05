@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 107 nodes, 235 edges · **Date:** 2026-09-05
+**Graph at generation:** 117 nodes, 260 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -32,9 +32,9 @@ Opened and checked directly.
 | [2604.25850](https://arxiv.org/abs/2604.25850) | Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses - J. Lin, S. Liu, C. Pan, L. Lin, S. Dou, Z. Xi, X. Huang, H. Yan, Z. Han, T. Gui, Y-G. Jiang | `concept_harness_evolution_subfield`, `pattern_harness_component_versioning`, `pattern_meta_harness_falsifiable_prediction` |
 | [2607.14159](https://arxiv.org/abs/2607.14159) | MemoHarness: Agent Harnesses That Learn from Experience - Y. Huang, W. Wang, H. Bao, Y. Ma, X. Luo, Y. Nian, H. Zhuang, Z. Liu, Y. Zhao, X. Zhang | `pattern_experience_bank` |
 | [2608.10218](https://arxiv.org/abs/2608.10218) | Mind Viruses: Self-Propagating Ideas in Multi-Agent LLM Systems - V. Papadopoulos, M. Shah, S. Zimmerman, J. Lindsey | `concept_inheritance_channel`, `emergent_mind_viruses` |
-| [2608.21156](https://arxiv.org/abs/2608.21156) | Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence - Y. Feng, Z. Xiang, C. Yang, Q. Ma et al. (36 authors) | `approach_graph_engineering`, `concept_agentic_os`, `concept_engineering_paradigm_ladder` +9 |
-| [2608.26530](https://arxiv.org/abs/2608.26530) | PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents | `pattern_skill_induction`, `pattern_supervisor_stagnation_redirect` |
-| [2608.27969](https://arxiv.org/abs/2608.27969) | openJiuwen: Beyond Static Harnesses for Long-Horizon Coding Agents (Huawei) - full results table checked; headline +3.39pp is a backend swap, same-backend comparison is +0.24pp within reported uncertainty | `concept_benchmark_headline_substitution`, `pattern_evaluation_driven_harness_optimization`, `pattern_shared_execution_substrate` +1 |
+| [2608.21156](https://arxiv.org/abs/2608.21156) | Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence - Y. Feng, Z. Xiang, C. Yang, Q. Ma et al. (36 authors) | `approach_graph_engineering`, `concept_agentic_os`, `concept_engineering_paradigm_ladder` +10 |
+| [2608.26530](https://arxiv.org/abs/2608.26530) | PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents | `pattern_continual_self_refinement`, `pattern_skill_induction`, `pattern_supervisor_stagnation_redirect` |
+| [2608.27969](https://arxiv.org/abs/2608.27969) | openJiuwen: Beyond Static Harnesses for Long-Horizon Coding Agents (Huawei) - full results table checked; headline +3.39pp is a backend swap, same-backend comparison is +0.24pp within reported uncertainty | `concept_benchmark_headline_substitution`, `concept_harness_orchestration_pairing`, `pattern_evaluation_driven_harness_optimization` +2 |
 | [2608.29596](https://arxiv.org/abs/2608.29596) | Towards a Systems Foundation for Agentic Skills: Architecture, Lifecycle, and Security - nine-stage skill lifecycle, marketplace and adversarial threat analysis | `pattern_agentic_skill_lifecycle` |
 | [2608.29612](https://arxiv.org/abs/2608.29612) | LLMs Interpret, Embeddings Organize, Graphs Emerge: Agent-Driven Compilation of Scientific Knowledge - S-J. Ran, K. Zhang, X. Wu, L-S. Yang, W-J. Li | `emergent_additive_growth_bias`, `pattern_agent_driven_graph_compilation`, `pattern_graph_delta_as_change_unit` +2 |
 
@@ -118,6 +118,11 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - ECC skill induction / instincts — `pattern_skill_induction`
 - Frontiers 2026 goal-directed reasoning — `emergent_goal_persistence_and_drift`
 - Frontiers 2026 hierarchical AI scientist ecosystems — `pattern_shallow_hierarchy`
+- GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) — `concept_harness_convergence_2026_09`
+- GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes cron jobs gained persistent memory and per-job reasoning effort — `pattern_scheduled_agent_with_continuity`
+- GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes multi-query tool_search — `concept_tool_definition_tax`
+- GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes v0.21.0 Bot Mode — `pattern_agent_society_surface`
+- GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes v0.21.0: sub-agents can be steered live mid-flight, shipped — `pattern_supervisor_stagnation_redirect`
 - Governing the Swarm: Config-Driven Control Plane for Human-in-the-Loop Multi-Agent Systems at Scale (Hackernoon, 2026-07-30) — `concept_config_driven_control_plane`
 - HuggingGPT, LLMCompiler (plan compiled to dataflow DAG for parallel dispatch) — `pattern_task_organization_graph`
 - ICLR 2026 'Evidence for Limited Metacognition in LLMs' — `emergent_metacognitive_monitoring`
@@ -142,6 +147,12 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - SkillGraph, Captain Agent (recruits and reorganises experts as requirements emerge) — `pattern_agent_coordination_graph`
 - TDAG, Flow (task graphs refined from intermediate results) — `pattern_runtime_adaptive_workflow`
 - Verbalized Sampling — `pattern_verbalized_sampling`
+- YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06 — `concept_harness_convergence_2026_09`
+- YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06 - Prime Intellect 'continual harness' / /refine — `pattern_continual_self_refinement`
+- YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06 - Prime Intellect Recursive Language Model — `pattern_code_as_context`
+- YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - 'Ringer' framework; 'a skill cannot make the call it is inside of any smaller' — `pattern_pre_request_intermediary`
+- YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - Anthropic tool-definition token measurement — `concept_tool_definition_tax`
+- YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - Nate B. Jones tracker: 3.77B tokens/day, 3.59B reused input, 143 Codex threads — `concept_reused_input_dominates`
 - arXiv 'Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification' via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened — `concept_verification_is_the_binding_constraint`
 - arXiv EvoUndo (Recoverability-Constrained Self-Evolution for LLM Agent Harnesses) via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened — `pattern_recoverability_constrained_evolution`
 - arXiv:2607.31 (AgentS4D): 6,560 sandboxed runs, 68% triggered unsafe signals — `emergent_recognition_execution_gap`
@@ -168,6 +179,9 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
+- `docs/harness_field_study_2026-09-06.md` — `concept_harness_convergence_2026_09`
+- `docs/harness_field_study_2026-09-06.md - Agent Zero Context Window Usage Indicator, Hermes lean-tail compression as default: token cost is now first-class UI across shipping harnesses` — `concept_context_economics`
+- `docs/nourishing_harness_design.md` — `approach_nourishing_harness`, `concept_harness_orchestration_pairing`
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking` +1
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
@@ -182,6 +196,8 @@ Nodes derived from this repository's own documents and conversation archives.
 - owner directive 2026-09-01: 'let them flow naturally with their emergent behaviours and only limit the final decisions at highest hitl level' — `principle_terminal_gate_only`
 - owner directive 2026-09-05: build a self-improving agentic OS and a dynamically improving harness — `approach_self_improving_harness`
 - owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research — `approach_agent_habitat`, `concept_cheap_death`, `concept_graded_challenge` +6
+- owner directive 2026-09-06: cron job that picks up the goal and forces research to continue — `pattern_scheduled_agent_with_continuity`
+- owner directive 2026-09-06: matching harness to orchestration layer, no security paranoias, free-flowing agents and swarms whose emergent behaviours are systematically nourished — `approach_nourishing_harness`
 - owner-supplied video set 2026-09-05 (Discover AI); primary sources read directly rather than transcripts — `approach_graph_engineering`, `concept_engineering_paradigm_ladder`, `concept_system_intelligence` +7
 - owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill — `concept_benchmark_headline_substitution`, `concept_layer_specific_clocks`, `concept_ontology_known_unknowns_limit` +5
 - owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill - presenter's own stated idea, explicitly marked as speculative and outside the source paper — `concept_knowledge_to_skill_feedback`
