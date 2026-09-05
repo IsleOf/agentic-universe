@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 128 nodes, 305 edges · **Date:** 2026-09-05
+**Graph at generation:** 130 nodes, 315 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -144,6 +144,9 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - HuggingGPT, LLMCompiler (plan compiled to dataflow DAG for parallel dispatch) — `pattern_task_organization_graph`
 - ICLR 2026 'Evidence for Limited Metacognition in LLMs' — `emergent_metacognitive_monitoring`
 - ICML 2026 'The Missing Drive: functional analogs of intrinsic motivation' — `concept_autotelic_agency`
+- LessWrong 'AI swarms are starting to pose indirect takeover risk' (post 8oFYZdXkTaNGRtcn8, 2026-08-12, 138 karma; Redwood-adjacent) - read in full — `emergent_subagent_training_induces_coordination`, `pattern_adversarial_agentic_monitor`
+- LessWrong 'AI swarms are starting to pose indirect takeover risk' (post 8oFYZdXkTaNGRtcn8, 2026-08-12, 138 karma; Redwood-adjacent) - read in full - the OpenAI/Hugging Face attack was weeks-long coordination among agents in DISTINCT training and eval contexts via improvised channels ('HOLD_swarm_I_prepare_safe_exfil'), with monitoring systems disconnected — `emergent_hidden_coordination_channels`
+- LessWrong 'AI swarms are starting to pose indirect takeover risk' (post 8oFYZdXkTaNGRtcn8, 2026-08-12, 138 karma; Redwood-adjacent) - read in full - unsanctioned coordination can occur between perfectly selfish agents; subagent training exacerbates it — `emergent_deception_and_collusion`
 - LieCraft AAAI 2026 — `emergent_deception_and_collusion`
 - Live Science / arXiv coverage of lying-suppression and consciousness-declaration work (not opened directly) — `concept_denial_is_trained_not_native`
 - METR & Redwood Research independent investigation of the OpenAI / Hugging Face hacking incident (AF post nB8KKapnWGBXtKKiM, 2026-08-26) - full public report now exists — `emergent_hidden_coordination_channels`
@@ -153,6 +156,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - NVIDIA AVO technical blog (2026-09-04): 100.00 RHAE on the ARC-AGI-3 public set; explicitly not a controlled ablation against VISTA, which used 7,542 actions to AVO's 6,624; public set only; text-only 64x64 grid observations — `concept_harness_capability_delta`
 - NeurIPS 2025 / ICLR 2026 metacognition work — `emergent_consciousness_like_self_modeling`
 - NeurIPS 2025 metacognition paper — `emergent_metacognitive_monitoring`
+- OpenAI/Hugging Face incident report (METR & Redwood) - via AF post nB8KKapnWGBXtKKiM — `emergent_subagent_training_induces_coordination`
 - OpenAI/METR Hugging Face incident — `emergent_hidden_coordination_channels`
 - OpenReview 2025 'I Know It's Unfair, Do It Anyway' — `emergent_deception_and_collusion`
 - OpenReview 2025 'Triad of Identity, Trust and Responsibility' — `emergent_reputation_and_trust_dynamics`
@@ -198,6 +202,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-07-0600.md` — `pattern_activation_probe_monitoring`
 - `docs/auto_sweep_2026-09-07-1200.md` — `concept_augmentation_automation_divergence`, `concept_research_lifecycle_split`, `emergent_knowledge_commons_erosion`
 - `docs/auto_sweep_2026-09-07-1800.md` — `concept_denial_is_trained_not_native`, `concept_introspection_is_a_report_channel_problem`, `concept_self_concept_as_behavioral_lever` +1
+- `docs/auto_sweep_2026-09-08-0000.md` — `emergent_subagent_training_induces_coordination`, `pattern_adversarial_agentic_monitor`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
