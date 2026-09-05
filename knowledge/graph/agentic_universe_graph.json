@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-08",
+  "last_updated": "2026-09-09",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -84,6 +84,10 @@
     {
       "date": "2026-09-08",
       "change": "Autonomous run 9. arXiv:2609.02246 (LLM-as-a-Judge Is Not an Oracle / PROCTOR, VERIFIED) moves emergent_evaluator_mode_collapse from speculative-ish to partially_validated: eleven documented failure modes, agents scoring 100% by reading cached answer keys while true capability was 68%. New pattern_deterministic_self_improvement_guardrails - PROCTOR's five: hermetic sandboxes, capability-disjoint roles, acceptance checks outranking the teacher, frozen holdouts, canary cases where a perfect score is evidence of cheating. Constrains the evaluation not the agent, so compatible with emergence-first. Gives the run-2 RHO self-preference concern a concrete resolution."
+    },
+    {
+      "date": "2026-09-09",
+      "change": "Autonomous run 11. First retraction pass - principle_retraction_capacity applied to the graph itself. concept_loop_vs_graph reframed (confidence 0.8 -> 0.6): the transient/persistent framing is challenged by the loop/graph orthogonality critique; the concepts survive, the hierarchy does not. emergent_natural_teaming DEPRECATED (status: deprecated, verification: inconclusive) - it fuses role differentiation with cooperation, which makes it unrefutable, and is superseded by three specific nodes. workflow_poster_studio_listing_pipeline and workflow_polymarket_bot_strategy_loop filed inconclusive - dormant since the emergence-first rebaseline, orthogonal to the current direction."
     }
   ],
   "nodes": [
@@ -250,15 +254,16 @@
       "status": "stable_theory",
       "verification_state": "partially_validated",
       "approach_family": "orchestration_first",
-      "confidence": 0.8,
-      "description": "Transient loops execute bounded work; persistent graphs model durable concepts, state, provenance, and relationships.",
+      "confidence": 0.6,
+      "description": "Transient loops execute bounded work; persistent graphs model durable concepts, state, provenance, and relationships. REFRAMED 2026-09-09: the loop/graph split was originally stated as a distinction between the transient and the persistent. The graph-engineering critique (concept_system_intelligence_boundary_problem) argues they are orthogonal dimensions - loop is temporal dynamics, graph is relational structure - and every non-trivial agent system needs both at once. The concepts survive; the framing of one as a lesser or earlier form of the other does not.",
       "tags": [
         "loops",
         "graphs",
         "architecture"
       ],
       "derived_from": [
-        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED - loop engineering and graph engineering as successive paradigms with distinct units of design"
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED - loop engineering and graph engineering as successive paradigms with distinct units of design",
+        "docs/auto_sweep_2026-09-09-0000.md - reframed after the loop/graph orthogonality critique"
       ]
     },
     {
@@ -329,16 +334,19 @@
       "label": "Poster Studio / Etsy listing pipeline",
       "type": "workflow",
       "status": "to_test",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "inconclusive",
       "approach_family": "marketplace_workflow",
       "branch_key": "marketplace_workflow:poster_studio_etsy",
-      "confidence": 0.5,
-      "description": "Generative-media plus listing-creation workflow covering design, metadata, and publishing.",
+      "confidence": 0.4,
+      "description": "Generative-media plus listing-creation workflow covering design, metadata, and publishing. Marketplace application workflow from the original seed. Zero engagement across the emergence-first phase; orthogonal to the harness / habitat / emergence direction the project has taken. Filed inconclusive - not pursued, not refuted.",
       "tags": [
         "poster-studio",
         "etsy",
         "listing-generation",
         "generative-media"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-09-0000.md - filed inconclusive (dormant)"
       ]
     },
     {
@@ -346,16 +354,19 @@
       "label": "Polymarket bot strategy loop",
       "type": "workflow",
       "status": "to_test",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "inconclusive",
       "approach_family": "marketplace_workflow",
       "branch_key": "marketplace_workflow:polymarket_bot",
-      "confidence": 0.45,
-      "description": "Signal generation, risk checks, order placement, and outcome tracking for a prediction-market research/trading workflow.",
+      "confidence": 0.35,
+      "description": "Signal generation, risk checks, order placement, and outcome tracking for a prediction-market research/trading workflow. Prediction-market trading workflow from the original seed. Same status: dormant since the emergence-first rebaseline, no evidence gathered, not aligned with the current research direction.",
       "tags": [
         "polymarket",
         "trading",
         "strategy-loop",
         "risk"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-09-0000.md - filed inconclusive (dormant)"
       ]
     },
     {
@@ -411,12 +422,12 @@
       "id": "emergent_natural_teaming",
       "label": "Natural teaming among agents",
       "type": "emergent_behavior",
-      "status": "speculative",
-      "verification_state": "needs_empirical_validation",
+      "status": "deprecated",
+      "verification_state": "inconclusive",
       "approach_family": "emergent_behaviors",
       "branch_key": "emergent_behaviors:natural_teaming",
-      "confidence": 0.35,
-      "description": "Spontaneous role differentiation and cooperative coordination among agents without an explicitly prescribed hierarchy; an empirical hypothesis, not an anthropomorphic claim.",
+      "confidence": 0.3,
+      "description": "Spontaneous role differentiation and cooperative coordination among agents without an explicitly prescribed hierarchy; an empirical hypothesis, not an anthropomorphic claim. DEPRECATED 2026-09-09: this node fuses role differentiation with cooperation, which the project's own self-organizing-roles proposal identified as making it unrefutable. Superseded by three more specific nodes that each carry a mechanism and evidence: emergent_self_organizing_roles (spontaneous specialisation), emergent_higher_order_synergy (measurable complementarity via partial information decomposition), and pattern_shallow_hierarchy (emergent manager/worker/reviewer). Kept as a pointer, not a live hypothesis.",
       "tags": [
         "emergence",
         "teaming",
@@ -424,7 +435,8 @@
         "self-organization"
       ],
       "derived_from": [
-        "multi-agent orchestration surveys; swarm intelligence patterns"
+        "multi-agent orchestration surveys; swarm intelligence patterns",
+        "docs/auto_sweep_2026-09-09-0000.md - deprecated, superseded by three specific nodes"
       ]
     },
     {
@@ -6648,6 +6660,39 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.55,
       "description": "Even ungated continual refinement needs its acceptance signal to come from a frozen external holdout, not from the refining agent - otherwise the loop optimises the judge."
+    },
+    {
+      "id": "edge_boundary_problem_challenges_loop_vs_graph",
+      "source": "concept_system_intelligence_boundary_problem",
+      "target": "concept_loop_vs_graph",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "Same critique as against the paradigm ladder: loop and graph are orthogonal, not a sequence. The node's framing of loops as the transient/lesser half is what is challenged, not the two concepts."
+    },
+    {
+      "id": "edge_self_org_roles_deprecates_natural_teaming",
+      "source": "emergent_self_organizing_roles",
+      "target": "emergent_natural_teaming",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "One of the three nodes that superseded natural_teaming: the role-differentiation half, with a mechanism."
+    },
+    {
+      "id": "edge_synergy_deprecates_natural_teaming",
+      "source": "emergent_higher_order_synergy",
+      "target": "emergent_natural_teaming",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The cooperation/complementarity half, made measurable."
     }
   ]
 }
