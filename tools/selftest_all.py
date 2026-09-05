@@ -27,6 +27,7 @@ JOBS = [
     ("experience_bank.py", ["selftest"]),
     ("improvement_loop.py", ["selftest"]),
     ("loop_adapter.py", ["selftest"]),
+    ("loop_session.py", ["selftest"]),
 ]
 
 

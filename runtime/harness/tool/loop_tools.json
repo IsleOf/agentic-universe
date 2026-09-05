@@ -1,0 +1,7 @@
+{
+  "research_fetch": "python C:/Agents/skills/research-fetch/research_fetch.py <source> <cmd>",
+  "arxiv_api": "http://export.arxiv.org/api/query",
+  "web_fetch": "WebFetch",
+  "graph_validate": "python tools/knowledge_graph.py validate",
+  "git": "commit + push to proposals/2026-09-01-emergent-behaviour-cluster"
+}

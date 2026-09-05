@@ -1,0 +1,14 @@
+{
+  "kind": "tool",
+  "name": "loop_tools",
+  "versions": [
+    {
+      "v": 1,
+      "hash": "7e915a7ded5d2856",
+      "ts": 1788652477.523,
+      "note": "local tool set",
+      "author": "adapter",
+      "body": "{\n  \"research_fetch\": \"python C:/Agents/skills/research-fetch/research_fetch.py <source> <cmd>\",\n  \"arxiv_api\": \"http://export.arxiv.org/api/query\",\n  \"web_fetch\": \"WebFetch\",\n  \"graph_validate\": \"python tools/knowledge_graph.py validate\",\n  \"git\": \"commit + push to proposals/2026-09-01-emergent-behaviour-cluster\"\n}"
+    }
+  ]
+}

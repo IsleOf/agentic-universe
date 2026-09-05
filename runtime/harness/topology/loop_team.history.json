@@ -1,0 +1,14 @@
+{
+  "kind": "topology",
+  "name": "loop_team",
+  "versions": [
+    {
+      "v": 1,
+      "hash": "63c1bdc579202032",
+      "ts": 1788652477.52,
+      "note": "single agent",
+      "author": "adapter",
+      "body": "{\"agents\": [\"researcher\"], \"swarm\": false, \"note\": \"single agent; Phase 1 'one agent, one sandbox'\"}"
+    }
+  ]
+}

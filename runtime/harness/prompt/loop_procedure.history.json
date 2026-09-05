@@ -1,0 +1,14 @@
+{
+  "kind": "prompt",
+  "name": "loop_procedure",
+  "versions": [
+    {
+      "v": 1,
+      "hash": "960dff6023d56732",
+      "ts": 1788652477.511,
+      "note": "from SKILL.md",
+      "author": "adapter",
+      "body": "Autonomous continuation of the Agentic Universe research programme. ONE increment per run, then stop.\nSETUP: checkout proposals/2026-09-01-emergent-behaviour-cluster; read habitat_charter.md, the Open/Next\nsections of the 3 most recent sweep/plan/design docs, literature_coverage.md, sources/README.md.\nPICK ONE increment (highest value from the open questions). VERIFY every citation three ways\n(exists / summary matches / headline number causally isolated). Record tensions as challenges edges.\nWRITE docs/auto_sweep_<UTC>.md. VALIDATE (knowledge_graph.py validate must print VALID; orphan check).\nCOMMIT as Ilmar Selter, Co-Authored-By Claude Sonnet 5; push to the working branch.\n"
+    }
+  ]
+}

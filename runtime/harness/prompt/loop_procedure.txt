@@ -1,0 +1,7 @@
+Autonomous continuation of the Agentic Universe research programme. ONE increment per run, then stop.
+SETUP: checkout proposals/2026-09-01-emergent-behaviour-cluster; read habitat_charter.md, the Open/Next
+sections of the 3 most recent sweep/plan/design docs, literature_coverage.md, sources/README.md.
+PICK ONE increment (highest value from the open questions). VERIFY every citation three ways
+(exists / summary matches / headline number causally isolated). Record tensions as challenges edges.
+WRITE docs/auto_sweep_<UTC>.md. VALIDATE (knowledge_graph.py validate must print VALID; orphan check).
+COMMIT as Ilmar Selter, Co-Authored-By Claude Sonnet 5; push to the working branch.

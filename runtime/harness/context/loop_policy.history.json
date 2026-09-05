@@ -1,0 +1,14 @@
+{
+  "kind": "context",
+  "name": "loop_policy",
+  "versions": [
+    {
+      "v": 1,
+      "hash": "f7a774517516d745",
+      "ts": 1788652477.516,
+      "note": "charter + coverage + 3 recent sweeps first",
+      "author": "adapter",
+      "body": "{\n  \"read_first\": [\n    \"docs/habitat_charter.md\",\n    \"docs/literature_coverage.md\",\n    \"3 most recent docs/*sweep*|*plan*|*design*\",\n    \"sources/README.md\"\n  ],\n  \"pin\": [\n    \"charter conventions\",\n    \"literature_coverage state\",\n    \"graph validation rule\"\n  ],\n  \"compress\": [\n    \"older sweep docs\",\n    \"search results\"\n  ],\n  \"do_not\": [\n    \"re-sweep covered ground\",\n    \"re-add a paper already in derived_from\"\n  ]\n}"
+    }
+  ]
+}

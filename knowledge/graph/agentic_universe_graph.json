@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-22",
+  "last_updated": "2026-09-23",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -224,6 +224,10 @@
     {
       "date": "2026-09-22",
       "change": "Autonomous run 66. Built the real-harness adapter (tools/loop_adapter.py): points Recorder + Registry at this project's own autonomous loop (single-agent harness, 4 real components, 54-run history). replay_history() reconstructs the first non-synthetic Phase 0 trace - 329 events, 54 runs, 54 distinct arXiv evidence roots, 4 cited by more than one run. Trace validates, condenses to one workflow entry per run, topology_recover reads researcher as planner. Schema fix surfaced: Recorder.emit drops None-valued optional fields. selftest_all.py runs 7 selftests, all GREEN. artifact_loop_adapter_real_trace added."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 67. Built tools/loop_session.py - a LoopSession context manager the loop wraps its work in, so each run emits Phase 0 events live (cite/tool/graph_write/note/commit) instead of being reconstructed from the evolution_log afterwards. Writes a committed per-run summary + a gitignored raw trace. SKILL.md updated to require it. Run 67 is the first live-recorded run. selftest_all.py runs 8 selftests, all GREEN. artifact_loop_session_live_recording added. Fixed a Windows path bug (relative_to across drives)."
     }
   ],
   "nodes": [
@@ -4586,6 +4590,31 @@
       ],
       "evidence_links": [
         "docs/phase1_loop_adapter.md"
+      ]
+    },
+    {
+      "id": "artifact_loop_session_live_recording",
+      "label": "Live trace recording for the autonomous loop",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:live_recording",
+      "confidence": 0.8,
+      "description": "tools/loop_session.py, run 67: a LoopSession context manager the autonomous loop wraps its work in, so each run emits Phase 0 events as it happens (cite/tool/graph_write/note/commit) rather than being reconstructed from the evolution_log afterwards. Writes a committed per-run summary (runtime/observations/loop_runs/run-<N>.json) and a gitignored raw trace. SKILL.md updated to require it. Run 67 is the first live-recorded run. This closes the gap the adapter (run 66) left: replay of history -> a real run emitting events.",
+      "tags": [
+        "phase-0",
+        "live-recording",
+        "loop-session",
+        "first-live-run"
+      ],
+      "derived_from": [
+        "docs/phase0_live_recording.md",
+        "tools/loop_session.py",
+        "runtime/observations/loop_runs/run-67.json"
+      ],
+      "evidence_links": [
+        "docs/phase0_live_recording.md"
       ]
     }
   ],
@@ -10075,6 +10104,49 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.6,
       "description": "4 of 54 sources were cited by more than one run; the adapter surfaces the shared-ancestry structure a swarm would need to dedupe."
+    },
+    {
+      "id": "edge_liverec_instantiates_sih",
+      "source": "artifact_loop_session_live_recording",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_liverec_depends_on_adapter",
+      "source": "artifact_loop_session_live_recording",
+      "target": "artifact_loop_adapter_real_trace",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "Reuses the adapter's seeded loop harness; turns its replay into a live feed."
+    },
+    {
+      "id": "edge_liverec_implements_five_w",
+      "source": "artifact_loop_session_live_recording",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "Each loop action becomes a Phase 0 event with the run as the STEP and citations as CLAIMs with arXiv evidence roots."
+    },
+    {
+      "id": "edge_liverec_feeds_phase3",
+      "source": "artifact_loop_session_live_recording",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "supports",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Real per-run traces are the input Phase 3's proposer needs instead of the synthetic compaction task."
     }
   ]
 }

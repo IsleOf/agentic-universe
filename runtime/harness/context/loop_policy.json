@@ -1,0 +1,21 @@
+{
+  "read_first": [
+    "docs/habitat_charter.md",
+    "docs/literature_coverage.md",
+    "3 most recent docs/*sweep*|*plan*|*design*",
+    "sources/README.md"
+  ],
+  "pin": [
+    "charter conventions",
+    "literature_coverage state",
+    "graph validation rule"
+  ],
+  "compress": [
+    "older sweep docs",
+    "search results"
+  ],
+  "do_not": [
+    "re-sweep covered ground",
+    "re-add a paper already in derived_from"
+  ]
+}
