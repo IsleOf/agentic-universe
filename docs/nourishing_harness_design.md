@@ -15,6 +15,8 @@ The loop-vs-graph critique (`concept_system_intelligence_boundary_problem`) sett
 
 The interface between them is deliberately thin. Orchestration hands the harness `(scoped task, peer set)`. The harness hands back `(trace)`. Topology can change without rebuilding runtimes; runtimes can be nourished without touching topology. This is the clean form of openJiuwen's "shared execution substrate across topologies."
 
+**The topology handed over is not arbitrary** (added run 28). `concept_topology_shapes_error_propagation`: scale-free / hub-centric graphs amplify hallucination variance ~52% over a more even graph, because hub bottlenecks confine and compound errors instead of diffusing them. So the orchestration graph the harness receives is (a) **causally pruned** — `pattern_causal_edge_pruning`, only the edges that determine the outcome, which is both cheaper and fewer paths for routing manipulation — and (b) **connectivity-monitored** — the algebraic connectivity of the graph Laplacian tracked as a health metric, adaptive re-wiring when a hub bottleneck forms. "Orchestration owns the graph" includes owning its shape as an error-propagation parameter, not just its content.
+
 ## 2. The two-part gate
 
 **Part 1 — the outer gate.** On **final world-affecting acts only** — a real payment, a real deployment, a message to a real person, a shutdown of real infrastructure. `principle_terminal_gate_only`.
