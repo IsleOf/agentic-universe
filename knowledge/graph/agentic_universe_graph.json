@@ -56,6 +56,10 @@
     {
       "date": "2026-09-06",
       "change": "Autonomous run 1. Opened four indexed-not-opened harness-subfield papers. CORRECTED pattern_recoverability_constrained_evolution: EvoUndo (2608.28363) works post-hoc not preventively, and conventional repair recovered 0 of 197 failed edits - rollback is only a safety story if purpose-built. Verified Verify Smarter (2608.27311, +7.6-13.6% held-out at lower eval budget). Added concept_harness_self_evolution_is_domain_dependent from HarnessDev (2609.01437) + Evo-Bench (2608.09096): autonomous harness evolution trails human-engineered on code and research, barely transfers across models, and shows early saturation. challenges the subfield-convergence optimism and the ungated-refinement safety story."
+    },
+    {
+      "date": "2026-09-06",
+      "change": "Autonomous run 2. Opened RHO (2606.05922) and WHALE (2609.00196). pattern_trajectory_only_harness_optimization: RHO improves a harness from past rollouts with no external grading, self-preference selection, SWE-Bench Pro 59->78 in one round - challenges the verification-cost bound, but emergent_evaluator_mode_collapse challenges it right back (no stated self-preference-bias limitation). pattern_alternating_weight_harness_optimization: WHALE co-optimises weights and harness alternately, harness still adds 4-24pp under improving weights - the cleanest evidence yet against model-native orchestration absorbing the harness."
     }
   ],
   "nodes": [
@@ -2915,6 +2919,56 @@
       "evidence_links": [
         "docs/auto_sweep_2026-09-06-2115.md"
       ]
+    },
+    {
+      "id": "pattern_trajectory_only_harness_optimization",
+      "label": "Optimise the harness from past trajectories, no labelled validation set",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:trajectory_only",
+      "confidence": 0.6,
+      "description": "RHO (arXiv:2606.05922, 'Evolving Agents in the Dark', EMNLP 2026 Findings, VERIFIED) improves an agent harness using only past rollouts and no external grading: it selects challenging tasks, analyses the rollouts with self-validation and self-consistency, generates candidate harness updates, and picks between them by its own pairwise self-preference. Reported: SWE-Bench Pro pass rate 59% -> 78% in a single optimisation round. This directly attacks concept_verification_is_the_binding_constraint - the binding cost was the labelled validation set, and RHO removes it. The paper states no limitation about self-preference bias.",
+      "tags": [
+        "trajectory-only",
+        "self-preference",
+        "self-validation",
+        "no-labels",
+        "swe-bench-pro"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-07-0000.md",
+        "arXiv:2606.05922 (RHO / Evolving Agents in the Dark) - VERIFIED, abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-07-0000.md"
+      ]
+    },
+    {
+      "id": "pattern_alternating_weight_harness_optimization",
+      "label": "Co-optimise weights and harness on alternating turns",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:alternating_optimization",
+      "confidence": 0.6,
+      "description": "WHALE (arXiv:2609.00196, 'Weight-Harness Alternating LEarning', VERIFIED) alternates: update model parameters under a fixed harness, then search for a better harness under the updated parameters, via online rejection-sampling fine-tuning plus Meta-Harness. Across three domains with Qwen models it beat weight-only and harness-only baselines by 4-24 percentage points. concept_layer_specific_clocks made into a training loop - the weight clock and the harness clock advance on alternating turns rather than independently.",
+      "tags": [
+        "co-optimization",
+        "alternating",
+        "weights-and-harness",
+        "meta-harness",
+        "qwen"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-07-0000.md",
+        "arXiv:2609.00196 (WHALE) - VERIFIED, abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-07-0000.md"
+      ]
     }
   ],
   "edges": [
@@ -5691,6 +5745,91 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.4,
       "description": "Note the internal tension: HarnessDev reports limited cross-model transfer of evolved harnesses; Evo-Bench calls synthesised harnesses 'highly transferable reasoning structures'. Different task mixes, unresolved - a candidate probe."
+    },
+    {
+      "id": "edge_trajectory_only_instantiates_sih",
+      "source": "pattern_trajectory_only_harness_optimization",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_alternating_instantiates_sih",
+      "source": "pattern_alternating_weight_harness_optimization",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_trajectory_only_challenges_verification_bound",
+      "source": "pattern_trajectory_only_harness_optimization",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "If a labelled validation set was the binding cost on safe self-improvement, RHO's trajectory-only self-preference route removes it - and reports a 19-point SWE-Bench Pro jump in one round. The bound may be softer than the behaviour-aware-verification work assumed."
+    },
+    {
+      "id": "edge_evaluator_collapse_challenges_trajectory_only",
+      "source": "emergent_evaluator_mode_collapse",
+      "target": "pattern_trajectory_only_harness_optimization",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "The exposed nerve. RHO selects harness updates by the model's own pairwise self-preference with no external grading - the exact configuration evaluator collapse predicts will converge on what the model finds plausible rather than what works. The paper states no self-preference-bias limitation. A one-round +19 could be real improvement or could be the harness learning to please its own judge; trajectory-only cannot tell them apart."
+    },
+    {
+      "id": "edge_trajectory_only_supports_capability_delta",
+      "source": "pattern_trajectory_only_harness_optimization",
+      "target": "concept_harness_capability_delta",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "59 -> 78 on SWE-Bench Pro from a harness change alone, weights fixed."
+    },
+    {
+      "id": "edge_alternating_challenges_model_native",
+      "source": "pattern_alternating_weight_harness_optimization",
+      "target": "emergent_model_native_orchestration",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "The cleanest test yet of the inward-migration thesis. WHALE actively improves the weights and the harness STILL contributes 4-24 points on top - if orchestration were being absorbed into the model, co-optimising the harness under improving weights would show diminishing harness gains. It does not."
+    },
+    {
+      "id": "edge_alternating_instantiates_layer_clocks",
+      "source": "pattern_alternating_weight_harness_optimization",
+      "target": "concept_layer_specific_clocks",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_alternating_challenges_domain_dependent",
+      "source": "pattern_alternating_weight_harness_optimization",
+      "target": "concept_harness_self_evolution_is_domain_dependent",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "HarnessDev/Evo-Bench found autonomous harness evolution weak on code; WHALE's co-optimisation with weight updates reports gains across three domains. Whether the difference is the weight-update half or the task mix is open."
     }
   ]
 }
