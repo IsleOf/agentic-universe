@@ -46,4 +46,6 @@ Recorded as `challenges` edges in the graph, not resolved here. The sharpest: `e
 
 ## Decision
 
+**Honest counterweight:** `docs/what_would_make_this_wrong.md` ranks the five weaknesses of this design by closeness-to-fatal. Read it alongside this proposal.
+
 _Fill after owner review._

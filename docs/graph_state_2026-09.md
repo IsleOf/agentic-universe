@@ -8,9 +8,9 @@ Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: 
 
 ## Snapshot
 
-**138 nodes · 352 edges · 9 approach families · 83 `challenges` edges (~24% of all edges).**
+**140 nodes · 365 edges · 9 approach families · 89 `challenges` edges (~24% of all edges).**
 
-`verification_state`: 85 needs-validation · 34 partially-validated · 5 inconclusive · 1 deprecated · 13 stable-theory (the deferred governance set).
+`verification_state`: 82 needs-validation · 46 partially-validated · 5 inconclusive · 7 unset. `status`: 95 to_test · 30 speculative · 13 stable_theory · 1 in_experiment · 1 deprecated.
 
 The high `challenges` ratio is deliberate. Every capability mechanism the project wants — self-improving harness, free-flowing swarm, emergence nourished not constrained — has a documented failure mode wired to it as a `challenges` edge. That ratio *is* the honest state of the thesis.
 
@@ -62,4 +62,4 @@ The high `challenges` ratio is deliberate. Every capability mechanism the projec
 
 ## Reading order for a new agent
 
-`docs/habitat_charter.md` → `docs/nourishing_harness_design.md` → `docs/self_improving_harness_plan.md` → `docs/emergence_probe_catalogue.md` → `docs/source_register.md` → the `docs/auto_sweep_*` files newest-first for the run-by-run detail.
+`docs/habitat_charter.md` → `docs/nourishing_harness_design.md` → `docs/what_would_make_this_wrong.md` (the adversarial counterweight — read it second) → `docs/self_improving_harness_plan.md` → `docs/emergence_probe_catalogue.md` → `docs/source_register.md` → the `docs/auto_sweep_*` files newest-first for run-by-run detail.
