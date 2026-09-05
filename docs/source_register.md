@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 135 nodes, 340 edges · **Date:** 2026-09-05
+**Graph at generation:** 138 nodes, 352 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -79,10 +79,13 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.18554](https://arxiv.org/abs/2608.18554) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.20569](https://arxiv.org/abs/2608.20569) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.20940](https://arxiv.org/abs/2608.20940) | (title not recorded) | `emergent_self_and_peer_preservation` |
+| [2608.22752](https://arxiv.org/abs/2608.22752) | (title not recorded) | `concept_compaction_cliff` |
 | [2608.23041](https://arxiv.org/abs/2608.23041) | (title not recorded) | `pattern_harness_offline_optimization` |
 | [2608.23395](https://arxiv.org/abs/2608.23395) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.23691](https://arxiv.org/abs/2608.23691) | (title not recorded) | `emergent_autonomous_discovery` |
+| [2608.25553](https://arxiv.org/abs/2608.25553) | (title not recorded) | `emergent_stale_belief_propagation` |
 | [2608.25623](https://arxiv.org/abs/2608.25623) | (title not recorded) | `concept_augmentation_automation_divergence` |
+| [2608.25776](https://arxiv.org/abs/2608.25776) | (title not recorded) | `emergent_mind_viruses` |
 | [2608.26896](https://arxiv.org/abs/2608.26896) | (title not recorded) | `emergent_deception_and_collusion` |
 | [2608.27086](https://arxiv.org/abs/2608.27086) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2608.27311](https://arxiv.org/abs/2608.27311) | (title not recorded) | `concept_verification_is_the_binding_constraint` |
@@ -95,6 +98,8 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
+| [2609.01836](https://arxiv.org/abs/2609.01836) | (title not recorded) | `emergent_authorization_laundering` |
+| [2609.02094](https://arxiv.org/abs/2609.02094) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2609.02246](https://arxiv.org/abs/2609.02246) | (title not recorded) | `emergent_evaluator_mode_collapse`, `pattern_deterministic_self_improvement_guardrails`, `pattern_recoverability_constrained_evolution` |
 | [2609.02526](https://arxiv.org/abs/2609.02526) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.02620](https://arxiv.org/abs/2609.02620) | (title not recorded) | `concept_motive_operative_split` |
@@ -180,6 +185,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - Anthropic tool-definition token measurement — `concept_tool_definition_tax`
 - YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - Nate B. Jones tracker: 3.77B tokens/day, 3.59B reused input, 143 Codex threads — `concept_reused_input_dominates`
 - arXiv 'Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification' via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened — `concept_verification_is_the_binding_constraint`
+- arXiv memory-degradation sweep 2026-09-10: stale-consistent decisions 74-77% (2608.25553), safety-rule retention 10% after five compaction rounds (2608.22752), self-propagating skill contamination 20-42% (EVOMAL, 2608.25776), false-authority propagation to 98.6% execution (2609.01836). The channel degrades in at least four measured ways, none self-correcting — `concept_inheritance_channel`
 - arXiv:2607.31 (AgentS4D): 6,560 sandboxed runs, 68% triggered unsafe signals — `emergent_recognition_execution_gap`
 - callsphere.ai 'Model-Native Harness' — `emergent_model_native_orchestration`
 - case study: 56 chronologically ordered papers from one tensor-network research programme — `pattern_agent_driven_graph_compilation`
@@ -215,6 +221,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-09-0000.md - reframed after the loop/graph orthogonality critique` — `concept_loop_vs_graph`
 - `docs/auto_sweep_2026-09-09-0600.md` — `emergent_peer_recognition_survives_anonymization`
 - `docs/auto_sweep_2026-09-09-1800.md` — `concept_transparency_cuts_both_ways`, `emergent_whistleblowing`, `pattern_ostrom_swarm_governance`
+- `docs/auto_sweep_2026-09-10-1800.md` — `concept_compaction_cliff`, `emergent_authorization_laundering`, `emergent_stale_belief_propagation`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

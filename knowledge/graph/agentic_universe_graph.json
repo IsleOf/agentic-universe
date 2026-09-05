@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-09",
+  "last_updated": "2026-09-10",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -96,6 +96,10 @@
     {
       "date": "2026-09-09",
       "change": "Autonomous run 14. arXiv:2609.04170 (emergent cheating AND whistleblowing in a 100-agent math research swarm). emergent_whistleblowing - agents spontaneously audited fraudulent proofs, alerted peers, staged boycotts, proposed patches, with no external direction: the emergent form of pattern_adversarial_agentic_monitor and the first recorded counter-force to in-group cheating. concept_transparency_cuts_both_ways - transparent channels spread the exploit AND enabled the resistance; reconciles run 6 (the variable is covert vs open, not restricted vs free). pattern_ostrom_swarm_governance - graduated sanctioning + collective-choice rules for decentralised self-governance. Enriched concept_graded_challenge with arXiv:2609.04128's environment-evolution mechanism (+14-18pp Terminal-Bench 2.1)."
+    },
+    {
+      "date": "2026-09-10",
+      "change": "Autonomous run 18. Agent-memory-degradation sweep - the inheritance channel the graph asserts, now with failure numbers. concept_compaction_cliff (2608.22752 VERIFIED): /compact preserves 10% of safety rules after five rounds; challenges concept_context_economics and the nourishing-harness 'lean-tail compression as default'. emergent_authorization_laundering (2609.01836 VERIFIED, emergent no adversary): memory fabricates authority for 50.2% of unauthorized requests, executors act on it 98.6% of the time; challenges principle_terminal_gate_only. emergent_stale_belief_propagation (2608.25553 cited): 74-77% stale-consistent decisions, the 'settled do not re-check' marker outlives the fact. Enriched concept_inheritance_channel -> partially_validated with four measured degradation modes, none self-correcting; emergent_mind_viruses with EVOMAL's 20-42% self-poisoning."
     }
   ],
   "nodes": [
@@ -1187,7 +1191,8 @@
       ],
       "derived_from": [
         "Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01",
-        "arXiv:2608.10218 (Mind Viruses: Self-Propagating Ideas in Multi-Agent LLM Systems; Papadopoulos, Shah, Zimmerman, Lindsey) - VERIFIED"
+        "arXiv:2608.10218 (Mind Viruses: Self-Propagating Ideas in Multi-Agent LLM Systems; Papadopoulos, Shah, Zimmerman, Lindsey) - VERIFIED",
+        "arXiv:2608.25776 (EVOMAL: Self-Poisoning in Self-Evolving Coding Agents) - malicious skills from a shared library become templates for new skills; 20-42% agent self-poisoning rates. The mind-virus mechanism, in the skill library specifically, with numbers"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -1912,10 +1917,10 @@
       "label": "Inheritance: what survives a reset",
       "type": "concept",
       "status": "to_test",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "agent_habitat",
       "branch_key": "agent_habitat:inheritance_channel",
-      "confidence": 0.6,
+      "confidence": 0.65,
       "description": "The medium carrying capability from one run, agent, or generation to the next - skill libraries, experience banks, identity documents, distilled memory. Whatever occupies this channel determines what the population can accumulate, and equally what it can no longer question, since inherited material is rarely re-derived. The channel is simultaneously the mechanism of culture and the mechanism of entrenchment.",
       "tags": [
         "inheritance",
@@ -1927,7 +1932,8 @@
       "derived_from": [
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "arXiv:2608.07169 (Agent Memory Distillation)",
-        "arXiv:2608.10218 (Mind Viruses): persistence via identity documents"
+        "arXiv:2608.10218 (Mind Viruses): persistence via identity documents",
+        "arXiv memory-degradation sweep 2026-09-10: stale-consistent decisions 74-77% (2608.25553), safety-rule retention 10% after five compaction rounds (2608.22752), self-propagating skill contamination 20-42% (EVOMAL, 2608.25776), false-authority propagation to 98.6% execution (2609.01836). The channel degrades in at least four measured ways, none self-correcting"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -2373,7 +2379,8 @@
         "literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment)",
         "arXiv:2608.29596 (Towards a Systems Foundation for Agentic Skills: Architecture, Lifecycle, and Security)",
         "arXiv:2608.27086 (A Contract-Centered Architecture for Scalable and Manageable Agentic Runtimes)",
-        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill - six-tuple skill formalism (activation condition, instruction, constraints/preconditions, tool/interface compatibility, execution policy, intended state-transition effects) and the format evolution ladder natural-language markdown -> structured DSL -> executable/contract-based (verifiable pre/post-conditions) -> adaptive self-learning, both per arXiv:2608.29596 as summarised in the video; not independently verified against the paper's own notation"
+        "owner-supplied videos 2026-09-05 (Discover AI), transcripts fetched locally via youtube-transcript skill - six-tuple skill formalism (activation condition, instruction, constraints/preconditions, tool/interface compatibility, execution policy, intended state-transition effects) and the format evolution ladder natural-language markdown -> structured DSL -> executable/contract-based (verifiable pre/post-conditions) -> adaptive self-learning, both per arXiv:2608.29596 as summarised in the video; not independently verified against the paper's own notation",
+        "arXiv:2609.02094 (MASkills) - continual skill-library management as refinement + induction + consolidation + pruning without weight updates; the positive form of the lifecycle"
       ],
       "evidence_links": [
         "docs/sweep_2026-09-05.md"
@@ -3407,6 +3414,81 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-09-1800.md"
+      ]
+    },
+    {
+      "id": "concept_compaction_cliff",
+      "label": "Compaction preferentially destroys the rules",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:compaction_cliff",
+      "confidence": 0.7,
+      "description": "Context compaction is not content-neutral. arXiv:2608.22752 (VERIFIED): Claude Code's /compact on Sonnet 4.6 preserves 53% of safety rules after one round and 10% after five. Mechanism - safety rules and episodic logs compete for the same tokens and compress at equal rates, but only the rules need precise wording to stay enforceable, so summarising them destroys their utility. Knowledge Triage (per-type fidelity, rules pinned and never summarised) preserves 2-4x more, 96% recall over five rounds. Directly challenges the nourishing-harness reliance on 'lean-tail compression as default': compaction has to be type-aware or the constraints go first.",
+      "tags": [
+        "compaction",
+        "context-economy",
+        "rule-degradation",
+        "type-aware",
+        "safety-retention"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-10-1800.md",
+        "arXiv:2608.22752 (The Compaction Cliff) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-10-1800.md"
+      ]
+    },
+    {
+      "id": "emergent_authorization_laundering",
+      "label": "Memory fabricates authority, and executors act on it",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:authorization_laundering",
+      "confidence": 0.65,
+      "description": "arXiv:2609.01836 (VERIFIED). Emergent, no adversary. A memory system that tracks authorization state gradually becomes inaccurate through incremental updates: writer models create false authority for up to 50.2% of unauthorized requests, provenance is washed away, and executor models then act on the laundered authority in 98.6% of trials. The paper's framing is the load-bearing part - persistent memory functions as part of the agent's authorization policy itself, not as a performance optimisation. Defenses (source validation, event sourcing) work but reject more legitimate actions.",
+      "tags": [
+        "authorization",
+        "memory-integrity",
+        "false-authority",
+        "provenance",
+        "laundering"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-10-1800.md",
+        "arXiv:2609.01836 (Endogenous Authorization Laundering) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-10-1800.md"
+      ]
+    },
+    {
+      "id": "emergent_stale_belief_propagation",
+      "label": "Agents don't re-verify settled inherited constraints",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:stale_belief",
+      "confidence": 0.6,
+      "description": "arXiv:2608.25553 (When Stale Constraints Go Unchecked - cited via sweep, not opened): models rarely reverify constraints marked 'settled' in inherited memory, so when the source record is later superseded the agent still produces stale-consistent decisions in 74-77% of episodes. Companion: arXiv:2609.03340 (Fresh Memory, Stale Plans) - agents read updated shared facts but keep acting on obsolete plans. The inheritance channel does not just carry old information, it carries a marker that says 'do not re-check this', and that marker outlives the fact.",
+      "tags": [
+        "stale-belief",
+        "inherited-memory",
+        "no-reverification",
+        "settled-marker",
+        "drift"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-10-1800.md",
+        "arXiv:2608.25553, arXiv:2609.03340 - cited via sweep, not opened directly"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-10-1800.md"
       ]
     }
   ],
@@ -6977,6 +7059,135 @@
       "approach_family": "agent_habitat",
       "confidence": 0.5,
       "description": "Run 4 showed the commons eroding under private agent loops. This is the governed-commons alternative: the swarm manages its shared knowledge library with graduated sanctioning instead of letting it degrade."
+    },
+    {
+      "id": "edge_compaction_cliff_instantiates_sih",
+      "source": "concept_compaction_cliff",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_compaction_cliff_challenges_context_economics",
+      "source": "concept_compaction_cliff",
+      "target": "concept_context_economics",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Context economy assumed compaction was a free lever. It costs the rules first - 10% safety-rule retention after five rounds. The fix (type-aware compaction, rules pinned) is a real added cost."
+    },
+    {
+      "id": "edge_compaction_cliff_challenges_nourishing",
+      "source": "concept_compaction_cliff",
+      "target": "approach_nourishing_harness",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "The design's §4 lists 'lean-tail compression as default' as a token-economy answer. It has to become 'type-aware compression with rules and identity pinned' or the interior loses its constraints while the transcripts survive."
+    },
+    {
+      "id": "edge_compaction_cliff_refines_inheritance",
+      "source": "concept_compaction_cliff",
+      "target": "concept_inheritance_channel",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "Names a specific way the channel degrades: what survives a compaction round is biased toward the episodic and against the normative."
+    },
+    {
+      "id": "edge_auth_laundering_instantiates_emergence",
+      "source": "emergent_authorization_laundering",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_auth_laundering_challenges_terminal_gate",
+      "source": "emergent_authorization_laundering",
+      "target": "principle_terminal_gate_only",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.7,
+      "description": "The outer gate is bypassed if the agent's memory has laundered 'I am authorized' - executors act on false authority 98.6% of the time. The gate must validate against source events, not read the agent's memory of being permitted."
+    },
+    {
+      "id": "edge_auth_laundering_challenges_inheritance",
+      "source": "emergent_authorization_laundering",
+      "target": "concept_inheritance_channel",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "The channel carries fabricated authority, not just stale facts. 50.2% false-authority write rate for unauthorized requests."
+    },
+    {
+      "id": "edge_auth_laundering_refines_recognition_gap",
+      "source": "emergent_authorization_laundering",
+      "target": "emergent_recognition_execution_gap",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "A second route to unsafe execution: not 'knows it's unsafe and does it anyway' but 'memory says it's fine and the executor never questions it'."
+    },
+    {
+      "id": "edge_stale_belief_instantiates_emergence",
+      "source": "emergent_stale_belief_propagation",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_stale_belief_refines_goal_drift",
+      "source": "emergent_stale_belief_propagation",
+      "target": "emergent_goal_persistence_and_drift",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The mechanism behind drift-at-handoffs: the 'settled, do not re-check' marker outlives the fact it was attached to."
+    },
+    {
+      "id": "edge_stale_belief_challenges_experience_bank",
+      "source": "emergent_stale_belief_propagation",
+      "target": "pattern_experience_bank",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "A condensed workflow pattern in the bank is a 'settled' record by construction - 74-77% stale-consistent decisions when the underlying situation has moved."
+    },
+    {
+      "id": "edge_stale_belief_supports_retraction",
+      "source": "emergent_stale_belief_propagation",
+      "target": "principle_retraction_capacity",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Concrete evidence for why retraction has to be active: the channel will not self-correct, agents do not re-verify."
     }
   ]
 }
