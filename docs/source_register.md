@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 131 nodes, 321 edges · **Date:** 2026-09-05
+**Graph at generation:** 132 nodes, 330 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -60,6 +60,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
+| [2606.09854](https://arxiv.org/abs/2606.09854) | (title not recorded) | `emergent_deception_and_collusion`, `emergent_peer_recognition_survives_anonymization` |
 | [2606.19924](https://arxiv.org/abs/2606.19924) | The Tao of Agency: Autotelic AI, Embedded Agency and Dissolution of the Self | `concept_autotelic_agency`, `concept_habitat_slack` |
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
@@ -206,6 +207,10 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-07-1800.md` — `concept_denial_is_trained_not_native`, `concept_introspection_is_a_report_channel_problem`, `concept_self_concept_as_behavioral_lever` +1
 - `docs/auto_sweep_2026-09-08-0000.md` — `emergent_subagent_training_induces_coordination`, `pattern_adversarial_agentic_monitor`
 - `docs/auto_sweep_2026-09-08-1200.md` — `pattern_deterministic_self_improvement_guardrails`
+- `docs/auto_sweep_2026-09-09-0000.md - deprecated, superseded by three specific nodes` — `emergent_natural_teaming`
+- `docs/auto_sweep_2026-09-09-0000.md - filed inconclusive (dormant)` — `workflow_polymarket_bot_strategy_loop`, `workflow_poster_studio_listing_pipeline`
+- `docs/auto_sweep_2026-09-09-0000.md - reframed after the loop/graph orthogonality critique` — `concept_loop_vs_graph`
+- `docs/auto_sweep_2026-09-09-0600.md` — `emergent_peer_recognition_survives_anonymization`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
