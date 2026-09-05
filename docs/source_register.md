@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 124 nodes, 280 edges · **Date:** 2026-09-05
+**Graph at generation:** 128 nodes, 305 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -56,6 +56,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2603.28990](https://arxiv.org/abs/2603.28990) | self-organizing roles / Drop the Hierarchy and Roles | `emergent_self_organizing_roles` |
 | [2604.08465](https://arxiv.org/abs/2604.08465) | peer-preservation (companion) | `emergent_self_and_peer_preservation` |
 | [2604.11623](https://arxiv.org/abs/2604.11623) | Context Kubernetes | `concept_agentic_os` |
+| [2604.13051](https://arxiv.org/abs/2604.13051) | (title not recorded) | `emergent_consciousness_cluster` |
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
@@ -75,6 +76,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.17597](https://arxiv.org/abs/2608.17597) | HarnessRisk | `emergent_recognition_execution_gap`, `pattern_execution_layer_enforcement` |
 | [2608.18398](https://arxiv.org/abs/2608.18398) | (title not recorded) | `concept_work_substitution_frontier` |
 | [2608.18554](https://arxiv.org/abs/2608.18554) | (title not recorded) | `concept_augmentation_automation_divergence` |
+| [2608.20569](https://arxiv.org/abs/2608.20569) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.20940](https://arxiv.org/abs/2608.20940) | (title not recorded) | `emergent_self_and_peer_preservation` |
 | [2608.23041](https://arxiv.org/abs/2608.23041) | (title not recorded) | `pattern_harness_offline_optimization` |
 | [2608.23395](https://arxiv.org/abs/2608.23395) | (title not recorded) | `test_scenario_decomposition_granularity` |
@@ -86,13 +88,16 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.28363](https://arxiv.org/abs/2608.28363) | (title not recorded) | `concept_harness_evolution_subfield`, `pattern_recoverability_constrained_evolution` |
 | [2608.28553](https://arxiv.org/abs/2608.28553) | (title not recorded) | `emergent_stigmergic_coordination` |
 | [2608.29174](https://arxiv.org/abs/2608.29174) | (title not recorded) | `emergent_sustained_heterogeneity` |
+| [2608.30980](https://arxiv.org/abs/2608.30980) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
 | [2609.00196](https://arxiv.org/abs/2609.00196) | (title not recorded) | `pattern_alternating_weight_harness_optimization` |
 | [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
+| [2609.02526](https://arxiv.org/abs/2609.02526) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.02620](https://arxiv.org/abs/2609.02620) | (title not recorded) | `concept_motive_operative_split` |
 | [2609.03035](https://arxiv.org/abs/2609.03035) | (title not recorded) | `pattern_activation_probe_monitoring` |
+| [2609.03218](https://arxiv.org/abs/2609.03218) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.03667](https://arxiv.org/abs/2609.03667) | (title not recorded) | `principle_diversity_maintenance` |
 | [2609.04167](https://arxiv.org/abs/2609.04167) | (title not recorded) | `concept_verification_completeness_gap` |
 
@@ -140,6 +145,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - ICLR 2026 'Evidence for Limited Metacognition in LLMs' — `emergent_metacognitive_monitoring`
 - ICML 2026 'The Missing Drive: functional analogs of intrinsic motivation' — `concept_autotelic_agency`
 - LieCraft AAAI 2026 — `emergent_deception_and_collusion`
+- Live Science / arXiv coverage of lying-suppression and consciousness-declaration work (not opened directly) — `concept_denial_is_trained_not_native`
 - METR & Redwood Research independent investigation of the OpenAI / Hugging Face hacking incident (AF post nB8KKapnWGBXtKKiM, 2026-08-26) - full public report now exists — `emergent_hidden_coordination_channels`
 - Meta Organizational Second Brain (Sep 2026) — `concept_agentic_os`
 - Multi-Agent Systems Need a Control Plane, Not Just Better Orchestration (Hackernoon, 2026-07-18) — `concept_config_driven_control_plane`
@@ -191,6 +197,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-07-0000.md` — `pattern_alternating_weight_harness_optimization`, `pattern_trajectory_only_harness_optimization`
 - `docs/auto_sweep_2026-09-07-0600.md` — `pattern_activation_probe_monitoring`
 - `docs/auto_sweep_2026-09-07-1200.md` — `concept_augmentation_automation_divergence`, `concept_research_lifecycle_split`, `emergent_knowledge_commons_erosion`
+- `docs/auto_sweep_2026-09-07-1800.md` — `concept_denial_is_trained_not_native`, `concept_introspection_is_a_report_channel_problem`, `concept_self_concept_as_behavioral_lever` +1
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
