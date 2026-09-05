@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-14",
+  "last_updated": "2026-09-15",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -132,6 +132,10 @@
     {
       "date": "2026-09-14",
       "change": "Autonomous run 33. Norms / reputation / conformity sweep. emergent_pluralistic_ignorance (arXiv:2608.02758 VERIFIED): 64-94% public conformity despite private opposition; a single norm entrepreneur fails to cascade in >74% of populations; conformity is emergent and capability-uncorrelated. Challenges emergent_social_conventions (the norm-anchor-minority claim was from an unverified source and the verified evidence is the opposite) and tempers emergent_whistleblowing (the immune response needs the violation legible, not just felt). Refined emergent_reputation_and_trust_dynamics -> partially_validated: simple reputation emerges, robust Leading-Eight norms do not, order-of-magnitude model variation. Enriched principle_diversity_maintenance with the biased-consensus phase transition (heterogeneity suppresses it)."
+    },
+    {
+      "date": "2026-09-15",
+      "change": "Autonomous run 35. Targeted sweep on intrinsic motivation / curiosity / autotelic goal generation in LLM agents - NEGATIVE RESULT: the 2026 field has almost nothing on genuine self-generated-goal mechanisms; the adjacent work is external curriculum/task generation optimised against a reward (ARISE-RL, self-generated curricula, SPADE). Recorded as concept_curriculum_generation_not_intrinsic_drive and noted on concept_autotelic_agency / concept_intrinsic_motivation that they are under-evidenced by the field, not only by this project. Raises the value of docs/probe_idle_agent.md as a potential field-level datapoint."
     }
   ],
   "nodes": [
@@ -767,7 +771,8 @@
       ],
       "derived_from": [
         "Acharya, Kuppan & Divya, 'Agentic AI: Autonomous Intelligence for Complex Goals - A Comprehensive Survey', IEEE Access vol. 13, 2025, DOI 10.1109/ACCESS.2025.3532853 (section X-I)",
-        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator"
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator",
+        "same sweep: no verifiable mechanism work since the run-5 sources (Sophia, Tao of Agency, Learnable Novelty - all position/framework). The field is investing in supervised curriculum generation, not intrinsic drive."
       ]
     },
     {
@@ -2135,7 +2140,8 @@
         "arXiv:2606.19924 (The Tao of Agency)",
         "arXiv:2512.18202 (Sophia: persistent agent framework of artificial life)",
         "ICML 2026 'The Missing Drive: functional analogs of intrinsic motivation'",
-        "arXiv:2607.18433 (Intelligence from Learnable Novelty)"
+        "arXiv:2607.18433 (Intelligence from Learnable Novelty)",
+        "targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint."
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -3731,6 +3737,31 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-14-1200.md"
+      ]
+    },
+    {
+      "id": "concept_curriculum_generation_not_intrinsic_drive",
+      "label": "The field builds supervised curriculum generators, not curious agents",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:curriculum_not_curiosity",
+      "confidence": 0.5,
+      "description": "Where a habitat-first view would expect work on agents generating their own goals from curiosity or novelty, the 2026 literature has instead concentrated on external task/curriculum generation optimised against a reward or rubric (ARISE-RL rubric-mediated co-evolution, self-generated curricula for scaling beyond human supervision, SPADE's regret-driven environment designer). These improve training efficiency; none of them are an agent wanting something. The autotelic question - does an LLM agent given slack and no task generate structured self-directed projects - is largely unstudied, which makes docs/probe_idle_agent.md a potential field-level datapoint rather than just a project-internal one.",
+      "tags": [
+        "curriculum-generation",
+        "intrinsic-motivation-gap",
+        "autotelic",
+        "field-direction",
+        "idle-agent-probe"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-15-0000.md",
+        "arXiv:2609.01058 (ARISE-RL), 2608.31075 - abstracts read; negative result on the intrinsic-motivation search"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-15-0000.md"
       ]
     }
   ],
@@ -7869,6 +7900,49 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "The asymmetry: a wrong belief cascades into consensus easily, but a correct dissent from a false consensus cascades rarely. Cascades are not symmetric in direction."
+    },
+    {
+      "id": "edge_curriculum_gap_instantiates_habitat",
+      "source": "concept_curriculum_generation_not_intrinsic_drive",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_curriculum_gap_challenges_autotelic",
+      "source": "concept_curriculum_generation_not_intrinsic_drive",
+      "target": "concept_autotelic_agency",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "Not a refutation - an absence. The mechanism autotelic agency needs (self-generated goals) is not something the field is building or measuring, so the node has to stay speculative on field evidence, not just project evidence."
+    },
+    {
+      "id": "edge_curriculum_gap_supports_idle_probe",
+      "source": "concept_curriculum_generation_not_intrinsic_drive",
+      "target": "concept_habitat_slack",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "Sharpens why slack is the load-bearing unverified mechanism: nobody else is testing it either."
+    },
+    {
+      "id": "edge_curriculum_gap_relates_regret_signal",
+      "source": "concept_curriculum_generation_not_intrinsic_drive",
+      "target": "pattern_regret_as_difficulty_signal",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.4,
+      "description": "SPADE's regret-driven designer is the strongest version of the curriculum-generation direction - useful for graded challenge, orthogonal to intrinsic drive."
     }
   ]
 }

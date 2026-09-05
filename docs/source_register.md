@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 146 nodes, 393 edges · **Date:** 2026-09-05
+**Graph at generation:** 147 nodes, 397 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -108,6 +108,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.30980](https://arxiv.org/abs/2608.30980) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
 | [2609.00196](https://arxiv.org/abs/2609.00196) | (title not recorded) | `pattern_alternating_weight_harness_optimization` |
+| [2609.01058](https://arxiv.org/abs/2609.01058) | (title not recorded) | `concept_curriculum_generation_not_intrinsic_drive` |
 | [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
@@ -214,6 +215,8 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - reconciles emergent_subagent_training_induces_coordination (run 6) — `concept_transparency_cuts_both_ways`
 - revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
 - run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI — `concept_context_economics`
+- same sweep: no verifiable mechanism work since the run-5 sources (Sophia, Tao of Agency, Learnable Novelty - all position/framework). The field is investing in supervised curriculum generation, not intrinsic drive. — `concept_intrinsic_motivation`
+- targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
 - unifies pattern_verifier_gated_promotion + concept_agent_shaped_topology_is_agent_corruptible + emergent_authorization_laundering — `principle_structural_edits_gated_outside_the_agents`
 - zylos.ai 'Goal Persistence and Goal Drift' — `emergent_goal_persistence_and_drift`
 - zylos.ai emergent behaviour survey — `emergent_self_organizing_roles`
@@ -244,6 +247,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`
 - `docs/auto_sweep_2026-09-14-1200.md` — `emergent_pluralistic_ignorance`
+- `docs/auto_sweep_2026-09-15-0000.md` — `concept_curriculum_generation_not_intrinsic_drive`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
