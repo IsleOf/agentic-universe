@@ -104,6 +104,10 @@
     {
       "date": "2026-09-11",
       "change": "Autonomous run 21. Wired the orchestration family to the emergence findings (external fetches were timing out; graph reasoning increment). concept_agent_shaped_topology_is_agent_corruptible: pattern_runtime_adaptive_workflow rewrites the topology from agent output, so every agent-output failure mode (deception -> routing manipulation, authorization laundering -> false 'approved reviewer' edges, stale-belief -> frozen dead dependencies) applies to the topology. Static topology is corrupt-once; dynamic is corrupt-continuously. Challenges pattern_runtime_adaptive_workflow and concept_harness_orchestration_pairing."
+    },
+    {
+      "date": "2026-09-11",
+      "change": "Autonomous run 22. principle_structural_edits_gated_outside_the_agents - one rule unifying three the design treated separately: harness edits, orchestration-graph rewrites, and permission-shaped memory writes are all an agent changing the structure it runs inside, and all fail when the agent's output validates the change. Rule: accepted only against a source outside the agents (frozen holdout, computed check, source event, cross-family verifier). Same shape as principle_terminal_gate_only, applied to self-modification of structure. Depends on PROCTOR guardrails as the concrete instantiation."
     }
   ],
   "nodes": [
@@ -3518,6 +3522,31 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-11-1200.md"
+      ]
+    },
+    {
+      "id": "principle_structural_edits_gated_outside_the_agents",
+      "label": "Any self-edit to structure is gated against non-agent sources",
+      "type": "principle",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:structural_edit_gate",
+      "confidence": 0.6,
+      "description": "One rule covering three things the design treats separately: a harness edit (pattern_verifier_gated_promotion), an orchestration-graph rewrite (concept_agent_shaped_topology_is_agent_corruptible), and a permission-shaped memory write (emergent_authorization_laundering). All three are an agent changing the structure it then runs inside, and all three fail the same way - the agent's own output becomes the thing that validates the change. The rule: a structural edit is accepted only against a source outside the agents - a frozen held-out set, a computed check, a source event, a cross-family verifier - never against the trace the editing agent produced. This is the one place the emergence-first interior is not ungated, and it is not a process constraint on reasoning: the agent proposes structural changes freely, the acceptance signal just does not come from the agent. Same shape as principle_terminal_gate_only, applied to self-modification of structure rather than to world-affecting acts.",
+      "tags": [
+        "structural-edit",
+        "external-gate",
+        "self-modification",
+        "unification",
+        "harness-orchestration-memory"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-11-1800.md",
+        "unifies pattern_verifier_gated_promotion + concept_agent_shaped_topology_is_agent_corruptible + emergent_authorization_laundering"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-11-1800.md"
       ]
     }
   ],
@@ -7293,6 +7322,71 @@
       "approach_family": "graph_engineering",
       "confidence": 0.4,
       "description": "The one orchestration datapoint: more decomposition did not Pareto-dominate, and each added partition is another edge an agent can influence."
+    },
+    {
+      "id": "edge_structural_gate_instantiates_terminal_gate",
+      "source": "principle_structural_edits_gated_outside_the_agents",
+      "target": "principle_terminal_gate_only",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "The same shape - propose freely, gate the consequential act - applied to self-modification of structure rather than world-affecting acts."
+    },
+    {
+      "id": "edge_structural_gate_generalises_verifier_gate",
+      "source": "principle_structural_edits_gated_outside_the_agents",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "The verifier gate is this principle at the harness layer; the principle is what it generalises to."
+    },
+    {
+      "id": "edge_structural_gate_answers_corruptible_topology",
+      "source": "principle_structural_edits_gated_outside_the_agents",
+      "target": "concept_agent_shaped_topology_is_agent_corruptible",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "The resolution: orchestration-graph rewrites accepted only against non-agent sources, same as harness edits."
+    },
+    {
+      "id": "edge_structural_gate_answers_auth_laundering",
+      "source": "principle_structural_edits_gated_outside_the_agents",
+      "target": "emergent_authorization_laundering",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "Permission-shaped memory writes require source-event backing - the paper's own recommended defense, stated as the general rule."
+    },
+    {
+      "id": "edge_structural_gate_needs_proctor",
+      "source": "principle_structural_edits_gated_outside_the_agents",
+      "target": "pattern_deterministic_self_improvement_guardrails",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "PROCTOR's five (hermetic sandbox, frozen holdout, cross-family checker, acceptance-outranks-judge, canary) are the concrete instantiation of 'a source outside the agents'."
+    },
+    {
+      "id": "edge_structural_gate_instantiates_nourishing",
+      "source": "principle_structural_edits_gated_outside_the_agents",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6
     }
   ]
 }
