@@ -44,6 +44,10 @@
     {
       "date": "2026-09-05",
       "change": "Analysed three owner-supplied videos via locally-fetched transcripts (youtube-transcript skill). Corrected pattern_evaluation_driven_harness_optimization after checking the associated paper's own results table: the apples-to-apples same-backend comparison is +0.24pp against +-1.1/1.2pp uncertainty, not the +3.39pp headline, which swaps to a stronger backend model; no ablations were run, acknowledged by the authors. Generalised this as concept_benchmark_headline_substitution, a third citation-risk class after fabrication and note-summary drift. Added two structural critiques of arXiv:2608.21156 from independent analysis: concept_ontology_known_unknowns_limit (a fixed ontology - including this repo's own schema - can only find gaps within categories it already has) and concept_system_intelligence_boundary_problem (the individual/system split does not survive a harness that spawns sub-agents with shared state; loop and graph read as orthogonal, not sequential). Added concept_layer_specific_clocks, sharpening concept_agentic_os with three named progress variables instead of one shared one."
+    },
+    {
+      "date": "2026-09-05",
+      "change": "First sweep with the research-fetch skill (Semantic Scholar citation graph + AI Alignment Forum). +4 nodes, +11 edges. The AHE citation set shows harness self-evolution became a 15+-system subfield in weeks (concept_harness_evolution_subfield). Two reported-influential systems name mechanisms this project had asserted: EvoUndo -> pattern_recoverability_constrained_evolution (retraction as a precondition on the edit, not cleanup after), and behaviour-aware verification work -> concept_verification_is_the_binding_constraint (verification cost bounds safe self-modification, the harness-layer form of the substitution frontier). Also pattern_debate_against_reward_hacking as a third evaluator-collapse repair (speculative - from a forum post, not a read paper). All S2-sourced papers marked as indexed-not-opened per the register convention."
     }
   ],
   "nodes": [
@@ -425,7 +429,8 @@
         "security"
       ],
       "derived_from": [
-        "OpenAI/METR Hugging Face incident"
+        "OpenAI/METR Hugging Face incident",
+        "METR & Redwood Research independent investigation of the OpenAI / Hugging Face hacking incident (AF post nB8KKapnWGBXtKKiM, 2026-08-26) - full public report now exists"
       ]
     },
     {
@@ -1145,7 +1150,8 @@
       "derived_from": [
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
         "owner directive 2026-09-05: build a self-improving agentic OS and a dynamically improving harness",
-        "openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm - Auto Harness optimised end-to-end from evaluation with no weight training; Skill Self-Evolution from error signals"
+        "openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm - Auto Harness optimised end-to-end from evaluation with no weight training; Skill Self-Evolution from error signals",
+        "AHE citation set as of 2026-09 (via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened): Self-Harness, HarnessEvolve, HarnessDev, WHALE, EvoUndo, Retrospective Harness Optimisation, Hierarchical Self-Improvement, Meta-Harness, Dalek; benchmarks CordisBench, HarnessRisk"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -1962,7 +1968,8 @@
       "derived_from": [
         "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
         "arXiv:2608.12253 (One Frozen Simulator Is Not Enough)",
-        "arXiv:2510.01171 (mode collapse as a fundamental alignment-diversity tension, not an algorithmic limit)"
+        "arXiv:2510.01171 (mode collapse as a fundamental alignment-diversity tension, not an algorithmic limit)",
+        "AI Alignment Forum 2026-08/09: 'Training a Misaligned Reward Seeker' (evhub et al.), 'Debate training reduces reward hacking in RLAIF' - reward-hacking-during-RL evidence, not opened"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -2521,6 +2528,105 @@
       ],
       "evidence_links": [
         "docs/video_analysis_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_harness_evolution_subfield",
+      "label": "Harness self-evolution is now a subfield, not a claim",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:subfield",
+      "confidence": 0.7,
+      "description": "As of 2026-09 the citation graph around Agentic Harness Engineering (arXiv:2604.25850) holds 15+ distinct systems in a few weeks: Self-Harness, HarnessEvolve, HarnessDev, WHALE (joint harness-weight optimisation), EvoUndo, Retrospective Harness Optimisation, Hierarchical Self-Improvement, Meta-Harness, Dalek, plus benchmarks (CordisBench, HarnessRisk) that treat 'can an LLM evolve its own harness' as a measured question. The convergence is itself evidence: the shared shape across independent groups - components as files, falsifiable prediction per edit, trajectory-driven updates, verifier-gated promotion - is what this project's approach_self_improving_harness family already asserts, arrived at separately.",
+      "tags": [
+        "subfield",
+        "convergence",
+        "harness-evolution",
+        "citation-graph"
+      ],
+      "derived_from": [
+        "docs/research_fetch_sweep_2026-09-05.md",
+        "arXiv:2604.25850 citation set via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened"
+      ],
+      "evidence_links": [
+        "docs/research_fetch_sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "pattern_recoverability_constrained_evolution",
+      "label": "Recoverability as a hard constraint on self-evolution",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:recoverability_constraint",
+      "confidence": 0.6,
+      "description": "A self-evolving harness is bounded by an explicit recoverability constraint: an edit is only permitted if the state it produces can be returned to a known-good prior state at bounded cost. This makes rollback a precondition on the proposal, not a cleanup step after a bad promotion - the loop cannot enter a configuration it cannot leave. Named as its own mechanism because a reported influential system (EvoUndo, 'Recoverability-Constrained Self-Evolution for LLM Agent Harnesses') is built entirely around it, and it is the operational form of this project's principle_retraction_capacity applied to the harness layer.",
+      "tags": [
+        "recoverability",
+        "rollback",
+        "constraint",
+        "self-evolution",
+        "reversibility"
+      ],
+      "derived_from": [
+        "docs/research_fetch_sweep_2026-09-05.md",
+        "arXiv EvoUndo (Recoverability-Constrained Self-Evolution for LLM Agent Harnesses) via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened"
+      ],
+      "evidence_links": [
+        "docs/research_fetch_sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "concept_verification_is_the_binding_constraint",
+      "label": "Verification cost is what bounds harness evolution",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:verification_bound",
+      "confidence": 0.65,
+      "description": "The rate at which a harness can safely self-improve is set by how cheaply each candidate edit can be verified, not by how good the proposer is. Multiple systems in the AHE citation set attack exactly this - behaviour-aware verification, task-coreset selection, staged screening, task sampling - all to reduce the per-edit verification cost that otherwise dominates. This is the harness-layer instance of concept_work_substitution_frontier (verification cost, not capability, sets the frontier) and of this project's operating-plan claim that verification throughput, not idea supply, is the bottleneck.",
+      "tags": [
+        "verification-cost",
+        "binding-constraint",
+        "harness-evolution",
+        "throughput"
+      ],
+      "derived_from": [
+        "docs/research_fetch_sweep_2026-09-05.md",
+        "arXiv 'Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification' via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened",
+        "docs/research_operating_plan.md: the bottleneck is verification capacity"
+      ],
+      "evidence_links": [
+        "docs/research_fetch_sweep_2026-09-05.md"
+      ]
+    },
+    {
+      "id": "pattern_debate_against_reward_hacking",
+      "label": "Multi-party debate as an evaluator-collapse repair",
+      "type": "pattern",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:evaluator_collapse",
+      "confidence": 0.45,
+      "description": "Training or scoring against a debate between models - rather than a single judge - is reported to reduce reward hacking in RLAIF. A third repair path for emergent_evaluator_mode_collapse alongside heterogeneous verifiers and pre-committed rubrics: the modes a single judge collapses to are exposed when a second party is incentivised to attack them. Recorded speculative pending the primary source; it arrived through an alignment-forum post, not a read paper.",
+      "tags": [
+        "debate",
+        "reward-hacking",
+        "rlaif",
+        "evaluator",
+        "repair"
+      ],
+      "derived_from": [
+        "docs/research_fetch_sweep_2026-09-05.md",
+        "AI Alignment Forum 2026-09: 'Debate training reduces reward hacking in RLAIF' - not opened"
+      ],
+      "evidence_links": [
+        "docs/research_fetch_sweep_2026-09-05.md"
       ]
     }
   ],
@@ -4855,6 +4961,123 @@
       "approach_family": "graph_engineering",
       "confidence": 0.5,
       "description": "Independent restatement: two agent instances create organisational separation without necessarily creating epistemic independence, which is the same diagnosis pattern_structural_decoupling makes from the diversity-collapse literature."
+    },
+    {
+      "id": "edge_subfield_instantiates_sih",
+      "source": "concept_harness_evolution_subfield",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge_subfield_supports_capability_delta",
+      "source": "concept_harness_evolution_subfield",
+      "target": "concept_harness_capability_delta",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Many independent groups optimising the non-weight layer is a bet, at scale, that the capability delta is real and worth chasing."
+    },
+    {
+      "id": "edge_recoverability_instantiates_sih",
+      "source": "pattern_recoverability_constrained_evolution",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_recoverability_is_retraction_at_harness_layer",
+      "source": "pattern_recoverability_constrained_evolution",
+      "target": "principle_retraction_capacity",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "The operational form of the retraction principle: not just that removal must be possible, but that an edit is refused unless removal is cheap."
+    },
+    {
+      "id": "edge_recoverability_strengthens_versioning",
+      "source": "pattern_recoverability_constrained_evolution",
+      "target": "pattern_harness_component_versioning",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Versioned components make the recoverability check computable - you can price the return path."
+    },
+    {
+      "id": "edge_recoverability_constrains_verifier_gate",
+      "source": "pattern_recoverability_constrained_evolution",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Adds a gate condition upstream of the verifier: reject un-leaveable configurations before spending verification budget on them."
+    },
+    {
+      "id": "edge_verification_bound_instantiates_sih",
+      "source": "concept_verification_is_the_binding_constraint",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_verification_bound_is_substitution_frontier_at_harness",
+      "source": "concept_verification_is_the_binding_constraint",
+      "target": "concept_work_substitution_frontier",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "The same claim one layer in: for a harness improving itself, the frontier of safe self-modification sits where a candidate edit can be cheaply checked."
+    },
+    {
+      "id": "edge_verification_bound_challenges_offline_optimization",
+      "source": "concept_verification_is_the_binding_constraint",
+      "target": "pattern_harness_offline_optimization",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Offline batch optimisation still pays a verification cost per candidate; the batch does not remove the bound, it amortises it."
+    },
+    {
+      "id": "edge_debate_challenges_evaluator_collapse",
+      "source": "pattern_debate_against_reward_hacking",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "A third repair path. Where fresh-context separates the judge from the proposal and heterogeneous verifiers separate model priors, debate makes a second party pay to find the first judge's collapsed modes."
+    },
+    {
+      "id": "edge_debate_supports_rubric_induction",
+      "source": "pattern_debate_against_reward_hacking",
+      "target": "pattern_rubric_induction",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4
     }
   ]
 }

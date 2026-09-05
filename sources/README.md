@@ -29,18 +29,18 @@ Two jobs, not one. **Discovery** finds work; **adjudication** decides whether a 
 | X / Twitter | Author threads days ahead of publication | `x-fetch` skill (`C:\Agents\skills\x-fetch`) — nodriver + shared profile | **yes** |
 | Reddit (`r/LocalLLaMA`, `r/MachineLearning`) | Failure reports that never reach arXiv | `reddit-fetch` skill — OAuth app + local token | **yes** |
 | YouTube | Paper-summary channels; see `docs/source_channels.md` for which | `youtube-transcript` skill — local, residential IP | **yes** |
-| GitHub search / trending / releases | What's actually shipping vs. what's a preprint claim | `api.github.com` — PAT for 5,000 req/hr (unauth 60/hr is too low) | no |
-| LessWrong / AI Alignment Forum | Sharpest early analysis of deception, scheming, situational awareness — months ahead of papers | `lesswrong.com/graphql`, `alignmentforum.org/graphql` — public reads, no auth | no |
+| GitHub search / trending / releases | What's actually shipping vs. what's a preprint claim | `research-fetch` skill: `github` | **yes** |
+| LessWrong / AI Alignment Forum | Sharpest early analysis of deception, scheming, situational awareness — months ahead of papers | `research-fetch` skill: `forum` | **yes** |
 
 ### Adjudication
 
 | Venue | Answers | Access | Wired? |
 | --- | --- | --- | --- |
-| OpenReview | *Why did reviewers push back? Did it get in?* Reviews ask the baseline/ablation/cost questions first. | `api2.openreview.net/notes?forum=<id>` returns the full thread (submission + reviews + rebuttals + meta-review + decision). Public, no auth. Old venues on `api.openreview.net` (v1). | no |
-| Semantic Scholar Graph API | *How do later papers characterize this one? What refutes it?* | `api.semanticscholar.org/graph/v1/paper/{id}/citations?fields=contexts,intents,isInfluential` — the `contexts` field returns the exact citing sentences. `{id}` accepts `arXiv:2604.25850`. Keyless ~1 req/s; free key raises it. | no |
+| OpenReview | *Why did reviewers push back? Did it get in?* Reviews ask the baseline/ablation/cost questions first. | `research-fetch` skill: `openreview`. **Correction:** `/notes?forum=` is now auth-gated by OpenReview; `search` is keyless, `forum`/`venue` need a one-time free-account `login`. | **yes** (search) / setup for reviews |
+| Semantic Scholar Graph API | *How do later papers characterize this one? What refutes it?* | `research-fetch` skill: `s2`. `citations` returns each citer with its `contexts` string. Keyless ~1 req/s; `S2_API_KEY` raises it. | **yes** |
 | OpenAlex | Citation counts, concept tags, open-access links | `api.openalex.org/works` — no key, add `mailto=` for the polite pool | no |
 | Papers with Code | Leaderboard reality vs. "strongest **selected** baseline" | `paperswithcode.com/api/v1/` — no key. Check it's still live before relying on it. | no |
-| SWE-bench / Terminal-Bench / ARC Prize leaderboards | Ground truth for stale-baseline detection | SWE-bench + Terminal-Bench: JSON on their sites + full run data in `SWE-bench/experiments` and `laude-institute/terminal-bench` on GitHub. ARC Prize (`arcprize.org/leaderboard`) is JS-rendered — needs the browser wrapper. | no |
+| SWE-bench / Terminal-Bench / ARC Prize leaderboards | Ground truth for stale-baseline detection | `research-fetch` skill: `leaderboard` (GitHub-backed parts). Live boards (swebench.com, tbench.ai, arcprize.org) have no API — browser skill for those. | **partial** |
 | Google Scholar | Forward citation tracking with different coverage from S2; author recent-work feeds | No API, blocks scrapers hard. Needs a nodriver profile with a **logged-in Google session** — the one place the reusable Google-authed browser profile is the enabling piece, not a convenience. | no |
 
 Do not route literature access through pirated-article mirrors; for this field they add nothing arXiv does not already cover.
@@ -57,7 +57,15 @@ Do not route literature access through pirated-article mirrors; for this field t
 
 **Which of the new sources actually need it:** almost none. OpenReview, Semantic Scholar, OpenAlex, GitHub, LessWrong/AF, and Papers with Code are all clean public REST/GraphQL — plain `WebFetch` or a thin `requests` script, no browser. The browser wrapper earns its place for exactly two: **ARC Prize's JS-rendered leaderboard**, and **Google Scholar**, where the persistent Google-authed profile is the only reliable way in.
 
-### Build priority
+### Status: built 2026-09-05
+
+`C:\Agents\skills
+esearch-fetch` implements openreview / s2 / github / forum / leaderboard behind one
+dispatcher (`python research_fetch.py <source> <cmd>`). First sweep: `docs/research_fetch_sweep_2026-09-05.md`.
+OpenReview `forum` still needs a one-time free-account `login`; the rest are keyless or take an optional
+rate-limit key. Google Scholar remains unbuilt (needs the browser profile) and lowest priority.
+
+### Original build priority
 
 1. **OpenReview** — highest value, no auth, simplest build. Reviews are the adjudication layer this project most lacks.
 2. **Semantic Scholar** — the `contexts` field directly serves the "verify the claim, not just existence" rule.
