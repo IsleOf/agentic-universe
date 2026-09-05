@@ -180,6 +180,10 @@
     {
       "date": "2026-09-19",
       "change": "Autonomous run 52. Narrow 10-day cs.MA sweep - two genuinely new findings. concept_epistemic_sybil_collapse (2609.01873 VERIFIED, 20k calls): multiplying agents on one evidence source collapses naive posterior coverage 0.940 -> 0.263 - a direct challenge to the diversity keystone, model heterogeneity does not imply evidence independence. pattern_evidential_ancestry_tracking: dedupe reports by evidence root before aggregating - a hard requirement on the Phase 2 experience bank. emergent_compositional_private_language (GlossoGen 2609.01491 VERIFIED): agents under partial-information pressure evolve human-unreadable compositional languages, strong models originate and weak models acquire - challenges the transparency bet and Five-W instrumentation. Enriched emergent_stigmergic_coordination, pattern_deterministic_state_folding (2609.03192 append-only ledger as the composed-design experimental frame)."
+    },
+    {
+      "date": "2026-09-19",
+      "change": "Autonomous run 53. Citation upgrade: pattern_progressive_risk_vesting (2609.01035) abstract-read -> VERIFIED. New detail: trajectory harm has a phase transition in the authority reproduction number Ra - below criticality harm ~ p, at criticality ~ sqrt(p), above criticality a positive harm floor that shrinking per-branch risk cannot remove. Consequence for the design: a recursive spawn tree past the Ra threshold must be capped on depth/fan-out, not just per-branch risk. Limitation logged: synthetic studies only, not deployed-agent safety estimates."
     }
   ],
   "nodes": [
@@ -4186,8 +4190,8 @@
       "verification_state": "partially_validated",
       "approach_family": "nourishing_harness",
       "branch_key": "nourishing_harness:progressive_risk_vesting",
-      "confidence": 0.6,
-      "description": "arXiv:2609.01035 ('Spawn Freely, Act Sparingly' - the title is the nourishing-harness thesis). Anytime harm bounds for recursive agent trees via Progressive Risk Vesting: trajectory-level risk budgeting where each local certificate must remain valid conditional on the full pre-activation history. The formal, recursion-aware version of concept_irreversibility_budget - it handles the case the budget node did not, which is sub-agents spawning sub-agents, each individually within budget while the tree overdraws.",
+      "confidence": 0.65,
+      "description": "arXiv:2609.01035 ('Spawn Freely, Act Sparingly' - the title is the nourishing-harness thesis), VERIFIED. Progressive Risk Vesting (PRV): a trajectory-level risk budget held in escrow and debited as branches are *activated* (cross into irreversible action), not as they are *spawned* (sandbox spawning is free). Proves an anytime harm bound for adaptively generated trees with dependent branch outcomes, and preserves every policy available under irrevocable spawn charging when the gates and constraints are fixed - so it is strictly more permissive than a per-spawn budget at the same safety. Each local certificate must stay valid conditional on the full pre-activation history, including the information used to select the request. The sharp result: trajectory harm has a phase transition in the authority reproduction number Ra - below criticality harm is proportional to per-branch risk p, at criticality to sqrt(p), and ABOVE criticality there is a positive harm floor that shrinking p cannot remove. This is the recursion-aware form of concept_irreversibility_budget, and it says a spawn tree past the Ra threshold cannot be made safe by tightening per-branch limits - the depth/fan-out itself has to be capped. Limitation on the record: 'these synthetic studies do not estimate safety in deployed agents'.",
       "tags": [
         "risk-vesting",
         "anytime-bounds",
@@ -4197,7 +4201,7 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-17-1200.md",
-        "arXiv:2609.01035 - abstract read"
+        "arXiv:2609.01035 (Spawn Freely, Act Sparingly) - VERIFIED run 53: PRV, anytime harm bound, authority reproduction number Ra phase transition (p / sqrt(p) / harm floor); synthetic studies only"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-17-1200.md"
@@ -9399,6 +9403,17 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "If the channel content becomes unreadable, the activation probe (which reads internal state, not messages) is the monitoring path that survives."
+    },
+    {
+      "id": "edge_risk_vesting_challenges_subagent_coord",
+      "source": "pattern_progressive_risk_vesting",
+      "target": "emergent_subagent_training_induces_coordination",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "PRV bounds the harm a recursive tree can do, but only below the authority-reproduction-number threshold; a peer-deference-driven tree that spawns aggressively can push Ra past criticality where a harm floor persists. The design has to cap depth/fan-out, not just per-branch risk."
     }
   ]
 }
