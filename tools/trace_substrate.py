@@ -205,7 +205,7 @@ class Recorder:
             "layer": fields.pop("layer", self.layer),
             "language": fields.pop("language", self.language),
         }
-        ev.update(fields)
+        ev.update({k: v for k, v in fields.items() if v is not None})
         ev = scrub(ev)
         errs = validate_event(ev)
         if errs:
