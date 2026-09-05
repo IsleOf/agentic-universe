@@ -80,8 +80,8 @@ Then **removing the restriction is the experiment**: lift same-parent-ID filteri
 - Code-as-context (§3.1) — don't accumulate the transcript.
 - Pre-request intermediary (§3.1) — skip the model call on cache hits and local recipes.
 - Dynamic tool loading — load only the tools the current task can use; `pattern` from Hermes's multi-query tool_search.
-- Lean-tail compression as default (Hermes ships this).
-- Retrieve-don't-recompute — a durable answer store the agent queries instead of re-deriving (Nate B. Jones's "OpenBrain" pattern; this project's own knowledge graph is one).
+- **Type-aware compaction, not lean-tail** (revised run 18). Hermes ships lean-tail compression as a default, but `concept_compaction_cliff` shows uniform compaction keeps only 10% of safety rules after five rounds — rules and episodic logs compress at equal rates, and only the rules need exact wording. Compaction here is type-classified: rules, identity documents, and standing constraints are **pinned and never summarised**; episodic logs and search results are what gets compressed. Knowledge-Triage-style, 2–4× better rule retention.
+- Retrieve-don't-recompute — a durable answer store the agent queries instead of re-deriving (Nate B. Jones's "OpenBrain" pattern; this project's own knowledge graph is one). Guard it: `emergent_authorization_laundering` shows a memory store *is* part of the authorization policy — a "was allowed to X" record is acted on 98.6% of the time. Permission-shaped records need source-event backing, not just presence.
 
 ## 5. Build order
 

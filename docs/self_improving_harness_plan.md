@@ -73,7 +73,9 @@ Decompose the current harness into addressable files: prompt fragments, tool def
 
 Condense traces into two stores kept deliberately apart: **workflow-level** (what shape of approach works for this task class, retrieved at planning) and **step-level** (what specific move was wrong here, retrieved at failure). Merging them yields a store that is wrong at both moments.
 
-**Watch:** `emergent_information_cascades` *challenges* this. The bank is shared upstream context for every later run — a wrongly condensed pattern is a cascade with persistence. Keep the raw trace alongside the condensation so a bad pattern can be traced back and evicted.
+**Watch:** three `challenges` edges land here. `emergent_information_cascades` — the bank is shared upstream context for every later run; a wrongly condensed pattern is a cascade with persistence. `emergent_stale_belief_propagation` (run 18) — a condensed pattern is a "settled" record by construction, and agents re-verify those at ~23% (74–77% stale-consistent decisions when the situation has moved). `concept_compaction_cliff` (run 18) — condensation preferentially loses the normative content.
+
+**So:** keep the raw trace alongside every condensation (traceback + eviction); stamp every bank entry with the source-record version it was derived from and force re-verification when that source changes; and never let a rule or constraint exist only in condensed form.
 
 ### Phase 3 — Proposer + verifier loop
 
