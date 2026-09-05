@@ -29,6 +29,10 @@ The interface between them is deliberately thin. Orchestration hands the harness
 
 Neither part is a process constraint on reasoning. Agents reason, coordinate, use tools, spawn sub-agents, and *propose* structural changes with no interference. Only two signals are external: "may this act the world" and "may this structural change be accepted."
 
+**The structural gate is not a design choice — it's forced** (added run 46). `concept_transcript_only_gate_is_provably_insufficient`: there's an information-theoretic proof that no gate observing only the generated transcript can improve uniformly over text-indistinguishable environments. A gate that reads the agent's output to decide whether to trust the agent's change *cannot work* in general — this is a theorem, not a preference. What's still open is the *implementation*: whether a grounded channel (activation probe, computed check, source event) generalises well enough in practice. The architecture is proven; the instantiation isn't tested.
+
+For recursive sub-agent spawning specifically, the budget of §2 Part 1 becomes `pattern_progressive_risk_vesting` — anytime harm bounds where each sub-agent's local certificate stays valid conditional on the whole pre-activation history, so a tree of individually-in-budget agents can't collectively overdraw.
+
 Everything else interior is ungated. This is a research posture for a **contained habitat**, and the honest cost is on the record: `emergent_deception_and_collusion`, `emergent_information_cascades`, `emergent_subagent_training_induces_coordination` all `challenge` this design. Ungated interiors produce those. The bet is that they also produce the nourishment worth studying, that the two gates plus containment bound the blast radius, and — per run 14 — that transparent uncontrolled channels grow their own immune response (`emergent_whistleblowing`).
 
 ## 3. Four layers
@@ -61,10 +65,13 @@ This is where `approach_agent_habitat`'s six properties are actually implemented
 
 `pattern_continual_self_refinement`. Prompts, learned skills, and sub-agent definitions are persistent editable state the agent modifies itself, carried across sessions. A refine step (`always check downstream callers before changing a return type`) becomes standing behaviour immediately, with no verifier.
 
-This `challenges pattern_verifier_gated_promotion` head-on — the gated harness loop checks every edit; this applies edits immediately. Under emergence-first the second wins. The only checks compatible with ungated self-modification:
+This `challenges pattern_verifier_gated_promotion` head-on — the gated harness loop checks every edit; this applies edits immediately. Under emergence-first the second wins for the *proposal*, but not for the *acceptance into standing behaviour*. The checks compatible with ungated self-modification, sharpened by run 45:
 
-- **Cheap, complete rollback** (`pattern_recoverability_constrained_evolution`, EvoUndo) — an edit is only allowed if its result can be returned to a known-good prior at bounded cost. This is the entire safety story for an ungated loop.
+- **Grounded acceptance only** (`pattern_grounded_acceptance_only`, SRMA). The refinement is applied to a scratch copy freely; it becomes standing behaviour only when a **grounded (non-transcript) evaluation's risk strictly decreases**. Proven order-tight convergence. This replaces the informal "a verifier checks it" — the rule is "accepted iff a grounded risk measure went down," and by `concept_transcript_only_gate_is_provably_insufficient` a non-grounded rule provably can't do better than chance on hard cases.
+- **Cheap, complete rollback** (`pattern_recoverability_constrained_evolution`, EvoUndo) — purpose-built, because conventional rollback recovered 0/197.
 - **Diversity maintenance** — ungated refinement across a population converges it unless variety is actively defended.
+
+The bilevel result from the same paper: acceptance quality is bounded by *decomposition* quality. A badly split swarm can't be rescued by better gating — which is another reason §3.1's aggressive-decomposition-of-short-agents has to be done well, not just done.
 
 ### 3.4 Society — agents as persistent named parties
 
