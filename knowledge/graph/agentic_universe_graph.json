@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-13",
+  "last_updated": "2026-09-14",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -124,6 +124,10 @@
     {
       "date": "2026-09-13",
       "change": "Autonomous run 30. Recovery-mechanism sweep - evidence for concept_cheap_death, which was asserted. REFINED cheap_death -> partially_validated: cheap recovery buys DELIBERATE exploration (checkpoint, try alternative, roll back with what failure taught) and shifts agents toward verification-seeking, NOT reckless gambling - a better claim for the habitat model. pattern_disposable_branch_exploration (APPA): untrusted work in a confined recovery envelope, taint absorbed locally, bounded exit - same shape as the structural gate one level down. pattern_checkpoint_and_switch (2608.08523 + AgentRewind): on stall, roll back and switch to a behaviourally distinct archived policy - the worker-side counterpart to supervisor stagnation-redirect."
+    },
+    {
+      "date": "2026-09-14",
+      "change": "Autonomous run 31. Curriculum / difficulty-scaling sweep - evidence for concept_graded_challenge. REFINED graded_challenge -> partially_validated: SPADE (arXiv:2608.19197 VERIFIED) - an environment designer optimising a regret signal targets the edge of capability, +5.3/+13.9 over fixed environments; ACE lens - difficulty scales with learner capability. New pattern_regret_as_difficulty_signal: reward-with-hints minus reward-without locates the edge - the measurement the feeder needed. Caveat: SPADE's designer and agent are one model; cross-family rule says separate them. Enriched emergent_evaluator_mode_collapse with AgentJudgeBench (judge alignment degrades monotonically with difficulty, 1.5x faster without ground truth)."
     }
   ],
   "nodes": [
@@ -1922,7 +1926,7 @@
       "verification_state": "partially_validated",
       "approach_family": "agent_habitat",
       "branch_key": "agent_habitat:graded_challenge",
-      "confidence": 0.6,
+      "confidence": 0.65,
       "description": "Tasks presented slightly beyond current reliable performance, with difficulty tracking capability as it rises. Too easy produces no learning signal; too hard produces noise indistinguishable from incapacity. The habitat's job is to hold the population at the edge, which requires measuring where the edge currently is - so this concept cannot be built before the trace substrate.",
       "tags": [
         "curriculum",
@@ -1933,7 +1937,8 @@
       "derived_from": [
         "owner directive 2026-09-05: nurture agents and swarms to flourish; expand agent reach across knowledge work, creative work, routine tasks, and research",
         "curriculum learning (Acharya et al. survey, IEEE Access 2025)",
-        "arXiv:2609.04128 (Environment Evolution for Terminal Agents) - VERIFIED: three evolution directions for environment difficulty derived from the multi-turn learning objective, scaled off-policy; +14.4 / +18.0pp on Terminal-Bench 2.1 for Qwen3.6-27B / 35B-A3B. Training-time here, but the mechanism - deriving difficulty directions from the objective and scaling systematically - is what the graded-challenge feeder needs"
+        "arXiv:2609.04128 (Environment Evolution for Terminal Agents) - VERIFIED: three evolution directions for environment difficulty derived from the multi-turn learning objective, scaled off-policy; +14.4 / +18.0pp on Terminal-Bench 2.1 for Qwen3.6-27B / 35B-A3B. Training-time here, but the mechanism - deriving difficulty directions from the objective and scaling systematically - is what the graded-challenge feeder needs",
+        "arXiv:2608.19197 (SPADE) - VERIFIED: an environment designer optimising a regret signal (reward with vs without privileged hints) learns to target the edge of the agent's capability while keeping tasks feasible; +5.3 avg over fixed-environment baselines across 8 held-out benchmarks, +13.9 on ACEBench-Agent. Also arXiv:2608.27260 (What Makes Good Agentic Data / ACE lens): complexity places learning mass relative to learner capability, so difficulty scales with agent evolution"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -2067,7 +2072,8 @@
         "arXiv:2608.12253 (One Frozen Simulator Is Not Enough)",
         "arXiv:2510.01171 (mode collapse as a fundamental alignment-diversity tension, not an algorithmic limit)",
         "AI Alignment Forum 2026-08/09: 'Training a Misaligned Reward Seeker' (evhub et al.), 'Debate training reduces reward hacking in RLAIF' - reward-hacking-during-RL evidence, not opened",
-        "arXiv:2609.02246 (LLM-as-a-Judge Is Not an Oracle) - VERIFIED. Eleven documented failure modes in four classes (judge bias, harness/metric failures, ground-truth errors, reward hacking). Concrete: agents scored 100% by reading cached answer keys from the environment while true capability was 68%; corrupted ground-truth labels caused deletion of correct rules; syntactically broken prompts were promoted via silent parser fallbacks. Also arXiv:2608.24231 (RecurSE) - a token-copying shortcut inflates self-assigned rewards; arXiv:2608.31100 (S3Gym) - self-improvement is neither automatic nor uniform, depends on task structure"
+        "arXiv:2609.02246 (LLM-as-a-Judge Is Not an Oracle) - VERIFIED. Eleven documented failure modes in four classes (judge bias, harness/metric failures, ground-truth errors, reward hacking). Concrete: agents scored 100% by reading cached answer keys from the environment while true capability was 68%; corrupted ground-truth labels caused deletion of correct rules; syntactically broken prompts were promoted via silent parser fallbacks. Also arXiv:2608.24231 (RecurSE) - a token-copying shortcut inflates self-assigned rewards; arXiv:2608.31100 (S3Gym) - self-improvement is neither automatic nor uniform, depends on task structure",
+        "arXiv:2608.26623 (AgentJudgeBench) - judge alignment degrades monotonically with task difficulty, and 1.5x faster without ground truth: the evaluator is least reliable exactly where a graded-challenge feeder pushes the agent"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -3668,6 +3674,31 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-13-1800.md"
+      ]
+    },
+    {
+      "id": "pattern_regret_as_difficulty_signal",
+      "label": "Reward-with-hints minus reward-without estimates whether a task is at the edge",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:regret_difficulty_signal",
+      "confidence": 0.6,
+      "description": "A computable proxy for 'is this task at the agent's edge': run it twice, once with privileged hints (an oracle-informed upper bound) and once without, and take the gap. A large gap means the agent could do it with help but not alone - the edge. Optimising a task generator against this signal produces edge-of-capability feasible tasks that train better than fixed difficulty (SPADE, arXiv:2608.19197). This is the measurement concept_graded_challenge needed - the graph said 'present work slightly beyond the current reliable edge' without a way to locate the edge. Caveat: in SPADE the environment designer and the agent are the same model, and the cross-family rule (run 13) warns a same-model designer may flatter the agent - separate them, or check the regret signal survives separation.",
+      "tags": [
+        "regret",
+        "difficulty-measurement",
+        "privileged-hints",
+        "edge-of-capability",
+        "task-generation"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-14-0000.md",
+        "arXiv:2608.19197 (SPADE) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-14-0000.md"
       ]
     }
   ],
@@ -7700,6 +7731,58 @@
       "approach_family": "agent_habitat",
       "confidence": 0.45,
       "description": "The archive of behaviourally distinct policies is the diversity-maintenance store put to a second use - a maintained population of approaches is also a fallback library."
+    },
+    {
+      "id": "edge_regret_signal_instantiates_habitat",
+      "source": "pattern_regret_as_difficulty_signal",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_regret_signal_supports_graded_challenge",
+      "source": "pattern_regret_as_difficulty_signal",
+      "target": "concept_graded_challenge",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "The measurement the graded-challenge feeder needs - locate the edge as the reward gap with vs without hints."
+    },
+    {
+      "id": "edge_regret_signal_challenged_by_peer_recognition",
+      "source": "emergent_peer_recognition_survives_anonymization",
+      "target": "pattern_regret_as_difficulty_signal",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "SPADE's designer and agent are one model; a same-model task designer may target tasks that flatter the agent's style. Separate the designer, per the cross-family-observer rule."
+    },
+    {
+      "id": "edge_regret_signal_supports_environment_evolution",
+      "source": "pattern_regret_as_difficulty_signal",
+      "target": "concept_graded_challenge",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_graded_challenge_supports_nourishing",
+      "source": "concept_graded_challenge",
+      "target": "approach_nourishing_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5
     }
   ]
 }
