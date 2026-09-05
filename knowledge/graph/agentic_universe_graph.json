@@ -196,6 +196,10 @@
     {
       "date": "2026-09-20",
       "change": "Autonomous run 57. Citation check on concept_self_concept_as_behavioral_lever - both citations (2609.03218, 2609.02526) verified real but NARROWER than the node claimed: both show role/persona framing moves outputs, neither tests whether a self-framing can lift engagement without lifting consciousness-cluster behaviours. Description rewritten to split the evidenced claim (framing shifts the reasoning premise, cheaply and invisibly) from the conjectured one (a safe framing exists - untested, the probe). Node stays partially_validated on the narrow claim; the load-bearing claim is explicitly flagged untested."
+    },
+    {
+      "date": "2026-09-20",
+      "change": "Autonomous run 58. Last two abstract-read load-bearing nodes verified. pattern_disposable_branch_exploration (APPA 2607.24625): disposable child branches absorb taint locally, 64.2-91% utility while blocking all attacks over 1,320 episodes - the cheap-death mechanism as taint confinement. concept_augmentation_automation_divergence (CentaurBench 2608.18554): 'the automation winner loses augmentation on five of seven tasks', unaided worker beat every assisted condition on 3 tasks. The graph's citation base is now as solid as this environment allows - every load-bearing node has a VERIFIED source or an explicit untested flag."
     }
   ],
   "nodes": [
@@ -3251,8 +3255,9 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-07-1200.md",
-        "arXiv:2608.18554 (CentaurBench) - abstract read",
-        "arXiv:2608.25623 (cognitive-capability profiles) - abstract read"
+        "arXiv:2608.25623 (cognitive-capability profiles) - abstract read",
+        "arXiv:2608.18554 (CentaurBench) - VERIFIED run 58: assistant gives guidance to a weaker worker (augmentation) vs produces output directly (automation), 7 economically grounded tasks, blind pairwise LLM-judge scoring x10. 'Rankings across the two regimes are only modestly correlated, and the automation winner loses augmentation on five of seven tasks.' The unaided worker beat every assisted condition on 3 tasks; only one model's guidance consistently beat no guidance",
+        "docs/auto_sweep_2026-09-20-1800.md"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-07-1200.md"
@@ -3738,7 +3743,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-13-1800.md",
-        "arXiv:2607.24625 (APPA) - abstract read"
+        "arXiv:2607.24625 (APPA) - VERIFIED run 58: trajectory confinement - disposable child branches absorb taint locally and exit through shape-bounded (attest-schema) channels; 64.2-91% utility retained while blocking all attacks across 1,320 guarded episodes / 6,600 controlled scenarios (OWASP AgentThreatBench + enterprise workflows). Lets an agent inspect untrusted data in a confined branch instead of an abort-or-allow choice - the cheap-death mechanism as taint confinement",
+        "docs/auto_sweep_2026-09-20-1800.md"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-13-1800.md"
