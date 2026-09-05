@@ -29,16 +29,16 @@ Research the conditions under which agents and swarms flourish, and build the en
 
 Six properties, derived from observed failure modes rather than from the biological metaphor. Each answers a specific way agent systems degrade.
 
-| Property | Supplies | Failure it answers |
-| --- | --- | --- |
-| **Slack** | compute and time above the task floor; idle intervals | efficiency budgeting removes exploration first, and looks correct doing it |
-| **Cheap death** | sandboxing, snapshots, disposable instances | expensive failure selects for the safe known move |
-| **Graded challenge** | tasks at the current capability edge | too easy gives no signal, too hard gives noise |
-| **Inheritance** | skills, experience banks, distilled memory | capability lost at every reset |
-| **Diversity maintenance** | heterogeneous models, decorrelated prompts and context | mode collapse, cascades, evaluator collapse |
-| **Retraction capacity** | live removal paths, actually exercised | accumulation-only growth; early errors gain the authority of age |
+| Property | Concrete mechanism | Failure it answers | Evidence (as of run 31) |
+| --- | --- | --- | --- |
+| **Slack** | compute and time above the task floor; scheduled idle intervals | efficiency budgeting removes exploration first, and looks correct doing it | **unverified** — the idle-agent probe (`docs/probe_idle_agent.md`) is the test |
+| **Cheap death** | disposable child branch, taint absorbed locally, bounded exit; aligned context+environment checkpoints | expensive failure selects for the safe known move | partially validated — cheap recovery buys *deliberate* strategy-space search, not gambling (AgentRewind, PACE-Bench, APPA) |
+| **Graded challenge** | a task generator optimised against a regret signal (reward with privileged hints minus without) | too easy gives no signal, too hard gives noise | partially validated — SPADE, +5.3/+13.9 over fixed environments; ACE lens for capability-relative difficulty |
+| **Inheritance** | skill library + dual-layer experience bank, version-stamped against source records, rules never condensed | capability lost at every reset | partially validated — *and* four measured degradation modes (stale-belief 74–77%, compaction cliff 10%, self-poisoning 20–42%, authority laundering 98.6%); the channel does not self-correct |
+| **Diversity maintenance** | heterogeneous model families, decorrelated prompts and context, permanently withheld skill-library fraction | mode collapse, cascades, evaluator collapse | partially validated (keystone: 2 diverse ≥ 16 homogeneous) — complicated by `emergent_sustained_heterogeneity` (variety doesn't uniformly decay) |
+| **Retraction capacity** | `pattern_agentic_skill_lifecycle` deprecation stage, actually exercised | accumulation-only growth; early errors gain the authority of age | partially validated — exercised on this graph itself (1 deprecated, 5 inconclusive) |
 
-The last two are the ones nobody builds, and they carry most of the load.
+The last two are the ones nobody builds, and they carry most of the load. Five of six now have literature behind them; **slack — the load-bearing one — is the gap, and it's the cheapest to test.**
 
 ## The keystone
 
