@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-20",
+  "last_updated": "2026-09-21",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -200,6 +200,10 @@
     {
       "date": "2026-09-20",
       "change": "Autonomous run 58. Last two abstract-read load-bearing nodes verified. pattern_disposable_branch_exploration (APPA 2607.24625): disposable child branches absorb taint locally, 64.2-91% utility while blocking all attacks over 1,320 episodes - the cheap-death mechanism as taint confinement. concept_augmentation_automation_divergence (CentaurBench 2608.18554): 'the automation winner loses augmentation on five of seven tasks', unaided worker beat every assisted condition on 3 tasks. The graph's citation base is now as solid as this environment allows - every load-bearing node has a VERIFIED source or an explicit untested flag."
+    },
+    {
+      "date": "2026-09-21",
+      "change": "Autonomous run 60. Built Phase 0 - the trace substrate the whole plan depends on. tools/trace_substrate.py (schema phase0.1, Recorder, validator), tools/topology_recover.py (interaction graph + deterministic role recovery), tools/phase0_selftest.py (GREEN/RED predicate). Implements pattern_five_w_message_instrumentation; events carry layer + language; CLAIM carries evidence_roots; secrets scrubbed before write. The plan's Phase 0 gate (recover assigned roles in a control) passes at 1.00 vs 0.80 threshold. artifact_phase0_trace_substrate added (verification_state validated - the gate is a computed check that passes). This clears the blocker under every 'untested' in what_would_make_this_wrong.md. docs/phase0_trace_substrate.md."
     }
   ],
   "nodes": [
@@ -4429,6 +4433,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-19-1800.md"
+      ]
+    },
+    {
+      "id": "artifact_phase0_trace_substrate",
+      "label": "Phase 0 trace substrate — built, gate GREEN",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase0_built",
+      "confidence": 0.9,
+      "description": "The measurement layer, built run 60: tools/trace_substrate.py (event schema phase0.1 + append-only Recorder + validator), tools/topology_recover.py (interaction graph + deterministic role recovery), tools/phase0_selftest.py (GREEN/RED predicate). Implements pattern_five_w_message_instrumentation (all six W's required on a MESSAGE event); every event carries layer (concept_emergence_layer_model) and language (concept_interaction_language_shifts_emergence); CLAIM events carry evidence_roots (pattern_evidential_ancestry_tracking); secrets scrubbed before write (operating rule 9). The plan's Phase 0 gate - recover explicitly-assigned roles in a control condition - passes at 1.00 (threshold 0.80) on a planner/workers/verifier/router/isolate control. This clears the blocker under every 'untested' in docs/what_would_make_this_wrong.md. Open: noisy-control role recovery (Phase 0.2).",
+      "tags": [
+        "phase-0",
+        "trace-substrate",
+        "five-w",
+        "built",
+        "gate-green",
+        "measurement-layer"
+      ],
+      "derived_from": [
+        "docs/phase0_trace_substrate.md",
+        "tools/trace_substrate.py",
+        "tools/topology_recover.py",
+        "tools/phase0_selftest.py"
+      ],
+      "evidence_links": [
+        "docs/phase0_trace_substrate.md"
       ]
     }
   ],
@@ -9606,6 +9638,71 @@
       "approach_family": "agent_habitat",
       "confidence": 0.55,
       "description": "A failure mode of the diversity-maintenance habitat mechanism: the habitat has to defend evidence independence, not just model independence."
+    },
+    {
+      "id": "edge_phase0_implements_five_w",
+      "source": "artifact_phase0_trace_substrate",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.9,
+      "description": "MESSAGE events require all six W's; a message without a declared purpose does not validate."
+    },
+    {
+      "id": "edge_phase0_implements_evidential_ancestry",
+      "source": "artifact_phase0_trace_substrate",
+      "target": "pattern_evidential_ancestry_tracking",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "CLAIM events carry a required non-empty evidence_roots list - the dedup key."
+    },
+    {
+      "id": "edge_phase0_instantiates_sih",
+      "source": "artifact_phase0_trace_substrate",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.85
+    },
+    {
+      "id": "edge_phase0_grounds_layer_model",
+      "source": "artifact_phase0_trace_substrate",
+      "target": "concept_emergence_layer_model",
+      "type": "grounds",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "Every event names its layer (llm/harness/swarm) - the attribution rule made enforceable."
+    },
+    {
+      "id": "edge_phase0_grounds_interaction_language",
+      "source": "artifact_phase0_trace_substrate",
+      "target": "concept_interaction_language_shifts_emergence",
+      "type": "grounds",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.75,
+      "description": "Every event is tagged with the interaction language - an English-only result can be told apart from a cross-lingual one."
+    },
+    {
+      "id": "edge_phase0_verifies_topology_recovery",
+      "source": "artifact_phase0_trace_substrate",
+      "target": "test_scenario_decomposition_granularity",
+      "type": "informs",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "Role recovery from a trace is the instrument the decomposition-granularity question needs; control passes at 1.00."
     }
   ]
 }

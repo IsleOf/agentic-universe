@@ -57,13 +57,15 @@ A runtime that mutates as fast as the harness has nothing left to verify against
 
 ## 4. Build order
 
-### Phase 0 — Trace substrate (prerequisite for everything)
+### Phase 0 — Trace substrate (prerequisite for everything) — **BUILT, gate GREEN (run 60)**
 
 Five-W instrumentation (`pattern_five_w_message_instrumentation`): sender, receiver, content class, timestamp, declared purpose captured at the call site, channel. Plus tool calls, outcomes, and token cost per step.
 
 Already the top of the emergence probe catalogue; it is now also the input format the experience bank condenses. One build serves both. `arXiv:2602.11583` independently arrives at the same five dimensions.
 
 **Gate:** topology analysis must recover roles in a control condition where roles were explicitly assigned. An instrument that cannot find roles known to be there cannot be trusted to find emergent ones.
+
+**Status (run 60):** built in `tools/trace_substrate.py` (schema `phase0.1` + `Recorder` + validator), `tools/topology_recover.py` (interaction graph + deterministic role recovery), `tools/phase0_selftest.py` (the GREEN/RED predicate). Full writeup: `docs/phase0_trace_substrate.md`. The gate passes — role recovery is **1.00 on the control condition** (planner / workers / verifier / router / isolate), threshold was 0.80. Every event also carries `layer` (`concept_emergence_layer_model`) and `language` (`concept_interaction_language_shifts_emergence`), and `CLAIM` events carry `evidence_roots` (`pattern_evidential_ancestry_tracking`). Secrets are scrubbed before write; raw `.jsonl` is gitignored. Open: role recovery on a *noisy* control (Phase 0.2) — not a blocker for Phase 1.
 
 ### Phase 1 — Harness as versioned artifact
 
@@ -137,7 +139,7 @@ Not a parallel track — the probe catalogue answers questions this architecture
 
 1. ~~Merge the September research into the graph.~~ Done, and 100+ nodes past it — the literature loop has swept every mapped area (`docs/literature_coverage.md`).
 2. ~~Fix or discard the 13 Perplexity patches.~~ Superseded — the graph was grown by direct edits under the emergence-first posture; the patches were treated as prose per §7's verdict.
-3. **Build Phase 0 (traces).** Still the real blocker. Nothing in this plan is measurable without it, and every "untested" in `docs/what_would_make_this_wrong.md` traces back to this not existing yet. This is the one action that has not moved.
+3. ~~Build Phase 0 (traces).~~ **Done (run 60)** — `tools/trace_substrate.py` + `tools/topology_recover.py` + `tools/phase0_selftest.py`, gate GREEN at 1.00 role recovery on the control. `docs/phase0_trace_substrate.md`. The blocker is cleared; the plan is now measurable. Next real move is Phase 0.2 (noisy-control role recovery) then Phase 1 (harness as versioned artifact).
 4. ~~Push the branch.~~ Done; the autonomous loop commits and pushes to `proposals/2026-09-01-emergent-behaviour-cluster` each run.
 5. ~~Unhold the PILOT/supervisor proposal.~~ Superseded by `evolution/proposals/2026-09-09_nourishing-harness` (run 16), which is `awaiting_review`.
 

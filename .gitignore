@@ -1,0 +1,12 @@
+# Raw runtime artifacts — scrubbed of secrets by the recorder, but large and
+# not canonical knowledge. Commit summaries and pointers, not raw traces
+# (operating rule 9; runtime/*/README.md).
+runtime/traces/*.jsonl
+runtime/observations/*.jsonl
+runtime/evaluations/*.jsonl
+!runtime/**/README.md
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
