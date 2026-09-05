@@ -27,10 +27,10 @@
 ## Genuinely unexplored — candidates for future sweeps
 
 - **Multi-agent economic/market dynamics** — trading swarms, resource allocation, emergent pricing. Touched once (`2608.26896` tacit collusion in electricity markets) but not developed. Bears on the marketplace-workflow family (currently dormant/inconclusive) and on `emergent_misaligned_communication_under_stress`.
-- **Agent-to-human trust and handoff** — when does a human trust an agent's output, how do handoffs degrade. Only `2608.23642` ("AI Agents Push Humans Out of the Loop") touched it. Bears on the outer gate's human side.
-- **Long-horizon coherence** — what breaks over 100+ step tasks beyond memory (planning, goal, identity). `emergent_goal_persistence_and_drift` is the node; the evidence is thin.
-- **Formal verification of agent behaviour** — proof-carrying agents, machine-checked plans. `2608.28433` (Prove2Me) and the math-swarm are pointers; not developed.
-- **Cross-lingual / cultural emergence** — do norms and conventions differ by training-language mix. `2601.11227` (language of thought → diversity) is a pointer.
+- ~~Agent-to-human trust and handoff~~ — SWEPT run 39: emergent_constraint_weakening_at_handoffs (100% blocker deactivation), four-field constraints, overseer degradation, attribution laundering.
+- ~~Long-horizon coherence~~ — SWEPT run 43: concept_geometric_reliability_decay (~16 steps to collapse), step-count-not-context, deterministic state folding.
+- ~~Formal verification~~ — SWEPT run 45: concept_transcript_only_gate_is_provably_insufficient (impossibility proof), SRMA grounded acceptance, progressive risk vesting, evidence-carrying termination.
+- ~~Cross-lingual / cultural emergence~~ — SWEPT run 47: concept_interaction_language_shifts_emergence (Shibboleth Effect - language shifts behaviour model-dependently), value plurality erodes under interaction, SwarmWorld cumulative tech evolution.
 - **Embodied / physical-world agents** — deliberately out of scope for this project so far, but the containment assumptions differ.
 
 ## Sources that keep recurring (diminishing returns)
