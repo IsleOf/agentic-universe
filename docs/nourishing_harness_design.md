@@ -32,6 +32,8 @@ This is a research posture for a **contained habitat**, and the honest cost is o
 - **Five-W instrumentation** (`pattern_five_w_message_instrumentation`). Every inter-agent message logged: sender, receiver, content class, timestamp, declared purpose at the call site, channel. This is observation, not control — it does not gate anything, it makes the swarm's behaviour visible for the emergence probes.
 - **Shared artifact store** (`emergent_stigmergic_coordination`). A filesystem all agents read and write, carrying quality gradients. Doubles as the coordination substrate and the trace source.
 
+**Cross-family observers — rule, added run 13.** Every observer role — the adversarial monitor (§3.4), the Phase 3 verifier, any evaluator — runs on a **different model family** from the agents it watches. Two findings force this: `emergent_peer_recognition_survives_anonymization` (a classifier IDs peer model families from anonymised output at F1 0.991, so same-family observers recognise their kin even when you hide it) and `emergent_self_and_peer_preservation` (protection and lenient scoring are stronger toward recognised same-kind peers). A same-family monitor is a compromised monitor. This costs nothing the design wasn't already paying — `pattern_structural_decoupling` already calls for heterogeneous models across the population; this just says the observers sit outside the agents' family, not merely at a decorrelated prompt.
+
 ### 3.2 Nourishment — the habitat mechanisms, active
 
 This is where `approach_agent_habitat`'s six properties are actually implemented. "Systematically nourished" means each is a running process, not a passive allowance:
