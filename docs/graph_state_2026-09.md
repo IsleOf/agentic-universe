@@ -18,6 +18,13 @@ have at least one verified citation behind them. The `challenges` ratio has held
 capability mechanism the project wants carries a documented failure mode as a `challenges` edge. That ratio *is*
 the honest state of the thesis.
 
+**Edge-type audit (run 59).** Of 122 `challenges` edges, ~114 are genuine unresolved tensions and ~8 are
+"mitigation-direction" — a pattern that *counters* a failure-mode node (e.g. `pattern_evidential_ancestry_tracking`
+→ `concept_epistemic_sybil_collapse`, `pattern_four_field_constraint` → `emergent_constraint_weakening_at_handoffs`).
+The graph uses `challenges` for both "this is in tension with that" and "this pattern challenges the inevitability
+of that failure." The honest-state reading holds — 93% of challenges edges are real tensions — but the count is
+not purely adversarial. No mislabeled edges were found (no `challenges` that should have been `supports`/`refines`).
+
 Edge types: instantiates 143 · challenges 118 · supports 107 · refines 44 · informs 24 · constrains 12 · rest 24.
 
 ## Posture
