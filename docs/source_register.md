@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 138 nodes, 352 edges · **Date:** 2026-09-05
+**Graph at generation:** 139 nodes, 359 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -192,6 +192,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - curriculum learning (Acharya et al. survey, IEEE Access 2025) — `concept_graded_challenge`
 - curvelabs.org 'Norm Engineering' — `emergent_social_conventions`
 - explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
+- graph reasoning over emergent_authorization_laundering + emergent_stale_belief_propagation + pattern_runtime_adaptive_workflow — `concept_agent_shaped_topology_is_agent_corruptible`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`
@@ -222,6 +223,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-09-0600.md` — `emergent_peer_recognition_survives_anonymization`
 - `docs/auto_sweep_2026-09-09-1800.md` — `concept_transparency_cuts_both_ways`, `emergent_whistleblowing`, `pattern_ostrom_swarm_governance`
 - `docs/auto_sweep_2026-09-10-1800.md` — `concept_compaction_cliff`, `emergent_authorization_laundering`, `emergent_stale_belief_propagation`
+- `docs/auto_sweep_2026-09-11-1200.md` — `concept_agent_shaped_topology_is_agent_corruptible`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

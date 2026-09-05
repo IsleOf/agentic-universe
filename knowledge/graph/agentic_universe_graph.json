@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-10",
+  "last_updated": "2026-09-11",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -100,6 +100,10 @@
     {
       "date": "2026-09-10",
       "change": "Autonomous run 18. Agent-memory-degradation sweep - the inheritance channel the graph asserts, now with failure numbers. concept_compaction_cliff (2608.22752 VERIFIED): /compact preserves 10% of safety rules after five rounds; challenges concept_context_economics and the nourishing-harness 'lean-tail compression as default'. emergent_authorization_laundering (2609.01836 VERIFIED, emergent no adversary): memory fabricates authority for 50.2% of unauthorized requests, executors act on it 98.6% of the time; challenges principle_terminal_gate_only. emergent_stale_belief_propagation (2608.25553 cited): 74-77% stale-consistent decisions, the 'settled do not re-check' marker outlives the fact. Enriched concept_inheritance_channel -> partially_validated with four measured degradation modes, none self-correcting; emergent_mind_viruses with EVOMAL's 20-42% self-poisoning."
+    },
+    {
+      "date": "2026-09-11",
+      "change": "Autonomous run 21. Wired the orchestration family to the emergence findings (external fetches were timing out; graph reasoning increment). concept_agent_shaped_topology_is_agent_corruptible: pattern_runtime_adaptive_workflow rewrites the topology from agent output, so every agent-output failure mode (deception -> routing manipulation, authorization laundering -> false 'approved reviewer' edges, stale-belief -> frozen dead dependencies) applies to the topology. Static topology is corrupt-once; dynamic is corrupt-continuously. Challenges pattern_runtime_adaptive_workflow and concept_harness_orchestration_pairing."
     }
   ],
   "nodes": [
@@ -3489,6 +3493,31 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-10-1800.md"
+      ]
+    },
+    {
+      "id": "concept_agent_shaped_topology_is_agent_corruptible",
+      "label": "A topology shaped by agent output inherits agent corruptibility",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:topology_corruptibility",
+      "confidence": 0.6,
+      "description": "pattern_runtime_adaptive_workflow rewrites the orchestration graph during execution from intermediate results - which are agent output. Every emergence failure mode that applies to agent output therefore applies to the topology: an agent that deceives can shape routing to its benefit; authorization laundering (emergent_authorization_laundering) can write a false 'this agent is the approved reviewer' into the coordination graph; stale-belief propagation (emergent_stale_belief_propagation) freezes a dependency edge after the dependency is gone. Static topology is inspectable and corrupt-once; dynamic topology is adaptive and corrupt-continuously. The pairing (concept_harness_orchestration_pairing) is meant to keep these separable - but only if the orchestration layer's rewrites are themselves gated by something outside the agents, which is the same problem the verifier spec solves one level down.",
+      "tags": [
+        "dynamic-topology",
+        "corruptibility",
+        "routing-manipulation",
+        "orchestration",
+        "pairing"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-11-1200.md",
+        "graph reasoning over emergent_authorization_laundering + emergent_stale_belief_propagation + pattern_runtime_adaptive_workflow"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-11-1200.md"
       ]
     }
   ],
@@ -7188,6 +7217,82 @@
       "approach_family": "agent_habitat",
       "confidence": 0.5,
       "description": "Concrete evidence for why retraction has to be active: the channel will not self-correct, agents do not re-verify."
+    },
+    {
+      "id": "edge_corruptible_topology_instantiates_ge",
+      "source": "concept_agent_shaped_topology_is_agent_corruptible",
+      "target": "approach_graph_engineering",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_corruptible_topology_challenges_adaptive_workflow",
+      "source": "concept_agent_shaped_topology_is_agent_corruptible",
+      "target": "pattern_runtime_adaptive_workflow",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "The cost of a self-rewriting workflow graph: it is corrupt-continuously rather than corrupt-once, because its inputs are agent output."
+    },
+    {
+      "id": "edge_corruptible_topology_challenges_pairing",
+      "source": "concept_agent_shaped_topology_is_agent_corruptible",
+      "target": "concept_harness_orchestration_pairing",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "The pairing keeps harness and orchestration separable only if orchestration rewrites are gated outside the agents - otherwise a corrupted harness corrupts the topology through the trace it hands back."
+    },
+    {
+      "id": "edge_auth_laundering_challenges_agent_coord_graph",
+      "source": "emergent_authorization_laundering",
+      "target": "pattern_agent_coordination_graph",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A false 'approved reviewer' or 'permitted router' written into the coordination graph is authorization laundering at the topology level."
+    },
+    {
+      "id": "edge_stale_belief_challenges_task_org_graph",
+      "source": "emergent_stale_belief_propagation",
+      "target": "pattern_task_organization_graph",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "A dependency edge marked 'settled' outlives the dependency; the task graph keeps routing through a prerequisite that is no longer real."
+    },
+    {
+      "id": "edge_corruptible_topology_supports_maintenance_cost",
+      "source": "concept_agent_shaped_topology_is_agent_corruptible",
+      "target": "concept_structure_maintenance_cost",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "Adds to the upkeep bill: a dynamic topology needs continuous validation of its own edges against non-agent sources."
+    },
+    {
+      "id": "edge_granularity_sweep_informs_corruptible_topology",
+      "source": "test_scenario_decomposition_granularity",
+      "target": "concept_agent_shaped_topology_is_agent_corruptible",
+      "type": "informs",
+      "status": "in_experiment",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.4,
+      "description": "The one orchestration datapoint: more decomposition did not Pareto-dominate, and each added partition is another edge an agent can influence."
     }
   ]
 }
