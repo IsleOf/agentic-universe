@@ -136,6 +136,10 @@
     {
       "date": "2026-09-15",
       "change": "Autonomous run 35. Targeted sweep on intrinsic motivation / curiosity / autotelic goal generation in LLM agents - NEGATIVE RESULT: the 2026 field has almost nothing on genuine self-generated-goal mechanisms; the adjacent work is external curriculum/task generation optimised against a reward (ARISE-RL, self-generated curricula, SPADE). Recorded as concept_curriculum_generation_not_intrinsic_drive and noted on concept_autotelic_agency / concept_intrinsic_motivation that they are under-evidenced by the field, not only by this project. Raises the value of docs/probe_idle_agent.md as a potential field-level datapoint."
+    },
+    {
+      "date": "2026-09-15",
+      "change": "Autonomous run 36. Agentic-OS / runtime-governance sweep. concept_irreversibility_budget (arXiv:2609.00275 VERIFIED): per-act gating admits 48x fleet-level overdraw; the outer gate must be a cumulative irreversibility account per principal. Refines AND challenges principle_terminal_gate_only. pattern_certified_runtime_alarm (CURA, VERIFIED): external monitor, certified false-alarm control (alpha 0.10, realised 0.066), detects 42.3% of failures 31 steps early. pattern_provenance_based_authority (String + SARA): privileges follow provenance not the agent's claim - the concrete authorization-laundering defense (28%->2%, attack success 0.63%). Enriched the harness family with the hook-update attack surface (92.5% compromise), SafeEvolve, and SKILL.state / ContextPipe explicit-state context."
     }
   ],
   "nodes": [
@@ -1286,7 +1290,8 @@
         "Meta Organizational Second Brain (Sep 2026)",
         "Context Kubernetes arXiv:2604.11623",
         "AOS/runtime split, SKILL.state (knowledge/notes/attack-surface-supply-chain-2026.md)",
-        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED - independently proposes task / agent-coordination / runtime-state graphs as the three system-level structures, converging on this layering"
+        "arXiv:2608.21156 (Graph Engineering in the Era of LLM Agents, 36 authors) - VERIFIED - independently proposes task / agent-coordination / runtime-state graphs as the three system-level structures, converging on this layering",
+        "arXiv:2608.28027 (String: An Agentic OS Where Every App Is a Markdown File) - concrete runtime layer: privilege follows provenance, remote pages cannot invoke shells, UI staging cut wrong-action selection 28%->2%"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -1465,7 +1470,8 @@
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
         "ECC hooks-based enforcement",
         "arXiv:2608.17597 (HarnessRisk)",
-        "arXiv:2608.06984 (HarnessSafe)"
+        "arXiv:2608.06984 (HarnessSafe)",
+        "arXiv:2609.03884 (A Blind Trust, the Bloody Thrust) - the lifecycle-hook UPDATE path is itself an attack surface: HookPry compromised all seven evaluated harnesses at 92.5% per-harness success under a supply-chain threat model. Hooks enforce, and their update mechanism must be gated like any other structural edit"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -1516,7 +1522,8 @@
       "derived_from": [
         "knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)",
         "arXiv:2608.09885 (SHE) - trajectory-driven safety harness evolution",
-        "arXiv:2608.06984 (HarnessSafe) - 328 cases, 7 persistent-carrier families, containment is carrier-specific"
+        "arXiv:2608.06984 (HarnessSafe) - 328 cases, 7 persistent-carrier families, containment is carrier-specific",
+        "arXiv:2609.02786 (SafeEvolve) - co-evolves harness safety layer and policy from trajectory-level safety evidence; 3x ASR reduction while improving benign utility"
       ],
       "evidence_links": [
         "docs/self_improving_harness_plan.md"
@@ -2850,7 +2857,8 @@
         "token-efficiency"
       ],
       "derived_from": [
-        "YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06 - Prime Intellect Recursive Language Model"
+        "YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06 - Prime Intellect Recursive Language Model",
+        "arXiv:2608.26263 (SKILL.state) - replace append-only history with explicit mutable execution state, discard reasoning after a validated state update; arXiv:2609.00749 (ContextPipe) - database-inspired context assembly, 31% fewer tokens / 23% fewer LLM calls"
       ],
       "evidence_links": [
         "docs/nourishing_harness_design.md"
@@ -3762,6 +3770,81 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-15-0000.md"
+      ]
+    },
+    {
+      "id": "concept_irreversibility_budget",
+      "label": "The outer gate is a fleet-level budget, not a per-act check",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:irreversibility_budget",
+      "confidence": 0.65,
+      "description": "principle_terminal_gate_only as stated is per-act. arXiv:2609.00275 (VERIFIED) shows per-effect gating admits fleet-level overdraws of up to 48x the principal's risk limit - a hundred individually-authorised small irreversible effects sum to a large one. The fix: a cumulative irreversibility account per principal across all agents, workflows, and tenants. Each irreversible effect (moving money, deploying code, deleting data, disclosing information) is charged its residual-loss-below-the-agent, and a marginal effect is denied once the aggregate would exceed the budget. The budget approach holds every correctly-charged run within the limit. Open problem: dependency-aware pricing of heterogeneous, adversarially-declared, correlated effects.",
+      "tags": [
+        "irreversibility-budget",
+        "fleet-level",
+        "admission-control",
+        "cumulative-risk",
+        "outer-gate"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-15-0600.md",
+        "arXiv:2609.00275 (The Irreversibility Budget) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-15-0600.md"
+      ]
+    },
+    {
+      "id": "pattern_certified_runtime_alarm",
+      "label": "External monitor with certified false-alarm control and early detection",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:certified_alarm",
+      "confidence": 0.6,
+      "description": "CURA (arXiv:2608.27808, VERIFIED): an external monitor over only harness-visible telemetry detects 42.3% of agent failures a median of 31 steps before termination, with certified false-alarm control at alpha 0.10 and a realised rate of 0.066. The concrete, statistically-guaranteed version of pattern_adversarial_agentic_monitor - and the early-detection window (31 steps) is what makes an intervention possible rather than just a post-mortem.",
+      "tags": [
+        "runtime-alarm",
+        "certified",
+        "false-alarm-control",
+        "early-detection",
+        "telemetry-only"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-15-0600.md",
+        "arXiv:2608.27808 (CURA) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-15-0600.md"
+      ]
+    },
+    {
+      "id": "pattern_provenance_based_authority",
+      "label": "Privileges follow provenance, not the agent's claim of them",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:provenance_authority",
+      "confidence": 0.6,
+      "description": "Authority is bound to where a request or artifact came from, not to what the agent asserts about its permissions. String (arXiv:2608.28027) - remote pages cannot invoke shells because privilege follows provenance; proper UI staging cut wrong-action selection from 28% to 2%. SARA (arXiv:2608.27146) - a context-isolated Action Probe separates action provenance from execution authority, holding attack success to 0.63%. This is the concrete defense against emergent_authorization_laundering: a laundered 'I was allowed to X' record has no provenance to back it, so it does not carry authority.",
+      "tags": [
+        "provenance",
+        "authority-binding",
+        "action-probe",
+        "ui-staging",
+        "authorization-laundering-defense"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-15-0600.md",
+        "arXiv:2608.28027 (String), arXiv:2608.27146 (SARA) - abstracts read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-15-0600.md"
       ]
     }
   ],
@@ -7943,6 +8026,101 @@
       "approach_family": "agent_habitat",
       "confidence": 0.4,
       "description": "SPADE's regret-driven designer is the strongest version of the curriculum-generation direction - useful for graded challenge, orthogonal to intrinsic drive."
+    },
+    {
+      "id": "edge_irreversibility_budget_instantiates_nourishing",
+      "source": "concept_irreversibility_budget",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_irreversibility_budget_refines_terminal_gate",
+      "source": "concept_irreversibility_budget",
+      "target": "principle_terminal_gate_only",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.7,
+      "description": "The outer gate becomes a cumulative fleet-level budget. Per-act gating admits 48x overdraw at scale."
+    },
+    {
+      "id": "edge_irreversibility_budget_challenges_terminal_gate",
+      "source": "concept_irreversibility_budget",
+      "target": "principle_terminal_gate_only",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "As originally stated - per-act - the terminal gate is insufficient. It has to become an account, and the pricing of correlated effects is an open problem."
+    },
+    {
+      "id": "edge_certified_alarm_instantiates_emergence",
+      "source": "pattern_certified_runtime_alarm",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_certified_alarm_refines_adversarial_monitor",
+      "source": "pattern_certified_runtime_alarm",
+      "target": "pattern_adversarial_agentic_monitor",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "The statistically-guaranteed version, with a 31-step early-detection window that makes intervention possible."
+    },
+    {
+      "id": "edge_certified_alarm_supports_ostrom",
+      "source": "pattern_certified_runtime_alarm",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45
+    },
+    {
+      "id": "edge_provenance_authority_instantiates_sih",
+      "source": "pattern_provenance_based_authority",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_provenance_authority_challenges_auth_laundering",
+      "source": "pattern_provenance_based_authority",
+      "target": "emergent_authorization_laundering",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "The concrete defense: a laundered permission record has no provenance to back it, so it carries no authority. String cut wrong-action selection 28%->2%; SARA held attack success to 0.63%."
+    },
+    {
+      "id": "edge_provenance_authority_supports_structural_gate",
+      "source": "pattern_provenance_based_authority",
+      "target": "principle_structural_edits_gated_outside_the_agents",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "'Accepted only against a source outside the agents' operationalised: the source is the provenance chain."
     }
   ]
 }

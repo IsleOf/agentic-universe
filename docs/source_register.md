@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 147 nodes, 397 edges · **Date:** 2026-09-05
+**Graph at generation:** 150 nodes, 406 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -98,16 +98,20 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.25553](https://arxiv.org/abs/2608.25553) | (title not recorded) | `emergent_stale_belief_propagation` |
 | [2608.25623](https://arxiv.org/abs/2608.25623) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.25776](https://arxiv.org/abs/2608.25776) | (title not recorded) | `emergent_mind_viruses` |
+| [2608.26263](https://arxiv.org/abs/2608.26263) | (title not recorded) | `pattern_code_as_context` |
 | [2608.26623](https://arxiv.org/abs/2608.26623) | (title not recorded) | `emergent_evaluator_mode_collapse` |
 | [2608.26896](https://arxiv.org/abs/2608.26896) | (title not recorded) | `emergent_deception_and_collusion` |
 | [2608.27086](https://arxiv.org/abs/2608.27086) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2608.27311](https://arxiv.org/abs/2608.27311) | (title not recorded) | `concept_verification_is_the_binding_constraint` |
+| [2608.27808](https://arxiv.org/abs/2608.27808) | (title not recorded) | `pattern_certified_runtime_alarm` |
+| [2608.28027](https://arxiv.org/abs/2608.28027) | (title not recorded) | `concept_agentic_os`, `pattern_provenance_based_authority` |
 | [2608.28363](https://arxiv.org/abs/2608.28363) | (title not recorded) | `concept_harness_evolution_subfield`, `pattern_recoverability_constrained_evolution` |
 | [2608.28553](https://arxiv.org/abs/2608.28553) | (title not recorded) | `emergent_stigmergic_coordination` |
 | [2608.29174](https://arxiv.org/abs/2608.29174) | (title not recorded) | `emergent_sustained_heterogeneity` |
 | [2608.30980](https://arxiv.org/abs/2608.30980) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
 | [2609.00196](https://arxiv.org/abs/2609.00196) | (title not recorded) | `pattern_alternating_weight_harness_optimization` |
+| [2609.00275](https://arxiv.org/abs/2609.00275) | (title not recorded) | `concept_irreversibility_budget` |
 | [2609.01058](https://arxiv.org/abs/2609.01058) | (title not recorded) | `concept_curriculum_generation_not_intrinsic_drive` |
 | [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
@@ -117,9 +121,11 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.02246](https://arxiv.org/abs/2609.02246) | (title not recorded) | `emergent_evaluator_mode_collapse`, `pattern_deterministic_self_improvement_guardrails`, `pattern_recoverability_constrained_evolution` |
 | [2609.02526](https://arxiv.org/abs/2609.02526) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.02620](https://arxiv.org/abs/2609.02620) | (title not recorded) | `concept_motive_operative_split` |
+| [2609.02786](https://arxiv.org/abs/2609.02786) | (title not recorded) | `pattern_trajectory_driven_safety_evolution` |
 | [2609.03035](https://arxiv.org/abs/2609.03035) | (title not recorded) | `pattern_activation_probe_monitoring` |
 | [2609.03218](https://arxiv.org/abs/2609.03218) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
 | [2609.03667](https://arxiv.org/abs/2609.03667) | (title not recorded) | `principle_diversity_maintenance` |
+| [2609.03884](https://arxiv.org/abs/2609.03884) | (title not recorded) | `pattern_execution_layer_enforcement` |
 | [2609.04128](https://arxiv.org/abs/2609.04128) | (title not recorded) | `concept_graded_challenge` |
 | [2609.04167](https://arxiv.org/abs/2609.04167) | (title not recorded) | `concept_verification_completeness_gap` |
 | [2609.04170](https://arxiv.org/abs/2609.04170) | (title not recorded) | `concept_transparency_cuts_both_ways`, `emergent_misaligned_communication_under_stress`, `emergent_whistleblowing` +1 |
@@ -248,6 +254,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`
 - `docs/auto_sweep_2026-09-14-1200.md` — `emergent_pluralistic_ignorance`
 - `docs/auto_sweep_2026-09-15-0000.md` — `concept_curriculum_generation_not_intrinsic_drive`
+- `docs/auto_sweep_2026-09-15-0600.md` — `concept_irreversibility_budget`, `pattern_certified_runtime_alarm`, `pattern_provenance_based_authority`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
