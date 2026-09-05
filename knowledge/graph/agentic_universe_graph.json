@@ -52,6 +52,10 @@
     {
       "date": "2026-09-06",
       "change": "Added approach_nourishing_harness (9 nodes, ~22 edges): the per-agent execution environment designed to feed emergence, paired with - not fused to - the orchestration graph. Single gate at the outer boundary only. From two videos (the four-way open-source harness comparison; Nate B. Jones on reused input) and a 30-day GitHub read of Hermes/OpenClaw/Agent Zero/OpenCode/Prime Agent/DeepSeek Harness. Key nodes: pattern_continual_self_refinement (Prime Agent - ungated self-modification, challenges pattern_verifier_gated_promotion head-on), pattern_code_as_context (RLM), pattern_pre_request_intermediary (a layer before the model call that can skip it), concept_reused_input_dominates (measured 96%), concept_tool_definition_tax (~55k tokens for 4 servers), concept_harness_convergence_2026_09 (agent society as UI, scheduled agents that learn, token cost first-class, recovery as the maintenance frontier)."
+    },
+    {
+      "date": "2026-09-06",
+      "change": "Autonomous run 1. Opened four indexed-not-opened harness-subfield papers. CORRECTED pattern_recoverability_constrained_evolution: EvoUndo (2608.28363) works post-hoc not preventively, and conventional repair recovered 0 of 197 failed edits - rollback is only a safety story if purpose-built. Verified Verify Smarter (2608.27311, +7.6-13.6% held-out at lower eval budget). Added concept_harness_self_evolution_is_domain_dependent from HarnessDev (2609.01437) + Evo-Bench (2608.09096): autonomous harness evolution trails human-engineered on code and research, barely transfers across models, and shows early saturation. challenges the subfield-convergence optimism and the ungated-refinement safety story."
     }
   ],
   "nodes": [
@@ -2554,7 +2558,8 @@
       ],
       "derived_from": [
         "docs/research_fetch_sweep_2026-09-05.md",
-        "arXiv:2604.25850 citation set via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened"
+        "arXiv:2604.25850 citation set via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened",
+        "arXiv:2608.28363, 2608.27311, 2609.01437, 2608.09096 - four now opened directly (2026-09-06)"
       ],
       "evidence_links": [
         "docs/research_fetch_sweep_2026-09-05.md"
@@ -2565,11 +2570,11 @@
       "label": "Recoverability as a hard constraint on self-evolution",
       "type": "pattern",
       "status": "to_test",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:recoverability_constraint",
-      "confidence": 0.6,
-      "description": "A self-evolving harness is bounded by an explicit recoverability constraint: an edit is only permitted if the state it produces can be returned to a known-good prior state at bounded cost. This makes rollback a precondition on the proposal, not a cleanup step after a bad promotion - the loop cannot enter a configuration it cannot leave. Named as its own mechanism because a reported influential system (EvoUndo, 'Recoverability-Constrained Self-Evolution for LLM Agent Harnesses') is built entirely around it, and it is the operational form of this project's principle_retraction_capacity applied to the harness layer.",
+      "confidence": 0.55,
+      "description": "Recoverability of a self-modification is verified AFTER the edit is applied, across counterfactual states - not blocked preventively. EvoUndo (arXiv:2608.28363, VERIFIED) represents, synthesises, diagnoses, and independently verifies whether a model-generated edit can be undone. The alarming result: across 600 tasks, 197 capability-improving mutations failed recoverability verification, and conventional repair strategies recovered 0 of 197. Recovery only worked with purpose-built machinery - extended recovery language reached 191/197 oracle recovery, exact state-address grounding hit 79% on one model, richer recovery language 99%. The paper's conclusion: reliable self-evolution needs co-designed verification protocols, state representation, witness semantics, and recovery-language expressivity together - iterative prompting alone does not recover a bad edit. For this project: 'cheap rollback is the safety story for ungated refinement' is only true if the rollback machinery is purpose-built; conventional undo recovers nothing.",
       "tags": [
         "recoverability",
         "rollback",
@@ -2578,8 +2583,8 @@
         "reversibility"
       ],
       "derived_from": [
-        "docs/research_fetch_sweep_2026-09-05.md",
-        "arXiv EvoUndo (Recoverability-Constrained Self-Evolution for LLM Agent Harnesses) via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened"
+        "docs/auto_sweep_2026-09-06-2115.md",
+        "arXiv:2608.28363 (EvoUndo) - VERIFIED, abstract read; 600 tasks, 0/197 conventional recovery"
       ],
       "evidence_links": [
         "docs/research_fetch_sweep_2026-09-05.md"
@@ -2604,7 +2609,8 @@
       "derived_from": [
         "docs/research_fetch_sweep_2026-09-05.md",
         "arXiv 'Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification' via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened",
-        "docs/research_operating_plan.md: the bottleneck is verification capacity"
+        "docs/research_operating_plan.md: the bottleneck is verification capacity",
+        "arXiv:2608.27311 (Verify Smarter, Evolve Further; framework HarnessLens) - VERIFIED; +7.6-13.6% held-out performance at substantially lower evaluation budget vs prior approaches"
       ],
       "evidence_links": [
         "docs/research_fetch_sweep_2026-09-05.md"
@@ -2882,6 +2888,32 @@
       ],
       "evidence_links": [
         "docs/harness_field_study_2026-09-06.md"
+      ]
+    },
+    {
+      "id": "concept_harness_self_evolution_is_domain_dependent",
+      "label": "LLMs can evolve their own harness - unevenly, and it barely transfers",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:evolution_domain_dependent",
+      "confidence": 0.65,
+      "description": "The measured answer to 'can an LLM build and evolve its own agent harness', from two benchmarks. HarnessDev (arXiv:2609.01437, VERIFIED): 6 creator models, 4 domains, 5 downstream benchmarks, 2,207 test instances. Generated harnesses fall substantially short of mature human-engineered references on code and on search/research, but match or exceed them on writing and ML experimentation. Evolution-phase gains are inconsistent, do not reliably transfer to unseen tasks, and depend heavily on which model executes the harness - limited cross-model transfer. Evo-Bench (arXiv:2608.09096, VERIFIED): 9 models across Search/Office/General, gains up to 16.6 points approaching human baselines, autonomous evolution beats a fixed harness in General and Search but struggles in Office (needs highly specific workflows), and it names 'early saturation' as a recurring temporal anomaly.",
+      "tags": [
+        "harness-evolution",
+        "domain-dependent",
+        "transfer",
+        "benchmark",
+        "early-saturation"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-06-2115.md",
+        "arXiv:2609.01437 (HarnessDev) - VERIFIED",
+        "arXiv:2608.09096 (Evo-Bench) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-06-2115.md"
       ]
     }
   ],
@@ -5594,6 +5626,71 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "self_improving_harness",
       "confidence": 0.6
+    },
+    {
+      "id": "edge_domain_dependent_instantiates_sih",
+      "source": "concept_harness_self_evolution_is_domain_dependent",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_domain_dependent_challenges_subfield",
+      "source": "concept_harness_self_evolution_is_domain_dependent",
+      "target": "concept_harness_evolution_subfield",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Tempers the convergence story. Fifteen teams shipping harness-evolution systems does not mean it works - on the two domains this project most cares about (code, research) generated harnesses trail human-engineered ones, and the gains that do appear do not transfer across models or to unseen tasks."
+    },
+    {
+      "id": "edge_domain_dependent_challenges_capability_delta",
+      "source": "concept_harness_self_evolution_is_domain_dependent",
+      "target": "concept_harness_capability_delta",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The capability delta is real but the AUTONOMOUS route to capturing it is domain-limited and non-transferable. Hand-engineered harnesses still win where it counts."
+    },
+    {
+      "id": "edge_evoundo_challenges_continual_refinement",
+      "source": "pattern_recoverability_constrained_evolution",
+      "target": "pattern_continual_self_refinement",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "Sharper than before. Ungated continual refinement leans on rollback as its only safety story; EvoUndo shows conventional rollback recovered 0 of 197 bad edits. Ungated self-modification without purpose-built recovery machinery is a one-way door."
+    },
+    {
+      "id": "edge_evoundo_challenges_nourishing_harness",
+      "source": "pattern_recoverability_constrained_evolution",
+      "target": "approach_nourishing_harness",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The design's §3.3 claim that cheap complete rollback plus diversity maintenance is enough for an ungated interior needs the word 'purpose-built' in front of rollback, or it is not a safety story at all."
+    },
+    {
+      "id": "edge_evobench_transfer_tension",
+      "source": "concept_harness_self_evolution_is_domain_dependent",
+      "target": "concept_harness_orchestration_pairing",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.4,
+      "description": "Note the internal tension: HarnessDev reports limited cross-model transfer of evolved harnesses; Evo-Bench calls synthesised harnesses 'highly transferable reasoning structures'. Different task mixes, unresolved - a candidate probe."
     }
   ]
 }

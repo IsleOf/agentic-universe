@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 117 nodes, 260 edges · **Date:** 2026-09-05
+**Graph at generation:** 118 nodes, 266 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -64,6 +64,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
 | [2608.06984](https://arxiv.org/abs/2608.06984) | HarnessSafe | `concept_cheap_death`, `pattern_execution_layer_enforcement`, `pattern_trajectory_driven_safety_evolution` |
 | [2608.07169](https://arxiv.org/abs/2608.07169) | Agent Memory Distillation (AMD) | `concept_inheritance_channel`, `pattern_agent_memory_distillation` |
+| [2608.09096](https://arxiv.org/abs/2608.09096) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2608.09885](https://arxiv.org/abs/2608.09885) | SHE: trajectory-driven safety harness evolution | `pattern_trajectory_driven_safety_evolution` |
 | [2608.12253](https://arxiv.org/abs/2608.12253) | One Frozen Simulator Is Not Enough | `emergent_evaluator_mode_collapse` |
 | [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
@@ -75,9 +76,12 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.23691](https://arxiv.org/abs/2608.23691) | (title not recorded) | `emergent_autonomous_discovery` |
 | [2608.26896](https://arxiv.org/abs/2608.26896) | (title not recorded) | `emergent_deception_and_collusion` |
 | [2608.27086](https://arxiv.org/abs/2608.27086) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
+| [2608.27311](https://arxiv.org/abs/2608.27311) | (title not recorded) | `concept_verification_is_the_binding_constraint` |
+| [2608.28363](https://arxiv.org/abs/2608.28363) | (title not recorded) | `concept_harness_evolution_subfield`, `pattern_recoverability_constrained_evolution` |
 | [2608.28553](https://arxiv.org/abs/2608.28553) | (title not recorded) | `emergent_stigmergic_coordination` |
 | [2608.29174](https://arxiv.org/abs/2608.29174) | (title not recorded) | `emergent_sustained_heterogeneity` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
+| [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_language_formation` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
 | [2609.02620](https://arxiv.org/abs/2609.02620) | (title not recorded) | `concept_motive_operative_split` |
@@ -154,7 +158,6 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - Anthropic tool-definition token measurement — `concept_tool_definition_tax`
 - YouTube Nate B. Jones '15 token-efficiency rules' (Y8vAQ1FgNbM), transcript fetched locally 2026-09-06 - Nate B. Jones tracker: 3.77B tokens/day, 3.59B reused input, 143 Codex threads — `concept_reused_input_dominates`
 - arXiv 'Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification' via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened — `concept_verification_is_the_binding_constraint`
-- arXiv EvoUndo (Recoverability-Constrained Self-Evolution for LLM Agent Harnesses) via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened — `pattern_recoverability_constrained_evolution`
 - arXiv:2607.31 (AgentS4D): 6,560 sandboxed runs, 68% triggered unsafe signals — `emergent_recognition_execution_gap`
 - callsphere.ai 'Model-Native Harness' — `emergent_model_native_orchestration`
 - case study: 56 chronologically ordered papers from one tensor-network research programme — `pattern_agent_driven_graph_compilation`
@@ -176,13 +179,14 @@ Nodes derived from this repository's own documents and conversation archives.
 
 - `architecture/foundations.md` — `pattern_five_w_message_instrumentation`
 - `architecture/foundations.md: write an executable GREEN/RED predicate before building a loop` — `concept_work_substitution_frontier`
+- `docs/auto_sweep_2026-09-06-2115.md` — `concept_harness_self_evolution_is_domain_dependent`, `pattern_recoverability_constrained_evolution`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
 - `docs/harness_field_study_2026-09-06.md` — `concept_harness_convergence_2026_09`
 - `docs/harness_field_study_2026-09-06.md - Agent Zero Context Window Usage Indicator, Hermes lean-tail compression as default: token cost is now first-class UI across shipping harnesses` — `concept_context_economics`
 - `docs/nourishing_harness_design.md` — `approach_nourishing_harness`, `concept_harness_orchestration_pairing`
-- `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking` +1
+- `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
