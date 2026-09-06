@@ -1,0 +1,35 @@
+{
+  "run": 276,
+  "increment": "citation sweep of 2601.00360: fold Colosseum (2602.15198) + Institutional AI (2601.11369)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 9
+  },
+  "citations": [
+    {
+      "id": "arXiv:2602.15198",
+      "verified": false
+    },
+    {
+      "id": "arXiv:2601.11369",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2601.11369",
+    "arXiv:2602.15198"
+  ],
+  "trace_file": "runtime\\traces\\loop-276.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 276 OK · VALID · graph +2n/+9e · cites 0v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.79 · novelty n/a"
+}

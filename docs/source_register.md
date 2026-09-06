@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 305 nodes, 1193 edges · **Date:** 2026-09-05
+**Graph at generation:** 307 nodes, 1220 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -74,12 +74,14 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2601.00360](https://arxiv.org/abs/2601.00360) | (title not recorded) | `concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps` |
 | [2601.09771](https://arxiv.org/abs/2601.09771) | (title not recorded) | `concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement` |
 | [2601.11227](https://arxiv.org/abs/2601.11227) | Language of Thought Shapes Output Diversity in Large Language Models | `pattern_verbalized_sampling` |
+| [2601.11369](https://arxiv.org/abs/2601.11369) | (title not recorded) | `concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering` |
 | [2601.12152](https://arxiv.org/abs/2601.12152) | (title not recorded) | `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated` |
 | [2601.13865](https://arxiv.org/abs/2601.13865) | (title not recorded) | `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful` |
 | [2601.14691](https://arxiv.org/abs/2601.14691) | (title not recorded) | `concept_rewriting_cot_alone_defeats_judges_90pct` |
 | [2601.15808](https://arxiv.org/abs/2601.15808) | (title not recorded) | `concept_inference_time_scaling_of_verification` |
 | [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
 | [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
+| [2602.15198](https://arxiv.org/abs/2602.15198) | (title not recorded) | `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe` |
 | [2602.15894](https://arxiv.org/abs/2602.15894) | Quality-constrained Entropy Maximization Policy Optimization | `pattern_verbalized_sampling` |
 | [2603.07360](https://arxiv.org/abs/2603.07360) | (title not recorded) | `concept_environmental_pressure_has_an_inverted_u` |
 | [2603.07837](https://arxiv.org/abs/2603.07837) | (title not recorded) | `concept_llm_steering_has_four_control_surfaces_input_structural_state_output` |
@@ -443,6 +445,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-26-1800.md` — `concept_cultural_transmission_engine_local_cultures_with_diffusion_rules`, `concept_orchestration_protocols_are_evolvable_code_kept_as_an_archive`, `concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default` +1
 - `docs/auto_sweep_2026-09-27-0000.md` — `concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture`
 - `docs/auto_sweep_2026-09-27-0600.md` — `artifact_emergence_safety_case_template`
+- `docs/auto_sweep_2026-09-28-1800.md` — `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe`, `concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
