@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 190 nodes, 598 edges · **Date:** 2026-09-05
+**Graph at generation:** 191 nodes, 604 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -170,6 +170,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 Venues, blogs, and industry reports cited in research notes. Weaker provenance than the arXiv set; several are self-published or vendor-authored.
 
 - 2T1L tournament — `emergent_deception_and_collusion`
+- AF post BB8o7b8A4Aykeksvw (Debate Training Reduces Reward Hacking in RLAIF, GDM Amplified Oversight, 2026-08-19) - READ IN FULL — `concept_debate_training_reduces_judge_hacking`
 - AFlow, AutoFlow (pre-execution search) — `pattern_runtime_adaptive_workflow`
 - AHE citation set as of 2026-09 (via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened): Self-Harness, HarnessEvolve, HarnessDev, WHALE, EvoUndo, Retrospective Harness Optimisation, Hierarchical Self-Improvement, Meta-Harness, Dalek; benchmarks CordisBench, HarnessRisk — `approach_self_improving_harness`
 - AI Alignment Forum 2026-08/09: 'Training a Misaligned Reward Seeker' (evhub et al.), 'Debate training reduces reward hacking in RLAIF' - reward-hacking-during-RL evidence, not opened — `emergent_evaluator_mode_collapse`
@@ -318,6 +319,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-20-1200.md` — `concept_self_concept_as_behavioral_lever`
 - `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
+- `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
