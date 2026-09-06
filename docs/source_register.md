@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 319 nodes, 1274 edges · **Date:** 2026-09-05
+**Graph at generation:** 320 nodes, 1278 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -360,6 +360,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_adversarial_collaboration.py — `artifact_probe_adversarial_collaboration_rig`
 - tools/probe_composed_design.py — `artifact_probe_composed_design_rig`
 - tools/probe_composed_design.py granularity sweep (run 94) - the intermediate optimum, when it exists, is set by accumulation-cost vs shed-cost — `test_scenario_decomposition_granularity`
+- tools/probe_dissent_vs_reflection.py — `artifact_probe_dissent_vs_reflection_rig`
 - tools/probe_epistemic_market.py — `artifact_probe_epistemic_market_rig`
 - tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`
 - tools/probe_identity_masking.py — `artifact_probe_identity_masking_rig`
@@ -465,6 +466,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-01-1800.md` — `artifact_probe_adversarial_collaboration_rig`
 - `docs/auto_sweep_2026-10-02-0000.md` — `artifact_probe_redteam_rate_rig`
 - `docs/auto_sweep_2026-10-02-0600.md` — `artifact_probe_trust_transfer_rig`
+- `docs/auto_sweep_2026-10-02-1200.md` — `artifact_probe_dissent_vs_reflection_rig`
 - `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`
 - `docs/auto_sweep_2026-10-03-0000.md` — `concept_self_harness_validates_the_three_loop`
 - `docs/auto_sweep_2026-10-03-1200.md` — `concept_environmental_pressure_has_an_inverted_u`

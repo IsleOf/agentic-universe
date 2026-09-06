@@ -1112,6 +1112,10 @@
     {
       "date": "2026-10-02",
       "change": "Autonomous run 290. BUILD - tools/probe_trust_transfer.py, the fifth runnable rig for an open research question (open_questions.md Q5: can trust transfer across task families without universal authority?). 8 agents x task families with a cluster similarity structure; three trust models (universal / domain_keyed / similarity_weighted) fit on train families, ranked on held-out. Verdict CONFIRMS: held-out rank corr similarity_weighted +0.76 > universal +0.49 > domain_keyed -0.00 (chance); authority concentration universal 1.00 vs similarity 0.59. Trust transfers partially, scaled by family similarity, without universal authority. 7 selftest checks, selftest_all JOBS -> 31, BUILD SELFTEST GREEN. New node artifact_probe_trust_transfer_rig + 3 edges (verifies concept_conditional_trust_is_domain_keyed_not_global, challenges emergent_reputation_and_trust_dynamics - a scalar reputation over-grants authority, supports artifact_probe_epistemic_market_rig). 318 -> 319 nodes, 1271 -> 1274 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-02",
+      "change": "Autonomous run 291. BUILD - tools/probe_dissent_vs_reflection.py, the sixth runnable rig for an open research question (open_questions.md Q6: does structured dissent beat reflection loops for long-horizon harness evolution?). HORIZON-round evolution, mean-zero edits (only selection improves q); REFLECTION self-scores with an optimism bias, DISSENT runs an unbiased held-out head-to-head. Verdict CONFIRMS: quality gap (dissent-reflection) +0.055 (h=5) -> +0.258 (h=40), net gap +0.047 -> +0.197 - dissent wins AND the gap WIDENS with the horizon (reflection drift compounds). 7 selftest checks, selftest_all JOBS -> 32, BUILD SELFTEST GREEN. New node artifact_probe_dissent_vs_reflection_rig + 4 edges (extends artifact_probe_adversarial_collaboration_rig - single-round +0.03 becomes +0.20 at h=40, verifies concept_self_correction_is_mostly_format_repair_not_reasoning, supports concept_the_acceptor_not_the_proposer, refines concept_recursive_meta_skill_evolution). 319 -> 320 nodes, 1274 -> 1278 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9442,6 +9446,32 @@
       ],
       "evidence_links": [
         "tools/probe_trust_transfer.py",
+        "docs/research/open_questions.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_dissent_vs_reflection_rig",
+      "label": "The dissent-vs-reflection rig - structured dissent beats reflection loops for long-horizon evolution, and the gap widens",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:dissent_vs_reflection",
+      "confidence": 0.65,
+      "description": "tools/probe_dissent_vs_reflection.py (run 291) - runnable rig for open question 6. A HORIZON-round harness evolution with a hidden quality q. Mean-zero per-round edit effects, so q only improves through correct SELECTION. REFLECTION: the agent self-scores the edit (self-score = true effect + optimism bias + noise), accepts if > 0 - the biased signal lets negative edits through (concept_self_correction_is_mostly_format_repair_not_reasoning). DISSENT: a dissenting implementation is built; both run on a noisy but UNBIASED held-out check; keep whichever measured better, at DISSENT_COST=0.0015/round. Dry-run (5000 trials): quality gap (dissent - reflection) +0.055 at h=5 -> +0.165 at h=15 -> +0.258 at h=40; net gap (after dissent cost) +0.047 -> +0.142 -> +0.197. Verdict CONFIRMS: dissent beats reflection AND the gap WIDENS with the horizon - reflection drift compounds, dissent catches it, and the per-round cost amortises. At short horizons the cost bites (net gap < quality gap). 7 selftest checks; selftest_all JOBS -> 32.",
+      "tags": [
+        "structured-dissent",
+        "reflection-loop",
+        "long-horizon-evolution",
+        "optimism-bias",
+        "open-question-6"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-02-1200.md",
+        "tools/probe_dissent_vs_reflection.py"
+      ],
+      "evidence_links": [
+        "tools/probe_dissent_vs_reflection.py",
         "docs/research/open_questions.md"
       ]
     }
@@ -23194,6 +23224,50 @@
       "approach_family": "orchestration_first",
       "confidence": 0.45,
       "description": "The epistemic market routes by trust (probe_epistemic_market); this rig says the trust graph it routes on must be similarity-keyed, not a scalar - otherwise routing concentrates on one agent regardless of the task family."
+    },
+    {
+      "id": "edge_dissent_rig_extends_advcollab_rig",
+      "source": "artifact_probe_dissent_vs_reflection_rig",
+      "target": "artifact_probe_adversarial_collaboration_rig",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "probe_adversarial_collaboration compares dissent vs reflection on a SINGLE task; this rig compounds the comparison over a HORIZON-round evolution and shows the advantage widens - a single-round net of +0.03 becomes +0.20 at h=40."
+    },
+    {
+      "id": "edge_dissent_rig_verifies_format_repair",
+      "source": "artifact_probe_dissent_vs_reflection_rig",
+      "target": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Operationalises the format-repair finding as a compounding drift: a self-score with an optimism bias accepts negative edits, and over a long horizon reflection reaches q 0.72 where an unbiased head-to-head reaches 0.98."
+    },
+    {
+      "id": "edge_dissent_rig_supports_acceptor",
+      "source": "artifact_probe_dissent_vs_reflection_rig",
+      "target": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The rig is an acceptor comparison: a biased acceptor (reflection self-score) vs an unbiased one (dissent head-to-head). Confirms the acceptor is the weak point - same proposer, different acceptor, 0.26 quality gap at h=40."
+    },
+    {
+      "id": "edge_dissent_rig_refines_recursive_meta",
+      "source": "artifact_probe_dissent_vs_reflection_rig",
+      "target": "concept_recursive_meta_skill_evolution",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Recursive meta-improvement needs an unbiased acceptor at each level or the drift compounds through the recursion; structured dissent is a concrete unbiased acceptor."
     }
   ]
 }
