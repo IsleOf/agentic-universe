@@ -1208,6 +1208,10 @@
     {
       "date": "2026-10-08",
       "change": "Autonomous run 315. IDLE-STATE clause b - dry-ran tools/probe_composed_design.py sweep end to end (not exercised since run 92). Verdict unchanged: COMPOSES BUT BOUNDED - short agents + four-field handoffs + folded state (C) extend the usable horizon 12 -> 24 steps vs prose handoffs, but the base per-step failure rate still caps it (C at 100 steps = 0.192). Matches what_would_make_this_wrong.md section 5. Reconfirmation, no graph node/edge change (341/1359). Validator VALID."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Autonomous run 316. Folded arXiv:2605.18747 (Code as Agent Harness survey, May 2026, VERIFIED) - queued since run 306. Frames code as the operational substrate for agent reasoning/acting/verification across 3 layers, and names 6 open harness-engineering challenges; the project has a mapped answer to 5 (evaluation beyond task success -> run 298 + run_novelty; verification under incomplete feedback -> Horizon Gap; regression-free harness improvement -> Phase 3 gate + acceptance_gate; consistent shared state -> task_ledger + run-218 criterion + fractal_flock; human oversight -> exec_guard + irreversibility budget), multimodal is out of scope. New node + 4 edges (supports harness-engineering-is-empirical + capability-is-config + the deterministic-spine split; informs the v2 plan as a checklist). 341 -> 342 nodes, 1359 -> 1363 edges. Validator VALID. The SEVerA/harness-engineering citation cluster is now fully folded (305-307, 316)."
     }
   ],
   "nodes": [
@@ -10147,6 +10151,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-08-0000.md"
+      ]
+    },
+    {
+      "id": "concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five",
+      "label": "Code as Agent Harness (survey): code is the operational substrate for reasoning/acting/verification; its six open harness-engineering challenges map onto the project tool set",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_anatomy",
+      "confidence": 0.55,
+      "description": "arXiv:2605.18747 (Code as Agent Harness, May 2026, VERIFIED via arxiv API). A survey framing code as the operational substrate for agent reasoning, acting, environment modelling and execution-based verification, across three layers: harness interface; harness mechanisms (planning, memory, tool use, feedback-driven control/optimization); scaling single -> multi-agent (shared code artifacts for coordination, review, verification). It names six open challenges for harness engineering, and the project has a mapped answer to five: (1) evaluation beyond final task success -> concept_pass_fail_agent_scoring_overcredits_lucky_retries (run 298) + run_novelty (248) + concept_aggregate_score_masks_per_layer_regression; (2) verification under incomplete feedback -> concept_horizon_gap_outcome_signals_decay; (3) regression-free harness improvement -> the Phase 3 gate + tools/acceptance_gate.py (300); (4) consistent shared state across multiple agents -> tools/task_ledger.py (244) + the run-218 orchestration criterion + fractal_flock (294); (5) human oversight for safety-critical actions -> artifact_phase5_exec_guard + concept_irreversibility_budget. (6) multimodal extensions is out of the project current scope. Currency: May 2026 survey; the framing and the challenge list are durable, the representative methods it cites are a snapshot.",
+      "tags": [
+        "code-as-harness",
+        "survey",
+        "open-challenges",
+        "harness-engineering",
+        "self-audit",
+        "verified"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-08-1800.md",
+        "arXiv:2605.18747 (Code as Agent Harness) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-08-1800.md"
       ]
     }
   ],
@@ -24833,6 +24863,50 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.5,
       "description": "A third attack class on the retrieve-heavy stance, alongside one-write-persists poisoning and covert bilevel-optimised poisons: this one does not corrupt the memory, it exfiltrates what is in it."
+    },
+    {
+      "id": "edge_codeharness_supports_harness_engineering",
+      "source": "concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five",
+      "target": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A survey-level statement of the same thesis: the coding harness is the substrate, not a wrapper, and its engineering is a discipline with an open-problem list."
+    },
+    {
+      "id": "edge_codeharness_supports_capability_config",
+      "source": "concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Code as the operational substrate for reasoning/acting/verification is the mechanism behind capability being a harness-config property."
+    },
+    {
+      "id": "edge_codeharness_informs_v2_plan",
+      "source": "concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The six-item open-challenge list is a checklist to measure the v2 plan against; the plan has a mapped answer to five and multimodal is out of scope."
+    },
+    {
+      "id": "edge_codeharness_supports_deterministic_spine",
+      "source": "concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five",
+      "target": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The survey roadmap - executable, verifiable, stateful agent systems - is the deterministic-spine / generative-edge split stated as a field direction."
     }
   ]
 }

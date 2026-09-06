@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 341 nodes, 1359 edges · **Date:** 2026-09-05
+**Graph at generation:** 342 nodes, 1363 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -105,6 +105,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.19827](https://arxiv.org/abs/2604.19827) | (title not recorded) | `concept_ai_native_software_ecosystems_are_complex_adaptive_systems` |
 | [2605.05007](https://arxiv.org/abs/2605.05007) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
+| [2605.18747](https://arxiv.org/abs/2605.18747) | (title not recorded) | `concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five` |
 | [2605.19576](https://arxiv.org/abs/2605.19576) | (title not recorded) | `concept_unmanaged_skill_libraries_silently_drift` |
 | [2605.22643](https://arxiv.org/abs/2605.22643) | (title not recorded) | `concept_incremental_attacks_boil_the_frog` |
 | [2605.24539](https://arxiv.org/abs/2605.24539) | (title not recorded) | `concept_harness_evolution_subfield` |
@@ -505,7 +506,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-07-1200.md` — `artifact_v2_integration_dry_run`
 - `docs/auto_sweep_2026-10-08-0000.md` — `concept_agent_memory_leaks_membership_an_adversary_can_infer_whether_a_unit_is_in_the_store`
 - `docs/auto_sweep_2026-10-08-1200.md` — `concept_ace_context_evolution_self_improvement`
-- `docs/auto_sweep_2026-10-08-1800.md` — `concept_horizon_gap_outcome_signals_decay`
+- `docs/auto_sweep_2026-10-08-1800.md` — `concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five`, `concept_horizon_gap_outcome_signals_decay`
 - `docs/auto_sweep_2026-10-09-1800.md` — `concept_spontaneous_behaviour_beats_scripted_for_simulation`
 - `docs/auto_sweep_2026-10-10-0600.md` — `concept_agentsociety_large_scale_generative_society`
 - `docs/auto_sweep_2026-10-11-0600.md` — `concept_inference_time_scaling_of_verification`
