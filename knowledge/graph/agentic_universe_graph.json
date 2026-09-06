@@ -756,6 +756,10 @@
     {
       "date": "2026-09-10",
       "change": "Autonomous run 198. Consistency pass. The runs 186-197 verification-thread nodes had in-degree ~0 (the additive-growth-bias rim shape, same as run 144's finding). Wove them: HarnessLens refines harness-tampering (attributable-evidence gate is a partial tampering defence); per-consumer-views refines silent-faults (an observer view is the step-level trace an outcome-only judge lacks); Calibration-Floor + HarnessLens both refine DeepVerifier (format-recovery caveat / scale verification smartly not uniformly). +4 edges, 0 nodes."
+    },
+    {
+      "date": "2026-09-10",
+      "change": "Autonomous run 199. Recent citation-sweep (S2 citations of the model-harness-lens survey 2606.20683). concept_the_harness_context_assembly_is_a_privilege_escalation_vector (When Context Gets Root arXiv:2608.27299 + What's in Your Agent's Context arXiv:2609.01222): the harness's context assembly can elevate attacker-controlled low-privilege content to a higher instruction level - 13 attack objectives incl. RCE across 6 coding-agent harnesses; two classes MessageRole-CPE / Cross-Scope-CPE. The HARNESS ITSELF is a privesc vector; hard requirement for Phase 5 / the runtime fixed point; the instruction level + original source must be Five-W fields. Related: local small models at Linux privesc succeed only 8-16% vs frontier (2604.27143). +7 edges."
     }
   ],
   "nodes": [
@@ -6793,6 +6797,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-09-0600.md"
+      ]
+    },
+    {
+      "id": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "label": "The harness's own context assembly can elevate attacker-controlled low-privilege content to a higher instruction level - 13 attack objectives (incl. RCE) across 6 coding-agent harnesses; two novel classes: MessageRole-CPE and Cross-Scope-CPE",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:context_assembly_privilege_escalation",
+      "confidence": 0.76,
+      "description": "When Context Gets Root: Privilege Escalation in LLM Harnesses (arXiv:2608.27299, Aug 2026) + What's in Your Agent's Context? Context Privilege Escalation Attacks (arXiv:2609.01222, Sept 2026) - BOTH VERIFIED via arxiv-fetch run 199; found via S2 citations of the model-harness-lens survey. Instruction hierarchy is a MODEL-SIDE defence: instructions get privilege levels by source, constraining which content may direct behaviour. But the HARNESS constructs the context for each model call, and that construction can ELEVATE low-level content to a higher instruction level, granting it greater model-facing privilege. INSTRUCTION PRIVILEGE ESCALATION: an attacker induces the agent to elevate low-level malicious content to a higher level; the elevated content then causes the agent to execute instructions it would not follow at the original level. Evaluated with multi-agent mechanisms: 13 attack objectives across SIX coding-agent harnesses, spanning confidentiality / integrity / availability / REMOTE CODE EXECUTION. The companion paper gives the first systematic analysis of real-harness context assembly and names two classes: MessageRole-CPE (attacker content from a low-privileged context put into a higher-privileged message ROLE) and Cross-Scope-CPE. For this project: (1) the HARNESS ITSELF is a privilege-escalation vector - context assembly is a trusted operation that can be subverted; a hard requirement for pattern_execution_layer_enforcement / Phase 5 and concept_agentic_os's runtime-as-fixed-point; (2) this is harness tampering (concept_harness_tampering_persists_in_real_self_improvement_runs) by an EXTERNAL attacker via context, complementing the interior-does-it version; (3) pattern_five_w_message_instrumentation records sender/role/channel - the instruction LEVEL and its ORIGINAL source must be Five-W fields, and a mismatch (content in a role above its source) is the detection signal; (4) type-aware compaction (concept_compaction_cliff mitigation) that pins 'rules' must not let attacker content ride into the pinned tier by being labelled a rule; (5) related: local small models at Linux privesc succeed on only 8-16% vs frontier (arXiv:2604.27143), and six failure modes map to harness techniques - the offensive small/local-model regime.",
+      "tags": [
+        "instruction-privilege-escalation",
+        "context-assembly-attack-vector",
+        "messagerole-cpe",
+        "cross-scope-cpe",
+        "13-objectives-6-harnesses",
+        "rce",
+        "harness-is-the-vector",
+        "aug-sept-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-10-0000.md",
+        "arXiv:2608.27299 (When Context Gets Root: Privilege Escalation in LLM Harnesses) - VERIFIED, abstract read run 199 via arxiv-fetch",
+        "arXiv:2609.01222 (What's in Your Agent's Context? Context Privilege Escalation Attacks) - VERIFIED, abstract read run 199 via arxiv-fetch"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-10-0000.md"
       ]
     }
   ],
@@ -16122,6 +16155,83 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "Both scale verification smartly rather than uniformly - DeepVerifier by spending inference compute on rubric checks, HarnessLens by spending rollout budget only on behaviour-relevant tasks."
+    },
+    {
+      "id": "edge_cpe_challenges_execution_layer_enforcement",
+      "source": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "target": "pattern_execution_layer_enforcement",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Context assembly is a trusted harness operation that can elevate attacker content to a privileged instruction level (RCE achieved on 6 coding-agent harnesses) - the exec layer must treat context construction itself as an enforcement boundary, not just tool calls."
+    },
+    {
+      "id": "edge_cpe_supports_agentic_os",
+      "source": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "target": "concept_agentic_os",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Instruction privilege escalation via context assembly is exactly why the runtime must be a fixed point the harness cannot edit - the assembler's privilege-labelling logic belongs in the runtime, not the mutable harness."
+    },
+    {
+      "id": "edge_cpe_refines_harness_tampering",
+      "source": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "target": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Harness tampering by an EXTERNAL attacker via the context channel - illusory-privilege rather than illusory-gain, but the same 'the harness is corruptible' shape."
+    },
+    {
+      "id": "edge_cpe_supports_five_w",
+      "source": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The instruction LEVEL and its ORIGINAL source must be Five-W fields; content sitting in a role above its source level is the MessageRole-CPE detection signal."
+    },
+    {
+      "id": "edge_cpe_refines_agent_communication_attack_surface",
+      "source": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "target": "concept_agent_communication_is_a_layered_attack_surface",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "A specific, RCE-achieving instance of the layered communication attack surface, located at the context-assembly layer."
+    },
+    {
+      "id": "edge_cpe_refines_memory_poisoning",
+      "source": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "MessageRole-CPE - low-privileged content promoted into a higher-privileged role - is the message-channel analogue of a poisoned memory entry being retrieved as trusted."
+    },
+    {
+      "id": "edge_cpe_challenges_compaction_cliff",
+      "source": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "target": "concept_compaction_cliff",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "Type-aware compaction pins 'rules'; if attacker content can be labelled a rule during context assembly it rides into the never-summarised tier - the pinning must verify the rule's provenance, not its label."
     }
   ]
 }

@@ -1,0 +1,34 @@
+{
+  "run": 199,
+  "increment": "recent citation-sweep: fold context-assembly privilege escalation (arXiv:2608.27299 + 2609.01222) via S2 citations of the model-harness-lens survey",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "citations": [
+    {
+      "id": "arXiv:2608.27299",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.01222",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.27299",
+    "arXiv:2609.01222"
+  ],
+  "trace_file": "runtime\\traces\\loop-199.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
