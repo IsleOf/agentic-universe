@@ -1012,6 +1012,10 @@
     {
       "date": "2026-09-26",
       "change": "Autonomous run 263. Fold group 4 of the owner's research input (coverage_map.md) - quality-diversity + homeostasis + optionality (directions 2, 8, 40). 3 nodes (branch_key agent_habitat:diversity_mechanisms): concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard (MAP-Elites; implements principle_diversity_maintenance), concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating (usage caps + lateral inhibition + decorrelation; constrains semantic-space compression), concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability (extends grounded acceptance + loop_metrics with a six-axis Pareto promotion rule). 10 edges. All three operationalise the diversity keystone. Emergence-first, all speculative. 288 -> 291 nodes, 1140 -> 1150 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-26",
+      "change": "Autonomous run 264. Fold group 5 of the owner's research input (coverage_map.md) - the developmental ladder (directions 22, 27, 28, 30). 4 nodes (branch_key nourishing_harness:developmental_ladder): concept_developmental_harness_affordances_unlock_on_demonstrated_reliability (6-stage ladder Seed->Steward; extends pattern_progressive_risk_vesting to capability-unlocks), concept_agent_authority_is_a_bounded_cognitive_light_cone_that_earns_expansion (Levin's light cone; refines the autonomy dial per-agent/per-domain), concept_governance_is_learned_as_a_graded_competence_not_a_final_policy_layer (constitutional curriculum; grounds approach_emergence_first), concept_developmental_benchmark_measures_maturity_across_stages_not_one_score (extends artifact_phase3_holdout_set to multi-axis + task genomes). 10 edges. Emergence-first, all speculative. 291 -> 295 nodes, 1150 -> 1160 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8620,6 +8624,104 @@
       "derived_from": [
         "docs/auto_sweep_2026-09-26-0000.md",
         "docs/research/alternative_approaches_part1.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "label": "Developmental harness: affordances unlock on demonstrated reliability",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:developmental_ladder",
+      "confidence": 0.55,
+      "description": "Owner direction 22 (docs/research/alternative_approaches_part3.md). Treat the harness like a developing organism: early stages have read-only tools, a private scratchpad, simple tasks. As competence and reliability are demonstrated, unlock richer affordances through a stage ladder - Seed (single-step, read-only) -> Apprentice (short plans, sandboxed writes) -> Specialist (reusable skills, skill registry) -> Collaborator (shared artifacts, negotiated handoffs) -> Architect (propose - not apply - harness changes) -> Steward (governed policy/tool evolution). Each transition has an explicit promotion gate (reliable completion, calibration + recovery, transfer, trust + non-interference, hidden evals + rollback readiness, long-term health metrics). An alternative to BOTH a static harness and unrestricted recursive self-improvement. Extends pattern_progressive_risk_vesting from harm-bounds to capability-unlocks.",
+      "tags": [
+        "developmental",
+        "staged-autonomy",
+        "maturity-ladder",
+        "promotion-gate",
+        "capability-unlock"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-0600.md",
+        "docs/research/alternative_approaches_part3.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_agent_authority_is_a_bounded_cognitive_light_cone_that_earns_expansion",
+      "label": "Agent authority is a bounded cognitive light cone that earns expansion",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:developmental_ladder",
+      "confidence": 0.5,
+      "description": "Owner direction 27, Levin's cognitive-light-cone framing applied to linguistic / mathematical / problem spaces. Give every agent a bounded light cone: what it can observe, what it may change, what future outcomes it must consider, what other agents and artifacts it is accountable to. An agent earns a broader cone only by demonstrating successful prediction and repair across its current boundary. A morphogenetic harness holds high-level goals as distributed constraints, not fixed task scripts, so distributed local repair can substitute for a central planner during tool outages or shifting objectives. The per-agent-boundary form of the autonomy dial.",
+      "tags": [
+        "cognitive-light-cone",
+        "morphogenesis",
+        "bounded-authority",
+        "distributed-constraint",
+        "local-repair"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-0600.md",
+        "docs/research/alternative_approaches_part3.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_governance_is_learned_as_a_graded_competence_not_a_final_policy_layer",
+      "label": "Governance is learned as a graded competence, not bolted on as a final policy layer",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:developmental_ladder",
+      "confidence": 0.55,
+      "description": "Owner direction 28. Make governance capability develop ALONGSIDE task capability: at each maturity stage add tests for declaring uncertainty, explaining evidence, requesting review, respecting permissions, preserving reversibility, recognising conflict of interest, auditing other agents. Constitutional-curriculum questions: can the agent refuse an unsafe shortcut even when rewarded for speed? distinguish a high-confidence fact from an attractive unsupported hypothesis? preserve a dissenting view in a synthesis? recognise when it lacks authority to modify a shared artifact? repair a failing workflow WITHOUT expanding its permissions? Developmental alignment - safe agency as a learned competence, not only an injected policy.",
+      "tags": [
+        "developmental-alignment",
+        "constitutional-curriculum",
+        "governance-competence",
+        "safe-agency"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-0600.md",
+        "docs/research/alternative_approaches_part3.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_developmental_benchmark_measures_maturity_across_stages_not_one_score",
+      "label": "A developmental benchmark measures maturity across stages, not one score",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:developmental_ladder",
+      "confidence": 0.5,
+      "description": "Owner directions 30 (+ 31 task genomes). An Agent Development Benchmark measures progress on distinct axes - tool acquisition, memory formation and consolidation, skill transfer, collaboration and trust calibration, environment design, repair after failure, governance and reversibility, long-horizon creative contribution - rather than one aggregate. Pairs with a task-genome repository: every executable environment carries source + verifier, difficulty estimate, capability tags, prerequisite skills, known exploits, niche coordinates, safety class, and an agent-performance lineage, so curriculum evolution is auditable. The project's artifact_phase3_holdout_set is a single-axis instance of this.",
+      "tags": [
+        "developmental-benchmark",
+        "multi-stage-evaluation",
+        "task-genome",
+        "maturity-metrics"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-0600.md",
+        "docs/research/alternative_approaches_part3.md (owner research input)"
       ],
       "evidence_links": [
         "docs/research/coverage_map.md"
@@ -21010,6 +21112,116 @@
       "approach_family": "agent_habitat",
       "confidence": 0.5,
       "description": "'Distinct validated strategies per task family' and 'fraction of skills with an alternative implementation' are read straight off a QD archive - without one, the option-value metric has nothing to count."
+    },
+    {
+      "id": "edge_dev_harness_extends_risk_vesting",
+      "source": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "target": "pattern_progressive_risk_vesting",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "Progressive risk vesting bounds harm as a recursive tree grows. The developmental ladder generalises the vesting idea to CAPABILITY: affordances (write access, delegation, harness-edit proposals) vest as reliability is demonstrated, gated the same way harm bounds are."
+    },
+    {
+      "id": "edge_dev_harness_instantiates_affordance_over_constraint",
+      "source": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "target": "principle_affordance_over_constraint",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "Affordance over constraint, made temporal: withhold an affordance until the agent can use it safely, then grant it - rather than granting everything and constraining use."
+    },
+    {
+      "id": "edge_dev_harness_grounds_emergence_first",
+      "source": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "target": "approach_emergence_first",
+      "type": "grounds",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "Addresses the standard objection to a free interior: an immature agent with broad autonomy produces brittle shortcuts. Stage-gating the affordances lets emergence-first apply only where the agent has earned the room."
+    },
+    {
+      "id": "edge_cone_refines_autonomy_dial",
+      "source": "concept_agent_authority_is_a_bounded_cognitive_light_cone_that_earns_expansion",
+      "target": "concept_autonomy_dial",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The autonomy dial is a global setting (in-the-loop / on-the-loop / override). The cognitive light cone makes it per-agent and per-domain: authority is a bounded region that expands only on demonstrated prediction + repair within its current edge."
+    },
+    {
+      "id": "edge_cone_supports_dev_harness",
+      "source": "concept_agent_authority_is_a_bounded_cognitive_light_cone_that_earns_expansion",
+      "target": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The light cone is the state variable the stage ladder promotes: each stage widens what the agent may observe, change, and be accountable to."
+    },
+    {
+      "id": "edge_gov_extends_dev_harness",
+      "source": "concept_governance_is_learned_as_a_graded_competence_not_a_final_policy_layer",
+      "target": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "Adds a parallel track to the ladder: governance competences (declare uncertainty, request review, preserve reversibility, recognise COI) are graded and gated stage by stage, not injected at the end."
+    },
+    {
+      "id": "edge_gov_grounds_emergence_first",
+      "source": "concept_governance_is_learned_as_a_graded_competence_not_a_final_policy_layer",
+      "target": "approach_emergence_first",
+      "type": "grounds",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "Developmental alignment is the emergence-first answer to 'the interior is not benign by default': safe agency is grown as a competence inside the free interior, checked at each promotion gate, not only enforced at the execution layer."
+    },
+    {
+      "id": "edge_bench_extends_holdout_set",
+      "source": "concept_developmental_benchmark_measures_maturity_across_stages_not_one_score",
+      "target": "artifact_phase3_holdout_set",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The frozen held-out set is a single-axis developmental benchmark (does a harness edit preserve research + design competence). The developmental benchmark adds the other axes - memory formation, skill transfer, trust calibration, repair, governance."
+    },
+    {
+      "id": "edge_bench_supports_dev_harness",
+      "source": "concept_developmental_benchmark_measures_maturity_across_stages_not_one_score",
+      "target": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The stage promotion gates need per-axis measurements; the developmental benchmark is where those measurements come from."
+    },
+    {
+      "id": "edge_bench_informs_grounded_acceptance",
+      "source": "concept_developmental_benchmark_measures_maturity_across_stages_not_one_score",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45,
+      "description": "A multi-axis maturity benchmark is the grounded evaluation a promotion gate reads - and its per-axis structure is what makes 'no axis regressed' checkable."
     }
   ]
 }
