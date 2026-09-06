@@ -2,7 +2,7 @@
 
 **Format:** Agentic Universe handover (`docs/practicing_what_we_preach.md` §3) · **Graph:**
 `knowledge/graph/agentic_universe_project_graph.json` (26 nodes; `python tools/project_graph_scaffold.py
-validate` it) · **Date:** 2026-09-06 (run 251)
+validate` it) · **Date:** 2026-09-27 (run 270)
 
 > A fresh session reads this file and the project graph **first**. This is the compact orientation; the
 > full literature map is `docs/graph_state_2026-09.md`, the build plan is
@@ -12,8 +12,8 @@ validate` it) · **Date:** 2026-09-06 (run 251)
 
 ## What it is
 
-A research repo with two artefacts. **(1)** `knowledge/graph/agentic_universe_graph.json` — 272 nodes /
-1091 edges of VERIFIED-arXiv literature and built artifacts about *emergent agent behaviour* and
+A research repo with two artefacts. **(1)** `knowledge/graph/agentic_universe_graph.json` — 305 nodes /
+1207 edges of VERIFIED-arXiv literature and built artifacts about *emergent agent behaviour* and
 *self-improving agent harnesses*, edited one increment per run. **(2)** the autonomous loop that edits it:
 `tools/loop_session.py` wraps each run, `tools/improvement_loop.py` is the Phase-3 acceptance gate,
 `tools/loop_metrics.py` reads the trace corpus. `docs/` is the orientation layer; the graph JSON is the
@@ -21,13 +21,21 @@ source of truth. Everything in `tools/` is pure Python stdlib, no dependencies, 
 
 ## Current state
 
-**Working:** the loop has run ~250 increments; every run validates the graph, passes 25 selftests
+**Working:** the loop has run 270 increments; every run validates the graph, passes 26 selftests
 (`python tools/selftest_all.py` → `BUILD SELFTEST: GREEN`), and commits+pushes to
 `proposals/2026-09-01-emergent-behaviour-cluster`. Phases 0–5 of the self-improving-harness plan exist as
 tested code. The acceptor/certificate literature cluster and the harness-evolution subfield are mapped and
-the project is self-audited against them (`docs/harness_anatomy_self_audit.md`). Six tools shipped in the
-latest session: `paired_eprocess`, `probe_orchestration_value`, `loop_metrics.status_line`,
-`deterministic_repair`, `graph_diff`, `task_ledger` + `supervisor`.
+the project is self-audited against them (`docs/harness_anatomy_self_audit.md`).
+
+**Latest session (runs 253–270):** the collusion thread closed out (`2601.00360` anti-collusion
+mechanisms; `2512.15790` XAMT covert memory poisons); `tools/experience_bank.write_gate` shipped (a
+deterministic pre-write risk screen); and the **owner's 54-direction research input**
+(`docs/research/`) was triaged (`docs/research/coverage_map.md`) and fully folded in 9 thematic groups —
+~35 new nodes across 6 branch_keys (epistemic-market, interoception/active-inference, structural
+coordination, quality-diversity/homeostasis, developmental ladder, curriculum refinements, culture &
+scarcity, ecosystem convergence, emergence safety-case). Earlier tools still current: `paired_eprocess`,
+`probe_orchestration_value`, `loop_metrics.status_line`/`run_novelty`, `deterministic_repair`,
+`graph_diff`, `task_ledger` + `supervisor`, `project_graph_scaffold`.
 
 **Half-built / not built:** Phase 6 (the swarm layer) is untouched — the project studies emergence but has
 never run a real swarm. The model-integration step (a real `call_model` bound into the probe adapters) is
@@ -36,14 +44,17 @@ deferred — the probes run on synthetic data.
 **Known gaps** (see `docs/what_would_make_this_wrong.md`): the central habitat mechanism
 (`concept_habitat_slack`) is unverified; the gate scores usefulness but nothing scores novelty
 (`run_novelty` is an advisory signal, not a gate check); the no-weight-training bet is challenged by WHALE
-/ JIT-Agent on capability-shaped tasks.
+/ JIT-Agent on capability-shaped tasks; the write gate is a perimeter heuristic that a bilevel-optimised
+covert poison evades (`2512.15790`).
 
 ## The single highest-value next move
 
 **Bind a real `call_model` into the five probe adapters and run `probe_idle_agent sweep`** (`docs/HANDOFF.md`).
 `what_would_make_this_wrong.md` calls it "the one experiment that resolves the most" — it tests the
-top-severity gap. The loop cannot re-execute its own past research autonomously; this is the
-human-in-the-loop step the plan always had.
+top-severity gap. It also unblocks the project's next *experimental* frontier: the 7 open research
+questions in `docs/research/open_questions.md` (from the owner's research input), each with a falsifiable
+kill condition, all gated on the same `call_model` binding. The loop cannot re-execute its own past
+research autonomously; this is the human-in-the-loop step the plan always had.
 
 ## Hard constraints
 
