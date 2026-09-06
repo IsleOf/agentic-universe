@@ -656,6 +656,10 @@
     {
       "date": "2026-10-19",
       "change": "Autonomous run 173 (cont.). Also fixed tools/skill_induction.py selftest: retire() check depended on the live loop-history containing a disused skill class, which it no longer does (the recent window is a healthy literature/build/consolidation mix). Selftest now registers a fixture skill with a task_class classify() never emits and checks retire() deprecates THAT - deterministic regardless of history composition (same fix pattern as runs 61/98/101). BUILD SELFTEST back to GREEN."
+    },
+    {
+      "date": "2026-10-19",
+      "change": "Autonomous run 174. Snapshot line in graph_state_2026-09.md refreshed to run 174 (226/811; validated 35->18 after the run-173 correction). DBLP fold: concept_naive_trajectory_accumulation_already_helps (Self-Generated In-Context Examples, arXiv:2505.00234, NeurIPS 2025): even NAIVE retention of an agent's own successful trajectories as in-context examples beats a model upgrade (ALFWorld 73->89%); population-based DB curation + utility-based exemplar retention -> 93%. A data point FOR the experience bank even in simple form; diversity maintenance applied to memory; a concept_harness_capability_delta instance. +5 edges."
     }
   ],
   "nodes": [
@@ -6421,6 +6425,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-18-1800.md"
+      ]
+    },
+    {
+      "id": "concept_naive_trajectory_accumulation_already_helps",
+      "label": "Even NAIVE accumulation of an agent's own successful trajectories as in-context examples beats a model upgrade; population-based curation of example DBs + utility-based exemplar retention pushes ALFWorld to 93%",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:naive_trajectory_bootstrapping",
+      "confidence": 0.72,
+      "description": "Self-Generated In-Context Examples Improve LLM Agents for Sequential Decision-Making Tasks (arXiv:2505.00234, NeurIPS 2025; VERIFIED via arXiv abstract read run 174, resolved via DBLP). Agents auto-improve by keeping their OWN successful trajectories as in-context examples, no human intervention. Findings: (1) EVEN NAIVE ACCUMULATION (just retain successes) gives substantial gains - ALFWorld 73->89%, Wordcraft 55->64%, InterCode-SQL 75->79% - and these EXCEED upgrading gpt-4o-mini -> gpt-4o and MATCH allowing multiple attempts per task; (2) DATABASE-LEVEL curation via POPULATION-BASED TRAINING (maintain a population of example collections, propagate high-performing ones); (3) EXEMPLAR-LEVEL curation - retain a trajectory by its EMPIRICAL UTILITY as an in-context example, not recency or count. With both: ALFWorld 93%, beating more powerful LLMs + hand-crafted components. For this project: (a) a data point FOR the Phase 2 experience bank even in a simple form - naive retention already helps, the synthesis is a bonus; (b) population-based curation of example DBs is principle_diversity_maintenance applied to the MEMORY itself - maintain a population, propagate the good; the experience bank's retention policy should be UTILITY-WEIGHTED; (c) 'gains exceed a model upgrade' is another concept_harness_capability_delta data point; (d) closely related to concept_cer_training_free_experience_replay_works (CER) - CER synthesises, this shows raw retention is most of the value; both inherit the memory-poisoning exposure (concept_memory_poisoning_one_write_persists).",
+      "tags": [
+        "self-generated-icl",
+        "naive-accumulation-works",
+        "exceeds-model-upgrade",
+        "population-based-db-curation",
+        "utility-based-exemplar-retention",
+        "alfworld-93pct",
+        "trajectory-bootstrapping",
+        "neurips-2025"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-19-1800.md",
+        "arXiv:2505.00234 (Self-Generated In-Context Examples Improve LLM Agents) - VERIFIED, abstract read run 174; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-19-1800.md"
       ]
     }
   ],
@@ -15079,6 +15111,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "concept_compaction_cliff's mitigation pins rules in a system-prompt-like position for retention; this finds models OBEY LESS from the system prompt - retention and compliance may pull opposite ways."
+    },
+    {
+      "id": "edge_naiveacc_refines_cer",
+      "source": "concept_naive_trajectory_accumulation_already_helps",
+      "target": "concept_cer_training_free_experience_replay_works",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "CER synthesises past experiences into a buffer; this shows RAW retention of successful trajectories is most of the value, with curation (not synthesis) as the enhancement."
+    },
+    {
+      "id": "edge_naiveacc_supports_experience_bank",
+      "source": "concept_naive_trajectory_accumulation_already_helps",
+      "target": "pattern_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Naive accumulation of successes already beats a model upgrade - the experience bank is worth building even before the dual-layer condensation is tuned."
+    },
+    {
+      "id": "edge_naiveacc_refines_diversity_maintenance",
+      "source": "concept_naive_trajectory_accumulation_already_helps",
+      "target": "principle_diversity_maintenance",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Database-level curation via population-based training is diversity maintenance applied to the memory: keep a population of example collections, propagate the high performers."
+    },
+    {
+      "id": "edge_naiveacc_supports_capability_delta",
+      "source": "concept_naive_trajectory_accumulation_already_helps",
+      "target": "concept_harness_capability_delta",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The in-context-example gains 'exceed those achieved by upgrading from gpt-4o-mini to gpt-4o' - harness-layer improvement beating model-layer improvement, measured."
+    },
+    {
+      "id": "edge_naiveacc_challenged_by_memory_poisoning",
+      "source": "concept_memory_poisoning_one_write_persists",
+      "target": "concept_naive_trajectory_accumulation_already_helps",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "A self-generated-trajectory database retrieved into every future task is the persistent-memory attack surface; utility-based retention does not screen for poisoning."
     }
   ]
 }

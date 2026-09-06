@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 226 nodes, 811 edges · **Date:** 2026-09-05
+**Graph at generation:** 227 nodes, 816 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -50,6 +50,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2502.08691](https://arxiv.org/abs/2502.08691) | (title not recorded) | `concept_agentsociety_large_scale_generative_society` |
 | [2502.11705](https://arxiv.org/abs/2502.11705) | (title not recorded) | `concept_agents_writing_their_own_tools_with_a_test_gate` |
 | [2503.13657](https://arxiv.org/abs/2503.13657) | (title not recorded) | `concept_mast_multi_agent_failure_taxonomy` |
+| [2505.00234](https://arxiv.org/abs/2505.00234) | (title not recorded) | `concept_naive_trajectory_accumulation_already_helps` |
 | [2506.03053](https://arxiv.org/abs/2506.03053) | (title not recorded) | `concept_moral_preferences_are_framing_brittle` |
 | [2506.06698](https://arxiv.org/abs/2506.06698) | (title not recorded) | `concept_cer_training_free_experience_replay_works` |
 | [2507.11473](https://arxiv.org/abs/2507.11473) | (title not recorded) | `concept_cot_monitorability_is_a_fragile_property_to_preserve` |
@@ -391,6 +392,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-17-1200.md` — `concept_search_time_contamination_inflates_agent_evals`
 - `docs/auto_sweep_2026-10-18-0000.md` — `concept_agents_writing_their_own_tools_with_a_test_gate`
 - `docs/auto_sweep_2026-10-18-1800.md` — `concept_incomplete_task_induces_shutdown_resistance`
+- `docs/auto_sweep_2026-10-19-1800.md` — `concept_naive_trajectory_accumulation_already_helps`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

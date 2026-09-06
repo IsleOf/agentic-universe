@@ -6,11 +6,12 @@
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 162)
+## Snapshot (run 174)
 
-**222 nodes · 792 edges · 9 approach families · 163 `challenges` edges (21% of all edges).**
+**226 nodes · 811 edges · 9 approach families · ~166 `challenges` edges (~20% of all edges).**
 
-`verification_state`: 79 needs-validation · **96 partially-validated** · **35 validated** · 5 inconclusive · 7 unset.
+`verification_state`: 79 needs-validation · **117 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
+(The `validated` count fell 35→18 at run 173: a consistency pass corrected abstract-read literature nodes from `validated` to `partially_validated` — `validated` is now again reserved for `artifact_*` nodes with passing computed selftests. The 220-run session added ~30 literature nodes; nearly all sit at `partially_validated`.)
 Families: self_improving_harness 76 · emergent_behaviors 68 · agent_habitat 23 · graph_engineering 19 · nourishing_harness 17 · rest 19.
 
 **Runs 146–161** added a scheming / monitorability / multi-agent adversarial thread, balancing the
