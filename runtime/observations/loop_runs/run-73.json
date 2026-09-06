@@ -1,0 +1,18 @@
+{
+  "run": 73,
+  "increment": "Phase 3 proposer with real context (tools/loop_proposer.py)",
+  "ok": true,
+  "harness_manifest_hash": "a0a320e06a4204c4",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-73.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

@@ -248,6 +248,10 @@
     {
       "date": "2026-09-24",
       "change": "Autonomous run 72. Completed Phase 4's skill lifecycle: added retire() to tools/skill_induction.py - the deprecation stage of pattern_agentic_skill_lifecycle (principle_retraction_capacity). A skill whose task class is unseen in the last 12 workflow entries is marked deprecated, kept not deleted, stops being offered, idempotent, revives on recurrence. On the real corpus literature_sweep deprecates (12 straight build runs). selftest_all.py still 12 selftests, all GREEN (skill_induction now checks retirement)."
+    },
+    {
+      "date": "2026-09-24",
+      "change": "Autonomous run 73. Built tools/loop_proposer.py - the Phase 3 proposer with real context. gather_context() assembles metrics + task-class distribution + skill state + harness components + latest open question. heuristic_propose() generates hypotheses across 4 dimensions, each with a falsifiable prediction and a computable-or-held-out verification. PROPOSER_PROMPT is the exact model-proposer input; verify path unchanged. On the real context: proposes one edit (per-run citation-verification rule). selftest_all.py runs 13 selftests, all GREEN. artifact_phase3_proposer_context added."
     }
   ],
   "nodes": [
@@ -4740,6 +4744,31 @@
       ],
       "evidence_links": [
         "docs/phase5_exec_guard.md"
+      ]
+    },
+    {
+      "id": "artifact_phase3_proposer_context",
+      "label": "Phase 3 proposer with real context — model-ready seam",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase3_proposer",
+      "confidence": 0.7,
+      "description": "tools/loop_proposer.py, run 73: gather_context() assembles what a Phase 3 proposer needs (loop_metrics, task-class distribution, skill state, harness components, latest open question). heuristic_propose() generates hypotheses across 4 dimensions (research quality, mode diversity, harness economy, safety), each with a falsifiable prediction and a computable-or-held-out verification. PROPOSER_PROMPT is the exact input a model proposer receives; it must return the same JSON shape, and verify_loop_edit + the held-out set are unchanged. On the real context it proposes one edit (make the verify-three-ways rule per-run enforceable). Still owed: the actual model call behind the prompt; heterogeneous verifiers; a better task-class classifier (~20/61 entries land in 'other').",
+      "tags": [
+        "phase-3",
+        "proposer",
+        "real-context",
+        "model-ready",
+        "falsifiable-prediction"
+      ],
+      "derived_from": [
+        "docs/phase3_proposer.md",
+        "tools/loop_proposer.py"
+      ],
+      "evidence_links": [
+        "docs/phase3_proposer.md"
       ]
     }
   ],
@@ -10497,6 +10526,48 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.7,
       "description": "Induction + deprecation stages both exercised - the lifecycle the plan flagged as owed."
+    },
+    {
+      "id": "edge_proposer_instantiates_sih",
+      "source": "artifact_phase3_proposer_context",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75
+    },
+    {
+      "id": "edge_proposer_realizes_phase3",
+      "source": "artifact_phase3_proposer_context",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "supports",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75,
+      "description": "The context-rich proposer feeding improvement_loop's verify/promote path; model drops in behind PROPOSER_PROMPT."
+    },
+    {
+      "id": "edge_proposer_depends_on_metrics",
+      "source": "artifact_phase3_proposer_context",
+      "target": "artifact_loop_metrics_phase3_real",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_proposer_implements_falsifiable_prediction",
+      "source": "artifact_phase3_proposer_context",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Each proposal carries a falsifiable prediction (metric/direction/from/target) - evolution as experiment, not search."
     }
   ]
 }
