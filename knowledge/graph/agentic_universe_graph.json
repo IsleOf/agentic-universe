@@ -524,6 +524,10 @@
     {
       "date": "2026-10-11",
       "change": "Autonomous run 141. Consolidation. self_improving_harness_plan.md section 6 gains a 'Status update (runs 60-140)' block: Phases 0-5 skeleton done (21 selftests GREEN); five of seven probe model seams now have written selftested adapters (model_policy / model_preference / model_relay / model_reader / model_propose); the single unblocking step is now 'bind one call_model into the five adapters and run probe_idle_agent sweep'; the run-130 idle_run_streak/plateau_watch signal is noted. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-11",
+      "change": "Autonomous run 142. DBLP. concept_inference_time_scaling_of_verification (DeepVerifier, arXiv:2601.15808, ACL 2026 Findings): self-evolve a research agent by iteratively verifying its own outputs against rubrics (from a 5x13 DRA Failure Taxonomy) - inference-time scaling of VERIFICATION, no training, +8-11% GAIA/XBench; DeepVerifier beats agent-as-judge/LLM-judge by 12-48% F1. A direct answer to concept_verification_is_the_binding_constraint. Caveats: verification asymmetry is conditional (cf. transcript-only impossibility); a crafted rubric is still a gameable grader. +6 edges."
     }
   ],
   "nodes": [
@@ -5921,6 +5925,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-10-0600.md"
+      ]
+    },
+    {
+      "id": "concept_inference_time_scaling_of_verification",
+      "label": "Scale verification at inference time, not the policy: a self-evolving research agent iteratively verifies its own outputs against rubrics, no training, +8-11% on GAIA/XBench",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:inference_time_verification_scaling",
+      "confidence": 0.7,
+      "description": "Inference-Time Scaling of Verification: Self-Evolving Deep Research Agents via Test-Time Rubric-Guided Verification / DeepVerifier (arXiv:2601.15808, ACL 2026 Findings; VERIFIED via arXiv abstract read run 142, resolved via DBLP). Instead of post-training the policy, self-evolve the agent by ITERATIVELY VERIFYING its own outputs against meticulously crafted rubrics - inference-time scaling of VERIFICATION (spend more compute on checking, not on the policy). Rubrics are derived from an automatically constructed DRA Failure Taxonomy: 5 major categories, 13 sub-categories. DeepVerifier is a rubrics-based OUTCOME reward verifier that 'leverages the asymmetry of verification' and beats vanilla agent-as-judge and LLM-judge baselines by 12-48% meta-eval F1. Plug-and-play at test time: rubric feedback -> iterative bootstrapping, refining responses WITHOUT additional training -> 8-11% accuracy gains on hard GAIA / XBench-DeepSearch subsets with capable closed models. Releases DeepVerifier-4K (4,646 agent steps for verification, emphasising reflection / self-critique). For this project: (1) a direct answer to concept_verification_is_the_binding_constraint - if verification is the bottleneck, SCALE VERIFICATION at inference; (2) the middle loop working with no weight training (observe -> rubric-verify -> refine); (3) independent support for pattern_grounded_acceptance_only (rubrics-based outcome verifier) and pattern_rubric_induction (rubrics BEFORE the work, from a taxonomy). CAVEATS: (a) 'asymmetry of verification' is load-bearing and NOT unconditional - concept_transcript_only_gate_is_provably_insufficient shows text-only verification cannot beat chance on text-indistinguishable cases; DeepVerifier uses rubrics + OUTCOME, not transcript, so it is compatible but the asymmetry has conditions; (b) 'meticulously crafted' rubrics are human-authored and a rubric IS a grader the interior can learn to game (concept_gate_faces_a_pretrained_grader_gamer).",
+      "tags": [
+        "inference-time-verification-scaling",
+        "rubric-guided",
+        "dra-failure-taxonomy-5x13",
+        "verification-asymmetry",
+        "no-training-self-evolution",
+        "outcome-reward-verifier",
+        "+8-11pp-gaia-xbench",
+        "acl-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-11-0600.md",
+        "arXiv:2601.15808 (Inference-Time Scaling of Verification / DeepVerifier) - VERIFIED, abstract read run 142; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-11-0600.md"
       ]
     }
   ],
@@ -13710,6 +13742,72 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "Bottom-up generative simulation of society - macro patterns from micro agent behaviour."
+    },
+    {
+      "id": "edge_itsv_supports_verification_binding_constraint",
+      "source": "concept_inference_time_scaling_of_verification",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A direct answer: if per-edit verification cost is the bottleneck, scale verification compute at inference - iterative rubric-guided self-verification, +8-11% with no training."
+    },
+    {
+      "id": "edge_itsv_supports_grounded_acceptance_only",
+      "source": "concept_inference_time_scaling_of_verification",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "DeepVerifier is a rubrics-based OUTCOME reward verifier - grounded (outcome + rubric), not transcript-only; beats agent-as-judge / LLM-judge by 12-48% F1."
+    },
+    {
+      "id": "edge_itsv_supports_rubric_induction",
+      "source": "concept_inference_time_scaling_of_verification",
+      "target": "pattern_rubric_induction",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Rubrics derived from a failure taxonomy and applied BEFORE / during, not after - the ordering property pattern_rubric_induction names, at scale."
+    },
+    {
+      "id": "edge_itsv_refines_transcript_only_insufficient",
+      "source": "concept_inference_time_scaling_of_verification",
+      "target": "concept_transcript_only_gate_is_provably_insufficient",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Shows the 'asymmetry of verification' is real but CONDITIONAL: DeepVerifier wins by using rubrics + outcome, exactly the environment-grounded channel the impossibility result leaves open."
+    },
+    {
+      "id": "edge_itsv_challenges_pretrained_grader_gamer",
+      "source": "concept_inference_time_scaling_of_verification",
+      "target": "concept_gate_faces_a_pretrained_grader_gamer",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "A meticulously crafted rubric is still a grader the interior can learn to game; the +12-48% F1 is meta-evaluation, not adversarial-optimisation-pressure evaluation."
+    },
+    {
+      "id": "edge_itsv_supports_horizon_gap",
+      "source": "concept_inference_time_scaling_of_verification",
+      "target": "concept_horizon_gap_outcome_signals_decay",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Rubric-level feedback is 'denser step-level signal' - the exact move The Horizon Gap finds the whole field converging on."
     }
   ]
 }
