@@ -1,11 +1,15 @@
 # Prediction Branch — Polymarket & Kalshi Ecosystem Scan
 
 **Date:** 2026-09-07 · **Branch of:** Agentic Universe (self-improving agentic systems)
-**Sources:** GitHub Search API (live, 2026-09-06/07), arXiv, ecosystem directories. Star counts are snapshot values.
+**Sources:** GitHub Search API (live), arXiv, X/Twitter, Reddit, ecosystem directories. Star counts and profit reports are point-in-time and independently unverified unless specifically stated.
 
 ## Purpose
 
-A curated implementation map for a self-improving forecasting and prediction-market branch. The branch treats resolved markets as a grounded feedback channel: forecast, record evidence and probability, score after resolution, recalibrate by domain, and evolve the research and trading policy.
+A curated implementation map for a self-improving forecasting and prediction-market branch. The core loop is: forecast, preserve point-in-time evidence, score after resolution, recalibrate by domain, and promote or reject policy variants through replay and paper trading.
+
+## Research coverage
+
+This scan covered GitHub repositories and direct GitHub metadata, recent arXiv literature, indexed X/Twitter posts, Reddit threads, official Polymarket tooling, Kalshi client/API material, and practitioner write-ups. Social-media profit claims are included as ecosystem signals and strategy leads, not as performance evidence.
 
 ## Official infrastructure
 
@@ -41,6 +45,7 @@ A curated implementation map for a self-improving forecasting and prediction-mar
 | [OctagonAI/kalshi-trading-bot-cli](https://github.com/OctagonAI/kalshi-trading-bot-cli) | Deep-research to probability-estimate to edge analysis, with Kelly sizing and a multi-gate risk pattern. |
 | [666ghj/MiroFish](https://github.com/666ghj/MiroFish) | Swarm simulation alternative for long-horizon scenario forecasting; use as an experimental forecasting specialist, not an execution engine. |
 | [alsk1992/CloddsBot](https://github.com/alsk1992/CloddsBot) | Multi-venue autonomous-agent architecture including prediction markets, useful for execution-boundary design. |
+| [chainstacklabs/polyclaw](https://github.com/chainstacklabs/polyclaw) | Trading-enabled Polymarket skill for OpenClaw; browse markets, assess trades with an LLM, and execute CLOB operations. |
 
 ### Quant and execution references
 
@@ -60,6 +65,39 @@ A curated implementation map for a self-improving forecasting and prediction-mar
 | [suislanchez/polymarket-kalshi-weather-bot](https://github.com/suislanchez/polymarket-kalshi-weather-bot) | Narrow-domain ensemble forecasts, explicit edge threshold, Kelly sizing, and dashboarding. |
 | [livetennisapi/polymarket-tennis](https://github.com/livetennisapi/polymarket-tennis) | Market-to-live-event mapping and observe-only data layer. |
 | [Novals83/5min-btc-polymarket](https://github.com/Novals83/5min-btc-polymarket) | Short-horizon momentum workflow with configurable risk controls. |
+
+## Community and social research
+
+### Ecosystem signals
+
+X/Twitter and Reddit show a rapid growth of agents built with OpenClaw, Polymarket skills, Simmer, and bespoke Claude-based stacks. The recurring implementations are narrow-domain weather forecasting, short-horizon crypto momentum, social-event reaction, and cross-venue arbitrage; these are leads for controlled experiments, not proof of repeatable edge.
+
+A public X post reported a Claude-driven Polymarket agent turning $1,000 into $14,216 over 48 hours while an OpenClaw-driven comparator reportedly lost its capital. Other posts claimed an OpenClaw time-zone-arbitrage agent earned $43,800 overnight, while a Kalshi user reported a $3,352.70 monthly loss before token costs. None provides sufficient public methodology, trade ledger, or risk disclosure to count as evidence; collectively, they demonstrate extreme outcome dispersion and the need for preserved logs, cost accounting, and bounded risk.
+
+### Repeated strategy patterns
+
+| Pattern | Community implementation | Branch response |
+|---|---|---|
+| Weather arbitrage | NOAA/GFS/ECMWF forecasts mapped to market temperature buckets; trade only when model probability exceeds CLOB price by a threshold, often cited near 8%; Kelly-style sizing. | First vertical candidate: public exogenous data, frequent resolution, crisp labels. Reproduce under paper trading with full forecast and order-book capture. |
+| Crypto micro-markets | 5–15 minute BTC/ETH/SOL sentiment and momentum strategies, often with optional hedge logic. | High-frequency experiment only after a realistic latency/slippage simulator exists; do not infer edge from screenshots. |
+| X/Truth Social reaction | Bots monitor selected accounts or event feeds, then react to specified market changes. | Put social feeds behind provenance validation, freshness windows, deduplication, position limits, and idempotent execution. |
+| Cross-venue arbitrage | Polymarket/Kalshi YES+NO parity or equivalent-market discrepancies, frequently in Rust. | Implement market-semantic matching and all-in costs first; reject apparent opportunities without executable depth on both venues. |
+| Swarm simulation | MiroFish-derived simulations create synthetic populations that debate or react in social environments. | Treat as a long-horizon forecasting expert; benchmark independently against market price and a retrieval baseline before influencing trades. |
+
+### Tools in active discussion
+
+- **OpenClaw + Polymarket:** Community examples use it for weather and micro-crypto agents. `chainstacklabs/polyclaw` exposes a concrete trading-enabled skill, but it must be run with sandboxed credentials and independent risk gates.
+- **Simmer / Simmer SDK:** Discussed as a framework for large numbers of independently parameterized prediction-market agents; its skills/MCP approach aligns with the Agentic Universe tool architecture.
+- **TweetStream-like event inputs:** Useful for selected X or Truth Social events, but only as untrusted inputs. A social post must never lead directly to an order without market-state, liquidity, exposure, and replay checks.
+- **Polymarket Weather resources:** Practitioner material and on-chain leaderboard discussions make weather a useful investigation target, though all return claims still require independent verification.
+
+### Community-derived operating rules
+
+1. Separate social ingestion, interpretation, strategy, risk checks, and venue execution into distinct services.
+2. Capture source identity, retrieval time, content hash, market state, and agent policy version with every forecast.
+3. Replay event strategies against historical market snapshots before shadow-mode operation.
+4. Run paper trading before a capped live regime, with a kill switch and hard per-market/per-day loss limits.
+5. Treat profit screenshots and viral agent challenges as anecdotal; use independently reproducible ledgers and resolution-aware metrics.
 
 ## Literature map
 
