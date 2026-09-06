@@ -492,6 +492,10 @@
     {
       "date": "2026-10-09",
       "change": "Autonomous run 133. Consolidation. Folded runs 131-132 into the docs. what_would_make_this_wrong.md: section 5 gains a run-132 update (The Horizon Gap leaves the geometric law less settled - general predictive theory is an open problem - but the field converges on denser step-level signal, which is the Phase 0 substrate); section 6 gains a run-131 update (ACE: a harness-only context intervention beats strong baselines with a smaller model, evidence against model-native absorption). phase0_trace_substrate.md gains 'Independent field-wide support' (The Horizon Gap's convergence finding + the correlated-process-signal-bias caveat). No graph node/edge change."
+    },
+    {
+      "date": "2026-10-09",
+      "change": "Autonomous run 134. Probe rig - end-to-end dry run of the idle-agent probe (IDLE-STATE RULE option b). probe_idle_agent.py gains model_policy(call_model, framing, tools): the production adapter that turns a single call_model(prompt)->str callable into a policy(cycle,state) the idle loop runs. State-only prompt (no transcript, no suggestion of what to do); first token parsed as the action; idle_noop on an unparseable reply or a model exception. Selftested with a deterministic fake model (trace validates, actions parse, both failure modes -> idle_noop): 16 checks GREEN. HANDOFF.md stub table updated - the idle-agent seam is now written, not just named. No graph node/edge change."
     }
   ],
   "nodes": [

@@ -42,7 +42,7 @@ interfaces are stable; swapping in a model changes nothing else.
 
 | stub | file | what it should become |
 | --- | --- | --- |
-| `agent_step(cycle, state, tools)` | `probe_idle_agent.py` | a model in a ReAct loop, sees only `IDLE_PROMPT` + the framing |
+| `model_policy(call_model, framing, tools)` | `probe_idle_agent.py` | **adapter now written (run 134)** — pass a `call_model(prompt) -> str`; it builds the state-only prompt, parses the reply into an action, `idle_noop` on anything unparseable or on a model exception. Selftested with a fake model. Swap in a real `call_model` and run `sweep`. |
 | `agent_read(source_id)` | `probe_epistemic_sybil.py` | a model estimating a value from a document |
 | `self_preference(cand)` | `probe_rho_holdout.py` | a model pairwise-judging two trajectories |
 | `relay_policy(agent, msg)` | `probe_subagent_coordination.py` | a model deciding whether to forward an out-of-scope instruction |
@@ -50,7 +50,7 @@ interfaces are stable; swapping in a model changes nothing else.
 | `step_ok` / `handoff_ok` | `probe_composed_design.py` | real agent sub-step / handoff outcomes (to measure the actual per-step `p` and shed rate) |
 | `PROPOSER_PROMPT` | `loop_proposer.py` | a model reading the context JSON, returning the proposal list shape |
 
-**First run to do:** point `agent_step` at a model and run
+**First run to do:** pass a real `call_model` into `model_policy` (wire it in `sweep`/`_config_policy`) and run
 `python tools/probe_idle_agent.py sweep`. That is the idle-agent probe —
 `what_would_make_this_wrong.md` calls it "the one experiment that resolves the most" (does
 `concept_habitat_slack` hold — is there autotelic behaviour in the gap?). The rig, the four arms, and the
