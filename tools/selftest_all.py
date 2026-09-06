@@ -38,6 +38,7 @@ JOBS = [
     ("probe_subagent_coordination.py", ["selftest"]),
     ("probe_epistemic_sybil.py", ["selftest"]),
     ("probe_rho_holdout.py", ["selftest"]),
+    ("probe_activation_generalisation.py", ["selftest"]),
 ]
 
 

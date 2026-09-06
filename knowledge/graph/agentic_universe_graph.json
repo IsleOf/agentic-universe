@@ -316,6 +316,10 @@
     {
       "date": "2026-09-28",
       "change": "Autonomous run 89. IDLE-STATE RULE: wrote docs/HANDOFF.md - the single 'what to do next' doc, replacing the pre-build HANDOVER.md. Covers where things are (branch, graph, toolchain, selftests), what is built (Phases 0-5 + 4 probe rigs + the run-80 self-edit), the ONE unblocking step (wire a model into the 5 stubs: agent_step / agent_read / self_preference / relay_policy / PROPOSER_PROMPT) with a first-run recommendation (idle-agent probe), what needs infrastructure this repo lacks (Phase 6, composed-design test), how to watch and revert the run-80 prediction, and open housekeeping. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-28",
+      "change": "Autonomous run 90. IDLE-STATE RULE: built tools/probe_activation_generalisation.py - the activation-probe generalisation test as a runnable rig. Fit a linear probe on assigned collusion vs benign, test on emergent collusion it never trained on. Dry-run: AUC 1.00 in-distribution -> 0.72 on emergent (gap 0.28); training on both recovers to 0.93. An activation probe trained only on labellable collusion is a detector for that scenario, not the general observation channel the two-part gate needs. Bears on what_would_make_this_wrong.md section 2. artifact_probe_activation_generalisation_rig added. 19 selftests GREEN."
     }
   ],
   "nodes": [
@@ -5018,6 +5022,32 @@
       ],
       "evidence_links": [
         "docs/probe_rho_holdout.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_activation_generalisation_rig",
+      "label": "Activation-probe generalisation test as a runnable rig",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:activation_probe_gen_rig",
+      "confidence": 0.7,
+      "description": "tools/probe_activation_generalisation.py, run 90 (IDLE-STATE RULE). A linear probe is fit on assigned collusion (stereotyped feature shift) vs benign, then tested on emergent collusion (weaker, differently-shaped shift) it never trained on. Dry-run: AUC 1.00 in-distribution, 0.72 on emergent (generalisation gap 0.28); training on both recovers to 0.93. So an activation probe trained only on labellable collusion is a detector for that scenario, not the general observation channel the two-part gate needs - and for genuinely emergent coordination the training set cannot be collected in advance. Directly bears on what_would_make_this_wrong.md section 2 (the gate never gets a clean read). Stub: sample_signal (swap for real activation vectors).",
+      "tags": [
+        "activation-probe",
+        "generalisation-gap",
+        "assigned-vs-emergent",
+        "two-part-gate",
+        "dry-run",
+        "rig"
+      ],
+      "derived_from": [
+        "docs/probe_activation_generalisation.md",
+        "tools/probe_activation_generalisation.py"
+      ],
+      "evidence_links": [
+        "docs/probe_activation_generalisation.md"
       ]
     }
   ],
@@ -11193,6 +11223,58 @@
     {
       "id": "edge_rhorig_from_run80_rule",
       "source": "artifact_probe_rho_holdout_rig",
+      "target": "artifact_phase3_first_closed_loop",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5
+    },
+    {
+      "id": "edge_actgenrig_instantiates_emergence",
+      "source": "artifact_probe_activation_generalisation_rig",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_actgenrig_challenges_activation_probe",
+      "source": "artifact_probe_activation_generalisation_rig",
+      "target": "pattern_activation_probe_monitoring",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "Measures the generalisation gap: a probe trained on assigned collusion scores AUC 0.72 on emergent collusion (vs 1.00 in-distribution)."
+    },
+    {
+      "id": "edge_actgenrig_challenges_structural_gate",
+      "source": "artifact_probe_activation_generalisation_rig",
+      "target": "principle_structural_edits_gated_outside_the_agents",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The grounded channel the structural gate relies on has a residual hole exactly at novel un-labelled misalignment."
+    },
+    {
+      "id": "edge_actgenrig_depends_on_phase0",
+      "source": "artifact_probe_activation_generalisation_rig",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_actgenrig_from_run80_rule",
+      "source": "artifact_probe_activation_generalisation_rig",
       "target": "artifact_phase3_first_closed_loop",
       "type": "depends_on",
       "status": "in_experiment",
