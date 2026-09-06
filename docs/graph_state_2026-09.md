@@ -6,13 +6,56 @@
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 252)
+## Snapshot (run 268)
+
+**305 nodes · 1193 edges · 9 approach families · 206 `challenges` edges (~17% of all edges).**
+
+`verification_state`: 109 needs-validation · **165 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
+(`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature
+nodes sit at `partially_validated`.)
+Families: self_improving_harness 121 · emergent_behaviors 80 · agent_habitat 27 · graph_engineering 22 · nourishing_harness 23 · orchestration_first 20 · rest 12.
+Edge types: supports 410 · challenges 206 · instantiates 192 · refines 178 · informs 62 · depends_on 44 · implements 32 · extends 19 · constrains 18 · verifies 14 · grounds 12 · rest 6.
+
+**Runs 253–268** — the collusion thread closed out, one tool built, then the owner's 54-direction
+research input triaged and fully folded (9 groups).
+
+*Collusion thread (runs 253–255, 258):* `concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps`
+(arXiv:2601.00360 — five human anti-collusion mechanism classes mapped to agents, four structural gaps:
+attribution / identity-fluidity / boundary / adversarial-adaptation; the boundary problem is the 10th and
+only *definitional* challenger of `principle_terminal_gate_only`, `what_would_make_this_wrong.md` §2).
+`concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics` (arXiv:2512.15790
+XAMT — `challenges` the run-256 write gate as its honest bound). Run 254 dry-ran
+`probe_subagent_coordination` (same-parent-ID filter holds spread to 0.333 vs 1.0, no detector).
+
+*Tool (run 256):* `tools/experience_bank.write_gate()` — a deterministic pre-write risk screen
+(hard-reject injection markers / oversize / bad collection; soft-flag missing provenance to `_writes.audit`).
+New node `pattern_memory_writes_pass_a_deterministic_risk_gate`. Half-closes `au__q_memory_capture`.
+
+*The owner's 54-direction research fold (runs 259–268):* `docs/research/` (5 parts + README) + the
+DeepSeek-harness ecosystem doc, pushed to `origin/main` 2026-09-07. `docs/research/coverage_map.md`
+triaged every direction COVERED / PARTIAL / NEW; then 8 thematic folds added ~35 nodes across 6 new
+branch_keys: `orchestration_first:epistemic_market` (260 — claim/forecast ledgers, pre-registered
+adversarial collaboration, independent evidence cells, domain-keyed conditional trust, counterfactual
+reputation; the parent `challenges` the vote-herding node), `self_improving_harness:interoception` (261 —
+active-inference action selection, a five-axis self-state vector, learnable-novelty), `orchestration_first:structural_coordination`
+(262 — orchestratorless flock `challenges` the run-218 multi-agent criterion, fractal decomposition,
+cellular agents, deterministic-spine/generative-edge `grounds` `approach_emergence_first`),
+`agent_habitat:diversity_mechanisms` (263 — QD archive, homeostatic caps, optionality-as-Pareto — all
+operationalise the diversity keystone), `nourishing_harness:developmental_ladder` (264 — 6-stage maturity
+ladder, cognitive light cone, governance-as-graded-competence, developmental benchmark),
+`self_improving_harness:curriculum_refinements` (265 — Go-Explore, SPADE/LURE as instantiations of
+`concept_environment_evolution_curriculum`, DiagEvo, task genomes), `emergent_behaviors:culture_and_scarcity`
+(266 — SwarmWorld, cultural transmission, protocol evolution, productive scarcity `challenges`
+`approach_emergence_first`), `graph_engineering:ecosystem_convergence` (267 — the DSH doc, provenance-cautioned),
+`nourishing_harness:emergence_safety_case` (268 — `artifact_emergence_safety_case_template`).
+New docs: `docs/research/open_questions.md` (7 questions, falsifiable shapes, gated on the model-integration
+handoff), `docs/emergence_safety_case_template.md`.
+
+### Snapshot (run 252) — prior
 
 **272 nodes · 1091 edges · 9 approach families · 199 `challenges` edges (~18% of all edges).**
 
-`verification_state`: 78 needs-validation · **163 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
-(`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature
-nodes sit at `partially_validated`.)
+`verification_state`: 78 needs-validation · 163 partially-validated · 19 validated · 5 inconclusive · 7 unset.
 Families: self_improving_harness 113 · emergent_behaviors 74 · agent_habitat 24 · graph_engineering 21 · nourishing_harness 18 · orchestration_first 10 · rest 12.
 
 **Runs 235–251** — the literature frontier reached (S2-confirmed swept for the harness-evolution and

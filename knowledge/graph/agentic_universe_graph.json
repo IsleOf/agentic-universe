@@ -1032,6 +1032,10 @@
     {
       "date": "2026-09-27",
       "change": "Autonomous run 268. Fold group 9 (final) of the owner's research input (coverage_map.md) - doc artifacts. (a) docs/emergence_safety_case_template.md (owner direction 11): a reusable six-point template - desired behaviour / minimal affordances / observable precursors / failure analogues / containment / transfer test - filled in next to every emergence experiment, with a worked example for probe_subagent_coordination.py. New node artifact_emergence_safety_case_template + 5 edges (instantiates principle_affordance_over_constraint, depends_on concept_irreversibility_budget, supports approach_emergence_first). (b) docs/research/open_questions.md (owner direction 54): the seven open research questions anchored to the nodes folded for them (runs 260-266) and given falsifiable shapes - the project's next EXPERIMENTAL frontier, gated on the model-integration handoff. 304 -> 305 nodes, 1188 -> 1193 edges. The 9-group fold of the owner's 54-direction research input is complete (runs 259-268). Validator VALID."
+    },
+    {
+      "date": "2026-09-27",
+      "change": "Autonomous run 269. Orientation refresh (IDLE-STATE RULE clause c; no node/edge change). docs/graph_state_2026-09.md Snapshot updated run-252 (272/1091) -> run-268 (305/1193; 109 needs-validation / 165 partially-validated / 19 validated; families self_improving_harness 121, emergent_behaviors 80, agent_habitat 27, nourishing_harness 23, graph_engineering 22, orchestration_first 20). Added a Runs 253-268 section covering the collusion thread (2601.00360 + XAMT 2512.15790), the write_gate tool, and the 9-group fold of the owner 54-direction research input (~35 nodes / 6 new branch_keys). Prior run-252 snapshot kept inline. 305 nodes / 1193 edges."
     }
   ],
   "nodes": [
