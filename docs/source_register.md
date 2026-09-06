@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 338 nodes, 1349 edges · **Date:** 2026-09-05
+**Graph at generation:** 339 nodes, 1352 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -94,6 +94,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2603.20975](https://arxiv.org/abs/2603.20975) | DiscoUQ: structured disagreement for uncertainty quantification | `pattern_fresh_context_evaluation` |
 | [2603.25111](https://arxiv.org/abs/2603.25111) | (title not recorded) | `concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback` |
 | [2603.26089](https://arxiv.org/abs/2603.26089) | mental self-modelling deficits | `emergent_consciousness_like_self_modeling`, `emergent_theory_of_mind` |
+| [2603.26635](https://arxiv.org/abs/2603.26635) | (title not recorded) | `concept_current_llm_agent_deception_is_mostly_equivocation_linguistically_subtle_but_strategically_weak` |
 | [2603.28990](https://arxiv.org/abs/2603.28990) | self-organizing roles / Drop the Hierarchy and Roles | `emergent_self_organizing_roles` |
 | [2604.08465](https://arxiv.org/abs/2604.08465) | peer-preservation (companion) | `emergent_self_and_peer_preservation` |
 | [2604.09746](https://arxiv.org/abs/2604.09746) | (title not recorded) | `concept_safety_helpfulness_tradeoff_persists_under_optimisation` |
@@ -497,7 +498,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-06-1200.md` — `concept_adaptive_self_improvement_in_the_low_data_regime`, `concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time`
 - `docs/auto_sweep_2026-10-06-1800.md` — `concept_bottleneck_is_the_model_harness_coupling`
 - `docs/auto_sweep_2026-10-07-0000.md` — `concept_knownliebench_verify_the_agent_knows_the_entitlement_before_scoring_whether_it_lies_under_a_deployer_incentive`
-- `docs/auto_sweep_2026-10-07-0600.md` — `concept_what_when_how_where_to_evolve`
+- `docs/auto_sweep_2026-10-07-0600.md` — `concept_current_llm_agent_deception_is_mostly_equivocation_linguistically_subtle_but_strategically_weak`, `concept_what_when_how_where_to_evolve`
 - `docs/auto_sweep_2026-10-08-1200.md` — `concept_ace_context_evolution_self_improvement`
 - `docs/auto_sweep_2026-10-08-1800.md` — `concept_horizon_gap_outcome_signals_decay`
 - `docs/auto_sweep_2026-10-09-1800.md` — `concept_spontaneous_behaviour_beats_scripted_for_simulation`

@@ -1,0 +1,30 @@
+{
+  "run": 310,
+  "increment": "fold arXiv:2603.26635 Among Us deception study - current LLM-agent deception is mostly equivocation, strategically weak",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 7,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 3
+  },
+  "citations": [
+    {
+      "id": "arXiv:2603.26635",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2603.26635"
+  ],
+  "trace_file": "runtime\\traces\\loop-310.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 310 OK · VALID · graph +1n/+3e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.77 · novelty 1.00"
+}
