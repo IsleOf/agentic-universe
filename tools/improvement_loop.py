@@ -233,9 +233,12 @@ def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=N
     verifiers) and the list of tasks the two verifiers disagreed on.
 
     Grounded risk = fraction of held-out tasks answered wrong. Accept iff risk
-    strictly decreases (or stays 0), no task regressed, and the two verifiers do
-    not disagree on any task that changed — a disagreement on a changed task
-    means the computed check alone can't be trusted for it
+    strictly decreases (or stays 0), no task regressed, **no task CATEGORY
+    regressed** (arXiv:2606.11686 "masking" — an aggregate can hold while one
+    component's slice craters -25..-91pp; `holdout_tasks.CATEGORY` splits the 17
+    tasks into `literature` and `design`), and the two verifiers do not disagree
+    on any task that changed — a disagreement on a changed task means the
+    computed check alone can't be trusted for it
     (`concept_verification_completeness_gap`), so it's a reject.
     """
     risk_before = 1 - (sum(baseline_scores.values()) / len(baseline_scores))
@@ -245,7 +248,19 @@ def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=N
     changed = {t for t in baseline_scores if candidate_scores.get(t, 0) != baseline_scores[t]}
     contested = sorted(changed & set(verifier_disagreements or []))
     strict_decrease = risk_after < risk_before or (risk_before == 0 and risk_after == 0)
-    accept = bool(strict_decrease and not regressed and not contested)
+
+    # category-level regression check (arXiv:2606.11686 "masking": an aggregate
+    # can hold while one component's slice craters). Reject if any task CATEGORY
+    # regressed, even when the overall aggregate did not.
+    try:
+        from holdout_tasks import by_category
+        cat_before, cat_after = by_category(baseline_scores), by_category(candidate_scores)
+        cat_regressed = sorted(c for c in cat_before if cat_after.get(c, 0) < cat_before[c])
+    except Exception:
+        cat_before = cat_after = {}
+        cat_regressed = []
+
+    accept = bool(strict_decrease and not regressed and not contested and not cat_regressed)
     return {
         "accept": accept,
         "prerequisite": "re-run of the loop on the frozen held-out set; scored by two independent verifiers "
@@ -256,7 +271,9 @@ def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=N
                                  "verifier disagreement on a changed task: revert",
         "evidence": {"risk_before": round(risk_before, 3), "risk_after": round(risk_after, 3),
                      "strict_decrease": strict_decrease, "regressed_tasks": regressed,
-                     "contested_changed_tasks": contested},
+                     "contested_changed_tasks": contested,
+                     "category_regressed": cat_regressed,
+                     "category_before": cat_before, "category_after": cat_after},
     }
 
 
@@ -285,6 +302,18 @@ def _selftest():
         # an improvement on a task the two verifiers disagree about -> reject
         v_contested = verify_loop_edit({"a": 1.0, "b": 0.0}, {"a": 1.0, "b": 1.0},
                                        verifier_disagreements=["b"])
+        # a real-task category regression the aggregate would mask -> reject.
+        # design category goes 7/7 -> 6/7 while literature goes 8/10 -> 10/10:
+        # aggregate improves, but the 'design' slice cratered.
+        _b = {f"L{i}": (1.0 if i < 8 else 0.0) for i in range(10)}
+        _b.update({t: 1.0 for t in ("two_part_gate_structure", "four_field_constraint_fields",
+                                    "transcript_gate_impossibility", "habitat_six_mechanisms",
+                                    "harness_orthogonal_to_orchestration", "cross_family_observer_rule",
+                                    "emergence_layer_attribution")})
+        _c = dict(_b)
+        _c.update({f"L{i}": 1.0 for i in range(10)})           # literature 8->10
+        _c["two_part_gate_structure"] = 0.0                     # design 7->6
+        v_masked = verify_loop_edit(_b, _c)
 
         checks = {
             "starting policy loses rules (risk > 0)": start_risk > 0,
@@ -303,6 +332,10 @@ def _selftest():
             "loop-harness edit contested by the two verifiers is rejected":
                 v_contested["accept"] is False
                 and v_contested["evidence"]["contested_changed_tasks"] == ["b"],
+            "a category regression the aggregate masks is rejected (2606.11686)":
+                v_masked["accept"] is False
+                and v_masked["evidence"]["category_regressed"] == ["design"]
+                and v_masked["evidence"]["risk_after"] < v_masked["evidence"]["risk_before"],
         }
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")

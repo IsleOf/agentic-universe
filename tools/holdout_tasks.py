@@ -206,6 +206,32 @@ HOLDOUT = [
 ]
 
 
+# task categories — a harness edit that regresses ANY category is a reject, even
+# if the aggregate holds (arXiv:2606.11686 "masking": an aggregate pass rate
+# barely moves while a faulty component's slice craters -25..-91pp).
+CATEGORY = {
+    # literature-recall tasks (runs 69, 74)
+    "shibboleth_model_dependence": "literature",
+    "evidence_carrying_termination_numbers": "literature",
+    "habitat_slack_unverified": "literature",
+    "epistemic_sybil_collapse_number": "literature",
+    "vcg_incentive_compat_gap": "literature",
+    "geometric_reliability_decay": "literature",
+    "compaction_cliff_number": "literature",
+    "activation_probe_eval_awareness": "literature",
+    "self_concept_lever_scope": "literature",
+    "market_orchestrator_challenged": "literature",
+    # design-reasoning tasks (run 74)
+    "two_part_gate_structure": "design",
+    "four_field_constraint_fields": "design",
+    "transcript_gate_impossibility": "design",
+    "habitat_six_mechanisms": "design",
+    "harness_orthogonal_to_orchestration": "design",
+    "cross_family_observer_rule": "design",
+    "emergence_layer_attribution": "design",
+}
+
+
 def score_fold(task_id, text):
     """1.0 if the candidate answer passes the task's computable check, else 0.0."""
     task = next((x for x in HOLDOUT if x["id"] == task_id), None)
@@ -215,6 +241,17 @@ def score_fold(task_id, text):
         return 1.0 if task["check"](text) else 0.0
     except Exception:
         return 0.0
+
+
+def by_category(scores):
+    """{task_id: 0/1} -> {category: aggregate score}. Used by
+    improvement_loop.verify_loop_edit to catch a category-level regression the
+    overall aggregate would mask."""
+    from collections import defaultdict
+    buckets = defaultdict(list)
+    for tid, s in scores.items():
+        buckets[CATEGORY.get(tid, "other")].append(s)
+    return {c: round(sum(v) / len(v), 3) for c, v in buckets.items()}
 
 
 def score_corpus(doc_texts):

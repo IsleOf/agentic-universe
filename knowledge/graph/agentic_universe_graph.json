@@ -420,6 +420,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 115. DBLP sweep on scaffold/harness evaluation. concept_aggregate_score_masks_per_layer_regression (Layer-Isolated Evaluation, arXiv:2606.11686): a deployed agent decomposed into a fixed layer taxonomy, each with a deterministic no-LLM assertion slice, locked baseline, CI on every change. MASKING: aggregate pass-rate -2 to -6 pp while the faulty layer's slice -25 to -91 pp. Empirical case for concept_verification_completeness_gap; independent production validation of Phase 5 + the two-verifier design + the regression fixture; a cleaner layer taxonomy than the registry's 5 component kinds. +6 edges."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 116. Folded the run-115 masking finding (arXiv:2606.11686) into the code: improvement_loop.verify_loop_edit now rejects a proposed loop-harness edit if any task CATEGORY (holdout_tasks.CATEGORY: literature 10 / design 7) regresses, even when the overall aggregate improves. New selftest: an edit that lifts literature 8->10 while dropping design 7->6 (aggregate up) is rejected as category_regressed=['design']. 21 selftests GREEN. +1 edge."
     }
   ],
   "nodes": [
@@ -5461,16 +5465,17 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:layer_isolated_eval",
       "confidence": 0.7,
-      "description": "Layer-Isolated Evaluation (arXiv:2606.11686, VERIFIED via arXiv abstract read run 115; resolved via DBLP). A deployed ordering agent is decomposed into a fixed layer taxonomy (ontology, intent, routing, decomposition, escalation, safety, memory, cross-cutting envelope/defense), each exercised by its own assertion slice in a DETERMINISTIC, NO-LLM 'pure' mode. The pure suite (238 cases / 23 slices, 2.39 s, ~10 ms/case) runs in CI on every change against a LOCKED per-slice baseline. Validated by controlled regression injection across 7 non-safety layers. Key finding - MASKING: the aggregate pass-rate barely moves (-1.7 to -5.9 pp for six local regressions) while the matching slice CRATERS (-25 to -91 pp). Localisation: the injected layer's slice is the single worst-hit in 5 of 7 and top-3 in 7 of 7 (mean rank 1.29 of 19), replicating on a structurally different second tenant. Positioned as the deterministic instantiation of component-level evaluation. For this project: the empirical case for concept_verification_completeness_gap (a single held-out number is insufficient), independent production validation of Phase 5 (exec_guard's no-LLM pre-commit gate) + the two-verifier design + the improvement_loop regression fixture, and a cleaner layer taxonomy than the harness registry's five component kinds.",
+      "description": "Layer-Isolated Evaluation (arXiv:2606.11686, VERIFIED via arXiv abstract read run 115; resolved via DBLP). A deployed ordering agent is decomposed into a fixed layer taxonomy (ontology, intent, routing, decomposition, escalation, safety, memory, cross-cutting envelope/defense), each exercised by its own assertion slice in a DETERMINISTIC, NO-LLM 'pure' mode. The pure suite (238 cases / 23 slices, 2.39 s, ~10 ms/case) runs in CI on every change against a LOCKED per-slice baseline. Validated by controlled regression injection across 7 non-safety layers. Key finding - MASKING: the aggregate pass-rate barely moves (-1.7 to -5.9 pp for six local regressions) while the matching slice CRATERS (-25 to -91 pp). Localisation: the injected layer's slice is the single worst-hit in 5 of 7 and top-3 in 7 of 7 (mean rank 1.29 of 19), replicating on a structurally different second tenant. Positioned as the deterministic instantiation of component-level evaluation. For this project: the empirical case for concept_verification_completeness_gap (a single held-out number is insufficient), independent production validation of Phase 5 (exec_guard's no-LLM pre-commit gate) + the two-verifier design + the improvement_loop regression fixture, and a cleaner layer taxonomy than the harness registry's five component kinds. Run 116: folded into the code - improvement_loop.verify_loop_edit now rejects a proposed loop-harness edit if any task CATEGORY (holdout_tasks.CATEGORY: literature 10 / design 7) regresses, even when the overall aggregate improves. Selftest: an edit that lifts literature 8->10 while dropping design 7->6 (aggregate up) is now rejected.",
       "tags": [
+        "-25-to-91pp",
+        "aggregate-hides-per-layer",
+        "component-level-evaluation",
+        "folded-into-verify_loop_edit",
         "layer-isolated-eval",
+        "locked-baseline",
         "masking",
         "no-llm-per-layer-harness",
-        "locked-baseline",
-        "regression-injection",
-        "aggregate-hides-per-layer",
-        "-25-to-91pp",
-        "component-level-evaluation"
+        "regression-injection"
       ],
       "derived_from": [
         "docs/auto_sweep_2026-10-04-1200.md",
@@ -12545,6 +12550,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "'Gating the deterministic scaffold from a no-LLM fixed point' is the agentic-OS layering (runtime verified from a fixed point) in production."
+    },
+    {
+      "id": "edge_masking_implemented_in_verify_loop_edit",
+      "source": "concept_aggregate_score_masks_per_layer_regression",
+      "target": "artifact_phase3_holdout_set",
+      "type": "refines",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "verify_loop_edit (run 116) rejects a category regression the aggregate masks - the 17 held-out tasks split into literature/design, and either slice cratering is a reject."
     }
   ]
 }
