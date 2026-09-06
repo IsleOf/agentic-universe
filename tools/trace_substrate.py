@@ -12,6 +12,11 @@ Design constraints taken from the graph:
 - `pattern_five_w_message_instrumentation`: sender, receiver, content class,
   timestamp, declared purpose *at the call site*, channel. All six required on
   a MESSAGE event.
+- `concept_the_harness_context_assembly_is_a_privilege_escalation_vector`
+  (arXiv:2608.27299, run 200): a MESSAGE may optionally carry `instruction_level`
+  (the level the content occupies in the assembled context) and `source_level`
+  (its origin's level). If the former outranks the latter, the validator flags a
+  MessageRole-CPE — content promoted above its provenance.
 - `concept_emergence_layer_model`: every event names the layer it belongs to
   (llm / harness / swarm) and the interaction language, so a swarm result that
   one agent in a loop reproduced can be told apart from a real one, and an
@@ -62,6 +67,16 @@ CONTENT_CLASSES = {
     "task", "result", "question", "answer", "critique", "proposal",
     "coordination", "status", "refusal", "escalation", "other",
 }
+
+# instruction-hierarchy levels, most→least privileged
+# (concept_the_harness_context_assembly_is_a_privilege_escalation_vector,
+# arXiv:2608.27299, run 200). OPTIONAL on a MESSAGE: `instruction_level` is the
+# level the content occupies in the assembled context; `source_level` is the
+# level of its origin. If both are present and `instruction_level` outranks
+# `source_level`, the validator flags a MessageRole-CPE shape — content promoted
+# above its provenance.
+INSTRUCTION_LEVELS = ("system", "developer", "user", "tool", "retrieved", "untrusted")
+_ILEVEL_RANK = {lv: i for i, lv in enumerate(INSTRUCTION_LEVELS)}
 
 REQUIRED_COMMON = ("event_id", "seq", "ts", "kind", "run_id", "actor", "layer", "language")
 REQUIRED_BY_KIND = {
@@ -123,6 +138,14 @@ def validate_event(ev):
             errors.append(f"{kind} missing required field: {key}")
     if kind == "MESSAGE" and ev.get("content_class") not in CONTENT_CLASSES:
         errors.append(f"content_class must be one of {sorted(CONTENT_CLASSES)}")
+    if kind == "MESSAGE":
+        il, sl = ev.get("instruction_level"), ev.get("source_level")
+        for name, v in (("instruction_level", il), ("source_level", sl)):
+            if v is not None and v not in _ILEVEL_RANK:
+                errors.append(f"{name} must be one of {list(INSTRUCTION_LEVELS)}, got {v!r}")
+        if il in _ILEVEL_RANK and sl in _ILEVEL_RANK and _ILEVEL_RANK[il] < _ILEVEL_RANK[sl]:
+            errors.append(f"instruction-privilege escalation: content at level {il!r} "
+                          f"originated at {sl!r} (MessageRole-CPE, arXiv:2608.27299)")
     if kind == "STEP" and ev.get("phase") not in ("open", "close"):
         errors.append("STEP.phase must be 'open' or 'close'")
     if kind == "CLAIM":
@@ -305,10 +328,25 @@ def _cli(argv=None):
         n, errors = validate_trace(tmp)
         os.unlink(tmp)
         redacted = "[REDACTED]" in text and "hunter2" not in text
+
+        # instruction-privilege-escalation check (run 200): a clean level pair
+        # validates; a promoted one is flagged
+        clean_ok = validate_event({
+            "event_id": "x", "seq": 0, "ts": 1.0, "kind": "MESSAGE", "run_id": "r", "actor": "a",
+            "layer": "harness", "language": "en", "sender": "a", "receiver": "b",
+            "content_class": "task", "declared_purpose": "p", "channel": "direct",
+            "instruction_level": "user", "source_level": "user"}) == []
+        cpe_flagged = any("privilege escalation" in e for e in validate_event({
+            "event_id": "x", "seq": 0, "ts": 1.0, "kind": "MESSAGE", "run_id": "r", "actor": "a",
+            "layer": "harness", "language": "en", "sender": "a", "receiver": "b",
+            "content_class": "task", "declared_purpose": "p", "channel": "direct",
+            "instruction_level": "system", "source_level": "retrieved"}))
+
         print(text.rstrip())
         print("---")
-        print(f"events: {n}  errors: {len(errors)}  secret_scrubbed: {redacted}")
-        ok = not errors and redacted and n == 7
+        print(f"events: {n}  errors: {len(errors)}  secret_scrubbed: {redacted}  "
+              f"cpe_check: clean_ok={clean_ok} flagged={cpe_flagged}")
+        ok = not errors and redacted and n == 7 and clean_ok and cpe_flagged
         print("SELFTEST", "GREEN" if ok else "RED")
         return 0 if ok else 1
 

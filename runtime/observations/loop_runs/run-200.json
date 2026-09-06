@@ -1,0 +1,26 @@
+{
+  "run": 200,
+  "increment": "Phase 0 - instruction_level/source_level on MESSAGE + MessageRole-CPE validator check (the run-199 conclusion)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2608.27299",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.27299"
+  ],
+  "trace_file": "runtime\\traces\\loop-200.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

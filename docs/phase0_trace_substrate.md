@@ -28,6 +28,14 @@ bit the experience-bank condensation once, run 65). Eight kinds:
   Five-W set (`pattern_five_w_message_instrumentation`): **sender, receiver,
   content_class, timestamp, declared_purpose at the call site, channel**. All
   six required; a message without a declared purpose does not validate.
+  Optionally carries **`instruction_level`** (the level the content occupies in
+  the assembled context) and **`source_level`** (its origin's level), ordered
+  `system > developer > user > tool > retrieved > untrusted`. If
+  `instruction_level` outranks `source_level` the validator flags a
+  **MessageRole-CPE** — content promoted above its provenance
+  (`concept_the_harness_context_assembly_is_a_privilege_escalation_vector`,
+  arXiv:2608.27299, run 200). The trace can now catch the harness's own context
+  assembly elevating attacker content.
 - **TOOL_CALL / TOOL_RESULT** — linked by `call_id`; result carries `ok` and
   optional `token_cost {in, out}` (the input to `concept_reused_input_dominates`
   measurement and the experience-bank cost accounting).

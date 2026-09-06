@@ -760,6 +760,10 @@
     {
       "date": "2026-09-10",
       "change": "Autonomous run 199. Recent citation-sweep (S2 citations of the model-harness-lens survey 2606.20683). concept_the_harness_context_assembly_is_a_privilege_escalation_vector (When Context Gets Root arXiv:2608.27299 + What's in Your Agent's Context arXiv:2609.01222): the harness's context assembly can elevate attacker-controlled low-privilege content to a higher instruction level - 13 attack objectives incl. RCE across 6 coding-agent harnesses; two classes MessageRole-CPE / Cross-Scope-CPE. The HARNESS ITSELF is a privesc vector; hard requirement for Phase 5 / the runtime fixed point; the instruction level + original source must be Five-W fields. Related: local small models at Linux privesc succeed only 8-16% vs frontier (2604.27143). +7 edges."
+    },
+    {
+      "date": "2026-09-10",
+      "change": "Autonomous run 200. Phase 0 - the run-199 conclusion in the trace schema. trace_substrate.py: a MESSAGE event may optionally carry instruction_level (level in the assembled context) and source_level (origin's level), ordered system > developer > user > tool > retrieved > untrusted (INSTRUCTION_LEVELS). validate_event flags a MessageRole-CPE when instruction_level outranks source_level - the trace catches the harness's own context assembly elevating attacker content (concept_the_harness_context_assembly_is_a_privilege_escalation_vector, arXiv:2608.27299). Backward compatible (both fields optional). +1 selftest check (clean pair validates, promoted pair flagged). phase0_trace_substrate.md updated. No graph node/edge change."
     }
   ],
   "nodes": [
