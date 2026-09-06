@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 243 nodes, 918 edges · **Date:** 2026-09-05
+**Graph at generation:** 245 nodes, 924 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -83,6 +83,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.11623](https://arxiv.org/abs/2604.11623) | Context Kubernetes | `concept_agentic_os` |
 | [2604.13051](https://arxiv.org/abs/2604.13051) | (title not recorded) | `emergent_consciousness_cluster` |
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
+| [2604.19827](https://arxiv.org/abs/2604.19827) | (title not recorded) | `concept_ai_native_software_ecosystems_are_complex_adaptive_systems` |
 | [2605.05007](https://arxiv.org/abs/2605.05007) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
 | [2605.19576](https://arxiv.org/abs/2605.19576) | (title not recorded) | `concept_unmanaged_skill_libraries_silently_drift` |
@@ -102,6 +103,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.19924](https://arxiv.org/abs/2606.19924) | The Tao of Agency: Autotelic AI, Embedded Agency and Dissolution of the Self | `concept_autotelic_agency`, `concept_habitat_slack` |
 | [2606.20683](https://arxiv.org/abs/2606.20683) | (title not recorded) | `concept_bottleneck_is_the_model_harness_coupling` |
 | [2606.26294](https://arxiv.org/abs/2606.26294) | (title not recorded) | `concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries` |
+| [2606.28235](https://arxiv.org/abs/2606.28235) | (title not recorded) | `concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property` |
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
 | [2607.05297](https://arxiv.org/abs/2607.05297) | (title not recorded) | `concept_recursive_meta_skill_evolution` |
 | [2607.07663](https://arxiv.org/abs/2607.07663) | (title not recorded) | `concept_self_improvement_strength_tracks_the_verification_hierarchy` |
@@ -366,6 +368,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-11-1800.md` — `concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans`, `principle_structural_edits_gated_outside_the_agents`
 - `docs/auto_sweep_2026-09-12-0000.md` — `concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries`
 - `docs/auto_sweep_2026-09-12-0600.md` — `concept_unmanaged_skill_libraries_silently_drift`
+- `docs/auto_sweep_2026-09-12-1200.md` — `concept_ai_native_software_ecosystems_are_complex_adaptive_systems`, `concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
 - `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`

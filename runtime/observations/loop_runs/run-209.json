@@ -1,0 +1,31 @@
+{
+  "run": 209,
+  "increment": "emergence-side pivot - s2 citations of MAEBE surfaced the AI-native-software-ecosystem emergence pair: Govern the Repository (arXiv:2606.28235, 930k PRs) + More Is Different (arXiv:2604.19827, CAS theory); 2 nodes, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 15,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2606.28235",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2604.19827",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2604.19827",
+    "arXiv:2606.28235"
+  ],
+  "trace_file": "runtime\\traces\\loop-209.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

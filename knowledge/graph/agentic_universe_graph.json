@@ -796,6 +796,10 @@
     {
       "date": "2026-09-12",
       "change": "Autonomous run 208. Recency-weighted arxiv-fetch sweep. Folded Library Drift (arXiv:2605.19576) as concept_unmanaged_skill_libraries_silently_drift: unbounded skill accumulation without outcome-driven lifecycle management causes retrieval degradation, false-positive injections, stagnation (LLM-authored skills +0.0pp vs human-curated +16.2pp on SkillsBench). Reproducible triggers (disable injection: flat +0.002; premature retirement: harmful -0.019); trace-level diagnostics (append-only per-skill contribution log); verified fix (outcome-driven retirement + bounded active-cap + meta-skill authoring prior: held-out pass@1 0.258 -> 0.584 over 100 rounds on MBPP+ hard-100). 7 edges: supports pattern_agentic_skill_lifecycle, artifact_phase2_experience_bank (the run-175 retention API is its justification; grace window should be generous), concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans, artifact_phase0_trace_substrate (the append-only contribution log = a leading indicator); constrains artifact_phase4_skill_induction (adds a bounded active-cap + meta-skill prior; premature retirement is harmful); challenges concept_cer_training_free_experience_replay_works (unbounded buffer drifts); refines concept_memory_poisoning_one_write_persists (false-positive injection = non-adversarial poisoning). 242->243 nodes, 911->918 edges."
+    },
+    {
+      "date": "2026-09-12",
+      "change": "Autonomous run 209. Emergence-side pivot via s2 citations of MAEBE (arXiv:2506.03053). Folded the AI-native-software-ecosystem emergence pair: concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property (Govern the Repository, arXiv:2606.28235 - 930k+ agent PRs, ~half of integration-friction variance is repository-level and survives full controls, agent contributions concentrate it 2x more than human, ICC 0.30 vs 0.16; govern the ecosystem not the agent) and concept_ai_native_software_ecosystems_are_complex_adaptive_systems (More Is Different, arXiv:2604.19827 - CAS framing, Holland's six properties, causal-emergence measurement via micro-variables + coarse-graining, seven falsifiable propositions, ecosystem-level monitoring as primary governance). 6 edges: the empirical node supports the CAS theory, approach_emergence_first, and concept_irreversibility_budget (fleet-level budget arrived at from 930k PRs); the CAS node supports concept_emergence_layer_model (swarm-layer measurement apparatus) and approach_emergence_first, and challenges concept_self_harness_validates_the_three_loop (a per-edit gate is necessary but not sufficient - need a repo-level drift metric). 243->245 nodes, 918->924 edges."
     }
   ],
   "nodes": [
@@ -7068,6 +7072,65 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-12-0600.md"
+      ]
+    },
+    {
+      "id": "concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property",
+      "label": "Across 930k agent-authored PRs, ~half of integration-friction variation is repository-level and survives full controls; agent contributions concentrate it 2x more than human (ICC 0.30 vs 0.16) - govern the ecosystem, not the agent",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:ecosystem_level_risk",
+      "confidence": 0.75,
+      "description": "Govern the Repository, Not the Agent: Measuring Ecosystem-Level Risk in AI-Native Software (arXiv:2606.28235, VERIFIED via arXiv abstract read run 209; June 2026). Autonomous coding agents open and merge PRs in shared repositories at scale, but the field evaluates them one agent at a time on isolated benchmark tasks - and agents that each pass their own tests still leave repositories that accumulate problems no single contribution accounts for. The study measures INTEGRATION FRICTION (the cost of integrating a contribution into a codebase other contributors are concurrently changing) across MORE THAN 930,000 agent-authored pull requests. About HALF the variation in friction stays with the repository after the contribution, its author, its size, and its agent are all accounted for, and it survives full controls. Agent-authored contributions concentrate this repository-level friction roughly TWICE as much as human ones (intraclass correlation 0.30 vs 0.16), a gap that holds after controlling for codebase size, age, task shape, process maturity, and merge path. Conclusion: the risk is a property of the ECOSYSTEM, not the agent; AI-native software is better measured and governed at the ecosystem level than one agent at a time. This is the project's emergence-first thesis and its governance-grade-measurement niche, stated as a large-N empirical result in the coding-agent domain: single-agent benchmarks miss the accumulating interaction cost; concept_irreversibility_budget's 'fleet-level budget, not a per-act check' is the same claim. Recency: June 2026, current coding-agent generation.",
+      "tags": [
+        "govern-the-repository",
+        "ecosystem-level-risk",
+        "integration-friction",
+        "930k-PRs",
+        "intraclass-correlation",
+        "single-agent-benchmarks-miss-it",
+        "governance-grade-measurement",
+        "recency-2026-06",
+        "large-N-empirical"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-12-1200.md",
+        "arXiv:2606.28235 (Govern the Repository, Not the Agent: Measuring Ecosystem-Level Risk in AI-Native Software) - VERIFIED, abstract read run 209"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-12-1200.md"
+      ]
+    },
+    {
+      "id": "concept_ai_native_software_ecosystems_are_complex_adaptive_systems",
+      "label": "AI-native software ecosystems are complex adaptive systems - architectural entropy, cascade failures, comprehension debt emerge from agent interactions, not components; ecosystem-level monitoring as primary governance",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:cas_theory",
+      "confidence": 0.58,
+      "description": "More Is Different: Toward a Theory of Emergence in AI-Native Software Ecosystems (arXiv:2604.19827, VERIFIED via arXiv abstract read run 209; April 2026). Argues AI-native software ecosystems must be studied as COMPLEX ADAPTIVE SYSTEMS (CAS): individual agents perform correctly, but their interactions degrade entire ecosystems, and emergent properties - architectural entropy, cascade failures, comprehension debt - arise from interactions, not components. Maps Holland's six CAS properties onto observable ecosystem dynamics; distinguishes these systems from microservices / open-source networks. To measure CAUSAL EMERGENCE it defines micro-level state variables, coarse-graining functions, and a tractable measurement framework. Seven falsifiable propositions link CAS theory to software evolution, challenging or extending Lehman's laws where agent-level assumptions fail. If confirmed, the finding 'would demand a radical shift: ecosystem-level monitoring as the primary governance mechanism for AI-native systems.' The title is Anderson's emergence motto - this is the project's central thesis in the software-engineering domain, with a falsifiable measurement program attached (still a position paper: the seven propositions are not yet tested - hence modest confidence). Companion to the large-N empirical result concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property.",
+      "tags": [
+        "more-is-different",
+        "complex-adaptive-systems",
+        "causal-emergence",
+        "coarse-graining",
+        "architectural-entropy",
+        "comprehension-debt",
+        "seven-falsifiable-propositions",
+        "ecosystem-level-monitoring",
+        "recency-2026-04",
+        "position-paper"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-12-1200.md",
+        "arXiv:2604.19827 (More Is Different: Toward a Theory of Emergence in AI-Native Software Ecosystems) - VERIFIED, abstract read run 209"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-12-1200.md"
       ]
     }
   ],
@@ -16903,6 +16966,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "The append-only evidence log with per-skill contribution scores that 'makes the failure visible before it reaches end-task scores' is a Phase 0 trace-substrate application - the leading indicator the substrate is meant to provide."
+    },
+    {
+      "id": "edge_ecosystem_risk_supports_cas_theory",
+      "source": "concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property",
+      "target": "concept_ai_native_software_ecosystems_are_complex_adaptive_systems",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.7,
+      "description": "The 930k-PR integration-friction result (half the variance is repository-level, ICC 0.30 vs 0.16 agent vs human) is a large-N empirical instance of exactly one of the CAS theory's predicted ecosystem-level emergent properties - it moves the theory from position paper toward confirmed."
+    },
+    {
+      "id": "edge_ecosystem_risk_supports_emergence_first",
+      "source": "concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "Direct support for the emergence-first family: behaviour that only appears in the population (repository-level friction agents each pass their tests but still create) is not visible to component-level evaluation - study the system, not the agent in isolation."
+    },
+    {
+      "id": "edge_ecosystem_risk_supports_irreversibility_budget",
+      "source": "concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property",
+      "target": "concept_irreversibility_budget",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.6,
+      "description": "'Govern at the ecosystem level, not one agent at a time' is concept_irreversibility_budget's 'fleet-level budget, not a per-act check' arrived at independently from 930k real PRs - the outer gate belongs at the aggregate, because that is where the accumulating cost lives."
+    },
+    {
+      "id": "edge_cas_theory_supports_emergence_layer_model",
+      "source": "concept_ai_native_software_ecosystems_are_complex_adaptive_systems",
+      "target": "concept_emergence_layer_model",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The CAS framing's micro-variables + coarse-graining functions is a measurement apparatus for the swarm layer of the three-layer emergence stratification - it operationalises 'emergence at the swarm layer' with Holland's properties and a causal-emergence metric."
+    },
+    {
+      "id": "edge_cas_theory_supports_emergence_first",
+      "source": "concept_ai_native_software_ecosystems_are_complex_adaptive_systems",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A named theory (complex adaptive systems) plus seven falsifiable propositions for the emergence-first approach in the software-engineering domain - the method the project has been applying, given a literature frame and a falsification program."
+    },
+    {
+      "id": "edge_cas_theory_challenges_self_harness_three_loop",
+      "source": "concept_ai_native_software_ecosystems_are_complex_adaptive_systems",
+      "target": "concept_self_harness_validates_the_three_loop",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "If agent contributions degrade the ecosystem even when each passes its own held-out check (architectural entropy, comprehension debt), then a per-edit held-out regression gate is necessary but not sufficient - a self-improving loop also needs an ecosystem-level (repo-level) drift metric, which is Library Drift's per-skill contribution log one level up."
     }
   ]
 }
