@@ -41,6 +41,29 @@ Six open-source harnesses, what each shipped in the last 30 days, and what they 
 - `pattern_agent_society_surface`, `pattern_scheduled_agent_with_continuity`
 - design nodes → `docs/nourishing_harness_design.md`
 
+## September update — GitHub releases, run 102 (2026-09-30 window check)
+
+A second pass over `research-fetch github releases` on the ecosystem (arXiv frozen ~Sept 3, forum folded). Two
+convergences in the early-September releases, both toward what `docs/nourishing_harness_design.md` already
+assumed:
+
+1. **Explicit tool/skill allow-lists — gated loading becomes the default.** OpenHands v1.16.0 (Aug 27):
+   *"replace the all-on skill catalog with an explicit allow-list"*; plus a per-agent LLM-provider allow-list.
+   This is §4's "dynamic tool loading — load only the tools the current task can use" — the answer to
+   `concept_tool_definition_tax` (~55k tokens/turn) — shipping as a product default, not a research idea.
+2. **Stateless MCP serving for horizontal scale.** agno v3.0.6 (Sep 4): `MCPConfig(stateless=True)` — no
+   session tracking, any replica answers any request, multi-instance needs no session affinity; a
+   `GET /mcp/server-card` describing the served tools; protocol-mode negotiation (sessionless era from
+   2026-07-28). This is the harness ⊥ orchestration separation (§1: "topology can change without rebuilding
+   runtimes") and `pattern_deterministic_state_folding`'s "explicit state, not session state" — the ecosystem
+   is removing per-connection state so the runtime is fungible.
+
+Also: browser-use 0.13.10 (Sep 4) exact-pins every runtime dependency (supply-chain hardening); agent-zero
+v2.11 (Aug 27) adds a vision sidecar + reliability fixes across memory/embeddings/context. Incremental.
+
+→ `concept_harness_convergence_2026_09` extended with these two; no new node needed — they sharpen points 1
+(society) and the token-economy thread rather than adding a category.
+
 ## The one tension worth stating
 
 Prime Agent restricts sub-agent messaging to **parent / child / sibling only** — deliberately, *"to keep things from spiraling into chaos."* The user's brief is "no security paranoias, perfectly free-flowing." Those are in direct conflict, and Prime Agent — the harness whose whole identity is radical openness — still chose the restriction. Recorded, not resolved. The free-flowing version is a research choice for a contained habitat; whether unrestricted agent-to-agent messaging produces nourishment or just cascades (`emergent_information_cascades`) is exactly one of the open probes.

@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-01",
+  "last_updated": "2026-09-30",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -364,6 +364,10 @@
     {
       "date": "2026-10-01",
       "change": "Autonomous run 101. AT REST. arXiv 429 (checked via API and curl); forum 'new' sort returns no design-relevant post dated after Sept 1 not already folded (runs 95-98). Build complete through Phase 5; six probe rigs; every doc current; 21 selftests GREEN. No increment warranted - per the run-80 IDLE-STATE RULE and the run-100 note, holding. The 6h scheduled task carries the loop and will resume the sweep cadence when a source moves. No graph change."
+    },
+    {
+      "date": "2026-09-30",
+      "change": "Autonomous run 102. IDLE-STATE RULE + GitHub source (arXiv frozen, forum folded). Second pass over research-fetch github releases: two early-Sept convergences toward what the design assumed - (1) explicit tool/skill allow-lists as a default (OpenHands v1.16.0, was all-on) = the dynamic-tool-loading answer to concept_tool_definition_tax; (2) stateless MCP serving (agno v3.0.6, MCPConfig(stateless=True) + /mcp/server-card + sessionless protocol era) = per-connection state removed for horizontal scale, the harness/orchestration thin interface standardised. Extended concept_harness_convergence_2026_09 + 3 supports edges; docs/harness_field_study_2026-09-06.md gains a September update section. No new node."
     }
   ],
   "nodes": [
@@ -3194,7 +3198,8 @@
       "derived_from": [
         "docs/harness_field_study_2026-09-06.md",
         "GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github)",
-        "YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06"
+        "YouTube 'The Harness War' (Discover-adjacent, hi5LhipHpv0), transcript fetched locally 2026-09-06",
+        "GitHub releases Sep 2026 (run 102): OpenHands v1.16.0 'replace the all-on skill catalog with an explicit allow-list' (gated tool loading as a default); agno v3.0.6 stateless MCP serving + /mcp/server-card + sessionless protocol era (per-connection state removed for horizontal scale)"
       ],
       "evidence_links": [
         "docs/harness_field_study_2026-09-06.md"
@@ -11728,6 +11733,39 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "emergent_behaviors",
       "confidence": 0.55
+    },
+    {
+      "id": "edge_convergence_supports_tool_tax",
+      "source": "concept_harness_convergence_2026_09",
+      "target": "concept_tool_definition_tax",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "OpenHands shipping an explicit skill allow-list (was all-on) is the dynamic-tool-loading answer to the ~55k-token/turn tool tax, now a product default."
+    },
+    {
+      "id": "edge_convergence_supports_state_folding",
+      "source": "concept_harness_convergence_2026_09",
+      "target": "pattern_deterministic_state_folding",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "agno's stateless MCP serving removes per-connection session state so the runtime is fungible - the ecosystem form of 'explicit state, not session state'."
+    },
+    {
+      "id": "edge_convergence_supports_boundary_problem",
+      "source": "concept_harness_convergence_2026_09",
+      "target": "concept_system_intelligence_boundary_problem",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.4,
+      "description": "Stateless serving + a server-card describing the tools is the harness/orchestration thin interface being standardised in the open."
     }
   ]
 }
