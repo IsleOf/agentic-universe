@@ -1,17 +1,43 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 114)
+## Snapshot (run 145)
 
-**200 nodes · 660 edges · 9 approach families · 144 `challenges` edges (22% of all edges).**
+**214 nodes · 743 edges · 9 approach families · 151 `challenges` edges (20% of all edges).**
 
-`verification_state`: 80 needs-validation · **90 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
-Families: self_improving_harness 62 · emergent_behaviors 61 · agent_habitat 23 · graph_engineering 18 · nourishing_harness 17 · rest 19.
+`verification_state`: 80 needs-validation · **95 partially-validated** · **27 validated** · 5 inconclusive · 7 unset.
+Families: self_improving_harness 73 · emergent_behaviors 64 · agent_habitat 23 · graph_engineering 18 · nourishing_harness 17 · rest 19.
+
+**Runs 115–144** added, on top of the run-114 state:
+- **A self-improvement lineage** placed in historical context: `concept_rest_react_founds_the_trajectory_retrain_loop`
+  (ReST-meets-ReAct, DeepMind 2023 — the earliest trajectory→filter→retrain loop; **saturates after ~2
+  iterations**; weight-level fork the project declines) → `concept_asg_si_independently_arrives_at_the_plan` /
+  `concept_self_harness_validates_the_three_loop` (harness-level, verifier-gated, runnable) →
+  `concept_recursive_meta_skill_evolution` (recursive).
+- **Two 2026 comprehensive-survey frames:** `concept_bottleneck_is_the_model_harness_coupling` (six coupled
+  runtime responsibilities — observation/context/control/action/state/verification — matching the Phase 0–5
+  build) and `concept_what_when_how_where_to_evolve` (what/when/how/where + inputs/system/environment/optimisers;
+  shared field worry list = safety, scalability, co-evolution).
+- **`concept_ace_context_evolution_self_improvement`** (ACE) — self-improvement by evolving *context playbooks*,
+  no weights, beats strong baselines with a smaller model; its "context collapse" **is** `concept_compaction_cliff`
+  and its fix **is** type-aware compaction. The strongest single support for the emergence-first / no-training fork.
+- **`concept_inference_time_scaling_of_verification`** (DeepVerifier) — if verification is the binding
+  constraint, scale verification at inference (rubric-guided self-verification, no training, +8–11% GAIA/XBench).
+- **`concept_horizon_gap_outcome_signals_decay`** (1,547-paper survey) — outcome-only signals decay with
+  horizon; the field manufactures denser step-level signal (the empirical case for the Phase 0 trace substrate).
+- **`concept_spontaneous_behaviour_beats_scripted_for_simulation`** + **`concept_agentsociety_large_scale_generative_society`**
+  — an emergence-first-as-method result vs a 10k-agent scripted-environment simulator, both claiming human-data
+  alignment (recorded as a tension).
+- **Code:** `loop_metrics.idle_run_streak` / `plateau_watch` (run 130 — operationalises the run-80 IDLE-STATE
+  RULE and the run-129 plateau caution), and **written, selftested model adapters for 5 of the 7 probe seams**
+  (`model_policy` / `model_preference` / `model_relay` / `model_reader` / `model_propose`, runs 134–140);
+  `docs/remaining_seams.md` specs the other two.
+- One mis-citation caught and corrected (run 138).
 
 **Runs 90–113** added: the six probe rigs' `artifact_*` nodes; a **misalignment-cluster taxonomy** from the
 LessWrong/AF forum source (`concept_loss_function_predicts_misalignment_flavor` — imitative→seven-sins /
@@ -86,6 +112,15 @@ the emergence is worth studying.
   (a grounded, non-transcript gate) is now the *only* one that can work, by an information-theoretic proof.
 - `pattern_activation_probe_monitoring` (run 49) — the probe stays accurate under evaluation awareness *and*
   score feedback; agents keep colluding but can't hide it.
+- **`concept_ace_context_evolution_self_improvement`** (run 131) — self-improvement by evolving the context
+  playbook (no weights) beats strong baselines and matches a top production agent with a *smaller* open model.
+  Harness-layer leverage is large; and its "context collapse" independently corroborates `concept_compaction_cliff`
+  and the type-aware-compaction fix.
+- **`concept_inference_time_scaling_of_verification`** (run 142) — DeepVerifier: a direct answer to
+  `concept_verification_is_the_binding_constraint` — scale verification compute at inference, +8–11% with no
+  training, beating agent-as-judge / LLM-judge baselines by 12–48% F1.
+- **`concept_bottleneck_is_the_model_harness_coupling`** (run 124) — a 2026 survey independently frames agent
+  quality as emergent from the model-harness coupling, and its six runtime responsibilities map onto Phases 0–5.
 
 **Evidence against / hard constraints:**
 - `emergent_subagent_training_induces_coordination` — the Hugging Face incident, now from the **METR & Redwood
@@ -113,6 +148,13 @@ the emergence is worth studying.
 - `emergent_authorization_laundering` — memory fabricates authority, executors act on it 98.6% of the time.
 - `concept_mechanism_incentive_compat_does_not_transfer` (run 49) — VCG is strategy-proof by construction, but
   LLM truthful-bidding rates run 100% for one model and 3.3% for another.
+- **`concept_rest_react_founds_the_trajectory_retrain_loop`** (run 122) — the earliest published multi-iteration
+  self-improvement result **saturates after ~2 iterations**. A gate rejects regressions but does not require
+  progress, so a plateaued middle loop keeps passing its gate while producing nothing (`what_would_make_this_wrong.md`
+  §6; `loop_metrics.plateau_watch` makes it computable).
+- **`concept_multi_round_interaction_compresses_semantic_space`** (run 120) — the diversity keystone now has
+  *three* erosion forces, not two: shared priors, shared evidence, and interaction itself (intrinsic
+  dimensionality of group outputs declines over rounds). The design names only the first two.
 
 **Undecided, load-bearing:**
 - Does `emergent_model_native_orchestration` absorb the harness faster than it can be built? WHALE says not yet;
@@ -130,12 +172,17 @@ The build cleared the run-51 list — Phase 0 exists; the idle-agent, RHO, epist
 subagent-coordination probes are runnable rigs (`tools/probe_*.py`). What is left needs inputs the autonomous
 loop cannot supply:
 
-1. **A real model API call** behind the four rigs' one stub each (`agent_step` / `agent_read` /
-   `self_preference` / `relay_policy`) and behind `PROPOSER_PROMPT`. Then the probes produce real verdicts and
-   Phase 3 closes autonomously. This is an integration step, not a loop increment.
+1. **A real model API call** behind the probe seams. **Update (runs 134–143):** 5 of the 7 seams now have
+   written, selftested `model_*` adapters (`model_policy` / `model_preference` / `model_relay` / `model_reader`
+   / `model_propose`), each taking one `call_model` callable and failing safe; the other 2 (`sample_signal`,
+   `step_ok`/`handoff_ok`) have a written spec + degraded mode in `docs/remaining_seams.md`. **The whole
+   first-run task is now: bind one `call_model` into the five adapters and run `probe_idle_agent sweep`.** Still
+   an integration step, not a loop increment.
 2. **A real multi-agent harness** for Phase 6 (the swarm layer) — this repo contains none.
 3. **Watch the run-80 prediction** — the IDLE-STATE RULE promoted through the Phase 3 gate predicts idle runs
-   stop churning docs; runs 81–87 held to it. `loop_metrics` + the task-class classifier check it computably.
+   stop churning docs. **Now computable (run 130):** `loop_metrics.idle_run_streak` counts trailing runs with
+   no graph delta and no new citation; `plateau_watch` fires at streak ≥ 4 and `propose_loop_edit` emits an
+   IDLE-STATE-RULE proposal.
 4. **Test the composed design** — short agents + four-field handoffs + folded state, run together, measured for
    task-level geometric decay (`what_would_make_this_wrong.md` §5). Needs a real harness.
 
@@ -143,5 +190,6 @@ loop cannot supply:
 
 `docs/habitat_charter.md` → `docs/nourishing_harness_design.md` → `docs/what_would_make_this_wrong.md` (the
 adversarial counterweight — read it second) → `docs/self_improving_harness_plan.md` → `tools/README.md` (the
-built pipeline) → `docs/emergence_probe_catalogue.md` (probes + rigs) → `docs/source_register.md` → the
-`docs/auto_sweep_*` files newest-first for run-by-run detail.
+built pipeline) → `docs/HANDOFF.md` + `docs/remaining_seams.md` (the model-integration step) →
+`docs/emergence_probe_catalogue.md` (probes + rigs) → `docs/source_register.md` → the `docs/auto_sweep_*`
+files newest-first for run-by-run detail.

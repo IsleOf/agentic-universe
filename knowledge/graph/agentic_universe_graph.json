@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-11",
+  "last_updated": "2026-10-12",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -536,6 +536,10 @@
     {
       "date": "2026-10-11",
       "change": "Autonomous run 144. Consistency pass. The 8 self-improvement nodes added runs 119-142 all had in-degree ~0 (pointing at the old graph, not at each other - the emergent_additive_growth_bias shape in miniature). Wove the rim together: ACE refines ReST-ReAct (context-not-weights variant of the trajectory-retrain loop, doesn't saturate); DeepVerifier refines ACE (propose+check halves of one inference-time loop) and supports adaptive-low-data; The Horizon Gap supports DeepVerifier (denser-step-level-signal); adaptive-low-data supports the model-harness-coupling node. +5 edges, 0 nodes."
+    },
+    {
+      "date": "2026-10-12",
+      "change": "Autonomous run 145. Consolidation. graph_state_2026-09.md refreshed (last done run 114 at 200/660; now 214/743): new snapshot, a 'runs 115-144' paragraph (self-improvement lineage / two 2026 survey frames / ACE / DeepVerifier / The Horizon Gap / spontaneous-vs-scripted / the plateau metric / 5-of-7 probe adapters), added evidence-for (ACE, DeepVerifier, model-harness-coupling) and evidence-against (ReST-ReAct saturation, semantic-compression third erosion force), updated 'highest-value next work' item 1 (5 of 7 seams adapted) and item 3 (plateau metric now computable), added HANDOFF + remaining_seams to the reading order. No graph node/edge change."
     }
   ],
   "nodes": [
