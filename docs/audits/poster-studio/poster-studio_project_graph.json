@@ -1,0 +1,578 @@
+{
+  "project": "poster-studio",
+  "format": "agentic-universe project graph v1",
+  "audit": "FIRST PASS by the agentic-universe loop (run 318), from a 2026-09-07 read of /home/dev/poster-studio: README + docs/AGENT_RUNBOOK.md + the newest HANDOVER + TASKLIST-listing-factory-active.md + AGENT_CONTRACT.md + git log. The current cron state, the draft-approval status, and the integration with etsy-agentic-space need the ACTIVE session to reconcile - the question nodes are the placeholders.",
+  "last_updated": "2026-09-07",
+  "nodes": [
+    {
+      "id": "ps__root",
+      "type": "component",
+      "label": "poster-studio: browser poster designer + Etsy listing-factory for themappedmoment.com",
+      "status": "active",
+      "confidence": 0.6,
+      "description": "A React/Vite frontend + Node/Express API + SQLite, deployed at https://themappedmoment.com (Nginx static + poster-studio-api.service:3001). Sells star-map and street-map posters via a professional SVG template system (draggable text, custom fonts, 300 DPI export). A separate 'listing-factory' pipeline turns competitor references into fresh Etsy listing drafts. 4 public listings; production DB is the source of truth for manually-edited templates.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__webapp",
+      "type": "component",
+      "label": "The web app - Vite/React frontend + Node/Express API + SQLite",
+      "status": "observed",
+      "confidence": 0.55,
+      "description": "npm run api = server/index.js (the real backend); npm run server = legacy save-server.js. Frontend Vite :5173 proxies /api + /auth to :3001. DB at server/data/db.sqlite; production DB synced local via a preserved-old-DB + VACUUM INTO copy (integrity ok).",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__svg_templates",
+      "type": "component",
+      "label": "The SVG template system - draggable text, custom fonts, 300 DPI export",
+      "status": "observed",
+      "confidence": 0.5,
+      "description": "Star map (exact night sky at date/time/location) and street map (stylized city map) posters share it. Templates: 12-size expansion per design; per-buyer 'Design: N' personalization lookup.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__listing_factory",
+      "type": "component",
+      "label": "listing-factory/ - the staged competitor -> Etsy-draft pipeline",
+      "status": "active",
+      "confidence": 0.5,
+      "description": "run_stage.py orchestrates stages; POSTER_STUDIO_ROOT configurable. Stage 004 = one fresh Google Flow scene per captured competitor reference (native 2752x1536 16:9/2K gate + green-frame detection). Stage 005 = Etsy draft creation via factory-create-etsy-draft.js. Each stage isn't done until its manifest.history entry is written AND the artifact exists on disk.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__flow_browser",
+      "type": "component",
+      "label": "The AdsPower + Playwright + Google Flow browser-automation layer",
+      "status": "observed",
+      "confidence": 0.45,
+      "description": "AdsPower profile k1dqmeqi (reused, not recreated). flow_fresh_generate_mockup.py drives Flow's Image + 16:9 controls and the 2K/Upscaled download, dismissing the completion toast before each action. Playwright verifies every review HTML + image dimensions.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__synthid_pass",
+      "type": "component",
+      "label": "reverse-SynthID final pass - mockup_harness/bin/synthid_final_pass.py (isolated venv)",
+      "status": "observed",
+      "confidence": 0.45,
+      "description": "V1-V4 detector/bypass via model-specific codebooks. Accepts only final 4:3 images, never overwrites inputs, emits detector/quality evidence, fail-closed. The runtime is provisioned OUTSIDE the Poster Studio runtime. The codebook uses the nearest supported profile, not an exact 2048x1536 one - detector-clear evidence, not a universal guarantee.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__mockup_compositing",
+      "type": "component",
+      "label": "Mockup + frame compositing - competitor quad -> centered 2048x1536 4:3 crop",
+      "status": "observed",
+      "confidence": 0.45,
+      "description": "20-image mockup galleries; frame-center error kept < 0.5px; local composite from the raw white/green Flow pair via a green point-cloud detector.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__etsy_draft_writer",
+      "type": "component",
+      "label": "factory-create-etsy-draft.js - creates the Etsy draft, records the ID immediately",
+      "status": "observed",
+      "confidence": 0.5,
+      "description": "Refuses to create a second draft if a retry sees an existing non-empty draft. Has a no-mutation --dry-run. Failed image uploads are a manual-recovery case. Reads back state=draft + exact title + ranked images via the Etsy API; never calls publish/activation.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__cron_tasklist",
+      "type": "component",
+      "label": "The cron cycle + docs/TASKLIST-listing-factory-active.md (the living priority queue)",
+      "status": "active",
+      "confidence": 0.5,
+      "description": "Re-read and updated every cron cycle; status updated inline, not a new file per session. Distinct from the ~30 dated docs/HANDOVER-*.md files (those are archive).",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__contract_gate",
+      "type": "component",
+      "label": "AGENT_CONTRACT.md + a machine gate + a cross-vendor auditor (portable 3-layer control)",
+      "status": "active",
+      "confidence": 0.55,
+      "description": "Adapted from poly-bot's AGENT_CONTRACT + docs/agent_control_research/. DoD = committed + deployed + observed with pasted evidence; anti-confabulation (banned without proof: 'working', 'verified', 'deployed', 'live'); delegation ladder; tool rule files (CLAUDE.md, GEMINI.md, .agents/AGENTS.md) point here.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__factory_audit",
+      "type": "component",
+      "label": "factory-audit-catalog.cjs - config-free structural auditor for the listing catalog",
+      "status": "observed",
+      "confidence": 0.55,
+      "description": "Built after a real silent customer-facing bug: two design groups sharing the same design00N suffix, once linked into one listing, made the buyer 'Design: N' personalization lookup resolve to the WRONG template. Catches that class automatically going forward.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__d_stop_at_draft",
+      "type": "decision",
+      "label": "Stop at draft - the factory creates Etsy drafts, never publishes or activates",
+      "status": "decided",
+      "confidence": 0.7,
+      "description": "No publish/activation call is ever made; a human approves the listing. AGENT_CONTRACT sec 6 (sign-in automation) was revoked per explicit owner instruction.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__d_prod_is_truth",
+      "type": "decision",
+      "label": "Production is the source of truth for manually-edited templates",
+      "status": "decided",
+      "confidence": 0.65,
+      "description": "Local DB/design state is pulled FROM production; a preserved-old-DB + VACUUM INTO sync keeps local rows matching prod. Backups under backups/production-sync/.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__d_one_ref_one_prompt",
+      "type": "decision",
+      "label": "One competitor reference -> one independent fresh scene record (N images => N scenes)",
+      "status": "decided",
+      "confidence": 0.6,
+      "description": "Each needs its own scene analysis, a distinct fresh-generation prompt, an output dir, and QA evidence. Enforced by validate_competitor_prompt_map.py + COMPETITOR-PROMPT-MAP-SPEC.md; run_stage.py blocks stage 004 without a valid map. Design004's earlier 3-scene run is explicitly historical, not evidence the contract was met.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__d_synthid_isolated_failclosed",
+      "type": "decision",
+      "label": "reverse-SynthID runs isolated, fail-closed, never overwriting inputs",
+      "status": "decided",
+      "confidence": 0.6,
+      "description": "The runtime lives in a separate venv outside the app; it only touches separate copies; originals remain the listing candidates pending human visual approval.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__d_jessica_persona",
+      "type": "decision",
+      "label": "docs/CUSTOMER_PROFILE_JESSICA.md governs listing copy, design defaults, mockup prompts, expansion",
+      "status": "decided",
+      "confidence": 0.6,
+      "description": "Target buyer: high-income Etsy customer wanting modern minimalist luxury, emotionally meaningful custom wall art.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__c_no_auto_publish",
+      "type": "constraint",
+      "label": "No publish/activation call to a live Etsy listing without owner approval",
+      "status": "active",
+      "confidence": 0.75,
+      "description": "The hard gate on the whole factory. Etsy draft reads (state=draft) are fine; a publish is not.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__c_live_path_gated",
+      "type": "constraint",
+      "label": "Live-path changes are machine-gated (the poly-bot-style agent gate)",
+      "status": "active",
+      "confidence": 0.6,
+      "description": "A change to listing data / deploy / production DB is a gated path; the machine gate blocks the commit without approval.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__c_no_customer_data_in_factory",
+      "type": "constraint",
+      "label": "Factory scene batches never use customer order data",
+      "status": "active",
+      "confidence": 0.65,
+      "description": "Every listing-factory run states 'no customer order data was used; the live Etsy draft and production design were not changed'.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__c_gpu_disk_budget",
+      "type": "constraint",
+      "label": "Local GPU/disk budget: ~4GB VRAM, ~19GB free - a watermark-removal attempt was aborted for this",
+      "status": "active",
+      "confidence": 0.55,
+      "description": "Production root disk ~76% at the last check; main pressure was user-level caches, not render outputs.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__c_synthid_codebook_approx",
+      "type": "constraint",
+      "label": "The reverse-SynthID codebook has no exact 2048x1536 profile - it uses the nearest supported one",
+      "status": "active",
+      "confidence": 0.55,
+      "description": "So a 'removed_verified' result is detector-clear evidence with that limitation, not a universal guarantee; some processed copies show quality loss / chromatic fringing.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__bug_designN_suffix_routing",
+      "type": "bug",
+      "label": "The design00N-suffix order-routing bug class - buyer 'Design: N' can resolve to the wrong template",
+      "status": "open",
+      "confidence": 0.55,
+      "description": "A real, silent, customer-facing bug (two design groups sharing a design00N suffix in one listing). Mitigated by factory-audit-catalog.cjs but the underlying suffix-collision risk remains whenever listings are restructured.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__bug_manifest_vs_disk",
+      "type": "bug",
+      "label": "Stage manifests can claim an artifact that isn't on disk (the anti-confabulation failure mode)",
+      "status": "open",
+      "confidence": 0.5,
+      "description": "Caught 2026-08-19: a stage-004 candidate manifest claimed 'rendered' when 04-rendered/ was empty. AGENT_CONTRACT sec 1 now requires ls-ing the artifact, not taking the agent's word - but the failure mode recurs and depends on discipline.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__bug_synthid_quality_loss",
+      "type": "bug",
+      "label": "reverse-SynthID processing degrades some images (quality loss, chromatic fringing on the 'oak' scene)",
+      "status": "open",
+      "confidence": 0.45,
+      "description": "'nuke' cleared the V4 detector but was rejected on visual inspection for fringing; a 'regen_plus' candidate then cleared with no visible fringing. The removal/quality tradeoff is unresolved and per-image.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__bug_loc001_heart_glyph",
+      "type": "bug",
+      "label": "loc001's couple-names heart connector is not yet a real font glyph",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "Two candidate fonts identified via a real WhatTheFont run, not yet inspected for an actual heart glyph. The design does not genuinely match its competitor until this is a glyph, not a composited overlay.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__bug_git_stale_vs_cron",
+      "type": "bug",
+      "label": "The git history is ~1 month stale (last commit 2026-08-30) while the cron tasklist keeps moving",
+      "status": "open",
+      "confidence": 0.5,
+      "description": "TASKLIST-listing-factory-active.md updates (2026-08-31 entries) are not all reflected in commits; a cold `git log` read understates current activity.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__q_factory_running",
+      "type": "question",
+      "label": "Is the listing-factory cron still running, and for which listings does it have drafts awaiting human approval?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "The TASKLIST says 're-read every cron cycle'; the last commit is 2026-08-30. Draft 4565362214 (Design004) exists remotely, state=draft, 3 images - is it approved, published, or abandoned?",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__q_synthid_wanted",
+      "type": "question",
+      "label": "Is SynthID watermark removal still the intent, given the quality tradeoff and that it is a bypass tool?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "The final-stage utility is fail-closed and evidence-recording, but the 'oak' fringing case and the nearest-profile codebook limitation raise whether removal is worth it vs. accepting the watermark or generating watermark-free.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__q_relation_to_etsy_branches",
+      "type": "question",
+      "label": "How does poster-studio relate to the agentic-universe autodesign-etsy and etsy-agentic-space branches?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "etsy-agentic-space (run 304, agentic-universe) is scaffolded as the shop-level orchestrator ABOVE poster-studio + autodesign-etsy. Does poster-studio expose the SVG template engine + the draft factory as a callable interface, or is the integration still just 'run the scripts'?",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__q_prod_db_sync_reliable",
+      "type": "question",
+      "label": "Is the production-DB sync (preserved-old-DB + VACUUM INTO) now a reliable, documented procedure?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "It was fixed during the 2026-08-30 resume after orphaned WAL/SHM files caused a bad sync. Is it scripted, or still a manual sequence?",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ps__q_next_listings",
+      "type": "question",
+      "label": "What is the next listing / design to push through the factory, and is Design004 the last completed one?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "The active TASKLIST would say; a cold read only sees Design004's ten-scene batch as the most recent completed work.",
+      "derived_from": [
+        "poster-studio code + docs/AGENT_RUNBOOK.md + docs/HANDOVER-2026-08-30-flow-resume.md + docs/TASKLIST-listing-factory-active.md (2026-08-31) + AGENT_CONTRACT.md + git log, read 2026-09-07"
+      ],
+      "tags": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "ps__e1",
+      "source": "ps__webapp",
+      "target": "ps__root",
+      "type": "implements",
+      "description": "The customer-facing product."
+    },
+    {
+      "id": "ps__e2",
+      "source": "ps__svg_templates",
+      "target": "ps__root",
+      "type": "implements",
+      "description": "The poster design engine."
+    },
+    {
+      "id": "ps__e3",
+      "source": "ps__listing_factory",
+      "target": "ps__root",
+      "type": "implements",
+      "description": "The competitor -> draft pipeline."
+    },
+    {
+      "id": "ps__e4",
+      "source": "ps__svg_templates",
+      "target": "ps__webapp",
+      "type": "depends_on",
+      "description": "Templates are served + personalised by the API."
+    },
+    {
+      "id": "ps__e5",
+      "source": "ps__listing_factory",
+      "target": "ps__flow_browser",
+      "type": "depends_on",
+      "description": "Stage 004 scene generation drives Google Flow via AdsPower + Playwright."
+    },
+    {
+      "id": "ps__e6",
+      "source": "ps__listing_factory",
+      "target": "ps__mockup_compositing",
+      "type": "depends_on",
+      "description": "Raw Flow pairs are composited into the final 4:3 crop."
+    },
+    {
+      "id": "ps__e7",
+      "source": "ps__listing_factory",
+      "target": "ps__synthid_pass",
+      "type": "depends_on",
+      "description": "The final-only reverse-SynthID pass runs on separate copies before human approval."
+    },
+    {
+      "id": "ps__e8",
+      "source": "ps__listing_factory",
+      "target": "ps__etsy_draft_writer",
+      "type": "depends_on",
+      "description": "Stage 005 creates the Etsy draft."
+    },
+    {
+      "id": "ps__e9",
+      "source": "ps__listing_factory",
+      "target": "ps__svg_templates",
+      "type": "depends_on",
+      "description": "Poster variants are rendered from production templates (POSTER_STUDIO_ROOT)."
+    },
+    {
+      "id": "ps__e10",
+      "source": "ps__cron_tasklist",
+      "target": "ps__listing_factory",
+      "type": "records",
+      "description": "The living queue that drives factory work."
+    },
+    {
+      "id": "ps__e11",
+      "source": "ps__factory_audit",
+      "target": "ps__svg_templates",
+      "type": "records",
+      "description": "The structural auditor for design/listing catalog integrity."
+    },
+    {
+      "id": "ps__e12",
+      "source": "ps__d_stop_at_draft",
+      "target": "ps__c_no_auto_publish",
+      "type": "records",
+      "description": "The decision, made a hard constraint."
+    },
+    {
+      "id": "ps__e13",
+      "source": "ps__d_stop_at_draft",
+      "target": "ps__etsy_draft_writer",
+      "type": "records",
+      "description": "The writer never calls publish/activation."
+    },
+    {
+      "id": "ps__e14",
+      "source": "ps__d_prod_is_truth",
+      "target": "ps__webapp",
+      "type": "records",
+      "description": "Local pulls from production."
+    },
+    {
+      "id": "ps__e15",
+      "source": "ps__d_one_ref_one_prompt",
+      "target": "ps__listing_factory",
+      "type": "records",
+      "description": "Enforced by run_stage.py + the prompt-map validator."
+    },
+    {
+      "id": "ps__e16",
+      "source": "ps__d_synthid_isolated_failclosed",
+      "target": "ps__synthid_pass",
+      "type": "records",
+      "description": "Isolated venv, separate copies, fail-closed."
+    },
+    {
+      "id": "ps__e17",
+      "source": "ps__d_jessica_persona",
+      "target": "ps__root",
+      "type": "records",
+      "description": "Governs all listing copy + design defaults."
+    },
+    {
+      "id": "ps__e18",
+      "source": "ps__contract_gate",
+      "target": "ps__root",
+      "type": "records",
+      "description": "The operating contract every agent on the repo follows."
+    },
+    {
+      "id": "ps__e19",
+      "source": "ps__c_live_path_gated",
+      "target": "ps__webapp",
+      "type": "blocks",
+      "description": "Listing-data / deploy / prod-DB changes need approval."
+    },
+    {
+      "id": "ps__e20",
+      "source": "ps__c_synthid_codebook_approx",
+      "target": "ps__synthid_pass",
+      "type": "blocks",
+      "description": "A 'removed_verified' is not a universal guarantee."
+    },
+    {
+      "id": "ps__e21",
+      "source": "ps__bug_designN_suffix_routing",
+      "target": "ps__svg_templates",
+      "type": "challenges",
+      "description": "A silent customer-facing routing bug class."
+    },
+    {
+      "id": "ps__e22",
+      "source": "ps__bug_manifest_vs_disk",
+      "target": "ps__contract_gate",
+      "type": "challenges",
+      "description": "The DoD rule exists precisely because this recurs."
+    },
+    {
+      "id": "ps__e23",
+      "source": "ps__bug_synthid_quality_loss",
+      "target": "ps__q_synthid_wanted",
+      "type": "records",
+      "description": "The open tradeoff behind the question."
+    },
+    {
+      "id": "ps__e24",
+      "source": "ps__bug_git_stale_vs_cron",
+      "target": "ps__cron_tasklist",
+      "type": "challenges",
+      "description": "The commit log understates current state."
+    },
+    {
+      "id": "ps__e25",
+      "source": "ps__q_factory_running",
+      "target": "ps__listing_factory",
+      "type": "blocks",
+      "description": "Undefined whether the cron is live and what awaits approval."
+    },
+    {
+      "id": "ps__e26",
+      "source": "ps__q_relation_to_etsy_branches",
+      "target": "ps__root",
+      "type": "blocks",
+      "description": "The integration contract with etsy-agentic-space is undefined."
+    },
+    {
+      "id": "ps__e27",
+      "source": "ps__q_prod_db_sync_reliable",
+      "target": "ps__d_prod_is_truth",
+      "type": "records",
+      "description": "The sync procedure's reliability is the open part of this decision."
+    },
+    {
+      "id": "ps__e28",
+      "source": "ps__bug_loc001_heart_glyph",
+      "target": "ps__svg_templates",
+      "type": "blocks",
+      "description": "loc001 does not match its competitor without a real glyph."
+    }
+  ]
+}
