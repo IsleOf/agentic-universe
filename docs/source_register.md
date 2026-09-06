@@ -48,6 +48,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2502.02534](https://arxiv.org/abs/2502.02534) | (title not recorded) | `concept_adaptive_self_improvement_in_the_low_data_regime` |
 | [2506.03053](https://arxiv.org/abs/2506.03053) | (title not recorded) | `concept_moral_preferences_are_framing_brittle` |
 | [2507.21046](https://arxiv.org/abs/2507.21046) | (title not recorded) | `concept_what_when_how_where_to_evolve` |
+| [2508.07407](https://arxiv.org/abs/2508.07407) | (title not recorded) | `concept_what_when_how_where_to_evolve` |
 | [2510.01171](https://arxiv.org/abs/2510.01171) | How to Mitigate Mode Collapse and Unlock LLM Diversity | `emergent_evaluator_mode_collapse` |
 | [2510.15568](https://arxiv.org/abs/2510.15568) | The Spark Effect: On Engineering Creative Diversity in Multi-Agent AI Systems | `pattern_structural_decoupling` |
 | [2512.00047](https://arxiv.org/abs/2512.00047) | (title not recorded) | `concept_multi_round_interaction_compresses_semantic_space` |

@@ -464,6 +464,10 @@
     {
       "date": "2026-10-07",
       "change": "Autonomous run 126. DBLP. concept_what_when_how_where_to_evolve (A Survey of Self-Evolving Agents, arXiv:2507.21046): first systematic review, taxonomy = what (model/memory/tools/architecture) / when (intra- vs inter-test-time) / how (scalar reward, textual feedback, single/multi-agent) / where (domains); challenges = safety, scalability, co-evolutionary dynamics. Node records where the project's middle loop sits on each axis - deliberately narrow on what and when, and that narrowness is the safety margin. +5 edges."
+    },
+    {
+      "date": "2026-10-07",
+      "change": "Autonomous run 127. DBLP. Deepened concept_what_when_how_where_to_evolve with the second 2025 comprehensive self-evolving-agents survey (arXiv:2508.07407): its four-component feedback-loop abstraction (System Inputs / Agent System / Environment / Optimisers), mapped onto the project's loop, plus its domain-coupled-objectives point (echoes run 123's weak-grader caveat). Two independent 2025 surveys, orthogonal frames, same worry list (safety / scalability / co-evolution). No node/edge count change; description + derived_from + tags extended."
     }
   ],
   "nodes": [
@@ -5721,26 +5725,30 @@
     },
     {
       "id": "concept_what_when_how_where_to_evolve",
-      "label": "The self-evolving-agents survey taxonomy: what / when / how / where to evolve - and where this project's middle loop sits on it",
+      "label": "The self-evolving-agents survey taxonomies (what/when/how/where; inputs/system/environment/optimisers) - and where this project's middle loop sits",
       "type": "concept",
       "status": "to_test",
       "verification_state": "validated",
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:what_when_how_where_taxonomy",
-      "confidence": 0.68,
-      "description": "A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve on the Path to Artificial Super Intelligence (arXiv:2507.21046, 2025; VERIFIED via arXiv abstract read run 126, resolved via DBLP). Billed as the first systematic review of self-evolving agents. Organizing taxonomy: WHAT to evolve - agent components: models, memory, tools, architecture; WHEN - adaptation stages: intra-test-time vs inter-test-time; HOW - algorithmic/architectural designs: scalar rewards, textual feedback, single- vs multi-agent; WHERE - application domains. Names three critical challenges: safety, scalability, co-evolutionary dynamics. Where this project's middle loop sits: WHAT = the harness only (context policy, tools, topology) - not model weights, not memory-as-parameters; WHEN = inter-test-time (between runs), never intra-test-time; HOW = textual feedback + a grounded non-transcript risk measure, single-agent proposer (multi-agent is Phase 6); WHERE = the harness layer of the agentic-OS split (concept_agentic_os). The deliberate narrowness on WHAT and WHEN is the safety margin - a smaller evolving surface, changed only at rest. 'Co-evolutionary dynamics' as a named open challenge is the model-harness co-evolution frontier (concept_bottleneck_is_the_model_harness_coupling, emergent_model_native_orchestration).",
+      "confidence": 0.72,
+      "description": "A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve on the Path to Artificial Super Intelligence (arXiv:2507.21046, 2025; VERIFIED via arXiv abstract read run 126, resolved via DBLP). Billed as the first systematic review of self-evolving agents. Organizing taxonomy: WHAT to evolve - agent components: models, memory, tools, architecture; WHEN - adaptation stages: intra-test-time vs inter-test-time; HOW - algorithmic/architectural designs: scalar rewards, textual feedback, single- vs multi-agent; WHERE - application domains. Names three critical challenges: safety, scalability, co-evolutionary dynamics. Where this project's middle loop sits: WHAT = the harness only (context policy, tools, topology) - not model weights, not memory-as-parameters; WHEN = inter-test-time (between runs), never intra-test-time; HOW = textual feedback + a grounded non-transcript risk measure, single-agent proposer (multi-agent is Phase 6); WHERE = the harness layer of the agentic-OS split (concept_agentic_os). The deliberate narrowness on WHAT and WHEN is the safety margin - a smaller evolving surface, changed only at rest. 'Co-evolutionary dynamics' as a named open challenge is the model-harness co-evolution frontier (concept_bottleneck_is_the_model_harness_coupling, emergent_model_native_orchestration). COMPLEMENTARY FRAMEWORK (arXiv:2508.07407, 'A Comprehensive Survey of Self-Evolving AI Agents: bridging foundation models and lifelong agentic systems', 2025; VERIFIED via arXiv abstract read run 127, resolved via DBLP): abstracts the self-evolution feedback loop into FOUR COMPONENTS - System Inputs, Agent System, Environment, Optimisers - as a common frame for comparing techniques by which component they target. Mapped onto this project: System Inputs = the open-question / task stream; Agent System = the harness (the thing optimised); Environment = the repo + validator + selftest_all + the 17-task holdout; Optimisers = loop_proposer + improvement_loop + the grounded-acceptance gate. The survey also stresses domain-specific evolution where optimisation objectives are tightly coupled with domain constraints (biomedicine, programming, finance) - the same point run 123's caveat makes (a strong domain verifier does not transfer to the weak-grader harness-edit setting), and it carries a dedicated evaluation / safety / ethics discussion. Two independent 2025 comprehensive surveys, two orthogonal frames (what/when/how/where vs inputs/system/environment/optimisers), same three worry-list items: safety, scalability, co-evolution.",
       "tags": [
-        "what-when-how-where-to-evolve",
-        "intra-vs-inter-test-time",
-        "self-evolving-agents-survey",
-        "components-model-memory-tools-architecture",
         "co-evolutionary-dynamics",
+        "components-model-memory-tools-architecture",
+        "domain-coupled-objectives",
+        "feedback-loop-abstraction",
+        "inputs-system-environment-optimisers",
+        "intra-vs-inter-test-time",
+        "project-loop-placement",
+        "self-evolving-agents-survey",
         "survey-2025",
-        "project-loop-placement"
+        "what-when-how-where-to-evolve"
       ],
       "derived_from": [
         "docs/auto_sweep_2026-10-07-0600.md",
-        "arXiv:2507.21046 (A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve) - VERIFIED, abstract read run 126; resolved via DBLP"
+        "arXiv:2507.21046 (A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve) - VERIFIED, abstract read run 126; resolved via DBLP",
+        "arXiv:2508.07407 (A Comprehensive Survey of Self-Evolving AI Agents) - VERIFIED, abstract read run 127; resolved via DBLP"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-07-0600.md"

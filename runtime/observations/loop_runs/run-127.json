@@ -1,0 +1,25 @@
+{
+  "run": 127,
+  "increment": "deepen the survey-taxonomy node with the second 2025 comprehensive self-evolving-agents survey (arXiv:2508.07407)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:2508.07407",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2508.07407"
+  ],
+  "trace_file": "runtime\\traces\\loop-127.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
