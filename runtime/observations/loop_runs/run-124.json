@@ -1,0 +1,25 @@
+{
+  "run": 124,
+  "increment": "fold the model-harness survey (arXiv:2606.20683) via DBLP",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:2606.20683",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2606.20683"
+  ],
+  "trace_file": "runtime\\traces\\loop-124.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

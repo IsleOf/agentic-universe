@@ -452,6 +452,10 @@
     {
       "date": "2026-10-06",
       "change": "Autonomous run 123. DBLP. concept_adaptive_self_improvement_in_the_low_data_regime (Adaptive Self-improvement LLM Agentic System for ML Library Development, arXiv:2502.02534, ICML 2025): generating ML-library code in architecture-specific programming languages - hard, and few examples because ASPLs are esoteric/evolving. Adaptive self-improvement agentic system, up to 3.9x over a single-LLM baseline. Evidence that adaptive self-improvement survives the scarce-trajectory regime the project's own middle loop lives in (one increment per run). Caveat: narrow domain with a strong outer verifier. +4 edges."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Autonomous run 124. DBLP. concept_bottleneck_is_the_model_harness_coupling (From Question Answering to Task Completion: A Survey on Agent System and Harness Design, arXiv:2606.20683, 2026): the model-harness lens - agent = foundation model + execution harness; the bottleneck is the coupling, and agent quality EMERGES from the interaction of model, runtime, task structure, evaluation. Harness decomposes into six coupled runtime responsibilities (observation/context/control/action/state/verification), matching the Phase 0-5 build. Four paradigms ending in agent-native co-evolution. +6 edges."
     }
   ],
   "nodes": [
@@ -5678,6 +5682,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-06-1200.md"
+      ]
+    },
+    {
+      "id": "concept_bottleneck_is_the_model_harness_coupling",
+      "label": "A 2026 survey frames agent quality as emergent from the model-harness coupling, and decomposes the harness into six coupled runtime responsibilities",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:model_harness_lens_survey",
+      "confidence": 0.7,
+      "description": "From Question Answering to Task Completion: A Survey on Agent System and Harness Design (arXiv:2606.20683, 2026; VERIFIED via arXiv abstract read run 124, resolved via DBLP; companion list github.com/ggjy/Awesome-Agent-Engineering). Examines LLM agents through a MODEL-HARNESS LENS: an agent is a foundation model coupled with an execution harness. Central question: where is the performance bottleneck - in the model, in the harness, or in the COUPLING between them? The survey's answer is a framing this project already holds: 'agent quality - success, efficiency, safety, generalization - EMERGES FROM THE INTERACTION between model capability, runtime infrastructure, task structure, and evaluation design' - not from the model with auxiliary tools. Two structural contributions worth adopting: (1) the harness decomposes into SIX COUPLED RUNTIME RESPONSIBILITIES - observation, context, control, action, state, verification - and task properties / domain pressures map to harness configs over this decomposition; (2) FOUR PARADIGMS of agent engineering: prompt engineering -> workflows / context engineering -> harness engineering -> agent-native training with co-evolution (matches the ReST-ReAct -> harness-level -> recursive progression already in the graph). Open challenges the survey names: value-aware evaluation, safety, harness generalization, model-harness co-evolution - the project's open questions, independently. Maps cleanly onto the Phase 0-5 build: observation = the trace substrate, context = context policy, control = the loop, action = tools, state = experience bank, verification = the two-part gate.",
+      "tags": [
+        "model-harness-lens",
+        "six-runtime-responsibilities",
+        "observation-context-control-action-state-verification",
+        "four-paradigms",
+        "agent-native-co-evolution",
+        "survey-2026",
+        "bottleneck-is-the-coupling"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-06-1800.md",
+        "arXiv:2606.20683 (From Question Answering to Task Completion: A Survey on Agent System and Harness Design) - VERIFIED, abstract read run 124; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-06-1800.md"
       ]
     }
   ],
@@ -13104,6 +13135,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "Evidence that a self-improvement loop can work with sparse history - the regime the project's middle loop actually runs in (one increment per run)."
+    },
+    {
+      "id": "edge_mhlens_refines_paradigm_ladder",
+      "source": "concept_bottleneck_is_the_model_harness_coupling",
+      "target": "concept_engineering_paradigm_ladder",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The survey's four paradigms (prompt -> context -> harness -> agent-native co-evolution) is another cut of the ladder, with model-harness co-evolution as the top rung."
+    },
+    {
+      "id": "edge_mhlens_supports_capability_is_config",
+      "source": "concept_bottleneck_is_the_model_harness_coupling",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Independent articulation of the model-harness lens: an agent is a foundation model coupled with an execution harness; capability is a property of the pair."
+    },
+    {
+      "id": "edge_mhlens_supports_verification_binding_constraint",
+      "source": "concept_bottleneck_is_the_model_harness_coupling",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Verification is one of the six named runtime responsibilities, and 'model-harness co-evolution' is a listed open challenge - the survey treats runtime verification design as load-bearing for reliability."
+    },
+    {
+      "id": "edge_mhlens_supports_emergence_first",
+      "source": "concept_bottleneck_is_the_model_harness_coupling",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergence_first",
+      "confidence": 0.55,
+      "description": "'Agent quality emerges from the interaction between model capability, runtime infrastructure, task structure, and evaluation design' - emergence-first applied to the harness itself."
+    },
+    {
+      "id": "edge_mhlens_refines_agentic_os",
+      "source": "concept_bottleneck_is_the_model_harness_coupling",
+      "target": "concept_agentic_os",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The six coupled runtime responsibilities (observation/context/control/action/state/verification) are a finer decomposition of the agentic-OS harness layer."
+    },
+    {
+      "id": "edge_mhlens_supports_model_native_orchestration",
+      "source": "concept_bottleneck_is_the_model_harness_coupling",
+      "target": "emergent_model_native_orchestration",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "'Agent-native training with co-evolution' as the frontier paradigm, and named limits of model-centric scaling - the trend where orchestration migrates into the model."
     }
   ]
 }
