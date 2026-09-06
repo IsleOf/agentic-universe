@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-18",
+  "last_updated": "2026-09-19",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -900,6 +900,10 @@
     {
       "date": "2026-09-18",
       "change": "Autonomous run 234. Consistency / adversarial pass (IDLE-STATE RULE clause c - the harness-evolution literature frontier is swept). docs/what_would_make_this_wrong.md gains a 'Severity re-rank (run 234)' section: (1) sec 2 (the two-part gate) WEAKENS as a threat - the acceptance side now has an independent mid-2026 literature counterpart at every layer (SEAL/Release Gates/PACE/Who Grades the Grader/ACES/RQGM/PCAA-CAVA + deterministic_repair), the tampering falsifier was run 0/7 clean, and the residual risk is measurement-validity not gate design; (2) sec 6 gains a new sharper challenger - JIT-Agent (2608.25593): a TRAINED harness-generator compounds where the project's elicitation-only approach may plateau (weaker model + JIT beats stronger, +20pp), challenging the no-weight-training FORK specifically; AHE's structure-not-prose ablation is the partial answer. Updated order: 3 -> 1 -> 4 -> 6 -> 2c -> 5 -> 7; sec-2-gate-design drops from the top tier. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-19",
+      "change": "Autonomous run 235. Orientation-layer refresh (no graph node/edge change). docs/graph_state_2026-09.md Snapshot block updated from run-229 (259/1011) to run 235 (262 nodes / 1032 edges; 78 needs-validation / 153 partially-validated / 19 validated / 5 inconclusive / 7 unset). Added a 'Runs 229-234' paragraph: PILOT (live self-improvement), JIT-Agent (trained harness generator, challenges emergence-first), AHE (the subfield anchor, opened directly - the three observability pillars are the project's Phase 1/2/3, and the gain is in structure not prose), the shipped deterministic_repair, and the run-234 severity re-rank. This closes the runs 202-234 session arc: the self-improving-harness research area is mapped, the project self-audited against it, and the adversarial ranking updated for it."
     }
   ],
   "nodes": [

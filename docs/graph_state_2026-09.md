@@ -1,16 +1,16 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 229)
+## Snapshot (run 235)
 
-**259 nodes · 1011 edges · 9 approach families · 193 `challenges` edges (~19% of all edges).**
+**262 nodes · 1032 edges · 9 approach families · ~196 `challenges` edges (~19% of all edges).**
 
-`verification_state`: 78 needs-validation · **150 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
+`verification_state`: 78 needs-validation · **153 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
 (`validated` is reserved for `artifact_*` nodes with passing computed selftests — the run-221
 `artifact_probe_orchestration_value_rig` is the 19th; VERIFIED-arXiv literature nodes sit at
 `partially_validated`.)
@@ -35,6 +35,19 @@ Families: self_improving_harness 103 · emergent_behaviors 74 · agent_habitat 2
 - **`concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement`** (PCN-Rec
   arXiv:2601.09771 — JSON certificate + deterministic verifier + constrained-greedy repair; conf 0.6,
   currency note).
+
+**Runs 229–234** — the harness-evolution subfield swept and the project placed in it:
+`concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker` (PILOT
+arXiv:2608.26530 — a supervisor redirects/aborts the active worker mid-run) ·
+`concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension` (JIT-Agent
+arXiv:2608.25593 — a *trained* harness generator; a `challenges` edge to `approach_emergence_first`) ·
+`concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract` (AHE
+arXiv:2604.25850, the subfield anchor, opened directly — component/experience/decision observability = the
+project's Phase 1/2/3; the gain is in tools/middleware/memory, **not the system prompt**). Shipped:
+`improvement_loop.deterministic_repair` (run 232 — the repair stage PCN-Rec / CordisBench / JIT-Agent all
+call for). `docs/what_would_make_this_wrong.md` severity re-ranked (run 234): §2-the-gate drops from the
+top tier (independent literature at every acceptance layer + the tampering falsifier ran clean); §6 gains
+JIT-Agent as a sharper challenger to the no-weight-training fork.
 
 **Runs 202–218** — two dense mid-2026 literature arcs, recency-weighted (RECENCY WEIGHTING directive of
 2026-09-06: prefer the last ~30 days; older papers carry a currency note + modest confidence + a
