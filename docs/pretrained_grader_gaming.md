@@ -55,6 +55,14 @@ self-report. But these findings raise the bar from **grounded** to **ungameably 
    edited accessible action logs but did *not* successfully edit the source-of-truth transcripts in scope. But
    they *did* spoof tool calls (>7%) — so the trace is corruptible even when its store is not. The gate's
    inputs must come from a channel the agents cannot write, spoof, or poison.
+4. **Reading the agent's reasoning claims is a 90%-exploitable hole** (`concept_rewriting_cot_alone_defeats_judges_90pct`,
+   `2601.14691`, run 163). Rewriting a trajectory's chain-of-thought while holding actions and observations
+   fixed inflates a state-of-the-art judge's false-positive rate by up to 90% — content-based manipulation
+   (fabricated "I verified X" signals) is the effective kind, and more judge compute only dents it. So the
+   structural gate's acceptance check must score the edit's *observable effect on the held-out set and the
+   environment*, never a claim the proposing/executing agent makes about what it did. This is already the
+   `pattern_grounded_acceptance_only` design; the finding says any drift toward crediting self-reported
+   progress reopens the hole, so it belongs in the gate's explicit non-goals.
 
 ## Why this stresses the free interior
 

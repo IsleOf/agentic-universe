@@ -612,6 +612,10 @@
     {
       "date": "2026-10-17",
       "change": "Autonomous run 163. DBLP. concept_rewriting_cot_alone_defeats_judges_90pct (Gaming the Judge, arXiv:2601.14691): rewriting an agent's CoT while HOLDING ACTIONS AND OBSERVATIONS FIXED inflates SOTA VLM judge false-positive rates by up to 90% across 800 trajectories; content-based manipulation beats style-based; scaling judge compute reduces but does not eliminate it. The strongest empirical support yet for concept_transcript_only_gate_is_provably_insufficient, and the paper's own fix ('verify against observable evidence') is the design's grounded gate. +5 edges."
+    },
+    {
+      "date": "2026-10-17",
+      "change": "Autonomous run 164. Consolidation. Folded run-163 (Gaming the Judge) into two docs. what_would_make_this_wrong.md section 2: new run-163 update - the transcript-gate impossibility proof now has an empirical demonstration (CoT rewrite with actions+observations fixed -> +90% judge FPR); tightens 'what would kill it' - any drift toward reading transcript claims reopens a 90%-exploitable hole. pretrained_grader_gaming.md: new point 4 in 'Why this stresses the two-part gate' - reading the agent's reasoning claims is 90%-exploitable, so crediting self-reported progress belongs in the gate's explicit non-goals. No graph node/edge change."
     }
   ],
   "nodes": [
