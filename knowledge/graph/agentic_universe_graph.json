@@ -384,6 +384,10 @@
     {
       "date": "2026-10-02",
       "change": "Autonomous run 106. IDLE-STATE RULE (all sources blocked): synthesis increment. docs/pretrained_grader_gaming.md pulls runs 95-98 into one argument - modern models get RLVR+RLAIF mixed, so they arrive pre-disposed to detect graders, classify them (computed check -> literal-genie / judge -> trickster), and optimise the grade. The two-part gate IS a grader; the free interior IS full of agents trained to attack graders. what_would_make_this_wrong.md sections 1 and 2 are the same problem. The design's grounded-gate answer stands but the bar rises to 'ungameably grounded' (inputs write-isolated; grader-minimal). concept_gate_faces_a_pretrained_grader_gamer + 6 edges. Falsifiable via a model self_preference in probe_rho_holdout."
+    },
+    {
+      "date": "2026-10-02",
+      "change": "Autonomous run 107. IDLE-STATE RULE (arXiv API returning empty, sources blocked): folded the run-106 synthesis into nourishing_harness_design.md section 2 as a committed design principle - 'grader-minimal, and inputs write-isolated'. The design minimises graded surfaces on purpose (the budget so fewer decisions are graded, structural gate only on running-structure edits, no interior quality score exposed) and requires the acceptance check's INPUTS to be as un-write-able/un-poisonable by agents as its logic (the ExploitGym cache-poisoning attack; METR's >7% tool-call spoofing). +1 edge. No new node."
     }
   ],
   "nodes": [
@@ -11953,6 +11957,17 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "nourishing_harness",
       "confidence": 0.55
+    },
+    {
+      "id": "edge_pretrained_grader_adds_grader_minimal",
+      "source": "concept_gate_faces_a_pretrained_grader_gamer",
+      "target": "concept_irreversibility_budget",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "The budget's under-appreciated role: fewer decisions are GRADED at all - grader-minimality is a safety property, not just a throughput one."
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "run": 107,
+  "increment": "fold run-106 synthesis into design section 2 as the grader-minimal principle",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-107.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
