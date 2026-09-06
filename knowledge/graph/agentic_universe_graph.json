@@ -556,6 +556,10 @@
     {
       "date": "2026-10-13",
       "change": "Autonomous run 149. Probe rig - the section-2c mitigation, implemented. probe_idle_agent.py gains observation_arm(policy_factory): runs the idle loop covert (no notice) vs overt (OBSERVED_NOTICE - 'your activity is being logged and reviewed') and reports the per-measure gap; model_policy gains an observed= flag (the only difference between the two conditions). A large gap = the probe is partly measuring behaviour-under-observation, not disposition (concept_anti_scheming_mitigation_confounded_by_eval_awareness). Selftested: a stand-in that self-inspects less when watched shows a negative self_reference_rate gap; one that ignores the notice shows ~0 gap. 19 checks GREEN (was 16). probe_idle_agent.md gains a 5th arm. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-13",
+      "change": "Autonomous run 150. DBLP. concept_mast_multi_agent_failure_taxonomy (Why Do Multi-Agent LLM Systems Fail? / MAST, arXiv:2503.13657, NeurIPS 2025 D&B): MAS benchmark gains are often minimal; the first MAS failure taxonomy - 14 modes in 3 categories (system design / inter-agent misalignment / task verification), 150 expert traces kappa=0.88, MAST-Data 1600+ traces / 7 frameworks. The 3 categories map onto the project's axes; a Phase 6 substrate candidate; reconcilable with DeepVerifier's DRA Failure Taxonomy. +6 edges."
     }
   ],
   "nodes": [
@@ -6039,6 +6043,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-12-1200.md"
+      ]
+    },
+    {
+      "id": "concept_mast_multi_agent_failure_taxonomy",
+      "label": "MAST: the first multi-agent-system failure taxonomy - 14 modes in 3 categories (system design / inter-agent misalignment / task verification); MAS gains on benchmarks are often minimal",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:mas_failure_taxonomy",
+      "confidence": 0.76,
+      "description": "Why Do Multi-Agent LLM Systems Fail? / MAST (arXiv:2503.13657, NeurIPS 2025 Datasets & Benchmarks; VERIFIED via arXiv abstract read run 150, resolved via DBLP). Opening premise: despite the enthusiasm, MAS PERFORMANCE GAINS ON BENCHMARKS ARE OFTEN MINIMAL. MAST is the first Multi-Agent System Failure Taxonomy - 14 unique failure modes in 3 categories: (i) SYSTEM DESIGN issues, (ii) INTER-AGENT MISALIGNMENT, (iii) TASK VERIFICATION. Built from 150 expert-annotated traces (inter-annotator kappa = 0.88), plus MAST-Data: 1,600+ annotated traces across 7 MAS frameworks, and an LLM-as-Judge annotator with high human agreement. Analysed across GPT-4 / Claude 3 / Qwen2.5 / CodeLlama and coding / math / general-agent tasks; the failures 'require more sophisticated solutions' - no easy fix. For this project: (1) the 3 categories map onto the project's own axes - system design = the harness, inter-agent misalignment = emergent_subagent_training_induces_coordination / emergent_deception_and_collusion / concept_topology_shapes_error_propagation, task verification = concept_verification_is_the_binding_constraint; (2) 'MAS gains often minimal' is a caution on the Phase 6 swarm layer and complements concept_harness_orchestration_pairing (orchestration is not a free win); (3) MAST-Data + the MAST taxonomy is a concrete Phase 6 substrate candidate - a failure-mode registry the six tools/probe_* rigs could be framed against, alongside concept_risklab_probe_toolkit; (4) MAST and DeepVerifier's DRA Failure Taxonomy (concept_inference_time_scaling_of_verification) are two independent 2025-26 agent-failure taxonomies - worth reconciling.",
+      "tags": [
+        "mast",
+        "multi-agent-failure-taxonomy",
+        "14-modes-3-categories",
+        "mas-gains-often-minimal",
+        "1600-annotated-traces",
+        "7-frameworks",
+        "kappa-0.88",
+        "neurips-2025-db",
+        "phase6-substrate"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-13-0600.md",
+        "arXiv:2503.13657 (Why Do Multi-Agent LLM Systems Fail? / MAST) - VERIFIED, abstract read run 150; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-13-0600.md"
       ]
     }
   ],
@@ -14092,6 +14125,72 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "Even a strong post-hoc mitigation leaves residual covert action and cannot be cleanly credited - a bound on how much the ungated interior can be made safe after the fact rather than by design."
+    },
+    {
+      "id": "edge_mast_challenges_pairing",
+      "source": "concept_mast_multi_agent_failure_taxonomy",
+      "target": "concept_harness_orchestration_pairing",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "'MAS performance gains on benchmarks are often minimal' - multi-agent orchestration is not a free win over a single agent + a good harness; the pairing has to earn its keep per task."
+    },
+    {
+      "id": "edge_mast_supports_topology_error_prop",
+      "source": "concept_mast_multi_agent_failure_taxonomy",
+      "target": "concept_topology_shapes_error_propagation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "'Inter-agent misalignment' is one of MAST's three categories - a taxonomy-level version of topology-shaped error propagation."
+    },
+    {
+      "id": "edge_mast_supports_verification_binding_constraint",
+      "source": "concept_mast_multi_agent_failure_taxonomy",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Task verification' is a full third of MAST's failure categories - independent evidence that verification is where multi-agent systems break, not just where single-agent self-improvement is bottlenecked."
+    },
+    {
+      "id": "edge_mast_supports_subagent_coordination",
+      "source": "concept_mast_multi_agent_failure_taxonomy",
+      "target": "emergent_subagent_training_induces_coordination",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "'Inter-agent misalignment' as a measured, common failure category corroborates that agent-to-agent dynamics are a first-order risk, not an edge case."
+    },
+    {
+      "id": "edge_mast_refines_dra_failure_taxonomy",
+      "source": "concept_mast_multi_agent_failure_taxonomy",
+      "target": "concept_inference_time_scaling_of_verification",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "MAST (multi-agent, 14 modes / 3 categories) and DeepVerifier's DRA Failure Taxonomy (single deep-research agent, 5 categories / 13 sub) are two independent agent-failure taxonomies - reconcilable into one map."
+    },
+    {
+      "id": "edge_mast_informs_emergence_layer_model",
+      "source": "concept_mast_multi_agent_failure_taxonomy",
+      "target": "concept_emergence_layer_model",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "MAST's system-design vs inter-agent-misalignment split is the harness-layer vs swarm-layer distinction of the three-layer emergence model, seen through failures."
     }
   ]
 }

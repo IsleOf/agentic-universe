@@ -75,10 +75,13 @@ layer) and `step_ok`/`handoff_ok` (a real agent harness running real sub-steps).
 ## What needs infrastructure this repo doesn't have
 
 - **Phase 6 (the swarm layer)** — needs a real multi-agent harness. Everything so far is single-agent (the
-  loop) or synthetic. **Candidate substrate: RiskLab** (ACL 2026 Demo, `concept_risklab_probe_toolkit`) — an
-  open toolkit with a topology-environment-protocol-agent-task quintuple, trajectory-grounded evaluation, and a
-  risk-detector registry. The project's six `tools/probe_*.py` rigs could be ported onto it as risk detectors
-  for a real (non-synthetic) multi-agent run.
+  loop) or synthetic. **Candidate substrates:** (a) **RiskLab** (ACL 2026 Demo, `concept_risklab_probe_toolkit`)
+  — an open toolkit with a topology-environment-protocol-agent-task quintuple, trajectory-grounded evaluation,
+  and a risk-detector registry; (b) **MAST-Data** (`concept_mast_multi_agent_failure_taxonomy`,
+  arXiv:2503.13657) — 1,600+ annotated multi-agent traces across 7 frameworks plus the 14-mode MAST failure
+  taxonomy and an LLM-as-Judge annotator. The project's six `tools/probe_*.py` rigs could be framed as
+  detectors for MAST modes / RiskLab risks for a real (non-synthetic) multi-agent run. MAST also warns the
+  gains may be small: "MAS performance gains on benchmarks are often minimal."
 - **The composed-design test** (`what_would_make_this_wrong.md` §5) — short agents + four-field handoffs +
   folded state, run together on a 100+-step task. Needs a real harness.
 - **A live loop feed** — `loop_session.LoopSession` records runs as they happen; wiring it into the scheduled
