@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 323 nodes, 1295 edges · **Date:** 2026-09-05
+**Graph at generation:** 325 nodes, 1303 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -64,6 +64,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2510.01171](https://arxiv.org/abs/2510.01171) | How to Mitigate Mode Collapse and Unlock LLM Diversity | `emergent_evaluator_mode_collapse` |
 | [2510.04618](https://arxiv.org/abs/2510.04618) | (title not recorded) | `concept_ace_context_evolution_self_improvement` |
 | [2510.15568](https://arxiv.org/abs/2510.15568) | The Spark Effect: On Engineering Creative Diversity in Multi-Agent AI Systems | `pattern_structural_decoupling` |
+| [2510.17638](https://arxiv.org/abs/2510.17638) | (title not recorded) | `concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution` |
 | [2510.19851](https://arxiv.org/abs/2510.19851) | (title not recorded) | `concept_cot_obfuscation_hits_the_message_channel_hardest` |
 | [2511.08710](https://arxiv.org/abs/2511.08710) | (title not recorded) | `concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium` |
 | [2511.15755](https://arxiv.org/abs/2511.15755) | (title not recorded) | `concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response` |
@@ -96,6 +97,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.09746](https://arxiv.org/abs/2604.09746) | (title not recorded) | `concept_safety_helpfulness_tradeoff_persists_under_optimisation` |
 | [2604.11623](https://arxiv.org/abs/2604.11623) | Context Kubernetes | `concept_agentic_os` |
 | [2604.13051](https://arxiv.org/abs/2604.13051) | (title not recorded) | `emergent_consciousness_cluster` |
+| [2604.14199](https://arxiv.org/abs/2604.14199) | (title not recorded) | `concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution` |
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
 | [2604.19827](https://arxiv.org/abs/2604.19827) | (title not recorded) | `concept_ai_native_software_ecosystems_are_complex_adaptive_systems` |
 | [2605.05007](https://arxiv.org/abs/2605.05007) | (title not recorded) | `test_scenario_decomposition_granularity` |
@@ -474,7 +476,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-03-0000.md` — `artifact_epistemic_constitution_harness`, `concept_self_harness_validates_the_three_loop`
 - `docs/auto_sweep_2026-10-03-0600.md` — `artifact_fractal_flock_harness`
 - `docs/auto_sweep_2026-10-03-1200.md` — `concept_environmental_pressure_has_an_inverted_u`
-- `docs/auto_sweep_2026-10-03-1800.md` — `concept_risklab_probe_toolkit`
+- `docs/auto_sweep_2026-10-03-1800.md` — `concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution`, `concept_risklab_probe_toolkit`, `concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop`
 - `docs/auto_sweep_2026-10-04-0000.md` — `concept_safety_helpfulness_tradeoff_persists_under_optimisation`
 - `docs/auto_sweep_2026-10-04-1200.md` — `concept_aggregate_score_masks_per_layer_regression`
 - `docs/auto_sweep_2026-10-05-0000.md` — `concept_harness_has_model_independent_failure_fingerprints`
@@ -551,6 +553,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)` — `approach_self_improving_harness`, `concept_agentic_os`, `concept_context_economics` +10
 - `knowledge/notes/2026-09-04-human-knowledge-creative-automation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful`, `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`
 - `knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)` — `concept_motive_operative_split`
+- `knowledge/notes/prediction-markets-branch-2026-09.md (owner research input, origin/main)` — `concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop`
 
 ## Owner input and research aggregation
 

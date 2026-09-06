@@ -1128,6 +1128,10 @@
     {
       "date": "2026-10-03",
       "change": "Autonomous run 294. BUILD - tools/fractal_flock.py, the owner research direction 41 combined prototype for the structural-coordination cluster (the analogue of run 293 epistemic_constitution.py for the other prototype the owner asked for). Deterministic coordination substrate (task_ledger.py shape): a shared append-only artifact store (no orchestrator), a bounded-neighbourhood read (last N contributions on the branch), and adaptive fractal spawn/compress (expand a node only on returned unresolved_boundaries, depth/child bounded; compress the subtree to a summary when every child returns). contribute(node, neighbourhood) is the caller callback. 12 selftest checks (fixed an infinite re-compress loop: _maybe_compress now no-ops on a non-open node), selftest_all JOBS -> 35, BUILD SELFTEST GREEN. New node artifact_fractal_flock_harness + 7 edges (implements concept_orchestratorless_flock + concept_fractal_decomposition, grounds artifact_probe_orchestration_value_rig, extends the task ledger, refines concept_trace_compiles_to_per_consumer_views, supports artifact_probe_composed_design_rig, instantiates concept_deterministic_spine_generative_edge). Both combined prototypes (EC + FF) now built. 322 -> 323 nodes, 1288 -> 1295 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-03",
+      "change": "Autonomous run 296. Folded the owner's prediction-markets branch (knowledge/notes/prediction-markets-branch-2026-09.md, origin/main, 2026-09-07) - a live Polymarket/Kalshi forecasting-agent ecosystem scan. 2 nodes: concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop (the branch's core loop IS epistemic_constitution.py's loop - independent operational arrival; names the external eval targets the forecast ledger lacks: ForecastBench 2409.19839, PredictionMarketBench 2602.00133, PolyBench 2604.14199, Replaying Prediction Markets 2607.14051, AQuA 2608.12841; Domain-Specific Calibration Dynamics 2602.19520 backs domain-keyed trust) and concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution (Prophet Arena 2510.17638 + PolyBench: calibration is not timeliness - the forecast ledger needs a time-to-resolution axis). 8 edges into the epistemic-market cluster (supports epistemic_constitution + domain-keyed trust; informs calibrated-forecasting; grounds probe_epistemic_market_rig; instantiates workflow_polymarket_bot_strategy_loop; freshness refines calibrated-forecasting + informs epistemic_constitution). Cross-method validation, not a new capability claim; the branch's profit anecdotes are explicitly unverified. 323 -> 325 nodes, 1295 -> 1303 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9568,6 +9572,59 @@
       "evidence_links": [
         "tools/fractal_flock.py",
         "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop",
+      "label": "The Polymarket/Kalshi ecosystem independently arrives at the forecast-ledger loop, and supplies its external evaluation targets",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:epistemic_market",
+      "confidence": 0.6,
+      "description": "Owner Perplexity research, knowledge/notes/prediction-markets-branch-2026-09.md (2026-09-07, origin/main): a live GitHub/arXiv/practitioner scan of the Polymarket + Kalshi forecasting-agent ecosystem. Its recommended core loop - forecast -> preserve point-in-time evidence (hashed) -> score after resolution (Brier / log-loss) -> recalibrate by domain -> promote or reject policy variants only through replay and capped paper trading - is the loop tools/epistemic_constitution.py (run 293) already implements, and an independent operational arrival at concept_calibrated_forecasting_before_action_is_the_influence_currency. Its operating safeguards (read-only -> paper -> human-approved capped-live, kill switch, hard per-market/per-day loss limits, immutable execution logs) match the project's irreversibility budget + grounded-acceptance posture. It also names the external evaluation targets the project's forecast ledger currently lacks: ForecastBench (2409.19839, contamination-resistant Brier), PredictionMarketBench (2602.00133, deterministic LOB replay + transaction costs as regression gates), PolyBench (2604.14199, live Polymarket - raw frontier LLM forecasts are overconfident and mostly unprofitable), Replaying Prediction Markets (2607.14051, point-in-time evidence snapshots for leakage-free hindcasts), AQuA (2608.12841, recursively self-improving quantitative trading). Domain-Specific Calibration Dynamics (2602.19520) independently backs the domain-keyed (not global) trust design; 'Going All-In on LLM Accuracy' (2512.05998) - a wager-size prompt elicits a sharper confidence signal than a raw binary probability. Currency: the ecosystem scan is point-in-time and the profit claims in it are explicitly unverified anecdotes; the value here is the architecture and the literature map, not any edge.",
+      "tags": [
+        "forecasting",
+        "prediction-markets",
+        "calibration",
+        "epistemic-market",
+        "owner-research",
+        "cross-validation",
+        "evaluation"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-03-1800.md",
+        "knowledge/notes/prediction-markets-branch-2026-09.md (owner research input, origin/main)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-03-1800.md"
+      ]
+    },
+    {
+      "id": "concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution",
+      "label": "A calibrated forecaster still lags the market on fresh information near resolution - calibration is not timeliness",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:epistemic_market",
+      "confidence": 0.55,
+      "description": "From LLM-as-a-Prophet / Prophet Arena (arXiv:2510.17638) and PolyBench (2604.14199), via the owner's prediction-markets branch. A model can be well-calibrated in aggregate yet aggregate fresh information more slowly than the market does as a question approaches resolution - so a forecast that looked well-calibrated on historical questions can be systematically stale on live ones. Implication for the project's forecast ledger (epistemic_constitution.py): a forecast record needs a time-to-resolution / evidence-freshness axis, not just a domain axis, and the promotion rule should score late-window calibration separately. This is a bound on any design that treats a calibrated internal forecaster as a substitute for an external resolving market.",
+      "tags": [
+        "forecasting",
+        "calibration",
+        "freshness",
+        "epistemic-market",
+        "recency"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-03-1800.md",
+        "arXiv:2510.17638 (LLM-as-a-Prophet / Prophet Arena)",
+        "arXiv:2604.14199 (PolyBench)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-03-1800.md"
       ]
     }
   ],
@@ -23550,6 +23607,94 @@
       "approach_family": "orchestration_first",
       "confidence": 0.5,
       "description": "The module is the deterministic spine (store, spawn rule, compression, audit); contribute() is the generative edge. Agents create freely inside a node; the coordination is not theirs to change."
+    },
+    {
+      "id": "edge_predmarket_supports_epistemic_constitution",
+      "source": "concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop",
+      "target": "artifact_epistemic_constitution_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "An independent operational arrival at the same loop - forecast ledger, resolve, Brier, domain-keyed calibration, replay-gated policy promotion - from a live ecosystem scan rather than from the research literature the prototype was built on."
+    },
+    {
+      "id": "edge_predmarket_informs_calibrated_forecasting",
+      "source": "concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop",
+      "target": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Supplies the concrete domain (Polymarket/Kalshi), the data contract, and the external benchmarks (ForecastBench, PredictionMarketBench, PolyBench) the forecast-ledger concept should be scored against."
+    },
+    {
+      "id": "edge_predmarket_grounds_epistemic_market_rig",
+      "source": "concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop",
+      "target": "artifact_probe_epistemic_market_rig",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Live prediction markets are the ungameable, contamination-resistant evaluation surface the rig's synthetic hidden-ground-truth task family stands in for."
+    },
+    {
+      "id": "edge_predmarket_instantiates_polymarket_workflow",
+      "source": "concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop",
+      "target": "workflow_polymarket_bot_strategy_loop",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The full six-stage branch architecture (ingest / forecast / memory+calibration / evaluation / execution / evolution) for the Polymarket bot strategy loop already in the graph."
+    },
+    {
+      "id": "edge_predmarket_supports_domain_keyed_trust",
+      "source": "concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop",
+      "target": "concept_conditional_trust_is_domain_keyed_not_global",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Domain-Specific Calibration Dynamics (2602.19520), cited in the branch: maintain domain-specific calibration tables rather than a global probability correction - the exact cold-start-None, per-domain design."
+    },
+    {
+      "id": "edge_freshness_refines_calibrated_forecasting",
+      "source": "concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution",
+      "target": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Adds a freshness / time-to-resolution axis: score late-window calibration separately, because aggregate calibration hides staleness near resolution."
+    },
+    {
+      "id": "edge_freshness_informs_epistemic_constitution",
+      "source": "concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution",
+      "target": "artifact_epistemic_constitution_harness",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The forecast ledger's records need a time-to-resolution field and the promotion rule a late-window sub-score; currently it scores only aggregate Brier by domain."
+    },
+    {
+      "id": "edge_freshness_supports_predmarket_validation",
+      "source": "concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution",
+      "target": "concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "One of the branch's own headline literature findings (Prophet Arena, PolyBench) - included here as the sharpest design constraint it carries."
     }
   ]
 }

@@ -1,0 +1,40 @@
+{
+  "run": 296,
+  "increment": "fold the owner prediction-markets branch into the epistemic-market cluster",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 3,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 8
+  },
+  "citations": [
+    {
+      "id": "arXiv:2510.17638",
+      "verified": false
+    },
+    {
+      "id": "arXiv:2602.00133",
+      "verified": false
+    },
+    {
+      "id": "arXiv:2604.14199",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2510.17638",
+    "arXiv:2602.00133",
+    "arXiv:2604.14199"
+  ],
+  "trace_file": "runtime\\traces\\loop-296.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 296 OK · VALID · graph +2n/+8e · cites 0v/3 · idle-streak 1 · legible 1.00 · verified-frac 0.78 · novelty n/a"
+}
