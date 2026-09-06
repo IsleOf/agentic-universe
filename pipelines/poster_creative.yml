@@ -1,20 +1,36 @@
 # poster_creative — design brief -> SVG -> framed mockup -> listing assets
-# SKELETON. Multi-agent flow, same style as the Agentic Universe graphs.
+# The concrete poster-studio seam. Contract: contracts/poster_studio_interface.md
+# (derived from agentic-universe:docs/audits/poster-studio/, first-pass audit run 318).
 name: poster_creative
 inputs: [design_brief, keyword_pack]     # from agents/etsy_researcher.py
+invariants:
+  - stop_at_draft            # no stage may publish/activate an Etsy listing
+  - artifact_on_disk         # a stage is done only when its manifest entry AND the file both exist
+  - one_ref_one_prompt       # N competitor refs => N independent fresh scenes (validate_competitor_prompt_map.py)
+  - no_customer_data         # factory runs never touch customer order data
+  - templates_read_only      # production templates are read-only to the orchestrator
 stages:
   - id: generate_design
     uses: autodesign-etsy            # CLIP extraction + style clustering + SD generation
     out: [candidate_svgs, posterbench_scores]
-  - id: template_render
-    uses: poster-studio              # SVG template engine, draggable text, 300 DPI export
-    in: candidate_svgs
-    out: [print_files]
-  - id: mockups
-    uses: poster-studio/mockup       # framed / in-room mockups, listing gallery
-    out: [listing_images]
+  - id: render_design
+    calls: poster-studio::render_design(brief)          # SVG template engine, 300 DPI, $POSTER_STUDIO_ROOT
+    in: [design_brief, candidate_svgs]
+    out: [print_files, template_id, design_group]
+  - id: make_mockups
+    calls: poster-studio::make_mockups(print_files, competitor_prompt_map)
+    note: stage 004 - Google Flow scene per competitor ref via AdsPower+Playwright, 16:9/2K + green-frame gate
+    out: [listing_images, review_html]
+  - id: finalize_images
+    calls: poster-studio::finalize_images(listing_images)
+    note: centered 2048x1536 4:3 crop + the fail-closed reverse-SynthID pass on separate copies
+    out: [final_images, synthid_evidence]
+  - id: create_draft
+    calls: poster-studio::create_draft(listing_spec, final_images, dry_run=true)
+    note: stage 005 - dry_run by default; a real create needs the stop-at-draft gate + an owner approval token
+    out: [draft_id, draft_state, ranked_images]
   - id: promo_video            # optional
     uses: whisper-video
     enabled: false
-outputs: [print_files, listing_images, listing_video?]
-open_question: etsy__q_creative_handoff   # the brief->asset contract is undefined
+outputs: [final_images, draft_id, draft_state, listing_video?]
+resolves: etsy__q_creative_handoff   # the brief->asset contract is now defined

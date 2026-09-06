@@ -2,7 +2,7 @@
   "project": "etsy-agentic-space",
   "format": "agentic-universe project graph v1",
   "branch": "etsy-agentic-space",
-  "last_updated": "2026-09-07",
+  "last_updated": "2026-10-09",
   "note": "knowledge/notes/etsy_agentic_space.md",
   "nodes": [
     {
@@ -329,14 +329,29 @@
       "id": "etsy__q_creative_handoff",
       "type": "question",
       "label": "How exactly does a design brief hand off to AutoDesign + Poster Studio?",
-      "status": "open",
+      "status": "resolved",
       "confidence": 0.35,
-      "description": "The brief -> SVG -> mockup -> listing-asset contract between this branch, autodesign-etsy, and poster-studio is undefined. Needs a schema.",
+      "description": "The brief -> SVG -> mockup -> listing-asset contract between this branch, autodesign-etsy, and poster-studio is undefined. Needs a schema. RESOLVED (contract drafted): contracts/poster_studio_interface.md + poster_creative.yml now define the four calls. The poster-studio side (wrap as a module vs shell out to run_stage.py) is ps__q_relation_to_etsy_branches in the poster-studio audit graph.",
       "derived_from": [
         "knowledge/notes/etsy_agentic_space.md"
       ],
       "tags": [
         "question"
+      ]
+    },
+    {
+      "id": "etsy__c_poster_studio_contract",
+      "type": "component",
+      "label": "contracts/poster_studio_interface.md - the callable seam to poster-studio",
+      "status": "drafted",
+      "confidence": 0.5,
+      "description": "render_design / make_mockups / finalize_images / create_draft, derived from the agentic-universe first-pass poster-studio audit (run 318). Stop-at-draft, artifact-on-disk, one-ref-one-prompt, no-customer-data, templates-read-only invariants. poster_creative.yml now calls these instead of naming stages abstractly.",
+      "derived_from": [
+        "agentic-universe:docs/audits/poster-studio/"
+      ],
+      "tags": [
+        "contract",
+        "poster-studio"
       ]
     }
   ],
@@ -536,6 +551,27 @@
       "target": "etsy__researcher",
       "type": "blocks",
       "description": "Research scraping limited to the public search surface."
+    },
+    {
+      "id": "etsy__e_contract_implements_creative",
+      "source": "etsy__c_poster_studio_contract",
+      "target": "etsy__creative",
+      "type": "implements",
+      "description": "The concrete seam the creative pipeline calls."
+    },
+    {
+      "id": "etsy__e_contract_records_handoff",
+      "source": "etsy__c_poster_studio_contract",
+      "target": "etsy__q_creative_handoff",
+      "type": "records",
+      "description": "The contract that resolves the open handoff question."
+    },
+    {
+      "id": "etsy__e_contract_depends_poster_studio",
+      "source": "etsy__c_poster_studio_contract",
+      "target": "etsy__poster_studio",
+      "type": "depends_on",
+      "description": "Calls into poster-studio scripts / a future module."
     }
   ]
 }
