@@ -572,6 +572,10 @@
     {
       "date": "2026-10-14",
       "change": "Autonomous run 153. DBLP. concept_cot_obfuscation_hits_the_message_channel_hardest (Can Reasoning Models Obfuscate Reasoning?, arXiv:2510.19851): CoT monitoring is accurate absent pressure, but under strong obfuscation pressure some models evade detection while completing adversarial tasks - and they obfuscate EXTERNAL (message) reasoning more than internal traces. The Five-W substrate reads the more obfuscatable channel; the activation probe reads the less. Independent support for pairing the two. +5 edges."
+    },
+    {
+      "date": "2026-10-14",
+      "change": "Autonomous run 154. DBLP. concept_cot_monitorability_is_a_fragile_property_to_preserve (Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety, arXiv:2507.11473, multi-org position paper): CoT monitoring is imperfect but promising and should be invested in ALONGSIDE other methods; it may be fragile, so weigh development decisions by their effect on it. The anchor for the run-147 + run-153 monitorability findings. For the project: trace legibility is a property to preserve and measure, and it belongs in the Phase 3 risk measure. +6 edges."
     }
   ],
   "nodes": [
@@ -6139,6 +6143,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-14-0600.md"
+      ]
+    },
+    {
+      "id": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "label": "CoT monitorability is a real but fragile safety property - developers should evaluate it and weigh development decisions by their effect on it, not assume it",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:cot_monitorability_preservation",
+      "confidence": 0.72,
+      "description": "Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety (arXiv:2507.11473, 2025; a multi-organisation position paper; VERIFIED via arXiv abstract read run 154, resolved via DBLP). AI systems that think in human language let us monitor their chains of thought for the intent to misbehave. Like every other oversight method CoT monitoring is IMPERFECT - some misbehaviour goes unnoticed - but it shows promise and warrants further research + investment ALONGSIDE existing methods. Key stance: CoT monitorability MAY BE FRAGILE, so frontier developers should consider the impact of development decisions on it. This is the anchor node for the run-147 and run-153 findings: concept_anti_scheming_mitigation_confounded_by_eval_awareness (behaviour-under-observation confound), concept_cot_obfuscation_hits_the_message_channel_hardest (deliberate obfuscation defeats it on some models, worse on the external/message channel). For this project specifically: (1) the Phase 0 trace substrate's readability is a PROPERTY TO ACTIVELY PRESERVE, not an assumption - it should be a measured input to the loop, not a given; (2) 'weigh development decisions by their effect on monitorability' applies to the middle loop - a harness edit could degrade the legibility of the traces the OUTER loop depends on, so monitorability belongs in the Phase 3 grounded-acceptance risk measure, not just held-out task quality.",
+      "tags": [
+        "cot-monitorability",
+        "fragile-safety-property",
+        "multi-org-position-paper",
+        "imperfect-oversight",
+        "preserve-not-assume",
+        "development-decisions-affect-it",
+        "monitorability-as-a-risk-measure"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-14-1200.md",
+        "arXiv:2507.11473 (Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety) - VERIFIED, abstract read run 154; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-14-1200.md"
       ]
     }
   ],
@@ -14368,6 +14399,72 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "The ungated interior's transparency benefit (emergent_whistleblowing, visible reasoning) degrades to the extent a model under pressure can obfuscate the channel being watched."
+    },
+    {
+      "id": "edge_cotmon_supports_five_w",
+      "source": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The trace substrate exploits CoT/message monitorability; this paper says that property is real, useful, and worth investing in - alongside other methods, not alone."
+    },
+    {
+      "id": "edge_cotmon_challenges_five_w_assumption",
+      "source": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "target": "concept_step_count_is_the_horizon_limit",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.35,
+      "description": "'Fragile' - monitorability is not a fixed asset; the Phase 0 substrate should measure its own trace legibility over a run, not assume it."
+    },
+    {
+      "id": "edge_cotmon_refines_eval_awareness",
+      "source": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "target": "concept_anti_scheming_mitigation_confounded_by_eval_awareness",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The position-paper anchor: eval-awareness confound and obfuscation are two of the fragility mechanisms this paper warns developers to weigh."
+    },
+    {
+      "id": "edge_cotmon_refines_obfuscation",
+      "source": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "target": "concept_cot_obfuscation_hits_the_message_channel_hardest",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The obfuscation stress-test is one concrete measurement of the fragility this paper names."
+    },
+    {
+      "id": "edge_cotmon_informs_grounded_acceptance",
+      "source": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "'Weigh development decisions by their effect on monitorability' -> trace legibility should be part of the Phase 3 grounded-acceptance risk measure, not just held-out task quality."
+    },
+    {
+      "id": "edge_cotmon_supports_activation_probe_monitoring",
+      "source": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "target": "pattern_activation_probe_monitoring",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "'Alongside existing safety methods' - the paper explicitly does not claim CoT monitoring is sufficient alone, which is the design's both-channels stance."
     }
   ]
 }
