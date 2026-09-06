@@ -36,6 +36,20 @@ The criterion predicts a strong positive delta ONLY when a & b & c are all on,
 and a non-positive delta whenever b is off (herding) or c is off (correlated
 errors).
 
+FLOCK arm (run 273) — from the `challenges` edge run 262 put on this criterion
+(`concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner`).
+A third architecture with NO synthesiser: K agents each do one subtask, each reads
+a bounded neighbourhood of prior contributions from a shared artifact store (local
+contagion — a wrong neighbour can drag you, but there is no global vote to herd
+on), and the store itself is the output (global success = enough subtasks right,
+graceful partial failure). Knobs (a) verifiable and (c) disjoint apply; (b) does
+not (no synthesis step). The question: does condition (b) "deterministic
+synthesis" hold as *necessary*, or is stigmergic accretion a viable third
+integration mode? Verdict at these params: the flock helps with a&c, sits below
+the perfect a&b&c MULTI ceiling but ABOVE every vote-synthesis MULTI — so (b)
+should read "deterministic synthesis OR bounded-neighbourhood stigmergic
+accretion", not "deterministic synthesis" alone.
+
 No model call — the finding is about how per-subtask, synthesis, and correlation
 failure probabilities compound. Swap `_subtask_ok` / `_synthesis_ok` for real
 agent runs.
@@ -67,6 +81,11 @@ SHED_VOTE = 0.04       # extra per-disagreeing-agent herding failure on top of B
 POOL_POISON = 0.55     # prob a shared evidence pool holds a poisoned fact (when NOT disjoint)
 POISON_DRAG = 0.35     # how much a poisoned shared fact lowers a subtask's success
 K = 8                  # subtasks per task
+
+FLOCK_NEIGHBOURHOOD = 3   # prior contributions a flock agent reads from the shared store
+FLOCK_CONTAGION = 0.45    # prob a wrong neighbour contribution drags this agent's subtask
+FLOCK_ACCEPT_FRAC = 0.95  # fraction of subtasks that must land right (no synthesiser to merge partials)
+FLOCK_NO_REVIEW = 0.03    # per-contribution penalty: no synthesis step does a final consistency check
 
 
 def _subtask_ok(rng, idx, *, accumulating, poisoned):
@@ -106,11 +125,30 @@ def run_multi(rng, *, verifiable, deterministic, disjoint):
     return n_disagree <= K // 3      # a vote papers over a minority of failures
 
 
+def run_flock(rng, *, verifiable, disjoint, neighbourhood=FLOCK_NEIGHBOURHOOD):
+    """No synthesiser. K agents append to a shared store; each reads a bounded
+    neighbourhood of prior contributions and can be dragged by a wrong one. The
+    store is the output — global success = enough subtasks land right."""
+    poisoned_pool = (not disjoint) and (rng.random() < POOL_POISON)
+    store = []
+    for _ in range(K):
+        touches_poison = poisoned_pool and (rng.random() < 0.6)
+        recent = store[-neighbourhood:]
+        dragged = any((not ok) and rng.random() < FLOCK_CONTAGION for ok in recent)
+        ok = _subtask_ok(rng, 0, accumulating=False, poisoned=touches_poison or dragged)
+        if not ok and verifiable and not touches_poison and not dragged:
+            # a fresh peer re-does it; catches an INDEPENDENT error, not a contagion/poison one
+            ok = _subtask_ok(rng, 0, accumulating=False, poisoned=False)
+        if ok and rng.random() < FLOCK_NO_REVIEW:
+            ok = False       # no synthesis step to catch a subtle inconsistency before it lands
+        store.append(ok)
+    return sum(store) >= K * FLOCK_ACCEPT_FRAC
+
+
 def sweep(trials=4000, rec=None):
-    base = random.Random(SEED)
     single_wins = sum(run_single(random.Random(f"{SEED}-s-{t}")) for t in range(trials))
     single = single_wins / trials
-    out = {"single": round(single, 3), "combos": {}}
+    out = {"single": round(single, 3), "combos": {}, "flock": {}}
     for a, b, c in itertools.product((False, True), repeat=3):
         key = f"a{int(a)}b{int(b)}c{int(c)}"
         wins = sum(run_multi(random.Random(f"{SEED}-{key}-{t}"),
@@ -121,6 +159,15 @@ def sweep(trials=4000, rec=None):
                               "verifiable": a, "deterministic": b, "disjoint": c}
         if rec:
             rec.claim("probe", f"combo {key} delta vs single", [f"sim-combo-{key}"], layer="swarm")
+    for a, c in itertools.product((False, True), repeat=2):
+        key = f"a{int(a)}c{int(c)}"
+        wins = sum(run_flock(random.Random(f"{SEED}-flock-{key}-{t}"), verifiable=a, disjoint=c)
+                   for t in range(trials))
+        flock = wins / trials
+        out["flock"][key] = {"flock": round(flock, 3), "delta": round(flock - single, 3),
+                             "verifiable": a, "disjoint": c}
+        if rec:
+            rec.claim("probe", f"flock {key} delta vs single", [f"sim-flock-{key}"], layer="swarm")
     return out
 
 
@@ -132,6 +179,13 @@ def assess(res):
     best_non_full = max(v["delta"] for k, v in combos.items() if k != "a1b1c1")
     # "strongly helps" = a delta big enough to justify paying for the orchestration
     STRONG = 0.15
+    flock = res.get("flock", {})
+    flock_ac = flock.get("a1c1", {}).get("delta")
+    flock_vote_gap = None
+    if flock_ac is not None:
+        # best MULTI whose synthesis is a vote (b off), for the "flock beats a bad synthesiser" test
+        best_vote = max(v["delta"] for v in combos.values() if not v["deterministic"])
+        flock_vote_gap = round(flock_ac - best_vote, 3)
     return {
         "all_three_on_helps": all_on > 0.25,
         "all_three_on_is_best": all(all_on >= v["delta"] for v in combos.values()),
@@ -140,6 +194,13 @@ def assess(res):
         "criterion_is_load_bearing": all_on - best_non_full > 0.15,
         "all_on_delta": all_on,
         "best_non_full_delta": best_non_full,
+        # FLOCK arm (run 273): stigmergic accretion as a third integration mode
+        "flock_ac_helps": (flock_ac is not None and flock_ac > 0.10),
+        "flock_below_deterministic_ceiling": (flock_ac is not None and flock_ac < all_on),
+        "flock_beats_best_vote_synthesis": (flock_vote_gap is not None and flock_vote_gap > 0.05),
+        "flock_shared_pool_not_strong": (flock.get("a1c0", {}).get("delta", 1.0) <= STRONG),
+        "flock_ac_delta": flock_ac,
+        "flock_minus_best_vote": flock_vote_gap,
         "verdict": None,
     }
 
@@ -152,9 +213,21 @@ def _verdict(a):
     if not (a["vote_synthesis_never_strongly_helps"] and a["shared_pool_never_strongly_helps"]):
         return (f"PARTIAL at these params: a&b&c helps ({a['all_on_delta']:+.3f}), but a vote-synthesis or "
                 f"shared-pool config also helps — the criterion's necessity conditions are not clean here")
-    return (f"CONFIRMS at these params: multi-agent helps ({a['all_on_delta']:+.3f}) only with verifiable "
+    base = (f"CONFIRMS at these params: multi-agent helps ({a['all_on_delta']:+.3f}) only with verifiable "
             f"subtasks + deterministic synthesis + disjoint evidence; the best config missing any one of the "
             f"three is {a['best_non_full_delta']:+.3f}")
+    if a.get("flock_ac_delta") is not None:
+        if (a["flock_ac_helps"] and a["flock_below_deterministic_ceiling"]
+                and a["flock_beats_best_vote_synthesis"]):
+            base += (f". FLOCK arm: stigmergic accretion (no synthesiser) with verifiable + disjoint "
+                     f"subtasks helps {a['flock_ac_delta']:+.3f} — below the deterministic-synthesis "
+                     f"ceiling but {a['flock_minus_best_vote']:+.3f} above the best vote-synthesis MULTI. "
+                     f"Condition (b) should read 'deterministic synthesis OR bounded-neighbourhood "
+                     f"stigmergic accretion', not 'deterministic synthesis' alone")
+        else:
+            base += (f". FLOCK arm inconclusive at these params "
+                     f"(delta {a['flock_ac_delta']:+.3f})")
+    return base
 
 
 def _selftest():
@@ -182,10 +255,17 @@ def _selftest():
         "verdict text is CONFIRMS": a["verdict"].startswith("CONFIRMS"),
         "trace validates": not trace_errors,
         "trace claims are on the swarm layer": '"layer": "swarm"' in trace,
+        "FLOCK: stigmergic accretion with verifiable+disjoint helps": a["flock_ac_helps"],
+        "FLOCK: sits below the deterministic-synthesis ceiling": a["flock_below_deterministic_ceiling"],
+        "FLOCK: beats the best vote-synthesis MULTI": a["flock_beats_best_vote_synthesis"],
+        "FLOCK: a shared pool still is not strongly helpful": a["flock_shared_pool_not_strong"],
+        "verdict names stigmergic accretion as a viable integration mode":
+            "stigmergic accretion" in a["verdict"],
     }
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print(f"\n  single={res['single']}  a1b1c1={res['combos']['a1b1c1']}")
+    print(f"  flock a1c1={res['flock']['a1c1']}")
     print(f"  verdict: {a['verdict']}")
     allok = all(checks.values())
     print("\nSELFTEST", "GREEN" if allok else "RED")

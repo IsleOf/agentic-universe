@@ -66,13 +66,36 @@ artifact; the strength of the "a vote is actively bad" claim depends on assuming
 moderate fraction of tasks, which the literature (`concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding`)
 supports.
 
+## The FLOCK arm (run 273)
+
+Run 262 put a `challenges` edge on the run-218 criterion:
+`concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner` (AWS Kiro) has
+**no synthesiser** — global structure accretes from bounded local contributions to a shared store — so
+condition (b) "deterministic synthesis" might not be necessary. `run_flock()` tests it: K agents each
+append one subtask result to a shared store, each reads a bounded neighbourhood (3) of prior
+contributions and can be dragged by a wrong one (`FLOCK_CONTAGION = 0.45`), plus a small
+`FLOCK_NO_REVIEW = 0.03` penalty (no synthesis step does a final consistency check); the store is the
+output, passing at ≥ 95% subtasks right (`FLOCK_ACCEPT_FRAC`). Knobs (a) verifiable and (c) disjoint
+apply; (b) does not.
+
+Result (4000 trials/combo): flock with **verifiable + disjoint** helps **+0.31** vs SINGLE — clearly
+below the perfect deterministic-synthesis ceiling (**+0.52**) but **+0.26 above** the best vote-synthesis
+MULTI. A shared evidence pool still defeats it (`a1c0` delta +0.04), and without verification it is weaker
+(`a0c1` +0.21).
+
+**Reading:** stigmergic accretion is a genuine *third* integration mode — it captures ~60% of the
+perfect-synthesis benefit with no synthesiser at all, and vastly outperforms a vote. So run-218
+condition (b) should read **"deterministic synthesis OR bounded-neighbourhood stigmergic accretion"**,
+not "deterministic synthesis" alone. Conditions (a) verifiable and (c) disjoint are unchanged — the flock
+needs them just as MULTI does. The run-262 `challenges` edge is now a `refines`.
+
 ## Stub / Phase 6
 
 `_subtask_ok` and `_synthesis_ok` are the swap points for real agent runs. With a real multi-agent harness
-this becomes a Phase 6 (swarm-layer) probe: measure (a)/(b)/(c) on an actual orchestration trace via the
-Phase 0 substrate and predict whether the orchestration helped.
+this becomes a Phase 6 (swarm-layer) probe: measure (a)/(b)/(c) — and the flock arm — on an actual
+orchestration trace via the Phase 0 substrate and predict whether the orchestration helped.
 
 ## Selftest
 
-`python tools/probe_orchestration_value.py selftest` → GREEN (9 checks). `tools/selftest_all.py` includes
-it → **BUILD SELFTEST: GREEN**.
+`python tools/probe_orchestration_value.py selftest` → GREEN (14 checks, incl. 5 for the flock arm).
+`tools/selftest_all.py` includes it → **BUILD SELFTEST: GREEN**.

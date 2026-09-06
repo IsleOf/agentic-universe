@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-27",
+  "last_updated": "2026-09-28",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1040,6 +1040,10 @@
     {
       "date": "2026-09-27",
       "change": "Autonomous run 270. IDLE-STATE RULE clause c - consistency pass on the runs 260-268 fold of the owner's research input. Finding: 24 of 30 new nodes had ZERO inbound edges - weakly integrated, reachable only by traversing outward from them. Added 14 edges, no new nodes: 5 inbound from the pre-existing graph (semantic-compression informs homeostasis; herding informs the epistemic market; creativity-decline informs learnable-novelty; metacognitive-monitoring informs interoception; execution-layer informs the spine/edge split) and 9 cross-cluster (flock supports evidence-cells; learnable-novelty informs Go-Explore; DiagEvo supports interoception; active-inference informs the epistemic market; dev-harness supports conditional-trust; SPADE supports task-genome; cultural-transmission challenges skill-induction; safety-case template <-> homeostasis + optionality). 305 nodes / 1207 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-28",
+      "change": "Autonomous run 273. IDLE-STATE RULE clause b - built the FLOCK arm for tools/probe_orchestration_value.py, testing the challenges edge run 262 put on the run-218 multi-agent criterion. run_flock(): no synthesiser - K agents append to a shared store, each reads a bounded neighbourhood and can be dragged by a wrong contribution, plus a no-final-review penalty; the store is the output, passing at >=95% subtasks right. Result (verifiable + disjoint): flock helps +0.31 vs SINGLE, below the deterministic-synthesis ceiling (+0.52) but far above any vote-synthesis MULTI; a shared pool still kills it (+0.04). Finding: run-218 condition (b) is not strictly 'deterministic synthesis' - it is 'deterministic synthesis OR bounded-neighbourhood stigmergic accretion'; (a) and (c) still bind. The run-262 challenges edge becomes a refinement. 5 new rig selftest checks (14 total); BUILD SELFTEST GREEN. Graph: 305 nodes / 1207 -> 1209 edges (2 new edges: rig refines flock; flock refines the criterion). rig node + challenges-edge descriptions updated. Validator VALID."
     }
   ],
   "nodes": [
@@ -7618,7 +7622,7 @@
       "approach_family": "orchestration_first",
       "branch_key": "orchestration_first:orchestration_value_rig",
       "confidence": 0.72,
-      "description": "tools/probe_orchestration_value.py, run 221 (operationalises the run-218 synthesis concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic). Controlled sim: a task of K=8 subtasks, SINGLE (one agent, growing accumulation penalty) vs MULTI (K fresh agents + a synthesis step) with three binary knobs on MULTI - (a) verifiable: each subtask output is checked and retried once; (b) deterministic: synthesis is a computed merge, else a vote that adds BASE_HERD=0.50 + per-disagreement herding; (c) disjoint: subtask errors independent, else a shared evidence pool with a poisoned fact that verification CANNOT fix (the retry agent re-reads the same pool - epistemic Sybil collapse). Dry-run (4000 trials/combo): SINGLE ~0.46; MULTI with a&b&c +0.52 delta and strictly the best of the 8 combos; every combo missing any one of the three is <=+0.20 (best non-full = a0b1c1 at +0.20 - deterministic+disjoint without verification gives a modest benefit; verification makes it decisive); vote-synthesis combos and shared-pool combos never exceed +0.15. Verdict CONFIRMS the criterion at these params. Stub: _subtask_ok / _synthesis_ok (swap for real agent runs); a Phase 6 probe once a real multi-agent harness exists. Emits a swarm-layer trace that validates. SENSITIVITY (run 249): a 16-cell grid (BASE_HERD x POISON_DRAG, 2500 trials/cell) - the CONFIRMS verdict's shape is parameter-robust (a1b1c1 always +0.526 and strictly best; best partial always +0.192; a1b1c1/a0b1c1 are insensitive to both knobs by construction). One sub-check is parameter-sensitive: 'no vote-synthesis config strongly helps' needs BASE_HERD >= ~0.42 (the default 0.50 has margin); below the flip a vote is weakly helpful, never as good as a deterministic merge. See docs/probe_orchestration_value.md.",
+      "description": "tools/probe_orchestration_value.py, run 221 (operationalises the run-218 synthesis concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic). Controlled sim: a task of K=8 subtasks, SINGLE (one agent, growing accumulation penalty) vs MULTI (K fresh agents + a synthesis step) with three binary knobs on MULTI - (a) verifiable: each subtask output is checked and retried once; (b) deterministic: synthesis is a computed merge, else a vote that adds BASE_HERD=0.50 + per-disagreement herding; (c) disjoint: subtask errors independent, else a shared evidence pool with a poisoned fact that verification CANNOT fix (the retry agent re-reads the same pool - epistemic Sybil collapse). Dry-run (4000 trials/combo): SINGLE ~0.46; MULTI with a&b&c +0.52 delta and strictly the best of the 8 combos; every combo missing any one of the three is <=+0.20 (best non-full = a0b1c1 at +0.20 - deterministic+disjoint without verification gives a modest benefit; verification makes it decisive); vote-synthesis combos and shared-pool combos never exceed +0.15. Verdict CONFIRMS the criterion at these params. Stub: _subtask_ok / _synthesis_ok (swap for real agent runs); a Phase 6 probe once a real multi-agent harness exists. Emits a swarm-layer trace that validates. SENSITIVITY (run 249): a 16-cell grid (BASE_HERD x POISON_DRAG, 2500 trials/cell) - the CONFIRMS verdict's shape is parameter-robust (a1b1c1 always +0.526 and strictly best; best partial always +0.192; a1b1c1/a0b1c1 are insensitive to both knobs by construction). One sub-check is parameter-sensitive: 'no vote-synthesis config strongly helps' needs BASE_HERD >= ~0.42 (the default 0.50 has margin); below the flip a vote is weakly helpful, never as good as a deterministic merge. See docs/probe_orchestration_value.md. FLOCK ARM (run 273): a third architecture with NO synthesiser - K agents each append one subtask result to a shared store, each reads a bounded neighbourhood (3) of prior contributions and can be dragged by a wrong one (FLOCK_CONTAGION=0.45), plus a small no-final-review penalty (0.03); the store itself is the output, passing at >=95% subtasks right. Result (verifiable + disjoint): flock helps +0.31 vs SINGLE - BELOW the perfect deterministic-synthesis ceiling (+0.52) but far ABOVE any vote-synthesis MULTI, and a shared evidence pool still kills it (+0.04). So run-218 condition (b) is not strictly 'deterministic synthesis' - it is 'deterministic synthesis OR bounded-neighbourhood stigmergic accretion'; conditions (a) verifiable and (c) disjoint still bind. 5 new selftest checks (14 total in the rig).",
       "tags": [
         "when-multi-agent-helps",
         "verifiable-subtasks",
@@ -21156,10 +21160,10 @@
       "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
       "type": "challenges",
       "status": "speculative",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "orchestration_first",
       "confidence": 0.5,
-      "description": "The run-218 criterion requires a deterministic synthesiser to combine verified subtasks. The flock has no synthesiser and no central integrator - global structure accretes from bounded local contributions to shared artifacts. Either the criterion needs a third regime, or the flock only works where the artifacts themselves carry the integration (append-only logs, a direction file)."
+      "description": "The run-218 criterion requires a deterministic synthesiser to combine verified subtasks. The flock has no synthesiser and no central integrator - global structure accretes from bounded local contributions to shared artifacts. Either the criterion needs a third regime, or the flock only works where the artifacts themselves carry the integration (append-only logs, a direction file). RESOLVED (run 273, probe flock arm): stigmergic accretion IS a viable third integration mode - it captures ~60% of the perfect-synthesis benefit with no synthesiser. The criterion holds with condition (b) widened to 'deterministic synthesis OR bounded-neighbourhood stigmergic accretion'; (a) and (c) are unchanged. The challenge becomes a refinement."
     },
     {
       "id": "edge_flock_refines_stigmergy",
@@ -22018,6 +22022,28 @@
       "approach_family": "agent_habitat",
       "confidence": 0.4,
       "description": "The template's transfer-test point (point 6) is an option-value check: does the behaviour keep its value in a second environment."
+    },
+    {
+      "id": "edge_orch_value_rig_refines_flock",
+      "source": "artifact_probe_orchestration_value_rig",
+      "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "The run-273 flock arm gives the flock concept a measured envelope: helps only with verifiable + disjoint subtasks; ceiling ~60% of a perfect deterministic synthesis; a shared evidence pool defeats it just as it defeats MULTI. Stigmergic accretion is real but not free."
+    },
+    {
+      "id": "edge_flock_refines_multiagent_criterion",
+      "source": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Widens condition (b): the run-218 criterion's 'deterministic synthesis' should read 'deterministic synthesis OR bounded-neighbourhood stigmergic accretion'. The flock is the second admissible integration mode; a vote/consensus is still not one."
     }
   ]
 }

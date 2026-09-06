@@ -1,0 +1,23 @@
+{
+  "run": 273,
+  "increment": "build the FLOCK arm for probe_orchestration_value; resolve the run-262 challenges edge on the multi-agent criterion",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 8,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 2
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-273.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 273 OK · VALID · graph +0n/+2e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.79 · novelty n/a"
+}

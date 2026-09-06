@@ -103,7 +103,7 @@ written, selftested `model_*` adapter (runs 134–140) — pass one `call_model`
 | `probe_epistemic_sybil.py` | shared-source coverage collapse; dedup recovery | `model_reader(call_model, corpus)` |
 | `probe_activation_generalisation.py` | activation-probe generalisation gap on emergent collusion | — (needs activations; degraded text mode in `docs/remaining_seams.md`) |
 | `probe_composed_design.py` | short-agent + four-field + folded-state composes but bounded | — (needs a real harness; single-agent `p` path in `docs/remaining_seams.md`) |
-| `probe_orchestration_value.py` | multi-agent helps only with verifiable subtasks + deterministic synthesis + disjoint evidence (verdict CONFIRMS, run 221) | — (needs a real multi-agent harness; `_subtask_ok` / `_synthesis_ok` stubs) |
+| `probe_orchestration_value.py` | multi-agent helps only with verifiable subtasks + disjoint evidence + (deterministic synthesis **or** bounded-neighbourhood stigmergic accretion); a vote never helps. Verdict CONFIRMS (run 221); FLOCK arm (run 273) widens condition (b) | — (needs a real multi-agent harness; `_subtask_ok` / `_synthesis_ok` / `run_flock` stubs) |
 
 ## Fresh-clone setup
 
