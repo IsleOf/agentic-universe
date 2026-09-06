@@ -1,7 +1,7 @@
 {
   "project": "agentic-universe",
   "format": "agentic-universe project graph v1",
-  "last_updated": "2026-09-06",
+  "last_updated": "2026-09-24",
   "nodes": [
     {
       "id": "au__root",
@@ -172,7 +172,7 @@
       "type": "component",
       "status": "live",
       "confidence": 0.65,
-      "description": "Every entry carries source_manifest + raw source_events; stale(current_manifest) forces re-verify. Retention (run 175): utility_score, prune with a grace window, record_use(helped). CHALLENGED by Shared Org Memory (2608.00122): capture must be platform-level, not agent-initiated.",
+      "description": "Every entry carries source_manifest + raw source_events; stale(current_manifest) forces re-verify. Retention (run 175): utility_score, prune with a grace window, record_use(helped). Write gate (run 256): write_gate() screens every add() - hard-rejects injection markers / oversize / unknown collection, soft-flags missing roots or manifest to _gate + _writes.audit. CHALLENGED by Shared Org Memory (2608.00122): agent-initiated capture is unreliable; the automatic-capture half is still missing.",
       "derived_from": [
         "tools/experience_bank.py",
         "docs/phase2_experience_bank.md"
@@ -366,10 +366,11 @@
       "label": "question: the experience bank condenses from traces but agents do not reliably RECORD the lesson first",
       "type": "question",
       "status": "open",
-      "confidence": 0.45,
-      "description": "concept_human_knowledge_capture_must_be_platform_level_... (run 241, Shared Org Memory - a production deployment). Two fixes the project lacks: capture as an automatic platform step; an approval + risk-gate on every write (also a memory-poisoning defense).",
+      "confidence": 0.6,
+      "description": "concept_human_knowledge_capture_must_be_platform_level_... (run 241, Shared Org Memory - a production deployment) names two fixes the project lacked: (1) an approval + risk-gate on every write, also a memory-poisoning defense; (2) capture as an automatic platform step. (1) is DONE - run 256 added experience_bank.write_gate (deterministic pre-write screen: hard-reject injection markers / oversize / bad collection, soft-flag missing provenance to _writes.audit). (2) remains open - it needs the platform integration point, still a handoff.",
       "derived_from": [
-        "docs/phase2_experience_bank.md"
+        "docs/phase2_experience_bank.md",
+        "docs/auto_sweep_2026-09-24-0600.md"
       ],
       "tags": [
         "risk"
@@ -565,6 +566,10 @@
     {
       "date": "2026-09-06",
       "change": "Created (run 251). The agentic-universe project as a ~30-node component/decision/constraint/question graph in its own format - the worked example for docs/practicing_what_we_preach.md sec 3 and the reference a fresh session (or a poly-bot audit) copies."
+    },
+    {
+      "date": "2026-09-24",
+      "change": "Run 257. Kept the project graph current after run 256: au__q_memory_capture's risk-gate half is built (experience_bank.write_gate), only the automatic-capture half stays open; au__c_experience_bank description gains the write gate. No node/edge count change (26/24)."
     }
   ]
 }

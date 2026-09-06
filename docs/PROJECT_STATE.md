@@ -63,7 +63,10 @@ human-in-the-loop step the plan always had.
 3. `au__q_phase6_swarm` — a real multi-agent harness does not exist in the repo.
 4. `au__q_novelty_in_gate` — promote `run_novelty` from advisory to a gate check (needs a held-out re-run
    to calibrate).
-5. `au__q_memory_capture` — the experience bank assumes the agent recorded the lesson; it often doesn't.
+5. `au__q_memory_capture` — half-closed (run 256): the write-side risk gate is built
+   (`experience_bank.write_gate` — deterministic injection/oversize/provenance screen on every `add()`);
+   the other half, *automatic* platform-level capture (the agent doesn't decide what's worth recording),
+   still needs the integration point.
 
 ## What would make this wrong
 
