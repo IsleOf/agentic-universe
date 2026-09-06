@@ -908,6 +908,10 @@
     {
       "date": "2026-09-19",
       "change": "Autonomous run 236. Recency-weighted node-deepening sweep (s2 citations of AHE arXiv:2604.25850). Folded WHALE (arXiv:2609.00196, Aug 2026) as concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model: agent performance depends jointly on weights and harness; optimizing either alone leaves the system bottlenecked by its frozen counterpart. WHALE alternates weight update (rejection-sampling FT) and harness search (Meta-Harness); Qwen3.5-2B/4B across search-QA / math / chess, beats weight-only / harness-only / Fast-Slow by 4.15-24.38pp. Either can be the bottleneck: harness search wins SearchQA cheaply, but math needs a weight update. The sharpest EMPIRICAL challenge to the no-weight-training fork, on SMALL models. 5 edges: challenges approach_emergence_first; supports concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension (a small trained-beats-frozen cluster for run-234 severity-6), concept_bottleneck_is_the_model_harness_coupling (operationalises the coupling), concept_capability_is_a_model_harness_config_property; refines concept_ace_context_evolution_self_improvement (prompt evolution leaves the executable harness on the table). 262->263 nodes, 1032->1037 edges."
+    },
+    {
+      "date": "2026-09-19",
+      "change": "Autonomous run 237. Consistency / adversarial pass (IDLE-STATE RULE clause c). docs/emergence_first_posture.md 'What this is a bet on' gains 'The second bet, made explicit': the no-weight-training bet is separable from emergence-first and the project makes both; the honest response to WHALE (2609.00196) and JIT-Agent (2608.25593) is that harness-only elicitation is enough for elicitation-shaped tasks (research direction-setting, graph engineering, adversarial reading - most of what the loop does) and hits a ceiling on capability-shaped tasks (novel math, long-horizon planning against a frozen small model). 1 challenges edge (WHALE node -> principle_affordance_over_constraint). No graph node change."
     }
   ],
   "nodes": [
@@ -18910,6 +18914,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "ACE evolves context playbooks (no weights); WHALE's point is that 'existing joint-adaptation methods optimize weights and textual prompts but leave the broader harness fixed' - and that context/prompt evolution alone leaves the executable harness (tools, middleware, control flow) on the table."
+    },
+    {
+      "id": "edge_whale_challenges_no_training_bet_in_posture",
+      "source": "concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model",
+      "target": "principle_affordance_over_constraint",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "docs/emergence_first_posture.md (run 237) now names the no-weight-training bet explicitly and states the WHALE / JIT-Agent evidence against it: harness-only elicitation is bottlenecked by the frozen model on capability-shaped tasks. The affordance-over-constraint principle assumes room + a frozen model is enough to elicit the interesting behaviour; WHALE says on some task shapes it is not."
     }
   ]
 }

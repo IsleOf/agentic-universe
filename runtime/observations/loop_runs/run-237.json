@@ -1,0 +1,20 @@
+{
+  "run": 237,
+  "increment": "consistency/adversarial pass - docs/emergence_first_posture.md names the no-weight-training bet explicitly and states the honest WHALE/JIT-Agent response (elicitation-shaped vs capability-shaped tasks); 0 nodes / 1 edge",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-237.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 237 OK · VALID · graph +0 · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80"
+}
