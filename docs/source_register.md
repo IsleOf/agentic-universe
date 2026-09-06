@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 197 nodes, 644 edges · **Date:** 2026-09-05
+**Graph at generation:** 198 nodes, 650 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -52,6 +52,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
 | [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
 | [2602.15894](https://arxiv.org/abs/2602.15894) | Quality-constrained Entropy Maximization Policy Optimization | `pattern_verbalized_sampling` |
+| [2603.07360](https://arxiv.org/abs/2603.07360) | (title not recorded) | `concept_environmental_pressure_has_an_inverted_u` |
 | [2603.20975](https://arxiv.org/abs/2603.20975) | DiscoUQ: structured disagreement for uncertainty quantification | `pattern_fresh_context_evaluation` |
 | [2603.26089](https://arxiv.org/abs/2603.26089) | mental self-modelling deficits | `emergent_consciousness_like_self_modeling`, `emergent_theory_of_mind` |
 | [2603.28990](https://arxiv.org/abs/2603.28990) | self-organizing roles / Drop the Hierarchy and Roles | `emergent_self_organizing_roles` |
@@ -331,6 +332,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-01-1200.md` — `concept_moral_preferences_are_framing_brittle`
 - `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`
 - `docs/auto_sweep_2026-10-03-0000.md` — `concept_self_harness_validates_the_three_loop`
+- `docs/auto_sweep_2026-10-03-1200.md` — `concept_environmental_pressure_has_an_inverted_u`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
