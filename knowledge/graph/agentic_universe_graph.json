@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-20",
+  "last_updated": "2026-10-21",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -672,6 +672,10 @@
     {
       "date": "2026-10-20",
       "change": "Autonomous run 177. DBLP. Deepened emergent_social_conventions with a VERIFIED read of Emergent Social Conventions and Collective Bias in LLM Populations (Baronchelli et al., arXiv:2410.08948, Science Advances 2025): three results - spontaneous universal convention emergence; STRONG COLLECTIVE BIAS even when no agent is individually biased (a fifth diversity-keystone erosion mechanism - convention formation itself manufactures bias); a committed adversarial minority past critical mass can capture the population's conventions (norms as engineerable design surface AND attack surface). +3 edges; description + derived_from (VERIFIED) + tags extended."
+    },
+    {
+      "date": "2026-10-21",
+      "change": "Autonomous run 178. Consolidation. Folded run-177 (Baronchelli collective bias) into what_would_make_this_wrong.md section 4: a FIFTH diversity-keystone erosion channel, and the worst-shaped one - collective bias emerges even when no agent is individually biased, so individual-level diversity maintenance (heterogeneous models, decorrelated prompts, withheld fraction) cannot touch it; no design mechanism exists short of not letting the population form standing conventions. Updated the run-172 severity ranking's section-4 line: one channel may be structurally unresolvable without dropping the society surface. No graph node/edge change."
     }
   ],
   "nodes": [

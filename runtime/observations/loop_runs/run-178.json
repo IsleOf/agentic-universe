@@ -1,0 +1,26 @@
+{
+  "run": 178,
+  "increment": "consolidation - fold run-177 collective-bias into what_would_make_this_wrong.md section 4 (fifth erosion channel)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2410.08948",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2410.08948"
+  ],
+  "trace_file": "runtime\\traces\\loop-178.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
