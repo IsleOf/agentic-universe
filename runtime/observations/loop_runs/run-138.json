@@ -1,0 +1,29 @@
+{
+  "run": 138,
+  "increment": "correct the run-136 mis-citation (arXiv:2502.08691 is AgentSociety, not a Shall We Team Up companion) + fold AgentSociety as its own node",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "citations": [
+    {
+      "id": "arXiv:2502.08691",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2502.08691"
+  ],
+  "trace_file": "runtime\\traces\\loop-138.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
