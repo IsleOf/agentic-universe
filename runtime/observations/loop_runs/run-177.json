@@ -1,0 +1,29 @@
+{
+  "run": 177,
+  "increment": "deepen emergent_social_conventions with a VERIFIED read of Baronchelli collective-bias paper (arXiv:2410.08948)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 3
+  },
+  "citations": [
+    {
+      "id": "arXiv:2410.08948",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2410.08948"
+  ],
+  "trace_file": "runtime\\traces\\loop-177.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

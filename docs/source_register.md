@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 228 nodes, 821 edges · **Date:** 2026-09-05
+**Graph at generation:** 228 nodes, 824 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -45,6 +45,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | arXiv | Work | Used for |
 | --- | --- | --- |
 | [2312.10003](https://arxiv.org/abs/2312.10003) | (title not recorded) | `concept_rest_react_founds_the_trajectory_retrain_loop` |
+| [2410.08948](https://arxiv.org/abs/2410.08948) | (title not recorded) | `emergent_social_conventions` |
 | [2412.04984](https://arxiv.org/abs/2412.04984) | (title not recorded) | `concept_frontier_models_can_scheme_in_context` |
 | [2502.02534](https://arxiv.org/abs/2502.02534) | (title not recorded) | `concept_adaptive_self_improvement_in_the_low_data_regime` |
 | [2502.08691](https://arxiv.org/abs/2502.08691) | (title not recorded) | `concept_agentsociety_large_scale_generative_society` |
@@ -395,6 +396,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-18-1800.md` — `concept_incomplete_task_induces_shutdown_resistance`
 - `docs/auto_sweep_2026-10-19-1800.md` — `concept_naive_trajectory_accumulation_already_helps`
 - `docs/auto_sweep_2026-10-20-0600.md` — `concept_agent_communication_is_a_layered_attack_surface`
+- `docs/auto_sweep_2026-10-20-1200.md` — `emergent_social_conventions`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

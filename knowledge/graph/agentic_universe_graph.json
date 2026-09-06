@@ -668,6 +668,10 @@
     {
       "date": "2026-10-20",
       "change": "Autonomous run 176. DBLP. concept_agent_communication_is_a_layered_attack_surface (A Survey of LLM-Driven AI Agent Communication, arXiv:2506.19676): agent-agent + agent-tool communication (MCP, A2A) as three classes over a three-layered architecture, with per-layer security risks and countermeasures, plus experimental MCP/A2A vulnerabilities. Gives the swarm messaging topology a layered risk taxonomy; MCP servers are inbound channels for Phase 5; a companion decomposition to the six runtime responsibilities. +5 edges."
+    },
+    {
+      "date": "2026-10-20",
+      "change": "Autonomous run 177. DBLP. Deepened emergent_social_conventions with a VERIFIED read of Emergent Social Conventions and Collective Bias in LLM Populations (Baronchelli et al., arXiv:2410.08948, Science Advances 2025): three results - spontaneous universal convention emergence; STRONG COLLECTIVE BIAS even when no agent is individually biased (a fifth diversity-keystone erosion mechanism - convention formation itself manufactures bias); a committed adversarial minority past critical mass can capture the population's conventions (norms as engineerable design surface AND attack surface). +3 edges; description + derived_from (VERIFIED) + tags extended."
     }
   ],
   "nodes": [
@@ -1576,23 +1580,30 @@
       "label": "Emergent social conventions and norms",
       "type": "emergent_behavior",
       "status": "speculative",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "emergent_behaviors",
       "branch_key": "emergent_behaviors:swarm_level",
       "confidence": 0.5,
-      "description": "Repeated local interaction produces stable shared conventions - honesty defaults, consent, escalation paths - with no global planner. Engineerable: a committed minority acting as norm anchors can steer which convention the population settles on, which makes norms a design surface rather than only an observation.",
+      "description": "Repeated local interaction produces stable shared conventions - honesty defaults, consent, escalation paths - with no global planner. Source: Emergent Social Conventions and Collective Bias in LLM Populations (Baronchelli et al., arXiv:2410.08948, Science Advances 2025; VERIFIED via arXiv abstract read run 177). THREE experimental results in decentralized LLM-agent populations playing a naming game: (1) SPONTANEOUS EMERGENCE of a universally adopted convention with no explicit programming and no central coordination; (2) STRONG COLLECTIVE BIAS emerges during that process EVEN WHEN AGENTS EXHIBIT NO BIAS INDIVIDUALLY - a group-level distortion that is invisible in any single agent; (3) a COMMITTED ADVERSARIAL MINORITY can drive social change, imposing an alternative convention on the larger population once it passes a critical mass. For this project: (2) is a FIFTH diversity-keystone erosion mechanism distinct from the four already listed (shared priors / shared evidence / interaction compression / emergent hubs) - convention FORMATION itself manufactures collective bias, so a population of individually-unbiased, process-diverse agents can still converge on a biased norm; and (3) makes norms an engineerable design surface (committed minority as norm anchor) but ALSO an attack surface - an adversarial minority in a free-interior swarm can capture the population's conventions, which is exactly what pattern_adversarial_agentic_monitor and pattern_ostrom_swarm_governance have to detect and resist. Related: arXiv:2608.02178 (Naming Games - consensus via temperature-dependent listener regimes) and arXiv:2609.03192 (Where Reliability Lives - false-claim acceptance is institution- and world-driven more than cognition-driven).",
       "tags": [
-        "norms",
+        "baronchelli-science-advances-2025",
+        "collective-bias-from-unbiased-individuals",
+        "committed-minority-critical-mass",
+        "convention-capture-attack-surface",
         "conventions",
-        "self-organization",
+        "naming-game",
         "norm-anchors",
+        "norms",
+        "self-organization",
         "swarm-level"
       ],
       "derived_from": [
         "Perplexity synthesis 2026-09-01 (owner-supplied); citations spot-verified 2026-09-01",
         "curvelabs.org 'Norm Engineering'",
         "Science Advances-style convention studies",
-        "arXiv:2608.02178 (Naming Games) - consensus via temperature-dependent listener regimes, sensitivity spanning 0 to 0.67 across architectures; arXiv:2609.03192 (Where Reliability Lives) - acceptance of false claims is stable across large cognitive changes, so norm behaviour is institution- and world-driven more than cognition-driven"
+        "arXiv:2608.02178 (Naming Games) - consensus via temperature-dependent listener regimes, sensitivity spanning 0 to 0.67 across architectures; arXiv:2609.03192 (Where Reliability Lives) - acceptance of false claims is stable across large cognitive changes, so norm behaviour is institution- and world-driven more than cognition-driven",
+        "arXiv:2410.08948 (Emergent Social Conventions and Collective Bias in LLM Populations, Baronchelli et al., Science Advances 2025) - VERIFIED, abstract read run 177",
+        "docs/auto_sweep_2026-10-20-1200.md"
       ],
       "evidence_links": [
         "docs/emergence_probe_catalogue.md"
@@ -15257,6 +15268,39 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "Recording sender/receiver/channel/purpose per message is the observability half of a layered defence - you cannot defend a layer you do not log."
+    },
+    {
+      "id": "edge_socialconv_challenges_diversity_maintenance",
+      "source": "emergent_social_conventions",
+      "target": "principle_diversity_maintenance",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Collective bias emerges during convention formation even when no agent is individually biased - a fifth erosion mechanism: the norming process itself manufactures group-level distortion in an otherwise-diverse population."
+    },
+    {
+      "id": "edge_socialconv_challenges_adversarial_monitor",
+      "source": "emergent_social_conventions",
+      "target": "pattern_adversarial_agentic_monitor",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "A committed adversarial minority past a critical mass can capture the population's conventions - the monitor has to detect norm-capture, not just individual misbehaviour."
+    },
+    {
+      "id": "edge_socialconv_supports_ostrom_governance",
+      "source": "emergent_social_conventions",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Norms are engineerable (committed minority as anchor) - Ostrom-style collective-choice mechanisms are how a population sets its own conventions deliberately rather than drifting or being captured."
     }
   ]
 }
