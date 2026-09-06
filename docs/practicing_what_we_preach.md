@@ -77,7 +77,10 @@ tool depends on it.
 ## 3. Auditing poly-bot / poster-studio — recommended method
 
 **Yes — let a session per project write a knowledge graph + a handover doc in this project's format.**
-The tooling is already reusable:
+The tooling is now built (`tools/project_graph_scaffold.py`, run 251) and there is a **worked example**:
+`knowledge/graph/agentic_universe_project_graph.json` (26 nodes) + `docs/PROJECT_STATE.md` — this project,
+in its own format. `python tools/project_graph_scaffold.py new poly-bot` writes the starter files;
+`… validate <graph>` checks any project graph against the schema + the node/edge vocabulary. The steps:
 
 1. **One session per project** does a codebase read and produces:
    - a **small graph** (aim 20–50 nodes) using the schema in `tools/knowledge_graph.py`:

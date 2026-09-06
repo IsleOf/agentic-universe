@@ -45,6 +45,7 @@ JOBS = [
     ("graph_diff.py", ["selftest"]),
     ("task_ledger.py", ["selftest"]),
     ("supervisor.py", ["selftest"]),
+    ("project_graph_scaffold.py", ["selftest"]),
 ]
 
 

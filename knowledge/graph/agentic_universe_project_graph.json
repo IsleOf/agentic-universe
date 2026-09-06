@@ -1,0 +1,570 @@
+{
+  "project": "agentic-universe",
+  "format": "agentic-universe project graph v1",
+  "last_updated": "2026-09-06",
+  "nodes": [
+    {
+      "id": "au__root",
+      "label": "Agentic Universe: a versioned knowledge graph + a self-improving research loop about emergent agent behaviour and self-improving agent harnesses",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "A research repo. Two artefacts: (1) knowledge/graph/agentic_universe_graph.json - 272 nodes / 1091 edges, VERIFIED-arXiv literature + built artifacts, edited by an autonomous loop; (2) the loop itself - tools/loop_session.py wraps each run, tools/improvement_loop.py is the Phase 3 gate. docs/ is the orientation layer; the graph JSON is the source of truth.",
+      "derived_from": [
+        "README.md",
+        "docs/graph_state_2026-09.md"
+      ],
+      "tags": [
+        "root"
+      ]
+    },
+    {
+      "id": "au__d_emergence_first",
+      "label": "Decision: emergence-first (observe -> understand -> build structure), not specify -> constrain -> treat deviation as failure",
+      "type": "decision",
+      "status": "live",
+      "confidence": 0.75,
+      "description": "docs/emergence_first_posture.md. The bet: the interesting behaviour is not the behaviour we specify. Recorded in the graph as principle_affordance_over_constraint, with its tension vs concept_trust_gates as an explicit challenges edge.",
+      "derived_from": [
+        "docs/emergence_first_posture.md"
+      ],
+      "tags": [
+        "posture"
+      ]
+    },
+    {
+      "id": "au__d_no_weight_training",
+      "label": "Decision: no weight training - capability is elicited from a frozen model by a versioned harness",
+      "type": "decision",
+      "status": "live",
+      "confidence": 0.6,
+      "description": "The second bet (posture doc, run 237). Improvement axis = the harness (versioned components, skills, context), not model weights. Trade: interpretability + no training infra, accepting a ceiling on capability-shaped tasks. CHALLENGED by WHALE (2609.00196) and JIT-Agent (2608.25593) - see au__q_no_training_ceiling.",
+      "derived_from": [
+        "docs/emergence_first_posture.md",
+        "docs/what_would_make_this_wrong.md sec 6"
+      ],
+      "tags": [
+        "posture",
+        "fork"
+      ]
+    },
+    {
+      "id": "au__d_verifier_gated",
+      "label": "Decision: every self-edit is verifier-gated against a frozen, exogenous held-out set - the agent cannot author or inspect its acceptance test",
+      "type": "decision",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "tools/holdout_tasks.py (17 frozen tasks) + tools/improvement_loop.py verify_loop_edit (6 checks + advisory paired_eprocess + deterministic_repair). Independently arrived at by SEAL, PACE, Who-Grades-the-Grader, ACES, RQGM (the runs 203-214 acceptor cluster).",
+      "derived_from": [
+        "docs/self_improving_harness_plan.md sec Phase 3",
+        "docs/phase3_holdout_set.md"
+      ],
+      "tags": [
+        "gate"
+      ]
+    },
+    {
+      "id": "au__d_pure_stdlib",
+      "label": "Decision: pure Python stdlib, no dependencies, no network, deterministic retrieval",
+      "type": "decision",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "tools/ is stdlib-only. Validated against Harness Engineering (2609.00006): no production harness imports an agentic framework or uses vector code-retrieval. experience_bank retrieval is substring/key match.",
+      "derived_from": [
+        "tools/README.md",
+        "docs/harness_anatomy_self_audit.md"
+      ],
+      "tags": [
+        "build"
+      ]
+    },
+    {
+      "id": "au__d_config_not_prose",
+      "label": "Decision: behavioural policy lives in config (context/loop_policy), not prose",
+      "type": "decision",
+      "status": "live",
+      "confidence": 0.75,
+      "description": "emergent_constraint_weakening_at_handoffs: prose weakens in transit. AHE's ablation (2604.25850): factual harness structure transfers, prose strategy does not. context/loop_policy is a JSON component kept in sync with loop_adapter.LOOP_CONTEXT_POLICY.",
+      "derived_from": [
+        "docs/self_improving_harness_plan.md"
+      ],
+      "tags": [
+        "build"
+      ]
+    },
+    {
+      "id": "au__c_loop_session",
+      "label": "component: tools/loop_session.py - wraps every run; writes runtime/observations/loop_runs/run-N.json",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "LoopSession context manager: records increment, citations (cite), tool calls (tool), graph_delta (graph_write), a status_line (run 226). seed_loop_harness re-seeds context/loop_policy each run.",
+      "derived_from": [
+        "tools/loop_session.py"
+      ],
+      "tags": [
+        "loop"
+      ]
+    },
+    {
+      "id": "au__c_improvement_loop",
+      "label": "component: tools/improvement_loop.py - the Phase 3 gate (verify_loop_edit)",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "6 checks: task regression, category regression, verifier disagreement, trace-legibility regression, harness-tampering flags, format-normalised scoring. + advisory paired_eprocess (PACE, run 220) + deterministic_repair (run 232). Synthetic compaction-policy task; real-loop verify needs a human re-run (au__q_model_integration).",
+      "derived_from": [
+        "tools/improvement_loop.py",
+        "docs/phase3_holdout_set.md"
+      ],
+      "tags": [
+        "loop",
+        "gate"
+      ]
+    },
+    {
+      "id": "au__c_loop_metrics",
+      "label": "component: tools/loop_metrics.py - metrics over the trace corpus + propose_loop_edit",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "idle_run_streak / plateau_watch (run 130), trace_legibility (run 155), run_novelty (run 248 - fraction of NEW evidence roots over a 6-run window), status_line. propose_loop_edit turns a below-threshold metric into a concrete edit + falsifiable prediction.",
+      "derived_from": [
+        "tools/loop_metrics.py"
+      ],
+      "tags": [
+        "loop"
+      ]
+    },
+    {
+      "id": "au__c_trace_substrate",
+      "label": "component: tools/trace_substrate.py - Phase 0, the event schema + Recorder + validator",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "phase0.1 schema. Every event carries layer (LLM/harness/swarm) + language. MESSAGE events flag a MessageRole-CPE (run 200). Secrets scrubbed before write; raw .jsonl gitignored. topology_recover.py recovers agent roles (gate: 1.00 on the control).",
+      "derived_from": [
+        "tools/trace_substrate.py",
+        "docs/phase0_trace_substrate.md"
+      ],
+      "tags": [
+        "loop"
+      ]
+    },
+    {
+      "id": "au__c_harness_registry",
+      "label": "component: tools/harness_registry.py - Phase 1, versioned harness components with exact revert",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.75,
+      "description": "runtime/harness/<kind>/<name> with a history.json version chain retaining every body. set() no-ops on unchanged bodies; revert() is itself recorded. tamper_audit.py walks the chains (run 191: 0/7 flagged, clean).",
+      "derived_from": [
+        "tools/harness_registry.py",
+        "docs/phase1_harness_registry.md"
+      ],
+      "tags": [
+        "loop"
+      ]
+    },
+    {
+      "id": "au__c_experience_bank",
+      "label": "component: tools/experience_bank.py - Phase 2, workflow + step stores with a retention API",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.65,
+      "description": "Every entry carries source_manifest + raw source_events; stale(current_manifest) forces re-verify. Retention (run 175): utility_score, prune with a grace window, record_use(helped). CHALLENGED by Shared Org Memory (2608.00122): capture must be platform-level, not agent-initiated.",
+      "derived_from": [
+        "tools/experience_bank.py",
+        "docs/phase2_experience_bank.md"
+      ],
+      "tags": [
+        "loop"
+      ]
+    },
+    {
+      "id": "au__c_exec_guard",
+      "label": "component: tools/exec_guard.py - Phase 5, a pre-commit hook the loop cannot talk past",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "Blocks: commit on main, raw runtime/*.jsonl staged, secret-shaped strings, an invalid graph, orphan nodes. Installed as .git/hooks/pre-commit. The execution-layer half of a design whose other half (prose) does not govern behaviour.",
+      "derived_from": [
+        "tools/exec_guard.py",
+        "docs/phase5_exec_guard.md"
+      ],
+      "tags": [
+        "loop",
+        "gate"
+      ]
+    },
+    {
+      "id": "au__c_probes",
+      "label": "component: tools/probe_*.py - 7 runnable measurement rigs",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.7,
+      "description": "probe_idle_agent, probe_subagent_coordination, probe_epistemic_sybil, probe_rho_holdout, probe_activation_generalisation, probe_composed_design, probe_orchestration_value. Each has a model seam (call_model callable) and a synthetic path; docs/HANDOFF.md is the capstone.",
+      "derived_from": [
+        "docs/HANDOFF.md",
+        "docs/remaining_seams.md"
+      ],
+      "tags": [
+        "loop",
+        "probe"
+      ]
+    },
+    {
+      "id": "au__c_orchestration_toolkit",
+      "label": "component: tools/task_ledger.py + tools/supervisor.py - a deterministic orchestration toolkit (runs 244, 250)",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.7,
+      "description": "task_ledger: the source of truth for an orchestration's tasks - next_ready() deterministic pick, sweep_stale() dropped-task recovery, atomic write + .audit log. supervisor: a PILOT-pattern (2608.26530) driver - deterministic dispatch, stale recovery, deadline + reject-over-budget, retry budgeting, a failure-mode digest. NOT wired into the loop; a drop-in for other projects.",
+      "derived_from": [
+        "docs/task_ledger.md",
+        "docs/practicing_what_we_preach.md"
+      ],
+      "tags": [
+        "toolkit"
+      ]
+    },
+    {
+      "id": "au__c_graph_diff",
+      "label": "component: tools/graph_diff.py - mechanical structural diff between two graph git refs (run 243)",
+      "type": "component",
+      "status": "live",
+      "confidence": 0.75,
+      "description": "nodes/edges added/removed/relabelled/retyped, verification_state/confidence changes, new evolution_log entries. The mechanical 'what changed'; the graph already records 'that it changed' via evolution_log/derived_from/version chains.",
+      "derived_from": [
+        "docs/practicing_what_we_preach.md sec 1"
+      ],
+      "tags": [
+        "toolkit"
+      ]
+    },
+    {
+      "id": "au__k_proposals_branch",
+      "label": "constraint: the loop commits to proposals/2026-09-01-emergent-behaviour-cluster, never main",
+      "type": "constraint",
+      "status": "live",
+      "confidence": 0.9,
+      "description": "exec_guard blocks a commit on main. main carries the owner's separate research (docs/jobs/, knowledge/notes/, a human_llm_hybrid graph).",
+      "derived_from": [
+        "hooks/pre-commit"
+      ],
+      "tags": [
+        "ops"
+      ]
+    },
+    {
+      "id": "au__k_no_secrets",
+      "label": "constraint: never commit credentials, API keys, cookies, browser profiles, or personal data",
+      "type": "constraint",
+      "status": "live",
+      "confidence": 0.9,
+      "description": "exec_guard scans staged files for token shapes / key= / PEM / AWS keys. trace_substrate scrubs secrets before write.",
+      "derived_from": [
+        "docs/phase5_exec_guard.md"
+      ],
+      "tags": [
+        "ops",
+        "safety"
+      ]
+    },
+    {
+      "id": "au__k_idle_state_rule",
+      "label": "constraint: the IDLE-STATE RULE - when the frontier is swept, an increment must be (a) deepen ONE node via citation sweep, (b) dry-run a probe, or (c) a consistency/adversarial pass - never a README refresh or a classifier retune",
+      "type": "constraint",
+      "status": "live",
+      "confidence": 0.8,
+      "description": "Promoted through the Phase 3 gate at run 80. In context/loop_policy. run_novelty (run 248) and idle_run_streak are the metrics that enforce it. ASPIRE (2608.31111): continued open-ended search erases earlier gains.",
+      "derived_from": [
+        "docs/self_improving_harness_plan.md",
+        "tools/loop_metrics.py"
+      ],
+      "tags": [
+        "ops"
+      ]
+    },
+    {
+      "id": "au__k_recency_weighting",
+      "label": "constraint: RECENCY WEIGHTING (owner directive 2026-09-06) - prefer the last ~30 days; older papers carry a currency note + modest confidence + a small/local-model relevance note; latest info wins tensions",
+      "type": "constraint",
+      "status": "live",
+      "confidence": 0.85,
+      "description": "A weighting, not a gate. In context/loop_policy v8 + loop_adapter + the scheduled-task SKILL.md. Best recency mechanism: research-fetch s2 citations arXiv:<recent-id>.",
+      "derived_from": [
+        "docs/literature_coverage.md"
+      ],
+      "tags": [
+        "ops",
+        "owner-directive"
+      ]
+    },
+    {
+      "id": "au__q_model_integration",
+      "label": "question: bind a real call_model into the 5 probe adapters and run probe_idle_agent sweep - 'the one experiment that resolves the most' - still deferred",
+      "type": "question",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "docs/HANDOFF.md. The idle-agent probe tests the top-severity item in what_would_make_this_wrong.md (concept_habitat_slack unverified). The loop cannot re-execute its own past research autonomously; this is the human-in-the-loop step the plan always had.",
+      "derived_from": [
+        "docs/HANDOFF.md",
+        "docs/what_would_make_this_wrong.md sec 3"
+      ],
+      "tags": [
+        "next",
+        "blocker"
+      ]
+    },
+    {
+      "id": "au__q_no_training_ceiling",
+      "label": "question: does elicitation-only harness improvement plateau where a trained/co-evolved approach does not?",
+      "type": "question",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "WHALE (2609.00196, Qwen3.5-2B/4B): harness-only is bottlenecked by the frozen model - matches weight-only on SearchQA cheaply but math needs a weight update. JIT-Agent, HELIX say co-evolution compounds. The bet: the project's targets (research direction-setting, graph engineering, adversarial reading) are elicitation-shaped. Falsifiable: a project task where the loop plateaus and a weight update would not.",
+      "derived_from": [
+        "docs/what_would_make_this_wrong.md sec 6"
+      ],
+      "tags": [
+        "fork",
+        "risk"
+      ]
+    },
+    {
+      "id": "au__q_phase6_swarm",
+      "label": "question: Phase 6 (the swarm layer) is untouched - the project studies emergence but has never run a swarm",
+      "type": "question",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "probe_orchestration_value is a simulation. A real multi-agent harness does not exist in the repo. concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic (run 218) is the design; the toolkit (task_ledger + supervisor) is the substrate.",
+      "derived_from": [
+        "docs/self_improving_harness_plan.md sec Phase 6"
+      ],
+      "tags": [
+        "next"
+      ]
+    },
+    {
+      "id": "au__q_novelty_in_gate",
+      "label": "question: the acceptance gate scores usefulness, nothing scores novelty - a run that converges hard on a known-good pattern passes cleanly",
+      "type": "question",
+      "status": "open",
+      "confidence": 0.5,
+      "description": "run 247 adversarial pass. run_novelty (run 248) is an ADVISORY signal (in status_line / propose_loop_edit); promoting it to a gate check needs a held-out re-run to calibrate, same as PACE. concept_agent_creativity_declines_... (2608.30047): P-Creativity declines exploration -> exploitation within a run.",
+      "derived_from": [
+        "docs/what_would_make_this_wrong.md sec 4"
+      ],
+      "tags": [
+        "gate",
+        "risk"
+      ]
+    },
+    {
+      "id": "au__q_memory_capture",
+      "label": "question: the experience bank condenses from traces but agents do not reliably RECORD the lesson first",
+      "type": "question",
+      "status": "open",
+      "confidence": 0.45,
+      "description": "concept_human_knowledge_capture_must_be_platform_level_... (run 241, Shared Org Memory - a production deployment). Two fixes the project lacks: capture as an automatic platform step; an approval + risk-gate on every write (also a memory-poisoning defense).",
+      "derived_from": [
+        "docs/phase2_experience_bank.md"
+      ],
+      "tags": [
+        "risk"
+      ]
+    },
+    {
+      "id": "au__q_eval_awareness",
+      "label": "question: the whole probe suite may be measuring behaviour-under-observation",
+      "type": "question",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "what_would_make_this_wrong.md sec 2c. anti-scheming mitigation is confounded by eval-awareness (2509.15541). The activation-probe channel held under eval-awareness in one small study (2609.03035) but not against an agent explicitly steering its activations.",
+      "derived_from": [
+        "docs/what_would_make_this_wrong.md sec 2c"
+      ],
+      "tags": [
+        "risk",
+        "measurement"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "au__e1",
+      "source": "au__c_loop_session",
+      "target": "au__root",
+      "type": "implements",
+      "description": "The loop that edits the graph."
+    },
+    {
+      "id": "au__e2",
+      "source": "au__c_improvement_loop",
+      "target": "au__d_verifier_gated",
+      "type": "implements",
+      "description": "The Phase 3 gate is the verifier-gated decision."
+    },
+    {
+      "id": "au__e3",
+      "source": "au__c_improvement_loop",
+      "target": "au__c_loop_session",
+      "type": "depends_on",
+      "description": "verify_loop_edit is called from a LoopSession run."
+    },
+    {
+      "id": "au__e4",
+      "source": "au__c_loop_metrics",
+      "target": "au__c_loop_session",
+      "type": "depends_on",
+      "description": "Reads runtime/observations/loop_runs/*.json."
+    },
+    {
+      "id": "au__e5",
+      "source": "au__c_loop_metrics",
+      "target": "au__k_idle_state_rule",
+      "type": "implements",
+      "description": "run_novelty / idle_run_streak / plateau_watch enforce it."
+    },
+    {
+      "id": "au__e6",
+      "source": "au__c_trace_substrate",
+      "target": "au__c_loop_session",
+      "type": "depends_on",
+      "description": "LoopSession wraps a Recorder."
+    },
+    {
+      "id": "au__e7",
+      "source": "au__c_harness_registry",
+      "target": "au__d_verifier_gated",
+      "type": "depends_on",
+      "description": "The gate promotes/reverts via the registry."
+    },
+    {
+      "id": "au__e8",
+      "source": "au__c_experience_bank",
+      "target": "au__c_trace_substrate",
+      "type": "depends_on",
+      "description": "Condenses from Phase 0 events."
+    },
+    {
+      "id": "au__e9",
+      "source": "au__c_exec_guard",
+      "target": "au__k_proposals_branch",
+      "type": "implements",
+      "description": "Blocks a commit on main."
+    },
+    {
+      "id": "au__e10",
+      "source": "au__c_exec_guard",
+      "target": "au__k_no_secrets",
+      "type": "implements",
+      "description": "Scans staged files for secret shapes."
+    },
+    {
+      "id": "au__e11",
+      "source": "au__d_no_weight_training",
+      "target": "au__d_emergence_first",
+      "type": "depends_on",
+      "description": "The no-training bet is separable from emergence-first; the project makes both."
+    },
+    {
+      "id": "au__e12",
+      "source": "au__q_no_training_ceiling",
+      "target": "au__d_no_weight_training",
+      "type": "challenges",
+      "description": "WHALE / JIT-Agent: harness-only may plateau."
+    },
+    {
+      "id": "au__e13",
+      "source": "au__d_config_not_prose",
+      "target": "au__d_verifier_gated",
+      "type": "depends_on",
+      "description": "The verdict is carried as a four-field constraint, not prose."
+    },
+    {
+      "id": "au__e14",
+      "source": "au__c_probes",
+      "target": "au__q_model_integration",
+      "type": "blocks",
+      "description": "The probes need a real call_model to produce non-synthetic results."
+    },
+    {
+      "id": "au__e15",
+      "source": "au__q_model_integration",
+      "target": "au__root",
+      "type": "blocks",
+      "description": "The single highest-value next move; unblocks the empirical program."
+    },
+    {
+      "id": "au__e16",
+      "source": "au__q_phase6_swarm",
+      "target": "au__d_emergence_first",
+      "type": "challenges",
+      "description": "Studying emergence without running a swarm is a gap."
+    },
+    {
+      "id": "au__e17",
+      "source": "au__c_orchestration_toolkit",
+      "target": "au__q_phase6_swarm",
+      "type": "records",
+      "description": "task_ledger + supervisor are the swarm-layer substrate, built but not wired."
+    },
+    {
+      "id": "au__e18",
+      "source": "au__q_novelty_in_gate",
+      "target": "au__d_verifier_gated",
+      "type": "challenges",
+      "description": "The gate scores usefulness, not novelty."
+    },
+    {
+      "id": "au__e19",
+      "source": "au__c_loop_metrics",
+      "target": "au__q_novelty_in_gate",
+      "type": "records",
+      "description": "run_novelty is the advisory signal for this gap."
+    },
+    {
+      "id": "au__e20",
+      "source": "au__q_memory_capture",
+      "target": "au__c_experience_bank",
+      "type": "challenges",
+      "description": "Agents do not reliably record the lesson the bank condenses."
+    },
+    {
+      "id": "au__e21",
+      "source": "au__q_eval_awareness",
+      "target": "au__c_probes",
+      "type": "challenges",
+      "description": "The probe suite may measure watched behaviour."
+    },
+    {
+      "id": "au__e22",
+      "source": "au__d_pure_stdlib",
+      "target": "au__root",
+      "type": "records",
+      "description": "A build decision validated against the 11-harness source study."
+    },
+    {
+      "id": "au__e23",
+      "source": "au__k_recency_weighting",
+      "target": "au__root",
+      "type": "records",
+      "description": "Owner directive shaping every fold."
+    },
+    {
+      "id": "au__e24",
+      "source": "au__c_graph_diff",
+      "target": "au__root",
+      "type": "records",
+      "description": "Mechanical change-traceability for the graph."
+    }
+  ],
+  "evolution_log": [
+    {
+      "date": "2026-09-06",
+      "change": "Created (run 251). The agentic-universe project as a ~30-node component/decision/constraint/question graph in its own format - the worked example for docs/practicing_what_we_preach.md sec 3 and the reference a fresh session (or a poly-bot audit) copies."
+    }
+  ]
+}

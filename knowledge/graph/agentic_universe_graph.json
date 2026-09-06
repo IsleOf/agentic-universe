@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-22",
+  "last_updated": "2026-09-23",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -964,6 +964,10 @@
     {
       "date": "2026-09-22",
       "change": "Autonomous run 250. Build (recommendation #5 from docs/practicing_what_we_preach.md, answering the owner's CLI-orchestration pain). tools/supervisor.py + docs/task_ledger.md#the-supervisor: a PILOT-pattern (arXiv:2608.26530) live supervisor over the run-244 task_ledger as substrate. run_worker(task, *, hints) is caller-supplied; the supervisor supplies deterministic dispatch (next_ready), stale recovery each tick, per-task deadline + reject-over-budget, retry budgeting (ledger max_attempts), and a failure-mode digest that rides along in hints on retries (PILOT live self-evolution, no model call). All decisions computed from the ledger, not reasoned (concept_component_lifecycle_reasoning_degrades_with_size). 8 selftest checks; added to selftest_all.py JOBS (25) and tools/README.md. New node pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest + 4 edges (implements concept_self_improvement_should_be_live_..., concept_multi_agent_helps_when_subtasks_are_verifiable_...; depends_on pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth; supports concept_the_agentic_labor_market_...). 271->272 nodes, 1087->1091 edges."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 251. Build (recommendation #2 method + 'practice what it preaches'). tools/project_graph_scaffold.py: scaffold + validate a per-project knowledge graph + a PROJECT_STATE.md handover doc in this project's format (node types component/decision/constraint/bug/question; edge types depends_on/implements/challenges/blocks/records; reuses knowledge_graph.validate_graph + vocabulary lints). 8 selftest checks; added to selftest_all.py JOBS (26). WORKED EXAMPLE: knowledge/graph/agentic_universe_project_graph.json (26 nodes / 24 edges, VALID - the agentic-universe project itself as components/decisions/constraints/open-questions) + docs/PROJECT_STATE.md (a compact handover a fresh session reads first). docs/practicing_what_we_preach.md section 3 updated to point at the tool + example. The project now practices its own section-3 recommendation. No change to the main graph's nodes/edges."
     }
   ],
   "nodes": [
