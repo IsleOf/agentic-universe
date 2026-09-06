@@ -53,7 +53,11 @@ THRESHOLDS = {
     "verified_citation_fraction": 0.60,   # most citations should be independently verified
     "validation_pass_rate": 1.00,         # the graph must never be committed invalid
     "trace_legibility": 0.70,             # the loop's own trace should explain itself in words
+    "run_novelty": 0.34,                  # over a window, at least ~1 in 3 cited roots should be NEW
 }
+
+# window for run_novelty (matches PLATEAU_WINDOW: the same horizon idle_run_streak uses)
+NOVELTY_WINDOW = 6
 
 # trailing runs with no graph delta before the loop is "on plateau watch".
 # Matches the run-80 IDLE-STATE RULE window (last 3 runs idle + this one) and the
@@ -93,6 +97,45 @@ def idle_run_streak(live_summaries):
             break
         streak += 1
     return streak
+
+
+def run_novelty(live_summaries, window=NOVELTY_WINDOW):
+    """Over the trailing `window` runs, what fraction of the evidence roots those
+    runs cited were NEW when first cited?
+
+    `concept_agent_creativity_declines_..._within_a_run` (2608.30047) + the run-247
+    what_would_make_this_wrong.md §4 note: the acceptance gate scores USEFULNESS
+    (held-out task score) and nothing scores NOVELTY, so a run that lifts the
+    score by converging on a known-good pattern passes with no signal that the
+    loop has stopped discovering. `idle_run_streak` is the binary version (a run
+    is idle iff it cited NO new root and wrote no graph delta); this is the
+    continuous version over a window.
+
+    Returns {novelty_ratio, new_roots, repeat_roots, window} or None if the
+    window has no citations. novelty_ratio in [0, 1]; low = the loop is
+    re-citing its own corpus.
+    """
+    ordered = sorted(live_summaries, key=lambda s: s.get("run", 0))
+    if not ordered:
+        return None
+    seen = set()
+    for s in ordered[:-window] if len(ordered) > window else []:
+        seen |= set(s.get("distinct_evidence_roots", []))
+    tail = ordered[-window:]
+    new_roots = repeat_roots = 0
+    for s in tail:
+        for r in s.get("distinct_evidence_roots", []):
+            if r in seen:
+                repeat_roots += 1
+            else:
+                new_roots += 1
+                seen.add(r)
+    total = new_roots + repeat_roots
+    if total == 0:
+        return None
+    return {"novelty_ratio": round(new_roots / total, 3),
+            "new_roots": new_roots, "repeat_roots": repeat_roots,
+            "window": len(tail)}
 
 
 def _load_trace(path):
@@ -161,6 +204,7 @@ def compute(trace_path=HISTORY_TRACE, live_dir=LIVE_RUNS):
 
     streak = idle_run_streak(live)
     legibility = trace_legibility(events)
+    novelty = run_novelty(live)
 
     total_claims = len(claims) + len(live_cites)
     total_verified = len(verified) + len(live_verified)
@@ -179,6 +223,8 @@ def compute(trace_path=HISTORY_TRACE, live_dir=LIVE_RUNS):
         "idle_run_streak": streak,
         "plateau_watch": streak >= PLATEAU_WINDOW,
         "trace_legibility": legibility,
+        "run_novelty": novelty["novelty_ratio"] if novelty else None,
+        "run_novelty_detail": novelty,
     }
 
 
@@ -241,6 +287,27 @@ def propose_loop_edit(metrics):
             },
             "verification": "computable — recompute trace_legibility on the replayed corpus",
         })
+    nov = metrics.get("run_novelty")
+    if nov is not None and nov < THRESHOLDS["run_novelty"]:
+        d = metrics.get("run_novelty_detail") or {}
+        proposals.append({
+            "component": ("prompt", "loop_procedure"),
+            "change": f"run_novelty has fallen to {nov} over the last {d.get('window', NOVELTY_WINDOW)} "
+                      f"runs ({d.get('new_roots', 0)} new roots / {d.get('new_roots', 0) + d.get('repeat_roots', 0)} "
+                      "cited): the loop is re-citing its own corpus. The next run's increment MUST fold a "
+                      "source no earlier run has cited, or run a probe / consistency pass that does not "
+                      "lean on the existing corpus at all",
+            "prediction": {
+                "metric": "run_novelty over the next 6 runs",
+                "direction": "increase",
+                "from": nov,
+                "to_at_least": THRESHOLDS["run_novelty"],
+                "rationale": "the acceptance gate scores usefulness, not novelty (run 247) — a run that "
+                             "converges on a known-good pattern passes with no signal the loop has "
+                             "stopped discovering; this metric is the missing novelty signal, advisory",
+            },
+            "verification": "computable — recompute run_novelty from the live run summaries after the next 6 runs",
+        })
     vpr = metrics.get("validation_pass_rate")
     if vpr is not None and vpr < THRESHOLDS["validation_pass_rate"]:
         proposals.append({
@@ -300,6 +367,8 @@ def status_line(local_summary=None, metrics=None):
         f"idle-streak {m.get('idle_run_streak', 0)}" + ("!" if plateau else ""),
         f"legible {leg:.2f}" if leg is not None else "legible n/a",
         f"verified-frac {vf:.2f}" if vf is not None else "verified-frac n/a",
+        (f"novelty {nov:.2f}" + ("!" if nov < THRESHOLDS["run_novelty"] else ""))
+        if (nov := m.get("run_novelty")) is not None else "novelty n/a",
     ]
     return " · ".join(parts)
 
@@ -404,6 +473,29 @@ def _selftest():
             "status_line: an invalid trace shows the stop-and-look light":
                 status_line({"run": 9, "trace_valid": False, "graph_delta": None, "citations": []},
                             metrics={**m, "plateau_watch": False}).startswith("run 9 STOP"),
+            "run_novelty: all-new roots over the window -> ratio 1.0 (run 248)":
+                run_novelty([{"run": i, "distinct_evidence_roots": [f"arXiv:{i}"]} for i in range(1, 5)],
+                            window=6)["novelty_ratio"] == 1.0,
+            "run_novelty: window re-citing older roots -> low ratio":
+                run_novelty(
+                    [{"run": 1, "distinct_evidence_roots": ["arXiv:A", "arXiv:B", "arXiv:C"]}]
+                    + [{"run": r, "distinct_evidence_roots": ["arXiv:A"]} for r in range(2, 8)],
+                    window=6)["novelty_ratio"] == 0.0,
+            "run_novelty: mixed window -> ratio between 0 and 1":
+                0 < run_novelty(
+                    [{"run": 1, "distinct_evidence_roots": ["arXiv:A"]},
+                     {"run": 2, "distinct_evidence_roots": ["arXiv:A", "arXiv:B"]},
+                     {"run": 3, "distinct_evidence_roots": ["arXiv:C"]}], window=6)["novelty_ratio"] < 1,
+            "run_novelty: no citations anywhere -> None":
+                run_novelty([{"run": 1, "distinct_evidence_roots": []}]) is None,
+            "run_novelty in compute() output and status_line":
+                "run_novelty" in m and "novelty" in status_line(
+                    {"run": 5, "trace_valid": True, "graph_delta": None, "citations": []}, metrics=m),
+            "low run_novelty emits a proposal naming the corpus re-citation (run 248)":
+                any("re-citing its own corpus" in p["change"]
+                    for p in (propose_loop_edit({**m, "run_novelty": 0.1,
+                                                 "run_novelty_detail": {"window": 6, "new_roots": 1,
+                                                                        "repeat_roots": 9}}) or [])),
         }
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")

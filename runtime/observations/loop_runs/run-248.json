@@ -1,0 +1,20 @@
+{
+  "run": 248,
+  "increment": "build - loop_metrics.run_novelty: the advisory novelty signal the run-247 adversarial pass called for; fraction of NEW evidence roots over a 6-run window, in compute()/status_line/propose_loop_edit; 0 nodes / 1 edge",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-248.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 248 OK · VALID · graph +0 · cites 0v/0 · idle-streak 1 · legible 1.00 · verified-frac 0.80 · novelty 1.00"
+}
