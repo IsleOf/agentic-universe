@@ -432,6 +432,10 @@
     {
       "date": "2026-10-05",
       "change": "Autonomous run 118. DBLP. concept_recursive_meta_skill_evolution (MetaSkill-Evolve, arXiv:2607.05297): self-improvement made recursive via two timescales - a branch carries a task skill AND a meta-skill (Analyzer/Retriever/Allocator/Proposer/Evolver); task skills evolve fast, the meta-skill evolves slow under the same pipeline applied to itself, one frozen backbone. +23.54/+16.09/+1.92 held-out points (domain-dependent). For the project: the MIDDLE loop's procedure (loop_proposer heuristic) is fixed; this says it should be a meta-skill under improvement. +5 edges."
+    },
+    {
+      "date": "2026-10-05",
+      "change": "Autonomous run 119. DBLP. concept_asg_si_independently_arrives_at_the_plan (ASG-SI, arXiv:2512.23760, 2025): self-improvement as iterative compilation into an auditable skill graph; each improvement extracted from trajectories, normalised into a skill with an explicit interface, promoted only after verifier-backed replay + contract checks; rewards decomposed into reconstructible components from replayable evidence (independent audit); experience synthesis + continual memory control; complete threat model + runnable reference implementation. Nearly the project's entire plan, published - with code to compare tools/ against. The one difference: ASG-SI is RL-based, the project is emergence-first. +7 edges."
     }
   ],
   "nodes": [
@@ -5547,6 +5551,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-05-0600.md"
+      ]
+    },
+    {
+      "id": "concept_asg_si_independently_arrives_at_the_plan",
+      "label": "A 2025 framework (ASG-SI) independently arrives at nearly the project's self-improving-harness design, with a runnable reference implementation",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:asg_si",
+      "confidence": 0.7,
+      "description": "Audited Skill-Graph Self-Improvement (ASG-SI, arXiv:2512.23760, VERIFIED via arXiv abstract read run 119; resolved via DBLP). Treats self-improvement as iterative compilation of an agent into a growing, auditable skill graph. Each candidate improvement is extracted from successful trajectories, normalised into a skill with an explicit interface, and promoted only after passing verifier-backed replay and contract checks. Rewards are decomposed into reconstructible components derived from replayable evidence, enabling independent audit of promotion decisions and learning signals. Integrates experience synthesis for stress testing and continual memory control for long-horizon performance under bounded context. Ships a complete system architecture, threat model, security analysis, and a fully runnable reference implementation. This is nearly the project's entire plan, published: pattern_verifier_gated_promotion (verifier-backed replay + contract checks), pattern_grounded_acceptance_only (rewards from replayable evidence), pattern_four_field_constraint (explicit interface + contract), the experience bank (experience synthesis), the compaction-cliff mitigation (continual memory control), the improvements-as-verifiable-artifacts-not-opaque-updates thesis, and the threat model that pretrained_grader_gaming.md just argued for. The one difference: ASG-SI is RL-based (RL turns LLMs into agents); the project is emergence-first / no weight training - but the harness/skill-graph layer is the same. A concrete reference implementation to compare the project's tools/ against.",
+      "tags": [
+        "asg-si",
+        "auditable-skill-graph",
+        "verifier-backed-replay",
+        "contract-checks",
+        "replayable-evidence",
+        "threat-model",
+        "runnable-reference-implementation",
+        "independent-convergence"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-05-1200.md",
+        "arXiv:2512.23760 (Audited Skill-Graph Self-Improvement for Agentic LLMs) - VERIFIED, abstract read; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-05-1200.md"
       ]
     }
   ],
@@ -12733,6 +12765,82 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "self_improving_harness",
       "confidence": 0.6
+    },
+    {
+      "id": "edge_asgsi_supports_verifier_gate",
+      "source": "concept_asg_si_independently_arrives_at_the_plan",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "'Promoted only after passing verifier-backed replay and contract checks' - the exact rule, with a runnable implementation."
+    },
+    {
+      "id": "edge_asgsi_supports_grounded_acceptance",
+      "source": "concept_asg_si_independently_arrives_at_the_plan",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "'Rewards decomposed into reconstructible components derived from replayable evidence' = a grounded, auditable acceptance signal."
+    },
+    {
+      "id": "edge_asgsi_supports_four_field",
+      "source": "concept_asg_si_independently_arrives_at_the_plan",
+      "target": "pattern_four_field_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Skill with an explicit interface' + 'contract checks' - the four-field constraint as a skill contract."
+    },
+    {
+      "id": "edge_asgsi_supports_experience_bank",
+      "source": "concept_asg_si_independently_arrives_at_the_plan",
+      "target": "artifact_phase2_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Experience synthesis for scalable stress testing' - the experience bank plus a stress-test generator."
+    },
+    {
+      "id": "edge_asgsi_supports_pretrained_grader_synthesis",
+      "source": "concept_asg_si_independently_arrives_at_the_plan",
+      "target": "concept_gate_faces_a_pretrained_grader_gamer",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "ASG-SI ships an explicit threat model for reward hacking under optimisation pressure - the same concern the run-106 synthesis raised, taken as a design requirement."
+    },
+    {
+      "id": "edge_asgsi_supports_self_harness",
+      "source": "concept_asg_si_independently_arrives_at_the_plan",
+      "target": "concept_self_harness_validates_the_three_loop",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Two independent published systems (ASG-SI 2025, Self-Harness 2026) with the project's exact shape and runnable code."
+    },
+    {
+      "id": "edge_asgsi_instantiates_sih",
+      "source": "concept_asg_si_independently_arrives_at_the_plan",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7
     }
   ]
 }
