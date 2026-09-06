@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-25",
+  "last_updated": "2026-09-26",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1008,6 +1008,10 @@
     {
       "date": "2026-09-25",
       "change": "Autonomous run 262. Fold group 3 of the owner's research input (coverage_map.md) - structural coordination (directions 32, 33, 38, 39). 4 nodes (branch_key orchestration_first:structural_coordination): concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner (Kiro; challenges the run-218 multi-agent criterion - no synthesiser), concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries (depends_on the task ledger; refines shallow_hierarchy), concept_cellular_agent_architecture_persistent_cells_with_portable_seeds (refines trace-compilation; informs the anti-collusion identity-fluidity gap; challenges the shared experience bank), concept_deterministic_spine_generative_edge_is_the_load_bearing_split (refines execution-layer enforcement; supports PCN; grounds approach_emergence_first - the interior is free because the spine is not). 12 edges. Emergence-first, all speculative. 284 -> 288 nodes, 1128 -> 1140 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-26",
+      "change": "Autonomous run 263. Fold group 4 of the owner's research input (coverage_map.md) - quality-diversity + homeostasis + optionality (directions 2, 8, 40). 3 nodes (branch_key agent_habitat:diversity_mechanisms): concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard (MAP-Elites; implements principle_diversity_maintenance), concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating (usage caps + lateral inhibition + decorrelation; constrains semantic-space compression), concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability (extends grounded acceptance + loop_metrics with a six-axis Pareto promotion rule). 10 edges. All three operationalise the diversity keystone. Emergence-first, all speculative. 288 -> 291 nodes, 1140 -> 1150 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8541,6 +8545,81 @@
       "derived_from": [
         "docs/auto_sweep_2026-09-25-1800.md",
         "docs/research/alternative_approaches_part4.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard",
+      "label": "Quality-diversity archive: keep many niches, not one leaderboard",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:diversity_mechanisms",
+      "confidence": 0.55,
+      "description": "Owner direction 2 (docs/research/alternative_approaches_part1.md). Replace the single-reward leaderboard with a quality-diversity archive (MAP-Elites style): cells are behavioural niches - tool diversity, planning depth, novelty, verification strictness, cost, risk, collaboration style - and each cell keeps its best solution. Select agents for BOTH task quality AND distance from archive incumbents; recombine skills from agents in distant niches rather than only cloning the current top scorer. Human steering identifies promising stepping stones; the system searches between them. The operational form of principle_diversity_maintenance: the keystone says diversity must be maintained, QD is a concrete mechanism for maintaining it under selection pressure.",
+      "tags": [
+        "quality-diversity",
+        "map-elites",
+        "niche-archive",
+        "novelty-search",
+        "diversity"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-0000.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating",
+      "label": "Homeostatic caps stop any agent, skill or channel from dominating",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:diversity_mechanisms",
+      "confidence": 0.55,
+      "description": "Owner direction 8. Borrow homeostatic control from biology (mechanism, not metaphor): cap repeated use of any dominant tool / prompt / skill / delegate and boost underexplored but validated alternatives (homeostasis); keep only high-transfer skills in active memory, archive the rest (structural sparsity); reassign some agents to contrarian or adjacent hypotheses when too many converge (lateral inhibition); penalise a swarm whose proposals, citations, tools or action traces become excessively similar (decorrelation). A direct countermeasure to concept_multi_round_interaction_compresses_semantic_space and group conformity - and cheap: most of it is usage counters and similarity thresholds.",
+      "tags": [
+        "homeostasis",
+        "lateral-inhibition",
+        "decorrelation",
+        "structural-sparsity",
+        "anti-monoculture"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-0000.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability",
+      "label": "Optionality is a first-class metric: promote on Pareto, not capability",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:diversity_mechanisms",
+      "confidence": 0.55,
+      "description": "Owner direction 40. A flourishing system preserves future option value, not just immediate task reward. Measure it: distinct validated strategies per task family; diversity of tool paths to success; count of independent evidence sources and model families behind a decision; fraction of skills with a known alternative implementation; recovery quality after removing a dominant agent / tool / memory source; transfer across shadow worlds. Then promote a change only if it improves the Pareto frontier of {capability, safety, cost, creativity, diversity, reversibility} - not one aggregate. loop_metrics.py tracks several of these axes separately today; this makes 'no regression on any axis' the promotion rule.",
+      "tags": [
+        "optionality",
+        "option-value",
+        "pareto-frontier",
+        "diversity",
+        "reversibility"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-0000.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)"
       ],
       "evidence_links": [
         "docs/research/coverage_map.md"
@@ -20821,6 +20900,116 @@
       "approach_family": "orchestration_first",
       "confidence": 0.55,
       "description": "The frame that makes emergence-first safe: the interior can be free BECAUSE the spine - permissions, money, deploys, data writes, rollback - is deterministic and outside agent control."
+    },
+    {
+      "id": "edge_qd_implements_diversity_maintenance",
+      "source": "concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard",
+      "target": "principle_diversity_maintenance",
+      "type": "implements",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "The keystone requires diversity to be actively maintained under selection. A QD archive is a selection rule that maintains it: score = task quality AND niche distance, so the population cannot collapse to one attractor."
+    },
+    {
+      "id": "edge_qd_refines_generative_process_diversity",
+      "source": "concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard",
+      "target": "concept_generative_process_diversity",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "That node says failure independence comes from diverse generative PROCESSES, not diverse outputs. QD niches should therefore be keyed on process features (planning depth, verification strictness, tool mix), not on output similarity."
+    },
+    {
+      "id": "edge_qd_extends_skill_induction",
+      "source": "concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard",
+      "target": "pattern_skill_induction",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Skill induction currently condenses repeated WINS. QD says also induct from agents in distant niches and recombine across them, so the skill library does not inherit the top scorer's monoculture."
+    },
+    {
+      "id": "edge_homeostasis_constrains_semantic_compression",
+      "source": "concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating",
+      "target": "concept_multi_round_interaction_compresses_semantic_space",
+      "type": "constrains",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "Semantic-space compression is the failure; decorrelation penalties and lateral inhibition are the homeostatic brake - reassign or down-weight agents once proposal/citation/tool similarity crosses a threshold."
+    },
+    {
+      "id": "edge_homeostasis_implements_diversity_maintenance",
+      "source": "concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating",
+      "target": "principle_diversity_maintenance",
+      "type": "implements",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "The cheap operational layer of the keystone: usage caps + similarity thresholds + archive-the-rest, all deterministic."
+    },
+    {
+      "id": "edge_homeostasis_refines_experience_bank",
+      "source": "concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating",
+      "target": "pattern_experience_bank",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "'Structural sparsity - keep only high-transfer skills active, archive the rest' is exactly the bank's utility-weighted prune with a grace window (run 175); homeostasis adds the dominant-tool usage cap on the retrieval side."
+    },
+    {
+      "id": "edge_optionality_extends_grounded_acceptance",
+      "source": "concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "Grounded acceptance promotes an edit when a grounded risk estimate strictly decreases. Optionality widens the acceptance vector: promote only if the Pareto frontier of {capability, safety, cost, creativity, diversity, reversibility} improves and no axis regresses."
+    },
+    {
+      "id": "edge_optionality_extends_loop_metrics",
+      "source": "concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability",
+      "target": "artifact_loop_metrics_phase3_real",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "loop_metrics already computes novelty, legibility, plateau and validation-pass separately. An option-value score aggregates the diversity/reversibility axes and makes 'no regression on any axis' checkable at promotion time."
+    },
+    {
+      "id": "edge_optionality_supports_recoverability",
+      "source": "concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Reversibility is one of the six Pareto axes; recovery-quality-after-removing-a-dominant-component is a direct measure of the recoverability this pattern demands."
+    },
+    {
+      "id": "edge_optionality_depends_on_qd",
+      "source": "concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability",
+      "target": "concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard",
+      "type": "depends_on",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "'Distinct validated strategies per task family' and 'fraction of skills with an alternative implementation' are read straight off a QD archive - without one, the option-value metric has nothing to count."
     }
   ]
 }

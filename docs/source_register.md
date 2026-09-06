@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 288 nodes, 1140 edges · **Date:** 2026-09-05
+**Graph at generation:** 291 nodes, 1150 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -436,6 +436,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-25-0600.md` — `concept_calibrated_forecasting_before_action_is_the_influence_currency`, `concept_conditional_trust_is_domain_keyed_not_global`, `concept_counterfactual_reputation_credits_predicting_the_road_not_taken` +3
 - `docs/auto_sweep_2026-09-25-1200.md` — `concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value`, `concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate`, `concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_cellular_agent_architecture_persistent_cells_with_portable_seeds`, `concept_deterministic_spine_generative_edge_is_the_load_bearing_split`, `concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries` +2
+- `docs/auto_sweep_2026-09-26-0000.md` — `concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating`, `concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability`, `concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
@@ -505,6 +506,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/probe_orchestration_value.md` — `artifact_probe_orchestration_value_rig`
 - `docs/probe_rho_holdout.md` — `artifact_probe_rho_holdout_rig`
 - `docs/probe_subagent_coordination.md` — `artifact_probe_subagent_coordination_rig`
+- `docs/research/alternative_approaches_part1.md (owner research input)` — `concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating`, `concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability`, `concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard`
 - `docs/research/alternative_approaches_part2.md (owner research input)` — `concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value`, `concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate`, `concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise`
 - `docs/research/alternative_approaches_part4.md (owner research input)` — `concept_cellular_agent_architecture_persistent_cells_with_portable_seeds`, `concept_deterministic_spine_generative_edge_is_the_load_bearing_split`, `concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries` +1
 - `docs/research/alternative_approaches_part5.md (owner research input)` — `concept_calibrated_forecasting_before_action_is_the_influence_currency`, `concept_conditional_trust_is_domain_keyed_not_global`, `concept_counterfactual_reputation_credits_predicting_the_road_not_taken` +3
