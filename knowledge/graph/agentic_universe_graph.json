@@ -448,6 +448,10 @@
     {
       "date": "2026-10-06",
       "change": "Autonomous run 122. DBLP. concept_rest_react_founds_the_trajectory_retrain_loop (ReST meets ReAct, arXiv:2312.10003, DeepMind 2023): the earliest published trajectory -> filter -> retrain self-improvement loop for an LLM agent - ReAct agent + ReST-style growing-batch RL from AI feedback, iteratively trained on its own trajectories; after JUST 2 ITERATIONS a small fine-tuned model matches a prompted big model with ~2 OOM fewer params. Places the Self-Harness / ASG-SI / MetaSkill-Evolve line in historical context (the loop is not new; auditable harness edits vs opaque weight updates is). Caveats: weight-training fork (the project declines it); gains saturate after ~2 iterations. +5 edges."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Autonomous run 123. DBLP. concept_adaptive_self_improvement_in_the_low_data_regime (Adaptive Self-improvement LLM Agentic System for ML Library Development, arXiv:2502.02534, ICML 2025): generating ML-library code in architecture-specific programming languages - hard, and few examples because ASPLs are esoteric/evolving. Adaptive self-improvement agentic system, up to 3.9x over a single-LLM baseline. Evidence that adaptive self-improvement survives the scarce-trajectory regime the project's own middle loop lives in (one increment per run). Caveat: narrow domain with a strong outer verifier. +4 edges."
     }
   ],
   "nodes": [
@@ -5646,6 +5650,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-06-0600.md"
+      ]
+    },
+    {
+      "id": "concept_adaptive_self_improvement_in_the_low_data_regime",
+      "label": "Adaptive self-improvement holds up when trajectories are scarce and the target is evolving (ASPL ML-library dev, up to 3.9x over a single LLM)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:low_data_self_improvement",
+      "confidence": 0.66,
+      "description": "Adaptive Self-improvement LLM Agentic System for ML Library Development (arXiv:2502.02534, ICML 2025 / PMLR v267; VERIFIED via arXiv abstract read run 123, resolved via DBLP). Task: generate ML-library code in architecture-specific programming languages (ASPLs) - hard even for expert humans, and with FEW code examples because ASPLs are esoteric and evolving. So the LLM must do complex reasoning with LIMITED DATA. Their adaptive self-improvement agentic system reports up to 3.9x improvement over a baseline single LLM on a purpose-built benchmark, with both open and closed models. Relevance to this project: most self-improvement work (ReST-ReAct, RHO, Self-Harness) assumes ENOUGH trajectories to filter or run self-consistency over. This project's own middle loop does NOT have that - one increment per run, sparse history. This is evidence that adaptive self-improvement (where the improvement strategy adapts to the difficulty and the data actually available, cf. MetaSkill-Evolve's Allocator) survives the scarce-data regime the harness loop actually lives in. Caveat: 'ML library code in a fixed ASPL' is a narrow, checkable domain with a strong outer verifier (does it compile / match reference perf); the harness-edit domain has a weaker grader.",
+      "tags": [
+        "low-data-self-improvement",
+        "aspl",
+        "ml-library-codegen",
+        "adaptive",
+        "3.9x-over-baseline",
+        "scarce-trajectories",
+        "evolving-target",
+        "icml-2025"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-06-1200.md",
+        "arXiv:2502.02534 (Adaptive Self-improvement LLM Agentic System for ML Library Development) - VERIFIED, abstract read run 123; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-06-1200.md"
       ]
     }
   ],
@@ -13028,6 +13060,50 @@
       "approach_family": "emergence_first",
       "confidence": 0.35,
       "description": "A working self-improvement result achieved purely by weight-level self-distillation - the RL/weight-training fork this project declines in favour of emergence-first; recorded as a live alternative, not resolved."
+    },
+    {
+      "id": "edge_lowdata_instantiates_self_improving_harness",
+      "source": "concept_adaptive_self_improvement_in_the_low_data_regime",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Adaptive self-improvement agentic system for a hard, low-example codegen task."
+    },
+    {
+      "id": "edge_lowdata_supports_recursive_meta_skill",
+      "source": "concept_adaptive_self_improvement_in_the_low_data_regime",
+      "target": "concept_recursive_meta_skill_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Adaptive' = the improvement strategy adjusts to task difficulty and available data - the meta-skill / Allocator role, working under data scarcity."
+    },
+    {
+      "id": "edge_lowdata_challenges_trajectory_only_harness_opt",
+      "source": "concept_adaptive_self_improvement_in_the_low_data_regime",
+      "target": "pattern_trajectory_only_harness_optimization",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "RHO's self-consistency / self-preference selection needs a supply of rollouts to compare; when trajectories are scarce the system must adapt its strategy rather than average over samples."
+    },
+    {
+      "id": "edge_lowdata_supports_improvement_loop_artifact",
+      "source": "concept_adaptive_self_improvement_in_the_low_data_regime",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Evidence that a self-improvement loop can work with sparse history - the regime the project's middle loop actually runs in (one increment per run)."
     }
   ]
 }

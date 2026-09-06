@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 206 nodes, 695 edges · **Date:** 2026-09-05
+**Graph at generation:** 207 nodes, 699 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -45,6 +45,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | arXiv | Work | Used for |
 | --- | --- | --- |
 | [2312.10003](https://arxiv.org/abs/2312.10003) | (title not recorded) | `concept_rest_react_founds_the_trajectory_retrain_loop` |
+| [2502.02534](https://arxiv.org/abs/2502.02534) | (title not recorded) | `concept_adaptive_self_improvement_in_the_low_data_regime` |
 | [2506.03053](https://arxiv.org/abs/2506.03053) | (title not recorded) | `concept_moral_preferences_are_framing_brittle` |
 | [2510.01171](https://arxiv.org/abs/2510.01171) | How to Mitigate Mode Collapse and Unlock LLM Diversity | `emergent_evaluator_mode_collapse` |
 | [2510.15568](https://arxiv.org/abs/2510.15568) | The Spark Effect: On Engineering Creative Diversity in Multi-Agent AI Systems | `pattern_structural_decoupling` |
@@ -349,6 +350,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-05-1200.md` — `concept_asg_si_independently_arrives_at_the_plan`
 - `docs/auto_sweep_2026-10-05-1800.md` — `concept_multi_round_interaction_compresses_semantic_space`
 - `docs/auto_sweep_2026-10-06-0600.md` — `concept_rest_react_founds_the_trajectory_retrain_loop`
+- `docs/auto_sweep_2026-10-06-1200.md` — `concept_adaptive_self_improvement_in_the_low_data_regime`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
