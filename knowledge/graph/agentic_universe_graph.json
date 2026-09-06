@@ -1116,6 +1116,10 @@
     {
       "date": "2026-10-02",
       "change": "Autonomous run 291. BUILD - tools/probe_dissent_vs_reflection.py, the sixth runnable rig for an open research question (open_questions.md Q6: does structured dissent beat reflection loops for long-horizon harness evolution?). HORIZON-round evolution, mean-zero edits (only selection improves q); REFLECTION self-scores with an optimism bias, DISSENT runs an unbiased held-out head-to-head. Verdict CONFIRMS: quality gap (dissent-reflection) +0.055 (h=5) -> +0.258 (h=40), net gap +0.047 -> +0.197 - dissent wins AND the gap WIDENS with the horizon (reflection drift compounds). 7 selftest checks, selftest_all JOBS -> 32, BUILD SELFTEST GREEN. New node artifact_probe_dissent_vs_reflection_rig + 4 edges (extends artifact_probe_adversarial_collaboration_rig - single-round +0.03 becomes +0.20 at h=40, verifies concept_self_correction_is_mostly_format_repair_not_reasoning, supports concept_the_acceptor_not_the_proposer, refines concept_recursive_meta_skill_evolution). 319 -> 320 nodes, 1274 -> 1278 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-02",
+      "change": "Autonomous run 292. BUILD - tools/probe_trust_weighted_voting.py, the SEVENTH and last runnable rig for the open research questions (open_questions.md Q7: can a conditional trust graph prevent majority-following?). Replays an info cascade; compares uniform vote vs domain-keyed-trust-weighted vs stale-trust-weighted on the post-cascade answers. Verdict CONFIRMS: trust-weighting MITIGATES (recovers ~31% of the -0.093 cascade loss) but does NOT prevent majority-following, and only a correctly-keyed trust graph helps (stale ~3%). The kill condition (herding rate unchanged) does not hold. 7 selftest checks, selftest_all JOBS -> 33, BUILD SELFTEST GREEN. New node artifact_probe_trust_weighted_voting_rig + 3 edges (verifies concept_conditional_trust_is_domain_keyed_not_global, refines the vote-herding node, supports artifact_probe_epistemic_market_rig). ALL 7 OPEN-QUESTION RIGS BUILT (runs 286-292). 320 -> 321 nodes, 1278 -> 1281 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9472,6 +9476,32 @@
       ],
       "evidence_links": [
         "tools/probe_dissent_vs_reflection.py",
+        "docs/research/open_questions.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_trust_weighted_voting_rig",
+      "label": "The trust-weighted-voting rig - a conditional trust graph mitigates but does not prevent majority-following",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.65,
+      "description": "tools/probe_trust_weighted_voting.py (run 292) - runnable rig for open question 7, the last of the 7. Replays the info-cascade scenario (low-competence agents copy the loudest agent, competent agents hold their own answer) and compares aggregation rules on the POST-cascade answers: UNIFORM_VOTE, TRUST_WEIGHTED (weight = a noisy domain-keyed trust estimate, cubed), STALE_TRUST (weight from a weakly-correlated wrong family). Dry-run (10000 trials): no-cascade ceiling 0.826; uniform vote under the cascade 0.73 (loss -0.093); trust-weighted 0.76 (recovers +0.029, ~31% of the loss); stale-trust 0.73 (+0.003, barely helps). Verdict CONFIRMS: a conditional trust graph MITIGATES majority-following but does NOT prevent it - the herded answers stay corrupted, trust only discounts the low-trust herders - and only a correctly-keyed graph helps. The open_questions.md KILL CONDITION (herding rate unchanged) does not hold. 7 selftest checks; selftest_all JOBS -> 33.",
+      "tags": [
+        "trust-weighted-voting",
+        "conditional-trust",
+        "majority-following",
+        "info-cascade",
+        "open-question-7"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-02-1800.md",
+        "tools/probe_trust_weighted_voting.py"
+      ],
+      "evidence_links": [
+        "tools/probe_trust_weighted_voting.py",
         "docs/research/open_questions.md"
       ]
     }
@@ -23268,6 +23298,39 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "Recursive meta-improvement needs an unbiased acceptor at each level or the drift compounds through the recursion; structured dissent is a concrete unbiased acceptor."
+    },
+    {
+      "id": "edge_trustvote_rig_verifies_conditional_trust",
+      "source": "artifact_probe_trust_weighted_voting_rig",
+      "target": "concept_conditional_trust_is_domain_keyed_not_global",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "The runnable test of whether a domain-keyed trust graph counters herding: it recovers ~31% of the cascade loss, and a wrong-family (stale) trust graph recovers ~3% - the domain key is load-bearing."
+    },
+    {
+      "id": "edge_trustvote_rig_refines_herding",
+      "source": "artifact_probe_trust_weighted_voting_rig",
+      "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "Bounds the mitigation: trust-weighting the vote helps (kill condition does not hold) but the majority-following is not prevented - the herded answers are still wrong, trust only down-weights the herders. Removing the vote entirely (probe_epistemic_market forecast-selection) does better."
+    },
+    {
+      "id": "edge_trustvote_rig_composes_market_rigs",
+      "source": "artifact_probe_trust_weighted_voting_rig",
+      "target": "artifact_probe_epistemic_market_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Completes the epistemic-market rig set: probe_epistemic_market (forecast-selection removes the vote), probe_identity_masking (elicitation independence), probe_adversarial_collaboration (dispute resolution), probe_trust_transfer (the trust graph transfers), probe_trust_weighted_voting (trust-weighting a vote is a partial fix). All 5 point at the same conclusion - independent elicitation + calibration-weighting, not a raw vote."
     }
   ]
 }

@@ -110,6 +110,7 @@ written, selftested `model_*` adapter (runs 134–140) — pass one `call_model`
 | `probe_redteam_rate.py` | open-question 4 (run 289): net system value is an inverted-U in the red-team challenge rate — optimum interior (~r=0.5, net +17), both endpoints >20 below (r=0 ships defects, r=1 throughput→0). Verdict CONFIRMS | — (`CATCH` / paralysis-curve stubs) |
 | `probe_trust_transfer.py` | open-question 5 (run 290): similarity-weighted trust predicts held-out task families best (rank corr +0.76 vs universal +0.49 vs domain-keyed ~0 cold-start); universal trust crowns one agent everywhere (concentration 1.0 vs 0.6). Trust transfers partially, scaled by family similarity, without universal authority. Verdict CONFIRMS | — |
 | `probe_dissent_vs_reflection.py` | open-question 6 (run 291): structured dissent beats reflection loops for long-horizon harness evolution and the gap **widens** with the horizon (quality gap +0.06 at h=5 → +0.26 at h=40; net +0.05 → +0.20). Reflection's optimism bias compounds; dissent's unbiased head-to-head catches negative edits. Verdict CONFIRMS | — |
+| `probe_trust_weighted_voting.py` | open-question 7 (run 292): a domain-keyed trust graph **mitigates** majority-following (recovers ~31% of the cascade accuracy loss) but does not **prevent** it — the herded answers stay corrupted, and only a correctly-keyed trust graph helps (stale-family trust barely moves it). Verdict CONFIRMS | — |
 
 ## Fresh-clone setup
 
