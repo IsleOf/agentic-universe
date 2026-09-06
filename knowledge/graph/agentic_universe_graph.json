@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-24",
+  "last_updated": "2026-09-25",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -992,6 +992,10 @@
     {
       "date": "2026-09-24",
       "change": "Autonomous run 258. Third-method literature sweep (arxiv-fetch, distinct query - S2 was rate-limited). Folded arXiv:2512.15790 'Bilevel Optimization for Covert Memory Tampering in Heterogeneous Multi-Agent Architectures (XAMT)' (Dec 2025, ~9 months - a threat-model paper, ages slowly). New node concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics: MARL replay buffers and RAG knowledge bases share a centralized-memory vulnerability; XAMT formalises the attack as bilevel optimisation (minimise perturbation for covertness, maximise behaviour divergence) yielding stealthy minimal-perturbation poisons that evade detection heuristics at sub-percent rates. 3 edges: challenges pattern_memory_writes_pass_a_deterministic_risk_gate (the run-256 gate is exactly the perimeter heuristic XAMT evades - the honest bound), extends concept_memory_poisoning_one_write_persists (adds the covertness mechanism + cross-architecture generality), supports pattern_grounded_acceptance_only (the paper's 'intrinsic safety over perimeter detection' is the project's own move for structural edits - the memory path lacks the equivalent effect-level check). 275 nodes / 1104 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-25",
+      "change": "Autonomous run 259. Owner pushed docs/research/ (54 research directions in 5 parts + README) and research/2026-09-06-deepseek-harness-ecosystem.md to origin/main (2026-09-07). Brought both onto the proposals branch. Triage in docs/research/coverage_map.md: every direction classified COVERED / PARTIAL / NEW against the 275-node graph, with a 9-group fold plan (emergence-first, one per run). No node/edge change this run - orientation only. Headline: ~15 genuinely NEW directions (biggest: the epistemic-market cluster - claims/forecasts/pre-registration/evidence-cells/conditional-trust); the rest sharpen existing nodes (diversity keystone, environment_evolution_curriculum, progressive_risk_vesting, the gate cluster). DSH doc: provenance-cautioned (inflated headline numbers), folds as one convergence node + the five-track memory detail. 275 nodes / 1104 edges unchanged."
     }
   ],
   "nodes": [
