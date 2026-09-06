@@ -1,0 +1,19 @@
+{
+  "run": 135,
+  "increment": "RHO held-out probe: write the model_preference pairwise-judge adapter + selftest",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 15,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 5,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-135.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

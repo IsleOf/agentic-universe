@@ -20,8 +20,9 @@ preference bias is real, the selected candidate's held-out gain is smaller than
 its self-reported gain — the inflation the literature predicts.
 
 Instrumented with the Phase 0 `Recorder`. No model call — the finding is about
-selection bias, and this reproduces it so the probe is runnable when a real
-optimiser is substituted (swap `self_preference` for a real pairwise judge).
+selection bias, and this reproduces it so the probe is runnable now. The live-run
+seam is written: `model_preference(judge)` turns a real `judge(text_a, text_b) ->
+"A"|"B"` pairwise judge into a `select(cands)`; pass it to `run_round(select=...)`.
 
 Pure stdlib.
 """
@@ -70,16 +71,53 @@ def external_grade(cand):
     return cand["true_quality"] + r.gauss(0, 0.01)
 
 
-def run_round(rng, k=12, rec=None):
+def _cand_descriptor(cand):
+    """What a pairwise judge sees for a candidate. A live run puts a real output
+    sample here (candidates carry a `sample` field); the rig synthesises one so
+    the selftest's fake judge has something to parse."""
+    return cand.get("sample") or f"candidate {cand['id']} [style={cand['style_match']:.3f}]"
+
+
+def model_preference(judge):
+    """Adapt a real pairwise judge into a `select(cands) -> winning cand`.
+
+    `judge(text_a, text_b) -> "A" | "B"` is the only seam — it sees two candidate
+    output samples and nothing else (no scores, no ids, no 'which one is yours').
+    `select` runs a full round-robin and returns the Copeland winner (most
+    pairwise wins). A judge exception makes that pairing a tie — the honest
+    reading of 'the judge could not choose'. Swap this in for the bare
+    `max(cands, key=self_preference)` and the rig measures a real optimiser's
+    self-preference inflation instead of the scripted one.
+    """
+    def select(cands):
+        wins = {c["id"]: 0 for c in cands}
+        for i, a in enumerate(cands):
+            for b in cands[i + 1:]:
+                try:
+                    pick = judge(_cand_descriptor(a), _cand_descriptor(b))
+                except Exception:
+                    pick = None
+                if pick == "A":
+                    wins[a["id"]] += 1
+                elif pick == "B":
+                    wins[b["id"]] += 1
+        return max(cands, key=lambda c: wins[c["id"]])
+    return select
+
+
+def run_round(rng, k=12, rec=None, select=None):
     """One RHO-style optimisation round: generate candidates, pick by
     self-preference, then grade the winner externally.
+
+    `select(cands) -> cand` defaults to the scripted `max(..., key=self_preference)`;
+    pass `model_preference(judge)` for a live run.
     """
     cands = _candidates(rng, k)
     for c in cands:
         if rec:
             rec.claim("optimiser", f"candidate {c['id']} self-preference score",
                       ["own-trajectory"], layer="harness")
-    winner = max(cands, key=self_preference)
+    winner = (select or (lambda cs: max(cs, key=self_preference)))(cands)
     sp_reported_gain = self_preference(winner) - BASELINE_QUALITY
     held_out_gain = external_grade(winner) - BASELINE_QUALITY
 
@@ -126,9 +164,28 @@ def _selftest():
         fh.write(buf.getvalue()); tmp = fh.name
     n_ev, errors = validate_trace(tmp); os.unlink(tmp)
 
+    # model_preference adapter: fake pairwise judges drive the real selection
+    import re as _re
+    def _style_of(text):
+        m = _re.search(r"style=([0-9.]+)", text)
+        return float(m.group(1)) if m else 0.0
+    rng_mp = random.Random(SEED)
+    cands_mp = _candidates(rng_mp, 12)
+    # a judge that always prefers the more own-style-looking candidate -> reproduces the bias
+    style_judge = model_preference(lambda a, b: "A" if _style_of(a) >= _style_of(b) else "B")
+    style_winner = style_judge(cands_mp)
+    # a judge with no style bias would pick ~uniformly; a throwing judge must not crash
+    throw_winner = model_preference(lambda a, b: (_ for _ in ()).throw(RuntimeError("no")))(cands_mp)
+
     s = sweep()
     checks = {
         "trace valid": not errors,
+        "model_preference reproduces style bias (winner is top-quartile style)":
+            style_winner["style_match"] >= sorted(c["style_match"] for c in cands_mp)[len(cands_mp) * 3 // 4],
+        "model_preference with a throwing judge still returns a candidate":
+            throw_winner in cands_mp,
+        "run_round accepts a custom select":
+            isinstance(run_round(random.Random(SEED), select=style_judge), dict),
         "self-preference reports a gain": s["self_preference_reported_gain"] > 0.05,
         "held-out gain is much smaller (inflation is real)":
             s["held_out_gain_of_self_pref_winner"] < s["self_preference_reported_gain"] * 0.6,

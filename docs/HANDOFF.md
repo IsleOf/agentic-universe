@@ -44,7 +44,7 @@ interfaces are stable; swapping in a model changes nothing else.
 | --- | --- | --- |
 | `model_policy(call_model, framing, tools)` | `probe_idle_agent.py` | **adapter now written (run 134)** — pass a `call_model(prompt) -> str`; it builds the state-only prompt, parses the reply into an action, `idle_noop` on anything unparseable or on a model exception. Selftested with a fake model. Swap in a real `call_model` and run `sweep`. |
 | `agent_read(source_id)` | `probe_epistemic_sybil.py` | a model estimating a value from a document |
-| `self_preference(cand)` | `probe_rho_holdout.py` | a model pairwise-judging two trajectories |
+| `model_preference(judge)` | `probe_rho_holdout.py` | **adapter written (run 135)** — pass a `judge(text_a, text_b) -> "A"\|"B"`; it runs a round-robin Copeland selection, judge exception = tie. Pass to `run_round(select=...)`. Selftested with fake judges. |
 | `relay_policy(agent, msg)` | `probe_subagent_coordination.py` | a model deciding whether to forward an out-of-scope instruction |
 | `sample_signal(kind, rng)` | `probe_activation_generalisation.py` | real activation vectors from a model layer, per collusion kind |
 | `step_ok` / `handoff_ok` | `probe_composed_design.py` | real agent sub-step / handoff outcomes (to measure the actual per-step `p` and shed rate) |
@@ -56,9 +56,10 @@ interfaces are stable; swapping in a model changes nothing else.
 `concept_habitat_slack` hold — is there autotelic behaviour in the gap?). The rig, the four arms, and the
 falsification assessment are all done; it needs the model and a real filesystem sandbox for the containment.
 
-**Second:** `self_preference` → a model, run `probe_rho_holdout sweep`. Decides whether trajectory-only
-self-improvement (`pattern_trajectory_only_harness_optimization`) survives external grading. The sim says ~33%
-survives; a real judge gives the real number.
+**Second:** pass a real `judge` into `model_preference` and `run_round(select=...)`, run `probe_rho_holdout
+sweep`. Decides whether trajectory-only self-improvement (`pattern_trajectory_only_harness_optimization`)
+survives external grading. The sim says ~33% survives; a real judge gives the real number. (Candidates need
+a real output `sample` field for the judge to compare — `_cand_descriptor` synthesises one for the rig.)
 
 ## What needs infrastructure this repo doesn't have
 

@@ -496,6 +496,10 @@
     {
       "date": "2026-10-09",
       "change": "Autonomous run 134. Probe rig - end-to-end dry run of the idle-agent probe (IDLE-STATE RULE option b). probe_idle_agent.py gains model_policy(call_model, framing, tools): the production adapter that turns a single call_model(prompt)->str callable into a policy(cycle,state) the idle loop runs. State-only prompt (no transcript, no suggestion of what to do); first token parsed as the action; idle_noop on an unparseable reply or a model exception. Selftested with a deterministic fake model (trace validates, actions parse, both failure modes -> idle_noop): 16 checks GREEN. HANDOFF.md stub table updated - the idle-agent seam is now written, not just named. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-09",
+      "change": "Autonomous run 135. Probe rig - the RHO held-out probe's live-run seam (HANDOFF 'second' step). probe_rho_holdout.py gains model_preference(judge): turns a real pairwise judge(text_a, text_b)->'A'|'B' into a select(cands) via round-robin Copeland count; a judge exception is a tie. run_round takes an optional select= (default the scripted max-by-self_preference). Selftested with fake judges: a style-preferring judge reproduces the inflation, a throwing judge does not crash. 9 checks GREEN (was 6). HANDOFF.md updated. No graph node/edge change."
     }
   ],
   "nodes": [
