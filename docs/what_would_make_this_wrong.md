@@ -1,11 +1,39 @@
 # What Would Make This Wrong
 
-**Date:** 2026-09-12 (autonomous run 25) · last revised run 47 · severity re-rank run 172 · An adversarial read of the central thesis, from the `challenges` edges.
+**Date:** 2026-09-12 (autonomous run 25) · last revised run 47 · severity re-rank runs 172, 234 · An adversarial read of the central thesis, from the `challenges` edges.
 Current graph state and counts: `docs/graph_state_2026-09.md` (this document's snapshot numbers are historical).
 
 The graph's thesis: *a nourishing harness — active habitat mechanisms, ungated interior, a two-part gate, paired with the orchestration graph — produces more capable and more exploratory agent populations than a constrained one, and the emergence is worth studying.*
 
 Twenty-five runs of adding both mechanisms and their failure modes. Here is where the thesis is actually weak, ordered by how close each is to fatal.
+
+## Severity re-rank (run 234)
+
+After the runs 203–233 literature arc (the acceptor/certificate cluster, the harness-evolution subfield,
+three shipped verification-hygiene tools), two of the rankings below have moved:
+
+- **§2 has weakened as a threat.** The two-part gate's acceptance side now has an independent mid-2026
+  literature counterpart at every layer — exogenous (SEAL, Falsifiable Release Gates), anytime-valid
+  (PACE → `improvement_loop.paired_eprocess`, run 220), validity-checked (Who Grades the Grader),
+  paired-live-trial measured (ACES, ρ=0.14 proves `exec_guard` and `holdout_tasks` are complementary),
+  epoch-versioned (RQGM), certificate-bearing (PCAA/CAVA), plus a repair stage (`deterministic_repair`,
+  run 232). The falsifier for the harness-tampering worry was *run* on the loop's own lineage: 0/7 clean.
+  The gate architecture was already provably sound; the *instantiation* now has five independent groups'
+  worth of corroboration. §2's residual risk is still measurement-validity (§2c eval-awareness), not the
+  gate design.
+- **§6 has a new challenger: `concept_jit_agent_...` (JIT-Agent, arXiv:2608.25593).** The old §6 worry
+  was *the harness becomes irrelevant as models absorb planning*. JIT-Agent is the opposite worry, and it
+  is sharper: the harness matters so much that a **trained** harness-generator compounds where the
+  project's **elicitation-only** approach may plateau — a weaker model in a JIT-Agent harness beats a
+  stronger model, +20pp on a strong one. This challenges the emergence-first / no-weight-training *fork*
+  specifically, not the family. AHE's ablation is the partial answer: the transferable capability is in
+  factual harness *structure* (tools, middleware, memory), not prose — and structure is exactly what a
+  versioned component registry captures without training. But "elicitation gets most of the value" is now
+  a bet with a named, measured alternative.
+
+Updated order: **§3 (habitat mechanism unverified) → §1 (ungated interior) → §4 (diversity) → §6 (now:
+trained-harness alternative to the no-training fork) → §2c (measurement validity) → §5 (reliability decay)
+→ §7 (language)**. §2-the-gate-design drops out of the top tier.
 
 ## Current severity ranking (run 172)
 
