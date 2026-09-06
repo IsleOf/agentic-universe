@@ -1,0 +1,26 @@
+{
+  "run": 216,
+  "increment": "emergence-side - folded OrchestraBench (arXiv:2608.05263): orchestration failures need cascade-radius + per-mode recovery metrics; three model-invariant recovery tiers across five MAST modes; blind retry hides latent faults; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2608.05263",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.05263"
+  ],
+  "trace_file": "runtime\\traces\\loop-216.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

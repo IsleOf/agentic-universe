@@ -824,6 +824,10 @@
     {
       "date": "2026-09-14",
       "change": "Autonomous run 215. Consolidation (no graph node/edge change). docs/self_improving_harness_plan.md Phase 3 gains 'The acceptor / certificate arc - from autonomous runs 203-214': the six-condition acceptance-gate spec (exogenous / anytime-valid / validity-checked / paired-live-trial-measured / epoch-versioned / certificate-bearing) with the SEAL / PACE / Who-Grades-the-Grader / ACES / RQGM / PCAA+CAVA citations and the project's status against each (met, or the one open item: a paired e-process in verify_loop_edit), plus SEA (arXiv:2607.00871) as the fifth independent arrival that instantiates all of it around a frozen base. Phase 4 gains a 'Library drift' paragraph (bounded active-cap + meta-skill prior + outcome-driven retirement). Header dated 'acceptor/certificate arc run 214'."
+    },
+    {
+      "date": "2026-09-14",
+      "change": "Autonomous run 216. Emergence-side, from s2 citations of the herding paper (arXiv:2509.23537). Folded OrchestraBench (arXiv:2608.05263, Aug 2026) as concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery: a controlled failure-injection harness with cascade-radius + per-failure-mode recovery as primary metrics. Real Claude agent over a verifiable dependency chain: three recovery tiers across five MAST modes (tool faults ~1.0, ambiguous delegation ~0.30, latent/semantic ~0.0), ordering invariant across Sonnet/Opus/Haiku and a loan-approval reframing; blind retry reproduces latent faults and delays detection; cascade radius 0.9->4.7 across depths 3-7; trusted-state repair ablation shows containment comes from the trusted-state signal not autonomous detection. 6 edges: refines concept_mast_multi_agent_failure_taxonomy (per-mode recovery rates, model-invariant ordering) and emergent_information_cascades (measured depth growth law); supports artifact_phase0_trace_substrate ('where a cascade began' = its job), pattern_recoverability_constrained_evolution (trusted-state is load-bearing), emergent_recognition_execution_gap; challenges concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate (self-repair alone is not containment). 250->251 nodes, 955->961 edges."
     }
   ],
   "nodes": [
@@ -7303,6 +7307,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-13-1800.md"
+      ]
+    },
+    {
+      "id": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "label": "Orchestration failures need cascade-radius + per-failure-mode recovery metrics, not task accuracy; three recovery tiers across five MAST modes (tool faults ~1.0, ambiguous delegation ~0.30, latent/semantic ~0.0), stable across models; blind retry hides latent faults",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:orchestration_failure_diagnostics",
+      "confidence": 0.68,
+      "description": "OrchestraBench: Evaluating Multi-Agent Orchestration Failure Modes, Recovery, and Decomposition Quality (arXiv:2608.05263, VERIFIED via arXiv abstract read run 216; Aug 2026). Multi-agent orchestration benchmarks report task accuracy without diagnosing WHY a pipeline failed, WHERE a cascade began, or WHICH routing decision caused the breakdown. OrchestraBench is a controlled, seed-reproducible FAILURE-INJECTION harness over templated enterprise workflows, with two primary metrics: CASCADE RADIUS and PER-FAILURE-MODE RECOVERY. Findings: (1) on a 26-case gold diagnostic a keyword/flag router scores 0% on adversarial cases with misleading or missing surface flags while an intent-reasoning model router scores 100% (matches the oracle); (2) controlled mechanism probes with a REAL Claude agent over a verifiable arithmetic dependency chain reveal THREE FAILURE-HANDLING TIERS across five MAST modes - tool faults recover fully (1.0), ambiguous delegation partially (0.30), and three latent or semantic modes NEVER recover (0.0); this ordering PERSISTS when the chain is reframed as a loan-approval workflow and across Sonnet, Opus, and Haiku (absolute rates shift with context); (3) BLIND RETRY reproduces latent faults and increases time to detection - detection and attribution are necessary for containment; (4) cascade radius grows with pipeline depth (mean 0.9 -> 4.7 across depths 3-7); (5) a trusted-state repair ablation shows apparent containment gains come primarily from the trusted-state signal, not autonomous detection. Honest scoping (stated): controlled-chain mechanism probes, not domain-workload claims. Bearing on the project: this operationalises concept_mast_multi_agent_failure_taxonomy with recovery rates, and 'detection and attribution are necessary for containment' + 'where a cascade began' is exactly the job of artifact_phase0_trace_substrate + tools/topology_recover.py. Recency: Aug 2026, tested on the current Claude model family.",
+      "tags": [
+        "OrchestraBench",
+        "cascade-radius",
+        "per-failure-mode-recovery",
+        "MAST-modes",
+        "failure-injection-harness",
+        "blind-retry-hides-latent-faults",
+        "trusted-state-repair",
+        "intent-reasoning-router",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-14-0600.md",
+        "arXiv:2608.05263 (OrchestraBench: Evaluating Multi-Agent Orchestration Failure Modes, Recovery, and Decomposition Quality) - VERIFIED, abstract read run 216"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-14-0600.md"
       ]
     }
   ],
@@ -17545,6 +17578,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "SEA states the same caution against itself - 'results are single-run on expensive evaluations; confirming run-to-run variance is future work' - the Fragility discipline, self-applied."
+    },
+    {
+      "id": "edge_orchestration_diag_refines_mast",
+      "source": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "target": "concept_mast_multi_agent_failure_taxonomy",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.66,
+      "description": "Operationalises MAST with per-mode recovery rates on a real Claude agent: tool faults ~1.0, ambiguous delegation ~0.30, three latent/semantic modes ~0.0 - and the ORDERING is model-invariant (Sonnet/Opus/Haiku), which makes it a structural property of the modes, not a model artefact."
+    },
+    {
+      "id": "edge_orchestration_diag_supports_trace_substrate",
+      "source": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "'Where a cascade began' and 'detection and attribution are necessary for containment' is precisely what the Phase 0 trace substrate + topology_recover.py exist to provide - cascade radius and origin attribution are trace-substrate outputs."
+    },
+    {
+      "id": "edge_orchestration_diag_supports_recoverability",
+      "source": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The trusted-state repair ablation - containment gains come from the trusted-state signal, not autonomous detection - is direct evidence that a purpose-built recovery mechanism (a retained trusted state) is load-bearing, not optional polish."
+    },
+    {
+      "id": "edge_orchestration_diag_supports_recognition_execution_gap",
+      "source": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "target": "emergent_recognition_execution_gap",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Three MAST modes never recover autonomously and blind retry just reproduces them - the agent does not act on the latent fault it is in. The recognition-execution gap, at the multi-agent recovery layer."
+    },
+    {
+      "id": "edge_orchestration_diag_refines_information_cascades",
+      "source": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "target": "emergent_information_cascades",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Gives the cascade a measured growth law: cascade radius rises from mean 0.9 to 4.7 as pipeline depth goes 3 to 7 - deeper decomposition is strictly more dangerous per unbounded fault."
+    },
+    {
+      "id": "edge_orchestration_diag_challenges_self_repair",
+      "source": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "target": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "SEA lists 'self-repair' as one of its five verifier-in-the-loop signal mechanisms; OrchestraBench shows blind retry / self-repair reproduces latent faults and delays detection unless paired with attribution and a trusted-state signal - self-repair alone is not a containment mechanism."
     }
   ]
 }
