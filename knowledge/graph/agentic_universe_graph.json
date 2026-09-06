@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-30",
+  "last_updated": "2026-10-01",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1092,6 +1092,10 @@
     {
       "date": "2026-09-30",
       "change": "Autonomous run 285. IDLE-STATE clause c - corrected docs/literature_coverage.md, stale since run 49 (2026-09-18) and actively misleading (it told the scheduled task the collusion area was swept). Added a Correction block + a Swept-well-covered row for the collusion-audit-and-governance subfield (runs 253/276-282, 7 papers): run 49 marked Emergent deception/collusion as settled, but the 2601.00360 citation chain surfaced ~10 relevant 2026 papers forming a distinct subfield the topic-level sweep missed. LESSON recorded in the doc: a swept claim is only as deep as the citation chain walked; the scheduled task should periodically re-sweep citers of the most-cited literature nodes. Frontier-status header updated to run 285 (314/1255). No graph node/edge change."
+    },
+    {
+      "date": "2026-10-01",
+      "change": "Autonomous run 286. BUILD - tools/probe_epistemic_market.py, the first runnable rig for one of the 7 open research questions (open_questions.md Q1: does forecast-calibrated selection beat majority / manager / debate?). Four selection rules x a persuasion sweep x a herd knob (independent Condorcet errors vs a confidence-anchored info cascade). Verdict CONFIRMS: FORECAST beats MANAGER and DEBATE everywhere and is persuasion-robust; MAJORITY is strongest under independent errors but collapses -0.15 under herding, where FORECAST (which elicits independently) beats it by +0.04 - the epistemic market earns its keep in the herding regime. 11 selftest checks, selftest_all JOBS -> 27, BUILD SELFTEST GREEN. New node artifact_probe_epistemic_market_rig + 5 edges (verifies concept_calibrated_forecasting_before_action, grounds the epistemic-market parent, refines the vote-herding node = the necessity condition, supports independent-evidence-cells, instantiates the run-218 criterion on the selection side). 313 -> 314 nodes, 1255 -> 1260 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9289,6 +9293,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-30-0600.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_epistemic_market_rig",
+      "label": "The epistemic-market selection rig - forecast-calibrated vs majority / manager / debate",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.7,
+      "description": "tools/probe_epistemic_market.py (run 286) - the first runnable rig for one of the 7 open questions (docs/research/open_questions.md Q1). A pool of K=7 agents with Beta-drawn competence and a persuasion bias on stated confidence; four selection rules (MAJORITY plurality, MANAGER picks highest stated confidence, DEBATE the more-persuasive of the top two, FORECAST picks the best calibration record and elicits INDEPENDENTLY). A herd knob switches errors from independent (Condorcet) to a confidence-anchored info cascade. Dry-run (4000 trials/cell): FORECAST beats MANAGER and DEBATE at every persuasion level and is persuasion-robust (-0.022 vs manager -0.046 from no-persuasion to full); MAJORITY is the strongest rule under INDEPENDENT errors (Condorcet jury theorem) but collapses -0.15 under herding, where FORECAST beats it by +0.04. Verdict CONFIRMS: the epistemic market earns its keep specifically in the herding regime concept_epistemic_sybil_collapse describes. 11 selftest checks; selftest_all JOBS -> 27. Stub: _agent_answer / calibration record (swap for real agent runs).",
+      "tags": [
+        "epistemic-market",
+        "probe",
+        "forecast-selection",
+        "condorcet",
+        "herding",
+        "open-question-1"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-01-0600.md",
+        "tools/probe_epistemic_market.py"
+      ],
+      "evidence_links": [
+        "tools/probe_epistemic_market.py",
+        "docs/research/open_questions.md"
       ]
     }
   ],
@@ -22831,6 +22862,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "The runnable numbers for the claim: honest selection would have captured 0.095 held-out gain; the self-preference winner captures 0.073 - the evaluator that scores itself picks a worse edit AND reports a better number."
+    },
+    {
+      "id": "edge_market_rig_verifies_calibrated_forecasting",
+      "source": "artifact_probe_epistemic_market_rig",
+      "target": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "The runnable test of the claim: calibration-record selection beats manager-pick and debate at every persuasion level and does not degrade as persuasion rises, where the confidence-reading rules do."
+    },
+    {
+      "id": "edge_market_rig_grounds_epistemic_market_parent",
+      "source": "artifact_probe_epistemic_market_rig",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "First runnable evidence for the parent: pricing by track record rather than by current agreement is what keeps the group accurate when agreement collapses into a cascade."
+    },
+    {
+      "id": "edge_market_rig_refines_herding",
+      "source": "artifact_probe_epistemic_market_rig",
+      "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "Quantifies the trade: majority vote is the BEST rule (Condorcet) as long as errors stay independent - it is only worth replacing when votes become visible and cascade (-0.15 here). The herding node is the necessity condition for the epistemic market."
+    },
+    {
+      "id": "edge_market_rig_supports_evidence_cells",
+      "source": "artifact_probe_epistemic_market_rig",
+      "target": "concept_independent_evidence_cells_then_identity_masked_synthesis",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "FORECAST wins under herding only because it elicits INDEPENDENTLY (reads each agents own answer, not the cascaded pool) - which is exactly the evidence-cell protocol. Without independent elicitation, calibration selection also gets the herded answer."
+    },
+    {
+      "id": "edge_market_rig_instantiates_when_ma_helps",
+      "source": "artifact_probe_epistemic_market_rig",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "A concrete SELECTION-side instance of the run-218 criterion: the aggregation rule (not a vote) is what determines whether a multi-agent pool beats a single strong agent."
     }
   ]
 }
