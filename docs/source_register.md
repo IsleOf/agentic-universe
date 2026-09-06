@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 194 nodes, 624 edges · **Date:** 2026-09-05
+**Graph at generation:** 196 nodes, 637 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -61,6 +61,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
 | [2605.05007](https://arxiv.org/abs/2605.05007) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
+| [2605.27922](https://arxiv.org/abs/2605.27922) | (title not recorded) | `concept_capability_is_a_model_harness_config_property` |
 | [2606.00953](https://arxiv.org/abs/2606.00953) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
 | [2606.05985](https://arxiv.org/abs/2606.05985) | (title not recorded) | `emergent_pluralistic_ignorance`, `principle_diversity_maintenance` |
@@ -327,6 +328,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
 - `docs/auto_sweep_2026-10-01-1200.md` — `concept_moral_preferences_are_framing_brittle`
+- `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
@@ -346,6 +348,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/phase3_proposer.md` — `artifact_phase3_proposer_context`
 - `docs/phase4_skill_induction.md` — `artifact_phase4_skill_induction`
 - `docs/phase5_exec_guard.md` — `artifact_phase5_exec_guard`
+- `docs/pretrained_grader_gaming.md` — `concept_gate_faces_a_pretrained_grader_gamer`
 - `docs/probe_activation_generalisation.md` — `artifact_probe_activation_generalisation_rig`
 - `docs/probe_composed_design.md` — `artifact_probe_composed_design_rig`
 - `docs/probe_epistemic_sybil.md` — `artifact_probe_epistemic_sybil_rig`

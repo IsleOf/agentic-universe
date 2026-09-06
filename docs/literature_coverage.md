@@ -48,9 +48,10 @@ re-checking the 5 `inconclusive` nodes against newer evidence, and graph hygiene
 `research-fetch openreview search` is keyless; the `forum` command needs a token, and arXiv / S2 have been
 429'ing. These titles came up on relevant searches and are worth folding **when a content source clears**:
 
-- **"Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows"** — a benchmark for
-  how much the harness (vs the model) determines agent performance. Directly on `concept_harness_capability_delta`
-  and the whole `self_improving_harness` family. Highest priority.
+- ~~**"Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows"**~~ — FOLDED run
+  108 (`concept_capability_is_a_model_harness_config_property`, arXiv:2605.27922, resolved via DBLP). 5,194
+  trajectories, substantial model-harness variation → report capability at the config level; names
+  "execution-alignment failure" (reasoning decoupled from tool feedback / state / evidence / contracts).
 - **"Self-Harness: Harnesses That Improve Themselves"** — framework/survey; check for a taxonomy the plan
   could adopt.
 - **"Retrospective Harness Optimization: Improving LLM Agents via Self-Preference over Trajectory Rollouts"**
@@ -59,8 +60,10 @@ re-checking the 5 `inconclusive` nodes against newer evidence, and graph hygiene
   whether the self-preference-inflation concern (`probe_rho_holdout.py`, ~33% survives external grading) was
   raised by peer review.
 
-How to clear: retry `arxiv_api` / `s2` on each title; or set an OpenReview token per `openreview.py` header for
-the `forum` command.
+How to clear: **DBLP works when arXiv/S2 API don't** — `curl "https://dblp.org/search/publ/api?q=<title>&format=json"`
+resolves the arXiv id, then `curl https://arxiv.org/abs/<id>` reads the abstract from the HTML page
+(`citation_abstract` meta tag). Run 108 used this to fold Harness-Bench. Or set an OpenReview token per
+`openreview.py` header for the `forum` command.
 
 ## Guidance for the scheduled task
 

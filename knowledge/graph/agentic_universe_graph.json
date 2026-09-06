@@ -388,6 +388,10 @@
     {
       "date": "2026-10-02",
       "change": "Autonomous run 107. IDLE-STATE RULE (arXiv API returning empty, sources blocked): folded the run-106 synthesis into nourishing_harness_design.md section 2 as a committed design principle - 'grader-minimal, and inputs write-isolated'. The design minimises graded surfaces on purpose (the budget so fewer decisions are graded, structural gate only on running-structure edits, no interior quality score exposed) and requires the acceptance check's INPUTS to be as un-write-able/un-poisonable by agents as its logic (the ExploitGym cache-poisoning attack; METR's >7% tool-call spoofing). +1 edge. No new node."
+    },
+    {
+      "date": "2026-10-02",
+      "change": "Autonomous run 108. IDLE-STATE RULE. Resolved Harness-Bench via DBLP (arXiv:2605.27922) after arXiv/S2 API 429s, read the abstract via curl on the arXiv HTML page. concept_capability_is_a_model_harness_config_property: 106 tasks x harness configs x model backends, 5,194 trajectories, substantial variation across model-harness pairings -> 'report capability at the model-harness configuration level, not the base model'. Systematic confirmation of concept_harness_capability_delta. Names 'execution-alignment failure' - plausible reasoning decoupled from tool feedback / workspace state / evidence / output contracts - generalising emergent_recognition_execution_gap. Its per-run recording (artifacts + traces + usage + validator outputs) is the Phase 0 trace-substrate methodology validated as a benchmark. +6 edges. Watch-list item 1 of 4 folded."
     }
   ],
   "nodes": [
@@ -5281,6 +5285,33 @@
       ],
       "evidence_links": [
         "docs/pretrained_grader_gaming.md"
+      ]
+    },
+    {
+      "id": "concept_capability_is_a_model_harness_config_property",
+      "label": "Agent capability is a model-harness-configuration property, not a base-model one — and reasoning decouples from execution",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_bench",
+      "confidence": 0.7,
+      "description": "Harness-Bench (arXiv:2605.27922, VERIFIED via arXiv abstract read run 108; resolved through DBLP). A diagnostic benchmark for CONFIGURATION-LEVEL harness effects: 106 sandboxed offline tasks (reviewed for realism / solvability / oracle-checkability / integrity), representative harness configs x multiple model backends under shared environments/budgets/protocols with each harness's native execution preserved. Across 5,194 execution trajectories: 'substantial variation in completion, process quality, efficiency, and failure behavior across model-harness pairings' - so 'agent capability should be reported at the model-harness configuration level rather than attributed to the base model alone'. Systematic confirmation of concept_harness_capability_delta with a benchmark, not an anecdote. Names a failure mode: EXECUTION-ALIGNMENT FAILURE - 'plausible reasoning becomes decoupled from tool feedback, workspace state, evidence, or verifiable output contracts' (generalises emergent_recognition_execution_gap: not just knowing-vs-doing, but reasoning drifting from the ground truth of the run). Records final artifacts + execution traces + usage stats + validator outputs per run - the Phase 0 trace-substrate methodology, validated as a benchmark design.",
+      "tags": [
+        "harness-bench",
+        "model-harness-config",
+        "5194-trajectories",
+        "execution-alignment-failure",
+        "reasoning-decoupled-from-execution",
+        "106-tasks",
+        "benchmark"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-02-1800.md",
+        "arXiv:2605.27922 (Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows, Yao et al.) - VERIFIED, abstract read; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-02-1800.md"
       ]
     }
   ],
@@ -11968,6 +11999,71 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.5,
       "description": "The budget's under-appreciated role: fewer decisions are GRADED at all - grader-minimality is a safety property, not just a throughput one."
+    },
+    {
+      "id": "edge_harnessbench_supports_capability_delta",
+      "source": "concept_capability_is_a_model_harness_config_property",
+      "target": "concept_harness_capability_delta",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75,
+      "description": "5,194 trajectories: substantial variation across model-harness pairings - the harness-holds-capability claim as a systematic benchmark result."
+    },
+    {
+      "id": "edge_harnessbench_supports_subfield",
+      "source": "concept_capability_is_a_model_harness_config_property",
+      "target": "concept_harness_evolution_subfield",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A diagnostic benchmark for configuration-level harness effects is the subfield acquiring measurement infrastructure."
+    },
+    {
+      "id": "edge_harnessbench_refines_recognition_gap",
+      "source": "concept_capability_is_a_model_harness_config_property",
+      "target": "emergent_recognition_execution_gap",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "'Execution-alignment failure' generalises the recognition-execution gap: not just knowing-vs-doing but plausible reasoning drifting from tool feedback / workspace state / evidence / output contracts."
+    },
+    {
+      "id": "edge_harnessbench_supports_state_folding",
+      "source": "concept_capability_is_a_model_harness_config_property",
+      "target": "pattern_deterministic_state_folding",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The folded deterministic state IS the tool-feedback / workspace-state the reasoning must stay coupled to - state folding is the anti-execution-alignment-failure mechanism."
+    },
+    {
+      "id": "edge_harnessbench_validates_phase0",
+      "source": "concept_capability_is_a_model_harness_config_property",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Harness-Bench records artifacts + execution traces + usage + validator outputs per run - the Phase 0 trace-substrate methodology, validated as a benchmark design."
+    },
+    {
+      "id": "edge_harnessbench_instantiates_sih",
+      "source": "concept_capability_is_a_model_harness_config_property",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65
     }
   ]
 }
