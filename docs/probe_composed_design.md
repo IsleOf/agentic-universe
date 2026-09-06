@@ -57,8 +57,24 @@ state stack is a horizon *extender*, not a horizon *remover*. The orchestration 
 decomposition into genuinely short *tasks*) is doing at least as much work as the harness layer here — which
 matches the bilevel result already in §3.3 ("acceptance quality is bounded by decomposition quality").
 
+## Granularity sweep (run 94)
+
+`python tools/probe_composed_design.py granularity` sweeps `SUBTASK_LEN` (steps per short agent before a
+handoff) at a fixed task length, asking whether there is an intermediate decomposition optimum.
+
+At the default parameters (length 40, four-field shed 0.01, modest accumulation penalty): **no clean
+intermediate optimum** — task success is nearly flat across `SUBTASK_LEN` 2–40 (spread < 0.1) and drifts
+slightly toward the *coarse* end (fewer handoffs). Reason: four-field handoffs are cheap but not free, and the
+per-agent accumulation penalty here is modest, so ~7 handoffs cost about what the resets save.
+
+This **matches `test_scenario_decomposition_granularity`** (the pilot left the intermediate-optimum hypothesis
+unsupported; three 2026 papers reframed it as task-structure dependent). The rig makes the dependence explicit:
+crank `ACCUM_PENALTY` up and the optimum moves fine; crank `SHED_FOUR_FIELD` up and it moves coarse. **The
+granularity that maximises the horizon is a function of (per-step accumulation cost) vs (per-handoff shed
+cost)** — both measurable per model + harness, neither universal.
+
 ## Next
 
-Real `step_ok` / `handoff_ok` from agent runs; measure the actual per-step `p` and handoff shed rate for a
-given model + harness; sweep `SUBTASK_LEN` to find the decomposition granularity that maximises the usable
-horizon (ties into `test_scenario_decomposition_granularity`).
+Real `step_ok` / `handoff_ok` from agent runs; measure the actual per-step `p`, the accumulation slope, and
+the handoff shed rate for a given model + harness — then the granularity sweep gives the real optimal
+decomposition depth.

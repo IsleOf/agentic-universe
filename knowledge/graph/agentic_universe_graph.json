@@ -332,6 +332,10 @@
     {
       "date": "2026-09-29",
       "change": "Autonomous run 93. IDLE-STATE RULE: folded the run-92 composed-design verdict into nourishing_harness_design.md 3.1 ('this stack is a horizon extender, not a horizon remover - the orchestration layer's decomposition into short TASKS does at least as much work as the harness layer'), and linked the composed-design rig into emergence_probe_catalogue.md + docs/HANDOFF.md (6th rig, 6th stub). No graph node/edge change."
+    },
+    {
+      "date": "2026-09-29",
+      "change": "Autonomous run 94. IDLE-STATE RULE: added a granularity sweep to tools/probe_composed_design.py - at a fixed task length, does an intermediate decomposition depth beat the extremes? At plausible params: NO clean optimum (flat across SUBTASK_LEN 2-40, drifting coarse - four-field handoffs are cheap but not free). The optimum moves fine when accumulation cost rises, coarse when shed cost rises - it is f(accumulation cost, shed cost), neither universal. Enriched test_scenario_decomposition_granularity (one of the 5 inconclusive nodes) with this. 20 selftests GREEN."
     }
   ],
   "nodes": [
@@ -2542,7 +2546,7 @@
       "approach_family": "graph_engineering",
       "branch_key": "graph_engineering:decomposition_granularity",
       "confidence": 0.4,
-      "description": "A controlled sweep on the organisational-ceiling question: one broad agent through five specialised agents against a single-agent baseline, 4,400 runs on VAT determination, with matched-token arms separating prompt budget from agent count and three failure-injection arms. Intermediate configurations scored highest at 0.830 against endpoints of 0.720 and 0.770, but the authors state the intermediate-optimum hypothesis remains unsupported at pilot scale. The result that survives: the single agent does not Pareto-dominate the orchestrated set, sitting 6.5 points below the leader when token-matched, without statistical definiteness. Filed as inconclusive - the first node in this graph to use that state, and an honest one. Re-checked run 50: three 2026 papers reframe the question - the decomposition optimum is TASK-STRUCTURE dependent, not a fixed sweet spot. arXiv:2606.00953 (Co-Coder): decomposition shortens the critical path but cross-agent dependencies force costly context transfer, so gains are largest on dependency-dense projects and community detection decides where to split. arXiv:2608.19557: a multi-agent control plane beats a static heuristic only 'when non-stationarity opens headroom a fixed policy cannot use' - under stationary load, extra orchestration adds nothing. arXiv:2605.05007 (Uno-Orchestra): selective, learned decomposition depth beats any fixed routing. Net: the original 'intermediate optimum' hypothesis stays unsupported as a universal claim, but the single-agent-does-not-Pareto-dominate result holds and the refinement is that granularity should be chosen per task from dependency structure and non-stationarity, not fixed.",
+      "description": "A controlled sweep on the organisational-ceiling question: one broad agent through five specialised agents against a single-agent baseline, 4,400 runs on VAT determination, with matched-token arms separating prompt budget from agent count and three failure-injection arms. Intermediate configurations scored highest at 0.830 against endpoints of 0.720 and 0.770, but the authors state the intermediate-optimum hypothesis remains unsupported at pilot scale. The result that survives: the single agent does not Pareto-dominate the orchestrated set, sitting 6.5 points below the leader when token-matched, without statistical definiteness. Filed as inconclusive - the first node in this graph to use that state, and an honest one. Re-checked run 50: three 2026 papers reframe the question - the decomposition optimum is TASK-STRUCTURE dependent, not a fixed sweet spot. arXiv:2606.00953 (Co-Coder): decomposition shortens the critical path but cross-agent dependencies force costly context transfer, so gains are largest on dependency-dense projects and community detection decides where to split. arXiv:2608.19557: a multi-agent control plane beats a static heuristic only 'when non-stationarity opens headroom a fixed policy cannot use' - under stationary load, extra orchestration adds nothing. arXiv:2605.05007 (Uno-Orchestra): selective, learned decomposition depth beats any fixed routing. Net: the original 'intermediate optimum' hypothesis stays unsupported as a universal claim, but the single-agent-does-not-Pareto-dominate result holds and the refinement is that granularity should be chosen per task from dependency structure and non-stationarity, not fixed. Run 94: tools/probe_composed_design.py granularity sweep gives the dependence explicitly - at plausible params there is NO clean intermediate optimum (success flat across SUBTASK_LEN 2-40, drifting slightly coarse), and the optimum moves fine when per-step accumulation cost rises, coarse when per-handoff shed cost rises. So the optimal decomposition depth is a function of (accumulation cost) vs (shed cost), both measurable per model+harness, neither universal - consistent with this node staying inconclusive on the universal-intermediate-optimum claim.",
       "tags": [
         "decomposition",
         "granularity",
@@ -2556,7 +2560,8 @@
         "arXiv:2608.25099 (Control-Theoretic Resource-Aware Consensus) - adaptive topology switching outperforms any fixed topology on the consensus-performance / token-cost tradeoff",
         "arXiv:2606.00953 (Co-Coder / Cohesion-Aware Task Partitioning) - abstract read run 50 (May 2026)",
         "arXiv:2608.19557 (Deadline-Aware Mixed-Criticality Scheduling at the AV Edge) - abstract read run 50",
-        "arXiv:2605.05007 (Uno-Orchestra: Parsimonious Agent Routing) - abstract read run 50 (May 2026)"
+        "arXiv:2605.05007 (Uno-Orchestra: Parsimonious Agent Routing) - abstract read run 50 (May 2026)",
+        "tools/probe_composed_design.py granularity sweep (run 94) - the intermediate optimum, when it exists, is set by accumulation-cost vs shed-cost"
       ],
       "evidence_links": [
         "docs/sweep_2026-09-05.md"
@@ -11383,6 +11388,17 @@
       "verification_state": "validated",
       "approach_family": "self_improving_harness",
       "confidence": 0.5
+    },
+    {
+      "id": "edge_composedrig_informs_decomp_granularity",
+      "source": "artifact_probe_composed_design_rig",
+      "target": "test_scenario_decomposition_granularity",
+      "type": "informs",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "The granularity sweep makes the task-structure dependence explicit: optimal SUBTASK_LEN = f(accumulation cost, shed cost)."
     }
   ]
 }

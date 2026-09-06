@@ -163,15 +163,49 @@ def _selftest():
         "C dominates A and B at every length":
             all(full["C"][L] >= full["A"][L] and full["C"][L] >= full["B"][L] - 0.05 for L in full["A"]),
     }
+    gran = granularity_sweep(trials=300)
+    vals = list(gran["success_by_subtask_len"].values())
+    checks["granularity sweep runs and picks a best subtask length"] = (
+        gran["best_subtask_len"] in gran["success_by_subtask_len"])
+    checks["the granularity effect is modest at these params (spread < 0.2)"] = (
+        max(vals) - min(vals) < 0.2)
+    checks["the reading classifies the granularity curve"] = (
+        "optimum" in gran["reading"] or "monotone" in gran["reading"])
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print("\n  curves (task-success by length):")
     for cfg in ("A", "B", "C"):
         print(f"    {cfg}: " + "  ".join(f"L{L}={full[cfg][L]}" for L in sorted(full[cfg])))
     print(f"\n  verdict: {a['verdict']}")
+    print(f"  granularity: {json.dumps(gran)}")
     ok = all(checks.values())
     print("\nSELFTEST", "GREEN" if ok else "RED")
     return 0 if ok else 1
+
+
+def granularity_sweep(length=40, subtask_lens=(2, 3, 4, 6, 8, 12, 20, 40), trials=600):
+    """At a fixed task length, which decomposition granularity (steps per short
+    agent before a handoff) maximises task success? Too fine = handoff overhead
+    dominates; too coarse = the per-agent accumulation isn't reset often enough.
+    Ties into `test_scenario_decomposition_granularity` (the intermediate-optimum
+    question).
+    """
+    global SUBTASK_LEN
+    saved = SUBTASK_LEN
+    out = {}
+    try:
+        for sl in subtask_lens:
+            SUBTASK_LEN = sl
+            rng = random.Random(f"{SEED}-gran-{sl}")
+            wins = sum(run_task(rng, length, "C") for _ in range(trials))
+            out[sl] = round(wins / trials, 3)
+    finally:
+        SUBTASK_LEN = saved
+    best = max(out, key=out.get)
+    return {"length": length, "success_by_subtask_len": out, "best_subtask_len": best,
+            "reading": (f"intermediate optimum at {best} steps/agent"
+                        if 2 < best < max(subtask_lens) else
+                        f"monotone — best at the {'fine' if best <= min(subtask_lens) else 'coarse'} end")}
 
 
 def _cli(argv=None):
@@ -179,6 +213,7 @@ def _cli(argv=None):
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("selftest")
     sub.add_parser("sweep")
+    sub.add_parser("granularity")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
@@ -187,6 +222,9 @@ def _cli(argv=None):
         a = assess(c)
         a["verdict"] = _verdict(a)
         print(json.dumps({"curves": c, "assessment": a}, indent=2))
+        return 0
+    if args.cmd == "granularity":
+        print(json.dumps(granularity_sweep(), indent=2))
         return 0
     return 2
 
