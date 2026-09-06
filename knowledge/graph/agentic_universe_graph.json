@@ -236,6 +236,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 69. Built tools/holdout_tasks.py - the frozen held-out research-task set that Phase 3 verification of loop-harness edits was blocked on. 10 questions this project already verified, each with a computable substance-check. Historical baseline 10/10 at aggregate 1.00. improvement_loop.verify_loop_edit() uses it as the grounded risk: accept iff risk strictly decreases AND no task regressed. Phase 3 gap narrowed to: proposer (code) -> human promotes + re-runs loop on the set -> verify (code). selftest_all.py runs 10 selftests, all GREEN. artifact_phase3_holdout_set added."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 70. Built Phase 4 skeleton - skill induction (tools/skill_induction.py). Classifies the loop's 56-run history into task classes; a class recurring >=4x becomes a candidate skill written to the harness registry (status=candidate, no auto-promotion). Induced literature_sweep (22) and build (9). Enforces distillation vs discovery: withheld_runs() marks a fixed deterministic 20% of runs permanently skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). selftest_all.py runs 11 selftests, all GREEN. artifact_phase4_skill_induction added."
     }
   ],
   "nodes": [
@@ -4675,6 +4679,31 @@
       ],
       "evidence_links": [
         "docs/phase3_holdout_set.md"
+      ]
+    },
+    {
+      "id": "artifact_phase4_skill_induction",
+      "label": "Phase 4 skill induction — skeleton on the loop's own history",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase4_skeleton",
+      "confidence": 0.7,
+      "description": "tools/skill_induction.py, run 70: classifies the loop's 56-run history (via experience-bank workflow entries) into task classes; a class recurring >= 4 times becomes a candidate skill written to the harness registry as a tool component, status=candidate (no auto-promotion). Induced literature_sweep (support 22) and build (support 9). Enforces the distillation/discovery tension: withheld_runs() marks a fixed 20% of runs permanently and deterministically skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). Not built: LLM clustering, auto-promotion, finer task-class classification (needs live per-run summaries).",
+      "tags": [
+        "phase-4",
+        "skill-induction",
+        "withheld-fraction",
+        "distillation-vs-discovery",
+        "skeleton"
+      ],
+      "derived_from": [
+        "docs/phase4_skill_induction.md",
+        "tools/skill_induction.py"
+      ],
+      "evidence_links": [
+        "docs/phase4_skill_induction.md"
       ]
     }
   ],
@@ -10313,6 +10342,60 @@
       "verification_state": "validated",
       "approach_family": "self_improving_harness",
       "confidence": 0.75
+    },
+    {
+      "id": "edge_phase4_instantiates_sih",
+      "source": "artifact_phase4_skill_induction",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75
+    },
+    {
+      "id": "edge_phase4_implements_skill_induction",
+      "source": "artifact_phase4_skill_induction",
+      "target": "pattern_skill_induction",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "Repeated task-class shapes -> candidate named skills; no auto-promotion."
+    },
+    {
+      "id": "edge_phase4_constrained_by_diversity",
+      "source": "artifact_phase4_skill_induction",
+      "target": "principle_diversity_maintenance",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "withheld_runs() marks 20% of runs permanently skill-withheld - the mechanism that resolves distillation vs discovery."
+    },
+    {
+      "id": "edge_phase4_depends_on_phase2",
+      "source": "artifact_phase4_skill_induction",
+      "target": "artifact_phase2_experience_bank",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "Induces from the bank's workflow entries."
+    },
+    {
+      "id": "edge_phase4_challenges_skill_lifecycle",
+      "source": "artifact_phase4_skill_induction",
+      "target": "pattern_agentic_skill_lifecycle",
+      "type": "supports",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Gives the lifecycle its induction stage; the deprecation stage (retraction) is still owed."
     }
   ]
 }
