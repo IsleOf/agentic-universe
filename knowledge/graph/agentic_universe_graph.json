@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-04",
+  "last_updated": "2026-10-05",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -424,6 +424,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 116. Folded the run-115 masking finding (arXiv:2606.11686) into the code: improvement_loop.verify_loop_edit now rejects a proposed loop-harness edit if any task CATEGORY (holdout_tasks.CATEGORY: literature 10 / design 7) regresses, even when the overall aggregate improves. New selftest: an edit that lifts literature 8->10 while dropping design 7->6 (aggregate up) is rejected as category_regressed=['design']. 21 selftests GREEN. +1 edge."
+    },
+    {
+      "date": "2026-10-05",
+      "change": "Autonomous run 117. DBLP. concept_harness_has_model_independent_failure_fingerprints (The Scaffold Effect in Coding Agents, arXiv:2607.22585): 2 models x 3 harnesses on Terminal-Bench Pro - failure fingerprints REPLICATE across models (REASON-loop/Goose, VERIFY-MAX_TURNS/OpenHands-SDK, IDLE-LOOP-TIME/OpenCode); up to 40x token difference from harness choice, 0-8 pp pass-rate difference; 'no-action turns are a per-task WAIT tax'. A harness component's failure mode is a component property not a model property - supports per-component gating and the idle-agent probe. Also enriched concept_capability_is_a_model_harness_config_property with the 40x number. +5 edges."
     }
   ],
   "nodes": [
@@ -5341,7 +5345,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-10-02-1800.md",
-        "arXiv:2605.27922 (Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows, Yao et al.) - VERIFIED, abstract read; resolved via DBLP"
+        "arXiv:2605.27922 (Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows, Yao et al.) - VERIFIED, abstract read; resolved via DBLP",
+        "arXiv:2607.22585 (The Scaffold Effect in Coding Agents) - run 117: Qwen 3.6 Plus + MiniMax M2.5 x Goose / OpenCode / OpenHands-SDK on Terminal-Bench Pro - harness choice induces up to a 40x difference in tokens per solved task while within-model pass-rate differences stay 0-8 pp; the harness's biggest lever is efficiency, not pass rate, in this task regime"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-02-1800.md"
@@ -5483,6 +5488,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-04-1200.md"
+      ]
+    },
+    {
+      "id": "concept_harness_has_model_independent_failure_fingerprints",
+      "label": "A harness has its own characteristic failure mode regardless of the model running in it",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_failure_fingerprints",
+      "confidence": 0.65,
+      "description": "The Scaffold Effect in Coding Agents (arXiv:2607.22585, VERIFIED via arXiv abstract read run 117; resolved via DBLP). Across two models (Qwen 3.6 Plus, MiniMax M2.5) x three harnesses (Goose, OpenCode, OpenHands-SDK) on a 50-task Terminal-Bench Pro subset, FAILURE FINGERPRINTS REPLICATE ACROSS MODELS: REASON-loop failure for Goose, VERIFY / MAX_TURNS for OpenHands-SDK, IDLE-LOOP / TIME for OpenCode - i.e. each harness has a characteristic pathology that is largely model-independent. Also: harness choice induces up to a 40x difference in tokens per solved task while pass-rate differences stay 0-8 pp, and 'no-action turns are a per-task WAIT tax, not just a token tax'. For this project: a harness component's failure mode is a property of the component, not the model - which is exactly why per-component gating (concept_aggregate_score_masks_per_layer_regression) and per-component evolution (the Phase 3 registry) are the right granularity; and OpenCode's real 'idle-loop' pathology is independent evidence that the idle-agent probe (artifact_probe_idle_agent_rig) is measuring a real harness failure mode, not just a hypothesis.",
+      "tags": [
+        "scaffold-effect",
+        "failure-fingerprints",
+        "model-independent",
+        "idle-loop",
+        "reason-loop",
+        "verify-loop",
+        "40x-token-difference",
+        "wait-tax"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-05-0000.md",
+        "arXiv:2607.22585 (The Scaffold Effect in Coding Agents) - VERIFIED, abstract read; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-05-0000.md"
       ]
     }
   ],
@@ -12561,6 +12594,60 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.6,
       "description": "verify_loop_edit (run 116) rejects a category regression the aggregate masks - the 17 held-out tasks split into literature/design, and either slice cratering is a reject."
+    },
+    {
+      "id": "edge_fingerprints_supports_config_capability",
+      "source": "concept_harness_has_model_independent_failure_fingerprints",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Same conclusion from a different angle: report at the harness-model-pair level; up to 40x token difference from harness choice alone."
+    },
+    {
+      "id": "edge_fingerprints_supports_per_layer_gating",
+      "source": "concept_harness_has_model_independent_failure_fingerprints",
+      "target": "concept_aggregate_score_masks_per_layer_regression",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "A harness component's failure mode is a component property, not a model property - so per-component gating is the right granularity."
+    },
+    {
+      "id": "edge_fingerprints_supports_idle_probe",
+      "source": "concept_harness_has_model_independent_failure_fingerprints",
+      "target": "artifact_probe_idle_agent_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "OpenCode's real 'idle-loop / TIME' pathology is independent evidence that the idle-agent probe measures a real harness failure mode."
+    },
+    {
+      "id": "edge_fingerprints_refines_reused_input",
+      "source": "concept_harness_has_model_independent_failure_fingerprints",
+      "target": "concept_reused_input_dominates",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'no-action turns are a per-task WAIT tax, not just a token tax' - an operational cost the token-economy view misses."
+    },
+    {
+      "id": "edge_fingerprints_instantiates_sih",
+      "source": "concept_harness_has_model_independent_failure_fingerprints",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
     }
   ]
 }

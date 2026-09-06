@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 201 nodes, 666 edges · **Date:** 2026-09-05
+**Graph at generation:** 202 nodes, 672 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -75,6 +75,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
+| [2607.22585](https://arxiv.org/abs/2607.22585) | (title not recorded) | `concept_capability_is_a_model_harness_config_property`, `concept_harness_has_model_independent_failure_fingerprints` |
 | [2607.22758](https://arxiv.org/abs/2607.22758) | (title not recorded) | `concept_topology_shapes_error_propagation`, `emergent_information_cascades` |
 | [2607.24625](https://arxiv.org/abs/2607.24625) | (title not recorded) | `pattern_disposable_branch_exploration` |
 | [2607.27191](https://arxiv.org/abs/2607.27191) | (title not recorded) | `concept_motive_operative_split`, `concept_research_lifecycle_split` |
@@ -339,6 +340,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-03-1800.md` — `concept_risklab_probe_toolkit`
 - `docs/auto_sweep_2026-10-04-0000.md` — `concept_safety_helpfulness_tradeoff_persists_under_optimisation`
 - `docs/auto_sweep_2026-10-04-1200.md` — `concept_aggregate_score_masks_per_layer_regression`
+- `docs/auto_sweep_2026-10-05-0000.md` — `concept_harness_has_model_independent_failure_fingerprints`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
