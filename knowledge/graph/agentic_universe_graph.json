@@ -500,6 +500,10 @@
     {
       "date": "2026-10-09",
       "change": "Autonomous run 135. Probe rig - the RHO held-out probe's live-run seam (HANDOFF 'second' step). probe_rho_holdout.py gains model_preference(judge): turns a real pairwise judge(text_a, text_b)->'A'|'B' into a select(cands) via round-robin Copeland count; a judge exception is a tie. run_round takes an optional select= (default the scripted max-by-self_preference). Selftested with fake judges: a style-preferring judge reproduces the inflation, a throwing judge does not crash. 9 checks GREEN (was 6). HANDOFF.md updated. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-09",
+      "change": "Autonomous run 136. DBLP. concept_spontaneous_behaviour_beats_scripted_for_simulation (Shall We Team Up, EMNLP 2024 Findings): questions shaping agent behaviour for social simulation; across three competitive scenarios cooperation GRADUALLY EMERGES among competitors without direction, matching human data. An independent 2024 methodological statement of the emergence-first posture, and unscripted behaviour offered as a reasoning probe (the idle-agent-probe philosophy). +6 edges."
     }
   ],
   "nodes": [
@@ -5840,6 +5844,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-08-1800.md"
+      ]
+    },
+    {
+      "id": "concept_spontaneous_behaviour_beats_scripted_for_simulation",
+      "label": "Not scripting agents produces more accurate social simulation AND a better probe of reasoning - cooperation emerges among competitors without direction",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:unscripted_beats_scripted",
+      "confidence": 0.68,
+      "description": "Shall We Team Up: Exploring Spontaneous Cooperation of Competing LLM Agents (Wu et al., EMNLP 2024 Findings, arXiv:2502.08691 companion / aclanthology 2024.findings-emnlp.297; VERIFIED via ACL abstract read run 136, resolved via DBLP; code github.com/wuzengqing001225/SABM_ShallWeTeamUp). Directly questions the standard practice of shaping agent behaviour with crafted instructions for social simulation: 'we doubt the necessity of shaping agents' behaviors for accurate social simulations.' Instead emphasises SPONTANEOUS phenomena - agents engaging with context and making adaptive decisions WITHOUT explicit directions. Across three competitive scenarios they simulate the GRADUAL EMERGENCE OF COOPERATION among agents set up as competitors, and the trajectories align closely with human behavioural data. Two claims for this project: (1) an independent 2024 methodological statement of the emergence-first posture (approach_emergence_first) - don't direct the agents, and the result is both more accurate and more informative; (2) unscripted behaviour is offered as 'a novel method to assess LLMs' capability of deliberate reasoning' - i.e. the idle-agent-probe philosophy (measure what emerges when you give no instruction; run 134's model_policy deliberately gives the model no hint of what to do). Cooperation-emerging-among-competitors is the same shape as emergent_whistleblowing (spontaneous counter-response) and emergent_self_organizing_roles.",
+      "tags": [
+        "spontaneous-cooperation",
+        "unscripted-agents",
+        "emergence-first-methodology",
+        "social-simulation",
+        "cooperation-among-competitors",
+        "matches-human-data",
+        "reasoning-probe",
+        "emnlp-2024"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-09-1800.md",
+        "Shall We Team Up (EMNLP 2024 Findings, aclanthology 2024.findings-emnlp.297) - VERIFIED, abstract read run 136; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-09-1800.md"
       ]
     }
   ],
@@ -13519,6 +13551,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "Complements the run-124 survey: both 2026 surveys name model-vs-harness attribution as the central open measurement problem."
+    },
+    {
+      "id": "edge_unscripted_instantiates_emergence_first",
+      "source": "concept_spontaneous_behaviour_beats_scripted_for_simulation",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "An independent 2024 argument that not shaping agent behaviour gives more accurate simulation - the emergence-first posture, stated as method."
+    },
+    {
+      "id": "edge_unscripted_supports_spontaneous_self_inquiry",
+      "source": "concept_spontaneous_behaviour_beats_scripted_for_simulation",
+      "target": "emergent_spontaneous_self_inquiry",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Same premise - agents do something coherent and measurable when given context but no instruction; here it is cooperation rather than self-inquiry."
+    },
+    {
+      "id": "edge_unscripted_supports_whistleblowing",
+      "source": "concept_spontaneous_behaviour_beats_scripted_for_simulation",
+      "target": "emergent_whistleblowing",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Cooperation emerging among agents set up as competitors is the same spontaneous-counter-to-the-setup shape as whistleblowing against in-group cheating."
+    },
+    {
+      "id": "edge_unscripted_supports_autotelic_agency",
+      "source": "concept_spontaneous_behaviour_beats_scripted_for_simulation",
+      "target": "concept_autotelic_agency",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "'Adaptive decisions without explicit directions' is self-generated goal-directed behaviour in a social setting."
+    },
+    {
+      "id": "edge_unscripted_refines_inverted_u",
+      "source": "concept_spontaneous_behaviour_beats_scripted_for_simulation",
+      "target": "concept_environmental_pressure_has_an_inverted_u",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "Cooperation emerging under competitive pressure is a data point on the pressure/emergence curve - competition is non-zero pressure and cooperation still forms."
+    },
+    {
+      "id": "edge_unscripted_supports_idle_probe",
+      "source": "concept_spontaneous_behaviour_beats_scripted_for_simulation",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "Positions unscripted behaviour as a reasoning probe - the same stance as the idle-agent probe (measure what emerges from no instruction)."
     }
   ]
 }

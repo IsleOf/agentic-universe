@@ -1,0 +1,29 @@
+{
+  "run": 136,
+  "increment": "fold Shall We Team Up - spontaneous cooperation of competing LLM agents (EMNLP 2024) via DBLP",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "citations": [
+    {
+      "id": "src:2024.findings-emnlp.297",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:2024.findings-emnlp.297"
+  ],
+  "trace_file": "runtime\\traces\\loop-136.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

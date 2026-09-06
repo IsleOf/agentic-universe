@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 211 nodes, 722 edges · **Date:** 2026-09-05
+**Graph at generation:** 212 nodes, 728 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -244,6 +244,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - RiskLab (ACL 2026 Demo, 10.18653/v1/2026.acl-demo.17) - VERIFIED via ACL Anthology page — `concept_risklab_probe_toolkit`
 - SBCO self-supervised harness optimisation — `emergent_model_native_orchestration`
 - Science Advances-style convention studies — `emergent_social_conventions`
+- Shall We Team Up (EMNLP 2024 Findings, aclanthology 2024.findings-emnlp.297) - VERIFIED, abstract read run 136; resolved via DBLP — `concept_spontaneous_behaviour_beats_scripted_for_simulation`
 - SkillGraph, Captain Agent (recruits and reorganises experts as requirements emerge) — `pattern_agent_coordination_graph`
 - TDAG, Flow (task graphs refined from intermediate results) — `pattern_runtime_adaptive_workflow`
 - Verbalized Sampling — `pattern_verbalized_sampling`
@@ -360,6 +361,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-07-0600.md` — `concept_what_when_how_where_to_evolve`
 - `docs/auto_sweep_2026-10-08-1200.md` — `concept_ace_context_evolution_self_improvement`
 - `docs/auto_sweep_2026-10-08-1800.md` — `concept_horizon_gap_outcome_signals_decay`
+- `docs/auto_sweep_2026-10-09-1800.md` — `concept_spontaneous_behaviour_beats_scripted_for_simulation`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
