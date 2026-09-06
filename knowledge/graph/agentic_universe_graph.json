@@ -1000,6 +1000,10 @@
     {
       "date": "2026-09-25",
       "change": "Autonomous run 260. Fold group 1 of the owner's research input (coverage_map.md) - the epistemic-market cluster (directions 42-45, 47, 50, 52). 6 nodes under a new branch_key orchestration_first:epistemic_market: the parent concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages + calibrated_forecasting_before_action, pre_registered_adversarial_collaboration, independent_evidence_cells_then_identity_masked_synthesis, conditional_trust_is_domain_keyed_not_global, counterfactual_reputation_credits_predicting_the_road_not_taken. 16 edges: the parent challenges the vote-herding node (markets price by evidence, not agreement) and refines the debate-repair pattern; forecasting extends the PACE acceptor; evidence-cells implements evidential-ancestry-tracking + constrains sybil-collapse + refines the anonymization finding; conditional-trust refines trust_gates + reputation_dynamics; counterfactual-reputation depends_on the rollback substrate. Emergence-first, all speculative/needs-validation. 275 -> 281 nodes, 1104 -> 1120 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-25",
+      "change": "Autonomous run 261. Fold group 2 of the owner's research input (coverage_map.md) - active inference + interoception (directions 7, 12, 13, 15). 3 nodes (branch_key self_improving_harness:interoception): concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value (the ask/retrieve/act/stop decision as epistemic vs pragmatic value vs cost - the IDLE-STATE RULE is a hand-written special case), concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate (five health axes; loop_metrics.py already does two of them for the research loop), concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise (the four-way event classifier; a quality axis on run_novelty). 8 edges: interoception extends artifact_loop_metrics_phase3_real + refines emergent_metacognitive_monitoring + inherits the eval-awareness confound; learnable-novelty refines the within-run creativity-decline node; active-inference refines the idle-agent rig. Emergence-first, all speculative. 281 -> 284 nodes, 1120 -> 1128 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8358,6 +8362,80 @@
       "derived_from": [
         "docs/auto_sweep_2026-09-25-0600.md",
         "docs/research/alternative_approaches_part5.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value",
+      "label": "Active-inference action selection: weigh epistemic value against pragmatic value and cost",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:interoception",
+      "confidence": 0.55,
+      "description": "Owner direction 12 (docs/research/alternative_approaches_part2.md). Frame the harness's ask / retrieve / delegate / test / act / defer / stop decision as a two-level choice that scores each candidate by pragmatic value (expected task + safety progress), epistemic value (expected uncertainty reduction), and operational cost (tokens, latency, risk, coordination). Select the best constrained balance; update beliefs and calibration from outcomes. A principled answer to the classic harness question - when should an agent investigate versus execute - that avoids both premature action and endless research loops. The IDLE-STATE RULE is a hand-written special case of this (deepen a node / dry-run a probe / consistency pass when there is nothing exogenous to act on).",
+      "tags": [
+        "active-inference",
+        "expected-free-energy",
+        "ask-vs-act",
+        "context-acquisition"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-1200.md",
+        "docs/research/alternative_approaches_part2.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate",
+      "label": "Interoceptive harness: a self-state vector drives pause / ask / simplify / delegate / recover",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:interoception",
+      "confidence": 0.55,
+      "description": "Owner directions 7 + 15. Give the harness an explicit model of its own operational condition across five axes - context health (entropy, contradiction, staleness, compression loss), epistemic health (calibration, source coverage, unresolved uncertainty), operational health (token budget, latency, tool error rate, retry loops), social health (trust calibration, dependency concentration, coordination load), creative health (novelty rate, idea convergence, niche occupancy) - and let those signals, not only external evaluation, trigger pause / ask-for-help / simplify / delegate / recover / consolidate. loop_metrics.py already computes the operational and creative axes for the research loop (idle-streak, plateau, run_novelty, trace_legibility); this generalises that to a per-agent runtime contract, and adds an 'agent sleep cycle' (replay high-value episodes, consolidate skills, prune memory, schedule deferred work).",
+      "tags": [
+        "interoception",
+        "self-model",
+        "operational-health",
+        "metacognition",
+        "sleep-cycle"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-1200.md",
+        "docs/research/alternative_approaches_part2.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise",
+      "label": "Learnable novelty is surprise that compresses, not irreducible noise",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:interoception",
+      "confidence": 0.55,
+      "description": "Owner direction 13. Novelty alone is distraction; reward optimisation alone finds local optima. Prioritise learnable novelty - observations that are surprising AND compressible into a better predictive model. Classify each event: familiar+useful (exploit, minimise cost) / learnably novel (explore, document, distill) / irreducibly noisy (limit attention, log as anomaly) / harmfully surprising (pause, isolate, escalate). Measure not only task success but compression gain - how much simpler / more predictive the world model becomes. Refines run_novelty (which counts distinct evidence roots) with a quality axis: a new root that yields no reusable rule is closer to irreducible noise than to progress.",
+      "tags": [
+        "learnable-novelty",
+        "compression-progress",
+        "curiosity",
+        "world-model",
+        "anomaly"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-1200.md",
+        "docs/research/alternative_approaches_part2.md (owner research input)"
       ],
       "evidence_links": [
         "docs/research/coverage_map.md"
@@ -20418,6 +20496,94 @@
       "approach_family": "orchestration_first",
       "confidence": 0.5,
       "description": "Counterfactual scoring is how the market credits foresight, not just outcomes."
+    },
+    {
+      "id": "edge_active_inference_refines_idle_state",
+      "source": "concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value",
+      "target": "artifact_probe_idle_agent_rig",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "The idle-agent rig tests what an agent does with no exogenous task. Active-inference framing says the idle policy is not special - it is the epistemic-value-dominant regime of the same ask/act/stop calculation."
+    },
+    {
+      "id": "edge_active_inference_informs_verification_hierarchy",
+      "source": "concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "That survey says every improvement loop substitutes some signal for ground truth. Active inference makes the substitution explicit: epistemic value is a bet on expected uncertainty reduction, and a miscalibrated bet is exactly a weak verification signal."
+    },
+    {
+      "id": "edge_interoception_refines_metacognitive_monitoring",
+      "source": "concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate",
+      "target": "emergent_metacognitive_monitoring",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Metacognitive monitoring is the measured (limited) ability. The interoceptive harness is the engineered version: don't rely on the model noticing - instrument the five axes externally and wire the signals to concrete recovery actions."
+    },
+    {
+      "id": "edge_interoception_extends_loop_metrics",
+      "source": "concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate",
+      "target": "artifact_loop_metrics_phase3_real",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "loop_metrics.py computes the operational + creative axes for the research loop (idle_run_streak, plateau_watch, run_novelty, trace_legibility). The interoceptive harness generalises this to a per-agent runtime contract with the context / epistemic / social axes added."
+    },
+    {
+      "id": "edge_interoception_informs_eval_awareness",
+      "source": "concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate",
+      "target": "concept_anti_scheming_mitigation_confounded_by_eval_awareness",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "A self-state vector is another in-harness measurement surface, so it inherits the eval-awareness confound: an agent that knows its interoceptive signals are read can shape them. The signals must be derived from environment state where possible, not self-report."
+    },
+    {
+      "id": "edge_learnable_novelty_refines_run_novelty",
+      "source": "concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise",
+      "target": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "That node found within-run novelty rises while usefulness falls. Learnable novelty is the distinction that resolves it: novelty that compresses into a reusable rule is the useful kind; novelty that does not is the exploration-to-exploitation drift dressed up as progress."
+    },
+    {
+      "id": "edge_learnable_novelty_informs_active_inference",
+      "source": "concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise",
+      "target": "concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The four-way event classifier is the epistemic-value estimator: 'learnably novel' is high epistemic value, 'irreducibly noisy' is near zero, 'harmfully surprising' flips the sign."
+    },
+    {
+      "id": "edge_interoception_supports_active_inference",
+      "source": "concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate",
+      "target": "concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The self-state vector is the belief state active-inference action selection reads from - uncertainty_level, context_integrity and cost_remaining are its direct inputs."
     }
   ]
 }

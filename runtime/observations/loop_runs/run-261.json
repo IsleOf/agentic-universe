@@ -1,0 +1,23 @@
+{
+  "run": 261,
+  "increment": "fold group 2: active inference + interoception (3 nodes / 8 edges) from owner research input",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 8,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 3,
+    "edges": 8
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-261.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 261 OK · VALID · graph +3n/+8e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.79 · novelty 1.00"
+}
