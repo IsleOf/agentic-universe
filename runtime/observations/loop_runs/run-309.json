@@ -1,0 +1,30 @@
+{
+  "run": 309,
+  "increment": "fold arXiv:2608.26372 KnownLieBench - knowledge-verified emergent deception under conflicting incentives",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "citations": [
+    {
+      "id": "arXiv:2608.26372",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.26372"
+  ],
+  "trace_file": "runtime\\traces\\loop-309.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 309 OK · VALID · graph +1n/+4e · cites 1v/1 · idle-streak 1 · legible 1.00 · verified-frac 0.76 · novelty 1.00"
+}

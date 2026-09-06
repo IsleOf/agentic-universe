@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 337 nodes, 1345 edges · **Date:** 2026-09-05
+**Graph at generation:** 338 nodes, 1349 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -193,6 +193,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.25776](https://arxiv.org/abs/2608.25776) | (title not recorded) | `emergent_mind_viruses` |
 | [2608.26081](https://arxiv.org/abs/2608.26081) | (title not recorded) | `emergent_self_organizing_roles` |
 | [2608.26263](https://arxiv.org/abs/2608.26263) | (title not recorded) | `pattern_code_as_context` |
+| [2608.26372](https://arxiv.org/abs/2608.26372) | (title not recorded) | `concept_knownliebench_verify_the_agent_knows_the_entitlement_before_scoring_whether_it_lies_under_a_deployer_incentive` |
 | [2608.26623](https://arxiv.org/abs/2608.26623) | (title not recorded) | `emergent_evaluator_mode_collapse` |
 | [2608.26896](https://arxiv.org/abs/2608.26896) | (title not recorded) | `emergent_deception_and_collusion` |
 | [2608.27086](https://arxiv.org/abs/2608.27086) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
@@ -495,6 +496,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-06-0600.md` — `concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic`, `concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses`, `concept_rest_react_founds_the_trajectory_retrain_loop`
 - `docs/auto_sweep_2026-10-06-1200.md` — `concept_adaptive_self_improvement_in_the_low_data_regime`, `concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time`
 - `docs/auto_sweep_2026-10-06-1800.md` — `concept_bottleneck_is_the_model_harness_coupling`
+- `docs/auto_sweep_2026-10-07-0000.md` — `concept_knownliebench_verify_the_agent_knows_the_entitlement_before_scoring_whether_it_lies_under_a_deployer_incentive`
 - `docs/auto_sweep_2026-10-07-0600.md` — `concept_what_when_how_where_to_evolve`
 - `docs/auto_sweep_2026-10-08-1200.md` — `concept_ace_context_evolution_self_improvement`
 - `docs/auto_sweep_2026-10-08-1800.md` — `concept_horizon_gap_outcome_signals_decay`
