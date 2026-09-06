@@ -28,6 +28,15 @@ now instantiated **component by component**, not only as a whole (ASG-SI, Self-H
    regression (Self-Harness), unit tests (ToolMaker), meta-evaluation (DeepVerifier). This is
    `pattern_grounded_acceptance_only` recurring at every layer, which is what
    `concept_rewriting_cot_alone_defeats_judges_90pct` (run 163) says it must be.
+   **`concept_self_improvement_strength_tracks_the_verification_hierarchy` (run 186)** places these on one
+   scale — formal verifier > PRM > judge > rubric > meta-eval > intrinsic self-assessment, and
+   *demonstrated self-improvement strength tracks it*. Ranking the instances above: ToolMaker's unit-test
+   gate is near-formal (executable, deterministic); Self-Harness's held-out regression and ACE's
+   execution feedback are outcome-grounded (strong); DeepVerifier's rubrics-from-a-taxonomy sit in the
+   rubric band (mid); CER's retrieve-and-augment has *no* gate of its own (weakest — the run-3 point
+   below). The design's move is to keep each layer's gate **as high on this hierarchy as its domain
+   allows** — a computed check + environment state wherever a domain admits one, a rubric only where it
+   doesn't.
 3. **The weakest link is `state`** — CER works but inherits the memory-poisoning attack surface, and the
    design's retrieve-heavy stance widens it (`what_would_make_this_wrong.md` §1, nourishing harness 5×
    challenged).
@@ -38,9 +47,20 @@ now instantiated **component by component**, not only as a whole (ASG-SI, Self-H
    loop would put that dict through `verify_loop_edit` on a slower cadence (e.g. every N object-level
    accepts). Still fixed — but the fixity is now explicit and the knob is load-bearing.
 
+5. **Where the human stays.** `concept_self_improvement_strength_tracks_the_verification_hierarchy` (run
+   186) finds the "research direction-setting" bottleneck — deciding *what to improve toward* — sits at
+   the top of the verification hierarchy, above any automatable signal. That is this project's structure
+   verbatim: the loop picks the *increment*, a human (or the standing goal) sets the *direction*.
+   Independent confirmation the human is in the right place — and a warning not to automate that step.
+6. **Where the project is ahead.** The same survey names *governance-grade measurement of self-improvement*
+   as the field's most underpopulated niche. `loop_metrics` (`plateau_watch`, `idle_run_streak`,
+   `trace_legibility`) and `verify_loop_edit`'s regression checks are exactly that.
+
 ## What this changes
 
 Nothing structural — it confirms the plan. But it re-frames the HANDOFF's "wire a model" step: the
 integration is not "make the self-improving harness work," it is "connect six independently-validated
 loops through one trace substrate and one gate discipline." The pieces are each proven; the coupling is
-the untested part — exactly what `concept_bottleneck_is_the_model_harness_coupling` predicts.
+the untested part — exactly what `concept_bottleneck_is_the_model_harness_coupling` predicts. The RSI
+survey adds one constraint on that coupling: **each loop's gate must be as high on the verification
+hierarchy as its domain allows, or its failure modes (self-confirming, collapse) are predictable.**

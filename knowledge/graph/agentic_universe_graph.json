@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-06",
+  "last_updated": "2026-09-07",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -708,6 +708,10 @@
     {
       "date": "2026-09-06",
       "change": "Autonomous run 186. Recent citation-sweep (S2 citations of DeepVerifier 2601.15808). concept_self_improvement_strength_tracks_the_verification_hierarchy (Recursive Self-Improvement in AI, arXiv:2607.07663, 1250-paper survey): every improvement loop claims a signal substitutes for human judgment; a verification hierarchy (formal verifier > PRM > judge > rubric > meta-eval > intrinsic) and demonstrated strength TRACKS it; failure modes (self-confirming, model collapse, diversity collapse) follow from violations; research direction-setting is the top-of-hierarchy human bottleneck; governance-grade measurement is the underpopulated niche. Unifies the grader-gaming + diversity-collapse threads as one weak-signal phenomenon; confirms the project's human-sets-direction structure. +6 edges."
+    },
+    {
+      "date": "2026-09-07",
+      "change": "Autonomous run 187. Consolidation. Folded run-186's verification hierarchy into self_improvement_by_responsibility.md: reading note 2 now ranks the five self-improving instances on the hierarchy (ToolMaker unit tests near-formal > Self-Harness/ACE outcome-grounded > DeepVerifier rubric-band > CER no gate); two new reading notes - (5) research direction-setting is the top-of-hierarchy human bottleneck = the project's loop-picks-increment / human-sets-direction structure, confirmed; (6) governance-grade measurement is the underpopulated niche and loop_metrics + verify_loop_edit are exactly that. The 'what this changes' close adds: each loop's gate must sit as high on the hierarchy as its domain allows or its failure modes are predictable. No graph node/edge change."
     }
   ],
   "nodes": [
