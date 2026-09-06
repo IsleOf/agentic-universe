@@ -1,0 +1,26 @@
+{
+  "run": 166,
+  "increment": "Phase 3 - SEARCH_SENSITIVE task set + search-restricted-scoring note (the run-165 STC conclusion)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2606.05241",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2606.05241"
+  ],
+  "trace_file": "runtime\\traces\\loop-166.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

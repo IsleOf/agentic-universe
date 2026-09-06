@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-17",
+  "last_updated": "2026-10-18",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -620,6 +620,10 @@
     {
       "date": "2026-10-17",
       "change": "Autonomous run 165. DBLP. concept_search_time_contamination_inflates_agent_evals (Search-Time Contamination in Deep Research Agents, arXiv:2606.05241): agents retrieve benchmark metadata / question context / ground-truth answers during their own web search; widespread across 6 benchmarks, up to 4% inflation; fix = isolated sandbox + transparent search trajectory + controlled benchmark access. STC in the project's own Phase 3 held-out gate (the loop has web access). Concrete fix: restrict search during held-out scoring; prefer computed substance-checks. +4 edges."
+    },
+    {
+      "date": "2026-10-18",
+      "change": "Autonomous run 166. Phase 3 - the run-165 Search-Time Contamination conclusion, made concrete. holdout_tasks.py gains SEARCH_SENSITIVE (the 10 literature task ids - headline numbers / findings from named papers that a web-connected loop could retrieve) + search_sensitive(task_id); the 7 design tasks are computed substance-checks and are not web-findable. phase3_holdout_set.md gains a 'Search-restricted scoring' section: literature tasks must be scored with no external retrieval during the fold, search trajectory kept in the trace. +3 selftest checks. No graph node/edge change."
     }
   ],
   "nodes": [

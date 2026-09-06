@@ -78,6 +78,19 @@ research autonomously. So Phase 3 on the loop harness is now:
 Steps 1 and 3 are code. Step 2 is the human-in-the-loop the plan always had at
 the top level — it is just explicit here.
 
+## Search-restricted scoring (added run 166)
+
+`concept_search_time_contamination_inflates_agent_evals` (`2606.05241`): a
+web-connected agent re-run on a benchmark can **retrieve** the answer instead of
+recalling or reasoning it, inflating the score. The 10 `literature` tasks ask for
+a headline number or finding from a named paper — `holdout_tasks.SEARCH_SENSITIVE`
+lists them (`search_sensitive(task_id)`). When step 2's re-run is scored, these
+must be run **search-restricted** — no external retrieval during the fold — and
+the search trajectory kept in the trace (the Five-W substrate already records it).
+The 7 `design` tasks are computed substance-checks over the project's own
+reasoning and are not web-findable, so they score safely with search on.
+
+
 ## Selftest
 
 `python tools/holdout_tasks.py selftest` → GREEN. `tools/selftest_all.py` runs

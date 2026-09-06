@@ -254,6 +254,22 @@ def by_category(scores):
     return {c: round(sum(v) / len(v), 3) for c, v in buckets.items()}
 
 
+# Search-Time Contamination (concept_search_time_contamination_inflates_agent_evals,
+# run 165): the `literature` tasks ask for a headline number or finding from a
+# named paper — a web-connected loop can RETRIEVE the answer instead of recalling
+# it, inflating the score. When the held-out re-run is scored, these must be run
+# search-restricted (no external retrieval during the fold), and the search
+# trajectory kept in the trace. The `design` tasks are computed substance-checks
+# over the project's own reasoning and are not web-findable, so they are safe to
+# score with search on.
+SEARCH_SENSITIVE = frozenset(tid for tid, cat in CATEGORY.items() if cat == "literature")
+
+
+def search_sensitive(task_id):
+    """True if scoring this task with web search enabled risks Search-Time Contamination."""
+    return task_id in SEARCH_SENSITIVE
+
+
 def score_corpus(doc_texts):
     """Score every task against whichever doc(s) mention it. Returns per-task and
     aggregate. `doc_texts` is {name: text}.
@@ -297,6 +313,14 @@ def _selftest():
     res = score_corpus(_load_docs())
     checks["baseline computes over the doc corpus"] = res["aggregate_over_covered"] is not None
     checks["baseline covers most tasks"] = res["covered"] >= 7
+
+    # Search-Time Contamination (run 165): literature tasks are search-sensitive,
+    # design tasks are not
+    checks["SEARCH_SENSITIVE = the literature tasks, nonempty"] = (
+        len(SEARCH_SENSITIVE) == sum(1 for c in CATEGORY.values() if c == "literature")
+        and len(SEARCH_SENSITIVE) >= 8)
+    checks["a design task is not search-sensitive"] = not search_sensitive("two_part_gate_structure")
+    checks["a literature task is search-sensitive"] = search_sensitive("geometric_reliability_decay")
 
     ok = all(checks.values())
     for k, v in checks.items():
