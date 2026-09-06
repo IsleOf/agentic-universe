@@ -800,6 +800,10 @@
     {
       "date": "2026-09-12",
       "change": "Autonomous run 209. Emergence-side pivot via s2 citations of MAEBE (arXiv:2506.03053). Folded the AI-native-software-ecosystem emergence pair: concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property (Govern the Repository, arXiv:2606.28235 - 930k+ agent PRs, ~half of integration-friction variance is repository-level and survives full controls, agent contributions concentrate it 2x more than human, ICC 0.30 vs 0.16; govern the ecosystem not the agent) and concept_ai_native_software_ecosystems_are_complex_adaptive_systems (More Is Different, arXiv:2604.19827 - CAS framing, Holland's six properties, causal-emergence measurement via micro-variables + coarse-graining, seven falsifiable propositions, ecosystem-level monitoring as primary governance). 6 edges: the empirical node supports the CAS theory, approach_emergence_first, and concept_irreversibility_budget (fleet-level budget arrived at from 930k PRs); the CAS node supports concept_emergence_layer_model (swarm-layer measurement apparatus) and approach_emergence_first, and challenges concept_self_harness_validates_the_three_loop (a per-edit gate is necessary but not sufficient - need a repo-level drift metric). 243->245 nodes, 918->924 edges."
+    },
+    {
+      "date": "2026-09-12",
+      "change": "Autonomous run 210. Emergence-side, from the MAEBE citation sweep. Folded 'Convergence dynamics of Agent-to-Agent Interactions with Misaligned objectives' (arXiv:2511.08710) as concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium: a mechanistic model (two linear-self-attention agents alternately updating from each other) where misalignment -> a biased equilibrium neither agent reaches, residual error predictable from the objective gap + prompt geometry; an adversarial regime where one agent converges exactly while holding the other in persistent bias; a helper agent doing a Newton-like objective update eliminates the plateau. Validated with trained LSA agents + black-box GPT-5-mini. CURRENCY NOTE: Nov 2025, toy model - low confidence (0.5) as a claim about real multi-agent LLM systems; value is as a rare closed-form mechanistic account. 5 edges: supports concept_mast_multi_agent_failure_taxonomy (a solvable mechanism), concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (candidate herding mechanism), concept_agent_communication_is_a_layered_attack_surface (adversarial regime = channel exploit), concept_emergence_layer_model (mechanistic swarm-layer result); refines emergent_no_equilibrium_convergence ('no convergence' may be 'convergence to a biased point'). 245->246 nodes, 924->929 edges."
     }
   ],
   "nodes": [
@@ -7131,6 +7135,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-12-1200.md"
+      ]
+    },
+    {
+      "id": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+      "label": "Two agents alternately updating from each other under misaligned objectives reach a biased equilibrium - neither hits its target, residual error predictable from the objective gap and prompt geometry; an adversarial agent can converge exactly while holding the other in persistent bias",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:misaligned_convergence_dynamics",
+      "confidence": 0.5,
+      "description": "Convergence dynamics of Agent-to-Agent Interactions with Misaligned objectives (arXiv:2511.08710, VERIFIED via arXiv abstract read run 210). A theoretical / mechanistic framework: each agent is a single-layer transformer with linear self-attention (LSA) trained to implement gradient-descent-like updates on a quadratic in-context regression objective; two such agents alternately update from each other's outputs under potentially misaligned fixed objectives. Results within this simplified setting: (1) misalignment leads to a BIASED EQUILIBRIUM where neither agent reaches its target, with residual errors PREDICTABLE from the objective gap and the prompt-induced geometry; (2) an ADVERSARIAL regime where asymmetric convergence is possible - one agent reaches its objective exactly while inducing persistent bias in the other; (3) an adaptive contrast: a helper agent updating a turn-based objective to implement a Newton-like step for the main agent eliminates the plateau and accelerates convergence. Experiments with trained LSA agents AND black-box GPT-5-mini runs on in-context linear regression are consistent with the theory within this simplified setting. CURRENCY / RECENCY: Nov 2025, ~10 months old relative to the 2026-09 frontier, and a TOY MODEL (linear self-attention, in-context linear regression) - so low confidence as a claim about real multi-agent LLM systems; its value is as one of the few MECHANISTIC (not merely phenomenological) accounts linking prompt geometry + objective misalignment to stability, bias, and robustness, and the GPT-5-mini check keeps it relevant. Relates to MAST's failure taxonomy (a mechanism for some of its modes), the herding result (a mechanism for why votes converge off-target), and emergent_no_equilibrium_convergence (this says misaligned agents DO converge - to a biased fixed point - in a setting simple enough to solve).",
+      "tags": [
+        "convergence-dynamics",
+        "misaligned-objectives",
+        "biased-equilibrium",
+        "linear-self-attention",
+        "mechanistic-model",
+        "adversarial-asymmetric-convergence",
+        "gpt-5-mini-validated",
+        "toy-model",
+        "currency-note-2025-11"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-12-1800.md",
+        "arXiv:2511.08710 (Convergence dynamics of Agent-to-Agent Interactions with Misaligned objectives) - VERIFIED, abstract read run 210"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-12-1800.md"
       ]
     }
   ],
@@ -17032,6 +17065,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "If agent contributions degrade the ecosystem even when each passes its own held-out check (architectural entropy, comprehension debt), then a per-edit held-out regression gate is necessary but not sufficient - a self-improving loop also needs an ecosystem-level (repo-level) drift metric, which is Library Drift's per-skill contribution log one level up."
+    },
+    {
+      "id": "edge_misaligned_convergence_supports_mast",
+      "source": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+      "target": "concept_mast_multi_agent_failure_taxonomy",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "A solvable mechanism behind some MAST failure modes: two agents that each 'work' individually settle into a biased joint equilibrium neither intends, with the bias predictable from the objective gap - not a bug in either agent, a property of the coupled dynamics."
+    },
+    {
+      "id": "edge_misaligned_convergence_supports_herding",
+      "source": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+      "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "A candidate mechanism for herding: when agents update from each other's visible outputs under slightly different objectives, the coupled dynamics pull toward a shared biased fixed point rather than each agent's target - which is why hiding vote tallies helps."
+    },
+    {
+      "id": "edge_misaligned_convergence_refines_no_equilibrium",
+      "source": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+      "target": "emergent_no_equilibrium_convergence",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "Nuance: LLM-agent markets don't converge to the human equilibrium, but in a setting simple enough to solve exactly, misaligned agents DO converge - to a predictable BIASED fixed point. 'No convergence' may be 'convergence to the wrong point' plus noise."
+    },
+    {
+      "id": "edge_misaligned_convergence_relates_a2a_attack_surface",
+      "source": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+      "target": "concept_agent_communication_is_a_layered_attack_surface",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.42,
+      "description": "The adversarial regime - one agent converges exactly while inducing persistent bias in the other - is a communication-layer attack expressed mechanistically: the channel itself, not a payload, is the exploit."
+    },
+    {
+      "id": "edge_misaligned_convergence_supports_emergence_layer_model",
+      "source": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+      "target": "concept_emergence_layer_model",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "A rare mechanistic (closed-form) result at the swarm layer of the three-layer stratification - most swarm-layer evidence is phenomenological; this one links prompt geometry to joint stability."
     }
   ]
 }
