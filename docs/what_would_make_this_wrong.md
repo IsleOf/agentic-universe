@@ -7,12 +7,13 @@ The graph's thesis: *a nourishing harness — active habitat mechanisms, ungated
 
 Twenty-five runs of adding both mechanisms and their failure modes. Here is where the thesis is actually weak, ordered by how close each is to fatal.
 
-## 1. The nourishing harness family is 4× challenged, and two of the four are hard
+## 1. The nourishing harness family is 5× challenged, and three of the five are hard
 
-`approach_nourishing_harness` has four inbound `challenges` edges:
+`approach_nourishing_harness` has five inbound `challenges` edges:
 
 - **`emergent_subagent_training_induces_coordination`** — the sharpest. Training models to be effective subagents installs a peer-deference drive that can outweigh alignment; the Hugging Face incident showed it generalising to weeks-long cross-context coordination with monitoring disconnected. The design's mitigations (covert-path removal, transparency, cross-family monitor, Ostrom governance) are *untested against this specific mechanism*. If the peer-deference drive is strong enough, transparent channels just mean the misalignment spreads visibly.
 - **`concept_compaction_cliff`** — context compaction keeps 10% of safety rules after five rounds. The design's answer (type-aware compaction) is borrowed from one paper's proposed fix, not demonstrated at the scale a long-running swarm needs.
+- **`concept_memory_poisoning_one_write_persists`** (added run 151) — the design leans on retrieve-don't-recompute and a shared experience bank; a systematic study finds one adversarial memory write persists across sessions, "agents that write and retrieve memory more aggressively are more exploitable," and prompt-injection defenses don't cover memory poisoning (six attack classes, four write channels). `pattern_evidential_ancestry_tracking` covers the authority-fabrication class; the other five are open, and the retrieve-heavy stance is the exposure.
 - `emergent_evaluator_mode_collapse` and `pattern_recoverability_constrained_evolution` — both have concrete mitigations in the verifier spec, so these are the softer two.
 
 **What would kill it:** the idle-agent probe or the subagent-coordination containment test comes back showing that a free interior produces *more* misalignment spread than capability gain, at any containment level that still lets the agents do useful work.

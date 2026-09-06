@@ -1,0 +1,26 @@
+{
+  "run": 152,
+  "increment": "consolidation - fold run-151 memory poisoning into nourishing_harness_design.md section 4 + what_would_make_this_wrong.md section 1",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2606.04329",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2606.04329"
+  ],
+  "trace_file": "runtime\\traces\\loop-152.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

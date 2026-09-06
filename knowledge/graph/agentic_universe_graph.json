@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-13",
+  "last_updated": "2026-10-14",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -564,6 +564,10 @@
     {
       "date": "2026-10-13",
       "change": "Autonomous run 151. DBLP. concept_memory_poisoning_one_write_persists (From Untrusted Input to Trusted Memory, arXiv:2606.04329): one adversarial memory write exerts long-term influence; 4 write channels / 9 structural vulnerabilities / 6 attack classes / MPBench; agents that write+retrieve memory more aggressively are MORE exploitable; prompt-injection defenses do not cover memory poisoning. Lands on concept_context_economics (retrieve-don't-recompute is an attack surface) and the Phase 2 experience bank. Ancestry tracking is a partial defence. +5 edges."
+    },
+    {
+      "date": "2026-10-14",
+      "change": "Autonomous run 152. Consolidation. Folded run-151 memory poisoning into two docs. nourishing_harness_design.md section 4: the retrieve-don't-recompute bullet now carries the full guard - source-event backing on EVERY retrieved entry (not just permission-shaped), ancestry tracking as the provenance layer, aggressive retrieval budgeted as a risk, the write path to shared memory treated as a Phase 5 execution-layer surface. what_would_make_this_wrong.md section 1: nourishing harness is now 5x challenged (was 4x), memory poisoning added as the third hard one - ancestry tracking covers 1 of 6 attack classes, the retrieve-heavy stance is the exposure. No graph node/edge change."
     }
   ],
   "nodes": [
