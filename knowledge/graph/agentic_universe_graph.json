@@ -584,6 +584,10 @@
     {
       "date": "2026-10-15",
       "change": "Autonomous run 156. Phase 3 - trace legibility is now a first-class acceptance criterion. improvement_loop.verify_loop_edit gains an optional legibility=(before, after) param; an edit that trades the loop's own trace legibility for held-out score (drop > 0.02) is REJECTED, alongside the existing task-regression, category-regression (run 116), and verifier-disagreement checks. Mirrors the run-116 masking fix. Operationalises concept_cot_monitorability_is_a_fragile_property_to_preserve at the gate. +2 selftest checks. phase3_holdout_set.md updated. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-15",
+      "change": "Autonomous run 157. DBLP. Deepened pattern_structural_decoupling with a VERIFIED read of Diversity Collapse in Multi-Agent LLM Systems (arXiv:2604.18005): the three-level analysis (model intelligence / agent cognition / system dynamics), the COMPUTE EFFICIENCY PARADOX (stronger aligned models -> diminishing marginal diversity despite higher per-sample quality), authority-driven dynamics suppress semantic diversity, collapse is 'from the interaction structure rather than inherent model insufficiency' - the same conclusion as concept_multi_round_interaction_compresses_semantic_space from a second study. +3 edges; description + derived_from (VERIFIED) + tags extended."
     }
   ],
   "nodes": [
@@ -2498,22 +2502,27 @@
       "label": "Decouple model, prompt, and context to hold variety",
       "type": "pattern",
       "status": "to_test",
-      "verification_state": "needs_empirical_validation",
+      "verification_state": "partially_validated",
       "approach_family": "agent_habitat",
       "branch_key": "agent_habitat:structural_decoupling",
       "confidence": 0.65,
-      "description": "Diversity collapse in multi-agent systems is caused by structural coupling - agents sharing the same base model, the same prompts, and the same context - rather than by dense communication topology. So the intervention is at the model, prompt, and context level, not the graph level: heterogeneous models, decorrelated prompts, independently sourced context. Sparsifying who talks to whom does not fix agents that were never independent.",
+      "description": "Diversity collapse in multi-agent systems is caused by STRUCTURAL COUPLING - agents sharing the same base model, the same prompts, and the same context - rather than by dense communication topology. So the intervention is at the model, prompt, and context level, not the graph level: heterogeneous models, decorrelated prompts, independently sourced context. Sparsifying who talks to whom does not fix agents that were never independent. Source: Diversity Collapse in Multi-Agent LLM Systems (arXiv:2604.18005, ACL 2026 Findings; VERIFIED via arXiv abstract read run 157). A systematic study across THREE bottom-up levels: (1) MODEL INTELLIGENCE - a 'compute efficiency paradox': stronger, highly-aligned models yield DIMINISHING MARGINAL DIVERSITY despite higher per-sample quality (so 'just use the best model' actively hurts a diverse population - refines concept_generative_process_diversity); (2) AGENT COGNITION - authority-driven dynamics SUPPRESS semantic diversity vs junior-dominated groups (emergent hub / role formation compressing variety - cf. emergent_self_organizing_roles); (3) SYSTEM DYNAMICS - group-size scaling gives diminishing returns, dense topologies accelerate premature convergence. The collapse is 'primarily from the interaction structure rather than inherent model insufficiency' - the same conclusion as concept_multi_round_interaction_compresses_semantic_space (arXiv:2512.00047), from a second independent study: interaction itself contracts exploration. Code: github.com/Xtra-Computing/MAS_Diversity.",
       "tags": [
+        "authority-suppresses-diversity",
+        "compute-efficiency-paradox",
+        "correlation",
         "decoupling",
         "heterogeneity",
+        "interaction-structure-not-model-insufficiency",
         "mode-collapse",
-        "correlation",
-        "swarm"
+        "swarm",
+        "three-level-analysis"
       ],
       "derived_from": [
         "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)",
-        "arXiv:2604.18005 (Diversity Collapse in Multi-Agent LLM Systems, ACL 2026 Findings)",
-        "arXiv:2510.15568 (The Spark Effect)"
+        "arXiv:2510.15568 (The Spark Effect)",
+        "arXiv:2604.18005 (Diversity Collapse in Multi-Agent LLM Systems, ACL 2026 Findings) - VERIFIED, abstract read run 157",
+        "docs/auto_sweep_2026-10-15-1200.md"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -14473,6 +14482,39 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "'Alongside existing safety methods' - the paper explicitly does not claim CoT monitoring is sufficient alone, which is the design's both-channels stance."
+    },
+    {
+      "id": "edge_structdecouple_refines_semcompress",
+      "source": "pattern_structural_decoupling",
+      "target": "concept_multi_round_interaction_compresses_semantic_space",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "Two independent studies, same conclusion: diversity collapse is caused by the interaction structure, not model insufficiency. This one adds the model/cognition/system three-level breakdown and the compute-efficiency paradox."
+    },
+    {
+      "id": "edge_structdecouple_challenges_generative_diversity",
+      "source": "pattern_structural_decoupling",
+      "target": "concept_generative_process_diversity",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "The compute-efficiency paradox: stronger, more-aligned models give diminishing marginal diversity - process diversity is not just uncorrelated to capability, it can be inversely related to it."
+    },
+    {
+      "id": "edge_structdecouple_supports_self_organizing_roles",
+      "source": "pattern_structural_decoupling",
+      "target": "emergent_self_organizing_roles",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "'Authority-driven dynamics suppress semantic diversity' - emergent hubs/roles are a diversity-erosion mechanism, not just an organisation one."
     }
   ]
 }

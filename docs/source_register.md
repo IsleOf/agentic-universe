@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 220 nodes, 778 edges · **Date:** 2026-09-05
+**Graph at generation:** 220 nodes, 781 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -378,6 +378,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-13-1200.md` — `concept_memory_poisoning_one_write_persists`
 - `docs/auto_sweep_2026-10-14-0600.md` — `concept_cot_obfuscation_hits_the_message_channel_hardest`
 - `docs/auto_sweep_2026-10-14-1200.md` — `concept_cot_monitorability_is_a_fragile_property_to_preserve`
+- `docs/auto_sweep_2026-10-15-1200.md` — `pattern_structural_decoupling`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
