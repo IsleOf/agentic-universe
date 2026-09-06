@@ -52,8 +52,10 @@ re-checking the 5 `inconclusive` nodes against newer evidence, and graph hygiene
   108 (`concept_capability_is_a_model_harness_config_property`, arXiv:2605.27922, resolved via DBLP). 5,194
   trajectories, substantial model-harness variation → report capability at the config level; names
   "execution-alignment failure" (reasoning decoupled from tool feedback / state / evidence / contracts).
-- **"Self-Harness: Harnesses That Improve Themselves"** — framework/survey; check for a taxonomy the plan
-  could adopt.
+- ~~**"Self-Harness: Harnesses That Improve Themselves"**~~ — FOLDED run 109
+  (`concept_self_harness_validates_the_three_loop`, arXiv:2606.09498). An agent improves its own harness via
+  weakness-mining → minimal proposal → held-out regression validation; 9/9 model-benchmark combos improve
+  held-out, up to +132%. The project's exact three-loop architecture, working.
 - **"Retrospective Harness Optimization: Improving LLM Agents via Self-Preference over Trajectory Rollouts"**
   (ACL ARR 2026 May) and **"Evolving Agents in the Dark: Retrospective Harness Optimization via
   Self-Preference"** — the RHO line; the graph cites `2606.05922`, but the OpenReview *reviews* would show

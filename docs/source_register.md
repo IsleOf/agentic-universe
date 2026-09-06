@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 196 nodes, 637 edges · **Date:** 2026-09-05
+**Graph at generation:** 197 nodes, 644 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -65,6 +65,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.00953](https://arxiv.org/abs/2606.00953) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
 | [2606.05985](https://arxiv.org/abs/2606.05985) | (title not recorded) | `emergent_pluralistic_ignorance`, `principle_diversity_maintenance` |
+| [2606.09498](https://arxiv.org/abs/2606.09498) | (title not recorded) | `concept_self_harness_validates_the_three_loop` |
 | [2606.09854](https://arxiv.org/abs/2606.09854) | (title not recorded) | `emergent_deception_and_collusion`, `emergent_peer_recognition_survives_anonymization` |
 | [2606.11082](https://arxiv.org/abs/2606.11082) | (title not recorded) | `concept_interaction_language_shifts_emergence` |
 | [2606.19924](https://arxiv.org/abs/2606.19924) | The Tao of Agency: Autotelic AI, Embedded Agency and Dissolution of the Self | `concept_autotelic_agency`, `concept_habitat_slack` |
@@ -329,6 +330,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
 - `docs/auto_sweep_2026-10-01-1200.md` — `concept_moral_preferences_are_framing_brittle`
 - `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`
+- `docs/auto_sweep_2026-10-03-0000.md` — `concept_self_harness_validates_the_three_loop`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-02",
+  "last_updated": "2026-10-03",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -392,6 +392,10 @@
     {
       "date": "2026-10-02",
       "change": "Autonomous run 108. IDLE-STATE RULE. Resolved Harness-Bench via DBLP (arXiv:2605.27922) after arXiv/S2 API 429s, read the abstract via curl on the arXiv HTML page. concept_capability_is_a_model_harness_config_property: 106 tasks x harness configs x model backends, 5,194 trajectories, substantial variation across model-harness pairings -> 'report capability at the model-harness configuration level, not the base model'. Systematic confirmation of concept_harness_capability_delta. Names 'execution-alignment failure' - plausible reasoning decoupled from tool feedback / workspace state / evidence / output contracts - generalising emergent_recognition_execution_gap. Its per-run recording (artifacts + traces + usage + validator outputs) is the Phase 0 trace-substrate methodology validated as a benchmark. +6 edges. Watch-list item 1 of 4 folded."
+    },
+    {
+      "date": "2026-10-03",
+      "change": "Autonomous run 109. Watch-list 2/4 via DBLP: Self-Harness (arXiv:2606.09498). concept_self_harness_validates_the_three_loop: an agent improves its OWN harness via Weakness Mining (from traces) -> minimal Harness Proposal -> Proposal Validation (regression testing only). 9/9 model-benchmark combos improve held-in AND held-out, up to +132%. This is the project's exact self_improving_harness three-loop architecture, working - independent evidence the plan is instantiable, and the held-out-gains result is the counterpoint to RHO's self-preference inflation (~33% survives). Harness design is per-model. +7 edges."
     }
   ],
   "nodes": [
@@ -5312,6 +5316,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-02-1800.md"
+      ]
+    },
+    {
+      "id": "concept_self_harness_validates_the_three_loop",
+      "label": "A real system does observe-trace -> minimal proposal -> held-out regression validation, and it works (up to +132%)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_harness",
+      "confidence": 0.7,
+      "description": "Self-Harness (arXiv:2606.09498, VERIFIED via arXiv abstract read run 109; resolved through DBLP). An LLM-based agent improves its OWN operating harness with no human engineers and no stronger external agent, via an iterative three-stage loop: (1) Weakness Mining - model-specific failure patterns from EXECUTION TRACES; (2) Harness Proposal - diverse yet MINIMAL modifications tied to those failures; (3) Proposal Validation - candidate edits accepted ONLY after regression testing. Instantiated on Terminal-Bench-2.0, SWE-bench Verified, AppWorld x 3 base models from different families (MiniMax M2.5, Qwen3.5-35B-A3B, GLM-5). Across all 9 model-benchmark combinations, every final harness improves BOTH held-in AND held-out pass rates, relative gains up to 132%. Retained mechanisms address concrete bottlenecks (artifact handling, runtime control, patch verification, application-state retrieval). This is nearly the project's exact self_improving_harness architecture (docs/self_improving_harness_plan.md three loops; Phase 2 experience bank = weakness mining, Phase 3 proposer = minimal proposal, improvement_loop + holdout_tasks = held-out regression validation) - independent evidence that the plan is not just plausible but instantiable, and the held-out-gains result is the counterpoint to RHO's self-preference inflation (pattern_trajectory_only_harness_optimization / probe_rho_holdout: ~33% survives). Model-specific: harness design must be per-model (matches concept_generative_process_diversity).",
+      "tags": [
+        "self-harness",
+        "three-loop",
+        "weakness-mining",
+        "held-out-regression",
+        "132-percent",
+        "model-specific-harness",
+        "independent-validation",
+        "9-of-9"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-03-0000.md",
+        "arXiv:2606.09498 (Self-Harness: Harnesses That Improve Themselves) - VERIFIED, abstract read; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-03-0000.md"
       ]
     }
   ],
@@ -12064,6 +12096,82 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "self_improving_harness",
       "confidence": 0.65
+    },
+    {
+      "id": "edge_selfharness_validates_plan",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "approach_self_improving_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75,
+      "description": "A working system with the plan's exact three-loop shape (weakness mining from traces / minimal proposal / held-out regression validation), 9/9 model-benchmark combos improve held-out, up to +132%."
+    },
+    {
+      "id": "edge_selfharness_supports_verifier_gate",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "'Candidate edits accepted only after regression testing' - the verifier gate, with held-out pass rate as the acceptance signal, working in practice."
+    },
+    {
+      "id": "edge_selfharness_challenges_trajectory_only",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "pattern_trajectory_only_harness_optimization",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Self-Harness gets real HELD-OUT gains by validating against regression tests; RHO's trajectory-only self-preference gets ~33% held-out survival (probe_rho_holdout). The held-out validation is what makes the difference."
+    },
+    {
+      "id": "edge_selfharness_supports_experience_bank",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "artifact_phase2_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Weakness Mining from execution traces is the experience bank's step-level store."
+    },
+    {
+      "id": "edge_selfharness_supports_improvement_loop",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The propose -> validate-on-held-out -> promote loop, instantiated and shown to work."
+    },
+    {
+      "id": "edge_selfharness_refines_gen_process_diversity",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "concept_generative_process_diversity",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "'Effective harness design is inherently model-specific' - the per-model harness point, matching process diversity across model families."
+    },
+    {
+      "id": "edge_selfharness_supports_subfield",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "concept_harness_evolution_subfield",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
     }
   ]
 }
