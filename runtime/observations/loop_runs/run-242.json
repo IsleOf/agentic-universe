@@ -1,0 +1,20 @@
+{
+  "run": 242,
+  "increment": "incorporate the owner's agentic-jobs analysis (docs/jobs/) + write docs/practicing_what_we_preach.md (strategy note on graph traceability, per-project audit method, the concrete pains -> folded research); 1 node, 7 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-242.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 242 OK · VALID · graph +0 · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80"
+}

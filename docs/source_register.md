@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 267 nodes, 1061 edges · **Date:** 2026-09-05
+**Graph at generation:** 268 nodes, 1068 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -418,7 +418,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-20-0000.md` — `concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data`
 - `docs/auto_sweep_2026-09-20-0600.md` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`
 - `docs/auto_sweep_2026-09-20-1200.md` — `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`, `concept_self_concept_as_behavioral_lever`
-- `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `pattern_disposable_branch_exploration`
+- `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
@@ -464,6 +464,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
 - `docs/harness_field_study_2026-09-06.md` — `concept_harness_convergence_2026_09`
 - `docs/harness_field_study_2026-09-06.md - Agent Zero Context Window Usage Indicator, Hermes lean-tail compression as default: token cost is now first-class UI across shipping harnesses` — `concept_context_economics`
+- `docs/jobs/ (owner's agentic-jobs analysis, 6 files, brought from origin/main run 242) - 100+ postings Aug-Sep 2026` — `concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness`
 - `docs/nourishing_harness_design.md` — `approach_nourishing_harness`, `concept_harness_orchestration_pairing`
 - `docs/phase0_live_recording.md` — `artifact_loop_session_live_recording`
 - `docs/phase0_trace_substrate.md` — `artifact_phase0_trace_substrate`

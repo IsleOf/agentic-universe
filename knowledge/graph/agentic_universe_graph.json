@@ -928,6 +928,10 @@
     {
       "date": "2026-09-20",
       "change": "Autonomous run 241. Incorporating the owner's Perplexity deep-research (cont. from run 240). Folded the human-knowledge-capture cluster as concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue: three converging papers - Shared Organizational Memory for Enterprise Coding Agents (arXiv:2608.00122, production deployment: agents don't reliably recognise/record reusable lessons, so capture must be platform-level with contributor approval + risk gating), Nurture-First Agent Development (arXiv:2603.10808: tacit expertise grown through structured conversation, Knowledge Crystallization Cycle consolidates dialogue into reusable assets), Knowledge Activation / Atomic Knowledge Units (arXiv:2603.14805, from the dossier, not independently opened: typed AKU schema intent/procedure/tools/governance/validators). 6 edges: challenges artifact_phase2_experience_bank (the bank assumes the lesson was recorded); supports emergent_recognition_execution_gap (agents don't record what they should), pattern_agentic_skill_lifecycle (AKU typed schema), concept_human_effort_shifts_from_ideating_to_verifying... (Nurture-First conversation); refines concept_memory_poisoning_one_write_persists (approval + risk-gate write-path defense), pattern_evidential_ancestry_tracking (validators/governance as first-class fields). 266->267 nodes, 1055->1061 edges."
+    },
+    {
+      "date": "2026-09-20",
+      "change": "Autonomous run 242. Incorporating the owner's agentic-jobs analysis (docs/jobs/, 6 files, brought from origin/main; 100+ postings Aug-Sep 2026). New node concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness: a labor-market signal for where the labs invest. Five converging organisational patterns each mapping onto the project's design - dedicated harness teams (infrastructure not app logic), forward-deployed engineering, EVALUATION AS CI GATE (= exec_guard + verify_loop_edit), SELF-IMPROVING AS DEFAULT (40%+ of roles), TIERED ORCHESTRATION (= run-218 criterion). DeepSeek 'Model + Harness = Agent', a dedicated Agent Harness R&D Engineer + PM whose job includes co-evolving models and harness, benchmarked against Claude Code. 7 edges: supports concept_bottleneck_is_the_model_harness_coupling, concept_harness_engineering_is_an_empirical_discipline... (demand-side confirmation), approach_self_improving_harness, artifact_phase5_exec_guard (eval-as-CI-gate), concept_whale_... (co-evolution as a hiring priority), principle_terminal_gate_only (gate outcomes not process); refines concept_harness_convergence_2026_09. Also: docs/practicing_what_we_preach.md - a strategy note answering the owner's questions (graph traceability: add tools/graph_diff.py, don't redesign; per-project graph+handover audit method for poly-bot/poster-studio; the concrete pains -> folded research: deterministic task ledger, platform-level memory capture + bounded active-cap, the run-218 orchestration criterion, PILOT live supervisor). 267->268 nodes, 1061->1068 edges."
     }
   ],
   "nodes": [
@@ -7906,6 +7910,36 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-20-1200.md"
+      ]
+    },
+    {
+      "id": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "label": "100+ agentic job postings (Aug-Sep 2026, ~1,365 aggregate): harness engineering is a distinct hired discipline separate from model training; self-improving loops (reflection/critique/self-debug) are table stakes in 40%+ of roles; eval rigs + CI gates are near-universal; DeepSeek hires explicitly for model-harness co-evolution ('DeepSeek CodeHarness' vs Claude Code)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:agentic_labor_market_landscape",
+      "confidence": 0.72,
+      "description": "The owner's agentic-jobs analysis (docs/jobs/ - 6 files, 64.6 KB, brought onto this branch from origin/main run 242; 100+ high-signal postings Aug 1 - Sep 6 2026 across 20+ job boards, ~1,365 aggregate roles on frontierroles.com). A LABOR-MARKET signal for where the frontier labs and enterprises are actually investing - a proxy for research direction (the RSI survey / ASPIRE thread: research-direction-setting is the bottleneck). Five organisational patterns, each mapping onto the project's design: (1) DEDICATED HARNESS TEAMS separate from model training (OpenAI Codex Core Agents, Anthropic Claude Managed Agents $405-485K, NVIDIA, DeepSeek, FICO) - harness engineering is infrastructure, not application logic; (2) FORWARD-DEPLOYED ENGINEERING - client-side harness deployment + production instrumentation; (3) EVALUATION AS CI GATE - eval harnesses wired into CI, regressions block releases, near-universal across roles (= the project's exec_guard hook + verify_loop_edit + the acceptor cluster); (4) SELF-IMPROVING AS DEFAULT - reflection/critique/self-debug/meta-agent in 40%+ of roles, Bosch / DeepMind / NVIDIA / startups (= approach_self_improving_harness); (5) TIERED ORCHESTRATION converging as a standard - Tier 1 routers / Tier 2 specialists / Tier 3 utilities, LangGraph state machines, human-in-the-loop handoffs (= the run-218 multi-agent criterion). DeepSeek: 'Model + Harness = Agent'; everything except the core model (tooling, memory, agent loop, desktop, MCP, feedback) is the Harness; a dedicated Agent Harness R&D Engineer + Agent Harness PM whose job includes 'deep collaboration with model training teams to CO-EVOLVE models and harness' - the WHALE / HELIX / JIT-Agent co-evolution thread as a HIRING PRIORITY, benchmarked directly against Claude Code. Anthropic vs OpenAI: Anthropic human-piloted / protocol-first (MCP) / platform-as-infrastructure / outcome-driven execution (specify success criteria + budget, Claude iterates); OpenAI auto-piloted / continuous-learning / vertical. Bearing on the project: strong external validation that Agent = Model + Harness, harness-as-versioned-discipline, verifier-gated self-improvement, and eval-rigs-in-CI are now the INDUSTRY consensus, not a research bet - the project's thesis is where the labor market already is. Recency: Sep 2026, a hiring snapshot (not a result), so it validates direction, not any mechanism.",
+      "tags": [
+        "agentic-jobs-analysis",
+        "labor-market-signal",
+        "harness-as-hired-discipline",
+        "self-improving-table-stakes",
+        "eval-as-ci-gate",
+        "tiered-orchestration",
+        "deepseek-model-plus-harness",
+        "model-harness-co-evolution-as-hiring",
+        "owner-research-source"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-20-1800.md",
+        "docs/jobs/ (owner's agentic-jobs analysis, 6 files, brought from origin/main run 242) - 100+ postings Aug-Sep 2026"
+      ],
+      "evidence_links": [
+        "docs/jobs/README.md",
+        "docs/auto_sweep_2026-09-20-1800.md"
       ]
     }
   ],
@@ -19314,6 +19348,83 @@
       "approach_family": "graph_engineering",
       "confidence": 0.45,
       "description": "AKUs carry explicit VALIDATORS and GOVERNANCE fields and Shared Org Memory records CONTRIBUTOR approval - provenance and a check attached to every knowledge unit, which is evidential-ancestry tracking made a first-class field of the stored artifact."
+    },
+    {
+      "id": "edge_labor_market_supports_model_harness_coupling",
+      "source": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "DeepSeek's 'Model + Harness = Agent' equation as a hiring frame, and dedicated harness teams at OpenAI / Anthropic / NVIDIA - the model-harness coupling is the industry's organising principle, not only a survey abstraction."
+    },
+    {
+      "id": "edge_labor_market_supports_harness_anatomy",
+      "source": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "target": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The 11-harness source study says harness engineering is a discipline that turned from tool to platform; the jobs market confirms it from the demand side - dedicated Harness Engineer roles, separate from model researchers, at every frontier lab."
+    },
+    {
+      "id": "edge_labor_market_supports_self_improving_family",
+      "source": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "target": "approach_self_improving_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.58,
+      "description": "Self-improving agent loops (reflection / critique / self-debug / meta-agent) appear in 40%+ of analysed roles across Bosch, DeepMind, NVIDIA, and startups - 'static agents are legacy' is the hiring language. The family the project bet on is where the market is."
+    },
+    {
+      "id": "edge_labor_market_supports_exec_guard",
+      "source": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "target": "artifact_phase5_exec_guard",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Evaluation as CI gate' - eval harnesses wired into CI so regressions BLOCK RELEASES - is near-universal in the postings. exec_guard (a pre-commit hook the loop cannot talk past) is the project's instance of exactly this pattern."
+    },
+    {
+      "id": "edge_labor_market_supports_co_evolution_cluster",
+      "source": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "target": "concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "DeepSeek's Agent Harness PM job explicitly lists 'co-evolve models and harness' as a responsibility - the WHALE / HELIX / JIT-Agent co-evolution finding as a hiring priority at a frontier lab, benchmarked against Claude Code."
+    },
+    {
+      "id": "edge_labor_market_supports_terminal_gate",
+      "source": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "target": "principle_terminal_gate_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "'Agent quality is enforced by automation, not manual QA' - CI gates on the OUTPUT (the release), not the process. principle_terminal_gate_only ('gate outcomes, not process') stated as an industry operating norm."
+    },
+    {
+      "id": "edge_labor_market_refines_harness_convergence",
+      "source": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "target": "concept_harness_convergence_2026_09",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Adds the demand-side view to 'what the shipping harnesses converged on': the same five patterns (dedicated harness teams, forward-deployed, eval-as-CI, self-improving-default, tiered orchestration) are what companies are HIRING for, worldwide, at $30K-$485K."
     }
   ]
 }

@@ -14,6 +14,7 @@ python tools/selftest_all.py        # 22 selftests -> BUILD SELFTEST: GREEN
 | `knowledge_graph.py validate` | validate `knowledge/graph/agentic_universe_graph.json` (must print `VALID`) |
 | `knowledge_graph.py summarize` | node/edge/family/status counts |
 | `knowledge_graph.py check-proposal <f>` | validate an `evolution/proposals/*.json` patch |
+| `graph_diff.py <ref-a> [<ref-b>]` | mechanical structural diff between two graph versions — nodes/edges added, removed, relabelled, retyped; `verification_state`/`confidence` changes; new `evolution_log` entries (run 243, `docs/practicing_what_we_preach.md` §1) |
 
 ## The self-improving-harness pipeline (`docs/self_improving_harness_plan.md`)
 

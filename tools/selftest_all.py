@@ -42,6 +42,7 @@ JOBS = [
     ("probe_composed_design.py", ["selftest"]),
     ("probe_orchestration_value.py", ["selftest"]),
     ("tamper_audit.py", ["selftest"]),
+    ("graph_diff.py", ["selftest"]),
 ]
 
 
