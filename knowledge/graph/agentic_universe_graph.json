@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-06",
+  "last_updated": "2026-10-07",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -456,6 +456,10 @@
     {
       "date": "2026-10-06",
       "change": "Autonomous run 124. DBLP. concept_bottleneck_is_the_model_harness_coupling (From Question Answering to Task Completion: A Survey on Agent System and Harness Design, arXiv:2606.20683, 2026): the model-harness lens - agent = foundation model + execution harness; the bottleneck is the coupling, and agent quality EMERGES from the interaction of model, runtime, task structure, evaluation. Harness decomposes into six coupled runtime responsibilities (observation/context/control/action/state/verification), matching the Phase 0-5 build. Four paradigms ending in agent-native co-evolution. +6 edges."
+    },
+    {
+      "date": "2026-10-07",
+      "change": "Autonomous run 125. Consolidation. self_improving_harness_plan.md gains 'The lineage and the lens' block (ReST-meets-ReAct 2023 as the trajectory-retrain ancestor that saturates after ~2 iterations / adaptive self-improvement survives the scarce-trajectory regime / the model-harness-lens survey's six coupled runtime responsibilities), and a build-order cross-check mapping the six responsibilities (observation/context/control/action/state/verification) onto Phases 0-5. No graph node/edge change."
     }
   ],
   "nodes": [

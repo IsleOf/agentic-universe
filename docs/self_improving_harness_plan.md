@@ -1,6 +1,6 @@
 # Forward Plan: Self-Improving Agentic OS
 
-**Date:** 2026-09-05 · last reconciled run 48 · plan-soundness update run 121 · **Target:** a self-improving agentic OS with a dynamically improving harness
+**Date:** 2026-09-05 · last reconciled run 48 · plan-soundness update run 124 · **Target:** a self-improving agentic OS with a dynamically improving harness
 **Graph:** 61 nodes / 115 edges at authoring — current state in `docs/graph_state_2026-09.md` · **Supersedes as active plan:** `docs/emergence_first_posture.md` (posture unchanged, now has a build target)
 
 > **Independent systems that match this plan (found runs 109, 118, 119).** Three published frameworks now
@@ -19,6 +19,21 @@
 >   pipeline. This plan's middle loop currently has a *fixed* procedure (`tools/loop_proposer.py`); per
 >   MetaSkill-Evolve it should also be under improvement. The Analyzer/Retriever/Allocator/Proposer/Evolver
 >   decomposition is cleaner than this plan's `loop_metrics → loop_proposer → improvement_loop` split.
+>
+> **The lineage and the lens (runs 122–124).** The trajectory → filter → retrain self-improvement loop is
+> not new: **ReST-meets-ReAct** (`concept_rest_react_founds_the_trajectory_retrain_loop`, arXiv:2312.10003,
+> DeepMind 2023) is the earliest published form — a ReAct agent retrained on its own filtered trajectories,
+> matching a large prompted model after *two* iterations with ~2 OOM fewer parameters. What is new in 2025+
+> is moving the loop from opaque weight updates to *auditable harness/skill edits* (the tier this plan sits
+> at). Two caveats it carries: it is weight-level self-distillation (the fork this plan declines), and its
+> gains **saturate after ~2 iterations** — a caution on expecting recursive loops to compound.
+> **Adaptive Self-improvement for ML-library dev** (`concept_adaptive_self_improvement_in_the_low_data_regime`,
+> arXiv:2502.02534, ICML 2025) shows the loop survives a *scarce-trajectory* regime (few examples, evolving
+> target; 3.9× over a single LLM) — the regime this plan's middle loop actually runs in (one increment per
+> run). And the **model-harness-lens survey** (`concept_bottleneck_is_the_model_harness_coupling`,
+> arXiv:2606.20683, 2026) decomposes the harness into **six coupled runtime responsibilities — observation,
+> context, control, action, state, verification** — which line up with the Phase 0–5 build below almost
+> one-to-one, and frames agent quality as *emergent from the model-harness coupling*, not a model property.
 
 ---
 
@@ -73,6 +88,13 @@ The middle loop is the product. The inner loop is where emergence happens. The o
 A runtime that mutates as fast as the harness has nothing left to verify against.
 
 ## 4. Build order
+
+> **Cross-check against the six runtime responsibilities** (`concept_bottleneck_is_the_model_harness_coupling`,
+> arXiv:2606.20683): observation = Phase 0 trace substrate · context = `context/loop_policy` · control =
+> the loop / `loop_adapter` · action = the tool registry (Phase 1) · state = Phase 2 experience bank ·
+> verification = the Phase 3 grounded-acceptance gate. The build covers all six; the survey's framing is
+> that their *coupling* is where quality is won or lost, so the gaps to watch are the seams between phases,
+> not the phases.
 
 ### Phase 0 — Trace substrate (prerequisite for everything) — **BUILT, gate GREEN (run 60)**
 

@@ -1,0 +1,30 @@
+{
+  "run": 125,
+  "increment": "consolidation - fold runs 122-124 (self-improvement lineage + model-harness lens) into the plan",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:2312.10003",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2606.20683",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2312.10003",
+    "arXiv:2606.20683"
+  ],
+  "trace_file": "runtime\\traces\\loop-125.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
