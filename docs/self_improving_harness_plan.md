@@ -34,6 +34,14 @@
 > arXiv:2606.20683, 2026) decomposes the harness into **six coupled runtime responsibilities — observation,
 > context, control, action, state, verification** — which line up with the Phase 0–5 build below almost
 > one-to-one, and frames agent quality as *emergent from the model-harness coupling*, not a model property.
+>
+> **The architecture is now instantiated component by component (run 168).** `docs/self_improvement_by_responsibility.md`
+> maps a published, working self-improving instance onto **five of the six** runtime responsibilities —
+> context = ACE, control = RHO / Self-Harness, action = ToolMaker, state = CER, verification = DeepVerifier
+> (observation is deliberately not self-modifying; its legibility is a Phase 3 acceptance criterion
+> instead). Every one has a *grounded* gate. So the integration step is not "make the self-improving
+> harness work" — it is "connect six independently-validated loops through one trace substrate and one
+> gate discipline." The coupling is the untested part, exactly as the lens predicts.
 
 ---
 

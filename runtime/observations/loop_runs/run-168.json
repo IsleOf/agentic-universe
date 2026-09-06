@@ -1,0 +1,41 @@
+{
+  "run": 168,
+  "increment": "docs/self_improvement_by_responsibility.md - map published self-improving instances onto the six runtime responsibilities",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 15,
+  "trace_valid": true,
+  "counts": {
+    "claims": 4,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2606.20683",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2510.04618",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2502.11705",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2601.15808",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2502.11705",
+    "arXiv:2510.04618",
+    "arXiv:2601.15808",
+    "arXiv:2606.20683"
+  ],
+  "trace_file": "runtime\\traces\\loop-168.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

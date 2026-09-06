@@ -628,6 +628,10 @@
     {
       "date": "2026-10-18",
       "change": "Autonomous run 167. DBLP. concept_agents_writing_their_own_tools_with_a_test_gate (LLM Agents Making Agent Tools / ToolMaker, arXiv:2502.11705, ACL 2025): an agent turns a paper-with-code into an LLM tool via closed-loop self-correction + a 100+-unit-test gate, 80% correct, beating SOTA SWE agents. Action-layer self-improvement (the least-explored of the six runtime responsibilities for self-modification); the test gate is grounded acceptance for tools; caveat - a self-written tool + the tool-making loop are new arbitrary-code-execution surface needing Phase 5 enforcement. +5 edges."
+    },
+    {
+      "date": "2026-10-18",
+      "change": "Autonomous run 168. Consolidation. docs/self_improvement_by_responsibility.md - maps a published working self-improving instance onto 5 of the 6 runtime responsibilities from concept_bottleneck_is_the_model_harness_coupling: context=ACE, control=RHO/Self-Harness, action=ToolMaker, state=CER, verification=DeepVerifier (observation deliberately not self-modifying - its legibility is a Phase 3 acceptance criterion). Every instance has a grounded gate. Re-frames the HANDOFF integration step: not 'make the self-improving harness work' but 'connect six independently-validated loops through one trace substrate + one gate discipline'. Linked from self_improving_harness_plan.md. No graph node/edge change."
     }
   ],
   "nodes": [
