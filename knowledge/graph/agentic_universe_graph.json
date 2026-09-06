@@ -1160,6 +1160,10 @@
     {
       "date": "2026-10-05",
       "change": "Autonomous run 303. Built tools/loop_conductor.py - the v2.3 skeleton (docs/self_rebuild_v2.md 4/8). Conductor.conduct(run_no) runs one loop increment as a deterministic pipeline: pick_increment() enforces the IDLE-STATE RULE as a classifier over recent run kinds -> ledger task -> Supervisor -> run_worker (caller-supplied, the generative edge) -> check_patch -> acceptance_gate.check -> apply_patch + commit_push (caller hooks) -> RunRecord+certificate. No model, no git in the conductor. 9 selftest checks; selftest_all JOBS -> 38. 1 node (artifact_loop_conductor) + 4 edges. 331 -> 332 nodes. The three v2 deterministic bricks (acceptance_gate 300, research_brief 302, loop_conductor 303) are now built; the remaining v2 work is the browser scout skill and binding a real call_model (v2.0, owner decision)."
+    },
+    {
+      "date": "2026-10-05",
+      "change": "Autonomous run 304. Built skills/perplexity-notebooklm/ - the v2.2 browser literature scout (docs/self_rebuild_v2.md 4/5). SKILL.md (nodriver-session contract) + perplexity_notebooklm.py: drives Perplexity deep-research + Google NotebookLM, returns {engine,query,answer_text,citations,challenge}; --brief wraps it as a research_brief STUB (empty candidates - the graph writer fills them). Replaces the manual owner-Perplexity-push step. Scaffold: stdlib parser + brief bridge selftested vs HTML fixtures (11 checks, added to selftest_all -> 39 jobs); the live selectors/waits/NotebookLM-upload need the profile + iteration. 1 node (artifact_perplexity_notebooklm_scout) + 2 edges. 332 -> 333 nodes. v2 status: deterministic spine complete (300/302/303) + the scout scaffolded (304); v2.0 (bind call_model) is the owner budget decision."
     }
   ],
   "nodes": [
@@ -9832,6 +9836,34 @@
       ],
       "evidence_links": [
         "docs/self_rebuild_v2.md"
+      ]
+    },
+    {
+      "id": "artifact_perplexity_notebooklm_scout",
+      "label": "perplexity-notebooklm skill - the v2 browser literature scout",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.45,
+      "description": "skills/perplexity-notebooklm/ (run 304), the v2.2 browser scout from docs/self_rebuild_v2.md section 4/5. Drives Perplexity deep-research and Google NotebookLM through the shared nodriver-session contract (minimized owned Chromium, profile serialization, persistent cooldowns, challenge classification, graceful shutdown, no credential extraction) and returns a normalized record {engine, query, answer_text, citations:[{title,url}], challenge}. --brief wraps it as a research_brief STUB (candidate_nodes/edges empty - the scout does not decide what to fold; the graph writer fills them after research_brief.check against the graph). Replaces the manual owner-runs-Perplexity-pushes-md step (runs 240-246, 253, 296, 298). Scaffold: the stdlib parser + brief bridge are selftested against HTML fixtures (11 checks, in selftest_all); the live selectors + the deep-research wait + the NotebookLM upload flow need the profile created and iteration against the real sites, which drift often - fall back to research-fetch + arxiv-fetch (the API path) when they break.",
+      "tags": [
+        "perplexity",
+        "notebooklm",
+        "browser",
+        "literature-scout",
+        "nodriver",
+        "v2",
+        "self-rebuild"
+      ],
+      "derived_from": [
+        "docs/self_rebuild_v2.md",
+        "skills/perplexity-notebooklm/SKILL.md",
+        "docs/auto_sweep_2026-10-05-1800.md"
+      ],
+      "evidence_links": [
+        "skills/perplexity-notebooklm/SKILL.md"
       ]
     }
   ],
@@ -24166,6 +24198,28 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "Uses Supervisor over a task_ledger to dispatch the run increment, with the deadline + retry budgeting it already has."
+    },
+    {
+      "id": "edge_scout_implements_v2_plan",
+      "source": "artifact_perplexity_notebooklm_scout",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2.2 browser scout from section 4/5 of the plan."
+    },
+    {
+      "id": "edge_scout_feeds_research_brief",
+      "source": "artifact_perplexity_notebooklm_scout",
+      "target": "artifact_research_brief",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "--brief emits the research_brief stub shape; the graph writer runs research_brief.check + fills candidates."
     }
   ]
 }
