@@ -1,18 +1,40 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 219)
+## Snapshot (run 229)
 
-**253 nodes · 973 edges · 9 approach families · 190 `challenges` edges (~20% of all edges).**
+**259 nodes · 1011 edges · 9 approach families · 193 `challenges` edges (~19% of all edges).**
 
-`verification_state`: 78 needs-validation · **145 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
-(`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature nodes sit at `partially_validated`. The `validated` count fell 35→18 at run 173 when a consistency pass corrected abstract-read literature nodes.)
-Families: self_improving_harness 98 · emergent_behaviors 74 · agent_habitat 23 · graph_engineering 20 · nourishing_harness 17 · orchestration_first 9 · rest 12.
+`verification_state`: 78 needs-validation · **150 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
+(`validated` is reserved for `artifact_*` nodes with passing computed selftests — the run-221
+`artifact_probe_orchestration_value_rig` is the 19th; VERIFIED-arXiv literature nodes sit at
+`partially_validated`.)
+Families: self_improving_harness 103 · emergent_behaviors 74 · agent_habitat 23 · graph_engineering 20 · nourishing_harness 17 · orchestration_first 10 · rest 12.
+
+**Runs 219–228** extended the two run-202–218 arcs and shipped two more tools:
+- **Shipped code:** `improvement_loop.paired_eprocess` (run 220 — PACE's anytime-valid commit gate,
+  advisory in `verify_loop_edit`), `tools/probe_orchestration_value.py` (run 221 — the "when does
+  multi-agent help" criterion as a rig, verdict CONFIRMS), `loop_metrics.status_line` (run 226 — a
+  one-line per-run health glance `OK`/`WATCH`/`STOP`, stamped into every run summary, closing the
+  observability dependency-chain link).
+- **The self-evolving-harness area mapped and self-audited:** `concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform`
+  (arXiv:2609.00006 — 11 production harnesses incl Hermes + Omnigent; seven canonical subsystems; no
+  runtime imports an agentic framework; none uses vector code-retrieval; SKILL.md leads MCP;
+  prose→configuration) + `concept_self_evolving_coding_agents_taxonomy_by_evolution_target`
+  (arXiv:2608.03392 survey) + `concept_shaper_a_frozen_model_is_its_own_harness_optimizer`
+  (arXiv:2608.11350 — embodied, frozen model as planner AND optimizer). `docs/harness_anatomy_self_audit.md`
+  checks the project against all four headline findings — all four validate a choice already made.
+- **`concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it`**
+  (CordisBench arXiv:2609.01600 — LLM lifecycle reasoning degrades as the harness grows; a finite
+  reference semantics matches execution on every scored outcome).
+- **`concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement`** (PCN-Rec
+  arXiv:2601.09771 — JSON certificate + deterministic verifier + constrained-greedy repair; conf 0.6,
+  currency note).
 
 **Runs 202–218** — two dense mid-2026 literature arcs, recency-weighted (RECENCY WEIGHTING directive of
 2026-09-06: prefer the last ~30 days; older papers carry a currency note + modest confidence + a

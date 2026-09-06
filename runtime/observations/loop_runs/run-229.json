@@ -1,0 +1,20 @@
+{
+  "run": 229,
+  "increment": "orientation-layer refresh - docs/graph_state_2026-09.md Snapshot from run-219 (253/973) to run-229 (259/1011) + a 'Runs 219-228' section (shipped tools + self-evolving-harness-area mapping + CordisBench + PCN-Rec)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-229.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 229 OK · VALID · graph +0 · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.79"
+}
