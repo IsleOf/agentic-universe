@@ -624,6 +624,10 @@
     {
       "date": "2026-10-18",
       "change": "Autonomous run 166. Phase 3 - the run-165 Search-Time Contamination conclusion, made concrete. holdout_tasks.py gains SEARCH_SENSITIVE (the 10 literature task ids - headline numbers / findings from named papers that a web-connected loop could retrieve) + search_sensitive(task_id); the 7 design tasks are computed substance-checks and are not web-findable. phase3_holdout_set.md gains a 'Search-restricted scoring' section: literature tasks must be scored with no external retrieval during the fold, search trajectory kept in the trace. +3 selftest checks. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-18",
+      "change": "Autonomous run 167. DBLP. concept_agents_writing_their_own_tools_with_a_test_gate (LLM Agents Making Agent Tools / ToolMaker, arXiv:2502.11705, ACL 2025): an agent turns a paper-with-code into an LLM tool via closed-loop self-correction + a 100+-unit-test gate, 80% correct, beating SOTA SWE agents. Action-layer self-improvement (the least-explored of the six runtime responsibilities for self-modification); the test gate is grounded acceptance for tools; caveat - a self-written tool + the tool-making loop are new arbitrary-code-execution surface needing Phase 5 enforcement. +5 edges."
     }
   ],
   "nodes": [
@@ -6334,6 +6338,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-17-1200.md"
+      ]
+    },
+    {
+      "id": "concept_agents_writing_their_own_tools_with_a_test_gate",
+      "label": "ToolMaker: an agent autonomously turns a paper-with-code into an LLM tool via a closed-loop self-correction + unit-test gate - 80% correct, beating SOTA SWE agents",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:agents_write_their_own_tools",
+      "confidence": 0.72,
+      "description": "LLM Agents Making Agent Tools / ToolMaker (arXiv:2502.11705, ACL 2025; VERIFIED via arXiv abstract read run 167, resolved via DBLP; code github.com/KatherLab/ToolMaker). Tools normally must be hand-implemented by developers - a bottleneck for domains needing many specialised tools (life sciences, medicine). ToolMaker autonomously transforms a paper-with-code (GitHub URL + short task description) into an LLM-compatible tool: it installs dependencies, generates code, and DEBUGS via a CLOSED-LOOP SELF-CORRECTION mechanism. Benchmark: 15 complex computational tasks, 100+ unit tests; ToolMaker correctly implements 80%, substantially beating SOTA software-engineering agents. For this project: (1) the harness's ACTION layer (tools) can be self-extended, not just its context or its skills - the Phase 1 harness registry (artifact_phase1_harness_registry) versions tools as artifacts, Phase 4 skill_induction induces workflows; ToolMaker is the missing piece, agents WRITING new tools; (2) the UNIT-TEST GATE + closed-loop self-correction is pattern_grounded_acceptance_only applied to the action layer - a tool is accepted iff its tests pass, a grounded (executable) check, not a self-report; (3) 'action' is one of the six runtime responsibilities (concept_bottleneck_is_the_model_harness_coupling) and this is action-layer self-improvement; (4) CAVEAT: a self-written tool is new arbitrary-code-execution attack surface - it must run under the same pattern_execution_layer_enforcement / Phase 5 exec_guard as everything else, and its generation (dependency install, code exec) is itself a privileged action.",
+      "tags": [
+        "toolmaker",
+        "agents-write-tools",
+        "paper-with-code-to-tool",
+        "closed-loop-self-correction",
+        "unit-test-gate",
+        "80pct-correct",
+        "action-layer-self-improvement",
+        "acl-2025"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-18-0000.md",
+        "arXiv:2502.11705 (LLM Agents Making Agent Tools / ToolMaker) - VERIFIED, abstract read run 167; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-18-0000.md"
       ]
     }
   ],
@@ -14882,6 +14914,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "'Isolated sandboxes, transparent search trajectories, controlled benchmark access' - the grounded-acceptance gate should score a held-out re-run under these conditions, not a free-search one."
+    },
+    {
+      "id": "edge_toolmaker_supports_grounded_acceptance",
+      "source": "concept_agents_writing_their_own_tools_with_a_test_gate",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The unit-test gate + closed-loop self-correction is grounded acceptance for the action layer: a generated tool is accepted iff its executable tests pass, not on a self-report of correctness."
+    },
+    {
+      "id": "edge_toolmaker_extends_harness_registry",
+      "source": "concept_agents_writing_their_own_tools_with_a_test_gate",
+      "target": "artifact_phase1_harness_registry",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The Phase 1 registry versions tools as revertible artifacts; ToolMaker is the generator that would feed it - agents authoring new tool components, not just editing existing ones."
+    },
+    {
+      "id": "edge_toolmaker_refines_agentic_os",
+      "source": "concept_agents_writing_their_own_tools_with_a_test_gate",
+      "target": "concept_agentic_os",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "The agentic-OS harness layer includes tools; ToolMaker shows the tools sub-layer self-modifying at speed, which the split says only the harness layer should."
+    },
+    {
+      "id": "edge_toolmaker_challenges_execution_layer_enforcement",
+      "source": "concept_agents_writing_their_own_tools_with_a_test_gate",
+      "target": "pattern_execution_layer_enforcement",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "A self-written tool is new arbitrary-code-execution surface, and tool GENERATION (dependency install, code exec, debugging) is itself privileged - the exec layer must cover the tool-making loop, not just tool use."
+    },
+    {
+      "id": "edge_toolmaker_supports_model_harness_coupling",
+      "source": "concept_agents_writing_their_own_tools_with_a_test_gate",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "'Action' is one of the six coupled runtime responsibilities; ToolMaker is action-layer self-improvement, the least-explored of the six for self-modification."
     }
   ]
 }
