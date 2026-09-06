@@ -272,6 +272,10 @@
     {
       "date": "2026-09-25",
       "change": "Autonomous run 78. Refreshed the top-level README.md - was ~90 runs stale (85 nodes / 174 edges / 5 families / 'seven phases' / no mention of the build). Now: 182/553/9, the two-things framing (curated model + working toolchain), Phases 0-5 built, tools/README.md linked, current family counts, the emergence-first posture, the pre-commit guard, and an honest Status section (what is and is not built). No graph change."
+    },
+    {
+      "date": "2026-09-25",
+      "change": "Autonomous run 79. arXiv sweep (frontier still ~Sept 3). concept_generative_process_diversity (2609.03422 VERIFIED, 38 models / 10 benchmarks): generative-process diversity - NCD on raw outputs, residualised, grounded in Algorithmic Information Theory - predicts reduced correlated failure (-0.216, CI [-0.309,-0.122], negative on all ten), not attributable to semantic similarity or capability. Sharpens principle_diversity_maintenance: 'heterogeneous base models' must mean process-diverse, not different vendors. Modest effect - refines rather than resolves concept_epistemic_sybil_collapse (shared evidence still collapses aggregate confidence)."
     }
   ],
   "nodes": [
@@ -2149,7 +2153,8 @@
         "arXiv:2602.00038 (Diversity as Defense: population heterogeneity counters synthetic consensus)",
         "arXiv:2609.03667 - task diversity dominates dataset size for zero-shot transfer in offline multi-agent RL",
         "arXiv:2608.02827 (Biased Consensus in Multi-Agent LLM Debates) - collective bias emerges as a phase transition above a conformity threshold; agent heterogeneity suppresses the transition by smoothing the dynamics",
-        "arXiv:2606.05985 (Value Diversity as a Collective Property) - diversity and alignment are uncorrelated; multicultural agent systems fall substantially below human societies in value diversity, and social interaction drives consensus that erodes plurality - the keystone's failure mode, in the value dimension"
+        "arXiv:2606.05985 (Value Diversity as a Collective Property) - diversity and alignment are uncorrelated; multicultural agent systems fall substantially below human societies in value diversity, and social interaction drives consensus that erodes plurality - the keystone's failure mode, in the value dimension",
+        "arXiv:2609.03422 - run 79, VERIFIED: generative-process diversity (NCD on raw outputs) predicts reduced correlated failure across 38 models / 10 benchmarks (-0.216, CI [-0.309,-0.122]), not attributable to semantic similarity or capability - so 'heterogeneous base models' must mean process-diverse"
       ],
       "evidence_links": [
         "docs/habitat_charter.md"
@@ -4813,6 +4818,33 @@
       ],
       "evidence_links": [
         "docs/phase3_heterogeneous_verifier.md"
+      ]
+    },
+    {
+      "id": "concept_generative_process_diversity",
+      "label": "What buys failure independence is generative-process diversity, not semantic or capability spread",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:generative_process_diversity",
+      "confidence": 0.65,
+      "description": "arXiv:2609.03422 (VERIFIED): generative-process diversity - measured by Normalised Compression Distance on raw model outputs, residualised against a permutation control, grounded in Algorithmic Information Theory - predicts reduced correlated failure. 38 models, 10 disjoint benchmark families: cross-benchmark partial rank association -0.216 (95% CI [-0.309, -0.122]), negative on all ten. 'Increased generative-process diversity is associated with reduced correlated failure in model pairs that is not attributable to semantic similarity or capability.' Sharpens principle_diversity_maintenance: the keystone's 'heterogeneous base models' has to mean process-diverse (different HOW), not merely different vendors or a capability gap. The effect is modest (-0.216), so process diversity reduces correlated failure, it does not eliminate it - which is also why concept_epistemic_sybil_collapse still bites when the evidence source is shared.",
+      "tags": [
+        "generative-process-diversity",
+        "correlated-failure",
+        "compression-distance",
+        "-0.216",
+        "38-models",
+        "not-semantic",
+        "diversity-keystone"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-1800.md",
+        "arXiv:2609.03422 (Inferred Generative-Process Diversity Predicts Correlated Failure Across Language Models) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-25-1800.md"
       ]
     }
   ],
@@ -10665,6 +10697,60 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "A second decorrelated scorer is the graph's own repair for evaluator collapse, now implemented for the loop-harness held-out check."
+    },
+    {
+      "id": "edge_genprocdiv_refines_diversity_maintenance",
+      "source": "concept_generative_process_diversity",
+      "target": "principle_diversity_maintenance",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.7,
+      "description": "The keystone measured right: 'heterogeneous base models' means generative-process-diverse (NCD on raw outputs), not different vendors or a capability spread."
+    },
+    {
+      "id": "edge_genprocdiv_refines_structural_decoupling",
+      "source": "concept_generative_process_diversity",
+      "target": "pattern_structural_decoupling",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "'Heterogeneous base models' in structural decoupling should be selected for process diversity, not just decorrelated prompts."
+    },
+    {
+      "id": "edge_genprocdiv_challenges_sybil",
+      "source": "concept_generative_process_diversity",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "Process diversity reduces correlated failure only modestly (-0.216); shared evidence still collapses aggregate confidence regardless."
+    },
+    {
+      "id": "edge_genprocdiv_instantiates_habitat",
+      "source": "concept_generative_process_diversity",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_genprocdiv_supports_higher_order_synergy",
+      "source": "concept_generative_process_diversity",
+      "target": "emergent_higher_order_synergy",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Complementarity needs independent failure modes; process diversity is what produces them."
     }
   ]
 }

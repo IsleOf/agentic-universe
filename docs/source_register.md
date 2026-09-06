@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 170 nodes, 490 edges · **Date:** 2026-09-05
+**Graph at generation:** 183 nodes, 558 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -149,6 +149,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.03035](https://arxiv.org/abs/2609.03035) | (title not recorded) | `pattern_activation_probe_monitoring` |
 | [2609.03192](https://arxiv.org/abs/2609.03192) | (title not recorded) | `pattern_deterministic_state_folding` |
 | [2609.03218](https://arxiv.org/abs/2609.03218) | (title not recorded) | `concept_self_concept_as_behavioral_lever` |
+| [2609.03422](https://arxiv.org/abs/2609.03422) | (title not recorded) | `concept_generative_process_diversity`, `principle_diversity_maintenance` |
 | [2609.03667](https://arxiv.org/abs/2609.03667) | (title not recorded) | `principle_diversity_maintenance` |
 | [2609.03884](https://arxiv.org/abs/2609.03884) | (title not recorded) | `pattern_execution_layer_enforcement`, `principle_structural_edits_gated_outside_the_agents` |
 | [2609.04128](https://arxiv.org/abs/2609.04128) | (title not recorded) | `concept_environment_evolution_curriculum`, `concept_graded_challenge` |
@@ -238,6 +239,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - curvelabs.org 'Norm Engineering' — `emergent_social_conventions`
 - explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
 - graph reasoning over emergent_authorization_laundering + emergent_stale_belief_propagation + pattern_runtime_adaptive_workflow — `concept_agent_shaped_topology_is_agent_corruptible`
+- hooks/pre-commit — `artifact_phase5_exec_guard`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`
@@ -246,8 +248,24 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - reconciles emergent_subagent_training_induces_coordination (run 6) — `concept_transparency_cuts_both_ways`
 - revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
 - run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI — `concept_context_economics`
+- runtime/observations/loop_history_summary.json — `artifact_loop_adapter_real_trace`, `artifact_loop_metrics_phase3_real`
+- runtime/observations/loop_runs/run-67.json — `artifact_loop_session_live_recording`
 - same sweep: no verifiable mechanism work since the run-5 sources (Sophia, Tao of Agency, Learnable Novelty - all position/framework). The field is investing in supervised curriculum generation, not intrinsic drive. — `concept_intrinsic_motivation`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
+- tools/exec_guard.py — `artifact_phase5_exec_guard`
+- tools/experience_bank.py — `artifact_phase2_experience_bank`
+- tools/harness_registry.py — `artifact_phase1_harness_registry`
+- tools/holdout_tasks.py — `artifact_phase3_holdout_set`
+- tools/holdout_verifier2.py — `artifact_phase3_heterogeneous_verifier`
+- tools/improvement_loop.py — `artifact_phase3_improvement_loop`
+- tools/loop_adapter.py — `artifact_loop_adapter_real_trace`
+- tools/loop_metrics.py — `artifact_loop_metrics_phase3_real`
+- tools/loop_proposer.py — `artifact_phase3_proposer_context`
+- tools/loop_session.py — `artifact_loop_session_live_recording`
+- tools/phase0_selftest.py — `artifact_phase0_trace_substrate`
+- tools/skill_induction.py — `artifact_phase4_skill_induction`
+- tools/topology_recover.py — `artifact_phase0_trace_substrate`
+- tools/trace_substrate.py — `artifact_phase0_trace_substrate`
 - unifies pattern_verifier_gated_promotion + concept_agent_shaped_topology_is_agent_corruptible + emergent_authorization_laundering — `principle_structural_edits_gated_outside_the_agents`
 - zylos.ai 'Goal Persistence and Goal Drift' — `emergent_goal_persistence_and_drift`
 - zylos.ai emergent behaviour survey — `emergent_self_organizing_roles`
@@ -290,12 +308,25 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-19-1800.md` — `concept_environment_evolution_curriculum`, `pattern_procedural_family_skill_consolidation`
 - `docs/auto_sweep_2026-09-20-1200.md` — `concept_self_concept_as_behavioral_lever`
 - `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `pattern_disposable_branch_exploration`
+- `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
 - `docs/harness_field_study_2026-09-06.md` — `concept_harness_convergence_2026_09`
 - `docs/harness_field_study_2026-09-06.md - Agent Zero Context Window Usage Indicator, Hermes lean-tail compression as default: token cost is now first-class UI across shipping harnesses` — `concept_context_economics`
 - `docs/nourishing_harness_design.md` — `approach_nourishing_harness`, `concept_harness_orchestration_pairing`
+- `docs/phase0_live_recording.md` — `artifact_loop_session_live_recording`
+- `docs/phase0_trace_substrate.md` — `artifact_phase0_trace_substrate`
+- `docs/phase1_harness_registry.md` — `artifact_phase1_harness_registry`
+- `docs/phase1_loop_adapter.md` — `artifact_loop_adapter_real_trace`
+- `docs/phase2_experience_bank.md` — `artifact_phase2_experience_bank`
+- `docs/phase3_heterogeneous_verifier.md` — `artifact_phase3_heterogeneous_verifier`
+- `docs/phase3_holdout_set.md` — `artifact_phase3_holdout_set`
+- `docs/phase3_improvement_loop.md` — `artifact_phase3_improvement_loop`
+- `docs/phase3_loop_metrics.md` — `artifact_loop_metrics_phase3_real`
+- `docs/phase3_proposer.md` — `artifact_phase3_proposer_context`
+- `docs/phase4_skill_induction.md` — `artifact_phase4_skill_induction`
+- `docs/phase5_exec_guard.md` — `artifact_phase5_exec_guard`
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`

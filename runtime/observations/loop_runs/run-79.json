@@ -1,0 +1,25 @@
+{
+  "run": 79,
+  "increment": "fold arXiv:2609.03422 generative-process diversity into the graph",
+  "ok": true,
+  "harness_manifest_hash": "a0a320e06a4204c4",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.03422",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.03422"
+  ],
+  "trace_file": "runtime\\traces\\loop-79.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
