@@ -1080,6 +1080,10 @@
     {
       "date": "2026-09-30",
       "change": "Autonomous run 282. IDLE-STATE clause a - folded arXiv:2602.04431 (MaMa, Feb 2026, VERIFIED), surfaced alongside the SoK. concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary: automated design of agentic systems robust to a compromised subset of agents, as a Stackelberg game (Meta-Agent designer vs best-responding Meta-Adversary); LLM-based adversarial search; MaMa systems defend worst-case attacks at no task-success cost and generalise to stronger/different adversaries and LLMs. 6 edges: refines the SoK node (path closure by adversarial search), extends pattern_adversarial_agentic_monitor (adversary moved to design time), supports concept_the_acceptor_not_the_proposer (worst-case acceptance) + pattern_grounded_acceptance_only, informs the self-evolving-coding-agents taxonomy, mildly challenges approach_emergence_first (design-time vs observe). Branch_key self_improving_harness:adversarial_system_design. 313 -> 314 nodes, 1244 -> 1250 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-30",
+      "change": "Autonomous run 283. IDLE-STATE clause b - dry-ran tools/probe_composed_design.py (sweep). Verdict COMPOSES BUT BOUNDED: composed design extends the usable horizon 12 -> 24 steps vs prose handoffs, but the base per-step failure rate sets a ceiling - you need short TASKS not just short agents. 2 edges connecting this to the run-262 fractal-decomposition node: artifact_probe_composed_design_rig supports concept_fractal_decomposition (fractal decomposition is the mechanism that makes tasks short); concept_fractal_decomposition refines concept_geometric_reliability_decay (keep every agent trajectory short so none hits the ~16-step decay wall). 314 nodes / 1250 -> 1252 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -22764,6 +22768,28 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "MaMa designs the system against a worst-case adversary at design time rather than giving agents room and observing. A mild pull toward control-first - though the design SEARCH is open-ended, and the result generalises beyond the training adversary, which is the emergence-first hope."
+    },
+    {
+      "id": "edge_composed_design_rig_supports_fractal",
+      "source": "artifact_probe_composed_design_rig",
+      "target": "concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Run 283 dry-run (sweep): composed design extends the usable horizon 12 -> 24 steps vs prose handoffs, but the base per-step failure rate still sets a ceiling - \"you need short TASKS, not just short agents\". Fractal decomposition is the mechanism that makes tasks short: spawn a child only for an unresolved boundary and keep each context narrow, so the per-step rate applies over fewer steps per agent."
+    },
+    {
+      "id": "edge_fractal_refines_geometric_decay",
+      "source": "concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries",
+      "target": "concept_geometric_reliability_decay",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Geometric decay caps any long trajectory (~16 steps to collapse). Fractal decomposition responds by keeping every agent trajectory short and problem-shaped - deep only where the task is genuinely unresolved - so no single agent runs long enough to hit the decay wall."
     }
   ]
 }
