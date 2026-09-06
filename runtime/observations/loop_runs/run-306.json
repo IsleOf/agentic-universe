@@ -1,0 +1,35 @@
+{
+  "run": 306,
+  "increment": "fold 2605.30621 (harness-updating flat / benefit non-monotonic) + 2607.08028 (only code-owned enforcement preserves both safety and utility)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 8
+  },
+  "citations": [
+    {
+      "id": "arXiv:2605.30621",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2607.08028",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2605.30621",
+    "arXiv:2607.08028"
+  ],
+  "trace_file": "runtime\\traces\\loop-306.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 306 OK · VALID · graph +2n/+8e · cites 2v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.76 · novelty 1.00"
+}

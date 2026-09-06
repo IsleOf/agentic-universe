@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 334 nodes, 1333 edges · **Date:** 2026-09-05
+**Graph at generation:** 336 nodes, 1341 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -107,6 +107,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2605.22643](https://arxiv.org/abs/2605.22643) | (title not recorded) | `concept_incremental_attacks_boil_the_frog` |
 | [2605.24539](https://arxiv.org/abs/2605.24539) | (title not recorded) | `concept_harness_evolution_subfield` |
 | [2605.27922](https://arxiv.org/abs/2605.27922) | (title not recorded) | `concept_capability_is_a_model_harness_config_property` |
+| [2605.30621](https://arxiv.org/abs/2605.30621) | (title not recorded) | `concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic` |
 | [2606.00953](https://arxiv.org/abs/2606.00953) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2606.04104](https://arxiv.org/abs/2606.04104) | (title not recorded) | `concept_runtime_governance_organizes_around_a_portable_action_certificate` |
 | [2606.04329](https://arxiv.org/abs/2606.04329) | (title not recorded) | `concept_memory_poisoning_one_write_persists` |
@@ -127,6 +128,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2607.00871](https://arxiv.org/abs/2607.00871) | (title not recorded) | `concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate` |
 | [2607.05297](https://arxiv.org/abs/2607.05297) | (title not recorded) | `concept_recursive_meta_skill_evolution` |
 | [2607.07663](https://arxiv.org/abs/2607.07663) | (title not recorded) | `concept_self_improvement_strength_tracks_the_verification_hierarchy` |
+| [2607.08028](https://arxiv.org/abs/2607.08028) | (title not recorded) | `concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses` |
 | [2607.12790](https://arxiv.org/abs/2607.12790) | (title not recorded) | `concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score` |
 | [2607.13070](https://arxiv.org/abs/2607.13070) | (title not recorded) | `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
@@ -489,7 +491,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-05-1200.md` — `artifact_loop_conductor`, `concept_asg_si_independently_arrives_at_the_plan`
 - `docs/auto_sweep_2026-10-05-1800.md` — `artifact_perplexity_notebooklm_scout`, `concept_multi_round_interaction_compresses_semantic_space`
 - `docs/auto_sweep_2026-10-06-0000.md` — `concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback`
-- `docs/auto_sweep_2026-10-06-0600.md` — `concept_rest_react_founds_the_trajectory_retrain_loop`
+- `docs/auto_sweep_2026-10-06-0600.md` — `concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic`, `concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses`, `concept_rest_react_founds_the_trajectory_retrain_loop`
 - `docs/auto_sweep_2026-10-06-1200.md` — `concept_adaptive_self_improvement_in_the_low_data_regime`
 - `docs/auto_sweep_2026-10-06-1800.md` — `concept_bottleneck_is_the_model_harness_coupling`
 - `docs/auto_sweep_2026-10-07-0600.md` — `concept_what_when_how_where_to_evolve`

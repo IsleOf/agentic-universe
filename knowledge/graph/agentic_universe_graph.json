@@ -1168,6 +1168,10 @@
     {
       "date": "2026-10-06",
       "change": "Autonomous run 305. Literature sweep (arxiv scan) - folded arXiv:2603.25111 'SEVerA: Verified Synthesis of Self-Evolving Agents' (Mar/Apr 2026, VERIFIED), absent from the graph. Frames self-evolving agentic code gen as constrained learning: hard formal specs + soft objectives. Formally Guarded Generative Models - a FOL output contract on each generative call + a verified-fallback rejection sampler, so every output satisfies the contract for all parameters. Search -> Verification (prove for ALL params) -> Learning (GRPO on the soft objective, verifier preserves correctness). Zero constraint violations + gains on Dafny / symbolic math / tau^2-bench. New node concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback + 4 edges: supports concept_proof_carrying_negotiation (FGGM = PCN per-call) + artifact_acceptance_gate (independent arrival at contract-check + repair/reject + certificate); refines concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (a proof for all params beats a held-out sample where the property is formally expressible); supports concept_whale_harness_only_optimization... (SEVerA's safety half is harness-only, its utility half is GRPO - the training-fork split). Currency note: ~6mo, uses weight training, utility numbers possibly superseded. 333 -> 334 nodes, 1329 -> 1333 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Autonomous run 306. SEVerA citation sweep (S2) surfaced 5 citers; EvoUndo (2608.28363) is already folded (pattern_recoverability_constrained_evolution). Folded the two genuinely-new harness-engineering papers. concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic (arXiv:2605.30621, VERIFIED): harness-updating flat across tiers (Qwen3.5-9B ~ Claude Opus 4.6), harness-benefit non-monotonic (mid-tier gains most) -> spend capability budget on the task-solver not the evolver; challenges JIT-Agent's trainable-harness claim, informs the run-298 routing node + the v2 plan. concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses (arXiv:2607.08028, VERIFIED): deterministic behaviour in code/manifests/schemas around a replaceable composition boundary; checks held 270/270 under model substitution; prompt-only lets violations through, a bolt-on guardrail over-refuses (88/120) vs the harness's 120/120 -> supports harness-engineering-is-empirical + capability-is-config + the acceptance gate (composed in, not bolted on) + the v2 spine. 8 edges. 334 -> 336 nodes, 1333 -> 1341 edges. Validator VALID. (AutoHarness 2603.03329 + Code-as-Agent-Harness survey 2605.18747 noted, not yet folded.)"
     }
   ],
   "nodes": [
@@ -9895,6 +9899,57 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-06-0000.md"
+      ]
+    },
+    {
+      "id": "concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic",
+      "label": "Harness-updating is flat in base capability; harness-benefit is non-monotonic (mid-tier gains most) - so spend the capability budget on the task-solver, not the evolver",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_anatomy",
+      "confidence": 0.55,
+      "description": "arXiv:2605.30621 (May 2026, VERIFIED via arxiv API; code at github.com/A-EVO-Lab/a-evolve). Splits harness self-evolution into two capabilities: (i) harness-updating - producing useful persistent harness updates from execution evidence; (ii) harness-benefit - benefiting from an updated harness during task solving. Findings: harness-updating is FLAT in base capability - Qwen3.5-9B's updates yield gains comparable to Claude Opus 4.6's; harness-benefit is NON-MONOTONIC - weak-tier models benefit little, mid-tier most, strong-tier less than mid. Weak-tier low gains trace to two failure modes: failing to activate the relevant harness artifact, or activating it but not following it faithfully. Recommendation: invest the capability budget in the task-solving agent, not the evolver, and train for harness invocation + long-horizon instruction following. Currency: May 2026, names specific model tiers, so the tier boundaries are generation-specific; the flat-updating / non-monotonic-benefit shape is the durable finding.",
+      "tags": [
+        "harness-evolution",
+        "model-routing",
+        "capability-budget",
+        "verified",
+        "owner-adjacent"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-06-0600.md",
+        "arXiv:2605.30621 (Harness Updating Is Not Harness Benefit) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-06-0600.md"
+      ]
+    },
+    {
+      "id": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+      "label": "Only code-owned enforcement preserves both safety and utility: prompt-only lets violations through, a bolt-on guardrail over-refuses",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_anatomy",
+      "confidence": 0.6,
+      "description": "arXiv:2607.08028 (From Prompts to Contracts, Jul 2026, VERIFIED via arxiv API). A harness-engineering pattern: move deterministic behaviour into code, manifests, schemas and validation artifacts around a replaceable composition boundary, while source-backed claims remain the runtime authority for answers. Three results on a public slice of 5 Korean corporate groups (25 companies): (1) the harness preserves its source-grounding / entity-routing / trace / output-hygiene / recommendation-language contracts; a fault-injection control confirms the validators flag deliberately broken contracts. (2) the checks held under MODEL SUBSTITUTION - 270/270 composition-boundary runs across three hosted models; failures were confined to the model-composed side and were caught and recorded. (3) the code-owned guarantees are LOAD-BEARING, not reproducible by prompting: holding the model fixed and varying only the enforcement layer, prompt instructions alone let recommendation-language and trace-leakage violations reach the reader; a bolt-on external guardrail blocks them too but OVER-REFUSES, dropping utility to 88/120 where the harness preserves 120/120. Only code-owned enforcement preserves both safety and utility.",
+      "tags": [
+        "deterministic-spine",
+        "harness-engineering",
+        "code-owned-enforcement",
+        "model-substitution",
+        "auditable",
+        "verified"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-06-0600.md",
+        "arXiv:2607.08028 (From Prompts to Contracts: Harness Engineering for Auditable Enterprise LLM Agents) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-06-0600.md"
       ]
     }
   ],
@@ -24295,6 +24350,94 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "SEVerA gets its correctness guarantees harness-only (Verification, no weights) but its utility gains from the Learning stage (GRPO). Another data point that capability-shaped improvement wants the weights, while safety-shaped improvement does not - the split this project's emergence-first bet makes."
+    },
+    {
+      "id": "edge_flat_updating_refines_capability_config",
+      "source": "concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Adds resolution: it is the harness-BENEFIT capability that tracks (non-monotonically with) base capability; the harness-UPDATING capability is flat across tiers."
+    },
+    {
+      "id": "edge_flat_updating_challenges_jit_agent",
+      "source": "concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic",
+      "target": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "JIT-Agent argues harness intelligence is trainable and compounding. 2605.30621 finds the harness-updating capability is already flat across capability tiers, so training a stronger EVOLVER has low marginal return - the compounding, if any, is on the task-solver side."
+    },
+    {
+      "id": "edge_flat_updating_informs_routing",
+      "source": "concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic",
+      "target": "concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Concrete routing guidance: a cheap model can generate harness updates about as well as an expensive one, so route the proposer cheap and spend the budget on the task-solving / verification legs."
+    },
+    {
+      "id": "edge_flat_updating_informs_v2_plan",
+      "source": "concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2 model-routed proposer can be the cheap model; the capability budget belongs on run_worker's task-solving and the verification leg."
+    },
+    {
+      "id": "edge_code_owned_supports_harness_engineering",
+      "source": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+      "target": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A fourth production data point that deterministic behaviour belongs in code/manifests/schemas around a replaceable composition boundary - with a fault-injection control and a model-substitution test (270/270)."
+    },
+    {
+      "id": "edge_code_owned_supports_capability_config",
+      "source": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The code-owned checks held across three models - the guarantees are a property of the harness configuration, not the base model."
+    },
+    {
+      "id": "edge_code_owned_supports_acceptance_gate",
+      "source": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+      "target": "artifact_acceptance_gate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The bolt-on guardrail over-refuses (88/120) where in-pipeline code-owned enforcement keeps full utility (120/120) - an argument for the acceptance gate being a composed stage in the loop, not an external filter."
+    },
+    {
+      "id": "edge_code_owned_supports_v2_plan",
+      "source": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2 deterministic spine IS this pattern: deterministic behaviour in stdlib code around the model-touching callbacks, with the gate composed in rather than bolted on."
     }
   ]
 }
