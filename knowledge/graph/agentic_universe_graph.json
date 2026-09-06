@@ -768,6 +768,10 @@
     {
       "date": "2026-09-10",
       "change": "Autonomous run 201. Consolidation. phase5_exec_guard.md gains 'The execution-layer threat surface' - a table of the four attack classes the 2026 literature has mapped that the execution layer (not the gate, not the model) must bound: memory poisoning (2606.04329), context privilege escalation (2608.27299), agent-communication attacks (2506.19676), harness tampering (2609.00069). concept_agentic_os's runtime-as-fixed-point is the unifying answer - each is a case of something that belongs in the runtime being reachable from the mutable harness. exec_guard covers none of them (it is a pre-commit hook); they need a real runtime/harness boundary. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-10",
+      "change": "Autonomous run 202. Orientation-layer refresh: docs/graph_state_2026-09.md 'Snapshot' block updated from the run-174 state (226 nodes / 811 edges) to run 202 (236 nodes / 879 edges; 78 needs-validation / 128 partially-validated / 18 validated / 5 inconclusive / 7 unset; families self_improving_harness 87, emergent_behaviors 70, agent_habitat 23, graph_engineering 20, nourishing_harness 17). Added a 'Runs 183-201' paragraph: the RECENCY WEIGHTING directive (2026-09-06, a weighting not a gate), the dedicated fetch skills, the s2-citations recency mechanism, and the Sept-2026 verification-hygiene + execution-layer thread (RSI survey / verification hierarchy 2607.07663; harness tampering 2609.00069 + tamper_audit 0/7 CLEAN; trajectory-judge 2609.00038 + Calibration Floor 2608.04355 -> holdout_tasks._normalize; HarnessLens 2608.27311 -> behavior_relevant_tasks; Live Trace Model 2609.01466; context privesc 2608.27299 -> Phase 0 MessageRole-CPE). No graph node/edge change."
     }
   ],
   "nodes": [

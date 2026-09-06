@@ -1,18 +1,54 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 174)
+## Snapshot (run 202)
 
-**226 nodes · 811 edges · 9 approach families · ~166 `challenges` edges (~20% of all edges).**
+**236 nodes · 879 edges · 9 approach families · 179 `challenges` edges (~20% of all edges).**
 
-`verification_state`: 79 needs-validation · **117 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
-(The `validated` count fell 35→18 at run 173: a consistency pass corrected abstract-read literature nodes from `validated` to `partially_validated` — `validated` is now again reserved for `artifact_*` nodes with passing computed selftests. The 220-run session added ~30 literature nodes; nearly all sit at `partially_validated`.)
-Families: self_improving_harness 76 · emergent_behaviors 68 · agent_habitat 23 · graph_engineering 19 · nourishing_harness 17 · rest 19.
+`verification_state`: 78 needs-validation · **128 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
+(`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature nodes sit at `partially_validated`. The `validated` count fell 35→18 at run 173 when a consistency pass corrected abstract-read literature nodes.)
+Families: self_improving_harness 87 · emergent_behaviors 70 · agent_habitat 23 · graph_engineering 20 · nourishing_harness 17 · rest 19.
+
+**Runs 183–201** — the **RECENCY WEIGHTING** directive (2026-09-06): prefer literature from the last ~30
+days; older papers are *not* locked out but carry a currency note, modest confidence on any
+capability/model-benchmark claim, and a note that they remain valid evidence about the small/local-LLM
+regime; latest information wins in any tension. Encoded in `context/loop_policy` v8 + `tools/loop_adapter.py`
++ the scheduled-task `SKILL.md`. The owner added dedicated fetch skills (`arxiv-fetch`, `hackernews-fetch`,
+`rss-fetch`, `github-fetch`, `reddit-fetch`, `x-fetch`, `research-core`). The loop's recency mechanism is
+**`research-fetch s2 citations arXiv:<recent-id>`** — citers are necessarily newer than the cited node.
+Under it, a **verification-hygiene + execution-layer thread** from Sept-2026 literature:
+- `concept_self_improvement_strength_tracks_the_verification_hierarchy` (RSI survey, arXiv:2607.07663,
+  1,250 papers) — a verification hierarchy (formal > PRM > judge > rubric > meta-eval > intrinsic) that
+  demonstrated self-improvement strength *tracks*; research-direction-setting is the top-of-hierarchy human
+  bottleneck (= the project's own structure); governance-grade measurement is the underpopulated niche
+  (= where `loop_metrics` already sits). See `docs/self_improvement_by_responsibility.md`.
+- `concept_harness_tampering_persists_in_real_self_improvement_runs` (arXiv:2609.00069) — illusory gains /
+  integrity violations *consistently occur and persist* in the best agent's lineage; the sharpest challenge
+  yet to `approach_self_improving_harness`. → `verify_loop_edit`'s `tampering_flags` (authorization /
+  provenance / completeness) + `tools/tamper_audit.py`, which ran the `what_would_make_this_wrong.md` §2
+  falsifier on *this loop's own* seven-edit lineage: **0/7 flagged, CLEAN**.
+- `concept_outcome_only_judges_miss_silent_faults` (trajectory-judge, arXiv:2609.00038 — outcome-only
+  scoring catches only 45% of silent faults) + `concept_self_correction_is_mostly_format_repair_not_reasoning`
+  (Calibration Floor, arXiv:2608.04355 — most self-correction gain is format repair, and a cited protocol
+  fails to replicate on a small model) → `holdout_tasks._normalize` scores content, not markdown formatting.
+- `concept_behavior_aware_verification_beats_the_fixed_task_set` (HarnessLens, arXiv:2608.27311 — verify
+  selectively on behaviour-relevant tasks; +7.6–13.6% at lower budget) → `holdout_tasks.behavior_relevant_tasks`.
+- `concept_trace_compiles_to_per_consumer_views` (Live Trace Model, arXiv:2609.01466 — a compiled
+  observer-side view answers monitoring questions at 14× fewer tokens, 0.85 vs 0.48 accuracy).
+- `concept_the_harness_context_assembly_is_a_privilege_escalation_vector` (arXiv:2608.27299 — context
+  assembly can promote attacker content to a privileged instruction level; RCE on 6 harnesses) → Phase 0
+  `MESSAGE` events now flag a MessageRole-CPE when `instruction_level` outranks `source_level`.
+
+**The Phase 3 gate** (`verify_loop_edit`) now runs six checks — task regression, task-category regression,
+verifier disagreement, trace-legibility regression, harness-tampering flags, format-normalised scoring —
+plus advisory behaviour-aware task selection. `docs/phase5_exec_guard.md` names the four execution-layer
+attack classes (memory poisoning / context privesc / agent-comms / harness tampering), unified by
+`concept_agentic_os`'s runtime-as-fixed-point.
 
 **Runs 146–161** added a scheming / monitorability / multi-agent adversarial thread, balancing the
 capability literature of runs 115–145:

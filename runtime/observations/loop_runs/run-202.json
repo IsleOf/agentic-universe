@@ -1,0 +1,19 @@
+{
+  "run": 202,
+  "increment": "orientation-layer refresh - docs/graph_state_2026-09.md Snapshot block from run-174 (226/811) to run-202 (236/879) + a 'Runs 183-201' paragraph covering the recency directive and the verification-hygiene / execution-layer literature thread",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-202.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
