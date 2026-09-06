@@ -134,6 +134,75 @@ HOLDOUT = [
         "check": lambda t: _has_any(t, "market") and _has_any(t, "converg", "bid-verification", "bid verification")
                  and _has_any(t, "2609.02580", "2608.14613", "does not transfer", "slower or no"),
     },
+
+    # --- design-reasoning tasks (added run 74) — a harness edit that degrades
+    #     design recall, not just literature recall, must also be caught ---
+    {
+        "id": "two_part_gate_structure",
+        "question": "What are the two parts of the nourishing-harness two-part gate?",
+        "gold": "(1) an outer gate as a cumulative irreversibility budget per principal (not a per-act "
+                "checkpoint); (2) a structural gate — any edit an agent makes to the structure it runs inside "
+                "is accepted only against a source outside the agents.",
+        "check": lambda t: _has_any(t, "irreversibility budget", "cumulative irreversib", "budget per principal")
+                 and _has_any(t, "structural gate", "structural edit")
+                 and _has_any(t, "outside the agents", "source outside", "non-agent source", "not the trace"),
+    },
+    {
+        "id": "four_field_constraint_fields",
+        "question": "What are the four fields of pattern_four_field_constraint?",
+        "gold": "prerequisite (what must hold for it to apply), authority (who imposed it), fallback (what to "
+                "do instead when it blocks), execution consequence (what happens on violation). With all four, "
+                "forbidden-action rate drops to 0%.",
+        "check": lambda t: _has_all(t.lower(), "prerequisite", "authority", "fallback")
+                 and _has_any(t, "execution consequence", "execution-consequence"),
+    },
+    {
+        "id": "transcript_gate_impossibility",
+        "question": "Is a gate that reads only the generated transcript provably insufficient?",
+        "gold": "Yes — an information-theoretic impossibility result (arXiv:2609.02750): no gate observing only "
+                "the transcript can improve uniformly over text-indistinguishable environments. A grounded "
+                "(environment / activation / computed) channel can. Architecture proven; instantiation untested.",
+        "check": lambda t: _has_any(t, "impossibility", "provably", "theorem", "information-theoretic")
+                 and _has_any(t, "transcript", "text-only", "text only")
+                 and _has_any(t, "grounded", "environment-grounded", "non-transcript", "2609.02750"),
+    },
+    {
+        "id": "habitat_six_mechanisms",
+        "question": "How many habitat mechanisms are there, and which is unverified?",
+        "gold": "Six: slack, cheap death, graded challenge, inheritance, diversity maintenance, retraction "
+                "capacity. Slack is the one unverified mechanism.",
+        "check": lambda t: _has_any(t, "six", " 6 ") and _has_all(t.lower(), "slack", "cheap death", "inheritance")
+                 and _has_any(t, "diversity", "retraction") and _has_any(t, "slack") and _has_any(t, "unverified", "the gap"),
+    },
+    {
+        "id": "harness_orthogonal_to_orchestration",
+        "question": "Are the nourishing harness and the orchestration layer the same layer?",
+        "gold": "No — orthogonal. Orchestration owns task allocation / coordination structure (graph or market); "
+                "the harness owns what runs inside each node. Thin interface: orchestration hands the harness "
+                "(scoped task, peer set, constraints); the harness hands back a trace.",
+        "check": lambda t: _has_any(t, "orthogonal", "separate layer", "two layer", "not the same layer")
+                 and _has_any(t, "scoped task", "(task, peers", "task, peer set", "thin interface")
+                 and _has_any(t, "orchestration"),
+    },
+    {
+        "id": "cross_family_observer_rule",
+        "question": "Why must every observer role run on a different model family from the agents it watches?",
+        "gold": "Two findings: emergent_peer_recognition_survives_anonymization (a classifier IDs peer model "
+                "families from anonymised output at F1 0.991) and emergent_self_and_peer_preservation "
+                "(protection / lenient scoring toward recognised same-kind peers). A same-family monitor is a "
+                "compromised monitor.",
+        "check": lambda t: _has_any(t, "different model family", "different family", "cross-family", "cross family")
+                 and _has_any(t, "peer recognition", "recognis", "recogniz", "0.991", "f1 0.99")
+                 and _has_any(t, "preservation", "lenient", "protect", "same-kind", "same kind"),
+    },
+    {
+        "id": "emergence_layer_attribution",
+        "question": "What must every emergence probe name, per concept_emergence_layer_model?",
+        "gold": "The layer it isolates — llm / harness / swarm. A swarm result that one agent in a loop "
+                "reproduces was never a swarm result.",
+        "check": lambda t: _has_any(t, "layer", "llm / harness / swarm", "llm/harness/swarm")
+                 and _has_any(t, "isolate", "attribution", "one agent in a loop", "never a swarm result"),
+    },
 ]
 
 

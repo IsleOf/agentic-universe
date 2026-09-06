@@ -252,6 +252,10 @@
     {
       "date": "2026-09-24",
       "change": "Autonomous run 73. Built tools/loop_proposer.py - the Phase 3 proposer with real context. gather_context() assembles metrics + task-class distribution + skill state + harness components + latest open question. heuristic_propose() generates hypotheses across 4 dimensions, each with a falsifiable prediction and a computable-or-held-out verification. PROPOSER_PROMPT is the exact model-proposer input; verify path unchanged. On the real context: proposes one edit (per-run citation-verification rule). selftest_all.py runs 13 selftests, all GREEN. artifact_phase3_proposer_context added."
+    },
+    {
+      "date": "2026-09-24",
+      "change": "Autonomous run 74. Widened tools/holdout_tasks.py from 10 to 17 tasks - added 7 design-reasoning checks (two-part gate, four-field constraint fields, transcript-gate impossibility, six habitat mechanisms, harness/orchestration orthogonality, cross-family observer rule, emergence-layer attribution). A harness edit that degrades design recall is now caught, not just one that degrades literature recall. Historical baseline 17/17 aggregate 1.00. selftest_all.py still 13 selftests, all GREEN."
     }
   ],
   "nodes": [
@@ -4669,14 +4673,14 @@
     },
     {
       "id": "artifact_phase3_holdout_set",
-      "label": "Frozen held-out research-task set — the loop-harness acceptance test",
+      "label": "Frozen held-out set (17 tasks: literature + design) — loop-harness acceptance test",
       "type": "artifact",
       "status": "in_experiment",
       "verification_state": "validated",
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:phase3_holdout",
       "confidence": 0.8,
-      "description": "tools/holdout_tasks.py, run 69: ten research questions this project has already verified (Shibboleth model-dependence, ECT 0/288 vs 252/288, habitat slack unverified, epistemic Sybil 0.94->0.26, VCG 100% vs 3.3%, geometric decay ~16 steps, compaction cliff 10%, activation probe survives awareness, self-concept lever scope, market orchestrator challenged), each with a computable check that rewards substance not phrasing. Frozen (one file, checks reward substance, not loop-expandable). Historical baseline: 10/10 covered, aggregate 1.00. improvement_loop.verify_loop_edit() uses it as the grounded risk for a loop-HARNESS edit: accept iff risk strictly decreases AND no single task regressed. Narrows the Phase 3 verification gap: proposer (code) -> human promotes + re-runs the loop on the set -> verify (code). Step 2 is the top-level human-in-the-loop, made explicit.",
+      "description": "tools/holdout_tasks.py, run 69: ten research questions this project has already verified (Shibboleth model-dependence, ECT 0/288 vs 252/288, habitat slack unverified, epistemic Sybil 0.94->0.26, VCG 100% vs 3.3%, geometric decay ~16 steps, compaction cliff 10%, activation probe survives awareness, self-concept lever scope, market orchestrator challenged), each with a computable check that rewards substance not phrasing. Frozen (one file, checks reward substance, not loop-expandable). Historical baseline: 10/10 covered, aggregate 1.00. improvement_loop.verify_loop_edit() uses it as the grounded risk for a loop-HARNESS edit: accept iff risk strictly decreases AND no single task regressed. Narrows the Phase 3 verification gap: proposer (code) -> human promotes + re-runs the loop on the set -> verify (code). Step 2 is the top-level human-in-the-loop, made explicit. Run 74: widened from 10 to 17 tasks - added 7 design-reasoning tasks (two-part gate structure, four-field constraint fields, transcript-gate impossibility, six habitat mechanisms, harness/orchestration orthogonality, cross-family observer rule, emergence-layer attribution). A harness edit that degrades design recall, not just literature recall, is now caught. Baseline 17/17 aggregate 1.00.",
       "tags": [
         "phase-3",
         "held-out-set",

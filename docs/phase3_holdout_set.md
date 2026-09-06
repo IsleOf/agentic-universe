@@ -6,7 +6,7 @@
 established and verified, each with a **computable** check on a candidate answer.
 The acceptance test a loop-harness edit has to pass.
 
-## The ten tasks
+## The tasks (17)
 
 | id | subject | gold (abbrev) |
 | --- | --- | --- |

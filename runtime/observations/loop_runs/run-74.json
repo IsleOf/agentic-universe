@@ -1,0 +1,18 @@
+{
+  "run": 74,
+  "increment": "widen holdout_tasks.py to design claims (10 -> 17 tasks)",
+  "ok": true,
+  "harness_manifest_hash": "a0a320e06a4204c4",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-74.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
