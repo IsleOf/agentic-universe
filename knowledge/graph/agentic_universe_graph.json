@@ -1100,6 +1100,10 @@
     {
       "date": "2026-10-01",
       "change": "Autonomous run 287. BUILD - tools/probe_identity_masking.py, the second runnable rig for an open research question (open_questions.md Q2: how much identity masking reduces prestige / model-family contagion?). Four masking levels L0 none / L1 name / L2 name+style / L3 name+style+reasoning-chain; a PEER_RECOGNITION_FLOOR that survives full masking. Verdict CONFIRMS: accuracy 0.599 -> 0.753 monotonically, deference 0.85 -> 0.16; stripping the REASONING CHAIN (L2->L3, +0.046) beats stripping the name (+0.035); but L3 still leaves 0.16 deference + a 0.03 gap to the independent-elicitation ceiling - masking is necessary, not sufficient. 8 selftest checks, selftest_all JOBS -> 28, BUILD SELFTEST GREEN. New node artifact_probe_identity_masking_rig + 4 edges (grounds concept_independent_evidence_cells, verifies emergent_peer_recognition_survives_anonymization, refines the vote-herding node, supports artifact_probe_epistemic_market_rig - the two market rigs compose). 315 -> 316 nodes, 1260 -> 1264 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-01",
+      "change": "Autonomous run 288. BUILD - tools/probe_adversarial_collaboration.py, the third runnable rig for an open research question (open_questions.md Q3: does pre-registered adversarial collaboration preserve creativity while improving reliability?). Three protocols x a factual + generative task. Verdict CONFIRMS: pre_registered acc 0.76 (+0.16 vs reflection) / creativity 0.58 (-0.12) = NET +0.03; the KILL CONDITION (creativity drops more than reliability rises) does NOT trigger. Open debate: no reliability gain, -0.32 net (floor-raising only). 8 selftest checks, selftest_all JOBS -> 29, BUILD SELFTEST GREEN. New node artifact_probe_adversarial_collaboration_rig + 4 edges (verifies concept_pre_registered_adversarial_collaboration_beats_open_debate, refines the within-run creativity-decline node, supports the epistemic-market parent + the other two market rigs - the three cover selection / elicitation / dispute-resolution). 316 -> 317 nodes, 1264 -> 1268 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9350,6 +9354,32 @@
       ],
       "evidence_links": [
         "tools/probe_identity_masking.py",
+        "docs/research/open_questions.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_adversarial_collaboration_rig",
+      "label": "The adversarial-collaboration rig - does pre-registration preserve creativity while improving reliability",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.65,
+      "description": "tools/probe_adversarial_collaboration.py (run 288) - runnable rig for open question 3. A task with a factual component (one true answer) and a generative component (a space of ideas; creativity = fraction explored before convergence). Three protocols: REFLECTION (one agent + one self-critique, baseline), OPEN_DEBATE (persuasion decides, converges fast), PRE_REGISTERED (rivals lock predictions + concession criteria before the data; evidence-led, convergence delayed by the adversarial framing). Dry-run (8000 trials): reflection acc 0.60 / creativity 0.70; open_debate acc 0.61 (NO reliability gain - persuasion-corrupted) / creativity 0.38 (net -0.32 vs reflection); pre_registered acc 0.76 (+0.16 reliability) / creativity 0.58 (-0.12), NET +0.03. Verdict CONFIRMS: pre-registration has the highest accuracy, its creativity sits below reflection but above open debate, and the open_questions.md KILL CONDITION (creativity drops more than reliability rises) does NOT trigger. 8 selftest checks; selftest_all JOBS -> 29. Stub: the argue/explore models.",
+      "tags": [
+        "adversarial-collaboration",
+        "pre-registration",
+        "probe",
+        "creativity-reliability-tradeoff",
+        "open-question-3"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-01-1800.md",
+        "tools/probe_adversarial_collaboration.py"
+      ],
+      "evidence_links": [
+        "tools/probe_adversarial_collaboration.py",
         "docs/research/open_questions.md"
       ]
     }
@@ -22992,6 +23022,50 @@
       "approach_family": "orchestration_first",
       "confidence": 0.5,
       "description": "The two epistemic-market rigs compose: probe_epistemic_market shows forecast-selection needs independent elicitation to beat herding; probe_identity_masking shows masking alone (even full) does not achieve independence - you need both."
+    },
+    {
+      "id": "edge_advcollab_rig_verifies_prereg",
+      "source": "artifact_probe_adversarial_collaboration_rig",
+      "target": "concept_pre_registered_adversarial_collaboration_beats_open_debate",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "The runnable test: pre-registration lifts factual accuracy +0.16 over reflection and +0.15 over open debate, while its creativity cost (-0.12 vs reflection) is smaller than the gain. Open debate is floor-raising only (no net reliability gain, large creativity cost)."
+    },
+    {
+      "id": "edge_advcollab_rig_refines_creativity_decline",
+      "source": "artifact_probe_adversarial_collaboration_rig",
+      "target": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Quantifies the within-run exploration-to-exploitation cost per protocol: open debate (fast convergence) explores 0.38 of the idea space, pre-registration (adversarial framing delays convergence) explores 0.58, reflection 0.70. The decline is protocol-dependent, and pre-registration slows it."
+    },
+    {
+      "id": "edge_advcollab_rig_supports_epistemic_market_parent",
+      "source": "artifact_probe_adversarial_collaboration_rig",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Evidence for the parent claim that debate is the wrong default: open debate here neither raises reliability nor preserves creativity; a pre-registered, evidence-led protocol does both."
+    },
+    {
+      "id": "edge_advcollab_rig_composes_with_market_rig",
+      "source": "artifact_probe_adversarial_collaboration_rig",
+      "target": "artifact_probe_epistemic_market_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "Third epistemic-market rig: probe_epistemic_market (selection), probe_identity_masking (elicitation independence), probe_adversarial_collaboration (dispute resolution) cover the three moments the cluster touches."
     }
   ]
 }

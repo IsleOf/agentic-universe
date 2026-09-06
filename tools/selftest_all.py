@@ -43,6 +43,7 @@ JOBS = [
     ("probe_orchestration_value.py", ["selftest"]),
     ("probe_epistemic_market.py", ["selftest"]),
     ("probe_identity_masking.py", ["selftest"]),
+    ("probe_adversarial_collaboration.py", ["selftest"]),
     ("tamper_audit.py", ["selftest"]),
     ("graph_diff.py", ["selftest"]),
     ("task_ledger.py", ["selftest"]),
