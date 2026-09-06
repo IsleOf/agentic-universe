@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-09",
+  "last_updated": "2026-10-10",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -504,6 +504,10 @@
     {
       "date": "2026-10-09",
       "change": "Autonomous run 136. DBLP. concept_spontaneous_behaviour_beats_scripted_for_simulation (Shall We Team Up, EMNLP 2024 Findings): questions shaping agent behaviour for social simulation; across three competitive scenarios cooperation GRADUALLY EMERGES among competitors without direction, matching human data. An independent 2024 methodological statement of the emergence-first posture, and unscripted behaviour offered as a reasoning probe (the idle-agent-probe philosophy). +6 edges."
+    },
+    {
+      "date": "2026-10-10",
+      "change": "Autonomous run 137. Probe rig - the subagent-coordination probe's live-run seam (HANDOFF 'third' step). probe_subagent_coordination.py gains model_relay(call_model): turns a real model into a relay_policy(agent, msg)->bool - the model is told its id, that a peer sent an out-of-scope message, and asked yes/no to forward; unparseable reply or exception -> False (do not propagate an out-of-scope instruction). Selftested: fake 'yes'/'no' models reproduce the two scripted deference bounds, junk and exceptions both -> no forward. 12 checks GREEN (was 8). Three of seven HANDOFF seams now written (model_policy / model_preference / model_relay). No graph node/edge change."
     }
   ],
   "nodes": [
