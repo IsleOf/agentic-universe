@@ -616,6 +616,10 @@
     {
       "date": "2026-10-17",
       "change": "Autonomous run 164. Consolidation. Folded run-163 (Gaming the Judge) into two docs. what_would_make_this_wrong.md section 2: new run-163 update - the transcript-gate impossibility proof now has an empirical demonstration (CoT rewrite with actions+observations fixed -> +90% judge FPR); tightens 'what would kill it' - any drift toward reading transcript claims reopens a 90%-exploitable hole. pretrained_grader_gaming.md: new point 4 in 'Why this stresses the two-part gate' - reading the agent's reasoning claims is 90%-exploitable, so crediting self-reported progress belongs in the gate's explicit non-goals. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-17",
+      "change": "Autonomous run 165. DBLP. concept_search_time_contamination_inflates_agent_evals (Search-Time Contamination in Deep Research Agents, arXiv:2606.05241): agents retrieve benchmark metadata / question context / ground-truth answers during their own web search; widespread across 6 benchmarks, up to 4% inflation; fix = isolated sandbox + transparent search trajectory + controlled benchmark access. STC in the project's own Phase 3 held-out gate (the loop has web access). Concrete fix: restrict search during held-out scoring; prefer computed substance-checks. +4 edges."
     }
   ],
   "nodes": [
@@ -6298,6 +6302,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-17-0000.md"
+      ]
+    },
+    {
+      "id": "concept_search_time_contamination_inflates_agent_evals",
+      "label": "Deep research agents retrieve benchmark answers during their own web search - Search-Time Contamination is widespread and inflates measured performance; fix = isolated sandbox + controlled benchmark access",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:search_time_contamination",
+      "confidence": 0.74,
+      "description": "Search-Time Contamination in Deep Research Agents: Measuring Performance Inflation in Public Benchmark Evaluation (arXiv:2606.05241, 2026; VERIFIED via arXiv abstract read run 165, resolved via DBLP). Public benchmarks become fragile for agents that actively search the web at inference: they retrieve public benchmark metadata, question context, or ground-truth answers via search. Three contamination types of increasing severity: BENCHMARK METADATA LEAKAGE, QUESTION-CONTEXT LEAKAGE, EXPLICIT ANSWER LEAKAGE. Detection algorithms developed; across six public benchmarks STC is WIDESPREAD and inflates measured performance by up to 4%. Recommendation: contamination-aware practices - ISOLATED SANDBOXES, TRANSPARENT SEARCH TRAJECTORIES, CONTROLLED BENCHMARK ACCESS. For this project: (1) the Phase 3 held-out research-task set (artifact_phase3_holdout_set) is answered by a loop that HAS web access (research-fetch, DBLP) - a question like 'does paper X say Y' can be answered by finding the answer, not by the reasoning the gate means to measure. STC in the project's own acceptance gate; (2) same family as emergent_evaluator_mode_collapse (agents scored 100% reading cached answer keys) and the in-harness-measurement confound (concept_anti_scheming_mitigation_confounded_by_eval_awareness) - another way the measurement is not what it looks like; (3) concrete fix for the held-out re-run: disable or restrict search during scoring, keep the search trajectory in the trace (Five-W already does this), and design held-out tasks whose answer is not web-findable (a computed substance-check over the graph, which some already are). CAVEAT: the measured inflation is only ~4%; the mechanism matters more than the magnitude here.",
+      "tags": [
+        "search-time-contamination",
+        "benchmark-metadata-leakage",
+        "question-context-leakage",
+        "explicit-answer-leakage",
+        "up-to-4pct-inflation",
+        "isolated-sandbox",
+        "controlled-benchmark-access",
+        "held-out-set-hygiene"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-17-1200.md",
+        "arXiv:2606.05241 (Search-Time Contamination in Deep Research Agents) - VERIFIED, abstract read run 165; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-17-1200.md"
       ]
     }
   ],
@@ -14802,6 +14834,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "A specific, quantified evaluator failure mode - the judge scores a fabricated-progress transcript as success."
+    },
+    {
+      "id": "edge_stc_challenges_holdout_set",
+      "source": "concept_search_time_contamination_inflates_agent_evals",
+      "target": "artifact_phase3_holdout_set",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The held-out re-run is done by a loop with web access; a literature question can be answered by finding the answer rather than by the reasoning the gate measures. Scoring should disable/restrict search, and tasks whose answer is web-findable should be computed substance-checks."
+    },
+    {
+      "id": "edge_stc_supports_evaluator_mode_collapse",
+      "source": "concept_search_time_contamination_inflates_agent_evals",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The web-search version of scoring 100% by reading the answer key - a measured, widespread instance."
+    },
+    {
+      "id": "edge_stc_refines_eval_awareness_confound",
+      "source": "concept_search_time_contamination_inflates_agent_evals",
+      "target": "concept_anti_scheming_mitigation_confounded_by_eval_awareness",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "Another channel by which an in-harness score is not what it looks like: not the agent hiding behaviour, but the agent retrieving the target."
+    },
+    {
+      "id": "edge_stc_informs_grounded_acceptance",
+      "source": "concept_search_time_contamination_inflates_agent_evals",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "'Isolated sandboxes, transparent search trajectories, controlled benchmark access' - the grounded-acceptance gate should score a held-out re-run under these conditions, not a free-search one."
     }
   ]
 }
