@@ -1,0 +1,19 @@
+{
+  "run": 141,
+  "increment": "consolidation - fold the runs 134-140 adapter work into self_improving_harness_plan.md section 6",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-141.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

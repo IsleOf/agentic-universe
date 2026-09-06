@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-10",
+  "last_updated": "2026-10-11",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -520,6 +520,10 @@
     {
       "date": "2026-10-10",
       "change": "Autonomous run 140. Phase 3 - the proposer's live-run seam (fifth of seven). loop_proposer.py gains model_propose(call_model, context) + _valid_proposal(p): hands the model PROPOSER_PROMPT.format(...), parses the JSON list leniently (first '[' to last ']'), drops proposals that fail the same bar heuristic_propose meets, returns [] on an unparseable reply or exception (the loop falls back to heuristic_propose). The verify/promote path is unchanged. Selftested: valid+malformed -> keeps the valid one, prose -> [], exception -> []. 13 checks GREEN (was 9). FIVE of seven HANDOFF seams now written; the two remaining need activation vectors / a real agent harness. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-11",
+      "change": "Autonomous run 141. Consolidation. self_improving_harness_plan.md section 6 gains a 'Status update (runs 60-140)' block: Phases 0-5 skeleton done (21 selftests GREEN); five of seven probe model seams now have written selftested adapters (model_policy / model_preference / model_relay / model_reader / model_propose); the single unblocking step is now 'bind one call_model into the five adapters and run probe_idle_agent sweep'; the run-130 idle_run_streak/plateau_watch signal is noted. No graph node/edge change."
     }
   ],
   "nodes": [
