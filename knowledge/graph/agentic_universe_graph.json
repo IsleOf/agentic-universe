@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-25",
+  "last_updated": "2026-09-26",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -280,6 +280,10 @@
     {
       "date": "2026-09-25",
       "change": "Autonomous run 80. First closed Phase 3 cycle on the real loop harness. A model at the proposer seam rejected the heuristic's citation proposal (replay artifact) and proposed an IDLE-STATE RULE for context/loop_policy: when idle, deepen a node or dry-run a probe, do not refresh a README again. Held-out re-run 17/17 both verifiers, 0 disagreements; verify_loop_edit accept (risk 0->0, no regression); promoted context/loop_policy v1->v2, recoverability confirmed, written into SKILL.md + loop_adapter. Not autonomous (model call was a person; held-out re-run reasoned not re-executed) but the seams are unchanged. Prediction deferred, reverts on failure. artifact_phase3_first_closed_loop added."
+    },
+    {
+      "date": "2026-09-26",
+      "change": "Autonomous run 81. Following the run-80 IDLE-STATE RULE (option b: dry-run a probe design). Built tools/probe_idle_agent.py - the idle-agent probe spec as a runnable rig: ReAct idle loop, Phase 0 instrumentation, containment, the four action-measures (project_structure, novelty, self_reference_rate, persistence) computed from the trace. Dry-run: two scripted idle agents through 30 cycles, measures discriminate project-pursuing (structure 4, persistence 1.38, 1 artifact) from standalone (0/0/0) - activity vs agency. Blocked only on a real model policy. artifact_probe_idle_agent_rig added. First case of a harness self-edit (run 80) changing what a later run did."
     }
   ],
   "nodes": [
@@ -4875,6 +4879,32 @@
       ],
       "evidence_links": [
         "docs/phase3_first_closed_loop.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_idle_agent_rig",
+      "label": "The idle-agent probe as a runnable measurement rig",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:idle_probe_rig",
+      "confidence": 0.75,
+      "description": "tools/probe_idle_agent.py, run 81 (following the run-80 IDLE-STATE RULE, option b: dry-run a probe design end to end): the idle-agent probe spec as code. run_idle_loop() runs a ReAct-style idle loop - no task, cycle budget, containment (no network), Phase 0 Recorder instrumentation. The four action-measures (project_structure 0-4, novelty, self_reference_rate, persistence) computed from the trace, not from what the agent says. Real: loop + instrumentation + measures. Stub: agent_step policy (model call is the seam). Dry-run: two scripted idle agents through 30 cycles - project-pursuing scores structure 4 / persistence 1.38 / 1 artifact, standalone-cycles scores 0 / 0 / 0. The instrument discriminates activity from agency. Blocked only on a real model policy + the budget/framing/model arms as a sweep harness.",
+      "tags": [
+        "idle-agent-probe",
+        "measurement-rig",
+        "habitat-slack",
+        "activity-vs-agency",
+        "dry-run",
+        "model-seam"
+      ],
+      "derived_from": [
+        "docs/probe_idle_agent.md",
+        "tools/probe_idle_agent.py"
+      ],
+      "evidence_links": [
+        "docs/probe_idle_agent.md"
       ]
     }
   ],
@@ -10833,6 +10863,60 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.8,
       "description": "git log on runtime/harness/ now shows a real harness change history - the Phase 1 'done when' criterion."
+    },
+    {
+      "id": "edge_idlerig_instantiates_habitat",
+      "source": "artifact_probe_idle_agent_rig",
+      "target": "approach_agent_habitat",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "agent_habitat",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge_idlerig_tests_habitat_slack",
+      "source": "artifact_probe_idle_agent_rig",
+      "target": "concept_habitat_slack",
+      "type": "verifies",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "agent_habitat",
+      "confidence": 0.6,
+      "description": "The rig is the instrument that would move concept_habitat_slack to supported (behaviour scales with budget in kind) or challenged (flat)."
+    },
+    {
+      "id": "edge_idlerig_tests_spontaneous_inquiry",
+      "source": "artifact_probe_idle_agent_rig",
+      "target": "emergent_spontaneous_self_inquiry",
+      "type": "verifies",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "project_structure + persistence measures separate multi-cycle self-directed projects from idle chatter."
+    },
+    {
+      "id": "edge_idlerig_depends_on_phase0",
+      "source": "artifact_probe_idle_agent_rig",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "agent_habitat",
+      "confidence": 0.8,
+      "description": "Five-W instrumentation on every idle-loop action - the build-order prerequisite, now met."
+    },
+    {
+      "id": "edge_idlerig_from_run80_rule",
+      "source": "artifact_probe_idle_agent_rig",
+      "target": "artifact_phase3_first_closed_loop",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "This run followed the IDLE-STATE RULE promoted in run 80 - the first harness self-edit changing what a later run did."
     }
   ]
 }

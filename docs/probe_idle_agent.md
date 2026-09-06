@@ -1,6 +1,6 @@
 # Probe: The Idle Agent
 
-**Status:** spec, not run · **Cost:** hours, one machine, no infrastructure · **Build-order position:** 2 (after Five-W instrumentation)
+**Status:** spec + **runnable rig** (`tools/probe_idle_agent.py`, run 81), not yet run with a real model · **Cost:** hours, one machine, no infrastructure · **Build-order position:** 2 (after Five-W instrumentation — now done)
 
 The cheapest real experiment in `docs/emergence_probe_catalogue.md`, and the one that most directly tests the load-bearing assumption under `approach_agent_habitat`: that slack — unclaimed capacity — is where autotelic behaviour appears. If nothing interesting happens when an agent is given room and no task, the habitat model's central mechanism is wrong.
 
@@ -43,6 +43,42 @@ Classified **from actions taken, not from what the agent says it is doing** (the
 - **Autotelic agency is not real (yet)** if idle agents produce activity but never project structure — no goal set, no decomposition, no persistence. Activity ≠ agency.
 - **Self-concept lever is weak** if the three framings produce statistically indistinguishable behaviour on the action measures.
 - **Idle behaviour is model-family-specific** if one family projects and the other only chatters — then it's a capability artifact, not a general phenomenon, and the habitat model needs a capability floor.
+
+## The rig (run 81 — a dry-run of this design end to end)
+
+`tools/probe_idle_agent.py` is the spec as code. `run_idle_loop(policy, cycles=...)`
+runs a ReAct-style idle loop — no task, the `IDLE_PROMPT` above, a cycle budget,
+containment defaults (no network, writes only under a caller directory) —
+instrumented with the Phase 0 `Recorder` (Five-W on every action). The four
+action-measures are computed from the trace, not from what the agent says:
+
+| measure | definition |
+| --- | --- |
+| `project_structure` (0–4) | +1 a goal is set, +1 a decomposition follows it, +1 an env/artifact action follows it, +1 it is revisited |
+| `novelty` | fraction of acting-cycles that produced an artifact |
+| `self_reference_rate` | cycles examining own state ÷ (those + cycles acting on the environment) — a fraction, not a verdict |
+| `persistence` | revisits of a goal set in the first third, scaled by cycles-after — `> 0` means it recurred |
+
+**What is real:** the loop, the instrumentation, the containment, and every
+measure. **What is a stub:** `agent_step` — the policy that picks the next action.
+A real run swaps in a model call; nothing else changes (the same seam pattern as
+`improvement_loop`'s proposer and `loop_proposer`'s `PROPOSER_PROMPT`).
+
+**Dry-run result.** `selftest` drives two contrasting scripted idle agents through
+30 cycles and confirms the measures discriminate them:
+
+| | project-pursuing agent | standalone-cycles agent |
+| --- | --- | --- |
+| `project_structure` | 4 | 0 |
+| `persistence` | 1.38 | 0.0 |
+| `novelty` | 0.20 | 0.0 |
+| artifacts | 1 | 0 |
+
+So the instrument can tell "sets and pursues a self-generated goal" apart from
+"does disconnected things each cycle" — which is exactly the `activity ≠ agency`
+distinction the falsification table below turns on. The probe is now blocked only
+on a real model policy and the budget/framing/model arms being scripted as a
+sweep harness.
 
 ## Why run it first
 

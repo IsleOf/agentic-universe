@@ -1,0 +1,18 @@
+{
+  "run": 81,
+  "increment": "dry-run the idle-agent probe end to end (tools/probe_idle_agent.py) - per run-80 rule",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-81.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

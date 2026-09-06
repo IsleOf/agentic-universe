@@ -34,6 +34,7 @@ JOBS = [
     ("exec_guard.py", ["selftest"]),
     ("loop_proposer.py", ["selftest"]),
     ("holdout_verifier2.py", ["selftest"]),
+    ("probe_idle_agent.py", ["selftest"]),
 ]
 
 
