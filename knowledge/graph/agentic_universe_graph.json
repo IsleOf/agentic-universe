@@ -1144,6 +1144,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 299. Owner request: begin the self-rebuild. docs/self_rebuild_v2.md - a first-pass v2 architecture synthesising the ~328-node graph + shipped tools + the machine skills library (nodriver-session, cli-agent-control, research-fetch, ...) into a headless multi-agent gate-enforced loop: deterministic spine (task ledger + supervisor + exogenous acceptance gate = held-out + PACE e-process + process-adjusted score + forecast check + signed certificate log), generative edge (model-routed proposers + WSL/Win worker agents + browser scout for Perplexity / Google NotebookLM). 8-agent roster; 4 new skills to build; 6 gated migration phases (v2.0 = bind one call_model, run probe_idle_agent sweep). No training infra (emergence-first bet holds). 1 node + 4 edges."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 300. Built tools/acceptance_gate.py - the v2.1 core brick from docs/self_rebuild_v2.md section 7. check() composes verify_loop_edit (held-out + category + tamper + legibility) + the PACE e-value + a process-adjusted flag (repair-dependent pass -> accept_conditional, the AgentLens shape from run 298) + a forecast Brier score, and emits a signed replayable certificate to an append-only log (runtime/observations/certificates/, gitignored). verify_certificate() recomputes the proposal hash, certificate hash and Brier. Exogenous - a proposer cannot edit the held-out set, alpha or a past certificate. 11 selftest checks; selftest_all JOBS -> 36. tools/README.md + the v2 plan updated. 1 node + 5 edges. 329 -> 330 nodes."
     }
   ],
   "nodes": [
@@ -9734,6 +9738,33 @@
       "derived_from": [
         "docs/self_rebuild_v2.md",
         "docs/auto_sweep_2026-10-04-1200.md"
+      ],
+      "evidence_links": [
+        "docs/self_rebuild_v2.md"
+      ]
+    },
+    {
+      "id": "artifact_acceptance_gate",
+      "label": "acceptance_gate.py - the exogenous acceptance gate as one replayable certificate",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "tools/acceptance_gate.py (run 300), the v2.1 core brick from docs/self_rebuild_v2.md section 7. check() composes improvement_loop.verify_loop_edit (frozen held-out set + category-masking + tamper + legibility) + the PACE anytime-valid e-value + a PROCESS-ADJUSTED flag (a pass that only holds after a deterministic_repair is downgraded to accept_conditional - the AgentLens shape, run 298) + a FORECAST Brier score (the proposer stated P(edit helps); scored on the held-out outcome). Emits a signed certificate {proposal_hash, gate, e_value, forecast:{brier}, certificate_hash} to an append-only log at runtime/observations/certificates/. verify_certificate() recomputes the proposal hash, the certificate hash and the Brier - the independent-verifier-can-replay property. Exogenous: nothing in the module lets a proposer edit the held-out set, alpha, or a past certificate. 11 selftest checks GREEN; selftest_all JOBS -> 36. Not yet wired as the loop commit gate (v2.1 remaining).",
+      "tags": [
+        "acceptance-gate",
+        "certificate",
+        "exogenous",
+        "process-scoring",
+        "forecast",
+        "v2",
+        "self-rebuild"
+      ],
+      "derived_from": [
+        "docs/self_rebuild_v2.md",
+        "docs/auto_sweep_2026-10-04-1800.md"
       ],
       "evidence_links": [
         "docs/self_rebuild_v2.md"
@@ -23950,6 +23981,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "The conductor is the shipped supervisor made headless on the 6h schedule."
+    },
+    {
+      "id": "edge_acc_gate_implements_v2_plan",
+      "source": "artifact_acceptance_gate",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The v2.1 core brick from section 7 of the plan."
+    },
+    {
+      "id": "edge_acc_gate_implements_exogenous_acceptor",
+      "source": "artifact_acceptance_gate",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A single call that a proposer cannot author around: the held-out set, alpha and the certificate log are all outside its reach."
+    },
+    {
+      "id": "edge_acc_gate_implements_process_scoring",
+      "source": "artifact_acceptance_gate",
+      "target": "concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The process-adjusted flag: a pass that only holds after a deterministic repair is accept_conditional, not accept - crediting the process, not just the outcome."
+    },
+    {
+      "id": "edge_acc_gate_extends_verify_loop_edit",
+      "source": "artifact_acceptance_gate",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Wraps verify_loop_edit and adds the forecast Brier + the certificate + the replay verifier."
+    },
+    {
+      "id": "edge_acc_gate_instantiates_forecast_ledger",
+      "source": "artifact_acceptance_gate",
+      "target": "artifact_epistemic_constitution_harness",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The forecast check reuses the epistemic-constitution shape: predicted probability in, Brier out, per-proposer over time."
     }
   ]
 }

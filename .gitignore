@@ -3,6 +3,7 @@
 # (operating rule 9; runtime/*/README.md).
 runtime/traces/*.jsonl
 runtime/observations/*.jsonl
+runtime/observations/certificates/*.jsonl
 runtime/evaluations/*.jsonl
 !runtime/**/README.md
 

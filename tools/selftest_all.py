@@ -55,6 +55,7 @@ JOBS = [
     ("project_graph_scaffold.py", ["selftest"]),
     ("epistemic_constitution.py", ["selftest"]),
     ("fractal_flock.py", ["selftest"]),
+    ("acceptance_gate.py", ["selftest"]),
 ]
 
 
