@@ -920,6 +920,10 @@
     {
       "date": "2026-09-20",
       "change": "Autonomous run 239. Recency-weighted node-deepening sweep (RSI-survey citation cluster). Folded HELIX (arXiv:2608.13951, Aug 2026) as concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data: model-harness co-evolution - build harnesses for a fixed model, update the model from verified sibling trajectories, rebuild as capabilities change. A source-traceable substrate decomposing agent systems into typed ports/atoms/recipes/product-shells/runtime-policies, preserving intervention identity. Harness evolution has two roles: improve fixed-model execution AND produce matched success/regression/near-miss records as model training data. Code repair, one round: 65-candidate portfolio finds a fixed harness +4.0% over Pi; the FULL portfolio exposes +58.0% verified coverage via complementary sibling behaviour; 200-slot sibling slice -> 438 verified SFT/critic/filter/preference records. 6 edges: supports concept_bottleneck_is_the_model_harness_coupling (bidirectional feedback), concept_whale_... (3rd co-evolution data point), concept_ahe_three_observability_pillars... (source-traceable substrate = observability pillars), artifact_phase1_harness_registry (finer typed decomposition), pattern_structural_decoupling (+58% complementary-sibling coverage with a number), concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic (portfolio union = the criterion at harness level). 264->265 nodes, 1044->1050 edges."
+    },
+    {
+      "date": "2026-09-20",
+      "change": "Autonomous run 240. Incorporating the owner's Perplexity deep-research (pushed to origin/main 2026-09-04: 'Improving Agent Creativity Diversity', 'Agent Harnesses & Swarm Orchestration', 'Human Knowledge Capture & Creative Work Automation', + ~15 knowledge notes). VALIDATION: ~80% of the diversity-mitigation papers in the owner's note (verbalized sampling 2510.01171, entropy-max 2602.15894, random-embedding 2605.11936, agent-scaling 2602.03794, diversity-collapse 2604.18005, diversity-as-defense 2602.00038, one-frozen-simulator 2608.12253, autotelic 2606.19924, language-of-thought 2601.11227, spark-effect 2510.15568) are ALREADY in the graph - the loop and an independent 24-50-search Perplexity sweep converged. FOLDED the strongest genuinely-new item: concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated (Who Owns Creativity and Who Does the Work?, arXiv:2601.12152, Jan 2026, 54-researcher HCI study): perceived creativity support is non-monotone in control; human effort shifts from ideating to VERIFYING; ownership is a negotiated human-AI outcome. 5 edges: supports concept_research_lifecycle_split (measured with real researchers), concept_aspire_... (human-in-the-loop half of the same measurement); refines concept_self_improvement_strength_tracks_the_verification_hierarchy (the bottleneck in practice is verification); informs concept_overseer_degradation (control is non-monotone), principle_diversity_maintenance (steering skill is a human-side quality lever). 265->266 nodes, 1050->1055 edges."
     }
   ],
   "nodes": [
@@ -7836,6 +7840,36 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-20-0000.md"
+      ]
+    },
+    {
+      "id": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "label": "In LLM-supported research ideation, perceived creativity support does NOT rise linearly with control, human effort shifts from ideating to VERIFYING ideas, and ownership becomes a negotiated human-AI outcome; design for researcher empowerment, not for operating an automated process",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:human_ai_research_collaboration",
+      "confidence": 0.62,
+      "description": "Who Owns Creativity and Who Does the Work? Trade-offs in LLM-Supported Research Ideation (arXiv:2601.12152, VERIFIED via arXiv abstract read run 240; Jan 2026). SOURCE: surfaced in the owner's Perplexity deep-research 'Improving Agent Creativity Diversity' (knowledge/notes/2026-09-04-creativity-diversity-mitigation.md on origin/main, 24-50 web searches) - cross-checked and folded here. A mixed-methods study with 54 researchers using an agentic research-ideation system with three roles (Ideator / Writer / Evaluator) across three control levels (Low / Medium / Intensive). Three findings: (1) perceived creativity support does NOT simply increase linearly with greater control - there is a sweet spot, and Intensive control can reduce the felt support; (2) human effort SHIFTS from ideating to VERIFYING ideas; (3) ownership becomes a NEGOTIATED outcome between human and AI. Design implication: emphasise researcher EMPOWERMENT and a sense of ownership over strong ideas, rather than reducing researchers to operating an automated AI-driven process. Bearing on the project: finding (2) is direct empirical corroboration of concept_research_lifecycle_split ('agents do the engineering of research, not the judgement') - with real researchers, the human's job becomes verification. Finding (1) is a nuance on the human-in-the-loop design: more human control is not monotonically better, which bears on the gate design and on where the direction-setting / verification boundary sits. This project is itself an instance - a human sets a standing research direction and the loop operationalises it; ASPIRE (run 238) is the automated-agent version of the same measurement, this is the human-in-the-loop version. Recency/currency: Jan 2026, an HCI study (54 participants) - modest confidence; the findings are about human-AI collaboration structure, not model capability, so they age slowly.",
+      "tags": [
+        "who-owns-creativity",
+        "research-ideation",
+        "effort-shifts-to-verification",
+        "non-linear-control",
+        "negotiated-ownership",
+        "researcher-empowerment",
+        "hci-study",
+        "perplexity-deep-research-source",
+        "currency-note-2026-01"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-20-0600.md",
+        "arXiv:2601.12152 (Who Owns Creativity and Who Does the Work?) - VERIFIED, abstract read run 240",
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-20-0600.md"
       ]
     }
   ],
@@ -19123,6 +19157,61 @@
       "approach_family": "orchestration_first",
       "confidence": 0.45,
       "description": "Running a portfolio of harness variants on the same task and taking the union of verified successes is the run-218 criterion at the harness level: verifiable per-candidate outcome + a deterministic union merge = +58% coverage."
+    },
+    {
+      "id": "edge_who_owns_supports_research_lifecycle_split",
+      "source": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "target": "concept_research_lifecycle_split",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.65,
+      "description": "Finding (2) - human effort shifts from ideating to VERIFYING ideas - is concept_research_lifecycle_split measured with 54 real researchers: agents do the engineering, the human's remaining job is judgement / verification."
+    },
+    {
+      "id": "edge_who_owns_refines_verification_hierarchy",
+      "source": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The RSI survey says research-direction-setting is the top-of-hierarchy human bottleneck; this study shows the bottleneck in practice is really VERIFICATION (the human ends up checking, not generating) - a slight relocation of where the human stays in the loop."
+    },
+    {
+      "id": "edge_who_owns_informs_overseer_degradation",
+      "source": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "target": "concept_overseer_degradation",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "Finding (1) - creativity support is non-monotone in control - is a design constraint on the human side of the gate: MORE oversight is not strictly better, and an over-controlled human may disengage (a different failure than the degradation-through-use one, but the same 'the human at the gate is fragile' theme)."
+    },
+    {
+      "id": "edge_who_owns_relates_aspire",
+      "source": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "target": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Two halves of the same measurement: ASPIRE tests an AUTONOMOUS agent operationalising a vague goal (it over-invests in interpretation and over-trusts narrow checks); this tests a HUMAN-IN-THE-LOOP researcher (effort shifts to verification, ownership is negotiated). Both say the direction-setting / verification split is where the value and the difficulty sit."
+    },
+    {
+      "id": "edge_who_owns_supports_diversity_maintenance",
+      "source": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "target": "principle_diversity_maintenance",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.4,
+      "description": "From the owner's diversity deep-research: the study is part of a body of work finding that steering skill drives output-quality variance - a human-side lever on the diversity/quality trade-off that principle_diversity_maintenance is about, alongside the model/prompt/context decoupling levers."
     }
   ]
 }

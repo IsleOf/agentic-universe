@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 265 nodes, 1050 edges · **Date:** 2026-09-05
+**Graph at generation:** 266 nodes, 1055 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -72,6 +72,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2512.23760](https://arxiv.org/abs/2512.23760) | (title not recorded) | `concept_asg_si_independently_arrives_at_the_plan` |
 | [2601.09771](https://arxiv.org/abs/2601.09771) | (title not recorded) | `concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement` |
 | [2601.11227](https://arxiv.org/abs/2601.11227) | Language of Thought Shapes Output Diversity in Large Language Models | `pattern_verbalized_sampling` |
+| [2601.12152](https://arxiv.org/abs/2601.12152) | (title not recorded) | `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated` |
 | [2601.14691](https://arxiv.org/abs/2601.14691) | (title not recorded) | `concept_rewriting_cot_alone_defeats_judges_90pct` |
 | [2601.15808](https://arxiv.org/abs/2601.15808) | (title not recorded) | `concept_inference_time_scaling_of_verification` |
 | [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
@@ -412,6 +413,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-19-0600.md` — `concept_epistemic_sybil_collapse`, `concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model`, `emergent_compositional_private_language` +1
 - `docs/auto_sweep_2026-09-19-1800.md` — `concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer`, `concept_environment_evolution_curriculum`, `pattern_procedural_family_skill_consolidation`
 - `docs/auto_sweep_2026-09-20-0000.md` — `concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data`
+- `docs/auto_sweep_2026-09-20-0600.md` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`
 - `docs/auto_sweep_2026-09-20-1200.md` — `concept_self_concept_as_behavioral_lever`
 - `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
@@ -486,6 +488,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
+- `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`
 - `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)` — `approach_self_improving_harness`, `concept_agentic_os`, `concept_context_economics` +10
 - `knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)` — `concept_motive_operative_split`
 

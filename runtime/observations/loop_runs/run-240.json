@@ -1,0 +1,27 @@
+{
+  "run": 240,
+  "increment": "incorporate the owner's Perplexity deep-research (origin/main) - ~80% of its diversity-mitigation papers already in the graph (validation); folded the strongest new item: Who Owns Creativity and Who Does the Work? (arXiv:2601.12152) - human effort shifts from ideating to verifying, control is non-monotone; 1 node, 5 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2601.12152",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2601.12152"
+  ],
+  "trace_file": "runtime\\traces\\loop-240.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 240 OK · VALID · graph +0 · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.80"
+}
