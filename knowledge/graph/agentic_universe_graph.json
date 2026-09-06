@@ -1156,6 +1156,10 @@
     {
       "date": "2026-10-05",
       "change": "Autonomous run 302. Built tools/research_brief.py - the v2.2 brick from docs/self_rebuild_v2.md section 5: the typed object a literature scout emits. validate_brief() enforces currency_note (required) + already_in_graph (the dedup review) + slug ids + verdict/candidate consistency. to_graph_patch() -> the check_patch shape. check_against_graph() mechanises \"do not duplicate work\": id collision = hard stop, >=4-shared-significant-word label = near_label, an unacknowledged near_label = unreviewed_overlap. 11 selftest checks; selftest_all JOBS -> 37. 1 node (artifact_research_brief) + 2 edges. 330 -> 331 nodes."
+    },
+    {
+      "date": "2026-10-05",
+      "change": "Autonomous run 303. Built tools/loop_conductor.py - the v2.3 skeleton (docs/self_rebuild_v2.md 4/8). Conductor.conduct(run_no) runs one loop increment as a deterministic pipeline: pick_increment() enforces the IDLE-STATE RULE as a classifier over recent run kinds -> ledger task -> Supervisor -> run_worker (caller-supplied, the generative edge) -> check_patch -> acceptance_gate.check -> apply_patch + commit_push (caller hooks) -> RunRecord+certificate. No model, no git in the conductor. 9 selftest checks; selftest_all JOBS -> 38. 1 node (artifact_loop_conductor) + 4 edges. 331 -> 332 nodes. The three v2 deterministic bricks (acceptance_gate 300, research_brief 302, loop_conductor 303) are now built; the remaining v2 work is the browser scout skill and binding a real call_model (v2.0, owner decision)."
     }
   ],
   "nodes": [
@@ -9799,6 +9803,32 @@
       "derived_from": [
         "docs/self_rebuild_v2.md",
         "docs/auto_sweep_2026-10-05-0600.md"
+      ],
+      "evidence_links": [
+        "docs/self_rebuild_v2.md"
+      ]
+    },
+    {
+      "id": "artifact_loop_conductor",
+      "label": "loop_conductor.py - the headless research-loop run as deterministic orchestration",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "tools/loop_conductor.py (run 303), the v2.3 skeleton from docs/self_rebuild_v2.md sections 4 and 8. Conductor.conduct(run_no) runs one loop increment as a deterministic pipeline: pick_increment() enforces the IDLE-STATE RULE as a classifier over recent run kinds (selftest RED -> only a fix; frontier open -> fold; last 3 runs doc/hygiene + frontier swept -> must be deepen/probe/consistency) -> a task_ledger task -> a Supervisor dispatches it to run_worker (the generative edge, caller-supplied) -> the worker returns a graph patch + gate inputs -> knowledge_graph.check_patch structural check -> acceptance_gate.check (held-out + PACE + process + forecast) -> on accept: apply_patch + commit_push (caller hooks) -> RunRecord with the certificate. The conductor calls no model and no git - every model-touching or side-effectful step is a callback. 9 selftest checks; selftest_all JOBS -> 38. This is the v1 interactive loop made a headless deterministic function; v2.0 (bind call_model into the worker + probe adapters) is what makes it run for real.",
+      "tags": [
+        "loop-conductor",
+        "deterministic-spine",
+        "idle-state-rule",
+        "v2",
+        "self-rebuild",
+        "headless"
+      ],
+      "derived_from": [
+        "docs/self_rebuild_v2.md",
+        "docs/auto_sweep_2026-10-05-1200.md"
       ],
       "evidence_links": [
         "docs/self_rebuild_v2.md"
@@ -24092,6 +24122,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "check_against_graph is a deterministic guard against the graph curation bias this node warns about: a candidate that duplicates an existing node cannot be folded without an explicit acknowledgement."
+    },
+    {
+      "id": "edge_conductor_implements_v2_plan",
+      "source": "artifact_loop_conductor",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The v2.3 skeleton from sections 4 and 8 of the plan - the deterministic spine as one function."
+    },
+    {
+      "id": "edge_conductor_composes_acceptance_gate",
+      "source": "artifact_loop_conductor",
+      "target": "artifact_acceptance_gate",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Runs acceptance_gate.check on the worker patch before applying it; a reject stops the run."
+    },
+    {
+      "id": "edge_conductor_composes_research_brief",
+      "source": "artifact_loop_conductor",
+      "target": "artifact_research_brief",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The worker patch is the shape research_brief.to_graph_patch produces; the conductor runs check_patch on it."
+    },
+    {
+      "id": "edge_conductor_extends_supervisor",
+      "source": "artifact_loop_conductor",
+      "target": "pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Uses Supervisor over a task_ledger to dispatch the run increment, with the deadline + retry budgeting it already has."
     }
   ]
 }

@@ -57,6 +57,7 @@ JOBS = [
     ("fractal_flock.py", ["selftest"]),
     ("acceptance_gate.py", ["selftest"]),
     ("research_brief.py", ["selftest"]),
+    ("loop_conductor.py", ["selftest"]),
 ]
 
 
