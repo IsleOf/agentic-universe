@@ -218,9 +218,15 @@ def _selftest():
         run_ids = [f"run-{i}" for i in range(1, 51)]
         held = withheld_runs(run_ids)
 
-        # retirement: the recent runs (60-71) are all 'build'; a class not in the
-        # recent window is deprecated, not deleted.
+        # retirement: register a skill whose task_class can never appear in the
+        # recent window (classify() never emits it), so retire() must deprecate it
+        # regardless of what the live loop-history composition happens to be.
+        reg.set("tool", "skill___test_disused__", json.dumps(
+            {"name": "__test_disused__", "task_class": "__never_emitted__",
+             "status": "candidate", "support": 99, "procedure": "n/a"}, indent=2),
+            note="selftest fixture: a definitely-disused skill", author="selftest")
         retired = retire(reg, bank)
+        retired_disused = any(s["name"] == "__test_disused__" for s in retired)
         # every retired skill is still in the registry, status deprecated
         retired_kept = all(
             json.loads(reg.get("tool", f"skill_{s['name']}"))["status"] == "deprecated"
@@ -234,7 +240,7 @@ def _selftest():
             "each candidate has support >= MIN_SUPPORT": all(c["support"] >= MIN_SUPPORT for c in candidates),
             "withheld fraction ~20% and non-empty": 0 < len(held) <= len(run_ids) * 0.5 and len(held) >= 8,
             "withheld set is deterministic": withheld_runs(run_ids) == held,
-            "retire() deprecates a disused skill class": len(retired) >= 1,
+            "retire() deprecates a disused skill class": retired_disused,
             "retired skills are kept (deprecated), not deleted": retired_kept,
             "a second retire() pass is idempotent": retire(reg, bank) == [],
         }
