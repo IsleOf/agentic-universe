@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 315 nodes, 1260 edges · **Date:** 2026-09-05
+**Graph at generation:** 316 nodes, 1264 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -361,6 +361,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_composed_design.py granularity sweep (run 94) - the intermediate optimum, when it exists, is set by accumulation-cost vs shed-cost — `test_scenario_decomposition_granularity`
 - tools/probe_epistemic_market.py — `artifact_probe_epistemic_market_rig`
 - tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`
+- tools/probe_identity_masking.py — `artifact_probe_identity_masking_rig`
 - tools/probe_idle_agent.py — `artifact_probe_idle_agent_rig`
 - tools/probe_orchestration_value.py — `artifact_probe_orchestration_value_rig`
 - tools/probe_orchestration_value.py (run 221) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
@@ -457,7 +458,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract`, `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`, `concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary`
 - `docs/auto_sweep_2026-10-01-0600.md` — `artifact_probe_epistemic_market_rig`
-- `docs/auto_sweep_2026-10-01-1200.md` — `concept_moral_preferences_are_framing_brittle`
+- `docs/auto_sweep_2026-10-01-1200.md` — `artifact_probe_identity_masking_rig`, `concept_moral_preferences_are_framing_brittle`
 - `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`
 - `docs/auto_sweep_2026-10-03-0000.md` — `concept_self_harness_validates_the_three_loop`
 - `docs/auto_sweep_2026-10-03-1200.md` — `concept_environmental_pressure_has_an_inverted_u`

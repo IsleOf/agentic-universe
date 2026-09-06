@@ -105,6 +105,7 @@ written, selftested `model_*` adapter (runs 134–140) — pass one `call_model`
 | `probe_composed_design.py` | short-agent + four-field + folded-state composes but bounded | — (needs a real harness; single-agent `p` path in `docs/remaining_seams.md`) |
 | `probe_orchestration_value.py` | multi-agent helps only with verifiable subtasks + disjoint evidence + (deterministic synthesis **or** bounded-neighbourhood stigmergic accretion); a vote never helps. Verdict CONFIRMS (run 221); FLOCK arm (run 273) widens condition (b) | — (needs a real multi-agent harness; `_subtask_ok` / `_synthesis_ok` / `run_flock` stubs) |
 | `probe_epistemic_market.py` | open-question 1 (run 286): forecast-calibrated selection beats manager-pick + debate everywhere and is persuasion-robust; majority is strongest under independent errors (Condorcet) but collapses −0.15 under herding, where forecast beats it +0.04. Verdict CONFIRMS | — (`_agent_answer` / calibration-record stubs; swap for real agent runs) |
+| `probe_identity_masking.py` | open-question 2 (run 287): masking helps monotonically (accuracy 0.60→0.75, deference 0.85→0.16); stripping the reasoning chain beats stripping the name; full masking still leaves 0.16 deference + a 0.03 gap to independent elicitation — necessary, not sufficient | — (`_perceived_status` / `_synthesiser_pick` stubs) |
 
 ## Fresh-clone setup
 
