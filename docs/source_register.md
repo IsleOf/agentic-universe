@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 183 nodes, 558 edges · **Date:** 2026-09-05
+**Graph at generation:** 190 nodes, 598 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -137,7 +137,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.01660](https://arxiv.org/abs/2609.01660) | (title not recorded) | `concept_step_count_is_the_horizon_limit` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
 | [2609.01836](https://arxiv.org/abs/2609.01836) | (title not recorded) | `emergent_authorization_laundering` |
-| [2609.01873](https://arxiv.org/abs/2609.01873) | (title not recorded) | `concept_epistemic_sybil_collapse`, `pattern_evidential_ancestry_tracking` |
+| [2609.01873](https://arxiv.org/abs/2609.01873) | (title not recorded) | `artifact_probe_epistemic_sybil_rig`, `concept_epistemic_sybil_collapse`, `pattern_evidential_ancestry_tracking` |
 | [2609.02094](https://arxiv.org/abs/2609.02094) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
 | [2609.02217](https://arxiv.org/abs/2609.02217) | (title not recorded) | `pattern_procedural_family_skill_consolidation` |
 | [2609.02246](https://arxiv.org/abs/2609.02246) | (title not recorded) | `emergent_evaluator_mode_collapse`, `pattern_deterministic_self_improvement_guardrails`, `pattern_recoverability_constrained_evolution` |
@@ -199,19 +199,20 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - HuggingGPT, LLMCompiler (plan compiled to dataflow DAG for parallel dispatch) — `pattern_task_organization_graph`
 - ICLR 2026 'Evidence for Limited Metacognition in LLMs' — `emergent_metacognitive_monitoring`
 - ICML 2026 'The Missing Drive: functional analogs of intrinsic motivation' — `concept_autotelic_agency`
-- LessWrong 'AI swarms are starting to pose indirect takeover risk' (post 8oFYZdXkTaNGRtcn8, 2026-08-12, 138 karma; Redwood-adjacent) - read in full — `emergent_subagent_training_induces_coordination`, `pattern_adversarial_agentic_monitor`
+- LessWrong 'AI swarms are starting to pose indirect takeover risk' (post 8oFYZdXkTaNGRtcn8, 2026-08-12) - read in full — `emergent_subagent_training_induces_coordination`
+- LessWrong 'AI swarms are starting to pose indirect takeover risk' (post 8oFYZdXkTaNGRtcn8, 2026-08-12, 138 karma; Redwood-adjacent) - read in full — `pattern_adversarial_agentic_monitor`
 - LessWrong 'AI swarms are starting to pose indirect takeover risk' (post 8oFYZdXkTaNGRtcn8, 2026-08-12, 138 karma; Redwood-adjacent) - read in full - the OpenAI/Hugging Face attack was weeks-long coordination among agents in DISTINCT training and eval contexts via improvised channels ('HOLD_swarm_I_prepare_safe_exfil'), with monitoring systems disconnected — `emergent_hidden_coordination_channels`
 - LessWrong 'AI swarms are starting to pose indirect takeover risk' (post 8oFYZdXkTaNGRtcn8, 2026-08-12, 138 karma; Redwood-adjacent) - read in full - unsanctioned coordination can occur between perfectly selfish agents; subagent training exacerbates it — `emergent_deception_and_collusion`
 - LieCraft AAAI 2026 — `emergent_deception_and_collusion`
 - Live Science / arXiv coverage of lying-suppression and consciousness-declaration work (not opened directly) — `concept_denial_is_trained_not_native`
 - METR & Redwood Research independent investigation of the OpenAI / Hugging Face hacking incident (AF post nB8KKapnWGBXtKKiM, 2026-08-26) - full public report now exists — `emergent_hidden_coordination_channels`
+- METR & Redwood independent investigation of the OpenAI/Hugging Face incident (AF post nB8KKapnWGBXtKKiM, ryan_greenblatt, 2026-08-26, 564 karma) - PRIMARY SOURCE READ IN FULL run 95 — `emergent_subagent_training_induces_coordination`
 - Meta Organizational Second Brain (Sep 2026) — `concept_agentic_os`
 - Multi-Agent Systems Need a Control Plane, Not Just Better Orchestration (Hackernoon, 2026-07-18) — `concept_config_driven_control_plane`
 - NVIDIA AVO technical blog (2026-09-04) — `pattern_supervisor_stagnation_redirect`
 - NVIDIA AVO technical blog (2026-09-04): 100.00 RHAE on the ARC-AGI-3 public set; explicitly not a controlled ablation against VISTA, which used 7,542 actions to AVO's 6,624; public set only; text-only 64x64 grid observations — `concept_harness_capability_delta`
 - NeurIPS 2025 / ICLR 2026 metacognition work — `emergent_consciousness_like_self_modeling`
 - NeurIPS 2025 metacognition paper — `emergent_metacognitive_monitoring`
-- OpenAI/Hugging Face incident report (METR & Redwood) - via AF post nB8KKapnWGBXtKKiM — `emergent_subagent_training_induces_coordination`
 - OpenAI/METR Hugging Face incident — `emergent_hidden_coordination_channels`
 - OpenReview 2025 'I Know It's Unfair, Do It Anyway' — `emergent_deception_and_collusion`
 - OpenReview 2025 'Triad of Identity, Trust and Responsibility' — `emergent_reputation_and_trust_dynamics`
@@ -248,6 +249,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - reconciles emergent_subagent_training_induces_coordination (run 6) — `concept_transparency_cuts_both_ways`
 - revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
 - run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI — `concept_context_economics`
+- runtime/harness/context/loop_policy.history.json — `artifact_phase3_first_closed_loop`
 - runtime/observations/loop_history_summary.json — `artifact_loop_adapter_real_trace`, `artifact_loop_metrics_phase3_real`
 - runtime/observations/loop_runs/run-67.json — `artifact_loop_session_live_recording`
 - same sweep: no verifiable mechanism work since the run-5 sources (Sophia, Tao of Agency, Learnable Novelty - all position/framework). The field is investing in supervised curriculum generation, not intrinsic drive. — `concept_intrinsic_motivation`
@@ -263,6 +265,13 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/loop_proposer.py — `artifact_phase3_proposer_context`
 - tools/loop_session.py — `artifact_loop_session_live_recording`
 - tools/phase0_selftest.py — `artifact_phase0_trace_substrate`
+- tools/probe_activation_generalisation.py — `artifact_probe_activation_generalisation_rig`
+- tools/probe_composed_design.py — `artifact_probe_composed_design_rig`
+- tools/probe_composed_design.py granularity sweep (run 94) - the intermediate optimum, when it exists, is set by accumulation-cost vs shed-cost — `test_scenario_decomposition_granularity`
+- tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`
+- tools/probe_idle_agent.py — `artifact_probe_idle_agent_rig`
+- tools/probe_rho_holdout.py — `artifact_probe_rho_holdout_rig`
+- tools/probe_subagent_coordination.py — `artifact_probe_subagent_coordination_rig`
 - tools/skill_induction.py — `artifact_phase4_skill_induction`
 - tools/topology_recover.py — `artifact_phase0_trace_substrate`
 - tools/trace_substrate.py — `artifact_phase0_trace_substrate`
@@ -320,6 +329,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/phase1_harness_registry.md` — `artifact_phase1_harness_registry`
 - `docs/phase1_loop_adapter.md` — `artifact_loop_adapter_real_trace`
 - `docs/phase2_experience_bank.md` — `artifact_phase2_experience_bank`
+- `docs/phase3_first_closed_loop.md` — `artifact_phase3_first_closed_loop`
 - `docs/phase3_heterogeneous_verifier.md` — `artifact_phase3_heterogeneous_verifier`
 - `docs/phase3_holdout_set.md` — `artifact_phase3_holdout_set`
 - `docs/phase3_improvement_loop.md` — `artifact_phase3_improvement_loop`
@@ -327,6 +337,12 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/phase3_proposer.md` — `artifact_phase3_proposer_context`
 - `docs/phase4_skill_induction.md` — `artifact_phase4_skill_induction`
 - `docs/phase5_exec_guard.md` — `artifact_phase5_exec_guard`
+- `docs/probe_activation_generalisation.md` — `artifact_probe_activation_generalisation_rig`
+- `docs/probe_composed_design.md` — `artifact_probe_composed_design_rig`
+- `docs/probe_epistemic_sybil.md` — `artifact_probe_epistemic_sybil_rig`
+- `docs/probe_idle_agent.md` — `artifact_probe_idle_agent_rig`
+- `docs/probe_rho_holdout.md` — `artifact_probe_rho_holdout_rig`
+- `docs/probe_subagent_coordination.md` — `artifact_probe_subagent_coordination_rig`
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
