@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 246 nodes, 929 edges · **Date:** 2026-09-05
+**Graph at generation:** 247 nodes, 935 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -132,6 +132,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.09885](https://arxiv.org/abs/2608.09885) | SHE: trajectory-driven safety harness evolution | `pattern_trajectory_driven_safety_evolution` |
 | [2608.12253](https://arxiv.org/abs/2608.12253) | One Frozen Simulator Is Not Enough | `emergent_evaluator_mode_collapse` |
 | [2608.12921](https://arxiv.org/abs/2608.12921) | (title not recorded) | `pattern_causal_edge_pruning` |
+| [2608.13867](https://arxiv.org/abs/2608.13867) | (title not recorded) | `concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain` |
 | [2608.14380](https://arxiv.org/abs/2608.14380) | (title not recorded) | `concept_cheap_death` |
 | [2608.14613](https://arxiv.org/abs/2608.14613) | (title not recorded) | `concept_mechanism_incentive_compat_does_not_transfer` |
 | [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
@@ -371,6 +372,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-12-0600.md` — `concept_unmanaged_skill_libraries_silently_drift`
 - `docs/auto_sweep_2026-09-12-1200.md` — `concept_ai_native_software_ecosystems_are_complex_adaptive_systems`, `concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property`
 - `docs/auto_sweep_2026-09-12-1800.md` — `concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium`
+- `docs/auto_sweep_2026-09-13-0000.md` — `concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
 - `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`

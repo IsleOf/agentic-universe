@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-12",
+  "last_updated": "2026-09-13",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -804,6 +804,10 @@
     {
       "date": "2026-09-12",
       "change": "Autonomous run 210. Emergence-side, from the MAEBE citation sweep. Folded 'Convergence dynamics of Agent-to-Agent Interactions with Misaligned objectives' (arXiv:2511.08710) as concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium: a mechanistic model (two linear-self-attention agents alternately updating from each other) where misalignment -> a biased equilibrium neither agent reaches, residual error predictable from the objective gap + prompt geometry; an adversarial regime where one agent converges exactly while holding the other in persistent bias; a helper agent doing a Newton-like objective update eliminates the plateau. Validated with trained LSA agents + black-box GPT-5-mini. CURRENCY NOTE: Nov 2025, toy model - low confidence (0.5) as a claim about real multi-agent LLM systems; value is as a rare closed-form mechanistic account. 5 edges: supports concept_mast_multi_agent_failure_taxonomy (a solvable mechanism), concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (candidate herding mechanism), concept_agent_communication_is_a_layered_attack_surface (adversarial regime = channel exploit), concept_emergence_layer_model (mechanistic swarm-layer result); refines emergent_no_equilibrium_convergence ('no convergence' may be 'convergence to a biased point'). 245->246 nodes, 924->929 edges."
+    },
+    {
+      "date": "2026-09-13",
+      "change": "Autonomous run 211. Recency-weighted arxiv-fetch sweep (S2 on Govern-the-Repository returned nothing - too new). Folded 'Engineering Reliable Coding Agents' (arXiv:2608.13867, Aug 2026) as concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain: a monograph-length structured multivocal review (164 scholarly + 100 practitioner + 29 benchmark + 17 case records). Coding agents are evaluated as models but deployed as systems; reliability is a dependency chain across harness / execution state / retrieval / memory / permissions / verification / observability; many apparent model failures originate elsewhere; a fix at one layer often fails to propagate end-to-end; task-construction weaknesses can invalidate downstream conclusions. Contributes a versioned 206-record reliability catalog + a dependency/repair-asymmetry framework + runnable protocols. 6 edges: supports concept_bottleneck_is_the_model_harness_coupling (a large synthesis restating it), concept_aggregate_score_masks_per_layer_regression (non-propagation confirmed), concept_capability_is_a_model_harness_config_property, concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property (system-level and ecosystem-level, both above the component); informs artifact_phase3_holdout_set (task-construction catalog); supports pattern_recoverability_constrained_evolution (repair asymmetry from the ops side). 246->247 nodes, 929->935 edges."
     }
   ],
   "nodes": [
@@ -7164,6 +7168,36 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-12-1800.md"
+      ]
+    },
+    {
+      "id": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "label": "Coding agents are evaluated as models but deployed as systems; reliability is a dependency chain across harness / execution state / retrieval / memory / permissions / verification / observability, and a fix at one layer often fails to propagate end-to-end",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:reliability_dependency_chain",
+      "confidence": 0.72,
+      "description": "Engineering Reliable Coding Agents: Evaluating and Operating the System Around the Model (arXiv:2608.13867, VERIFIED via arXiv abstract read run 211; Aug 2026). A monograph-length structured multivocal review synthesising 164 scholarly works, 100 practitioner records, 29 benchmark records, and 17 author-system case records. Core claim: AI coding agents are commonly EVALUATED AS MODELS but DEPLOYED AS SYSTEMS - reliability depends on the harness, execution state, retrieval, memory and state management, permissions, review interfaces, and resource allocation, not only model capability. Across the evidence: many apparent MODEL failures originate elsewhere in the system, and improvements at one layer often FAIL TO PROPAGATE to end-to-end outcomes. Evaluation and operation are treated as a DEPENDENCY CHAIN in which weaknesses in task construction, execution environments, retrieval, state management, verification, or observability can INVALIDATE downstream conclusions. Contributions: a versioned catalog of 206 reliability records (193 gated practices, 56 developed in depth, 13 research leads); an evidence ledger; a framework for dependency and REPAIR ASYMMETRY across the agent lifecycle; measurements and failure cases from operated systems; runnable evaluation and reliability protocols; five reusable agent skills with evidence maps. Honest limits (recorded in the paper): the review is structured not exhaustive, evidence strength varies by topic, results depend on workload and configuration, and it records which search lanes remain unexecuted. Bearing on the project: this is the project's entire thesis - agent quality is a model-harness-system property, per-layer verification matters, task construction can invalidate a held-out score - restated as a large practitioner+academic synthesis, with a 206-record catalog the project's tools/ and docs/ can be checked against. Recency: Aug 2026, current coding-agent generation.",
+      "tags": [
+        "engineering-reliable-coding-agents",
+        "system-around-the-model",
+        "dependency-chain",
+        "repair-asymmetry",
+        "multivocal-review",
+        "206-reliability-records",
+        "layer-non-propagation",
+        "task-construction-invalidates-conclusions",
+        "recency-2026-08",
+        "monograph"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-13-0000.md",
+        "arXiv:2608.13867 (Engineering Reliable Coding Agents: Evaluating and Operating the System Around the Model) - VERIFIED, abstract read run 211"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-13-0000.md"
       ]
     }
   ],
@@ -17120,6 +17154,72 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "A rare mechanistic (closed-form) result at the swarm layer of the three-layer stratification - most swarm-layer evidence is phenomenological; this one links prompt geometry to joint stability."
+    },
+    {
+      "id": "edge_reliability_chain_supports_model_harness_coupling",
+      "source": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.72,
+      "description": "A 164-work + 100-practitioner-record synthesis restating the model-harness-coupling frame: the six coupled runtime responsibilities are exactly the monograph's dependency-chain layers (harness / execution state / retrieval / memory / verification / observability)."
+    },
+    {
+      "id": "edge_reliability_chain_supports_aggregate_masks_regression",
+      "source": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "target": "concept_aggregate_score_masks_per_layer_regression",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.68,
+      "description": "'Improvements at one layer often fail to propagate to end-to-end outcomes' and 'weaknesses in one layer can invalidate downstream conclusions' is the per-layer-regression / non-propagation problem, confirmed across a large evidence base - the project's deterministic no-LLM per-layer check is the response."
+    },
+    {
+      "id": "edge_reliability_chain_supports_capability_is_config",
+      "source": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "'Evaluated as models but deployed as systems' is 'capability is a model-harness-configuration property, not a base-model property' stated as an operations problem: many apparent model failures originate in the configuration."
+    },
+    {
+      "id": "edge_reliability_chain_supports_ecosystem_risk",
+      "source": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "target": "concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "Same shape one level in: the monograph says reliability is a system (not model) property for a single agent; Govern the Repository says risk is an ecosystem (not agent) property for a population. System-level and ecosystem-level, both above the component."
+    },
+    {
+      "id": "edge_reliability_chain_informs_holdout_set",
+      "source": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "target": "artifact_phase3_holdout_set",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Weaknesses in task construction can invalidate downstream conclusions' names exactly the held-out-set risks the project has already patched (search contamination run 166, format-repair run 194) - the monograph's 206-record catalog is a checklist for the remaining task-construction gaps."
+    },
+    {
+      "id": "edge_reliability_chain_supports_repair_asymmetry",
+      "source": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The monograph's explicit 'repair asymmetry across the agent lifecycle' framework is recoverability-as-a-constraint from the operations side: some layers are cheap to repair, others propagate damage that is expensive or impossible to undo - so evolution must be gated on the expensive-to-repair ones."
     }
   ]
 }

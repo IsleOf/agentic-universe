@@ -1,0 +1,26 @@
+{
+  "run": 211,
+  "increment": "recency-weighted sweep - folded 'Engineering Reliable Coding Agents' (arXiv:2608.13867, Aug 2026): a 164-work synthesis that coding-agent reliability is a system property evaluated as a dependency chain, and fixes at one layer often don't propagate; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2608.13867",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.13867"
+  ],
+  "trace_file": "runtime\\traces\\loop-211.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
