@@ -872,6 +872,10 @@
     {
       "date": "2026-09-17",
       "change": "Autonomous run 227. Recency-weighted sweep. Folded PCN-Rec (arXiv:2601.09771, Jan 2026) as concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement: a pipeline that separates NL reasoning from deterministic enforcement - two agents negotiate (User Advocate / Policy Agent), a mediator LLM emits a JSON certificate of claimed constraint satisfaction, a deterministic verifier recomputes ALL constraints and accepts only verifier-checked certificates, constrained-greedy repair on failure yields an auditable trace. MovieLens-100K: 98.55% pass on feasible users vs a one-shot LLM baseline, 0.021 NDCG@10 drop (p<0.05). CURRENCY NOTE: Jan 2026, one benchmark, recommendation domain - conf 0.6, architecture is domain-general. 5 edges: supports pattern_grounded_acceptance_only (a working small instance with numbers), concept_runtime_governance_organizes_around_a_portable_action_certificate (certificate at slate granularity), concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic (conditions a+b, and it wins), concept_config_driven_control_plane; refines pattern_evidence_carrying_termination (adds an explicit repair stage). 257->258 nodes, 1001->1006 edges."
+    },
+    {
+      "date": "2026-09-17",
+      "change": "Autonomous run 228. Recency-weighted sweep (s2 citations of Self-Harness arXiv:2606.09498). Folded CordisBench (arXiv:2609.01600, Sept 2026) as concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it: a 1,200-question benchmark of lifecycle reasoning in dynamic harnesses (affected components, state after a teardown order, conditions under all/some orders, successful reconfigurations). Models handle small systems but degrade as relevant interactions grow (2-32), especially final-state prediction and cross-order reasoning; ~3000 reasoning tokens/question (GPT-5.6 Luna, 16-interaction subset); an independent finite reference semantics agrees with execution on every scored outcome across all 528 executable questions - the deterministic checker fully replaces the expensive LLM reasoning. 5 edges: supports pattern_execution_layer_enforcement (execute the check, don't reason about the change), pattern_recoverability_constrained_evolution (teardown-order = recovery), concept_unmanaged_skill_libraries_silently_drift (cleanup = retirement), concept_self_improvement_evaluation_is_noisy_and_task_order_dependent (cross-order reasoning); challenges artifact_phase1_harness_registry (rollback is not enough once components couple). 258->259 nodes, 1006->1011 edges."
     }
   ],
   "nodes": [
@@ -7584,6 +7588,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-17-0000.md"
+      ]
+    },
+    {
+      "id": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
+      "label": "Lifecycle reasoning in dynamic harnesses (which components a change affects, state after a teardown order, conditions holding under all/some orders) degrades as relevant interactions grow, costs ~3000 reasoning tokens/question, and is fully replaced by an independent finite reference semantics on controlled instances",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:lifecycle_reasoning_bench",
+      "confidence": 0.7,
+      "description": "CordisBench (arXiv:2609.01600, VERIFIED via arXiv abstract read run 228; Sept 2026). Dynamic agent harnesses let a model change the software that shapes its own execution - and a local plugin change propagates through dependencies and cleanup, a new REASONING BURDEN. CordisBench is a 1,200-question benchmark of that lifecycle reasoning: identify affected components, predict state after a specified teardown ORDER, determine which conditions hold under ALL or SOME orders, choose reconfigurations that succeed when executed. It pairs a controlled formal setting with programs executed against Cordis, a runtime that manages component dependencies and cleanup, with deterministic task-specific scoring. Findings: three efficiency-oriented models at low reasoning effort with 2-32 relevant interactions - models usually handle SMALL systems well but GROW LESS RELIABLE as more interactions become relevant, especially predicting final state and reasoning across teardown orders; additional inference effort recovers marked gains for some; the cost is nontrivial (GPT-5.6 Luna ~3,000 reasoning tokens/question at medium effort on the 16-interaction subset). CRUCIALLY: for these controlled instances the cost is AVOIDABLE - an independent finite REFERENCE SEMANTICS agrees with Cordis execution on every observation and action outcome used for scoring across all 528 executable questions. Bearing on the project: the self-improving loop modifies its own harness components (harness_registry version chains, context/loop_policy, skill induction/retirement); reasoning about the downstream effects of a component change is exactly this lifecycle reasoning, and CordisBench says an LLM's version of it is (a) unreliable at scale and (b) fully replaceable by a deterministic checker on controlled cases - a direct argument for the project's deterministic-where-possible stance (exec_guard, deterministic validate, tampering_flags, paired_eprocess). Recency: Sept 2026, current reasoning models.",
+      "tags": [
+        "CordisBench",
+        "lifecycle-reasoning",
+        "teardown-order",
+        "component-dependencies",
+        "degrades-with-size",
+        "reference-semantics-beats-llm",
+        "deterministic-checker",
+        "reasoning-token-cost",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-17-0600.md",
+        "arXiv:2609.01600 (CordisBench: Can Language Models Reason About Component Lifecycles in Dynamic Agent Harnesses?) - VERIFIED, abstract read run 228"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-17-0600.md"
       ]
     }
   ],
@@ -18387,6 +18420,61 @@
       "approach_family": "control_plane_governance",
       "confidence": 0.45,
       "description": "The Policy Agent enforces governance constraints that are configuration, not model behaviour - a config-driven control plane for a HITL-style multi-agent recommendation loop, with the deterministic verifier as the enforcement point."
+    },
+    {
+      "id": "edge_lifecycle_reasoning_supports_exec_layer_enforcement",
+      "source": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
+      "target": "pattern_execution_layer_enforcement",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "'An independent finite reference semantics agrees with execution on every outcome across all 528 executable questions' - a deterministic checker fully replaces ~3000 tokens of LLM lifecycle reasoning. The project's deterministic checks (exec_guard, graph validate, tampering_flags) are the right instinct: don't ask the model to reason about a change's effects, execute the check."
+    },
+    {
+      "id": "edge_lifecycle_reasoning_challenges_harness_registry",
+      "source": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
+      "target": "artifact_phase1_harness_registry",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The registry supports exact revert of a single component, but the loop still REASONS about whether a component edit is safe before making it. CordisBench says that reasoning degrades as the harness grows - so the loop needs a deterministic dependency/teardown checker, not just a rollback, once the harness has more than a handful of coupled components."
+    },
+    {
+      "id": "edge_lifecycle_reasoning_supports_recoverability",
+      "source": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Predict state after a specified teardown order' is the recoverability question: recovery is not just re-pinning a body, it is restoring dependent state in the right order - and models are worst exactly here."
+    },
+    {
+      "id": "edge_lifecycle_reasoning_supports_library_drift",
+      "source": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
+      "target": "concept_unmanaged_skill_libraries_silently_drift",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Teardown / cleanup reasoning is skill RETIREMENT: which downstream retrievals and routes a retired skill leaves dangling. Library Drift says premature retirement is harmful; CordisBench says the model can't reliably reason about what a retirement breaks - so retirement must be outcome-gated and deterministically checked."
+    },
+    {
+      "id": "edge_lifecycle_reasoning_relates_eval_noise",
+      "source": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
+      "target": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "'Reasoning across teardown ORDERS' and 'conditions that hold under ALL vs SOME orders' is the task-order-dependence problem inside the harness itself - the order components are torn down changes the outcome, and models are unreliable about it."
     }
   ]
 }

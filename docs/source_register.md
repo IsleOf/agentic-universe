@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 258 nodes, 1006 edges · **Date:** 2026-09-05
+**Graph at generation:** 259 nodes, 1011 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -197,6 +197,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2609.01466](https://arxiv.org/abs/2609.01466) | (title not recorded) | `concept_trace_compiles_to_per_consumer_views`, `pattern_deterministic_state_folding` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_compositional_private_language`, `emergent_language_formation`, `emergent_stigmergic_coordination` |
+| [2609.01600](https://arxiv.org/abs/2609.01600) | (title not recorded) | `concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it` |
 | [2609.01660](https://arxiv.org/abs/2609.01660) | (title not recorded) | `concept_step_count_is_the_horizon_limit` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
 | [2609.01836](https://arxiv.org/abs/2609.01836) | (title not recorded) | `emergent_authorization_laundering` |
@@ -400,6 +401,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-16-0600.md` — `concept_shaper_a_frozen_model_is_its_own_harness_optimizer`
 - `docs/auto_sweep_2026-09-16-1800.md` — `emergent_no_equilibrium_convergence`, `pattern_market_as_orchestrator`
 - `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement`, `concept_step_count_is_the_horizon_limit` +1
+- `docs/auto_sweep_2026-09-17-0600.md` — `concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it`
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1
 - `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`
 - `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`

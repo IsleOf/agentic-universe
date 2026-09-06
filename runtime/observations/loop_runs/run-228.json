@@ -1,0 +1,27 @@
+{
+  "run": 228,
+  "increment": "recency-weighted sweep - folded CordisBench (arXiv:2609.01600): LLM lifecycle reasoning in dynamic harnesses degrades with system size and is fully replaced by a deterministic reference semantics; 1 node, 5 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2609.01600",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01600"
+  ],
+  "trace_file": "runtime\\traces\\loop-228.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 228 OK · VALID · graph +0 · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.79"
+}
