@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-19",
+  "last_updated": "2026-09-20",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -916,6 +916,10 @@
     {
       "date": "2026-09-19",
       "change": "Autonomous run 238. Recency-weighted node-deepening sweep (s2 citations of the RSI survey arXiv:2607.07663). Folded ASPIRE (arXiv:2608.31111, Aug 2026) as concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer: a benchmark for vague-goal-driven self-evolution (natural-language goal only, hidden 520-item eval, both weight and harness evolution). Findings: vague goals redirect search to goal interpretation; agents complete training/harness loops but weight gains are sparse and unstable and the best evolved harness stays below the engineered Qwen-Agent reference; agents train on mismatched data and trust narrow self-evaluations so local gains don't transfer to hidden eval; continued search erases earlier improvements. The project's own top-level structure IS a vague goal - the human sets direction, the loop operationalises. 6 edges: supports concept_self_improvement_strength_tracks_the_verification_hierarchy (the human bottleneck is real), concept_self_improvement_evaluation_is_noisy_and_task_order_dependent (continued search regresses), concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score (narrow self-checks), concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (hidden eval), concept_self_harness_validates_the_three_loop (minimal-proposal discipline); challenges approach_emergence_first (evolved harness below engineered reference). 263->264 nodes, 1038->1044 edges."
+    },
+    {
+      "date": "2026-09-20",
+      "change": "Autonomous run 239. Recency-weighted node-deepening sweep (RSI-survey citation cluster). Folded HELIX (arXiv:2608.13951, Aug 2026) as concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data: model-harness co-evolution - build harnesses for a fixed model, update the model from verified sibling trajectories, rebuild as capabilities change. A source-traceable substrate decomposing agent systems into typed ports/atoms/recipes/product-shells/runtime-policies, preserving intervention identity. Harness evolution has two roles: improve fixed-model execution AND produce matched success/regression/near-miss records as model training data. Code repair, one round: 65-candidate portfolio finds a fixed harness +4.0% over Pi; the FULL portfolio exposes +58.0% verified coverage via complementary sibling behaviour; 200-slot sibling slice -> 438 verified SFT/critic/filter/preference records. 6 edges: supports concept_bottleneck_is_the_model_harness_coupling (bidirectional feedback), concept_whale_... (3rd co-evolution data point), concept_ahe_three_observability_pillars... (source-traceable substrate = observability pillars), artifact_phase1_harness_registry (finer typed decomposition), pattern_structural_decoupling (+58% complementary-sibling coverage with a number), concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic (portfolio union = the criterion at harness level). 264->265 nodes, 1044->1050 edges."
     }
   ],
   "nodes": [
@@ -7803,6 +7807,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-19-1800.md"
+      ]
+    },
+    {
+      "id": "concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data",
+      "label": "HELIX: harness, model, and data form a feedback system - harness evolution improves fixed-model execution AND produces matched success/regression/near-miss records as training data; a source-traceable substrate (typed ports/atoms/recipes/shells/policies); a candidate portfolio exposes 58% more verified coverage via complementary sibling behaviour",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:helix_model_harness_data_feedback",
+      "confidence": 0.7,
+      "description": "HELIX: Model-Harness Co-evolution for Recursive Self-Improvement (arXiv:2608.13951, VERIFIED via arXiv abstract read run 239; Aug 2026). An interactive agent acts through a runtime harness that mediates context, tools, control flow, and stopping - the harness shapes both what a model can accomplish AND the trajectories from which it learns. This coupling motivates model-harness CO-EVOLUTION: build harnesses for a fixed model, update the model from verified sibling trajectories, rebuild the harnesses as capabilities change. Realising the loop needs a controlled way to evolve harnesses while PRESERVING INTERVENTION IDENTITY AND EFFECT. HELIX is a SOURCE-TRACEABLE SUBSTRATE that decomposes agent systems into typed PORTS, reusable ATOMS, RECIPES, PRODUCT SHELLS, and RUNTIME POLICIES - interventions explicit and auditable, trajectories / test outcomes / provenance retained. Harness evolution serves two linked roles: improving fixed-model execution, AND producing matched successes / regressions / near misses / alternatives as DATA for the next model update. One evolution round on code repair: a 65-candidate portfolio finds a fixed harness improving task coverage 4.0% over Pi, while the FULL PORTFOLIO exposes up to 58.0% MORE verified coverage through COMPLEMENTARY SIBLING BEHAVIOUR; a 200-slot sibling slice yields 438 verified SFT / critic / filter / preference records. Bearing on the project: the typed-component decomposition (ports/atoms/recipes/shells/policies) is a more granular harness_registry; 'source-traceable, provenance retained' is Phase 0-1; the two-roles framing adds one the project does not use - harness evolution as a TRAINING-DATA GENERATOR (the project stops at improving execution, no weight update). The 58% complementary-sibling coverage is a portfolio/diversity result: multiple harness variants catch complementary cases, which is pattern_structural_decoupling and the run-218 multi-agent criterion at the harness-variant level. Third data point (with WHALE, JIT-Agent) that model-harness coupling rewards co-evolution - but HELIX's harness-only number (+4% over Pi) also holds up the harness-matters half. Recency: Aug 2026.",
+      "tags": [
+        "HELIX",
+        "model-harness-co-evolution",
+        "source-traceable-substrate",
+        "typed-ports-atoms-recipes",
+        "harness-as-training-data-generator",
+        "complementary-sibling-coverage",
+        "portfolio-58pct",
+        "intervention-identity",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-20-0000.md",
+        "arXiv:2608.13951 (HELIX: Model-Harness Co-evolution for Recursive Self-Improvement) - VERIFIED, abstract read run 239"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-20-0000.md"
       ]
     }
   ],
@@ -19024,6 +19057,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "'Continued search and training can erase earlier improvements' + 'over-invest in goal interpretation' is the empirical case for the three-loop's 'MINIMAL proposal' discipline (and the project's IDLE-STATE RULE): a bounded substantive increment per step, not open-ended re-searching that regresses."
+    },
+    {
+      "id": "edge_helix_supports_model_harness_coupling",
+      "source": "concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "'The harness shapes both what a model can accomplish AND the trajectories from which it learns' - the coupling stated as a bidirectional feedback loop: harness -> capability AND harness -> learning signal for the next model."
+    },
+    {
+      "id": "edge_helix_supports_whale",
+      "source": "concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data",
+      "target": "concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Third data point (with WHALE, JIT-Agent) that model-harness coupling rewards co-evolution over a purely frozen approach - though HELIX's harness-only +4% over Pi also holds up the harness-matters half."
+    },
+    {
+      "id": "edge_helix_supports_ahe_pillars",
+      "source": "concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data",
+      "target": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "HELIX's 'source-traceable substrate, interventions explicit and auditable, trajectories/outcomes/provenance retained' is AHE's component + experience + decision observability, with a more granular typed decomposition (ports/atoms/recipes/shells/policies)."
+    },
+    {
+      "id": "edge_helix_supports_harness_registry",
+      "source": "concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data",
+      "target": "artifact_phase1_harness_registry",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The typed decomposition (ports / atoms / recipes / product shells / runtime policies) is a finer-grained harness_registry component taxonomy, with 'preserving intervention identity and effect' as the explicit design goal - which is the registry's exact-revert requirement."
+    },
+    {
+      "id": "edge_helix_supports_structural_decoupling",
+      "source": "concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data",
+      "target": "pattern_structural_decoupling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "'The full portfolio exposes up to 58.0% more verified coverage through complementary sibling behaviour' - a portfolio of decoupled harness variants catches complementary cases no single harness does; structural decoupling at the harness-configuration level, with a number."
+    },
+    {
+      "id": "edge_helix_supports_when_ma_helps",
+      "source": "concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "Running a portfolio of harness variants on the same task and taking the union of verified successes is the run-218 criterion at the harness level: verifiable per-candidate outcome + a deterministic union merge = +58% coverage."
     }
   ]
 }

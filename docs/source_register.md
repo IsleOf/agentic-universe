@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 264 nodes, 1044 edges · **Date:** 2026-09-05
+**Graph at generation:** 265 nodes, 1050 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -141,6 +141,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.12253](https://arxiv.org/abs/2608.12253) | One Frozen Simulator Is Not Enough | `emergent_evaluator_mode_collapse` |
 | [2608.12921](https://arxiv.org/abs/2608.12921) | (title not recorded) | `pattern_causal_edge_pruning` |
 | [2608.13867](https://arxiv.org/abs/2608.13867) | (title not recorded) | `concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain` |
+| [2608.13951](https://arxiv.org/abs/2608.13951) | (title not recorded) | `concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data` |
 | [2608.14380](https://arxiv.org/abs/2608.14380) | (title not recorded) | `concept_cheap_death` |
 | [2608.14613](https://arxiv.org/abs/2608.14613) | (title not recorded) | `concept_mechanism_incentive_compat_does_not_transfer` |
 | [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
@@ -410,6 +411,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-18-1200.md` — `concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract`, `concept_mechanism_incentive_compat_does_not_transfer`
 - `docs/auto_sweep_2026-09-19-0600.md` — `concept_epistemic_sybil_collapse`, `concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model`, `emergent_compositional_private_language` +1
 - `docs/auto_sweep_2026-09-19-1800.md` — `concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer`, `concept_environment_evolution_curriculum`, `pattern_procedural_family_skill_consolidation`
+- `docs/auto_sweep_2026-09-20-0000.md` — `concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data`
 - `docs/auto_sweep_2026-09-20-1200.md` — `concept_self_concept_as_behavioral_lever`
 - `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
