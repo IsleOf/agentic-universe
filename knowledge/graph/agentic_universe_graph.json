@@ -888,6 +888,10 @@
     {
       "date": "2026-09-18",
       "change": "Autonomous run 231. Recency-weighted sweep. Folded JIT-Agent (arXiv:2608.25593, Aug 2026) as concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension: a TRAINED harness-generator model that synthesizes task-adaptive harnesses on the fly for off-the-shelf LLMs under a fixed four-module protocol; trained to customize / repair / self-evolve from a harness archive. DeepSeek-V4-Flash + JIT-Agent surpasses GPT-5.6 (+9.1 DeepSearchQA, +4.3 OdysseyBench); GLM-5.2 +20.2; competitive with OpenCode / Claude Code. Establishes harness intelligence as trainable, transferable, compounding, orthogonal to model scaling. A genuine TENSION with the emergence-first no-training fork. 6 edges: supports concept_capability_is_a_model_harness_config_property (strongest form - weaker model + good harness beats stronger model), pattern_four_field_constraint (fixed four-module protocol), concept_harness_engineering_is_an_empirical_discipline... (a generated harness at production quality); challenges approach_emergence_first (a trained generator may compound where elicitation plateaus); refines concept_recursive_meta_skill_evolution (archive distillation); supports concept_proof_carrying_negotiation_... (both name an explicit repair stage). 260->261 nodes, 1017->1023 edges."
+    },
+    {
+      "date": "2026-09-18",
+      "change": "Autonomous run 232. Build (the repair stage three Sept-2026 papers independently call for - PCN-Rec 2601.09771, CordisBench 2609.01600, JIT-Agent 2608.25593). improvement_loop.deterministic_repair(cur_policy, new_policy): on a rejected compaction-policy proposal, a bounded constrained fix ensures the risk-protected classes (rule, identity) are pinned WITHOUT widening the blast radius, then re-verifies; a passing repair is promoted with a '(deterministic repair ...)' note and verdict['repaired']=True. It cannot touch the holdout or the risk measure - only makes a proposal more conservative, so it cannot game the gate. run_once gains allow_repair=True (default); the raw-gate negative test runs allow_repair=False. 4 new selftest checks (raw gate still rejects the bad proposal; repair fixes+promotes+flags it; the repaired policy is risk 0; repair returns None when nothing is in bounds). BUILD SELFTEST GREEN. 3 edges (PCN-Rec implements artifact_phase3_improvement_loop; CordisBench + JIT-Agent inform it). self_improving_harness_plan.md Phase 3 gains a 'repair stage' paragraph. 261 nodes, 1023->1026 edges."
     }
   ],
   "nodes": [
@@ -7582,8 +7586,8 @@
       "verification_state": "partially_validated",
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:proof_carrying_negotiation",
-      "confidence": 0.6,
-      "description": "PCN-Rec - Agentic Proof-Carrying Negotiation for Reliable Governance-Constrained Recommendation (arXiv:2601.09771, VERIFIED via arXiv abstract read run 227; Jan 2026). LLM recommenders generate compelling lists but struggle to reliably satisfy governance constraints (minimum long-tail exposure, diversity). PCN-Rec is a pipeline that SEPARATES natural-language reasoning from DETERMINISTIC ENFORCEMENT: a base recommender (MF/CF) produces a candidate window of size W; two agents negotiate it - a User Advocate optimising relevance, a Policy Agent enforcing constraints; a mediator LLM synthesises a top-N slate PLUS a structured JSON CERTIFICATE describing the claimed constraint satisfaction; a DETERMINISTIC VERIFIER recomputes ALL constraints from the slate and accepts ONLY verifier-checked certificates; on failure a deterministic constrained-greedy REPAIR produces a compliant slate for re-verification, yielding an AUDITABLE TRACE. On MovieLens-100K: 98.55% pass rate on feasible users (n=551, W=80) vs a one-shot single-LLM baseline without verification/repair, preserving utility (0.021 absolute NDCG@10 drop, 0.403 vs 0.424; p<0.05). Bearing on the project: a clean small-scale instance of pattern_grounded_acceptance_only + pattern_evidence_carrying_termination - the LLM proposes and explains, a deterministic check is the authority, and a repair loop keeps the trace auditable. The two-agents-plus-deterministic-mediator structure is exactly the run-218 criterion (verifiable subtasks + DETERMINISTIC synthesis) applied to a governed recommendation task. Recency/currency: Jan 2026, one benchmark (MovieLens-100K), recommendation domain - modest confidence; the architecture is domain-general.",
+      "confidence": 0.63,
+      "description": "PCN-Rec - Agentic Proof-Carrying Negotiation for Reliable Governance-Constrained Recommendation (arXiv:2601.09771, VERIFIED via arXiv abstract read run 227; Jan 2026). LLM recommenders generate compelling lists but struggle to reliably satisfy governance constraints (minimum long-tail exposure, diversity). PCN-Rec is a pipeline that SEPARATES natural-language reasoning from DETERMINISTIC ENFORCEMENT: a base recommender (MF/CF) produces a candidate window of size W; two agents negotiate it - a User Advocate optimising relevance, a Policy Agent enforcing constraints; a mediator LLM synthesises a top-N slate PLUS a structured JSON CERTIFICATE describing the claimed constraint satisfaction; a DETERMINISTIC VERIFIER recomputes ALL constraints from the slate and accepts ONLY verifier-checked certificates; on failure a deterministic constrained-greedy REPAIR produces a compliant slate for re-verification, yielding an AUDITABLE TRACE. On MovieLens-100K: 98.55% pass rate on feasible users (n=551, W=80) vs a one-shot single-LLM baseline without verification/repair, preserving utility (0.021 absolute NDCG@10 drop, 0.403 vs 0.424; p<0.05). Bearing on the project: a clean small-scale instance of pattern_grounded_acceptance_only + pattern_evidence_carrying_termination - the LLM proposes and explains, a deterministic check is the authority, and a repair loop keeps the trace auditable. The two-agents-plus-deterministic-mediator structure is exactly the run-218 criterion (verifiable subtasks + DETERMINISTIC synthesis) applied to a governed recommendation task. Recency/currency: Jan 2026, one benchmark (MovieLens-100K), recommendation domain - modest confidence; the architecture is domain-general. IMPLEMENTED (run 232, synthetic-task path): improvement_loop.deterministic_repair - on a rejected compaction-policy proposal, a bounded constrained fix pins the risk-protected classes without widening the blast radius, then re-verifies; a passing repair is promoted flagged verdict['repaired']=True. Cannot touch the holdout or risk measure, so it can only make a proposal more conservative.",
       "tags": [
         "PCN-Rec",
         "proof-carrying-negotiation",
@@ -18678,6 +18682,39 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "JIT-Agent lists 'repair harnesses for stable and reliable execution' as a trained capability - the same explicit REPAIR stage PCN-Rec makes deterministic; two independent arguments that a self-improvement loop needs a repair step, not only accept/revert."
+    },
+    {
+      "id": "edge_deterministic_repair_implements_pcn_in_improvement_loop",
+      "source": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "improvement_loop.deterministic_repair (run 232) is PCN-Rec's constrained-greedy repair on the project's synthetic Phase-3 task: a rejected proposal gets a bounded deterministic fix (pin the risk-protected classes, no blast-radius widening) and is re-verified before promotion. Motivated jointly by PCN-Rec, CordisBench (2609.01600), and JIT-Agent (2608.25593), which all name a repair stage. 4 new selftest checks."
+    },
+    {
+      "id": "edge_deterministic_repair_grounds_cordisbench",
+      "source": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "CordisBench's finding - a deterministic reference semantics beats LLM lifecycle reasoning - is why the run-232 repair is DETERMINISTIC (a fixed rule: pin the protected classes) rather than a model call: the repair must be cheap and provably conservative."
+    },
+    {
+      "id": "edge_deterministic_repair_relates_jit_agent",
+      "source": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "JIT-Agent trains a repair capability; the project's run-232 repair is the deterministic, no-training counterpart - the same 'a loop needs repair, not only accept/revert' conclusion reached under the emergence-first constraint."
     }
   ]
 }

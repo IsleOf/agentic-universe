@@ -171,6 +171,8 @@ Trajectory-only optimisation (RHO-style, `pattern_trajectory_only_harness_optimi
 
 And the retention side (`concept_unmanaged_skill_libraries_silently_drift`, Library Drift arXiv:2605.19576): outcome-driven retirement + a **bounded active-cap** + a meta-skill authoring prior; premature retirement (−0.019) is worse than none (+0.002), so the `experience_bank` grace window should be generous. See `docs/phase3_holdout_set.md` for the full table.
 
+**The repair stage — from autonomous runs 227–232.** Three independent Sept-2026 papers name an explicit **repair** step a self-improvement loop needs beyond accept/revert: PCN-Rec (`concept_proof_carrying_negotiation_...`, arXiv:2601.09771 — deterministic constrained-greedy repair on a failed verify), CordisBench (`concept_component_lifecycle_reasoning_...`, arXiv:2609.01600 — a deterministic reference semantics), JIT-Agent (`concept_jit_agent_...`, arXiv:2608.25593 — a trained repair capability). **Built (run 232):** `improvement_loop.deterministic_repair(cur_policy, new_policy)` — on a rejected compaction-policy proposal, a bounded deterministic fix ensures the risk-protected classes (`rule`, `identity`) are pinned *without widening the blast radius*, then re-verifies; if the repaired policy passes it is promoted with a `(deterministic repair …)` note and `verdict["repaired"] = True`. It can only make a proposal *more* conservative — it never touches the holdout or the risk measure, so it cannot game the gate. `run_once(..., allow_repair=True)` by default; the raw-gate negative test runs with `allow_repair=False`.
+
 ### Phase 4 — Skill induction
 
 Repeated wins crystallise into named skills. This is where a harness *actually* improves — not by better prompts but by growing a library of procedures.

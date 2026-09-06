@@ -207,15 +207,56 @@ def recoverable(reg: Registry, kind, name):
 
 # --- the loop -------------------------------------------------------------
 
-def run_once(reg: Registry, proposal, log):
+def deterministic_repair(cur_policy, new_policy):
+    """A bounded, deterministic constrained fix for a rejected compaction-policy
+    proposal — the repair stage three Sept-2026 papers independently call for
+    (PCN-Rec's constrained-greedy repair, CordisBench's reference semantics,
+    JIT-Agent's trained repair; runs 227/228/231).
+
+    The one legal move: ensure the classes the frozen risk measure protects
+    (`rule`, `identity`) are pinned, WITHOUT widening the blast radius beyond the
+    original proposal. It cannot invent new structure and it cannot touch the
+    holdout or the risk measure — so it can only make a proposal *more*
+    conservative, never game the gate. Returns a repaired policy dict, or None if
+    no in-bounds repair exists.
+    """
+    protected = {"rule", "identity"}
+    repaired = {
+        "pin": sorted(set(new_policy.get("pin", [])) | protected),
+        "compress": [c for c in new_policy.get("compress", []) if c not in protected],
+    }
+    if repaired == new_policy:
+        return None                       # nothing to fix in bounds
+    if blast_radius(repaired) > blast_radius(new_policy):
+        return None                       # would widen the blast radius — refuse
+    return repaired
+
+
+def run_once(reg: Registry, proposal, log, *, allow_repair=True):
     kind, name, new_body, prediction, cur_policy, new_policy = proposal
     verdict = verify(cur_policy, new_policy, prediction)
     record = {"kind": kind, "name": name, "prediction": prediction, "verdict": verdict}
+    repaired_from = None
+
+    if not verdict["accept"] and allow_repair:
+        fix = deterministic_repair(cur_policy, new_policy)
+        if fix is not None:
+            fix_verdict = verify(cur_policy, fix, prediction)
+            if fix_verdict["accept"]:
+                repaired_from, new_policy = new_policy, fix
+                new_body = json.dumps(fix)
+                verdict = fix_verdict
+                verdict["repaired"] = True
+                record["verdict"] = verdict
+
     if verdict["accept"]:
-        entry = reg.set(kind, name, new_body, note=f"phase3 promote: {prediction['metric']}",
-                        author="proposer")
+        note = f"phase3 promote: {prediction['metric']}"
+        if repaired_from is not None:
+            note += " (deterministic repair of a rejected proposal)"
+        entry = reg.set(kind, name, new_body, note=note, author="proposer")
         record["promoted"] = bool(entry)
         record["recoverable"] = recoverable(reg, kind, name)
+        record["repaired_from"] = repaired_from
     else:
         record["promoted"] = False
         record["recoverable"] = None
@@ -438,8 +479,25 @@ def _selftest():
         good = run_once(reg, propose(reg), log)
         end_risk = grounded_risk(json.loads(reg.get("context", "compaction")))
 
-        # negative test: a deliberately bad proposal must be rejected
-        bad = run_once(reg, propose_bad(), log)
+        # negative test: a deliberately bad proposal must be rejected by the RAW
+        # gate (repair disabled — this tests the verifier, not the repair path)
+        bad = run_once(reg, propose_bad(), log, allow_repair=False)
+
+        # repair path (runs 227/228/231 — PCN-Rec / CordisBench / JIT-Agent all
+        # call for a repair stage). The same bad proposal, with repair ON: the
+        # deterministic constrained fix pins the protected classes and the
+        # REPAIRED policy is promoted, flagged, and still risk 0.
+        reg_r = Registry(base=tmp / "harness-repair")
+        reg_r.set("context", "compaction",
+                  json.dumps({"pin": ["identity"], "compress": list(CLASSES)}),
+                  note="weak starting policy")
+        rlog = []
+        rep = run_once(reg_r, propose_bad(), rlog, allow_repair=True)
+        # a proposal that already protects rule/identity leaves the repair nothing
+        # in bounds to do -> None
+        no_repair = deterministic_repair(
+            {"pin": ["identity"]},
+            {"pin": ["identity", "rule"], "compress": ["episodic", "search_result"]})
 
         # loop-harness edit verification against the held-out set
         v_improve = verify_loop_edit({"a": 1.0, "b": 0.0, "c": 1.0}, {"a": 1.0, "b": 1.0, "c": 1.0})
@@ -466,7 +524,15 @@ def _selftest():
             "grounded risk strictly decreased": end_risk < start_risk,
             "end risk is 0 (all rules retained)": end_risk == 0.0,
             "promoted edit is recoverable": good["recoverable"] is True,
-            "bad proposal REJECTED": bad["verdict"]["accept"] is False and bad["promoted"] is False,
+            "bad proposal REJECTED by the raw gate (repair off)":
+                bad["verdict"]["accept"] is False and bad["promoted"] is False,
+            "repair path: the bad proposal is fixed, promoted, and flagged (runs 227/228/231)":
+                rep["promoted"] and rep["repaired_from"] is not None
+                and rep["verdict"].get("repaired") is True,
+            "repair path: the promoted repaired policy retains all rules (risk 0)":
+                grounded_risk(json.loads(reg_r.get("context", "compaction"))) == 0.0,
+            "repair returns None when a proposal already protects rule/identity":
+                no_repair is None,
             "verdict carries all four constraint fields": all(
                 k in good["verdict"] for k in
                 ("prerequisite", "authority", "fallback", "execution_consequence")),
