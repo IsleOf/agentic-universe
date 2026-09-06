@@ -1136,6 +1136,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 297. No graph node/edge change. Hardened tools/project_graph_scaffold.py for use in an arbitrary target repo: cmd_new now creates docs/ and knowledge/graph/ if absent, and takes an optional root= (was hard-wired to the agentic-universe repo root). +2 selftest checks (10 total). Shipped docs/project_audit_kit/ - a 4-file pure-stdlib drop-in bundle (project_graph_scaffold + knowledge_graph + task_ledger + supervisor) with a README that is the exact prompt for the session auditing poly-bot (/home/dev/poly-bot) or poster-studio (/home/dev/poster-studio). docs/practicing_what_we_preach.md section 3 + tools/README.md updated. BUILD SELFTEST GREEN. The per-project audit - blocked on WSL paths since run 251 - is now executable."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 298. Folded the genuinely-new parts of the owner's agentic-tooling scan (research/next-research-directions-agentic-2026-09.md, origin/main, 2026-09-07). ~60% (DeepSeek Harness / Cordis plugin-first, Harness-Bench's 23.8pt gap, SkillsBench's self-generated-skills-hurt) is already in the graph - cross-validation, not re-folded. 3 new nodes: concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever (AgentLens: process scoring re-scores 23.2% of passes as lucky retries, rankings shift up to 5; StaminaBench: retry/feedback = up to 12x survival, 6x harness gap persists); concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop (Agent-as-a-Router arXiv:2606.22902); concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents (vector + graph/GraphRAG + KV + episodic + reranker + janitor agents; the project has the first three, missing the janitor role). 9 edges. 325 -> 328 nodes, 1303 -> 1312 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9629,6 +9633,81 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-03-1800.md"
+      ]
+    },
+    {
+      "id": "concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever",
+      "label": "Pass/fail agent scoring overcredits lucky retries; process-adjusted scoring shifts rankings, and retry/feedback access is itself a large harness lever",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:evaluation",
+      "confidence": 0.6,
+      "description": "From the owner's agentic-tooling scan (research/next-research-directions-agentic-2026-09.md, 2026-09-07). Two benchmarks say standard pass/fail agent evaluation systematically misleads. AgentLens: process-level scoring re-scores up to 23.2% of nominal 'passes' as lucky blind retries rather than real fixes, and rankings shift up to 5 positions under process-adjusted scoring. StaminaBench: test-feedback / retry access improves task survival by up to 12x, and even the strongest models still show a 6x best/worst-harness gap on long-horizon tasks. Together: (i) an outcome gate should credit the process (was the fix causal, or did the agent flail into a pass), not just the end state - the same family as the project's run-247 finding that the gate scores usefulness not novelty; (ii) a retry/feedback loop is a first-order harness lever, not a detail, so a rig that denies it under-measures the harness. Currency: vendor/benchmark figures are point-in-time and the harness set is H1-2026.",
+      "tags": [
+        "evaluation",
+        "harness",
+        "process-scoring",
+        "retry",
+        "owner-research",
+        "methodology"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-04-0600.md",
+        "research/next-research-directions-agentic-2026-09.md (owner research input, origin/main)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-04-0600.md"
+      ]
+    },
+    {
+      "id": "concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop",
+      "label": "Model routing per task class is a harness lever with a cost-accuracy-feedback loop",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_anatomy",
+      "confidence": 0.55,
+      "description": "Agent-as-a-Router: Agentic Model Routing for Coding Tasks (arXiv:2606.22902), via the owner's scan. A router with a task taxonomy + per-model performance stats + a cost-accuracy-feedback (C-A-F) update loop optimises which model handles each task class; log regret vs the best observed choice. This is a harness-configuration lever orthogonal to model scaling - the same shape as JIT-Agent's 'harness intelligence is trainable/transferable/compounding' and this project's concept_capability_is_a_model_harness_config_property. For the loop: the proposer/verifier split could route (cheap model proposes, stronger model verifies) with a logged regret metric.",
+      "tags": [
+        "model-routing",
+        "harness",
+        "cost",
+        "owner-research"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-04-0600.md",
+        "arXiv:2606.22902 (Agent-as-a-Router)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-04-0600.md"
+      ]
+    },
+    {
+      "id": "concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents",
+      "label": "Agent memory should be hybrid - vector + knowledge graph + KV + episodic stream - with janitor agents, not flat RAG",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:memory",
+      "confidence": 0.55,
+      "description": "From the owner's scan. The recommended agent-memory stack: a vector store for unstructured docs; a knowledge graph for structured relationships and multi-hop reasoning (GraphRAG maps relationships between chunks); a KV store for persistent agent state; and an episodic stream for time-ordered interaction/execution logs. Add a reranker when retrieval scales, and janitor agents that propose summaries and archival changes. Bears on the owner's stated pain ('agent memory, tasks get dropped') and on this project's own memory surfaces: the experience bank (workflow/step stores) is the vector+KV part; the append-only trace substrate is the episodic part; the knowledge graph is the graph part - what is missing is the janitor role (periodic summarise / archive) and an explicit reranker. The deterministic task ledger is the not-dropped-tasks answer that sits alongside memory, not inside it.",
+      "tags": [
+        "memory",
+        "graphrag",
+        "episodic",
+        "janitor",
+        "owner-research"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-04-0600.md",
+        "research/next-research-directions-agentic-2026-09.md (owner research input, origin/main)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-04-0600.md"
       ]
     }
   ],
@@ -23699,6 +23778,105 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.6,
       "description": "One of the branch's own headline literature findings (Prophet Arena, PolyBench) - included here as the sharpest design constraint it carries."
+    },
+    {
+      "id": "edge_lucky_retries_refines_aggregate_score_masks",
+      "source": "concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever",
+      "target": "concept_aggregate_score_masks_per_layer_regression",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Another way an aggregate pass-rate hides something: here the hidden variable is whether the pass came from a causal fix or a lucky blind retry. AgentLens's process scoring is the detector, as the deterministic per-layer harness is for per-layer regressions."
+    },
+    {
+      "id": "edge_lucky_retries_informs_heterogeneous_verifier",
+      "source": "concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever",
+      "target": "artifact_phase3_heterogeneous_verifier",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The project's held-out verifier scores answers; AgentLens says it should also weigh whether the process that produced them was sound - consistent with run 247 (the gate scores usefulness, and nothing scores how the result was reached)."
+    },
+    {
+      "id": "edge_lucky_retries_supports_harness_engineering",
+      "source": "concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever",
+      "target": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "StaminaBench's 6x best/worst-harness gap on long-horizon tasks - persisting for the strongest models - is direct evidence that the harness, not the model, sets the ceiling."
+    },
+    {
+      "id": "edge_lucky_retries_supports_contamination_evals",
+      "source": "concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever",
+      "target": "concept_search_time_contamination_inflates_agent_evals",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Both: a standard agent benchmark number is not what it looks like - contamination inflates it from one side, uncredited lucky retries from another."
+    },
+    {
+      "id": "edge_routing_extends_capability_is_config",
+      "source": "concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "If capability is a model-harness-config property, then choosing the model per task class is one of the config knobs - with a measurable regret metric."
+    },
+    {
+      "id": "edge_routing_informs_bottleneck_coupling",
+      "source": "concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Routing is a concrete instance of managing the model-harness coupling: the harness decides which model it couples to, per task."
+    },
+    {
+      "id": "edge_hybrid_memory_refines_experience_bank",
+      "source": "concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents",
+      "target": "pattern_experience_bank",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The experience bank is the vector+KV layer of the recommended stack; the missing pieces are a janitor role (periodic summarise/archive) and an explicit reranker at scale."
+    },
+    {
+      "id": "edge_hybrid_memory_informs_memory_and_learning",
+      "source": "concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents",
+      "target": "concept_memory_and_learning",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "A concrete architecture for the memory-and-learning concept: four stores by data shape, plus janitor agents for upkeep."
+    },
+    {
+      "id": "edge_hybrid_memory_supports_platform_capture",
+      "source": "concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents",
+      "target": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Janitor agents that periodically summarise and crystallise are the platform-level upkeep the human-knowledge-capture concept requires - the same idea applied to the agent's own memory."
     }
   ]
 }

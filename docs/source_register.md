@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 325 nodes, 1303 edges · **Date:** 2026-09-05
+**Graph at generation:** 328 nodes, 1312 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -119,6 +119,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.11686](https://arxiv.org/abs/2606.11686) | (title not recorded) | `concept_aggregate_score_masks_per_layer_regression` |
 | [2606.19924](https://arxiv.org/abs/2606.19924) | The Tao of Agency: Autotelic AI, Embedded Agency and Dissolution of the Self | `concept_autotelic_agency`, `concept_habitat_slack` |
 | [2606.20683](https://arxiv.org/abs/2606.20683) | (title not recorded) | `concept_bottleneck_is_the_model_harness_coupling` |
+| [2606.22902](https://arxiv.org/abs/2606.22902) | (title not recorded) | `concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop` |
 | [2606.26294](https://arxiv.org/abs/2606.26294) | (title not recorded) | `concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries` |
 | [2606.28235](https://arxiv.org/abs/2606.28235) | (title not recorded) | `concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property` |
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
@@ -338,6 +339,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - principle_diversity_maintenance requires a permanently withheld fraction of runs — `pattern_skill_induction`
 - reconciles emergent_subagent_training_induces_coordination (run 6) — `concept_transparency_cuts_both_ways`
 - research/2026-09-06-deepseek-harness-ecosystem.md (owner research input) — `concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture`
+- research/next-research-directions-agentic-2026-09.md (owner research input, origin/main) — `concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents`, `concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever`
 - revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
 - run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI — `concept_context_economics`
 - runtime/harness/context/loop_policy.history.json — `artifact_phase3_first_closed_loop`
@@ -478,6 +480,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-03-1200.md` — `concept_environmental_pressure_has_an_inverted_u`
 - `docs/auto_sweep_2026-10-03-1800.md` — `concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution`, `concept_risklab_probe_toolkit`, `concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop`
 - `docs/auto_sweep_2026-10-04-0000.md` — `concept_safety_helpfulness_tradeoff_persists_under_optimisation`
+- `docs/auto_sweep_2026-10-04-0600.md` — `concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents`, `concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop`, `concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever`
 - `docs/auto_sweep_2026-10-04-1200.md` — `concept_aggregate_score_masks_per_layer_regression`
 - `docs/auto_sweep_2026-10-05-0000.md` — `concept_harness_has_model_independent_failure_fingerprints`
 - `docs/auto_sweep_2026-10-05-0600.md` — `concept_recursive_meta_skill_evolution`
