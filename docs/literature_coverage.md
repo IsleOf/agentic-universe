@@ -43,10 +43,10 @@ re-checking the 5 `inconclusive` nodes against newer evidence, and graph hygiene
 
 `2608.29596` (Agentic Skills systems foundation), `2609.01779` (Agents That Model Agents), `2608.21156` (Graph Engineering survey), `2601.08129` (pressure-field coordination), `2608.26530` (PILOT), `2604.25850` (AHE). These are folded in; a sweep that only returns these has hit the current frontier.
 
-## OpenReview watch-list — titles surfaced, content not yet accessible (run 104)
+## OpenReview watch-list — CLEARED (run 104 opened it, runs 108–110 folded it)
 
 `research-fetch openreview search` is keyless; the `forum` command needs a token, and arXiv / S2 have been
-429'ing. These titles came up on relevant searches and are worth folding **when a content source clears**:
+429'ing. All four surfaced titles are now resolved:
 
 - ~~**"Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows"**~~ — FOLDED run
   108 (`concept_capability_is_a_model_harness_config_property`, arXiv:2605.27922, resolved via DBLP). 5,194
@@ -56,11 +56,7 @@ re-checking the 5 `inconclusive` nodes against newer evidence, and graph hygiene
   (`concept_self_harness_validates_the_three_loop`, arXiv:2606.09498). An agent improves its own harness via
   weakness-mining → minimal proposal → held-out regression validation; 9/9 model-benchmark combos improve
   held-out, up to +132%. The project's exact three-loop architecture, working.
-- **"Retrospective Harness Optimization: Improving LLM Agents via Self-Preference over Trajectory Rollouts"**
-  (ACL ARR 2026 May) and **"Evolving Agents in the Dark: Retrospective Harness Optimization via
-  Self-Preference"** — the RHO line; the graph cites `2606.05922`, but the OpenReview *reviews* would show
-  whether the self-preference-inflation concern (`probe_rho_holdout.py`, ~33% survives external grading) was
-  raised by peer review.
+- ~~RHO OpenReview items~~ — RESOLVED run 110: both are arXiv:2606.05922, already in the graph as `pattern_trajectory_only_harness_optimization` (VERIFIED). Re-confirmed the abstract via DBLP->arXiv-HTML. The RHO<->Self-Harness contrast (same problem, opposite verification) is now recorded as an edge.
 
 How to clear: **DBLP works when arXiv/S2 API don't** — `curl "https://dblp.org/search/publ/api?q=<title>&format=json"`
 resolves the arXiv id, then `curl https://arxiv.org/abs/<id>` reads the abstract from the HTML page

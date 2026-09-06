@@ -396,6 +396,10 @@
     {
       "date": "2026-10-03",
       "change": "Autonomous run 109. Watch-list 2/4 via DBLP: Self-Harness (arXiv:2606.09498). concept_self_harness_validates_the_three_loop: an agent improves its OWN harness via Weakness Mining (from traces) -> minimal Harness Proposal -> Proposal Validation (regression testing only). 9/9 model-benchmark combos improve held-in AND held-out, up to +132%. This is the project's exact self_improving_harness three-loop architecture, working - independent evidence the plan is instantiable, and the held-out-gains result is the counterpoint to RHO's self-preference inflation (~33% survives). Harness design is per-model. +7 edges."
+    },
+    {
+      "date": "2026-10-03",
+      "change": "Autonomous run 110. Watch-list COMPLETE (4/4). The two RHO OpenReview items both resolve via DBLP to arXiv:2606.05922 - the RHO paper already in the graph (pattern_trajectory_only_harness_optimization); re-read the abstract via DBLP->arXiv-HTML to confirm ('diverse coreset', 'self-validation and self-consistency', 59->78 without external grading). Added the direct RHO<->Self-Harness contrast edge: same problem, opposite verification (self-preference vs held-out regression) - the held-out validation is the whole difference, now with two data points (RHO ~33% survives per probe_rho_holdout; Self-Harness +132% held-out). No new node."
     }
   ],
   "nodes": [
@@ -3327,7 +3331,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-07-0000.md",
-        "arXiv:2606.05922 (RHO / Evolving Agents in the Dark) - VERIFIED, abstract read"
+        "arXiv:2606.05922 (RHO / Evolving Agents in the Dark) - VERIFIED, abstract read",
+        "arXiv:2606.05922 abstract re-read run 110 via DBLP->arXiv-HTML: 'selects a diverse coreset of challenging tasks from past trajectories and re-solves them in parallel ... self-validation and self-consistency ... pairwise self-preference'; SWE-Bench Pro 59->78 'without any external grading'; 'sustains higher accuracy during long-horizon sessions'"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-07-0000.md"
@@ -12172,6 +12177,17 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "self_improving_harness",
       "confidence": 0.6
+    },
+    {
+      "id": "edge_selfharness_vs_rho_direct",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "pattern_trajectory_only_harness_optimization",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Same problem (improve the harness from past traces), opposite verification: RHO selects by the agent's own pairwise self-preference (no external grading, +19pp reported); Self-Harness accepts only after regression testing on held-out tasks (+up to 132% held-in AND held-out, 9/9 combos). The held-out validation is the whole difference - the plan's 'frozen external holdout wired in' rule, with two data points now."
     }
   ]
 }

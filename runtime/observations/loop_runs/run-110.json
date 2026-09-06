@@ -1,0 +1,18 @@
+{
+  "run": 110,
+  "increment": "close the OpenReview watch-list: RHO items = arXiv:2606.05922 (already in graph)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-110.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
