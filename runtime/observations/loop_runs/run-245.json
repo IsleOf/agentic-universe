@@ -1,0 +1,27 @@
+{
+  "run": 245,
+  "increment": "incorporate the owner's Perplexity deep-research - folded AI Steerability 360 (arXiv:2603.07837): LLM steering has four control surfaces (input/structural/state/output), composable; the taxonomy partitions the project's positions; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2603.07837",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2603.07837"
+  ],
+  "trace_file": "runtime\\traces\\loop-245.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 245 OK · VALID · graph +0 · cites 1v/1 · idle-streak 3 · legible 1.00 · verified-frac 0.80"
+}

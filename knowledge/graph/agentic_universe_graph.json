@@ -940,6 +940,10 @@
     {
       "date": "2026-09-21",
       "change": "Autonomous run 244. Build (recommendation #3 from docs/practicing_what_we_preach.md, answering the owner's 'tasks get dropped' pain). tools/task_ledger.py + docs/task_ledger.md: a deterministic task ledger the orchestrator reads/writes instead of the model holding task state in context (CordisBench / ASPIRE). One row per task, pending->active->done (+ blocked/failed/abandoned). Three anti-dropped-task mechanisms: next_ready() deterministic pick; sweep_stale() returns claimed-but-abandoned tasks to pending (PILOT re-dispatch); atomic write + .audit log. Pure stdlib, reference implementation, NOT wired into the loop. 12 selftest checks; added to selftest_all.py JOBS (24) and tools/README.md. New node pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth + 5 edges (implements pattern_execution_layer_enforcement + the CordisBench node; supports the PILOT live-supervisor node, the jobs-landscape node, artifact_phase2_experience_bank). 268->269 nodes, 1068->1073 edges."
+    },
+    {
+      "date": "2026-09-21",
+      "change": "Autonomous run 245. Incorporating the owner's Perplexity deep-research (cont.). Folded AI Steerability 360 (arXiv:2603.07837, Mar 2026, IBM) as concept_llm_steering_has_four_control_surfaces_input_structural_state_output: a steering toolkit organised around four model control surfaces - input (prompt), structural (weights/architecture), state (activations/attentions), output (decoding) - composable via a common pipeline interface with use-case + benchmark classes. The taxonomy partitions the project's positions: input = context/loop_policy + ACE; structural = the weight-training fork declined (WHALE/JIT-Agent); state = activation-probe monitoring; output = the diversity toolkit (verbalized sampling, entropy-max). Addresses the steering-skill-drives-quality-variance finding (run 240). Currency note: Mar 2026, a toolkit not a capability claim. 6 edges: refines concept_bottleneck_is_the_model_harness_coupling (a taxonomy of where the coupling is exercised); supports concept_human_effort_shifts_from_ideating_to_verifying... (steering as a comparable artifact), concept_whale_... (three of four surfaces used, fourth on the table), pattern_activation_probe_monitoring (state surface), pattern_verbalized_sampling (output surface), concept_capability_is_a_model_harness_config_property (a pipeline IS a harness config). 269->270 nodes, 1073->1079 edges."
     }
   ],
   "nodes": [
@@ -7978,6 +7982,35 @@
       "evidence_links": [
         "docs/task_ledger.md",
         "docs/auto_sweep_2026-09-21-0600.md"
+      ]
+    },
+    {
+      "id": "concept_llm_steering_has_four_control_surfaces_input_structural_state_output",
+      "label": "LLM steering organises into four control surfaces - input (prompt), structural (weights/architecture), state (activations/attentions), output (decoding) - composable via a common pipeline interface; a toolkit lowers the barrier to comparing steering methods",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:four_steering_control_surfaces",
+      "confidence": 0.6,
+      "description": "AI Steerability 360 (arXiv:2603.07837, VERIFIED via arXiv abstract read run 245; Mar 2026, IBM; Apache 2.0, HF-native, github.com/IBM/AISteer360). SOURCE: surfaced in the owner's Perplexity deep-research 'Improving Agent Creativity Diversity' (knowledge/notes/2026-09-04-creativity-diversity-mitigation.md on origin/main), section 5 'Quality Variation Mitigation (Better Steering Interfaces)' - cross-checked and folded here. An extensible Python library for steering LLMs, organised around FOUR MODEL CONTROL SURFACES: (1) INPUT - modification of the prompt; (2) STRUCTURAL - modification of weights or architecture; (3) STATE - modification of activations and attentions; (4) OUTPUT - modification of decoding / generation. Steering methods exert control through a common 'steering pipeline' interface that also composes multiple methods; use-case classes define tasks and a benchmark class compares performance. Bearing on the project: the four-surface taxonomy is a clean map of WHERE the model-harness coupling is exercised, and it partitions the project's positions cleanly - INPUT is context/loop_policy + ACE context evolution; STRUCTURAL is the weight-training fork the project declines (WHALE / JIT-Agent); STATE is pattern_activation_probe_monitoring and the context-privesc concern; OUTPUT is the diversity toolkit (verbalized sampling, entropy-max). It also directly addresses concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated's finding that steering SKILL drives output-quality variance - a composable, comparable toolkit lowers the barrier. Currency: Mar 2026 (~6 months old) - a framework/toolkit not a capability claim, so it ages slowly; modest confidence for lack of independent adoption evidence.",
+      "tags": [
+        "ai-steerability-360",
+        "four-control-surfaces",
+        "input-structural-state-output",
+        "steering-pipeline",
+        "composable-steering",
+        "steering-toolkit",
+        "perplexity-deep-research-source",
+        "currency-note-2026-03"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-21-1200.md",
+        "arXiv:2603.07837 (AI Steerability 360: A Toolkit for Steering Large Language Models) - VERIFIED, abstract read run 245",
+        "knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-21-1200.md"
       ]
     }
   ],
@@ -19518,6 +19551,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "The ledger's .audit log and per-task notes are task-adjacent experience captured automatically at the platform level (concept_human_knowledge_capture_must_be_platform_level...) - a feed the experience bank could condense from."
+    },
+    {
+      "id": "edge_four_surfaces_refines_model_harness_coupling",
+      "source": "concept_llm_steering_has_four_control_surfaces_input_structural_state_output",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The four control surfaces (input / structural / state / output) are a taxonomy of WHERE the model-harness coupling is exercised - the harness touches input, state, and output; structural is the weight layer. A cleaner partition than 'model vs harness'."
+    },
+    {
+      "id": "edge_four_surfaces_supports_who_owns_creativity",
+      "source": "concept_llm_steering_has_four_control_surfaces_input_structural_state_output",
+      "target": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Who Owns Creativity finds steering SKILL drives output-quality variance; a composable, benchmarkable steering toolkit is a direct response - it makes steering a comparable engineering artifact rather than tacit skill."
+    },
+    {
+      "id": "edge_four_surfaces_challenges_no_training_fork",
+      "source": "concept_llm_steering_has_four_control_surfaces_input_structural_state_output",
+      "target": "concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "The 'structural' surface (weights / architecture) is exactly the one the project's no-weight-training fork declines - the taxonomy makes explicit that the project uses three of four steering surfaces and leaves the fourth on the table, which is WHALE's point stated structurally."
+    },
+    {
+      "id": "edge_four_surfaces_supports_activation_probe",
+      "source": "concept_llm_steering_has_four_control_surfaces_input_structural_state_output",
+      "target": "pattern_activation_probe_monitoring",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "The 'state' surface (activations / attentions) is where activation-probe monitoring reads and where activation steering would write - the same surface the project's monitoring design depends on."
+    },
+    {
+      "id": "edge_four_surfaces_relates_verbalized_sampling",
+      "source": "concept_llm_steering_has_four_control_surfaces_input_structural_state_output",
+      "target": "pattern_verbalized_sampling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.4,
+      "description": "Verbalized sampling and entropy-max are 'output' surface steering (decoding / generation modification) - the diversity toolkit located in the four-surface taxonomy."
+    },
+    {
+      "id": "edge_four_surfaces_supports_capability_is_config",
+      "source": "concept_llm_steering_has_four_control_surfaces_input_structural_state_output",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "A steering pipeline that composes input + state + output methods IS a harness configuration; the toolkit operationalises 'capability is a model x harness-config property' as a composable, benchmarkable object."
     }
   ]
 }

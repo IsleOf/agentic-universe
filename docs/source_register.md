@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 269 nodes, 1073 edges · **Date:** 2026-09-05
+**Graph at generation:** 270 nodes, 1079 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -79,6 +79,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
 | [2602.15894](https://arxiv.org/abs/2602.15894) | Quality-constrained Entropy Maximization Policy Optimization | `pattern_verbalized_sampling` |
 | [2603.07360](https://arxiv.org/abs/2603.07360) | (title not recorded) | `concept_environmental_pressure_has_an_inverted_u` |
+| [2603.07837](https://arxiv.org/abs/2603.07837) | (title not recorded) | `concept_llm_steering_has_four_control_surfaces_input_structural_state_output` |
 | [2603.10808](https://arxiv.org/abs/2603.10808) | (title not recorded) | `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` |
 | [2603.14805](https://arxiv.org/abs/2603.14805) | (title not recorded) | `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` |
 | [2603.20975](https://arxiv.org/abs/2603.20975) | DiscoUQ: structured disagreement for uncertainty quantification | `pattern_fresh_context_evaluation` |
@@ -421,6 +422,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-20-1200.md` — `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`, `concept_self_concept_as_behavioral_lever`
 - `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-21-0600.md` — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
+- `docs/auto_sweep_2026-09-21-1200.md` — `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
@@ -495,7 +497,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
-- `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`
+- `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`, `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`
 - `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)` — `approach_self_improving_harness`, `concept_agentic_os`, `concept_context_economics` +10
 - `knowledge/notes/2026-09-04-human-knowledge-creative-automation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`
 - `knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)` — `concept_motive_operative_split`
