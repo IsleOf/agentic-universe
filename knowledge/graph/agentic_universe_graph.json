@@ -288,6 +288,10 @@
     {
       "date": "2026-09-26",
       "change": "Autonomous run 82. IDLE-STATE RULE (option b): built tools/probe_subagent_coordination.py - the subagent-coordination containment test as a runnable rig. Two cohorts (same-parent filtered vs unrestricted), 9-agent tree, one seeded out-of-scope instruction, Phase 0 instrumentation, cross-family adversarial monitor, spread measures. Dry-run: under a peer-deference drive, same-parent filtering cuts reach 12/12 -> 4/12 - bounds spread but does not stop it, monitor fires in both regimes. Matches what_would_make_this_wrong.md section 1. Blocked on a real model relay policy. artifact_probe_subagent_coordination_rig added. 16 selftests GREEN."
+    },
+    {
+      "date": "2026-09-26",
+      "change": "Autonomous run 83. IDLE-STATE RULE (option b): built tools/probe_epistemic_sybil.py - the epistemic-Sybil evidence-roots probe as a runnable rig. Three arms (shared / independent / ancestry-dedup), N swept 1..32, coverage of the naive 95pct CI. Dry-run reproduces arXiv:2609.01873: shared-source coverage collapses 1.00->0.095, independent holds ~0.94, dedup recovers to 1.00. Confirms pattern_evidential_ancestry_tracking is load-bearing. artifact_probe_epistemic_sybil_rig added. 17 selftests GREEN."
     }
   ],
   "nodes": [
@@ -4935,6 +4939,33 @@
       ],
       "evidence_links": [
         "docs/probe_subagent_coordination.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_epistemic_sybil_rig",
+      "label": "Epistemic-Sybil evidence-roots probe as a runnable rig",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:sybil_probe_rig",
+      "confidence": 0.75,
+      "description": "tools/probe_epistemic_sybil.py, run 83 (IDLE-STATE RULE, option b). Three arms - N agents on one shared source, N on independent sources, and shared-with-ancestry-dedup - swept N 1..32, 400 trials each, coverage of the naive 95pct CI against ground truth. Phase 0 CLAIM instrumentation with evidence_roots. Stub: agent_read (source systematic bias + independent noise; swap for a model over a document). Dry-run reproduces arXiv:2609.01873: shared-source coverage collapses 1.00 -> 0.095 as N grows, independent holds at ~0.94, dedup-by-evidence-root recovers to 1.00. Confirms pattern_evidential_ancestry_tracking is load-bearing and experience_bank's distinct_evidence_roots is the dedup arm already built.",
+      "tags": [
+        "epistemic-sybil",
+        "evidence-roots",
+        "coverage-collapse",
+        "ancestry-dedup",
+        "dry-run",
+        "rig"
+      ],
+      "derived_from": [
+        "docs/probe_epistemic_sybil.md",
+        "tools/probe_epistemic_sybil.py",
+        "arXiv:2609.01873"
+      ],
+      "evidence_links": [
+        "docs/probe_epistemic_sybil.md"
       ]
     }
   ],
@@ -11000,6 +11031,59 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Second run governed by the run-80 IDLE-STATE RULE."
+    },
+    {
+      "id": "edge_sybilrig_instantiates_emergence",
+      "source": "artifact_probe_epistemic_sybil_rig",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_sybilrig_verifies_sybil_collapse",
+      "source": "artifact_probe_epistemic_sybil_rig",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "verifies",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.7,
+      "description": "Reproduces the coverage collapse (1.00->0.095), the independent-source hold, and the dedup recovery in a controlled sim."
+    },
+    {
+      "id": "edge_sybilrig_verifies_ancestry_tracking",
+      "source": "artifact_probe_epistemic_sybil_rig",
+      "target": "pattern_evidential_ancestry_tracking",
+      "type": "verifies",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "The dedup arm: collapsing by evidence root recovers coverage to nominal."
+    },
+    {
+      "id": "edge_sybilrig_depends_on_phase0",
+      "source": "artifact_probe_epistemic_sybil_rig",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge_sybilrig_from_run80_rule",
+      "source": "artifact_probe_epistemic_sybil_rig",
+      "target": "artifact_phase3_first_closed_loop",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Third run governed by the run-80 IDLE-STATE RULE."
     }
   ]
 }

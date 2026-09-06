@@ -36,6 +36,7 @@ JOBS = [
     ("holdout_verifier2.py", ["selftest"]),
     ("probe_idle_agent.py", ["selftest"]),
     ("probe_subagent_coordination.py", ["selftest"]),
+    ("probe_epistemic_sybil.py", ["selftest"]),
 ]
 
 
