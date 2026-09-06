@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 220 nodes, 781 edges · **Date:** 2026-09-05
+**Graph at generation:** 221 nodes, 787 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -54,6 +54,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2507.21046](https://arxiv.org/abs/2507.21046) | (title not recorded) | `concept_what_when_how_where_to_evolve` |
 | [2508.07407](https://arxiv.org/abs/2508.07407) | (title not recorded) | `concept_what_when_how_where_to_evolve` |
 | [2509.15541](https://arxiv.org/abs/2509.15541) | (title not recorded) | `concept_anti_scheming_mitigation_confounded_by_eval_awareness` |
+| [2509.23537](https://arxiv.org/abs/2509.23537) | (title not recorded) | `concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding` |
 | [2510.01171](https://arxiv.org/abs/2510.01171) | How to Mitigate Mode Collapse and Unlock LLM Diversity | `emergent_evaluator_mode_collapse` |
 | [2510.04618](https://arxiv.org/abs/2510.04618) | (title not recorded) | `concept_ace_context_evolution_self_improvement` |
 | [2510.15568](https://arxiv.org/abs/2510.15568) | The Spark Effect: On Engineering Creative Diversity in Multi-Agent AI Systems | `pattern_structural_decoupling` |
@@ -379,6 +380,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-14-0600.md` — `concept_cot_obfuscation_hits_the_message_channel_hardest`
 - `docs/auto_sweep_2026-10-14-1200.md` — `concept_cot_monitorability_is_a_fragile_property_to_preserve`
 - `docs/auto_sweep_2026-10-15-1200.md` — `pattern_structural_decoupling`
+- `docs/auto_sweep_2026-10-16-0000.md` — `concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

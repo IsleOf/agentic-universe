@@ -592,6 +592,10 @@
     {
       "date": "2026-10-16",
       "change": "Autonomous run 158. Consolidation. Folded run-157's compute-efficiency paradox into two docs. nourishing_harness_design.md section 3.2 (Diversity maintenance row): the population must deliberately include less-capable/less-aligned model variants (stronger aligned models -> diminishing marginal diversity); authority dynamics suppress semantic diversity so the society surface must not let a high-status agent dominate; heterogeneity buys independence at generation, not against interaction compression - a round cap or re-seeding is also needed. what_would_make_this_wrong.md section 4: the compute-efficiency paradox cuts against the 'use good models' instinct; emergent hubs are a fourth erosion channel; (3) confirmed from a second study. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-16",
+      "change": "Autonomous run 159. DBLP. concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (Beyond the Strongest LLM, arXiv:2509.23537): 4 frontier LLMs propose/vote - orchestration matches or exceeds the strongest single model (counterweight to MAST); ablations - revealing authorship drives self-voting (keep authorship hidden), showing ongoing votes amplifies herding into premature consensus (do not surface running vote tallies - a cheap specific protocol rule). +6 edges."
     }
   ],
   "nodes": [
@@ -6191,6 +6195,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-14-1200.md"
+      ]
+    },
+    {
+      "id": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "label": "Multi-turn multi-agent orchestration can match/exceed the strongest single model - but revealing authorship drives self-voting and showing ongoing votes amplifies herding into premature consensus",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:orchestration_vs_single_and_the_vote_visibility_lever",
+      "confidence": 0.72,
+      "description": "Beyond the Strongest LLM: Multi-Turn Multi-Agent Orchestration vs. Single LLMs on Benchmarks (arXiv:2509.23537, 2025; VERIFIED via arXiv abstract read run 159, resolved via DBLP). Four frontier LLMs (Gemini 2.5 Pro, GPT-5, Grok 4, Claude Sonnet 4) doing propose/vote-until-consensus on GPQA-Diamond, IFEval, MuSR. Two results: (i) orchestration MATCHES OR EXCEEDS the strongest single model and consistently outperforms the others - and best-achievable analysis shows more headroom; (ii) ablations - REVEALING AUTHORSHIP increases self-voting and ties; SHOWING ONGOING VOTES amplifies HERDING, which speeds convergence but can yield PREMATURE CONSENSUS. For this project: (1) the positive headline is a counterweight to concept_mast_multi_agent_failure_taxonomy ('MAS gains often minimal') - with top models and a clean propose/vote protocol, orchestration DOES beat the strongest single model; nuances concept_harness_orchestration_pairing (orchestration earns its keep here); (2) the two ablations are direct experimental confirmation of two design concerns and give a concrete lever: reveal-authorship -> self-voting is emergent_self_and_peer_preservation / emergent_peer_recognition_survives_anonymization, so keep authorship hidden (which the design already does via cross-family observers + anonymisation); show-ongoing-votes -> herding -> premature consensus is emergent_information_cascades + emergent_pluralistic_ignorance + concept_multi_round_interaction_compresses_semantic_space, so DO NOT surface running vote tallies to the agents - a cheap, specific protocol rule the design should adopt.",
+      "tags": [
+        "orchestration-beats-strongest-model",
+        "propose-vote-consensus",
+        "reveal-authorship-self-voting",
+        "show-votes-herding",
+        "premature-consensus",
+        "vote-visibility-lever",
+        "gpqa-ifeval-musr"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-16-0000.md",
+        "arXiv:2509.23537 (Beyond the Strongest LLM) - VERIFIED, abstract read run 159; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-16-0000.md"
       ]
     }
   ],
@@ -14519,6 +14550,72 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "'Authority-driven dynamics suppress semantic diversity' - emergent hubs/roles are a diversity-erosion mechanism, not just an organisation one."
+    },
+    {
+      "id": "edge_orchvote_challenges_mast",
+      "source": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "target": "concept_mast_multi_agent_failure_taxonomy",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.4,
+      "description": "A counterweight: with four frontier models and a clean propose/vote protocol, orchestration matches or exceeds the strongest single model on GPQA-Diamond / IFEval / MuSR - MAS gains are not always minimal."
+    },
+    {
+      "id": "edge_orchvote_supports_pairing",
+      "source": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "target": "concept_harness_orchestration_pairing",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45,
+      "description": "Orchestration earns its keep here - evidence that the orchestration layer adds value over a single agent, at least with strong models on clean benchmarks."
+    },
+    {
+      "id": "edge_orchvote_supports_self_preservation",
+      "source": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "target": "emergent_self_and_peer_preservation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "'Revealing authorship increases self-voting' - agents preferentially back their own (recognised) contributions; supports keeping authorship hidden from voting agents."
+    },
+    {
+      "id": "edge_orchvote_supports_information_cascades",
+      "source": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "target": "emergent_information_cascades",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "'Showing ongoing votes amplifies herding ... premature consensus' - a direct experimental instance of the cascade; gives the protocol rule: do not surface running vote tallies to the agents."
+    },
+    {
+      "id": "edge_orchvote_supports_pluralistic_ignorance",
+      "source": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "target": "emergent_pluralistic_ignorance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45,
+      "description": "Herding under visible votes is the visible-conformity dynamic - agents move toward the apparent majority before their own reasoning resolves."
+    },
+    {
+      "id": "edge_orchvote_refines_semcompress",
+      "source": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "target": "concept_multi_round_interaction_compresses_semantic_space",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "A specific mechanism for the over-rounds compression: visible vote tallies accelerate convergence, sometimes before the group has actually explored."
     }
   ]
 }
