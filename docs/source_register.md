@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 240 nodes, 899 edges · **Date:** 2026-09-05
+**Graph at generation:** 241 nodes, 905 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -138,6 +138,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.19197](https://arxiv.org/abs/2608.19197) | (title not recorded) | `concept_graded_challenge`, `pattern_regret_as_difficulty_signal` |
 | [2608.19557](https://arxiv.org/abs/2608.19557) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.20569](https://arxiv.org/abs/2608.20569) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
+| [2608.20614](https://arxiv.org/abs/2608.20614) | (title not recorded) | `concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans` |
 | [2608.20940](https://arxiv.org/abs/2608.20940) | (title not recorded) | `emergent_self_and_peer_preservation` |
 | [2608.22512](https://arxiv.org/abs/2608.22512) | (title not recorded) | `emergent_attribution_laundering` |
 | [2608.22752](https://arxiv.org/abs/2608.22752) | (title not recorded) | `concept_compaction_cliff` |
@@ -360,7 +361,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-11-0000.md` — `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal`, `concept_self_improvement_evaluation_is_noisy_and_task_order_dependent`
 - `docs/auto_sweep_2026-09-11-0600.md` — `concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution`
 - `docs/auto_sweep_2026-09-11-1200.md` — `concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score`, `concept_agent_shaped_topology_is_agent_corruptible`
-- `docs/auto_sweep_2026-09-11-1800.md` — `principle_structural_edits_gated_outside_the_agents`
+- `docs/auto_sweep_2026-09-11-1800.md` — `concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans`, `principle_structural_edits_gated_outside_the_agents`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
 - `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`

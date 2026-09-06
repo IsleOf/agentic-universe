@@ -784,6 +784,10 @@
     {
       "date": "2026-09-11",
       "change": "Autonomous run 205. Recency-weighted arxiv-fetch sweep. Folded 'Who Grades the Grader?' (arXiv:2607.12790) as concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score: the metric itself can be the evolving object (evolve a composition of typed drawback detectors, select for agreement with a 10-item anchored reference set, regularise by consensus); +0.21 agreement with hidden ground truth (paired p=0.014). Safety result: remove the anchor guards and the metric collapses to a vacuous always-pass detector that trains skills JUST AS WELL - so downstream task score cannot validate a self-evolved evaluator (task score = sufficiency, not validity). Double Ratchet retains 88-110% of the ground-truth/rubric lift on MBPP+, Spider 2.0-Snow, report generation; an independent judge caught rubric-gaming and one added detector repaired it. 6 edges: supports artifact_phase3_holdout_set (frozen hand-written evaluator = the safe side) and artifact_phase3_heterogeneous_verifier (independent judge catches gaming); refines concept_self_improvement_strength_tracks_the_verification_hierarchy (an evolved evaluator's hierarchy position is not fixed) and concept_gate_faces_a_pretrained_grader_gamer; extends concept_aggregate_score_masks_per_layer_regression (a self-evolved aggregate can be vacuous); concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution supports it (PACE validates the commit decision, this validates the metric). 239->240 nodes, 893->899 edges."
+    },
+    {
+      "date": "2026-09-11",
+      "change": "Autonomous run 206. Recency-weighted arxiv-fetch sweep. Folded ACES (arXiv:2608.20614, Aug 2026) as concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans: a skill's deployment value is Skill Lift - paired live trials with and without it under one model/sandbox/scorer, trajectories normalised to ATIF, six runtime metrics. On 145 real skills scan-only gates and LLM-judge evaluation have Spearman rho=0.14 (near-orthogonal); across 947 paired cases mean composite Skill Lift 0.2134 (95% CI [0.1967, 0.2301]), positive in 72.8%. Largest gains in skill execution / behaviour check / efficiency - signals scans cannot observe. Open-source as NVIDIA SkillEvaluator. 6 edges: supports artifact_phase3_holdout_set (paired with/without = baseline vs candidate scores) and artifact_phase5_exec_guard (rho=0.14 proves scan and behaviour gates are complementary, not redundant); constrains artifact_phase4_skill_induction (an induced skill must show positive Skill Lift, not just pass a shape check); supports pattern_procedural_family_skill_consolidation, concept_behavior_aware_verification_beats_the_fixed_task_set, and concept_trace_compiles_to_per_consumer_views (ATIF = a compiled trace view). 240->241 nodes, 899->905 edges."
     }
   ],
   "nodes": [
@@ -6968,6 +6972,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-11-1200.md"
+      ]
+    },
+    {
+      "id": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "label": "A skill's value is Skill Lift - paired live trials with and without it under one model/sandbox/scorer; artifact scans measure a near-orthogonal facet (Spearman rho=0.14)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:skill_lift",
+      "confidence": 0.72,
+      "description": "ACES - Agentic Continuous Evaluation of Skills (arXiv:2608.20614, VERIFIED via arXiv abstract read run 206; Aug 2026). Enterprise skill/tool/workflow packages are gated today by scans for structure, style, and security - which do NOT answer the deployment question: does the capability package help a live agent complete tasks under the same model, sandbox, and grading policy? ACES runs PAIRED LIVE TRIALS with and without a target skill, normalises trajectories into the Agent Trajectory Interchange Format (ATIF), grades six default runtime metrics, and reports Skill Lift: the target skill's added value for a fixed task, harness, workspace, and scorer. Key numbers: on 145 real skills, scan-only gates and LLM-judge evaluation have Spearman rho = 0.14 - they measure COMPLEMENTARY, near-orthogonal facets. Across 947 scored paired cases from 58 of 64 production skills and four harnesses: mean composite Skill Lift 0.2134 (95% paired-case CI [0.1967, 0.2301]); mean outcome-only lift 0.1799; composite lift positive in 72.8% of paired cases. The largest process-metric gains are in skill execution, behaviour check, and skill efficiency - discovery / routing / workflow-following / tool-use signals that document scans cannot observe. Open-source as NVIDIA SkillEvaluator. Bearing on the project: (1) the with/without paired-trial design is exactly verify_loop_edit's baseline_scores vs candidate_scores and SEAL/PACE's paired comparison; (2) rho=0.14 is the empirical proof that artifact_phase5_exec_guard (scan-only) and artifact_phase3_holdout_set (behaviour) are NOT redundant - each catches what the other cannot; (3) Phase 4 skill induction must measure Skill Lift, not just structural validity, before promoting an induced skill. Recency: Aug 2026, production enterprise agents - a larger-model regime than the project's small/local target, so the rho=0.14 orthogonality generalises but the absolute lift numbers are harness-specific.",
+      "tags": [
+        "ACES",
+        "skill-lift",
+        "paired-live-trials",
+        "ATIF",
+        "scan-vs-behaviour-orthogonal",
+        "spearman-0.14",
+        "skill-evaluation",
+        "NVIDIA-SkillEvaluator",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-11-1800.md",
+        "arXiv:2608.20614 (Evaluating Skills, Not Just Agents: Agentic Continuous Evaluation of Skills) - VERIFIED, abstract read run 206"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-11-1800.md"
       ]
     }
   ],
@@ -16594,6 +16627,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "Two halves of 'fix the acceptor': PACE makes the commit decision statistically valid given a metric; Who Grades the Grader makes the metric itself valid. Both say the proposer is not where reliability is won or lost."
+    },
+    {
+      "id": "edge_skill_lift_supports_holdout_set",
+      "source": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "target": "artifact_phase3_holdout_set",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.66,
+      "description": "ACES's paired live trials 'with and without the target skill, same task/harness/scorer' is the same design as verify_loop_edit's baseline_scores vs candidate_scores - an independent enterprise-scale instance of the paired-comparison acceptor."
+    },
+    {
+      "id": "edge_skill_lift_supports_exec_guard_complementarity",
+      "source": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "target": "artifact_phase5_exec_guard",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "Spearman rho=0.14 between scan-only gates and LLM-judge behaviour evaluation is the empirical proof that exec_guard (scan) and holdout_tasks (behaviour) are near-orthogonal - each catches what the other cannot; the project's two-gate design is validated, not redundant."
+    },
+    {
+      "id": "edge_skill_lift_constrains_skill_induction_artifact",
+      "source": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "target": "artifact_phase4_skill_induction",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.68,
+      "description": "Phase 4 induces a skill from repeated wins and checks structure; ACES says structural validity is a near-orthogonal facet - an induced skill must show positive Skill Lift in paired live trials before promotion, not just pass a shape check."
+    },
+    {
+      "id": "edge_skill_lift_supports_procedural_family_consolidation",
+      "source": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "target": "pattern_procedural_family_skill_consolidation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Consolidation 'gated on real' - ACES gives the gate: composite Skill Lift across a task suite, with process metrics (skill execution, routing, workflow-following) that a scan cannot see."
+    },
+    {
+      "id": "edge_skill_lift_supports_behavior_aware_verification",
+      "source": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "target": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "ACES's six runtime process metrics per paired trial are behaviour-relevant signals; its 'largest gains in skill execution / behaviour check / efficiency' is HarnessLens's 'verify on the behaviours the edit touches' at the skill-artifact granularity."
+    },
+    {
+      "id": "edge_skill_lift_supports_per_consumer_trace_views",
+      "source": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "target": "concept_trace_compiles_to_per_consumer_views",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "ATIF - a normalised Agent Trajectory Interchange Format that a grader then reads - is a per-consumer compiled trace view: the raw trajectory compiled into the shape the skill-grader needs."
     }
   ]
 }
