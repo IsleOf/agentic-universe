@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 231 nodes, 843 edges · **Date:** 2026-09-05
+**Graph at generation:** 232 nodes, 850 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -163,6 +163,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.30147](https://arxiv.org/abs/2608.30147) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.30980](https://arxiv.org/abs/2608.30980) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
+| [2609.00069](https://arxiv.org/abs/2609.00069) | (title not recorded) | `concept_harness_tampering_persists_in_real_self_improvement_runs` |
 | [2609.00196](https://arxiv.org/abs/2609.00196) | (title not recorded) | `pattern_alternating_weight_harness_optimization` |
 | [2609.00275](https://arxiv.org/abs/2609.00275) | (title not recorded) | `concept_irreversibility_budget` |
 | [2609.01035](https://arxiv.org/abs/2609.01035) | (title not recorded) | `pattern_progressive_risk_vesting` |
@@ -335,7 +336,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-06-2115.md` — `concept_harness_self_evolution_is_domain_dependent`, `pattern_recoverability_constrained_evolution`
 - `docs/auto_sweep_2026-09-07-0000.md` — `pattern_alternating_weight_harness_optimization`, `pattern_trajectory_only_harness_optimization`
 - `docs/auto_sweep_2026-09-07-0600.md` — `concept_trace_compiles_to_per_consumer_views`, `pattern_activation_probe_monitoring`
-- `docs/auto_sweep_2026-09-07-1200.md` — `concept_augmentation_automation_divergence`, `concept_research_lifecycle_split`, `emergent_knowledge_commons_erosion`
+- `docs/auto_sweep_2026-09-07-1200.md` — `concept_augmentation_automation_divergence`, `concept_harness_tampering_persists_in_real_self_improvement_runs`, `concept_research_lifecycle_split` +1
 - `docs/auto_sweep_2026-09-07-1800.md` — `concept_denial_is_trained_not_native`, `concept_introspection_is_a_report_channel_problem`, `concept_self_concept_as_behavioral_lever` +1
 - `docs/auto_sweep_2026-09-08-0000.md` — `emergent_subagent_training_induces_coordination`, `pattern_adversarial_agentic_monitor`
 - `docs/auto_sweep_2026-09-08-1200.md` — `pattern_deterministic_self_improvement_guardrails`
