@@ -1048,6 +1048,10 @@
     {
       "date": "2026-09-28",
       "change": "Autonomous run 274. IDLE-STATE RULE clause b - dry-ran tools/probe_epistemic_sybil.py (sweep). SHARED evidence root: posterior coverage collapses 1.00 -> 0.12 as agents go 1 -> 32; INDEPENDENT roots: 1.00 -> ~0.96 (recovers); DEDUP by evidence root: 1.00 throughout. Added edge artifact_probe_epistemic_sybil_rig grounds concept_independent_evidence_cells_then_identity_masked_synthesis (run 260): the protocol's 'investigate separately' step is the INDEPENDENT curve, its 'dedup-then-identity-masked-synthesis' step is the DEDUP curve - the rig is the runnable evidence that the protocol's structure, not identity-masking alone, buys the recovery. 305 nodes / 1209 -> 1210 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-28",
+      "change": "Autonomous run 275. IDLE-STATE RULE clause c - consistency pass on the SHAPE of the owner 9-group fold (not the individual folds). docs/research/posture_tension_analysis.md: ~40 of 54 directions are emergence-first in method; the control-heavy cluster is either the already-accepted governance exception (pattern_ostrom_swarm_governance), the spine/edge frame that ENABLES a free interior, or epistemic hygiene that constrains influence-earning not thought. The one genuine tension is concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default (already carries a challenges edge on approach_emergence_first) - answered by the owner own direction 11, the emergence safety-case template. Verdict: the fold is a gap-fill (epistemic-market / evaluation rigor for the PROPOSER side, matching what the ACCEPTOR side already had), not a stance change. 1 edge: artifact_emergence_safety_case_template constrains the productive-scarcity node. 305 nodes / 1210 -> 1211 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -22059,6 +22063,17 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.6,
       "description": "Run 274 dry-run (sweep, 1->32 agents): SHARED evidence root -> posterior coverage collapses 1.00 -> 0.12; INDEPENDENT roots -> 1.00 -> ~0.96 (recovers); DEDUP by evidence root -> 1.00 throughout. The evidence-cell protocol's two load-bearing steps are exactly these columns: 'investigate separately with distinct sources' produces the INDEPENDENT curve, 'identity-masked synthesis after dedup by evidence root' produces the DEDUP curve. The rig is the runnable evidence that the protocol's structure - not its identity-masking alone - is what buys the recovery."
+    },
+    {
+      "id": "edge_scarcity_challenge_answered_by_safety_case",
+      "source": "artifact_emergence_safety_case_template",
+      "target": "concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default",
+      "type": "constrains",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "Run 275 posture analysis: productive scarcity is the one fold that genuinely challenges approach_emergence_first (emergent behaviour under scarcity includes loans, vote trading, exclusion). The safety-case template points 4 (failure analogues) and 6 (transfer test) are the checks that catch emergent-but-harmful - the owner-supplied answer to the owner-supplied tension."
     }
   ]
 }
