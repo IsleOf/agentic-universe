@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-01",
+  "last_updated": "2026-10-02",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1104,6 +1104,10 @@
     {
       "date": "2026-10-01",
       "change": "Autonomous run 288. BUILD - tools/probe_adversarial_collaboration.py, the third runnable rig for an open research question (open_questions.md Q3: does pre-registered adversarial collaboration preserve creativity while improving reliability?). Three protocols x a factual + generative task. Verdict CONFIRMS: pre_registered acc 0.76 (+0.16 vs reflection) / creativity 0.58 (-0.12) = NET +0.03; the KILL CONDITION (creativity drops more than reliability rises) does NOT trigger. Open debate: no reliability gain, -0.32 net (floor-raising only). 8 selftest checks, selftest_all JOBS -> 29, BUILD SELFTEST GREEN. New node artifact_probe_adversarial_collaboration_rig + 4 edges (verifies concept_pre_registered_adversarial_collaboration_beats_open_debate, refines the within-run creativity-decline node, supports the epistemic-market parent + the other two market rigs - the three cover selection / elicitation / dispute-resolution). 316 -> 317 nodes, 1264 -> 1268 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-02",
+      "change": "Autonomous run 289. BUILD - tools/probe_redteam_rate.py, the fourth runnable rig for an open research question (open_questions.md Q4: optimal red-team challenge rate before a system cant act?). Sweeps the challenge rate; a PARALYSIS_KNEE (r~0.35) above which throughput decays super-linearly. Verdict CONFIRMS: net value is an INVERTED-U - -39 (r=0) -> +17 (r=0.5 optimum) -> -37 (r=1.0); both endpoints >20 below the interior optimum. A concrete instance of concept_environmental_pressure_has_an_inverted_u. 7 selftest checks, selftest_all JOBS -> 30, BUILD SELFTEST GREEN. New node artifact_probe_redteam_rate_rig + 3 edges (instantiates the inverted-U node, supports concept_irreversibility_budget, refines pattern_ostrom_swarm_governance - a permanent red team needs a rate cap). 317 -> 318 nodes, 1268 -> 1271 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9380,6 +9384,33 @@
       ],
       "evidence_links": [
         "tools/probe_adversarial_collaboration.py",
+        "docs/research/open_questions.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_redteam_rate_rig",
+      "label": "The red-team-rate rig - net value is an inverted-U in the challenge rate",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:red_team_rate",
+      "confidence": 0.65,
+      "description": "tools/probe_redteam_rate.py (run 289) - runnable rig for open question 4 (docs/research/open_questions.md; red-team-guild idea, alternative_approaches_part5 #48). Sweeps the challenge rate r (fraction of decisions a red team formally challenges). Per decision: a latent defect with prob 0.15; a challenge catches it with prob 0.85 at a throughput cost; above a PARALYSIS_KNEE (r~0.35) the system starts re-litigating un-challenged decisions too, so throughput decays super-linearly. Net value = throughput*value - shipped_defects*8. Dry-run (4000 trials/rate): net -39 (r=0, defects ship) -> +17 (r=0.5, optimum) -> -37 (r=1.0, throughput -> 0). Verdict CONFIRMS: a clear INTERIOR optimum, both endpoints >20 below it - under-challenging ships defects, over-challenging freezes the system. A specific instance of concept_environmental_pressure_has_an_inverted_u. 7 selftest checks; selftest_all JOBS -> 30. Stub: CATCH / the paralysis curve.",
+      "tags": [
+        "red-team",
+        "challenge-rate",
+        "inverted-u",
+        "probe",
+        "open-question-4",
+        "analysis-paralysis"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-02-0000.md",
+        "tools/probe_redteam_rate.py"
+      ],
+      "evidence_links": [
+        "tools/probe_redteam_rate.py",
         "docs/research/open_questions.md"
       ]
     }
@@ -23066,6 +23097,39 @@
       "approach_family": "orchestration_first",
       "confidence": 0.45,
       "description": "Third epistemic-market rig: probe_epistemic_market (selection), probe_identity_masking (elicitation independence), probe_adversarial_collaboration (dispute resolution) cover the three moments the cluster touches."
+    },
+    {
+      "id": "edge_redteam_rig_instantiates_inverted_u",
+      "source": "artifact_probe_redteam_rate_rig",
+      "target": "concept_environmental_pressure_has_an_inverted_u",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "A concrete instance: cooperation/emergence peak at medium environmental pressure - here net system value peaks at a medium red-team challenge rate (r~0.5), collapsing at both ends."
+    },
+    {
+      "id": "edge_redteam_rig_verifies_truthful_friction",
+      "source": "artifact_probe_redteam_rate_rig",
+      "target": "concept_irreversibility_budget",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.4,
+      "description": "Supports risk-proportionate friction: challenge is worth applying, but only up to the paralysis knee - the same logic the irreversibility budget applies to irreversible actions, applied to review load."
+    },
+    {
+      "id": "edge_redteam_rig_refines_ostrom",
+      "source": "artifact_probe_redteam_rate_rig",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45,
+      "description": "A permanent red-team institution (part5 #48) needs a rate cap: unbounded challenge authority freezes the system it governs. The rig gives the cap a shape (interior optimum, sharp fall past the knee)."
     }
   ]
 }

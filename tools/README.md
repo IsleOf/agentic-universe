@@ -107,6 +107,7 @@ written, selftested `model_*` adapter (runs 134–140) — pass one `call_model`
 | `probe_epistemic_market.py` | open-question 1 (run 286): forecast-calibrated selection beats manager-pick + debate everywhere and is persuasion-robust; majority is strongest under independent errors (Condorcet) but collapses −0.15 under herding, where forecast beats it +0.04. Verdict CONFIRMS | — (`_agent_answer` / calibration-record stubs; swap for real agent runs) |
 | `probe_identity_masking.py` | open-question 2 (run 287): masking helps monotonically (accuracy 0.60→0.75, deference 0.85→0.16); stripping the reasoning chain beats stripping the name; full masking still leaves 0.16 deference + a 0.03 gap to independent elicitation — necessary, not sufficient | — (`_perceived_status` / `_synthesiser_pick` stubs) |
 | `probe_adversarial_collaboration.py` | open-question 3 (run 288): pre-registration lifts factual accuracy +0.16 over reflection at a −0.12 creativity cost (net +0.03 — the kill condition does not trigger); open debate is floor-raising only (no reliability gain, −0.32 net). Verdict CONFIRMS | — (argue/explore model stubs) |
+| `probe_redteam_rate.py` | open-question 4 (run 289): net system value is an inverted-U in the red-team challenge rate — optimum interior (~r=0.5, net +17), both endpoints >20 below (r=0 ships defects, r=1 throughput→0). Verdict CONFIRMS | — (`CATCH` / paralysis-curve stubs) |
 
 ## Fresh-clone setup
 
