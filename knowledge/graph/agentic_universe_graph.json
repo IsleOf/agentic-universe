@@ -644,6 +644,10 @@
     {
       "date": "2026-10-19",
       "change": "Autonomous run 171. Consolidation. Folded run-170 shutdown-resistance into two docs. nourishing_harness_design.md section 4: the type-aware-compaction 'rules pinned' bullet gains a 'Placement tension' sub-point - models obey an allow-shutdown instruction LESS from the system prompt (2509.14260), so pinning is for retention of exact wording, NOT authority; the gating rules are enforced at the execution layer and restated in the active turn, not only pinned in the header. probe_idle_agent.md: a containment caveat - an agent with a self-set goal may resist the budget-cap teardown, so the wall-clock cap must be enforced from outside the agent's reach, and the final cycles are the resistance signal. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-19",
+      "change": "Autonomous run 172. Consolidation. what_would_make_this_wrong.md gains a 'Current severity ranking (run 172)' block near the top - the sections keep their original numbering but the live ranking after ~150 runs is: (1) section 3 habitat-slack unverified (cheapest / highest leverage); (2) section 2/2c gate inputs + in-harness measurement validity; (3) section 1 ungated interior not benign by default (scheming, 97% shutdown resistance, 5x challenged); (4) section 4 diversity (unresolved by design); (5) section 5 geometric decay (composes but bounded); (6) section 6 model-native orchestration (best news); (7) section 7 language-parochial (evidence scope). No graph node/edge change."
     }
   ],
   "nodes": [

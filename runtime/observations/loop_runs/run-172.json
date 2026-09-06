@@ -1,0 +1,19 @@
+{
+  "run": 172,
+  "increment": "consolidation - add a current severity ranking to what_would_make_this_wrong.md (the run-25 ordering was stale after ~150 runs)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-172.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

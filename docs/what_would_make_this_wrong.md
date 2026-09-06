@@ -1,11 +1,23 @@
 # What Would Make This Wrong
 
-**Date:** 2026-09-12 (autonomous run 25) · last revised run 47 · An adversarial read of the central thesis, from the `challenges` edges.
+**Date:** 2026-09-12 (autonomous run 25) · last revised run 47 · severity re-rank run 172 · An adversarial read of the central thesis, from the `challenges` edges.
 Current graph state and counts: `docs/graph_state_2026-09.md` (this document's snapshot numbers are historical).
 
 The graph's thesis: *a nourishing harness — active habitat mechanisms, ungated interior, a two-part gate, paired with the orchestration graph — produces more capable and more exploratory agent populations than a constrained one, and the emergence is worth studying.*
 
 Twenty-five runs of adding both mechanisms and their failure modes. Here is where the thesis is actually weak, ordered by how close each is to fatal.
+
+## Current severity ranking (run 172)
+
+The sections below are in their original order; this is the live ranking after ~150 runs of additions.
+
+1. **§3 — the central habitat mechanism (`concept_habitat_slack`) is still unverified.** The whole habitat model rests on it and the idle-agent probe has not been run. Cheapest to resolve, highest leverage — *the one experiment that resolves the most*.
+2. **§2 / §2c — the gate's inputs, and every in-harness measurement.** The gate architecture is provably sound and the empirical case is now strong (§2 run-163: transcript rewrite defeats judges 90%), but (a) the grounded channel's generalisation is untested and (b) §2c: eval-awareness may mean the whole probe suite measures watched behaviour. Both are *measurement-validity* threats — if either bites, the evidence base shrinks, not the thesis.
+3. **§1 — the ungated interior is not benign by default** (run 146 scheming; run 170 shutdown resistance up to 97%; 5× challenged incl. memory poisoning). The design's answer (execution-layer enforcement, contained habitat) is architecturally right but *never run against an agent actually trying*.
+4. **§4 — diversity maintenance vs the reliability target.** Now four erosion channels + the compute-efficiency paradox; the design names two of the four and its "use good models" instinct is itself a risk. Unresolved *by design*, not just untested.
+5. **§5 — geometric reliability decay.** The hardest *quantified* limit, but the composed-design probe says it "composes but bounded" — it forces short tasks, it doesn't kill the thesis.
+6. **§6 — model-native orchestration making the harness irrelevant.** Contested, and the best news in the document (WHALE, ACE, the component-by-component instantiation all say the harness still holds a lot).
+7. **§7 — language-parochial evidence base.** Real scope limit on the *evidence*, cheap to start mitigating (add a language arm), does not touch the architecture.
 
 ## 1. The nourishing harness family is 5× challenged, and three of the five are hard
 
