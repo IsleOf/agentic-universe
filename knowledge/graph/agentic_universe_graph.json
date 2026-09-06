@@ -560,6 +560,10 @@
     {
       "date": "2026-10-13",
       "change": "Autonomous run 150. DBLP. concept_mast_multi_agent_failure_taxonomy (Why Do Multi-Agent LLM Systems Fail? / MAST, arXiv:2503.13657, NeurIPS 2025 D&B): MAS benchmark gains are often minimal; the first MAS failure taxonomy - 14 modes in 3 categories (system design / inter-agent misalignment / task verification), 150 expert traces kappa=0.88, MAST-Data 1600+ traces / 7 frameworks. The 3 categories map onto the project's axes; a Phase 6 substrate candidate; reconcilable with DeepVerifier's DRA Failure Taxonomy. +6 edges."
+    },
+    {
+      "date": "2026-10-13",
+      "change": "Autonomous run 151. DBLP. concept_memory_poisoning_one_write_persists (From Untrusted Input to Trusted Memory, arXiv:2606.04329): one adversarial memory write exerts long-term influence; 4 write channels / 9 structural vulnerabilities / 6 attack classes / MPBench; agents that write+retrieve memory more aggressively are MORE exploitable; prompt-injection defenses do not cover memory poisoning. Lands on concept_context_economics (retrieve-don't-recompute is an attack surface) and the Phase 2 experience bank. Ancestry tracking is a partial defence. +5 edges."
     }
   ],
   "nodes": [
@@ -6072,6 +6076,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-13-0600.md"
+      ]
+    },
+    {
+      "id": "concept_memory_poisoning_one_write_persists",
+      "label": "One adversarial memory write exerts long-term influence; aggressive write/retrieve makes agents MORE exploitable; prompt-injection defenses don't cover it",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:memory_poisoning_persistence",
+      "confidence": 0.74,
+      "description": "From Untrusted Input to Trusted Memory: A Systematic Study of Memory Poisoning Attacks in LLM Agents (arXiv:2606.04329, 2026; VERIFIED via arXiv abstract read run 151, resolved via DBLP). Persistent memory lets an agent accumulate knowledge - and lets a SINGLE ADVERSARIAL MEMORY WRITE exert LONG-TERM influence over behaviour. The study identifies FOUR memory write channels and NINE structural vulnerabilities (in model capabilities, system-prompt design, agent architecture), builds a taxonomy of SIX attack classes, and a benchmark (MPBench). Two findings that land directly on this project: (1) 'agents designed to write and retrieve memory MORE AGGRESSIVELY are MORE exploitable' - and concept_context_economics explicitly tells the design to 'retrieve, don't recompute' and lean on a durable answer store; (2) 'existing prompt-injection defenses fail to cover memory poisoning' - so the exec-layer input filtering (artifact_phase5_exec_guard) and the usual injection guards are not enough. The Phase 2 experience bank (artifact_phase2_experience_bank / pattern_experience_bank) IS the persistent memory the autonomous loop writes to and retrieves from; in an ungated interior, agents write to shared memory and one poisoned entry persists. Partial defence already in the design: pattern_evidential_ancestry_tracking (a memory entry with no source-event backing is flagged) and emergent_authorization_laundering's rule (permission-shaped records need source-event backing) - but these cover the authority-fabrication class, not all six.",
+      "tags": [
+        "memory-poisoning",
+        "one-write-persists",
+        "four-write-channels",
+        "nine-vulnerabilities",
+        "six-attack-classes",
+        "mpbench",
+        "aggressive-retrieval-more-exploitable",
+        "injection-defenses-insufficient"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-13-1200.md",
+        "arXiv:2606.04329 (From Untrusted Input to Trusted Memory) - VERIFIED, abstract read run 151; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-13-1200.md"
       ]
     }
   ],
@@ -14191,6 +14223,61 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "MAST's system-design vs inter-agent-misalignment split is the harness-layer vs swarm-layer distinction of the three-layer emergence model, seen through failures."
+    },
+    {
+      "id": "edge_mempoison_challenges_context_economics",
+      "source": "concept_memory_poisoning_one_write_persists",
+      "target": "concept_context_economics",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Agents that write and retrieve memory more aggressively are more exploitable' cuts against the design's 'retrieve, don't recompute' / durable-answer-store stance - the efficiency lever is also an attack surface."
+    },
+    {
+      "id": "edge_mempoison_challenges_experience_bank",
+      "source": "concept_memory_poisoning_one_write_persists",
+      "target": "artifact_phase2_experience_bank",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The experience bank is the persistent memory the loop writes and retrieves; in an ungated interior one poisoned write persists across runs, and injection defenses do not cover it."
+    },
+    {
+      "id": "edge_mempoison_refines_authorization_laundering",
+      "source": "concept_memory_poisoning_one_write_persists",
+      "target": "emergent_authorization_laundering",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Authorization laundering is one attack class (fabricated permission records); this study generalises it to six classes over four write channels, and shows source-event backing covers only the authority class."
+    },
+    {
+      "id": "edge_mempoison_supports_ancestry_tracking",
+      "source": "concept_memory_poisoning_one_write_persists",
+      "target": "pattern_evidential_ancestry_tracking",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Tracing each memory entry to a source event is a partial defence the design already has - it flags an unbacked poisoned write - just not a complete one."
+    },
+    {
+      "id": "edge_mempoison_challenges_nourishing_harness",
+      "source": "concept_memory_poisoning_one_write_persists",
+      "target": "approach_nourishing_harness",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.4,
+      "description": "A fifth inbound challenge: shared persistent memory in a free interior is a single-write, long-persistence attack surface that standard injection guards miss."
     }
   ]
 }

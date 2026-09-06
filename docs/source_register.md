@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 217 nodes, 762 edges · **Date:** 2026-09-05
+**Graph at generation:** 218 nodes, 767 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -77,6 +77,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
 | [2605.27922](https://arxiv.org/abs/2605.27922) | (title not recorded) | `concept_capability_is_a_model_harness_config_property` |
 | [2606.00953](https://arxiv.org/abs/2606.00953) | (title not recorded) | `test_scenario_decomposition_granularity` |
+| [2606.04329](https://arxiv.org/abs/2606.04329) | (title not recorded) | `concept_memory_poisoning_one_write_persists` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
 | [2606.05985](https://arxiv.org/abs/2606.05985) | (title not recorded) | `emergent_pluralistic_ignorance`, `principle_diversity_maintenance` |
 | [2606.09498](https://arxiv.org/abs/2606.09498) | (title not recorded) | `concept_self_harness_validates_the_three_loop` |
@@ -372,6 +373,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-12-0600.md` — `concept_frontier_models_can_scheme_in_context`
 - `docs/auto_sweep_2026-10-12-1200.md` — `concept_anti_scheming_mitigation_confounded_by_eval_awareness`
 - `docs/auto_sweep_2026-10-13-0600.md` — `concept_mast_multi_agent_failure_taxonomy`
+- `docs/auto_sweep_2026-10-13-1200.md` — `concept_memory_poisoning_one_write_persists`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
