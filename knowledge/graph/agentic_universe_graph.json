@@ -1036,6 +1036,10 @@
     {
       "date": "2026-09-27",
       "change": "Autonomous run 269. Orientation refresh (IDLE-STATE RULE clause c; no node/edge change). docs/graph_state_2026-09.md Snapshot updated run-252 (272/1091) -> run-268 (305/1193; 109 needs-validation / 165 partially-validated / 19 validated; families self_improving_harness 121, emergent_behaviors 80, agent_habitat 27, nourishing_harness 23, graph_engineering 22, orchestration_first 20). Added a Runs 253-268 section covering the collusion thread (2601.00360 + XAMT 2512.15790), the write_gate tool, and the 9-group fold of the owner 54-direction research input (~35 nodes / 6 new branch_keys). Prior run-252 snapshot kept inline. 305 nodes / 1193 edges."
+    },
+    {
+      "date": "2026-09-27",
+      "change": "Autonomous run 270. IDLE-STATE RULE clause c - consistency pass on the runs 260-268 fold of the owner's research input. Finding: 24 of 30 new nodes had ZERO inbound edges - weakly integrated, reachable only by traversing outward from them. Added 14 edges, no new nodes: 5 inbound from the pre-existing graph (semantic-compression informs homeostasis; herding informs the epistemic market; creativity-decline informs learnable-novelty; metacognitive-monitoring informs interoception; execution-layer informs the spine/edge split) and 9 cross-cluster (flock supports evidence-cells; learnable-novelty informs Go-Explore; DiagEvo supports interoception; active-inference informs the epistemic market; dev-harness supports conditional-trust; SPADE supports task-genome; cultural-transmission challenges skill-induction; safety-case template <-> homeostasis + optionality). 305 nodes / 1207 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -21860,6 +21864,160 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.45,
       "description": "The template's filled example is this rig; conversely the rig's containment spec (disposable instance, no egress, fail-safe relay seam) is where points 2 and 5 came from."
+    },
+    {
+      "id": "edge_semantic_compression_informs_homeostasis",
+      "source": "concept_multi_round_interaction_compresses_semantic_space",
+      "target": "concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The measured failure (intrinsic dimensionality of group outputs declines over rounds) is the problem homeostatic caps + decorrelation penalties are designed to arrest."
+    },
+    {
+      "id": "edge_herding_informs_epistemic_market",
+      "source": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "The herding result is the motivation: if showing votes collapses independence, price claims by evidence and calibration instead of counting agreement."
+    },
+    {
+      "id": "edge_creativity_decline_informs_learnable_novelty",
+      "source": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "target": "concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The within-run drift (novelty up, usefulness down) is exactly what the learnable-vs-noise distinction is meant to separate."
+    },
+    {
+      "id": "edge_metacog_informs_interoception",
+      "source": "emergent_metacognitive_monitoring",
+      "target": "concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "The measured (limited) self-monitoring ability is the capability the interoceptive harness externalises and makes reliable."
+    },
+    {
+      "id": "edge_exec_layer_informs_spine_edge",
+      "source": "pattern_execution_layer_enforcement",
+      "target": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Execution-layer enforcement is the spine; naming the spine/edge split makes explicit what the enforcement is protecting and what it deliberately leaves free."
+    },
+    {
+      "id": "edge_flock_supports_evidence_cells",
+      "source": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "target": "concept_independent_evidence_cells_then_identity_masked_synthesis",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "A bounded peer neighbourhood + one-contribution-per-agent is a mechanism for evidence-cell independence: an agent contributes before it can be anchored by the full chorus."
+    },
+    {
+      "id": "edge_learnable_novelty_informs_go_explore",
+      "source": "concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise",
+      "target": "concept_go_explore_novelty_archive_return_then_explore",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Learnable novelty is the signal that decides what enters the Go-Explore archive: a state whose surprise compresses into a better model is worth returning to; irreducible noise is not."
+    },
+    {
+      "id": "edge_diagevo_supports_interoception",
+      "source": "concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace",
+      "target": "concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The hierarchical error-cause memory is the epistemic-health axis of the self-state vector - recurrent high-impact failure classes are what 'unresolved uncertainty' should track."
+    },
+    {
+      "id": "edge_active_inference_informs_epistemic_market",
+      "source": "concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Active inference scores an action's expected epistemic value; the market prices a claim's realised epistemic value against later ground truth - the same currency, before vs after."
+    },
+    {
+      "id": "edge_dev_harness_supports_conditional_trust",
+      "source": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "target": "concept_conditional_trust_is_domain_keyed_not_global",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "The Collaborator-stage promotion gate ('trust, contribution, non-interference') is read off a domain-keyed trust graph - the ladder needs that structure to gate on it."
+    },
+    {
+      "id": "edge_spade_supports_task_genome",
+      "source": "concept_paired_designer_solver_self_play_at_the_capability_frontier_spade_lure",
+      "target": "concept_task_genome_every_environment_carries_a_full_provenance_record",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "SPADE's designer emits complete environments (reset/step/reward/verifier); requiring it to emit a task-genome record per environment is what makes the generated curriculum auditable against leakage and difficulty drift."
+    },
+    {
+      "id": "edge_cultural_transmission_challenges_skill_induction",
+      "source": "concept_cultural_transmission_engine_local_cultures_with_diffusion_rules",
+      "target": "pattern_skill_induction",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Skill induction feeds one central library from repeated wins. Local cultures say some practices should stay local (not every group's convention should diffuse) - the central library is where a bad practice would spread fastest."
+    },
+    {
+      "id": "edge_safety_case_informs_homeostasis",
+      "source": "artifact_emergence_safety_case_template",
+      "target": "concept_homeostatic_caps_stop_any_agent_skill_or_channel_from_dominating",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.4,
+      "description": "The template's failure-analogue point names monoculture as a thing to watch for; the homeostatic caps are the mitigation it points at."
+    },
+    {
+      "id": "edge_optionality_supports_safety_case",
+      "source": "concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability",
+      "target": "artifact_emergence_safety_case_template",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.4,
+      "description": "The template's transfer-test point (point 6) is an option-value check: does the behaviour keep its value in a second environment."
     }
   ]
 }
