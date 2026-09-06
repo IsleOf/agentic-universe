@@ -1140,6 +1140,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 298. Folded the genuinely-new parts of the owner's agentic-tooling scan (research/next-research-directions-agentic-2026-09.md, origin/main, 2026-09-07). ~60% (DeepSeek Harness / Cordis plugin-first, Harness-Bench's 23.8pt gap, SkillsBench's self-generated-skills-hurt) is already in the graph - cross-validation, not re-folded. 3 new nodes: concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever (AgentLens: process scoring re-scores 23.2% of passes as lucky retries, rankings shift up to 5; StaminaBench: retry/feedback = up to 12x survival, 6x harness gap persists); concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop (Agent-as-a-Router arXiv:2606.22902); concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents (vector + graph/GraphRAG + KV + episodic + reranker + janitor agents; the project has the first three, missing the janitor role). 9 edges. 325 -> 328 nodes, 1303 -> 1312 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 299. Owner request: begin the self-rebuild. docs/self_rebuild_v2.md - a first-pass v2 architecture synthesising the ~328-node graph + shipped tools + the machine skills library (nodriver-session, cli-agent-control, research-fetch, ...) into a headless multi-agent gate-enforced loop: deterministic spine (task ledger + supervisor + exogenous acceptance gate = held-out + PACE e-process + process-adjusted score + forecast check + signed certificate log), generative edge (model-routed proposers + WSL/Win worker agents + browser scout for Perplexity / Google NotebookLM). 8-agent roster; 4 new skills to build; 6 gated migration phases (v2.0 = bind one call_model, run probe_idle_agent sweep). No training infra (emergence-first bet holds). 1 node + 4 edges."
     }
   ],
   "nodes": [
@@ -9708,6 +9712,31 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-04-0600.md"
+      ]
+    },
+    {
+      "id": "artifact_self_rebuild_v2_plan",
+      "label": "v2 self-rebuild plan: the loop redesigned on its own research",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.5,
+      "description": "docs/self_rebuild_v2.md (run 299). First-pass v2 architecture taking the ~328-node graph + shipped tools + the machine skills library and laying out a headless, multi-agent, gate-enforced loop spanning WSL + Windows CLI agents + browser skills (Perplexity / Google NotebookLM via the nodriver-session contract). Deterministic spine (task ledger + supervisor + acceptance gate), generative edge (model-routed proposers, worker agents). The acceptance gate is exogenous: held-out set + PACE e-process + process-adjusted score + forecast check + a signed certificate log the conductor cannot edit. 8-agent roster; 4 new skills; 6 gated migration phases; the #1 unblock is a call_model budget (cheap proposes, strong verifies). No training infra - the emergence-first no-weight-training bet holds. Names its own failure modes in section 11.",
+      "tags": [
+        "self-rebuild",
+        "architecture",
+        "v2",
+        "plan",
+        "practicing-what-we-preach"
+      ],
+      "derived_from": [
+        "docs/self_rebuild_v2.md",
+        "docs/auto_sweep_2026-10-04-1200.md"
+      ],
+      "evidence_links": [
+        "docs/self_rebuild_v2.md"
       ]
     }
   ],
@@ -23877,6 +23906,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "Janitor agents that periodically summarise and crystallise are the platform-level upkeep the human-knowledge-capture concept requires - the same idea applied to the agent's own memory."
+    },
+    {
+      "id": "edge_v2_plan_implements_spine",
+      "source": "artifact_self_rebuild_v2_plan",
+      "target": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2 spine (ledger + supervisor + gate) is pure-stdlib deterministic; models only at the leaves."
+    },
+    {
+      "id": "edge_v2_plan_implements_exogenous_acceptor",
+      "source": "artifact_self_rebuild_v2_plan",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2 acceptance gate is the exogenous signal made a service: held-out + PACE + process score + certificate, none editable by the conductor or proposers."
+    },
+    {
+      "id": "edge_v2_plan_supports_acceptor_weak_point",
+      "source": "artifact_self_rebuild_v2_plan",
+      "target": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "v2 puts the engineering on the acceptor (a gated service), not the proposer."
+    },
+    {
+      "id": "edge_v2_plan_extends_supervisor",
+      "source": "artifact_self_rebuild_v2_plan",
+      "target": "pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The conductor is the shipped supervisor made headless on the 6h schedule."
     }
   ]
 }

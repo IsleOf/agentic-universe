@@ -1,0 +1,23 @@
+{
+  "run": 299,
+  "increment": "docs/self_rebuild_v2.md - first-pass v2 architecture for the loop, grounded in the graph + the machine skills library",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 8,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-299.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 299 OK · VALID · graph +1n/+4e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.76 · novelty 1.00"
+}
