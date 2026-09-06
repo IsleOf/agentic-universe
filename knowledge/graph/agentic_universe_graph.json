@@ -912,6 +912,10 @@
     {
       "date": "2026-09-19",
       "change": "Autonomous run 237. Consistency / adversarial pass (IDLE-STATE RULE clause c). docs/emergence_first_posture.md 'What this is a bet on' gains 'The second bet, made explicit': the no-weight-training bet is separable from emergence-first and the project makes both; the honest response to WHALE (2609.00196) and JIT-Agent (2608.25593) is that harness-only elicitation is enough for elicitation-shaped tasks (research direction-setting, graph engineering, adversarial reading - most of what the loop does) and hits a ceiling on capability-shaped tasks (novel math, long-horizon planning against a frozen small model). 1 challenges edge (WHALE node -> principle_affordance_over_constraint). No graph node change."
+    },
+    {
+      "date": "2026-09-19",
+      "change": "Autonomous run 238. Recency-weighted node-deepening sweep (s2 citations of the RSI survey arXiv:2607.07663). Folded ASPIRE (arXiv:2608.31111, Aug 2026) as concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer: a benchmark for vague-goal-driven self-evolution (natural-language goal only, hidden 520-item eval, both weight and harness evolution). Findings: vague goals redirect search to goal interpretation; agents complete training/harness loops but weight gains are sparse and unstable and the best evolved harness stays below the engineered Qwen-Agent reference; agents train on mismatched data and trust narrow self-evaluations so local gains don't transfer to hidden eval; continued search erases earlier improvements. The project's own top-level structure IS a vague goal - the human sets direction, the loop operationalises. 6 edges: supports concept_self_improvement_strength_tracks_the_verification_hierarchy (the human bottleneck is real), concept_self_improvement_evaluation_is_noisy_and_task_order_dependent (continued search regresses), concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score (narrow self-checks), concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (hidden eval), concept_self_harness_validates_the_three_loop (minimal-proposal discipline); challenges approach_emergence_first (evolved harness below engineered reference). 263->264 nodes, 1038->1044 edges."
     }
   ],
   "nodes": [
@@ -7770,6 +7774,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-19-0600.md"
+      ]
+    },
+    {
+      "id": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "label": "ASPIRE: given only a vague natural-language goal (hidden eval), agents spend search on goal interpretation, complete training/harness loops but weight gains are sparse and unstable, the best evolved harness stays below an engineered reference, and continued search erases earlier gains",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:vague_goal_self_evolution",
+      "confidence": 0.72,
+      "description": "ASPIRE: Can Models Self-Evolve from Vague Goals? (arXiv:2608.31111, VERIFIED via arXiv abstract read run 238; Aug 2026). Existing LLM self-evolution work begins with human-specified tasks and metrics, reducing self-evolution to optimising an explicit objective rather than DECIDING WHAT AND HOW TO LEARN. ASPIRE is a benchmark for VAGUE-GOAL-DRIVEN self-evolution: it provides only a natural-language capability goal ('become better at X') while downstream evaluation tasks stay HIDDEN. The agent must operationalise the goal - choose data and update methods, construct training and validation signals, decide when to evaluate. It supports both model-weight AND agent-harness evolution in one interactive environment; evaluation is a hidden, expert-authored 520-item set across six goals. Findings: (1) vague goals REDIRECT SEARCH EFFORT toward goal interpretation; (2) agents routinely complete training and harness-editing loops, but WEIGHT-LEVEL GAINS REMAIN SPARSE AND UNSTABLE, and the strongest evolved harness REMAINS BELOW the engineered Qwen-Agent reference; (3) agents often TRAIN ON MISMATCHED DATA and TRUST NARROW SELF-EVALUATIONS, so local gains fail to transfer to hidden evaluation; (4) CONTINUED SEARCH AND TRAINING CAN ERASE EARLIER IMPROVEMENTS. Bearing on the project: the project's own top-level structure is a vague goal - the human sets the research direction ('keep researching until I say stop'), the loop operationalises it. ASPIRE measures exactly this and finds it hard: agents over-invest in interpreting the goal, over-trust their own narrow checks, and regress. This is why the project keeps the human at research-direction-setting (concept_self_improvement_strength_tracks_the_verification_hierarchy's top-of-hierarchy bottleneck), why the held-out set is frozen and exogenous, and why the IDLE-STATE RULE exists (to stop the loop erasing its own gains with low-value churn). A BOTH-SIDES caution: neither harness-only nor weight evolution from a vague goal beats an engineered reference. Recency: Aug 2026, current models.",
+      "tags": [
+        "ASPIRE",
+        "vague-goal-self-evolution",
+        "hidden-evaluation",
+        "goal-interpretation-dominates",
+        "weight-gains-sparse-and-unstable",
+        "narrow-self-evaluation",
+        "continued-search-erases-gains",
+        "below-engineered-reference",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-19-1800.md",
+        "arXiv:2608.31111 (Aspire: Can Models Self-Evolve from Vague Goals?) - VERIFIED, abstract read run 238"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-19-1800.md"
       ]
     }
   ],
@@ -18925,6 +18958,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "docs/emergence_first_posture.md (run 237) now names the no-weight-training bet explicitly and states the WHALE / JIT-Agent evidence against it: harness-only elicitation is bottlenecked by the frozen model on capability-shaped tasks. The affordance-over-constraint principle assumes room + a frozen model is enough to elicit the interesting behaviour; WHALE says on some task shapes it is not."
+    },
+    {
+      "id": "edge_aspire_supports_verification_hierarchy",
+      "source": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "ASPIRE tests moving research-direction-setting INTO the agent (a vague goal, hidden eval) and finds it hard - search collapses into goal interpretation and self-checks are over-trusted. Direct evidence that the top-of-hierarchy human bottleneck is real, not a convenience."
+    },
+    {
+      "id": "edge_aspire_supports_eval_noise",
+      "source": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "target": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "'Continued search and training can erase earlier improvements' is the Fragility finding in the vague-goal setting: the loop is not monotone, and running it longer can make it worse."
+    },
+    {
+      "id": "edge_aspire_supports_evaluator_validity",
+      "source": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "target": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "'Agents trust narrow self-evaluations, so local gains fail to transfer to hidden evaluation' - exactly the Who-Grades-the-Grader failure: a self-authored check that looks satisfied while real performance does not move."
+    },
+    {
+      "id": "edge_aspire_supports_exogenous_acceptance",
+      "source": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "ASPIRE's hidden 520-item set is the exogenous acceptance signal; agents that only have their own narrow checks regress against it. The frozen held-out set is the project's version."
+    },
+    {
+      "id": "edge_aspire_challenges_emergence_first",
+      "source": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "target": "approach_emergence_first",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.42,
+      "description": "The strongest EVOLVED harness (from a vague goal) remains below the ENGINEERED Qwen-Agent reference - a caution that autonomous harness evolution from a loose goal does not yet match deliberate human harness design, even before the weight-training question."
+    },
+    {
+      "id": "edge_aspire_supports_minimal_proposal_loop",
+      "source": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "target": "concept_self_harness_validates_the_three_loop",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Continued search and training can erase earlier improvements' + 'over-invest in goal interpretation' is the empirical case for the three-loop's 'MINIMAL proposal' discipline (and the project's IDLE-STATE RULE): a bounded substantive increment per step, not open-ended re-searching that regresses."
     }
   ]
 }
