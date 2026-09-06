@@ -1,0 +1,22 @@
+{
+  "run": 144,
+  "increment": "consistency pass - weave the 8 self-improvement nodes added this session into each other (they had in-degree ~0)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 5
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-144.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
