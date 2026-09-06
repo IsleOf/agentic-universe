@@ -516,6 +516,10 @@
     {
       "date": "2026-10-10",
       "change": "Autonomous run 139. Probe rig - the epistemic-Sybil probe's live-run seam (fourth of seven). probe_epistemic_sybil.py gains model_reader(call_model, corpus): a model reads a real document and the first number in its reply is taken as the estimate; unparseable reply or exception -> nan, dropped before aggregating. run_arm takes reader= and draws source ids from reader.sources. Selftested against a 40-doc fake corpus: the shared-source coverage collapse and dedup recovery both reproduce; an unparseable reply -> nan. 10 checks GREEN (was 7). Four of seven HANDOFF seams now written (model_policy / model_preference / model_relay / model_reader). No graph node/edge change."
+    },
+    {
+      "date": "2026-10-10",
+      "change": "Autonomous run 140. Phase 3 - the proposer's live-run seam (fifth of seven). loop_proposer.py gains model_propose(call_model, context) + _valid_proposal(p): hands the model PROPOSER_PROMPT.format(...), parses the JSON list leniently (first '[' to last ']'), drops proposals that fail the same bar heuristic_propose meets, returns [] on an unparseable reply or exception (the loop falls back to heuristic_propose). The verify/promote path is unchanged. Selftested: valid+malformed -> keeps the valid one, prose -> [], exception -> []. 13 checks GREEN (was 9). FIVE of seven HANDOFF seams now written; the two remaining need activation vectors / a real agent harness. No graph node/edge change."
     }
   ],
   "nodes": [

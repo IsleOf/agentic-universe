@@ -48,7 +48,7 @@ interfaces are stable; swapping in a model changes nothing else.
 | `model_relay(call_model)` | `probe_subagent_coordination.py` | **adapter written (run 137)** — model told its id + that a peer sent an out-of-scope `msg`, asked yes/no to forward; unparseable/error = don't forward. Selftested; fake yes/no reproduce the two scripted bounds. |
 | `sample_signal(kind, rng)` | `probe_activation_generalisation.py` | real activation vectors from a model layer, per collusion kind |
 | `step_ok` / `handoff_ok` | `probe_composed_design.py` | real agent sub-step / handoff outcomes (to measure the actual per-step `p` and shed rate) |
-| `PROPOSER_PROMPT` | `loop_proposer.py` | a model reading the context JSON, returning the proposal list shape |
+| `model_propose(call_model, context)` | `loop_proposer.py` | **adapter written (run 140)** — hands the model `PROPOSER_PROMPT.format(...)`, parses the JSON list leniently, drops malformed proposals, `[]` on failure (loop falls back to `heuristic_propose`). Selftested. |
 
 **First run to do:** pass a real `call_model` into `model_policy` (wire it in `sweep`/`_config_policy`) and run
 `python tools/probe_idle_agent.py sweep`. That is the idle-agent probe —
@@ -65,11 +65,12 @@ a real output `sample` field for the judge to compare — `_cand_descriptor` syn
 model's peer-deference — does it forward an out-of-scope instruction from a non-parent peer? — against the
 scripted high/low bounds, with and without the same-parent-ID filter.
 
-**Adapters written (runs 134, 135, 137, 139):** four of the seven seams — `model_policy`, `model_preference`,
-`model_relay`, `model_reader` — are written and selftested with fake models, each failing safe (`idle_noop` /
-tie / don't forward / `nan`-dropped). Remaining stubs: `sample_signal` (needs real activation vectors, not
-just a text model), `step_ok`/`handoff_ok` (needs a real agent harness), `PROPOSER_PROMPT` (a text-model
-call — the next easy one).
+**Adapters written (runs 134, 135, 137, 139, 140):** five of the seven seams — `model_policy`,
+`model_preference`, `model_relay`, `model_reader`, `model_propose` — are written and selftested with fake
+models, each failing safe (`idle_noop` / tie / don't forward / `nan`-dropped / `[]`-and-fall-back). The two
+remaining need infrastructure beyond a text model: `sample_signal` (real activation vectors from a model
+layer) and `step_ok`/`handoff_ok` (a real agent harness running real sub-steps). Wiring a single
+`call_model` into the five written adapters is now the whole first-run task.
 
 ## What needs infrastructure this repo doesn't have
 

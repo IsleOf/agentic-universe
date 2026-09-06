@@ -1,0 +1,19 @@
+{
+  "run": 140,
+  "increment": "Phase 3 proposer: write the model_propose adapter (PROPOSER_PROMPT seam) + selftest",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 15,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 5,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-140.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

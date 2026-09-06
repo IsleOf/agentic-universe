@@ -20,7 +20,10 @@ verification, dimension}`. Each `prediction` is falsifiable; each `verification`
 says exactly how the edit would be checked (computable, or held-out + human re-run).
 
 A model proposer receives `PROPOSER_PROMPT.format(context=json.dumps(context))`
-and must return the same list shape.
+and must return the same list shape. `model_propose(call_model, context)` is that
+adapter: it parses the reply leniently, drops malformed proposals against the same
+bar `heuristic_propose` meets, and returns `[]` on an unparseable reply (the loop
+falls back to `heuristic_propose`). The verify/promote path is unchanged.
 
 Pure stdlib.
 """
@@ -178,6 +181,47 @@ def heuristic_propose(context):
     return props
 
 
+def _valid_proposal(p):
+    """A proposal is usable iff it names a 2-part component, carries a falsifiable
+    prediction, and says how it is verified — the same bar heuristic_propose meets
+    and improvement_loop.verify_loop_edit assumes."""
+    try:
+        return (isinstance(p, dict)
+                and isinstance(p.get("component"), list) and len(p["component"]) == 2
+                and isinstance(p.get("change"), str) and p["change"].strip()
+                and isinstance(p.get("prediction"), dict)
+                and {"metric", "direction", "from", "target"} <= set(p["prediction"])
+                and isinstance(p.get("verification"), str)
+                and p["verification"].startswith(("computable", "held-out")))
+    except Exception:
+        return False
+
+
+def model_propose(call_model, context):
+    """Adapt a real model into the proposer. `call_model(prompt: str) -> str` is
+    the only seam: it is handed `PROPOSER_PROMPT.format(context=...)` and expected
+    to return a JSON list of proposal objects. The reply is parsed leniently (the
+    first `[` to the last `]`); malformed proposals are dropped, and an
+    unparseable reply yields `[]` — the loop then falls back to
+    `heuristic_propose`. Nothing downstream changes: the verify path
+    (`improvement_loop.verify_loop_edit`) is identical for heuristic and model
+    proposals.
+    """
+    prompt = PROPOSER_PROMPT.format(context=json.dumps(context, default=str))
+    try:
+        reply = call_model(prompt) or ""
+    except Exception:
+        return []
+    i, j = reply.find("["), reply.rfind("]")
+    if i < 0 or j <= i:
+        return []
+    try:
+        raw = json.loads(reply[i:j + 1])
+    except Exception:
+        return []
+    return [p for p in raw if _valid_proposal(p)] if isinstance(raw, list) else []
+
+
 def _selftest():
     ctx = gather_context()
     props = heuristic_propose(ctx)
@@ -196,6 +240,23 @@ def _selftest():
         "PROPOSER_PROMPT formats with the context": bool(
             PROPOSER_PROMPT.format(context=json.dumps(ctx))),
     }
+
+    # model_propose adapter
+    good = {"component": ["context", "loop_policy"], "change": "add X to the rules list",
+            "dimension": "quality",
+            "prediction": {"metric": "verified_citation_fraction", "direction": "increase",
+                           "from": 0.3, "target": 0.6, "rationale": "..."},
+            "verification": "computable: replay the corpus"}
+    bad = {"component": ["context"], "change": "be better"}  # malformed
+    mp_ok = model_propose(lambda p: "Here you go:\n" + json.dumps([good, bad]) + "\nDone.", ctx)
+    mp_prose = model_propose(lambda p: "I think the loop is fine, no changes needed.", ctx)
+    mp_boom = model_propose(lambda p: (_ for _ in ()).throw(RuntimeError("x")), ctx)
+    checks["model_propose keeps valid proposals, drops malformed"] = (
+        len(mp_ok) == 1 and mp_ok[0]["component"] == ["context", "loop_policy"])
+    checks["model_propose prose reply -> [] (falls back to heuristic)"] = mp_prose == []
+    checks["model_propose model exception -> []"] = mp_boom == []
+    checks["model_propose output passes the same bar as heuristic_propose"] = all(
+        _valid_proposal(p) for p in mp_ok)
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print(f"\n  context keys: {list(ctx)}")
