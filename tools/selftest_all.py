@@ -39,6 +39,7 @@ JOBS = [
     ("probe_epistemic_sybil.py", ["selftest"]),
     ("probe_rho_holdout.py", ["selftest"]),
     ("probe_activation_generalisation.py", ["selftest"]),
+    ("probe_composed_design.py", ["selftest"]),
 ]
 
 

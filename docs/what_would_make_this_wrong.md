@@ -53,6 +53,16 @@ This is the hardest quantified limit in this document. It doesn't kill the thesi
 
 **What would kill it:** the composed design (short agents, frequent four-field handoffs, folded state) still shows geometric decay at the *task* level — i.e. the decomposition just moves the compounding failure from steps to handoffs. Then long agentic work is not reliably doable at all, by this design or any other current one, and the project's knowledge-work-substitution aim is bounded to short tasks.
 
+**Update (run 92):** `tools/probe_composed_design.py` runs this in a controlled sim. Verdict at realistic
+parameters: **COMPOSES BUT BOUNDED.** The composed stack (config C) dominates both a single long agent (A) and
+prose-handoff decomposition (B) at every task length and roughly *doubles* the usable horizon (task length
+where success ≥ 0.5: A = 12, C = 24 steps). It is **not falsified** — the decomposition genuinely helps and
+four-field handoffs clearly beat prose ones. But the **base per-step failure rate still sets a ceiling**
+(0.985^100 ≈ 0.22 however clean the handoffs). So: the design *extends* how long a task can be, it does not make
+long work reliable — you need short *tasks*, not just short *agents*. The orchestration layer's decomposition
+is doing at least as much work as the harness layer, matching the §3.3 bilevel result. Real per-step `p` and
+handoff shed rate from agent runs would give the real horizon.
+
 ## 6. The thing that would make it *irrelevant* rather than wrong
 
 `emergent_model_native_orchestration` — if planning, context management, and self-correction keep migrating into the reasoning chain, the harness holds less and less, and the whole `self_improving_harness` + `nourishing_harness` leverage narrows. This one is *contested* (WHALE: harness still adds 4–24pp under improving weights; the AVO capability delta) rather than supported, which is the best news in this document. But it's not settled, and it's the failure mode that doesn't announce itself — you find out the harness stopped mattering by noticing your improvements stopped landing.
