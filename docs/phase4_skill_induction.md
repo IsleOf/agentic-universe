@@ -34,6 +34,20 @@ deterministically** as skill-withheld — those runs rediscover the approach fro
 scratch instead of selecting the skill. Without this, "distillation and discovery
 consume each other" and the loop stops finding anything new.
 
+## Retirement — the deprecation stage (run 72)
+
+`retire(reg, bank, window=12)` is the other half of `pattern_agentic_skill_lifecycle`,
+which the plan flagged as owed. A skill whose task class has not appeared in the
+last 12 workflow entries is marked `status: "deprecated"` — **kept and auditable,
+not deleted** — and stops being offered. A second pass is idempotent, and the
+skill revives if its class recurs. This is `principle_retraction_capacity`
+applied to the skill library, the same discipline the graph itself uses (1
+deprecated node, 5 inconclusive).
+
+On the real corpus right now, `literature_sweep` deprecates: runs 60–72 have all
+been `build`, so the sweep skill is stale by the window rule. It comes back the
+first run a literature sweep happens.
+
 ## No auto-promotion
 
 Every induced skill is written `status: "candidate"` — it goes into a

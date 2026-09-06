@@ -48,6 +48,7 @@ from loop_adapter import seed_loop_harness, replay_history, GRAPH  # noqa: E402
 
 MIN_SUPPORT = 4          # a task class must recur >= this many times
 WITHHELD_FRACTION = 0.20  # permanently, per principle_diversity_maintenance
+RETIRE_WINDOW = 12        # runs; a skill unseen for this many recent runs is retired
 
 # canonical task-class labels, matched against the free-text run notes
 TASK_CLASSES = {
@@ -117,6 +118,44 @@ def induce(reg: Registry, bank: ExperienceBank):
     return candidates
 
 
+def _run_order(bank):
+    """Best-effort chronological order of the workflow entries (by ts, then id)."""
+    return sorted(bank._all("workflow"), key=lambda e: (e.get("ts", 0), e["id"]))
+
+
+def retire(reg: Registry, bank: ExperienceBank, window=RETIRE_WINDOW):
+    """The deprecation stage of `pattern_agentic_skill_lifecycle`, actually
+    exercised (`principle_retraction_capacity`). A skill whose task class has not
+    appeared in the last `window` workflow entries is marked `deprecated` — it is
+    kept (auditable), not deleted, and stops being offered.
+
+    Returns the list of skills retired this pass.
+    """
+    entries = _run_order(bank)
+    recent = entries[-window:] if len(entries) > window else entries
+    recent_classes = {classify(e["pattern"] + " " + e.get("note", "")) for e in recent}
+
+    retired = []
+    for c in reg.list():
+        if c["kind"] != "tool" or not c["name"].startswith("skill_"):
+            continue
+        body = reg.get("tool", c["name"])
+        try:
+            skill = json.loads(body)
+        except Exception:
+            continue
+        if skill.get("status") == "deprecated":
+            continue
+        if skill.get("task_class") not in recent_classes:
+            skill["status"] = "deprecated"
+            skill["retired_note"] = (f"task class '{skill['task_class']}' not seen in the last "
+                                     f"{len(recent)} runs; deprecated, not deleted")
+            reg.set("tool", c["name"], json.dumps(skill, indent=2),
+                    note=f"retire: {skill['task_class']} disused", author="retire")
+            retired.append(skill)
+    return retired
+
+
 def _procedure_for(cls):
     return {
         "literature sweep": "narrow arXiv/cs.MA window; verify each citation 3 ways; fold only VERIFIED "
@@ -162,6 +201,14 @@ def _selftest():
         run_ids = [f"run-{i}" for i in range(1, 51)]
         held = withheld_runs(run_ids)
 
+        # retirement: the recent runs (60-71) are all 'build'; a class not in the
+        # recent window is deprecated, not deleted.
+        retired = retire(reg, bank)
+        # every retired skill is still in the registry, status deprecated
+        retired_kept = all(
+            json.loads(reg.get("tool", f"skill_{s['name']}"))["status"] == "deprecated"
+            for s in retired) if retired else True
+
         checks = {
             "corpus condensed into workflow entries": n_workflow >= 40,
             "at least 2 task classes induced": len(candidates) >= 2,
@@ -170,6 +217,9 @@ def _selftest():
             "each candidate has support >= MIN_SUPPORT": all(c["support"] >= MIN_SUPPORT for c in candidates),
             "withheld fraction ~20% and non-empty": 0 < len(held) <= len(run_ids) * 0.5 and len(held) >= 8,
             "withheld set is deterministic": withheld_runs(run_ids) == held,
+            "retire() deprecates a disused skill class": len(retired) >= 1,
+            "retired skills are kept (deprecated), not deleted": retired_kept,
+            "a second retire() pass is idempotent": retire(reg, bank) == [],
         }
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
@@ -199,8 +249,10 @@ def _cli(argv=None):
         tmp = Path(tempfile.mkdtemp())
         try:
             reg, bank, _ = _build_corpus_bank(tmp)
-            for c in induce(reg, bank):
-                print(json.dumps(c, indent=2))
+            cands = induce(reg, bank)
+            retired = retire(reg, bank)
+            print(json.dumps({"induced": cands, "retired": [s["task_class"] for s in retired]},
+                             indent=2))
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
         return 0

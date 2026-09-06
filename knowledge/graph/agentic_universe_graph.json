@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-23",
+  "last_updated": "2026-09-24",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -244,6 +244,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 71. Built Phase 5 - execution-layer enforcement (tools/exec_guard.py), installed as .git/hooks/pre-commit. Blocks (git commit physically fails): committing to main, staging a raw jsonl trace, a secret-shaped string, an invalid graph, an orphan node. emergent_recognition_execution_gap answered: the hook is the half of the system a prose instruction is not. Completes the plan skeleton - every phase 0-5 now exists as tested code; 12 selftests under tools/selftest_all.py. artifact_phase5_exec_guard added."
+    },
+    {
+      "date": "2026-09-24",
+      "change": "Autonomous run 72. Completed Phase 4's skill lifecycle: added retire() to tools/skill_induction.py - the deprecation stage of pattern_agentic_skill_lifecycle (principle_retraction_capacity). A skill whose task class is unseen in the last 12 workflow entries is marked deprecated, kept not deleted, stops being offered, idempotent, revives on recurrence. On the real corpus literature_sweep deprecates (12 straight build runs). selftest_all.py still 12 selftests, all GREEN (skill_induction now checks retirement)."
     }
   ],
   "nodes": [
@@ -4694,13 +4698,15 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:phase4_skeleton",
       "confidence": 0.7,
-      "description": "tools/skill_induction.py, run 70: classifies the loop's 56-run history (via experience-bank workflow entries) into task classes; a class recurring >= 4 times becomes a candidate skill written to the harness registry as a tool component, status=candidate (no auto-promotion). Induced literature_sweep (support 22) and build (support 9). Enforces the distillation/discovery tension: withheld_runs() marks a fixed 20% of runs permanently and deterministically skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). Not built: LLM clustering, auto-promotion, finer task-class classification (needs live per-run summaries).",
+      "description": "tools/skill_induction.py, run 70: classifies the loop's 56-run history (via experience-bank workflow entries) into task classes; a class recurring >= 4 times becomes a candidate skill written to the harness registry as a tool component, status=candidate (no auto-promotion). Induced literature_sweep (support 22) and build (support 9). Enforces the distillation/discovery tension: withheld_runs() marks a fixed 20% of runs permanently and deterministically skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). Not built: LLM clustering, auto-promotion, finer task-class classification (needs live per-run summaries). Run 72: added retire() - the deprecation stage of pattern_agentic_skill_lifecycle (principle_retraction_capacity). A skill whose task class is unseen in the last 12 workflow entries is marked deprecated - kept and auditable, not deleted - and stops being offered; idempotent, and revives if the class recurs. On the real corpus, literature_sweep deprecates (12 straight build runs).",
       "tags": [
-        "phase-4",
-        "skill-induction",
-        "withheld-fraction",
         "distillation-vs-discovery",
-        "skeleton"
+        "lifecycle-complete",
+        "phase-4",
+        "skeleton",
+        "skill-induction",
+        "skill-retirement",
+        "withheld-fraction"
       ],
       "derived_from": [
         "docs/phase4_skill_induction.md",
@@ -10469,6 +10475,28 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Reuses trace_substrate's secret patterns for the staged-file scan."
+    },
+    {
+      "id": "edge_phase4_implements_retraction",
+      "source": "artifact_phase4_skill_induction",
+      "target": "principle_retraction_capacity",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "retire() marks a disused skill deprecated (kept, not deleted); a second pass is idempotent; the skill revives if its class recurs."
+    },
+    {
+      "id": "edge_phase4_completes_skill_lifecycle",
+      "source": "artifact_phase4_skill_induction",
+      "target": "pattern_agentic_skill_lifecycle",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "Induction + deprecation stages both exercised - the lifecycle the plan flagged as owed."
     }
   ]
 }
