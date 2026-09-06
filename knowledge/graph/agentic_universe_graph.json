@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-05",
+  "last_updated": "2026-10-06",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1164,6 +1164,10 @@
     {
       "date": "2026-10-05",
       "change": "Autonomous run 304. Built skills/perplexity-notebooklm/ - the v2.2 browser literature scout (docs/self_rebuild_v2.md 4/5). SKILL.md (nodriver-session contract) + perplexity_notebooklm.py: drives Perplexity deep-research + Google NotebookLM, returns {engine,query,answer_text,citations,challenge}; --brief wraps it as a research_brief STUB (empty candidates - the graph writer fills them). Replaces the manual owner-Perplexity-push step. Scaffold: stdlib parser + brief bridge selftested vs HTML fixtures (11 checks, added to selftest_all -> 39 jobs); the live selectors/waits/NotebookLM-upload need the profile + iteration. 1 node (artifact_perplexity_notebooklm_scout) + 2 edges. 332 -> 333 nodes. v2 status: deterministic spine complete (300/302/303) + the scout scaffolded (304); v2.0 (bind call_model) is the owner budget decision."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Autonomous run 305. Literature sweep (arxiv scan) - folded arXiv:2603.25111 'SEVerA: Verified Synthesis of Self-Evolving Agents' (Mar/Apr 2026, VERIFIED), absent from the graph. Frames self-evolving agentic code gen as constrained learning: hard formal specs + soft objectives. Formally Guarded Generative Models - a FOL output contract on each generative call + a verified-fallback rejection sampler, so every output satisfies the contract for all parameters. Search -> Verification (prove for ALL params) -> Learning (GRPO on the soft objective, verifier preserves correctness). Zero constraint violations + gains on Dafny / symbolic math / tau^2-bench. New node concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback + 4 edges: supports concept_proof_carrying_negotiation (FGGM = PCN per-call) + artifact_acceptance_gate (independent arrival at contract-check + repair/reject + certificate); refines concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (a proof for all params beats a held-out sample where the property is formally expressible); supports concept_whale_harness_only_optimization... (SEVerA's safety half is harness-only, its utility half is GRPO - the training-fork split). Currency note: ~6mo, uses weight training, utility numbers possibly superseded. 333 -> 334 nodes, 1329 -> 1333 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9864,6 +9868,33 @@
       ],
       "evidence_links": [
         "skills/perplexity-notebooklm/SKILL.md"
+      ]
+    },
+    {
+      "id": "concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback",
+      "label": "SEVerA: wrap every generative model call in a first-order-logic output contract + a verified-fallback rejection sampler, prove it for ALL parameter values, then train the soft objective",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:acceptor_certificate",
+      "confidence": 0.5,
+      "description": "arXiv:2603.25111 (SEVerA, Mar 2026 / rev Apr 2026, VERIFIED via arxiv API - abstract, authors, dates). Frames self-evolving agentic code generation as a CONSTRAINED learning problem: hard formal specifications + soft objectives (task utility). Formally Guarded Generative Models (FGGM): the planner LLM writes a first-order-logic output contract for each generative model call; each call wraps the model in a rejection sampler with a VERIFIED FALLBACK, so every returned output satisfies the contract for any input and any parameter setting. Three stages: Search (synthesise candidate parametric programs containing FGGM calls) -> Verification (prove correctness w.r.t. the hard constraints for ALL parameter values, reducing the problem to unconstrained learning) -> Learning (GRPO-style fine-tuning improves the soft objective while the verifier preserves correctness). On Dafny, symbolic math, and tau^2-bench tool use: zero constraint violations AND performance over unconstrained + SOTA baselines. Currency: ~6 months old and it uses weight training (GRPO), so the utility numbers are model-generation-specific and possibly superseded; the FGGM contract-plus-verified-fallback mechanism is the durable part. It also sharpens the training-fork tension: the SAFETY half (Verification) is harness-only and needs no weights, but the UTILITY half (Learning) is gradient-based.",
+      "tags": [
+        "acceptor",
+        "certificate",
+        "formal-contract",
+        "verified-fallback",
+        "constrained-learning",
+        "training-fork",
+        "verified"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-06-0000.md",
+        "arXiv:2603.25111 (SEVerA: Verified Synthesis of Self-Evolving Agents) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-06-0000.md"
       ]
     }
   ],
@@ -24220,6 +24251,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "--brief emits the research_brief stub shape; the graph writer runs research_brief.check + fills candidates."
+    },
+    {
+      "id": "edge_severa_supports_pcn",
+      "source": "concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback",
+      "target": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "FGGM is proof-carrying negotiation at per-call granularity: a formal contract on each generative call, a deterministic verifier that must be satisfied, and a verified fallback when the sample fails - the same separation of NL reasoning from deterministic enforcement."
+    },
+    {
+      "id": "edge_severa_supports_acceptance_gate",
+      "source": "concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback",
+      "target": "artifact_acceptance_gate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Independent arrival at the run-300 gate's shape: don't trust the generator, check every output against a contract and repair-or-reject on failure. SEVerA's verified-fallback rejection sampler is the FGGM-call analogue of acceptance_gate's held-out check + deterministic_repair + certificate."
+    },
+    {
+      "id": "edge_severa_refines_exogenous_acceptor",
+      "source": "concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "When the acceptance criterion is formally expressible, SEVerA's Verification stage proves it for ALL parameter values - strictly stronger than a frozen held-out sample. The exogenous signal can be a proof, not just a test set, for the subset of properties that admit a formal contract."
+    },
+    {
+      "id": "edge_severa_supports_whale_tension",
+      "source": "concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback",
+      "target": "concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "SEVerA gets its correctness guarantees harness-only (Verification, no weights) but its utility gains from the Learning stage (GRPO). Another data point that capability-shaped improvement wants the weights, while safety-shaped improvement does not - the split this project's emergence-first bet makes."
     }
   ]
 }

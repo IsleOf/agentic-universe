@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 333 nodes, 1329 edges · **Date:** 2026-09-05
+**Graph at generation:** 334 nodes, 1333 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -91,6 +91,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2603.10808](https://arxiv.org/abs/2603.10808) | (title not recorded) | `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` |
 | [2603.14805](https://arxiv.org/abs/2603.14805) | (title not recorded) | `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` |
 | [2603.20975](https://arxiv.org/abs/2603.20975) | DiscoUQ: structured disagreement for uncertainty quantification | `pattern_fresh_context_evaluation` |
+| [2603.25111](https://arxiv.org/abs/2603.25111) | (title not recorded) | `concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback` |
 | [2603.26089](https://arxiv.org/abs/2603.26089) | mental self-modelling deficits | `emergent_consciousness_like_self_modeling`, `emergent_theory_of_mind` |
 | [2603.28990](https://arxiv.org/abs/2603.28990) | self-organizing roles / Drop the Hierarchy and Roles | `emergent_self_organizing_roles` |
 | [2604.08465](https://arxiv.org/abs/2604.08465) | peer-preservation (companion) | `emergent_self_and_peer_preservation` |
@@ -487,6 +488,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-05-0600.md` — `artifact_research_brief`, `concept_recursive_meta_skill_evolution`
 - `docs/auto_sweep_2026-10-05-1200.md` — `artifact_loop_conductor`, `concept_asg_si_independently_arrives_at_the_plan`
 - `docs/auto_sweep_2026-10-05-1800.md` — `artifact_perplexity_notebooklm_scout`, `concept_multi_round_interaction_compresses_semantic_space`
+- `docs/auto_sweep_2026-10-06-0000.md` — `concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback`
 - `docs/auto_sweep_2026-10-06-0600.md` — `concept_rest_react_founds_the_trajectory_retrain_loop`
 - `docs/auto_sweep_2026-10-06-1200.md` — `concept_adaptive_self_improvement_in_the_low_data_regime`
 - `docs/auto_sweep_2026-10-06-1800.md` — `concept_bottleneck_is_the_model_harness_coupling`
