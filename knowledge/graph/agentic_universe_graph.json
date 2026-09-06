@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-20",
+  "last_updated": "2026-09-21",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -932,6 +932,10 @@
     {
       "date": "2026-09-20",
       "change": "Autonomous run 242. Incorporating the owner's agentic-jobs analysis (docs/jobs/, 6 files, brought from origin/main; 100+ postings Aug-Sep 2026). New node concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness: a labor-market signal for where the labs invest. Five converging organisational patterns each mapping onto the project's design - dedicated harness teams (infrastructure not app logic), forward-deployed engineering, EVALUATION AS CI GATE (= exec_guard + verify_loop_edit), SELF-IMPROVING AS DEFAULT (40%+ of roles), TIERED ORCHESTRATION (= run-218 criterion). DeepSeek 'Model + Harness = Agent', a dedicated Agent Harness R&D Engineer + PM whose job includes co-evolving models and harness, benchmarked against Claude Code. 7 edges: supports concept_bottleneck_is_the_model_harness_coupling, concept_harness_engineering_is_an_empirical_discipline... (demand-side confirmation), approach_self_improving_harness, artifact_phase5_exec_guard (eval-as-CI-gate), concept_whale_... (co-evolution as a hiring priority), principle_terminal_gate_only (gate outcomes not process); refines concept_harness_convergence_2026_09. Also: docs/practicing_what_we_preach.md - a strategy note answering the owner's questions (graph traceability: add tools/graph_diff.py, don't redesign; per-project graph+handover audit method for poly-bot/poster-studio; the concrete pains -> folded research: deterministic task ledger, platform-level memory capture + bounded active-cap, the run-218 orchestration criterion, PILOT live supervisor). 267->268 nodes, 1061->1068 edges."
+    },
+    {
+      "date": "2026-09-21",
+      "change": "Autonomous run 243. Build (recommendation #1 from docs/practicing_what_we_preach.md). tools/graph_diff.py: a mechanical structural diff of the knowledge graph between two git refs (or two files) - reports nodes/edges added / removed / relabelled / retyped, verification_state / confidence / status / approach_family changes, edge endpoint changes, and the new evolution_log entries. 'python tools/graph_diff.py HEAD~5 HEAD' or '... HEAD~1' (vs worktree). Answers the owner's traceability question: the graph already records THAT it changed (evolution_log / derived_from / harness version chains / run records); this is the mechanical WHAT. 10 selftest checks; added to selftest_all.py JOBS (now 23) and tools/README.md. The tool + JOBS entry landed in the run-242 push (40e762c); this run records it as an increment and confirms the full selftest set is GREEN with it. No graph node/edge change."
     }
   ],
   "nodes": [

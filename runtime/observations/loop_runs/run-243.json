@@ -1,0 +1,20 @@
+{
+  "run": 243,
+  "increment": "build - tools/graph_diff.py: mechanical structural graph diff between two versions (nodes/edges added/removed/relabelled/retyped, vstate/confidence changes, new evolution_log); recommendation #1 from practicing_what_we_preach.md; 0 nodes / 0 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-243.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 243 OK · VALID · graph +0 · cites 0v/0 · idle-streak 1 · legible 1.00 · verified-frac 0.80"
+}
