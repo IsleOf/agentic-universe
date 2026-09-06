@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-08",
+  "last_updated": "2026-10-09",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -488,6 +488,10 @@
     {
       "date": "2026-10-08",
       "change": "Autonomous run 132. DBLP. concept_horizon_gap_outcome_signals_decay (The Horizon Gap, arXiv:2608.06663, 1547-paper survey): outcome-only signals grow uninformative as horizons lengthen -> the field manufactures denser step-level signal (the case FOR the Phase 0 trace substrate, and a sharpening of the run-129 plateau point). Disambiguates long-horizon / long-context / long-term-memory. Names the project's open questions as the field's: model-vs-harness capability decomposition, correlated bias in process signals used for both train and eval, whether long-horizon reliability admits general theory. +6 edges."
+    },
+    {
+      "date": "2026-10-09",
+      "change": "Autonomous run 133. Consolidation. Folded runs 131-132 into the docs. what_would_make_this_wrong.md: section 5 gains a run-132 update (The Horizon Gap leaves the geometric law less settled - general predictive theory is an open problem - but the field converges on denser step-level signal, which is the Phase 0 substrate); section 6 gains a run-131 update (ACE: a harness-only context intervention beats strong baselines with a smaller model, evidence against model-native absorption). phase0_trace_substrate.md gains 'Independent field-wide support' (The Horizon Gap's convergence finding + the correlated-process-signal-bias caveat). No graph node/edge change."
     }
   ],
   "nodes": [

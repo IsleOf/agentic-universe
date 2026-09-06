@@ -1,0 +1,31 @@
+{
+  "run": 133,
+  "increment": "consolidation - fold ACE (131) + The Horizon Gap (132) into what_would_make_this_wrong.md + phase0_trace_substrate.md",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2510.04618",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2608.06663",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2510.04618",
+    "arXiv:2608.06663"
+  ],
+  "trace_file": "runtime\\traces\\loop-133.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

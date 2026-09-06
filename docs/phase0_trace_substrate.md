@@ -140,6 +140,14 @@ Per `docs/self_improving_harness_plan.md` §5 and `docs/emergence_probe_catalogu
 - **Phase 2 experience bank** — TOOL_RESULT token_cost is the condensation
   accounting; CLAIM ancestry is the dedup key.
 
+**Independent field-wide support (added run 132).** `concept_horizon_gap_outcome_signals_decay` — The
+Horizon Gap (arXiv:2608.06663), a 1,547-paper survey — finds every subfield of long-horizon agent research
+converging on one move: *outcome-only signals grow uninformative as horizons lengthen, so you manufacture
+denser step-level signal* (process reward models, credit assignment, trajectory-level diagnostics). The
+Five-W trace substrate is that move, made a prerequisite rather than an afterthought. The survey's caveat
+applies here too: process-level signals used for both training and evaluation carry correlated bias — which
+is why the Phase 3 gate keeps generator and evaluator in separate contexts.
+
 ## Next (Phase 1)
 
 1. ~~Role recovery on a noisy control~~ — done (run 61), 1.00 after one tuning

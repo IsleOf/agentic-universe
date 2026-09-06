@@ -88,9 +88,21 @@ long work reliable — you need short *tasks*, not just short *agents*. The orch
 is doing at least as much work as the harness layer, matching the §3.3 bilevel result. Real per-step `p` and
 handoff shed rate from agent runs would give the real horizon.
 
+**Update (run 132):** `concept_horizon_gap_outcome_signals_decay` (The Horizon Gap, arXiv:2608.06663 — a
+1,547-paper survey) leaves the geometric law *less* settled, not more. It names as an **open problem**
+whether long-horizon reliability admits any general predictive theory — so the 16-step collapse number may
+be task-class-specific rather than a universal constant, and the composed-design probe's `p` is doing more
+load-bearing work than a single sim run can justify. The survey's constructive half cuts the other way: it
+finds the whole field converging on the same response — *outcome-only signals grow uninformative as
+horizons lengthen, so you manufacture denser step-level signal*. That is exactly what the Phase 0 trace
+substrate produces, and it means the §5 limit is best attacked not by a better decomposition but by richer
+per-step measurement of where trajectories actually fail.
+
 ## 6. The thing that would make it *irrelevant* rather than wrong
 
 `emergent_model_native_orchestration` — if planning, context management, and self-correction keep migrating into the reasoning chain, the harness holds less and less, and the whole `self_improving_harness` + `nourishing_harness` leverage narrows. This one is *contested* (WHALE: harness still adds 4–24pp under improving weights; the AVO capability delta) rather than supported, which is the best news in this document. But it's not settled, and it's the failure mode that doesn't announce itself — you find out the harness stopped mattering by noticing your improvements stopped landing.
+
+**Update (run 131):** `concept_ace_context_evolution_self_improvement` (ACE, arXiv:2510.04618) is a further data point *against* this worry. Evolving the *context playbook* — a pure harness-layer object, no weights — gets +10.6% on agents and matches the top production agent on AppWorld *with a smaller open model*. If model-native orchestration were absorbing the harness's job, a harness-only intervention of that size on a weaker model should not be possible. The harness still holds a lot.
 
 **Companion caution — the loop's returns may plateau even if the harness keeps mattering (added run 129).** `concept_rest_react_founds_the_trajectory_retrain_loop` (arXiv:2312.10003): the earliest published multi-iteration self-improvement result gets its gains in *two* iterations and then saturates. If the middle loop's returns decay the same way, the loop keeps running, keeps passing its gate (a gate only rejects regressions, it does not require progress), and quietly stops producing real improvement — the same "improvements stopped landing" signature as the model-native case, from a different cause. `concept_recursive_meta_skill_evolution` is the proposed answer (evolve the improvement procedure itself when the task loop plateaus), but that it *works* — that meta-level search reliably re-opens a plateaued object-level loop — is a hypothesis, not a result. The cheap tell: track the accept-rate and the held-out-score trend of the middle loop over a run window; a long run of gate-passing edits that don't move the held-out score is the plateau.
 
