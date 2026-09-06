@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-17",
+  "last_updated": "2026-09-18",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -884,6 +884,10 @@
     {
       "date": "2026-09-17",
       "change": "Autonomous run 230. Recency-weighted sweep. Folded PILOT in the Loop (arXiv:2608.26530, Aug 2026) as concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker: self-improvement should be LIVE not post-hoc - a supervisor-worker harness with live steering (a separate supervisor redirects/aborts the active worker mid-run) + live self-evolution (distil failure modes into skills during execution). Two frozen backbones, three benchmarks, first in 5/6 configs; Terminal-Bench 2.0 +9.8pp; self-improvement +14.6/+12.4; mean output tokens -42.9%/-47.4%, successful-evals-per-Mtoken +110%/+134%. 6 edges: extends concept_self_harness_validates_the_three_loop (middle loop as a live process); supports pattern_recoverability_constrained_evolution (abort = live recovery), concept_sea_steering_adapter_around_a_frozen_base... (frozen-backbone variant), artifact_probe_subagent_coordination_rig (adds the redirect-active-subagent capability), pattern_agentic_skill_lifecycle, concept_horizon_gap_outcome_signals_decay (dense in-run signal). 259->260 nodes, 1011->1017 edges."
+    },
+    {
+      "date": "2026-09-18",
+      "change": "Autonomous run 231. Recency-weighted sweep. Folded JIT-Agent (arXiv:2608.25593, Aug 2026) as concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension: a TRAINED harness-generator model that synthesizes task-adaptive harnesses on the fly for off-the-shelf LLMs under a fixed four-module protocol; trained to customize / repair / self-evolve from a harness archive. DeepSeek-V4-Flash + JIT-Agent surpasses GPT-5.6 (+9.1 DeepSearchQA, +4.3 OdysseyBench); GLM-5.2 +20.2; competitive with OpenCode / Claude Code. Establishes harness intelligence as trainable, transferable, compounding, orthogonal to model scaling. A genuine TENSION with the emergence-first no-training fork. 6 edges: supports concept_capability_is_a_model_harness_config_property (strongest form - weaker model + good harness beats stronger model), pattern_four_field_constraint (fixed four-module protocol), concept_harness_engineering_is_an_empirical_discipline... (a generated harness at production quality); challenges approach_emergence_first (a trained generator may compound where elicitation plateaus); refines concept_recursive_meta_skill_evolution (archive distillation); supports concept_proof_carrying_negotiation_... (both name an explicit repair stage). 260->261 nodes, 1017->1023 edges."
     }
   ],
   "nodes": [
@@ -7654,6 +7658,36 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-17-1800.md"
+      ]
+    },
+    {
+      "id": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "label": "JIT-Agent: a TRAINED harness-generator model synthesizes task-adaptive harnesses on the fly for off-the-shelf LLMs under a fixed four-module protocol; makes weaker models beat stronger ones (+9-20pp); harness intelligence is trainable, transferable, compounding, orthogonal to model scaling",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:jit_agent_trained_harness_generator",
+      "confidence": 0.66,
+      "description": "JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution (arXiv:2608.25593, VERIFIED via arXiv abstract read run 231; Aug 2026). Agent capability is not the model alone - the harness (memory management, planning strategy, action protocol, tool/skill orchestration) can DOMINATE the foundation model's contribution. Yet harness design is manual, task-specific, unscalable. JIT-Agent is a HARNESS INTELLIGENCE MODEL - a model TRAINED to synthesize task-adaptive agent harnesses on the fly for arbitrary off-the-shelf agentic LLMs. It formalizes the harness as a composable, machine-generatable artifact governed by a FIXED FOUR-MODULE PROTOCOL, and is trained to (a) customize harnesses per task, (b) REPAIR harnesses for stable and reliable execution, (c) self-evolve by distilling performance signals from an expanding ARCHIVE of prior harness configurations. Results: DeepSeek-V4-Flash + JIT-Agent surpasses GPT-5.6 on DeepSearchQA (+9.1) and OdysseyBench (+4.3); the already-strong GLM-5.2 gains up to +20.2; JIT-Agent-generated harnesses are performance-competitive with mature runtimes (OpenCode, Claude Code) and consistently improve DeepSeek V4 / Mimo-V2.5 / Qwen3.6 families. 'The first model purpose-built for just-in-time harness generation, establishing harness intelligence as a TRAINABLE, TRANSFERABLE, and COMPOUNDING dimension of agent capability ORTHOGONAL to model scaling.' Bearing on the project: this is a genuine TENSION with the emergence-first / no-weight-training fork - JIT-Agent trains a dedicated harness-generator model and shows it compounds, an alternative to elicitation-only harness improvement. But it is also the strongest published statement of concept_capability_is_a_model_harness_config_property (a weaker model + a good harness beats a stronger model), and its fixed four-module protocol echoes pattern_four_field_constraint. Recorded as a challenges edge to approach_emergence_first. Recency: Aug 2026, current model families.",
+      "tags": [
+        "JIT-Agent",
+        "harness-intelligence",
+        "trained-harness-generator",
+        "four-module-protocol",
+        "just-in-time-harness",
+        "harness-repair",
+        "harness-archive",
+        "orthogonal-to-model-scaling",
+        "compounding",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-18-0000.md",
+        "arXiv:2608.25593 (JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution) - VERIFIED, abstract read run 231"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-18-0000.md"
       ]
     }
   ],
@@ -18578,6 +18612,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "Long-horizon runs where outcome-only signals decay: PILOT manufactures a dense in-run signal (the supervisor's continuous assessment) - the same 'denser step-level signal' response, applied live."
+    },
+    {
+      "id": "edge_jit_agent_supports_capability_is_config",
+      "source": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.68,
+      "description": "The strongest published form: DeepSeek-V4-Flash + JIT-Agent SURPASSES GPT-5.6 on two benchmarks, and JIT-generated harnesses match Claude Code / OpenCode - a weaker model in a better harness beats a stronger model in a worse one, measured across multiple families."
+    },
+    {
+      "id": "edge_jit_agent_challenges_emergence_first",
+      "source": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "target": "approach_emergence_first",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A real alternative to the no-weight-training fork: JIT-Agent TRAINS a dedicated harness-generator model and shows harness intelligence is trainable, transferable, and COMPOUNDING - the project declines weight training, so if JIT-Agent's compounding claim holds, elicitation-only harness improvement may plateau where a trained generator does not."
+    },
+    {
+      "id": "edge_jit_agent_supports_four_field",
+      "source": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "target": "pattern_four_field_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "JIT-Agent governs the harness with a FIXED FOUR-MODULE PROTOCOL so a generated harness is well-formed and comparable - the same move as pattern_four_field_constraint: a fixed schema that makes an artifact machine-checkable and prevents a free-form edit from shedding structure."
+    },
+    {
+      "id": "edge_jit_agent_supports_harness_anatomy",
+      "source": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "target": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'JIT-Agent-generated harnesses are performance-competitive with OpenCode and Claude Code' - a generated harness reaching production-runtime quality is the tool-to-platform turn taken one step further: the platform generates itself."
+    },
+    {
+      "id": "edge_jit_agent_refines_recursive_meta_skill",
+      "source": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "target": "concept_recursive_meta_skill_evolution",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.48,
+      "description": "'Self-evolve by distilling performance signals from an expanding archive of prior harness configurations' is recursive meta-skill evolution with the meta-object being the whole harness and a trained model doing the distillation, not a prompt loop."
+    },
+    {
+      "id": "edge_jit_agent_relates_pcn_repair",
+      "source": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "target": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "JIT-Agent lists 'repair harnesses for stable and reliable execution' as a trained capability - the same explicit REPAIR stage PCN-Rec makes deterministic; two independent arguments that a self-improvement loop needs a repair step, not only accept/revert."
     }
   ]
 }

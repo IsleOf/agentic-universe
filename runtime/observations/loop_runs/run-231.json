@@ -1,0 +1,27 @@
+{
+  "run": 231,
+  "increment": "recency-weighted sweep - folded JIT-Agent (arXiv:2608.25593): a TRAINED harness-generator model; harness intelligence is trainable/transferable/compounding, orthogonal to model scaling; a tension with the emergence-first no-training fork; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2608.25593",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.25593"
+  ],
+  "trace_file": "runtime\\traces\\loop-231.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 231 OK · VALID · graph +0 · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.80"
+}

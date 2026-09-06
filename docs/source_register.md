@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 260 nodes, 1017 edges · **Date:** 2026-09-05
+**Graph at generation:** 261 nodes, 1023 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -167,6 +167,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.24876](https://arxiv.org/abs/2608.24876) | (title not recorded) | `pattern_code_as_context` |
 | [2608.25099](https://arxiv.org/abs/2608.25099) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2608.25553](https://arxiv.org/abs/2608.25553) | (title not recorded) | `emergent_stale_belief_propagation` |
+| [2608.25593](https://arxiv.org/abs/2608.25593) | (title not recorded) | `concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension` |
 | [2608.25623](https://arxiv.org/abs/2608.25623) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.25776](https://arxiv.org/abs/2608.25776) | (title not recorded) | `emergent_mind_viruses` |
 | [2608.26081](https://arxiv.org/abs/2608.26081) | (title not recorded) | `emergent_self_organizing_roles` |
@@ -404,7 +405,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-17-0600.md` — `concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it`
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1
 - `docs/auto_sweep_2026-09-17-1800.md` — `concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker`
-- `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`
+- `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`, `concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension`
 - `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`
 - `docs/auto_sweep_2026-09-19-0600.md` — `concept_epistemic_sybil_collapse`, `emergent_compositional_private_language`, `pattern_evidential_ancestry_tracking`
 - `docs/auto_sweep_2026-09-19-1800.md` — `concept_environment_evolution_curriculum`, `pattern_procedural_family_skill_consolidation`
