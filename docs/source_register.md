@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 266 nodes, 1055 edges · **Date:** 2026-09-05
+**Graph at generation:** 267 nodes, 1061 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -79,6 +79,8 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
 | [2602.15894](https://arxiv.org/abs/2602.15894) | Quality-constrained Entropy Maximization Policy Optimization | `pattern_verbalized_sampling` |
 | [2603.07360](https://arxiv.org/abs/2603.07360) | (title not recorded) | `concept_environmental_pressure_has_an_inverted_u` |
+| [2603.10808](https://arxiv.org/abs/2603.10808) | (title not recorded) | `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` |
+| [2603.14805](https://arxiv.org/abs/2603.14805) | (title not recorded) | `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` |
 | [2603.20975](https://arxiv.org/abs/2603.20975) | DiscoUQ: structured disagreement for uncertainty quantification | `pattern_fresh_context_evaluation` |
 | [2603.26089](https://arxiv.org/abs/2603.26089) | mental self-modelling deficits | `emergent_consciousness_like_self_modeling`, `emergent_theory_of_mind` |
 | [2603.28990](https://arxiv.org/abs/2603.28990) | self-organizing roles / Drop the Hierarchy and Roles | `emergent_self_organizing_roles` |
@@ -124,6 +126,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2607.24625](https://arxiv.org/abs/2607.24625) | (title not recorded) | `pattern_disposable_branch_exploration` |
 | [2607.27191](https://arxiv.org/abs/2607.27191) | (title not recorded) | `concept_motive_operative_split`, `concept_research_lifecycle_split` |
 | [2608.00102](https://arxiv.org/abs/2608.00102) | (title not recorded) | `concept_work_substitution_frontier` |
+| [2608.00122](https://arxiv.org/abs/2608.00122) | (title not recorded) | `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` |
 | [2608.02178](https://arxiv.org/abs/2608.02178) | (title not recorded) | `emergent_social_conventions` |
 | [2608.02758](https://arxiv.org/abs/2608.02758) | (title not recorded) | `emergent_pluralistic_ignorance` |
 | [2608.02827](https://arxiv.org/abs/2608.02827) | (title not recorded) | `principle_diversity_maintenance` |
@@ -414,7 +417,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-19-1800.md` — `concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer`, `concept_environment_evolution_curriculum`, `pattern_procedural_family_skill_consolidation`
 - `docs/auto_sweep_2026-09-20-0000.md` — `concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data`
 - `docs/auto_sweep_2026-09-20-0600.md` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`
-- `docs/auto_sweep_2026-09-20-1200.md` — `concept_self_concept_as_behavioral_lever`
+- `docs/auto_sweep_2026-09-20-1200.md` — `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`, `concept_self_concept_as_behavioral_lever`
 - `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
@@ -490,6 +493,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`
 - `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)` — `approach_self_improving_harness`, `concept_agentic_os`, `concept_context_economics` +10
+- `knowledge/notes/2026-09-04-human-knowledge-creative-automation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`
 - `knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)` — `concept_motive_operative_split`
 
 ## Owner input and research aggregation

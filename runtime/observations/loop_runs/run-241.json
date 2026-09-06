@@ -1,0 +1,37 @@
+{
+  "run": 241,
+  "increment": "incorporate the owner's Perplexity deep-research - folded the human-knowledge-capture cluster (Shared Org Memory 2608.00122 + Nurture-First 2603.10808 + AKUs 2603.14805): capture must be platform-level not agent-initiated; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 3,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2608.00122",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2603.10808",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2603.14805",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2603.10808",
+    "arXiv:2603.14805",
+    "arXiv:2608.00122"
+  ],
+  "trace_file": "runtime\\traces\\loop-241.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 241 OK · VALID · graph +0 · cites 2v/3 · idle-streak 0 · legible 1.00 · verified-frac 0.80"
+}

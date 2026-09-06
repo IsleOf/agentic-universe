@@ -924,6 +924,10 @@
     {
       "date": "2026-09-20",
       "change": "Autonomous run 240. Incorporating the owner's Perplexity deep-research (pushed to origin/main 2026-09-04: 'Improving Agent Creativity Diversity', 'Agent Harnesses & Swarm Orchestration', 'Human Knowledge Capture & Creative Work Automation', + ~15 knowledge notes). VALIDATION: ~80% of the diversity-mitigation papers in the owner's note (verbalized sampling 2510.01171, entropy-max 2602.15894, random-embedding 2605.11936, agent-scaling 2602.03794, diversity-collapse 2604.18005, diversity-as-defense 2602.00038, one-frozen-simulator 2608.12253, autotelic 2606.19924, language-of-thought 2601.11227, spark-effect 2510.15568) are ALREADY in the graph - the loop and an independent 24-50-search Perplexity sweep converged. FOLDED the strongest genuinely-new item: concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated (Who Owns Creativity and Who Does the Work?, arXiv:2601.12152, Jan 2026, 54-researcher HCI study): perceived creativity support is non-monotone in control; human effort shifts from ideating to VERIFYING; ownership is a negotiated human-AI outcome. 5 edges: supports concept_research_lifecycle_split (measured with real researchers), concept_aspire_... (human-in-the-loop half of the same measurement); refines concept_self_improvement_strength_tracks_the_verification_hierarchy (the bottleneck in practice is verification); informs concept_overseer_degradation (control is non-monotone), principle_diversity_maintenance (steering skill is a human-side quality lever). 265->266 nodes, 1050->1055 edges."
+    },
+    {
+      "date": "2026-09-20",
+      "change": "Autonomous run 241. Incorporating the owner's Perplexity deep-research (cont. from run 240). Folded the human-knowledge-capture cluster as concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue: three converging papers - Shared Organizational Memory for Enterprise Coding Agents (arXiv:2608.00122, production deployment: agents don't reliably recognise/record reusable lessons, so capture must be platform-level with contributor approval + risk gating), Nurture-First Agent Development (arXiv:2603.10808: tacit expertise grown through structured conversation, Knowledge Crystallization Cycle consolidates dialogue into reusable assets), Knowledge Activation / Atomic Knowledge Units (arXiv:2603.14805, from the dossier, not independently opened: typed AKU schema intent/procedure/tools/governance/validators). 6 edges: challenges artifact_phase2_experience_bank (the bank assumes the lesson was recorded); supports emergent_recognition_execution_gap (agents don't record what they should), pattern_agentic_skill_lifecycle (AKU typed schema), concept_human_effort_shifts_from_ideating_to_verifying... (Nurture-First conversation); refines concept_memory_poisoning_one_write_persists (approval + risk-gate write-path defense), pattern_evidential_ancestry_tracking (validators/governance as first-class fields). 266->267 nodes, 1055->1061 edges."
     }
   ],
   "nodes": [
@@ -7870,6 +7874,38 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-20-0600.md"
+      ]
+    },
+    {
+      "id": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "label": "Human knowledge capture for agents: agents don't reliably recognise what's worth recording, so capture must be a platform-level part of the workflow (with contributor approval + risk gating); tacit expertise is grown through structured conversation and periodically crystallised into typed reusable knowledge units",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:human_knowledge_capture",
+      "confidence": 0.66,
+      "description": "A cluster from the owner's Perplexity deep-research 'Human Knowledge Capture & Creative Work Automation' (knowledge/notes/2026-09-04-human-knowledge-creative-automation.md on origin/main, 50 web searches), cross-checked and folded here. Three papers converge: (1) SHARED ORGANIZATIONAL MEMORY FOR ENTERPRISE CODING AGENTS (arXiv:2608.00122, VERIFIED, Jul 2026, a production deployment) - existing knowledge interfaces 'depend on agents RECOGNISING and explicitly recording lessons worth reusing, disconnecting capture from the coding workflow and leaving development experience repeatedly rediscovered'. Fix: make capture a PLATFORM-LEVEL part of the work - collect task-adjacent experience WITH CONTRIBUTOR APPROVAL, curate into reusable question-answer memories, GATE obvious security and privacy risks, retrieve for future agents. Effects still under evaluation. (2) NURTURE-FIRST AGENT DEVELOPMENT (arXiv:2603.10808, VERIFIED, Mar 2026) - domain expertise is substantially TACIT, deeply personal, and continuously evolving, which breaks the code-first / prompt-first assumption that agent construction is a discrete phase before deployment. NFD: initialise with minimal scaffolding, grow through structured CONVERSATIONAL interaction with domain practitioners; the Knowledge Crystallization Cycle periodically consolidates fragmented dialogue knowledge into structured reusable assets; a three-layer architecture. (3) KNOWLEDGE ACTIVATION / ATOMIC KNOWLEDGE UNITS (arXiv:2603.14805, from the dossier; NOT independently opened) - Codification -> Compression -> Injection -> AKUs with a typed schema (intent, procedure, tools, metadata, governance, continuations, validators); the agent internalises an AKU via injection and 'ephemeral internalization' on task success. Bearing on the project: this CHALLENGES the Phase 2 experience_bank's implicit assumption - the bank condenses from traces, but Shared Org Memory says the agent will not reliably have RECORDED the lesson in the first place (an instance of emergent_recognition_execution_gap). Two fixes the project does not have: (a) capture as an automatic platform step, not agent-initiated; (b) an approval + risk-gate on every write (which is also the memory-poisoning defense). The AKU typed schema is a more governed version of a skill_induction skill. Recency: mixed (Mar-Jul 2026), one production deployment - modest confidence.",
+      "tags": [
+        "human-knowledge-capture",
+        "shared-organizational-memory",
+        "nurture-first",
+        "knowledge-crystallization-cycle",
+        "atomic-knowledge-units",
+        "platform-level-capture",
+        "contributor-approval",
+        "tacit-knowledge",
+        "perplexity-deep-research-source"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-20-1200.md",
+        "arXiv:2608.00122 (Shared Organizational Memory for Enterprise Coding Agents) - VERIFIED, abstract read run 241",
+        "arXiv:2603.10808 (Nurture-First Agent Development) - VERIFIED, abstract read run 241",
+        "arXiv:2603.14805 (Knowledge Activation / Atomic Knowledge Units) - from the owner's dossier, NOT independently opened",
+        "knowledge/notes/2026-09-04-human-knowledge-creative-automation.md (owner's Perplexity deep-research, origin/main) - source"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-20-1200.md"
       ]
     }
   ],
@@ -19212,6 +19248,72 @@
       "approach_family": "agent_habitat",
       "confidence": 0.4,
       "description": "From the owner's diversity deep-research: the study is part of a body of work finding that steering skill drives output-quality variance - a human-side lever on the diversity/quality trade-off that principle_diversity_maintenance is about, alongside the model/prompt/context decoupling levers."
+    },
+    {
+      "id": "edge_knowledge_capture_challenges_experience_bank",
+      "source": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "target": "artifact_phase2_experience_bank",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "experience_bank condenses from traces, assuming the useful lesson is in the trace. Shared Org Memory (a production deployment) finds agents do NOT reliably recognise or record what is worth reusing - so capture must be a platform step, not agent-initiated. A concrete Phase-2 gap."
+    },
+    {
+      "id": "edge_knowledge_capture_supports_recognition_execution_gap",
+      "source": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "target": "emergent_recognition_execution_gap",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "'Agents depend on recognising lessons worth reusing' and mostly don't - the recognition-execution gap at the knowledge-capture layer: the agent could note the lesson, knows it should, and doesn't."
+    },
+    {
+      "id": "edge_knowledge_capture_refines_memory_poisoning",
+      "source": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "'Collect WITH CONTRIBUTOR APPROVAL' + 'GATE obvious security and privacy risks' before a write enters shared memory is a concrete write-path defense - one of the memory-poisoning write channels closed by making every write human-approved and risk-screened."
+    },
+    {
+      "id": "edge_knowledge_capture_supports_skill_lifecycle",
+      "source": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "target": "pattern_agentic_skill_lifecycle",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The AKU typed schema (intent / procedure / tools / metadata / governance / continuations / validators) is a governed skill: a skill_induction output should carry these fields, not just a name and a body."
+    },
+    {
+      "id": "edge_knowledge_capture_supports_who_owns_creativity",
+      "source": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "target": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "Nurture-First's 'grow the agent through structured conversation with practitioners' is the constructive side of the same human-AI knowledge-transfer relationship: the human's effort goes into crystallising tacit expertise, and ownership of the resulting asset is shared."
+    },
+    {
+      "id": "edge_knowledge_capture_refines_evidential_ancestry",
+      "source": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "target": "pattern_evidential_ancestry_tracking",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45,
+      "description": "AKUs carry explicit VALIDATORS and GOVERNANCE fields and Shared Org Memory records CONTRIBUTOR approval - provenance and a check attached to every knowledge unit, which is evidential-ancestry tracking made a first-class field of the stored artifact."
     }
   ]
 }
