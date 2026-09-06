@@ -816,6 +816,10 @@
     {
       "date": "2026-09-13",
       "change": "Autonomous run 213. Recency-weighted sweep. Folded Proof-Carrying Agent Actions (PCAA, arXiv:2606.04104, June 2026) as concept_runtime_governance_organizes_around_a_portable_action_certificate: a runtime-neutral governance model centred on an action certificate, five checkpoints (pre-action admissibility, action open, assumption capture, approval, outcome closure) bound to a portable envelope + runtime/approval receipts + replay-ready proof; externality-aware (destination visibility, account provenance); approval by explicit enforceability classes not a reviewed/unreviewed bit. Benchmark 24->96 traces / four runtime families. PCAA is the layer above CAVA (run 212). 6 edges: depends_on the CAVA node (one stack); supports pattern_four_field_constraint (the five checkpoints = the four fields as a runtime protocol), concept_irreversibility_budget (externality-aware boundary facts price an act), principle_terminal_gate_only (approval + outcome closure are terminal on the action); refines pattern_evidence_carrying_termination (five lifecycle checkpoints, assumption capture, replay-ready proof); detects concept_overseer_degradation (enforceability classes answer the 20.1pp gap). 248->249 nodes, 941->947 edges."
+    },
+    {
+      "date": "2026-09-13",
+      "change": "Autonomous run 214. Recency-weighted sweep. Folded SEA - Self-Evolving Agents with Anytime-Valid Certificates (arXiv:2607.00871, July 2026) as concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate: confine self-modification to a steering adapter + versioned harness around a FROZEN base; admit each edit only through an anytime-valid gate emitting an auditable certificate against a fixed error budget; the gate can only SELECT behaviors the base already produces, so five verifier-in-the-loop mechanisms supply the dense grader-free signal from the issue text alone. SWE-bench Verified 52-subset, four base models: base capability dominant + confound-free, suite contributes +4/+5 (GLM 5.2 24->28, GPT 29->34). Honest limit: single-run. The FIFTH independent arrival at the project's plan and the closest to the emergence-first no-training fork. 8 edges: supports approach_emergence_first ('gate only selects behaviors the base already produces'), concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal, concept_asg_si_independently_arrives_at_the_plan (5th arrival), concept_runtime_governance_organizes_around_a_portable_action_certificate, concept_capability_is_a_model_harness_config_property (clean confound-controlled measurement), concept_inference_time_scaling_of_verification (the five signal mechanisms), concept_self_improvement_evaluation_is_noisy_and_task_order_dependent (self-applied caution); extends concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution (PACE gate in a full architecture). 249->250 nodes, 947->955 edges."
     }
   ],
   "nodes": [
@@ -7264,6 +7268,37 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-13-1200.md"
+      ]
+    },
+    {
+      "id": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "label": "SEA: confine self-modification to a small steering adapter + versioned harness around a FROZEN base; admit each edit only through an anytime-valid gate emitting an auditable certificate against a fixed error budget; the gate can only SELECT behaviors the base already produces",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:sea_anytime_valid_certificates",
+      "confidence": 0.73,
+      "description": "SEA - Self-Evolving Agents with Anytime-Valid Certificates (arXiv:2607.00871, VERIFIED via arXiv abstract read run 214; July 2026). Premise: self-evolving agents violate the assumption behind most learning-theoretic guarantees - the data, evaluator, components, and hypothesis space are all produced by the policy being updated. SEA's architecture: confine self-modification to a small STEERING ADAPTER and a VERSIONED HARNESS around a FROZEN base model, and admit each modification only through an ANYTIME-VALID gate that emits an AUDITABLE CERTIFICATE against a FIXED ERROR BUDGET. Five loop controllers compose published guarantees. Crucially: because such gates can only SELECT among behaviors the frozen base ALREADY PRODUCES, five verifier-in-the-loop mechanisms - best-of-N, micro-step search, self-authored reproduction oracles, search-layer control, self-repair - supply the dense, GRADER-FREE signal the gates require, computed from the issue text alone. Evaluation: a 52-instance SWE-bench Verified subset across four base models. BASE CAPABILITY IS THE DOMINANT, CONFOUND-FREE EFFECT; a deliberate no-op-composite control isolates the suite's contribution at +4 and +5 on two strong base models (GLM 5.2 24->28; GPT 29->34), with event logs confirming the mechanisms fire and prevent regressions. Honest limits (stated): single-run on expensive evaluations; run-to-run variance and per-task algorithm mix are future work. Bearing on the project: this is the project's ENTIRE STANCE, published - emergence-first (the gate only selects behaviors the frozen base already produces, no weight training), harness-level self-improvement (steering adapter + versioned harness), verifier-gated promotion with an auditable certificate, a fixed error budget (concept_irreversibility_budget), grader-free dense signal from the task text (concept_inference_time_scaling_of_verification). It is the fifth independent arrival at the plan (after ASG-SI, Self-Harness, SEAL, Falsifiable Release Gates) and the one that matches the no-training fork most exactly. Recency: July 2026, current base models.",
+      "tags": [
+        "SEA",
+        "steering-adapter",
+        "frozen-base",
+        "anytime-valid-gate",
+        "auditable-certificate",
+        "fixed-error-budget",
+        "gates-only-select",
+        "grader-free-dense-signal",
+        "base-capability-dominates",
+        "independent-convergence",
+        "recency-2026-07"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-13-1800.md",
+        "arXiv:2607.00871 (Self-Evolving Agents with Anytime-Valid Certificates) - VERIFIED, abstract read run 214"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-13-1800.md"
       ]
     }
   ],
@@ -17418,6 +17453,94 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "'Enforceability classes rather than a single reviewed/unreviewed bit' is a direct structural response to concept_overseer_degradation's finding that user permission policies are 20.1pp weaker than per-action review - it makes the strength of an approval explicit and machine-checkable."
+    },
+    {
+      "id": "edge_sea_supports_emergence_first",
+      "source": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.68,
+      "description": "'The gate can only SELECT among behaviors the frozen base already produces' is the emergence-first thesis stated as an architectural constraint: capability is elicited/selected, not trained in - and SEA's own result (base capability is the dominant confound-free effect) is the evidence for it."
+    },
+    {
+      "id": "edge_sea_extends_acceptor_weakpoint",
+      "source": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "target": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.68,
+      "description": "PACE gives the anytime-valid commit gate; SEA embeds it in a full architecture - a frozen base, a steering adapter, a versioned harness, five verifier-in-the-loop signal sources, and an auditable certificate against a fixed error budget."
+    },
+    {
+      "id": "edge_sea_supports_exogenous_acceptance",
+      "source": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.66,
+      "description": "The frozen base + fixed error budget + auditable certificate is SEAL's exogenous acceptance signal made concrete: the thing the modification is judged against is not producible by the modification."
+    },
+    {
+      "id": "edge_sea_supports_asg_si_convergence",
+      "source": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "target": "concept_asg_si_independently_arrives_at_the_plan",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The fifth independent arrival at the project's plan (after ASG-SI, Self-Harness, SEAL, Falsifiable Release Gates) - and the one matching the emergence-first / no-weight-training fork most exactly: steering adapter + versioned harness + frozen base."
+    },
+    {
+      "id": "edge_sea_supports_evidence_carrying_certificate",
+      "source": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "target": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "SEA's 'auditable certificate against a fixed error budget' for each accepted self-modification is PCAA's action certificate applied to the self-improvement edit as the governed action."
+    },
+    {
+      "id": "edge_sea_supports_capability_is_config",
+      "source": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "SEA's headline empirical finding - base capability is the dominant, confound-free effect, harness suite contributes +4/+5 - is a clean confound-controlled measurement of the capability = model-x-harness-config decomposition on SWE-bench Verified."
+    },
+    {
+      "id": "edge_sea_supports_inference_time_verification",
+      "source": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "target": "concept_inference_time_scaling_of_verification",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "SEA's five verifier-in-the-loop mechanisms (best-of-N, micro-step search, reproduction oracles, search-layer control, self-repair) supplying a dense grader-free signal from the issue text alone is inference-time scaling of verification, instantiated as the signal source for the gate."
+    },
+    {
+      "id": "edge_sea_relates_eval_noise",
+      "source": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "target": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "SEA states the same caution against itself - 'results are single-run on expensive evaluations; confirming run-to-run variance is future work' - the Fragility discipline, self-applied."
     }
   ]
 }

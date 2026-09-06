@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 249 nodes, 947 edges · **Date:** 2026-09-05
+**Graph at generation:** 250 nodes, 955 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -107,6 +107,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.26294](https://arxiv.org/abs/2606.26294) | (title not recorded) | `concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries` |
 | [2606.28235](https://arxiv.org/abs/2606.28235) | (title not recorded) | `concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property` |
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
+| [2607.00871](https://arxiv.org/abs/2607.00871) | (title not recorded) | `concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate` |
 | [2607.05297](https://arxiv.org/abs/2607.05297) | (title not recorded) | `concept_recursive_meta_skill_evolution` |
 | [2607.07663](https://arxiv.org/abs/2607.07663) | (title not recorded) | `concept_self_improvement_strength_tracks_the_verification_hierarchy` |
 | [2607.12790](https://arxiv.org/abs/2607.12790) | (title not recorded) | `concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score` |
@@ -377,7 +378,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-13-0000.md` — `concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes`, `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
 - `docs/auto_sweep_2026-09-13-1200.md` — `concept_runtime_governance_organizes_around_a_portable_action_certificate`
-- `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
+- `docs/auto_sweep_2026-09-13-1800.md` — `concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate`, `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`
 - `docs/auto_sweep_2026-09-14-1200.md` — `emergent_pluralistic_ignorance`
 - `docs/auto_sweep_2026-09-15-0000.md` — `concept_curriculum_generation_not_intrinsic_drive`
