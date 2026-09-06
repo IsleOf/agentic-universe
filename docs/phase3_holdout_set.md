@@ -71,6 +71,16 @@ regressed task.
 
 ## The remaining gap (narrowed, not closed)
 
+**Behaviour-aware verification (added run 197).** `concept_behavior_aware_verification_beats_the_fixed_task_set`
+(HarnessLens, arXiv:2608.27311): scoring every candidate on the whole fixed set
+wastes budget and lets the aggregate hide a regression. `holdout_tasks.behavior_relevant_tasks(edit)`
+returns the tasks an edit's `change` / `dimension` / `component` text actually
+touches (its behaviour categories) **plus a fixed regression sample**
+(`_REGRESSION_SAMPLE`), so a hidden regression elsewhere still surfaces. An
+unmatched edit falls back to all tasks (conservative). `verify_loop_edit(edit=…)`
+puts the list in `evidence["behaviour_relevant_tasks"]` as an advisory — a future
+re-run can spend its budget on that subset instead of all 17.
+
 **Content-not-format scoring (added run 194).** `concept_self_correction_is_mostly_format_repair_not_reasoning`
 (arXiv:2608.04355): most measured self-correction gain is format repair
 (parseability), not reasoning. `_normalize()` strips markdown emphasis / fences /

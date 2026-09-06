@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-09",
+  "last_updated": "2026-09-10",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -748,6 +748,10 @@
     {
       "date": "2026-09-09",
       "change": "Autonomous run 196. Recent citation-sweep (S2 citations of Agentic Harness Engineering 2604.25850). concept_behavior_aware_verification_beats_the_fixed_task_set (Verify Smarter Evolve Further / HarnessLens, arXiv:2608.27311): verifying each candidate harness edit selectively on behaviour-relevant tasks with an attributable-evidence gate (not the fixed task set) gives +7.6-13.6% held-out at substantially lower evaluation budget. A CONSTRUCTIVE answer to concept_verification_is_the_binding_constraint; 'aggregate scores obscure regressions' = the run-116 masking finding with a method; the attributable-evidence gate = the four-field verdict's authority field operationalised. +6 edges."
+    },
+    {
+      "date": "2026-09-10",
+      "change": "Autonomous run 197. Phase 3 - behaviour-aware verification (the run-196 HarnessLens conclusion). holdout_tasks.behavior_relevant_tasks(edit) returns the held-out tasks an edit's change/dimension/component text touches (its behaviour categories, keyed by _BEHAVIOUR_KEYS) PLUS a fixed _REGRESSION_SAMPLE; an unmatched edit -> all tasks (conservative). verify_loop_edit(edit=...) puts the list in evidence['behaviour_relevant_tasks'] as an advisory - a future re-run spends its budget on that subset not all 17. +5 selftest checks (holdout 45/45; improvement_loop). phase3_holdout_set.md updated. No graph node/edge change."
     }
   ],
   "nodes": [

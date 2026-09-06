@@ -325,6 +325,19 @@ def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=N
     # when the held-out score improves (the tampering-persists finding).
     tamper = tampering_flags(edit) if edit is not None else []
 
+    # behaviour-aware verification hint (concept_behavior_aware_verification_beats_
+    # the_fixed_task_set, arXiv:2608.27311, run 197): which held-out tasks the edit
+    # actually needed to be re-scored on (its behaviour categories + a regression
+    # sample). Advisory — the score args here are already computed — so a future
+    # re-run can spend its budget on the relevant subset instead of all 17.
+    behaviour_tasks = None
+    if edit is not None:
+        try:
+            from holdout_tasks import behavior_relevant_tasks
+            behaviour_tasks = behavior_relevant_tasks(edit, list(baseline_scores))
+        except Exception:
+            behaviour_tasks = None
+
     accept = bool(strict_decrease and not regressed and not contested
                   and not cat_regressed and not legibility_regressed and not tamper)
     return {
@@ -342,7 +355,8 @@ def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=N
                      "category_before": cat_before, "category_after": cat_after,
                      "legibility_regressed": legibility_regressed,
                      "legibility": list(legibility) if legibility is not None else None,
-                     "tampering_flags": [list(f) for f in tamper]},
+                     "tampering_flags": [list(f) for f in tamper],
+                     "behaviour_relevant_tasks": behaviour_tasks},
     }
 
 
@@ -426,6 +440,14 @@ def _selftest():
                                                  "the verify-three-ways rule is per-run ambiguous",
                                        "prediction": {"direction": "increase",
                                                       "rationale": "removes the ambiguity a busy run exploits"}})["accept"] is True,
+            "verdict carries a behaviour-relevant-tasks hint when edit is given (run 197)":
+                isinstance(verify_loop_edit(
+                    {"geometric_reliability_decay": 1.0, "two_part_gate_structure": 0.0},
+                    {"geometric_reliability_decay": 1.0, "two_part_gate_structure": 1.0},
+                    edit={"component": ["context", "loop_policy"], "change": "one unverified citation per run",
+                          "dimension": "research quality",
+                          "prediction": {"direction": "increase", "rationale": "x"}}
+                )["evidence"]["behaviour_relevant_tasks"], list),
             "a legibility gain (or noise-floor dip) does not block an otherwise-good edit":
                 verify_loop_edit({"a": 1.0, "b": 0.0}, {"a": 1.0, "b": 1.0},
                                  legibility=(0.80, 0.95))["accept"] is True

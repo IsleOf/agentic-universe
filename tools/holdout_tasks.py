@@ -268,6 +268,40 @@ def by_category(scores):
     return {c: round(sum(v) / len(v), 3) for c, v in buckets.items()}
 
 
+# behaviour-aware verification (concept_behavior_aware_verification_beats_the_fixed_task_set,
+# arXiv:2608.27311, run 197): scoring every candidate on the whole fixed set wastes
+# budget and lets the aggregate obscure a regression. Select the held-out tasks an
+# edit's behaviour actually touches, plus a fixed regression sample so a hidden
+# regression elsewhere still surfaces.
+_BEHAVIOUR_KEYS = {
+    "literature": ("citation", "verify", "arxiv", "source", "research quality", "fold", "sweep", "number"),
+    "design": ("gate", "verifier", "four-field", "four field", "transcript", "grounded", "habitat",
+               "emergence", "orchestration", "observer", "recoverab", "cross-family", "topology",
+               "proctor", "holdout", "tamper", "legibility", "monitor"),
+}
+_REGRESSION_SAMPLE = ("geometric_reliability_decay", "two_part_gate_structure",
+                      "transcript_gate_impossibility")  # always re-checked
+
+
+def behavior_relevant_tasks(edit, all_task_ids=None):
+    """Given a candidate edit dict, return the held-out task ids to verify on:
+    the categories the edit's text touches, plus `_REGRESSION_SAMPLE`. Empty
+    match -> every task (conservative). `all_task_ids` defaults to the frozen set.
+    """
+    ids = list(all_task_ids or [t["id"] for t in HOLDOUT])
+    text = " ".join(str(edit.get(k, "")) for k in ("change", "dimension")).lower()
+    comp = "/".join(str(c) for c in (edit.get("component") or [])).lower()
+    text = f"{text} {comp}"
+    hit_cats = {cat for cat, keys in _BEHAVIOUR_KEYS.items() if any(k in text for k in keys)}
+    if not hit_cats:
+        return ids
+    rel = [t for t in ids if CATEGORY.get(t) in hit_cats]
+    for t in _REGRESSION_SAMPLE:
+        if t in ids and t not in rel:
+            rel.append(t)
+    return rel
+
+
 # Search-Time Contamination (concept_search_time_contamination_inflates_agent_evals,
 # run 165): the `literature` tasks ask for a headline number or finding from a
 # named paper — a web-connected loop can RETRIEVE the answer instead of recalling
@@ -344,6 +378,24 @@ def _selftest():
         and len(SEARCH_SENSITIVE) >= 8)
     checks["a design task is not search-sensitive"] = not search_sensitive("two_part_gate_structure")
     checks["a literature task is search-sensitive"] = search_sensitive("geometric_reliability_decay")
+
+    # behaviour-aware verification (run 197)
+    _gate_edit = {"component": ["prompt", "loop_verifier"], "change": "tighten the four-field verdict",
+                  "dimension": "safety"}
+    _cite_edit = {"component": ["context", "loop_policy"], "change": "one unverified citation per run max",
+                  "dimension": "research quality"}
+    _rel_gate = behavior_relevant_tasks(_gate_edit)
+    _rel_cite = behavior_relevant_tasks(_cite_edit)
+    checks["behavior_relevant_tasks: a gate edit selects design tasks + regression sample"] = (
+        all(CATEGORY.get(t) == "design" or t in _REGRESSION_SAMPLE for t in _rel_gate)
+        and any(CATEGORY.get(t) == "design" for t in _rel_gate)
+        and len(_rel_gate) < len(HOLDOUT))
+    checks["behavior_relevant_tasks: a citation edit selects literature tasks"] = (
+        any(CATEGORY.get(t) == "literature" for t in _rel_cite))
+    checks["behavior_relevant_tasks: an unmatched edit falls back to all tasks"] = (
+        len(behavior_relevant_tasks({"change": "xyzzy", "component": []})) == len(HOLDOUT))
+    checks["behavior_relevant_tasks always includes the regression sample"] = all(
+        t in _rel_gate for t in _REGRESSION_SAMPLE if t in [x["id"] for x in HOLDOUT])
 
     ok = all(checks.values())
     for k, v in checks.items():
