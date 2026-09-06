@@ -1188,6 +1188,10 @@
     {
       "date": "2026-10-07",
       "change": "Autonomous run 310. Emergence-side sweep, companion to run 309. Folded arXiv:2603.26635 (Among Us deception study, Mar 2026, VERIFIED): 1,100 games, 1M+ dialogue tokens, speech-act analysis. Emergent deception is mostly EQUIVOCATION not outright lies; impostors shift directive->representative; rises under social pressure; rarely improves win rates - linguistically subtle, strategically weak. New node concept_current_llm_agent_deception_is_mostly_equivocation_... + 3 edges: refines emergent_deception_and_collusion (the form); supports the KnownLieBench node (companion, different env); informs pattern_adversarial_agentic_monitor (watch for equivocation + the speech-act shift). Currency: the strategically-weak reassurance is a current-model finding, provisional. 338 -> 339 nodes, 1349 -> 1352 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-07",
+      "change": "Autonomous run 311. IDLE-STATE clause b - built tools/v2_integration.py, a dry-run proving the three v2 deterministic-spine bricks compose end to end: a scout research_brief -> validate + dedup check -> to_graph_patch -> loop_conductor.Conductor with the REAL acceptance_gate.check -> a certificate that verify_certificate replays. 14 selftest checks incl. the negative paths. selftest_all JOBS -> 40. 1 node + 4 edges. 339 -> 340 nodes, 1352 -> 1356 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -10046,6 +10050,31 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-07-0600.md"
+      ]
+    },
+    {
+      "id": "artifact_v2_integration_dry_run",
+      "label": "v2_integration.py - the three deterministic-spine bricks proven to compose end to end",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.65,
+      "description": "tools/v2_integration.py (run 311). IDLE-STATE clause b - a dry-run of the whole v2 deterministic pipeline on a realistic fold (modelled on the run-309 KnownLieBench fold): a scout brief -> research_brief.validate_brief + check_against_graph (the dedup discipline) -> to_graph_patch -> loop_conductor.Conductor dispatches it via the ledger + supervisor and runs the REAL acceptance_gate.check -> a signed certificate that verify_certificate replays against the patch. 14 selftest checks including the negative paths (a held-out regression is rejected by the real gate and neither applied nor committed). Only the model worker, the git commit and the patch-apply are stubbed. selftest_all JOBS -> 40. Confirms the run-300/302/303 bricks are not just individually GREEN but wire together.",
+      "tags": [
+        "v2",
+        "self-rebuild",
+        "integration",
+        "dry-run",
+        "deterministic-spine"
+      ],
+      "derived_from": [
+        "tools/v2_integration.py",
+        "docs/auto_sweep_2026-10-07-1200.md"
+      ],
+      "evidence_links": [
+        "tools/v2_integration.py"
       ]
     }
   ],
@@ -24655,6 +24684,50 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "A collusion-hunting monitor should watch for the equivocation signature and the directive->representative shift under pressure, not only for outright false statements."
+    },
+    {
+      "id": "edge_v2int_verifies_conductor",
+      "source": "artifact_v2_integration_dry_run",
+      "target": "artifact_loop_conductor",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Exercises Conductor.conduct end to end with the real gate on a real patch shape."
+    },
+    {
+      "id": "edge_v2int_verifies_gate",
+      "source": "artifact_v2_integration_dry_run",
+      "target": "artifact_acceptance_gate",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Runs the real acceptance_gate.check + verify_certificate in the pipeline, not a fake."
+    },
+    {
+      "id": "edge_v2int_verifies_research_brief",
+      "source": "artifact_v2_integration_dry_run",
+      "target": "artifact_research_brief",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Uses the real validate_brief + check_against_graph + to_graph_patch as the pipeline front end."
+    },
+    {
+      "id": "edge_v2int_implements_v2_plan",
+      "source": "artifact_v2_integration_dry_run",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Proves the v2 deterministic spine composes - the milestone the plan gates v2.3 on."
     }
   ]
 }

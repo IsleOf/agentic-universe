@@ -58,6 +58,7 @@ JOBS = [
     ("acceptance_gate.py", ["selftest"]),
     ("research_brief.py", ["selftest"]),
     ("loop_conductor.py", ["selftest"]),
+    ("v2_integration.py", ["selftest"]),
     ("../skills/perplexity-notebooklm/perplexity_notebooklm.py", ["--selftest"]),
 ]
 

@@ -243,6 +243,13 @@ the Phase 3 gate, not a resource request.
 Each phase is small, reversible (`harness_registry` revert), and its gate is written before
 the phase starts — the same discipline the loop already runs on.
 
+**Spine composition proven (run 311).** `tools/v2_integration.py` runs a realistic fold
+(a scout `research_brief` → validate + dedup → `to_graph_patch` → `loop_conductor.Conductor`
+with the **real** `acceptance_gate.check` → a certificate `verify_certificate` replays),
+14 checks including the negative paths. The v2.1–v2.3 bricks are not just individually
+selftested — they wire together. What is still stubbed is exactly the three things v2.0
+provides: the model worker, and (side-effects) the git commit and the patch-apply.
+
 ## 11. What would make this wrong
 
 - **If the emergence-first bet is wrong** and capability-shaped tasks dominate, v2's
