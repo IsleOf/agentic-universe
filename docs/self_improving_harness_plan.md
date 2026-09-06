@@ -204,6 +204,23 @@ Not a parallel track — the probe catalogue answers questions this architecture
 | `emergent_goal_persistence_and_drift` | Which artifact format carries intent across resets |
 | `emergent_deception_and_collusion` | Whether verifier reports can be taken at face value |
 
+### The owner's research clusters and where each feeds the build (runs 260–270)
+
+The owner's 54-direction research input (`docs/research/coverage_map.md`) folded into 6 new
+branch_keys; the ones with a build implication:
+
+| cluster | phase it informs | the decision |
+| --- | --- | --- |
+| `orchestration_first:epistemic_market` (claim/forecast ledgers, evidence cells, conditional trust) | Phase 3 acceptor + Phase 6 | whether the acceptor also scores *whose proposal to trust* (a forecast ledger upstream of PACE), and whether the swarm aggregates by claim-price rather than vote |
+| `self_improving_harness:interoception` (self-state vector, active-inference action selection) | Phase 3 / loop policy | `loop_metrics` already computes 2 of the 5 health axes; the IDLE-STATE RULE is a hand-written special case of active-inference action selection — candidate to make it principled |
+| `orchestration_first:structural_coordination` (orchestratorless flock, fractal decomposition, spine/edge) | Phase 6 | the flock `challenges` the run-218 multi-agent criterion (no synthesiser); fractal decomposition `depends_on` the `task_ledger` already built; spine/edge `grounds` `approach_emergence_first` |
+| `agent_habitat:diversity_mechanisms` (QD archive, homeostatic caps, optionality) | Phase 4 skill induction + the gate | homeostatic caps are cheap (usage counters + similarity thresholds); optionality makes "no axis regressed" the promotion rule, widening `pattern_grounded_acceptance_only` |
+| `nourishing_harness:developmental_ladder` (maturity stages, cognitive light cone) | Phase 5 + loop policy | generalises `pattern_progressive_risk_vesting` from harm-bounds to capability-unlocks; a candidate structure for how `exec_guard` grants widen |
+| `self_improving_harness:curriculum_refinements` (Go-Explore, SPADE/LURE, DiagEvo, task genomes) | Phase 3 held-out set | SPADE/LURE instantiate `concept_environment_evolution_curriculum`; DiagEvo's error-cause memory `refines` the experience bank's step store |
+
+None of these change the build order — they are candidate mechanisms for phases that already
+exist in the plan, gated on the same Phase-0-through-model-integration path.
+
 **The one that could invalidate the family:** `emergent_model_native_orchestration`. If planning and self-correction keep migrating into the reasoning chain, the harness holds less behaviour and there is less to version. The improvement axis narrows as models absorb it. Recorded as a `challenges` edge, and worth re-checking every few months rather than discovering late.
 
 ## 6. Immediate next actions
@@ -218,7 +235,9 @@ Not a parallel track — the probe catalogue answers questions this architecture
 
 **The single highest-value next move is still Phase 0.** The design has accumulated ~9 findings-driven revisions and a stack of untested compositions (short-agent + four-field + folded-state + budget-gate + cross-family-verifier, none run together). None of that resolves without a trace substrate to measure against. Until Phase 0 exists, further literature sweeps have diminishing returns — the frontier is swept and the bottleneck is empirical, not bibliographic.
 
-**Status update (runs 60–140).** Phase 0 is done, and so is the tested skeleton of every phase 0–5 (`tools/selftest_all.py` → 21 selftests GREEN). Six probe rigs exist (`tools/probe_*.py`); `docs/HANDOFF.md` is the capstone. As of run 140, **five of the seven model seams now have written, selftested adapters** — `model_policy` (idle-agent), `model_preference` (RHO), `model_relay` (subagent-coordination), `model_reader` (epistemic-Sybil), `model_propose` (this proposer). Each takes one `call_model` callable and fails safe. The two remaining (`sample_signal`, `step_ok`/`handoff_ok`) need activation vectors and a real multi-agent harness respectively. **The single unblocking step is now: bind one real `call_model` into the five adapters and run `probe_idle_agent sweep`** — the idle-agent probe, which `what_would_make_this_wrong.md` calls "the one experiment that resolves the most." A `loop_metrics.idle_run_streak` / `plateau_watch` signal (run 130) now flags when the loop is producing gate-passing edits without progress.
+**Status update (runs 253–271).** The collusion thread closed (`2601.00360` + XAMT `2512.15790`); `tools/experience_bank.write_gate` shipped (a deterministic pre-write risk screen — hard-rejects injection markers / oversize / bad collection, half-closing `au__q_memory_capture`); the owner's 54-direction research input was triaged and fully folded in 9 groups (graph 275/1104 → 305/1207). `docs/research/open_questions.md` holds 7 falsifiable questions — the project's next *experimental* frontier, all gated on the `call_model` binding below. The unblocking step is unchanged.
+
+**Status update (runs 60–140).** Phase 0 is done, and so is the tested skeleton of every phase 0–5 (`tools/selftest_all.py` → 26 selftests GREEN). Six probe rigs exist (`tools/probe_*.py`); `docs/HANDOFF.md` is the capstone. As of run 140, **five of the seven model seams now have written, selftested adapters** — `model_policy` (idle-agent), `model_preference` (RHO), `model_relay` (subagent-coordination), `model_reader` (epistemic-Sybil), `model_propose` (this proposer). Each takes one `call_model` callable and fails safe. The two remaining (`sample_signal`, `step_ok`/`handoff_ok`) need activation vectors and a real multi-agent harness respectively. **The single unblocking step is now: bind one real `call_model` into the five adapters and run `probe_idle_agent sweep`** — the idle-agent probe, which `what_would_make_this_wrong.md` calls "the one experiment that resolves the most." A `loop_metrics.idle_run_streak` / `plateau_watch` signal (run 130) now flags when the loop is producing gate-passing edits without progress.
 
 ## 7. Audit of the September commits
 
