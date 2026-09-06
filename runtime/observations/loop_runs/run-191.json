@@ -1,0 +1,19 @@
+{
+  "run": 191,
+  "increment": "run the section-2 falsifier: tamper_audit.py on the loop's own harness lineage",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-191.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
