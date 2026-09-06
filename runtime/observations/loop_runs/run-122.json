@@ -1,0 +1,25 @@
+{
+  "run": 122,
+  "increment": "fold ReST meets ReAct (arXiv:2312.10003, DeepMind 2023) via DBLP - the founding trajectory-retrain self-improvement loop",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:2312.10003",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2312.10003"
+  ],
+  "trace_file": "runtime\\traces\\loop-122.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
