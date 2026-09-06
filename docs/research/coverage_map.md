@@ -103,7 +103,36 @@ run-11 graph-engineering-videos fold), with the memory-plugin patterns (five-tra
 project / project+branch / daily; intent-native `remember/link/recall`) as the one genuinely new detail
 worth recording against `pattern_experience_bank`.
 
-## Fold plan (subsequent runs)
+## Fold plan — COMPLETE (runs 259–268)
+
+All 9 groups folded. Graph 275/1104 → 305/1193, ~35 new nodes across 6 new
+branch_keys (`orchestration_first:epistemic_market`,
+`self_improving_harness:interoception`, `orchestration_first:structural_coordination`,
+`agent_habitat:diversity_mechanisms`, `nourishing_harness:developmental_ladder`,
+`self_improving_harness:curriculum_refinements`,
+`emergent_behaviors:culture_and_scarcity`,
+`graph_engineering:ecosystem_convergence`,
+`nourishing_harness:emergence_safety_case`). Every direction is now a node, an edge to
+an existing node, or COVERED above.
+
+| group | runs | result |
+|---|---|---|
+| 1 epistemic-market (42–45, 47, 50, 52) | 260 | 6 nodes / 16 edges |
+| 2 active inference + interoception (7, 12, 13, 15) | 261 | 3 nodes / 8 edges |
+| 3 structural coordination (32, 33, 38, 39) | 262 | 4 nodes / 12 edges |
+| 4 QD + homeostasis + optionality (2, 8, 40) | 263 | 3 nodes / 10 edges |
+| 5 developmental ladder (22, 27, 28, 30) | 264 | 4 nodes / 10 edges |
+| 6 curriculum refinements (1, 23, 24, 25, 31) | 265 | 4 nodes / 12 edges |
+| 7 cultural transmission + scarcity + protocol (3, 4, 5, 6) | 266 | 4 nodes / 11 edges |
+| 8 DSH ecosystem convergence | 267 | 1 node / 5 edges |
+| 9 doc artifacts (11, 54) | 268 | `emergence_safety_case_template.md` + `open_questions.md` + 1 node / 5 edges |
+
+The 7 open questions (`docs/research/open_questions.md`) are the project's next
+**experimental** frontier — gated on the model-integration handoff, not on literature.
+
+---
+
+### Original fold plan (for reference)
 
 Group the NEW / high-value items into coherent folds, emergence-first, one per run:
 
