@@ -1088,6 +1088,10 @@
     {
       "date": "2026-09-30",
       "change": "Autonomous run 284. IDLE-STATE clause b - dry-ran the last 2 unexercised probes. probe_activation_generalisation (run): AUC 1.0 in-distribution vs 0.716 emergent-untrained (gap 0.284) - a detector for the assigned scenario, not an observation channel. probe_rho_holdout (sweep): self-preferring evaluator reports 0.218 gain, only 0.073 (33.5%) survives held-out. 3 edges: activation_generalisation_rig supports the run-278 llm-as-judge-cant-detect-collusion node (even the activation channel does not generalise); rho_holdout_rig supports concept_calibrated_forecasting_before_action (3x inflation = why influence needs calibrated prediction not self-report) + grounds concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score. All 7 probe rigs now exercised this session. 314 nodes / 1252 -> 1255 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-30",
+      "change": "Autonomous run 285. IDLE-STATE clause c - corrected docs/literature_coverage.md, stale since run 49 (2026-09-18) and actively misleading (it told the scheduled task the collusion area was swept). Added a Correction block + a Swept-well-covered row for the collusion-audit-and-governance subfield (runs 253/276-282, 7 papers): run 49 marked Emergent deception/collusion as settled, but the 2601.00360 citation chain surfaced ~10 relevant 2026 papers forming a distinct subfield the topic-level sweep missed. LESSON recorded in the doc: a swept claim is only as deep as the citation chain walked; the scheduled task should periodically re-sweep citers of the most-cited literature nodes. Frontier-status header updated to run 285 (314/1255). No graph node/edge change."
     }
   ],
   "nodes": [

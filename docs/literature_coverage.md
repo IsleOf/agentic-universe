@@ -1,12 +1,24 @@
 # Literature Coverage Map
 
-**Updated:** 2026-09-18 (autonomous run 49) · Maintained so the autonomous loop and the scheduled task don't re-sweep the same ground.
+**Updated:** 2026-09-30 (autonomous run 285; prior full pass run 49) · Maintained so the autonomous loop and the scheduled task don't re-sweep the same ground.
 
-**Frontier status (run 49):** every mapped area is now swept. Runs 39, 43, 45, 47, 49 cleared the last five. The
-only remaining candidate is embodied/physical-world agents, deliberately out of scope. Further literature sweeps
-return recurring sources — the bottleneck is now empirical (Phase 0 traces, `docs/self_improving_harness_plan.md`
-§6), not bibliographic. The loop's remaining useful moves: citation upgrades from `docs/source_register.md`,
-re-checking the 5 `inconclusive` nodes against newer evidence, and graph hygiene.
+**Frontier status (run 285):** graph 314 nodes / 1255 edges. Both frontiers (emergence, harness) swept to
+~Sept 2026, **but "swept" decays** — see the run-276-282 correction below. The bottleneck is empirical
+(Phase 0 traces + the 7 open questions in `docs/research/open_questions.md`, all gated on the `call_model`
+binding in `docs/HANDOFF.md`), not bibliographic. Remaining useful literature moves: **citation-chain
+sweeps** of freshly-folded papers (not just topic sweeps), citation upgrades, re-checking `inconclusive`
+nodes.
+
+**Correction (runs 276–282) — the collusion-audit-and-governance subfield was NOT swept.** Run 49 marked
+"Emergent deception / collusion" as *"strong; covert-vs-transparent distinction settled."* An S2 citation
+sweep of `2601.00360` (folded run 253) → 4 direct citers → their citers surfaced ~10 relevant 2026 papers
+forming a distinct subfield the topic-level sweep had missed entirely. Now folded as branch_key
+`emergent_behaviors:collusion_audit_and_governance` (~9 nodes): Colosseum `2602.15198` (audit
+action-collusion by regret + a secret-channel probe), Institutional AI `2601.11369` (governance graph +
+Oracle/Controller, severe collusion 50%→5.6%), Payoff scaling `2601.19082`, Traccia `2607.14309`, the
+MAS-security SoK `2609.00595` (197 works, A-I-R framework), MaMa `2602.04431` (Stackelberg design game).
+**Lesson: a "swept" claim is only as deep as the citation chain that was walked.** The scheduled task
+should periodically re-sweep the citers of the graph's most-cited literature nodes, not just scan topics.
 
 ## Swept, well covered
 
@@ -14,6 +26,7 @@ re-checking the 5 `inconclusive` nodes against newer evidence, and graph hygiene
 | --- | --- | --- | --- |
 | Harness self-evolution subfield | 1, 2, 9 | EvoUndo 2608.28363, HarnessLens 2608.27311, HarnessDev 2609.01437, Evo-Bench 2608.09096, RHO 2606.05922, WHALE 2609.00196, PROCTOR 2609.02246 | 15+ systems mapped; two influential claims verified; self-preference concern documented |
 | Emergent deception / collusion / coordination | 5, 6, 12, 14 | Peer-Preservation 2604.19784, Mind Viruses 2608.10218, swarm-takeover analysis, cheating+whistleblowing 2609.04170, peer recognition 2606.09854 | strong; covert-vs-transparent distinction settled |
+| Collusion audit & governance (subfield) | 253, 276–282 | anti-collusion mechanisms 2601.00360, Colosseum 2602.15198, Institutional AI 2601.11369, Payoff scaling 2601.19082, Traccia 2607.14309, MAS-security SoK 2609.00595, MaMa 2602.04431 | crystallised early 2026; audit by behavioural regret not LLM-judge; executable > constitutional governance (measured, convergent); found via citation chain, not topic sweep |
 | Evaluator collapse | 9, 31 | PROCTOR 2609.02246, AgentJudgeBench 2608.26623 | documented, 11 failure modes; verifier spec written |
 | Agent memory degradation | 18 | Compaction Cliff 2608.22752, Authorization Laundering 2609.01836 | four measured degradation modes; the inheritance channel |
 | Communication topology | 28 | Spectral Drift 2607.22758, causal pruning 2608.12921 | hub amplification ~52%; no topology adversarially robust |
