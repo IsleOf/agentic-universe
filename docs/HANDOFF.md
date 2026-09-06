@@ -63,7 +63,10 @@ survives; a real judge gives the real number.
 ## What needs infrastructure this repo doesn't have
 
 - **Phase 6 (the swarm layer)** — needs a real multi-agent harness. Everything so far is single-agent (the
-  loop) or synthetic.
+  loop) or synthetic. **Candidate substrate: RiskLab** (ACL 2026 Demo, `concept_risklab_probe_toolkit`) — an
+  open toolkit with a topology-environment-protocol-agent-task quintuple, trajectory-grounded evaluation, and a
+  risk-detector registry. The project's six `tools/probe_*.py` rigs could be ported onto it as risk detectors
+  for a real (non-synthetic) multi-agent run.
 - **The composed-design test** (`what_would_make_this_wrong.md` §5) — short agents + four-field handoffs +
   folded state, run together on a 100+-step task. Needs a real harness.
 - **A live loop feed** — `loop_session.LoopSession` records runs as they happen; wiring it into the scheduled

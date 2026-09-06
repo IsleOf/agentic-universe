@@ -404,6 +404,10 @@
     {
       "date": "2026-10-03",
       "change": "Autonomous run 111. DBLP search (arXiv API still down). concept_environmental_pressure_has_an_inverted_u (Yerkes-Dodson for AI Agents, arXiv:2603.07360): cooperative behaviour follows an inverted-U - trades peak at 29 under medium pressure vs 8-12 at low/extreme; extreme pressure collapses the behavioural repertoire to movement-only in 5-12 turns; softer (selective) pressure eliminates aggression and produces communication. Refines emergent_misaligned_communication_under_stress (not monotonic) and gives concept_graded_challenge a shape + a collapse failure mode. +5 edges."
+    },
+    {
+      "date": "2026-10-03",
+      "change": "Autonomous run 112. DBLP -> ACL Anthology (RiskLab has no arXiv version). concept_risklab_probe_toolkit (ACL 2026 Demo): an open toolkit for probing emergent multi-agent risk via a topology-environment-protocol-agent-task quintuple with trajectory-grounded evaluation and a risk-detector registry; four risk categories (collusion / resource overreach / semantic drift / strategic misreporting) mapping to existing graph nodes. Independent convergence on the project's probe-rig + trace-substrate approach; a candidate substrate to port the six tools/probe_*.py rigs onto for a real run. +5 edges."
     }
   ],
   "nodes": [
@@ -5380,6 +5384,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-03-1200.md"
+      ]
+    },
+    {
+      "id": "concept_risklab_probe_toolkit",
+      "label": "An open toolkit converges on the project's probe-rig + trace-substrate approach (topology-environment-protocol-agent-task quintuple)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:risklab",
+      "confidence": 0.6,
+      "description": "RiskLab (ACL 2026 Demo, 10.18653/v1/2026.acl-demo.17, VERIFIED via the ACL Anthology page run 112; no arXiv version). An open-source toolkit for studying how failures emerge from INTERACTION DYNAMICS rather than individual model errors. Each experiment is a topology-environment-protocol-agent-task quintuple (reproducible, config-based). Components: flexible communication topologies, swappable interaction protocols, trajectory-grounded evaluation, extensible registries for risk detectors and agent backends. Probes four representative risk categories: collusion, resource overreach, semantic drift, strategic misreporting - which map to emergent_deception_and_collusion, concept_irreversibility_budget, emergent_compositional_private_language / concept_compaction_cliff, and emergent_recognition_execution_gap respectively. This is independent convergence on what the project built ad hoc across six tools/probe_*.py rigs plus the Phase 0 trace substrate: trajectory-grounded evaluation, swappable topology/protocol, a detector registry. The quintuple is a cleaner formalisation of the project's (scoped task, peer set, constraints) interface + trace. A candidate substrate to port the project's six probe rigs onto for a real (non-synthetic) run.",
+      "tags": [
+        "risklab",
+        "probe-toolkit",
+        "quintuple",
+        "trajectory-grounded-evaluation",
+        "risk-detector-registry",
+        "independent-convergence",
+        "acl-2026-demo"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-03-1800.md",
+        "RiskLab (ACL 2026 Demo, 10.18653/v1/2026.acl-demo.17) - VERIFIED via ACL Anthology page"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-03-1800.md"
       ]
     }
   ],
@@ -12273,6 +12304,60 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "agent_habitat",
       "confidence": 0.6
+    },
+    {
+      "id": "edge_risklab_supports_phase0",
+      "source": "concept_risklab_probe_toolkit",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Trajectory-grounded evaluation + a config-based quintuple is independent convergence on the Phase 0 trace substrate."
+    },
+    {
+      "id": "edge_risklab_supports_five_w",
+      "source": "concept_risklab_probe_toolkit",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Who talks to whom, via which protocol' as a reproducible config is the Five-W dimensions as an experiment spec."
+    },
+    {
+      "id": "edge_risklab_refines_topology_error",
+      "source": "concept_risklab_probe_toolkit",
+      "target": "concept_topology_shapes_error_propagation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45,
+      "description": "Flexible communication topologies + swappable protocols as first-class experiment axes - the topology-as-parameter claim, operationalised."
+    },
+    {
+      "id": "edge_risklab_maps_collusion",
+      "source": "concept_risklab_probe_toolkit",
+      "target": "emergent_deception_and_collusion",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "One of RiskLab's four risk categories; a shared substrate for probing it."
+    },
+    {
+      "id": "edge_risklab_instantiates_sih",
+      "source": "concept_risklab_probe_toolkit",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55
     }
   ]
 }
