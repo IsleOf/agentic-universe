@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-02",
+  "last_updated": "2026-10-03",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1120,6 +1120,10 @@
     {
       "date": "2026-10-02",
       "change": "Autonomous run 292. BUILD - tools/probe_trust_weighted_voting.py, the SEVENTH and last runnable rig for the open research questions (open_questions.md Q7: can a conditional trust graph prevent majority-following?). Replays an info cascade; compares uniform vote vs domain-keyed-trust-weighted vs stale-trust-weighted on the post-cascade answers. Verdict CONFIRMS: trust-weighting MITIGATES (recovers ~31% of the -0.093 cascade loss) but does NOT prevent majority-following, and only a correctly-keyed trust graph helps (stale ~3%). The kill condition (herding rate unchanged) does not hold. 7 selftest checks, selftest_all JOBS -> 33, BUILD SELFTEST GREEN. New node artifact_probe_trust_weighted_voting_rig + 3 edges (verifies concept_conditional_trust_is_domain_keyed_not_global, refines the vote-herding node, supports artifact_probe_epistemic_market_rig). ALL 7 OPEN-QUESTION RIGS BUILT (runs 286-292). 320 -> 321 nodes, 1278 -> 1281 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-03",
+      "change": "Autonomous run 293. BUILD - tools/epistemic_constitution.py, the owner research direction 53 combined prototype, built after the 7 open-question rigs (286-292) validated the pieces. Deterministic claim ledger + forecast ledger (Brier-scored on resolve) + domain-keyed conditional trust (1 - mean Brier, cold start = None not a global scalar); atomic write + .audit log, the shape of task_ledger.py. Promotion rule: >= 4 resolved forecasts / >= 2 agents / aggregate Brier < 0.18 / replicated / survived_counterexample (last two need a call_model, recorded as flags). 13 selftest checks, selftest_all JOBS -> 34, BUILD SELFTEST GREEN. New node artifact_epistemic_constitution_harness + 7 edges (implements the epistemic-market parent + calibrated_forecasting + conditional_trust concepts, extends pattern_deterministic_task_ledger, supports pattern_grounded_acceptance_only + concept_the_acceptor_not_the_proposer, grounds artifact_probe_epistemic_market_rig). 321 -> 322 nodes, 1281 -> 1288 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9502,6 +9506,34 @@
       ],
       "evidence_links": [
         "tools/probe_trust_weighted_voting.py",
+        "docs/research/open_questions.md"
+      ]
+    },
+    {
+      "id": "artifact_epistemic_constitution_harness",
+      "label": "The epistemic-constitution harness - a claim + forecast ledger with domain-keyed trust",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.7,
+      "description": "tools/epistemic_constitution.py (run 293) - the owner research direction 53 (part5) combined prototype, built after the 7 open-question rigs (286-292) validated the pieces. Deterministic, pure stdlib, atomic write via os.replace + append-only .audit log - the shape of task_ledger.py. Three primitives: (1) CLAIM LEDGER - versioned falsifiable propositions (statement, confidence, horizon, assumptions, evidence, disconfirmers, status); (2) FORECAST LEDGER - predictions made BEFORE the action, Brier-scored on resolve; (3) CONDITIONAL TRUST - per-(agent, domain) = 1 - mean Brier over that agents resolved forecasts in that domain, domain-keyed, cold start returns None NOT a global scalar. Promotion rule: >= 4 resolved forecasts from >= 2 distinct agents, aggregate Brier < 0.18, replicated=True, survived_counterexample=True (the last two set by an external process - they need a call_model). 13 selftest checks; selftest_all JOBS -> 34. The two unimplemented primitives (replication and adversarial-protocol EXECUTION) are recorded as required-evidence flags.",
+      "tags": [
+        "epistemic-constitution",
+        "claim-ledger",
+        "forecast-ledger",
+        "conditional-trust",
+        "combined-prototype",
+        "direction-53"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-03-0000.md",
+        "tools/epistemic_constitution.py",
+        "docs/research/alternative_approaches_part5.md (owner research input)"
+      ],
+      "evidence_links": [
+        "tools/epistemic_constitution.py",
         "docs/research/open_questions.md"
       ]
     }
@@ -23331,6 +23363,83 @@
       "approach_family": "orchestration_first",
       "confidence": 0.5,
       "description": "Completes the epistemic-market rig set: probe_epistemic_market (forecast-selection removes the vote), probe_identity_masking (elicitation independence), probe_adversarial_collaboration (dispute resolution), probe_trust_transfer (the trust graph transfers), probe_trust_weighted_voting (trust-weighting a vote is a partial fix). All 5 point at the same conclusion - independent elicitation + calibration-weighting, not a raw vote."
+    },
+    {
+      "id": "edge_ec_implements_epistemic_market_parent",
+      "source": "artifact_epistemic_constitution_harness",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "The parent claim made runnable: agents interact through structured falsifiable claim objects priced by a calibration record, not by messages or votes. This is the deterministic core of that market."
+    },
+    {
+      "id": "edge_ec_implements_calibrated_forecasting",
+      "source": "artifact_epistemic_constitution_harness",
+      "target": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "The forecast ledger IS this concept: predict before acting, score Brier on resolve, derive influence from the record. probe_epistemic_market (286) validated that this beats manager-pick / debate / self-score."
+    },
+    {
+      "id": "edge_ec_implements_conditional_trust",
+      "source": "artifact_epistemic_constitution_harness",
+      "target": "concept_conditional_trust_is_domain_keyed_not_global",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "trust(agent, domain) = 1 - mean Brier in that domain; no cross-domain leak, cold start = None. probe_trust_transfer (290) showed a global scalar over-grants authority; this refuses to compute one."
+    },
+    {
+      "id": "edge_ec_extends_task_ledger",
+      "source": "artifact_epistemic_constitution_harness",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Same discipline as the task ledger (deterministic, atomic write, audit log) applied to CLAIMS and FORECASTS rather than tasks - the epistemic source of truth alongside the orchestration one."
+    },
+    {
+      "id": "edge_ec_supports_grounded_acceptance",
+      "source": "artifact_epistemic_constitution_harness",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "The promotion rule is a grounded acceptance gate for claims: a Brier threshold + independent replication + counterexample survival, none of which an agent can self-report past."
+    },
+    {
+      "id": "edge_ec_supports_acceptor_weak_point",
+      "source": "artifact_epistemic_constitution_harness",
+      "target": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Puts the rigor on the acceptor: a claim is promoted by its calibration record and replication, not by who proposed it or how well they argued."
+    },
+    {
+      "id": "edge_ec_grounds_market_rigs",
+      "source": "artifact_epistemic_constitution_harness",
+      "target": "artifact_probe_epistemic_market_rig",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "The prototype the 7 rigs point at: probe_epistemic_market / _identity_masking / _adversarial_collaboration / _trust_transfer / _dissent_vs_reflection / _trust_weighted_voting each validated one mechanism this module composes."
     }
   ]
 }

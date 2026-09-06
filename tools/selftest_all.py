@@ -53,6 +53,7 @@ JOBS = [
     ("task_ledger.py", ["selftest"]),
     ("supervisor.py", ["selftest"]),
     ("project_graph_scaffold.py", ["selftest"]),
+    ("epistemic_constitution.py", ["selftest"]),
 ]
 
 
