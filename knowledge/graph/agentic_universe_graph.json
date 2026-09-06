@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-14",
+  "last_updated": "2026-10-15",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -576,6 +576,10 @@
     {
       "date": "2026-10-14",
       "change": "Autonomous run 154. DBLP. concept_cot_monitorability_is_a_fragile_property_to_preserve (Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety, arXiv:2507.11473, multi-org position paper): CoT monitoring is imperfect but promising and should be invested in ALONGSIDE other methods; it may be fragile, so weigh development decisions by their effect on it. The anchor for the run-147 + run-153 monitorability findings. For the project: trace legibility is a property to preserve and measure, and it belongs in the Phase 3 risk measure. +6 edges."
+    },
+    {
+      "date": "2026-10-15",
+      "change": "Autonomous run 155. Phase 3 tooling - the run-154 monitorability conclusion, made computable. loop_metrics.compute() now reports trace_legibility (fraction of describable events - STEP/CLAIM/TOOL_CALL/NOTE - whose free-text field explains itself: >=15 chars, >=3 words, not a placeholder); threshold 0.70; propose_loop_edit emits a keep-the-notes-explanatory proposal below it. Real corpus ~0.996 - a tripwire, not a current problem. Operationalises concept_cot_monitorability_is_a_fragile_property_to_preserve: a harness edit that makes the loop emit opaque notes degrades the signal the outer loop reads. +4 selftest checks. No graph node/edge change."
     }
   ],
   "nodes": [

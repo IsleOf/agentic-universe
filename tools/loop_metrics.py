@@ -20,6 +20,10 @@ Metrics (all computed, no judgement):
   plateau_watch               idle_run_streak >= PLATEAU_WINDOW — the run-129
                               caution: a gate rejects regressions but does not
                               require progress, so a plateaued loop keeps passing
+  trace_legibility            fraction of describable events (STEP/CLAIM/TOOL_CALL/
+                              NOTE) whose free-text field explains itself in words
+                              — monitorability is fragile (run 154); a drop flags
+                              that the loop's own trace is going opaque
 
 `propose_loop_edit(metrics)` turns a below-threshold metric into a concrete
 loop-harness edit (a `context`/`prompt` component change) plus a falsifiable
@@ -48,6 +52,7 @@ LIVE_RUNS = ROOT / "runtime" / "observations" / "loop_runs"
 THRESHOLDS = {
     "verified_citation_fraction": 0.60,   # most citations should be independently verified
     "validation_pass_rate": 1.00,         # the graph must never be committed invalid
+    "trace_legibility": 0.70,             # the loop's own trace should explain itself in words
 }
 
 # trailing runs with no graph delta before the loop is "on plateau watch".
@@ -97,6 +102,32 @@ def _load_trace(path):
         return [json.loads(l) for l in fh if l.strip()]
 
 
+_LEGIBILITY_FIELDS = {"STEP": "note", "CLAIM": "claim", "TOOL_CALL": "declared_purpose",
+                      "NOTE": "text", "MESSAGE": "declared_purpose"}
+_PLACEHOLDER = {"", "n/a", "na", "none", "-", "...", "tbd", "todo", "pending", "."}
+
+
+def _legible(text):
+    """A free-text field is legible if it explains in words, not a stub."""
+    t = (text or "").strip()
+    return len(t) >= 15 and len(t.split()) >= 3 and t.lower() not in _PLACEHOLDER
+
+
+def trace_legibility(events):
+    """Fraction of describable events whose free-text field explains itself.
+
+    Monitorability is a fragile property (concept_cot_monitorability_is_a_fragile_
+    property_to_preserve); a harness edit that makes the loop emit terser, more
+    opaque notes/purposes degrades the signal the OUTER loop reads. This is the
+    computable version — a drop is a flag, per run 154.
+    """
+    describable = [e for e in events if e.get("kind") in _LEGIBILITY_FIELDS]
+    if not describable:
+        return None
+    good = sum(1 for e in describable if _legible(e.get(_LEGIBILITY_FIELDS[e["kind"]])))
+    return round(good / len(describable), 3)
+
+
 def compute(trace_path=HISTORY_TRACE, live_dir=LIVE_RUNS):
     events = _load_trace(trace_path)
 
@@ -129,6 +160,7 @@ def compute(trace_path=HISTORY_TRACE, live_dir=LIVE_RUNS):
     live_verified = [c for c in live_cites if c.get("verified")]
 
     streak = idle_run_streak(live)
+    legibility = trace_legibility(events)
 
     total_claims = len(claims) + len(live_cites)
     total_verified = len(verified) + len(live_verified)
@@ -146,6 +178,7 @@ def compute(trace_path=HISTORY_TRACE, live_dir=LIVE_RUNS):
         "reused_roots": sorted(reused),
         "idle_run_streak": streak,
         "plateau_watch": streak >= PLATEAU_WINDOW,
+        "trace_legibility": legibility,
     }
 
 
@@ -190,6 +223,23 @@ def propose_loop_edit(metrics):
                              "run-129 plateau signature and the middle loop's returns have stalled",
             },
             "verification": "computable — re-run compute() after the next run and check idle_run_streak fell",
+        })
+    leg = metrics.get("trace_legibility")
+    if leg is not None and leg < THRESHOLDS["trace_legibility"]:
+        proposals.append({
+            "component": ("prompt", "loop_procedure"),
+            "change": "the RECORD THE RUN step must write a full-sentence note / declared_purpose for "
+                      "every LoopSession call — trace_legibility has dropped below "
+                      f"{THRESHOLDS['trace_legibility']}, meaning the loop's own trace is getting opaque",
+            "prediction": {
+                "metric": "trace_legibility over the next 10 runs",
+                "direction": "increase",
+                "from": leg,
+                "to_at_least": THRESHOLDS["trace_legibility"],
+                "rationale": "monitorability is a fragile property (run 154); a trace the outer loop "
+                             "cannot read is a silent failure — keep the free-text fields explanatory",
+            },
+            "verification": "computable — recompute trace_legibility on the replayed corpus",
         })
     vpr = metrics.get("validation_pass_rate")
     if vpr is not None and vpr < THRESHOLDS["validation_pass_rate"]:
@@ -269,6 +319,16 @@ def _selftest():
             "plateau_watch true at streak 4": m_plateau["idle_run_streak"] == 4 and m_plateau["plateau_watch"],
             "plateau proposal emitted when watching":
                 any("IDLE-STATE RULE" in p["change"] for p in (propose_loop_edit(m_plateau) or [])),
+            "trace_legibility in [0,1] and mostly legible on the real corpus":
+                m["trace_legibility"] is None or (0 <= m["trace_legibility"] <= 1),
+            "_legible accepts a sentence, rejects a stub":
+                _legible("validate the graph after adding six edges") and not _legible("...")
+                and not _legible("ok") and not _legible("pending"),
+            "trace_legibility drops on an opaque trace":
+                trace_legibility([{"kind": "STEP", "note": "x"}, {"kind": "CLAIM", "claim": "y"}]) == 0.0,
+            "legibility proposal fires below threshold":
+                any("trace_legibility" in p["change"]
+                    for p in (propose_loop_edit({**m, "trace_legibility": 0.2}) or [])),
             "verified_citation_fraction in [0,1]":
                 m["verified_citation_fraction"] is None or 0 <= m["verified_citation_fraction"] <= 1,
             "validation_pass_rate == 1.0 (replay marks all VALID)": m["validation_pass_rate"] == 1.0,

@@ -87,6 +87,20 @@ source, or writes any graph delta, is substantive and resets the streak;
 doc/hygiene-only runs do not. `LoopSession` summaries carry a `graph_delta` field
 from run 130 on; older summaries fall back to the artifact count.
 
+## `trace_legibility` (added run 155)
+
+`compute()` also reports **`trace_legibility`** — the fraction of describable
+events (STEP `note`, CLAIM `claim`, TOOL_CALL `declared_purpose`, NOTE `text`)
+whose free-text field explains itself: ≥ 15 chars, ≥ 3 words, not a placeholder.
+
+`concept_cot_monitorability_is_a_fragile_property_to_preserve` (run 154): the
+outer loop reads the middle loop's traces, and a harness edit that makes the loop
+emit terser, more opaque notes degrades that signal silently. This is the
+computable flag. Threshold 0.70; below it, `propose_loop_edit` emits a
+`(prompt, loop_procedure)` proposal to keep the RECORD-THE-RUN free-text fields
+explanatory, verified by recomputing `trace_legibility` on the replayed corpus.
+Real corpus is ~0.996 — the loop's traces are legible today; this is a tripwire.
+
 ## Selftest
 
 `python tools/loop_metrics.py selftest` → GREEN. `tools/selftest_all.py` runs
