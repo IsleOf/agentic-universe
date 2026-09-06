@@ -812,6 +812,10 @@
     {
       "date": "2026-09-13",
       "change": "Autonomous run 212. Recency-weighted sweep. Folded CAVA (arXiv:2607.13716, July 2026) as concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes: one operational act appears as many incompatible runtime records; deployer-side governance needs a canonical action object binding approval to execution, reproducible by an independent verifier. Sits below Proof-Carrying Agent Actions (PCAA = the route-review-prove process; CAVA = the action object it governs). Formalises canonical action identity, approval binding, receipt integrity, attestation; 96-seed 384-variant benchmark incl wrapper bypass, attestation tamper detection, policy degradation. 6 edges: supports pattern_evidence_carrying_termination (a typed certificate at action granularity), pattern_four_field_constraint (approval binding = authority+prerequisite as a runtime object), artifact_phase5_exec_guard (the general form of the narrow git hook), concept_agentic_os (canonicalization is a runtime responsibility), concept_harness_tampering_persists_in_real_self_improvement_runs (wrapper-bypass / tamper-detection = tamper_audit at the action layer); detects emergent_authorization_laundering (a laundered approval cannot produce a reproducible bound receipt). 247->248 nodes, 935->941 edges."
+    },
+    {
+      "date": "2026-09-13",
+      "change": "Autonomous run 213. Recency-weighted sweep. Folded Proof-Carrying Agent Actions (PCAA, arXiv:2606.04104, June 2026) as concept_runtime_governance_organizes_around_a_portable_action_certificate: a runtime-neutral governance model centred on an action certificate, five checkpoints (pre-action admissibility, action open, assumption capture, approval, outcome closure) bound to a portable envelope + runtime/approval receipts + replay-ready proof; externality-aware (destination visibility, account provenance); approval by explicit enforceability classes not a reviewed/unreviewed bit. Benchmark 24->96 traces / four runtime families. PCAA is the layer above CAVA (run 212). 6 edges: depends_on the CAVA node (one stack); supports pattern_four_field_constraint (the five checkpoints = the four fields as a runtime protocol), concept_irreversibility_budget (externality-aware boundary facts price an act), principle_terminal_gate_only (approval + outcome closure are terminal on the action); refines pattern_evidence_carrying_termination (five lifecycle checkpoints, assumption capture, replay-ready proof); detects concept_overseer_degradation (enforceability classes answer the 20.1pp gap). 248->249 nodes, 941->947 edges."
     }
   ],
   "nodes": [
@@ -7231,6 +7235,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-13-0600.md"
+      ]
+    },
+    {
+      "id": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "label": "Runtime-neutral governance centres on a portable action certificate - five checkpoints (pre-action admissibility, action open, assumption capture, approval, outcome closure) - that is externality-aware and uses explicit enforceability classes, not a reviewed/unreviewed bit",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:proof_carrying_agent_actions",
+      "confidence": 0.62,
+      "description": "Proof-Carrying Agent Actions (PCAA, arXiv:2606.04104, VERIFIED via arXiv abstract read run 213; June 2026). Agent systems execute through runtimes with very different control points (local coding tools, framework SDKs, managed platforms, API gateways, observer-only integrations), so a high-risk action like publishing data externally appears as a shell command in one, a tool call in another, a hosted session transition in a third. PCAA is a runtime-neutral governance model centred on an ACTION CERTIFICATE rather than a vendor-native session record. It organises control around FIVE CHECKPOINTS: pre-action admissibility, action open, assumption capture, approval, outcome closure - bound to a portable action envelope, runtime and approval receipts, and replay-ready proof. Two practical extensions: (1) the certificate is EXTERNALITY-AWARE, carrying boundary facts such as destination visibility and account provenance; (2) approval is described by explicit ENFORCEABILITY CLASSES rather than a single reviewed/unreviewed bit. Studied via a reference implementation in a heterogeneous agent control plane and a disclosure-bounded protocol; on a benchmark expanded from 24 executable seeds to 96 traces across four runtime families, PCAA preserves route quality while exposing distinct failure modes under ablation. PCAA is the layer ABOVE CAVA (concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes): CAVA is the stable action object, PCAA is the route-review-prove process over it. Bearing on the project: the five checkpoints + 'under whose authority / what approval semantics / what evidence after execution' is pattern_four_field_constraint (prerequisite / authority / fallback / consequence) as a runtime protocol; 'externality-aware boundary facts' (destination visibility, account provenance) is exactly what concept_irreversibility_budget needs to price an act; 'enforceability classes not a reviewed/unreviewed bit' directly answers concept_overseer_degradation's finding that permission policies are 20.1pp weaker than per-action review. Recency: June 2026, a systems formulation with a reference implementation, not yet independently replicated.",
+      "tags": [
+        "PCAA",
+        "proof-carrying-agent-actions",
+        "action-certificate",
+        "five-checkpoints",
+        "externality-aware",
+        "enforceability-classes",
+        "replay-ready-proof",
+        "runtime-neutral-governance",
+        "recency-2026-06"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-13-1200.md",
+        "arXiv:2606.04104 (Proof-Carrying Agent Actions: Model-Agnostic Runtime Governance for Heterogeneous Agent Systems) - VERIFIED, abstract read run 213"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-13-1200.md"
       ]
     }
   ],
@@ -17319,6 +17352,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "CAVA's wrapper-bypass and attestation-tamper-detection benchmark axes are the action-layer analogue of tamper_audit.py's lineage check - both ask whether the record of what happened can be trusted against an adversary inside the system."
+    },
+    {
+      "id": "edge_pcaa_depends_on_canonical_action",
+      "source": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "target": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "PCAA is the route-review-prove process; CAVA is the stable canonical action object that process governs. PCAA's replay-ready proof requires CAVA's reproducible action identity underneath - the two papers are explicitly one stack."
+    },
+    {
+      "id": "edge_pcaa_supports_four_field",
+      "source": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "target": "pattern_four_field_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "The five checkpoints plus 'what action, under whose AUTHORITY, with what approval semantics (FALLBACK / enforceability class), with what evidence (CONSEQUENCE / outcome closure), admissible given what PREREQUISITE' is the four-field constraint expressed as a runtime protocol."
+    },
+    {
+      "id": "edge_pcaa_supports_irreversibility_budget",
+      "source": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "target": "concept_irreversibility_budget",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.62,
+      "description": "The externality-aware certificate carries destination visibility and account provenance as first-class boundary facts - exactly the inputs concept_irreversibility_budget needs to price an act against a fleet-level budget rather than guess at reversibility."
+    },
+    {
+      "id": "edge_pcaa_refines_evidence_carrying_termination",
+      "source": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "target": "pattern_evidence_carrying_termination",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.58,
+      "description": "Adds structure the project's typed certificate does not yet have: five distinct lifecycle checkpoints (not just termination), assumption capture as its own checkpoint, and replay-ready proof bound to a portable envelope."
+    },
+    {
+      "id": "edge_pcaa_supports_terminal_gate_only",
+      "source": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "target": "principle_terminal_gate_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.55,
+      "description": "'Approval' and 'outcome closure' are terminal checkpoints on the action, not on the reasoning - gate the act and its recorded outcome, which is principle_terminal_gate_only at runtime granularity."
+    },
+    {
+      "id": "edge_pcaa_addresses_overseer_degradation",
+      "source": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "target": "concept_overseer_degradation",
+      "type": "detects",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "'Enforceability classes rather than a single reviewed/unreviewed bit' is a direct structural response to concept_overseer_degradation's finding that user permission policies are 20.1pp weaker than per-action review - it makes the strength of an approval explicit and machine-checkable."
     }
   ]
 }

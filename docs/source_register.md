@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 248 nodes, 941 edges · **Date:** 2026-09-05
+**Graph at generation:** 249 nodes, 947 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -92,6 +92,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2605.24539](https://arxiv.org/abs/2605.24539) | (title not recorded) | `concept_harness_evolution_subfield` |
 | [2605.27922](https://arxiv.org/abs/2605.27922) | (title not recorded) | `concept_capability_is_a_model_harness_config_property` |
 | [2606.00953](https://arxiv.org/abs/2606.00953) | (title not recorded) | `test_scenario_decomposition_granularity` |
+| [2606.04104](https://arxiv.org/abs/2606.04104) | (title not recorded) | `concept_runtime_governance_organizes_around_a_portable_action_certificate` |
 | [2606.04329](https://arxiv.org/abs/2606.04329) | (title not recorded) | `concept_memory_poisoning_one_write_persists` |
 | [2606.05241](https://arxiv.org/abs/2606.05241) | (title not recorded) | `concept_search_time_contamination_inflates_agent_evals` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
@@ -375,6 +376,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-12-1800.md` — `concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium`
 - `docs/auto_sweep_2026-09-13-0000.md` — `concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes`, `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
+- `docs/auto_sweep_2026-09-13-1200.md` — `concept_runtime_governance_organizes_around_a_portable_action_certificate`
 - `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`
 - `docs/auto_sweep_2026-09-14-1200.md` — `emergent_pluralistic_ignorance`

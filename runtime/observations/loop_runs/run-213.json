@@ -1,0 +1,26 @@
+{
+  "run": 213,
+  "increment": "recency-weighted sweep - folded Proof-Carrying Agent Actions (arXiv:2606.04104): runtime-neutral governance around a portable action certificate with five checkpoints, externality-aware, enforceability classes; the layer above CAVA; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2606.04104",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2606.04104"
+  ],
+  "trace_file": "runtime\\traces\\loop-213.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
