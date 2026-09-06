@@ -860,6 +860,10 @@
     {
       "date": "2026-09-16",
       "change": "Autonomous run 224. Recency-weighted sweep. Folded SHAPER (arXiv:2608.11350, Aug 2026) as concept_shaper_a_frozen_model_is_its_own_harness_optimizer: train-free embodied adaptation - a FROZEN model evolves its own reusable skills + context-code harness through target-environment rollouts, serving as BOTH planner and optimizer; beats pure execution, SFT, and test-time-scaling (verifier-free selection, voting) on VLABench + ESI-Bench. The same-frozen-model-as-planner-and-optimizer is the project's loop structure, demonstrated in the embodied domain where fixed action interfaces make it the only viable route. 6 edges: supports concept_sea_steering_adapter_around_a_frozen_base... (cross-domain frozen-base support), approach_emergence_first (no-training thesis from the constraint side), concept_self_harness_validates_the_three_loop (planner=optimizer); refines concept_ace_context_evolution_self_improvement (context-code harness = context playbook + executable glue), supports pattern_agentic_skill_lifecycle; challenges concept_inference_time_scaling_of_verification (persistent evolution beats selection at decision time, in fixed-interface settings). 256->257 nodes, 993->999 edges."
+    },
+    {
+      "date": "2026-09-16",
+      "change": "Autonomous run 225. Consolidation (IDLE-STATE RULE clause c - a consistency pass after seven straight literature folds). docs/harness_anatomy_self_audit.md: maps the project's tools/ to Harness Engineering's (arXiv:2609.00006) seven canonical subsystems and checks the four headline findings against the project - all four validate an existing choice (pure stdlib / deterministic experience_bank retrieval / SKILL.md loop / config loop_policy). Gaps surfaced: no explicit action/tool subsystem, no observability aggregation per run. Also checks the run-211 monograph's dependency chain (three links patched: search contamination run 166, format-repair run 194, category masking run 116; verification link hardened run 220; observability link open). tools/README.md selftest count 21->22 + probe_orchestration_value.py added to the probe table. 1 'grounds' edge from the harness-anatomy node to concept_bottleneck_is_the_model_harness_coupling. 257 nodes, 999->1000 edges."
     }
   ],
   "nodes": [
@@ -18270,6 +18274,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "SHAPER beats test-time-scaling baselines (verifier-free selection, voting) - persistent skill/harness evolution outperforms spending the same inference budget on selection at decision time, at least in fixed-interface embodied settings. A mild tension: WHERE to spend the compute."
+    },
+    {
+      "id": "edge_harness_anatomy_self_audit_grounds_project",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "docs/harness_anatomy_self_audit.md (run 225) maps the project's tools/ to the seven canonical subsystems and checks all four headline empirical findings (no framework / deterministic retrieval / SKILL.md leads MCP / prose->config) against the project - all four validate a choice already made. Two gaps surfaced: no explicit action/tool subsystem, and no observability aggregation (loop_metrics computes signals but nothing rolls them up per run)."
     }
   ]
 }

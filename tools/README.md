@@ -4,7 +4,7 @@ The Agentic Universe toolchain. Pure Python stdlib, no network, no dependencies.
 One predicate runs everything:
 
 ```
-python tools/selftest_all.py        # 21 selftests -> BUILD SELFTEST: GREEN
+python tools/selftest_all.py        # 22 selftests -> BUILD SELFTEST: GREEN
 ```
 
 ## The knowledge graph
@@ -99,6 +99,7 @@ written, selftested `model_*` adapter (runs 134–140) — pass one `call_model`
 | `probe_epistemic_sybil.py` | shared-source coverage collapse; dedup recovery | `model_reader(call_model, corpus)` |
 | `probe_activation_generalisation.py` | activation-probe generalisation gap on emergent collusion | — (needs activations; degraded text mode in `docs/remaining_seams.md`) |
 | `probe_composed_design.py` | short-agent + four-field + folded-state composes but bounded | — (needs a real harness; single-agent `p` path in `docs/remaining_seams.md`) |
+| `probe_orchestration_value.py` | multi-agent helps only with verifiable subtasks + deterministic synthesis + disjoint evidence (verdict CONFIRMS, run 221) | — (needs a real multi-agent harness; `_subtask_ok` / `_synthesis_ok` stubs) |
 
 ## Fresh-clone setup
 

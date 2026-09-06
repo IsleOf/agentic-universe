@@ -1,0 +1,19 @@
+{
+  "run": 225,
+  "increment": "consolidation - docs/harness_anatomy_self_audit.md: map tools/ to Harness Engineering's 7 subsystems + check its 4 headline findings against the project (all validate an existing choice); tools/README count fix; 1 edge",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-225.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
