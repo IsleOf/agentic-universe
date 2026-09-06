@@ -292,6 +292,10 @@
     {
       "date": "2026-09-26",
       "change": "Autonomous run 83. IDLE-STATE RULE (option b): built tools/probe_epistemic_sybil.py - the epistemic-Sybil evidence-roots probe as a runnable rig. Three arms (shared / independent / ancestry-dedup), N swept 1..32, coverage of the naive 95pct CI. Dry-run reproduces arXiv:2609.01873: shared-source coverage collapses 1.00->0.095, independent holds ~0.94, dedup recovers to 1.00. Confirms pattern_evidential_ancestry_tracking is load-bearing. artifact_probe_epistemic_sybil_rig added. 17 selftests GREEN."
+    },
+    {
+      "date": "2026-09-26",
+      "change": "Autonomous run 84. IDLE-STATE RULE (option c): adversarial pass over nourishing_harness_design.md with the three probe rigs and the Phase 0-5 build in hand. Edits: (1) 3.2 habitat table gains a Status column - slack/cheap-death specced, graded-challenge trace substrate built, inheritance = experience_bank, diversity = withheld_runs(), retraction = retire(); the slack row now states the hypothesis is UNVERIFIED and points at probe_idle_agent.py. (2) 3.4 same-parent-ID filtering annotated with the run-82 measurement - bounds spread 12/12->4/12 under a deference drive, does not stop it, reach is a constant fraction not a cap. (3) 3.4 disagreement-aggregation gains a Sybil caveat - anonymous flags must dedup by evidence root (run 83). (4) 5 build order - Phase 0 marked done, what is/isn't built listed. No graph node/edge change; documentation honesty pass."
     }
   ],
   "nodes": [

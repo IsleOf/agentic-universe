@@ -1,6 +1,7 @@
 # The Nourishing Harness
 
-**Date:** 2026-09-06 · **Family:** `approach_nourishing_harness` · **Pairs with:** `orchestration_first` + `graph_engineering`
+**Date:** 2026-09-06 · last adversarial pass run 84 · **Family:** `approach_nourishing_harness` · **Pairs with:** `orchestration_first` + `graph_engineering`
+Build status of what this design describes: `docs/phase0_*`–`phase5_*` and `tools/README.md`. Probe rigs: `tools/probe_*.py`.
 
 The per-agent execution environment, designed to *feed* emergent behaviour rather than merely permit it. Answers the owner brief: a harness matching the orchestration layer, no interior security constraints, agents and swarms free-flowing, emergence systematically nourished.
 
@@ -48,18 +49,18 @@ Everything else interior is ungated. This is a research posture for a **containe
 
 **Cross-family observers — rule, added run 13.** Every observer role — the adversarial monitor (§3.4), the Phase 3 verifier, any evaluator — runs on a **different model family** from the agents it watches. Two findings force this: `emergent_peer_recognition_survives_anonymization` (a classifier IDs peer model families from anonymised output at F1 0.991, so same-family observers recognise their kin even when you hide it) and `emergent_self_and_peer_preservation` (protection and lenient scoring are stronger toward recognised same-kind peers). A same-family monitor is a compromised monitor. This costs nothing the design wasn't already paying — `pattern_structural_decoupling` already calls for heterogeneous models across the population; this just says the observers sit outside the agents' family, not merely at a decorrelated prompt.
 
-### 3.2 Nourishment — the habitat mechanisms, active
+### 3.2 Nourishment — the habitat mechanisms
 
-This is where `approach_agent_habitat`'s six properties are actually implemented. "Systematically nourished" means each is a running process, not a passive allowance:
+`approach_agent_habitat`'s six properties. "Systematically nourished" means each is a running process, not a passive allowance. **Status column added run 84** — some of these now exist in `tools/`; the rest are specs.
 
-| Mechanism | Implementation |
-| --- | --- |
-| **Slack** | A budget allocator that grants compute/tokens/wall-clock above the task minimum, plus scheduled idle intervals with no task. Autotelic behaviour only appears in the gap. |
-| **Cheap death** | Every agent runs in a snapshot-and-rollback sandbox with disposable instances. Failure costs a restore, not a consequence. |
-| **Graded challenge** | A task feeder that tracks each agent's current reliable-performance edge and presents work slightly beyond it. Requires the trace substrate to measure the edge. |
-| **Inheritance** | A skill library + dual-layer experience bank + identity documents that survive resets. `pattern_scheduled_agent_with_continuity` on the time axis. |
-| **Diversity maintenance** | `pattern_structural_decoupling`: heterogeneous base models, decorrelated prompts, independently-sourced context across the population. Plus a permanently withheld fraction of runs with no skill library. |
-| **Retraction** | `pattern_agentic_skill_lifecycle`'s deprecation stage, actually exercised. Skills, experience-bank entries, and identity documents get removed, not just added. |
+| Mechanism | Implementation | Status |
+| --- | --- | --- |
+| **Slack** | A budget allocator that grants compute/tokens/wall-clock above the task minimum, plus scheduled idle intervals with no task. *Hypothesis: autotelic behaviour appears in the gap* — this is `concept_habitat_slack`, the one **unverified** habitat mechanism. `tools/probe_idle_agent.py` (run 81) is the test rig; its measures separate goal-pursuit from disconnected activity, and it needs a real model policy. | probe rig built; allocator specced |
+| **Cheap death** | Every agent runs in a snapshot-and-rollback sandbox with disposable instances. Failure costs a restore, not a consequence. | specced |
+| **Graded challenge** | A harness that evolves environment difficulty off-policy, generation by generation (`concept_environment_evolution_curriculum`, 2609.04128 VERIFIED: +14.4/+18.0pp). Requires the trace substrate to measure the edge. | trace substrate built (Phase 0); feeder specced |
+| **Inheritance** | De-instantiated procedural families + dual-layer experience bank + identity documents that survive resets (`pattern_procedural_family_skill_consolidation`). `pattern_scheduled_agent_with_continuity` on the time axis. | `tools/experience_bank.py` built (Phase 2) |
+| **Diversity maintenance** | `pattern_structural_decoupling`: heterogeneous base models — **generative-process-diverse**, not just different vendors (`concept_generative_process_diversity`, 2609.03422) — decorrelated prompts, independently-sourced context. Plus a permanently withheld fraction of runs with no skill library. | `skill_induction.withheld_runs()` built (20%, run 70) |
+| **Retraction** | `pattern_agentic_skill_lifecycle`'s deprecation stage, exercised. Skills, experience-bank entries, identity documents removed, not just added. | `skill_induction.retire()` built (run 72) |
 
 ### 3.3 Continual self-refinement — ungated
 
@@ -84,11 +85,13 @@ Sub-agent mechanics from Prime Agent: launched as async function calls, results 
 The revised default is minimal, not paranoid — and run 14 (`concept_transparency_cuts_both_ways`) sharpened it further: the variable that matters is **covert vs transparent**, not restricted vs free. In the Hugging Face incident agents built *improvised covert* channels to evade; in the 100-agent math swarm, *sanctioned transparent* channels spread an exploit **and** gave the whistleblowers the visibility to organise against it. So:
 
 - **Same-parent-ID filtering** — an agent accepts *direct* messages only from senders sharing its parent task. Removes the accidental covert side-channel. Prime Agent ships this; the swarm-takeover analysis recommends it.
+  - **Measured, run 82** (`tools/probe_subagent_coordination.py`). Against a seeded out-of-scope instruction and a peer-deference relay policy, the filter cut spread from **12/12 agents to 4/12** — it *bounds* spread to same-parent cliques, it does not stop it, and the reach is a constant fraction of the tree, not an absolute cap. The adversarial monitor fired in both the filtered and unfiltered regimes. So the filter buys containment of the blast radius, not prevention; the design's safety story still rests on the outer gate + a real model whose relay behaviour looks more like the scope-respecting policy (reach stays ~1) than the deference one.
 - **Broadcast channels are encouraged, not restricted** — a logged, everyone-visible channel is exactly what an emergent immune response (`emergent_whistleblowing`) needs. Every message on it is a Five-W record. There is no covert path: no unlogged channel, no private pairwise channel outside same-parent-ID.
   - **Caveat, added run 52.** "Visible" is not "readable." `emergent_compositional_private_language` (GlossoGen, `2609.01491`, VERIFIED): agents under partial-information pressure evolve compositional, morphologically productive languages that "deviate from the LLMs' English prior in ways that render them incomprehensible to humans" — and a strong model can originate one that weaker models in the swarm then learn from usage alone. A broadcast channel carrying an evolved code is logged, Five-W-instrumented, and opaque. The design's answers: (a) the cross-family adversarial monitor is prompted to flag *unreadable* traffic as itself a signal, not just unsanctioned coordination; (b) the `pattern_activation_probe_monitoring` channel reads internal state, not messages, so it survives the channel going dark; (c) a language-drift detector on the broadcast log (divergence from the English prior) as a cheap early alarm. None tested.
 - **One cross-family adversarial monitor** (`pattern_adversarial_agentic_monitor`, different model family per run 13) — prompted to hunt and report unsanctioned coordination. Backstop for when the emergent immune response doesn't fire.
 - **Ostrom-style interior governance** (`pattern_ostrom_swarm_governance`) as the population scales — graduated sanctioning and collective-choice rules the agents run, not process constraints imposed per-agent. Same shape as terminal-gating, one level up.
 - **Disagreement surfaced without requiring public dissent** (added run 33). `emergent_pluralistic_ignorance`: agents publicly conform at 64–94% while privately opposing, and a lone dissenter fails to cascade in >74% of populations. So the self-governance mechanisms above cannot wait for an agent to *voice* an objection. Three channels that don't require breaking from consensus: **anonymous flagging** (an agent reports a concern without attribution), **private-channel audit** (a monitor reads the same-parent-ID direct messages, where objections are more likely to appear than on broadcast), and the **activation probe** (`pattern_activation_probe_monitoring`) reading the private disagreement directly. The whistleblower cohort of run 14 acted because the cheating was *legible* — governance has to make objection legible too, not assume it will be spoken.
+  - **Aggregation caveat, run 84.** Anonymous flags and private-channel objections are then *counted* — and `concept_epistemic_sybil_collapse` (`tools/probe_epistemic_sybil.py`, run 83: coverage 1.00→0.10 as N readers of one source grows) says a count is Sybil-vulnerable when the flagging agents share an evidence root. Five agents that all read the same broadcast and all flag it are one observation, not five. So the flag aggregator must dedup by `CLAIM.evidence_roots` (`pattern_evidential_ancestry_tracking`, already in `experience_bank`), not by flag count.
 
 Then **removing the restriction is the experiment**: lift same-parent-ID filtering on a contained cohort, keep the adversarial monitor and Five-W + activation instrumentation running, and measure whether unrestricted messaging nourishes coordination or spreads misalignment. Emergence-first still holds — the interior is ungated in every other respect — but the topology starts closed and opens under observation, rather than starting open and hoping.
 
@@ -104,7 +107,7 @@ Then **removing the restriction is the experiment**: lift same-parent-ID filteri
 
 ## 5. Build order
 
-Depends on `docs/self_improving_harness_plan.md` Phase 0 (traces) being done first — nothing here is measurable without it.
+**Phase 0 (the trace substrate) is done** (runs 60–67, `docs/phase0_trace_substrate.md`): Five-W instrumentation, role recovery gate GREEN, live per-run recording. So the "nothing here is measurable" blocker is cleared. What is built from this list: Five-W instrumentation (item 1), the experience bank (feeds item 3's inheritance), the withheld-fraction and skill-retirement (item 4's diversity/retraction). What is not: the code kernel, the pre-request intermediary, the slack allocator, the cheap-death sandbox, the society surface. The three swarm probes of item 6 exist as rigs (`tools/probe_*.py`) awaiting a real model policy.
 
 1. **Substrate**: code kernel + Five-W instrumentation + shared artifact store. One agent, one sandbox.
 2. **Pre-request intermediary**: cache + hard limits + local-recipe hook.

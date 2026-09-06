@@ -1,0 +1,18 @@
+{
+  "run": 84,
+  "increment": "adversarial pass over nourishing_harness_design.md (per run-80 rule, option c)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 7,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 1,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-84.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
