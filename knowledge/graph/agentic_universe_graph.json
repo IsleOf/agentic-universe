@@ -892,6 +892,10 @@
     {
       "date": "2026-09-18",
       "change": "Autonomous run 232. Build (the repair stage three Sept-2026 papers independently call for - PCN-Rec 2601.09771, CordisBench 2609.01600, JIT-Agent 2608.25593). improvement_loop.deterministic_repair(cur_policy, new_policy): on a rejected compaction-policy proposal, a bounded constrained fix ensures the risk-protected classes (rule, identity) are pinned WITHOUT widening the blast radius, then re-verifies; a passing repair is promoted with a '(deterministic repair ...)' note and verdict['repaired']=True. It cannot touch the holdout or the risk measure - only makes a proposal more conservative, so it cannot game the gate. run_once gains allow_repair=True (default); the raw-gate negative test runs allow_repair=False. 4 new selftest checks (raw gate still rejects the bad proposal; repair fixes+promotes+flags it; the repaired policy is risk 0; repair returns None when nothing is in bounds). BUILD SELFTEST GREEN. 3 edges (PCN-Rec implements artifact_phase3_improvement_loop; CordisBench + JIT-Agent inform it). self_improving_harness_plan.md Phase 3 gains a 'repair stage' paragraph. 261 nodes, 1023->1026 edges."
+    },
+    {
+      "date": "2026-09-18",
+      "change": "Autonomous run 233. Consistency + fold. Opened AHE (arXiv:2604.25850) directly - the anchor paper of the harness-evolution subfield, previously only indexed via S2. New node concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract: component observability (file-level revertible components) + experience observability (distilled evidence corpus) + decision observability (prediction per edit verified next round) = every edit a falsifiable contract. 10 iterations 69.7->77.0% on Terminal-Bench 2, beating human Codex-CLI (71.9%) and baselines ACE / TF-GRPO; the frozen harness transfers cross-family +5.1-10.1pp at 12% fewer tokens; ablations localize the gain to tools/middleware/memory NOT the system prompt (factual structure transfers, prose strategy does not). The three pillars are the project's Phase 1/2/3. 6 edges: refines concept_harness_evolution_subfield (its anchor); supports approach_self_improving_harness, artifact_phase1_harness_registry, concept_capability_is_a_model_harness_config_property, emergent_constraint_weakening_at_handoffs (prose doesn't transfer), concept_asg_si_independently_arrives_at_the_plan. concept_harness_evolution_subfield updated - the 'NOT independently opened' caveat removed. 261->262 nodes, 1026->1032 edges."
     }
   ],
   "nodes": [
@@ -3443,8 +3447,8 @@
       "verification_state": "partially_validated",
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:subfield",
-      "confidence": 0.7,
-      "description": "As of 2026-09 the citation graph around Agentic Harness Engineering (arXiv:2604.25850) holds 20+ distinct systems in a few weeks: Self-Harness, HarnessEvolve, HarnessDev, HarnessFix (provenance-and-control-flow-aware localized repair), HarnessCompass, DemoEvolve, WHALE (joint harness-weight optimisation), EvoUndo, Retrospective Harness Optimisation, Hierarchical Self-Improvement, Meta-Harness, Dalek, plus benchmarks (CordisBench - reasoning about component lifecycles in dynamic harnesses; HarnessRisk) treating 'can an LLM evolve its own harness' as a measured question. The convergence is itself evidence: the shared shape across independent groups - components as files, falsifiable prediction per edit, trajectory-driven updates, verifier-gated promotion - is what this project's approach_self_improving_harness family already asserts, arrived at separately. NEW MECHANISM worth naming (DemoEvolve, arXiv:2605.24539, May 2026, VERIFIED via arxiv-fetch run 185): self-rollout harness evolution WORKS when episodes are short and failures are attributable (Liar's Dice), but BREAKS in long-horizon stochastic regimes (Balatro) - sparse rewards, high-variance outcomes, unattributable failures - where reward-only search is misled by candidate-selection noise and textual knowledge alone does not stabilise. DemoEvolve bootstraps with a few COMPETENT HUMAN TRAJECTORIES as expert reference for the coding proposer, making sparse-feedback harness evolution 'more diagnosable, localizable, and stable'. This is the answer to concept_verification_is_the_binding_constraint when you cannot even get a reliable SIGNAL - not a better verifier, a few demonstrations to anchor diagnosis.",
+      "confidence": 0.75,
+      "description": "As of 2026-09 the citation graph around Agentic Harness Engineering (arXiv:2604.25850) holds 20+ distinct systems in a few weeks: Self-Harness, HarnessEvolve, HarnessDev, HarnessFix (provenance-and-control-flow-aware localized repair), HarnessCompass, DemoEvolve, WHALE (joint harness-weight optimisation), EvoUndo, Retrospective Harness Optimisation, Hierarchical Self-Improvement, Meta-Harness, Dalek, plus benchmarks (CordisBench - reasoning about component lifecycles in dynamic harnesses; HarnessRisk) treating 'can an LLM evolve its own harness' as a measured question. The convergence is itself evidence: the shared shape across independent groups - components as files, falsifiable prediction per edit, trajectory-driven updates, verifier-gated promotion - is what this project's approach_self_improving_harness family already asserts, arrived at separately. NEW MECHANISM worth naming (DemoEvolve, arXiv:2605.24539, May 2026, VERIFIED via arxiv-fetch run 185): self-rollout harness evolution WORKS when episodes are short and failures are attributable (Liar's Dice), but BREAKS in long-horizon stochastic regimes (Balatro) - sparse rewards, high-variance outcomes, unattributable failures - where reward-only search is misled by candidate-selection noise and textual knowledge alone does not stabilise. DemoEvolve bootstraps with a few COMPETENT HUMAN TRAJECTORIES as expert reference for the coding proposer, making sparse-feedback harness evolution 'more diagnosable, localizable, and stable'. This is the answer to concept_verification_is_the_binding_constraint when you cannot even get a reliable SIGNAL - not a better verifier, a few demonstrations to anchor diagnosis. UPDATE run 233: AHE (arXiv:2604.25850), the anchor, is now VERIFIED (abstract read) - see concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract. The 'indexed, NOT independently opened' caveat is removed. The subfield's shared shape (revertible components, prediction per edit, verifier-gated promotion) is AHE's, and this session folded four more independent instances (Harness Engineering 2609.00006, Self-Evolving Coding Agents survey 2608.03392, PILOT 2608.26530, JIT-Agent 2608.25593).",
       "tags": [
         "20-plus-systems",
         "citation-graph",
@@ -3458,7 +3462,7 @@
       ],
       "derived_from": [
         "docs/research_fetch_sweep_2026-09-05.md",
-        "arXiv:2604.25850 citation set via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened",
+        "arXiv:2604.25850 (Agentic Harness Engineering) - VERIFIED, abstract read run 233 (was: indexed via S2, now opened directly)",
         "arXiv:2608.28363, 2608.27311, 2609.01437, 2608.09096 - four now opened directly (2026-09-06)",
         "arXiv:2605.24539 (DemoEvolve: Overcoming Sparse Feedback in Agentic Harness Evolution with Demonstrations, May 2026) - VERIFIED, abstract read run 185 via arxiv-fetch",
         "docs/auto_sweep_2026-09-06-1200.md"
@@ -7692,6 +7696,36 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-18-0000.md"
+      ]
+    },
+    {
+      "id": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "label": "AHE: component + experience + decision observability turn every harness edit into a falsifiable contract; 10 iterations 69.7->77.0% on Terminal-Bench 2 (beating the human harness); the frozen harness transfers cross-family +5-10pp; the gain is in tools/middleware/memory NOT the system prompt - factual structure transfers, prose strategy doesn't",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:ahe_observability_pillars",
+      "confidence": 0.76,
+      "description": "Agentic Harness Engineering (AHE, arXiv:2604.25850, VERIFIED via arXiv abstract read run 233; April 2026 - the ANCHOR paper of the harness-evolution subfield, opened directly to remove the 'indexed, NOT independently opened' caveat on concept_harness_evolution_subfield). Automating harness engineering faces three challenges: a heterogeneous action space across editable components, voluminous trajectories that bury signal, and edits whose effect is hard to attribute. AHE is a closed loop with three MATCHED OBSERVABILITY PILLARS: (1) COMPONENT observability - every editable component gets a file-level representation so the action space is explicit and REVERTIBLE; (2) EXPERIENCE observability - millions of raw trajectory tokens distilled into a layered, drill-down evidence corpus an evolving agent can consume; (3) DECISION observability - every edit paired with a self-declared PREDICTION, later verified against the next round's task-level outcomes. Together these turn every edit into a FALSIFIABLE CONTRACT so evolution proceeds without collapsing into trial-and-error. Empirically: 10 iterations lift Terminal-Bench 2 pass@1 69.7% -> 77.0%, surpassing the human-designed Codex-CLI (71.9%) and self-evolving baselines ACE and TF-GRPO. THE FROZEN HARNESS TRANSFERS without re-evolution: SWE-bench-verified aggregate success at 12% FEWER tokens than the seed; +5.1 to +10.1pp CROSS-FAMILY gains across three alternate model families - so the evolved components encode GENERAL engineering experience, not benchmark tuning. Ablations LOCALIZE the gain to TOOLS, MIDDLEWARE, and LONG-TERM MEMORY rather than the system prompt: FACTUAL HARNESS STRUCTURE TRANSFERS WHILE PROSE-LEVEL STRATEGY DOES NOT. Bearing on the project: the three pillars are the project's Phase 1 (harness_registry, file-level revertible components), Phase 2 (experience_bank + trace_substrate), and Phase 3 (prediction per edit in loop_proposer / verify_loop_edit) - AHE is the project's build, published and measured. The prose-doesn't-transfer ablation is direct support for context/loop_policy being config and for concentrating self-improvement on tools/memory not prompts. Recency: April 2026, older than the 30-day window - currency note: current-generation baselines (Codex-CLI, ACE) but pre-dates GPT-5.6 / GLM-5.2; the falsifiable-contract mechanism and the structure-vs-prose ablation are model-agnostic.",
+      "tags": [
+        "AHE",
+        "agentic-harness-engineering",
+        "three-observability-pillars",
+        "falsifiable-contract",
+        "cross-family-transfer",
+        "structure-transfers-prose-doesnt",
+        "component-observability",
+        "decision-observability",
+        "anchor-paper",
+        "currency-note-2026-04"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-18-1200.md",
+        "arXiv:2604.25850 (Agentic Harness Engineering) - VERIFIED, abstract read run 233 (removes the 'indexed, NOT independently opened' caveat)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-18-1200.md"
       ]
     }
   ],
@@ -18715,6 +18749,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "JIT-Agent trains a repair capability; the project's run-232 repair is the deterministic, no-training counterpart - the same 'a loop needs repair, not only accept/revert' conclusion reached under the emergence-first constraint."
+    },
+    {
+      "id": "edge_ahe_refines_subfield",
+      "source": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "target": "concept_harness_evolution_subfield",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "AHE is the anchor of the subfield node's citation graph, now opened directly - the 'falsifiable contract per edit' shared shape it names is what 20+ later systems converge on."
+    },
+    {
+      "id": "edge_ahe_supports_self_improving_family",
+      "source": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "target": "approach_self_improving_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.72,
+      "description": "The project's build, published and measured: three observability pillars = Phase 1 (file-level revertible components) + Phase 2 (distilled evidence corpus) + Phase 3 (prediction per edit); 69.7->77.0% over 10 iterations, beating the human harness."
+    },
+    {
+      "id": "edge_ahe_supports_harness_registry",
+      "source": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "target": "artifact_phase1_harness_registry",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "'Component observability: every editable component gets a file-level representation so the action space is explicit and revertible' is harness_registry's design goal, validated by an independent group with pass-rate numbers."
+    },
+    {
+      "id": "edge_ahe_supports_capability_is_config",
+      "source": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "+5.1 to +10.1pp cross-family gains from a FROZEN evolved harness across three model families - the harness config carries capability that is not model-specific."
+    },
+    {
+      "id": "edge_ahe_supports_config_over_prose",
+      "source": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "target": "emergent_constraint_weakening_at_handoffs",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.58,
+      "description": "AHE's ablation: the gain localizes to tools / middleware / long-term memory, NOT the system prompt - 'factual harness structure transfers while prose-level strategy does not'. Direct support for context/loop_policy being config, and a steer to put self-improvement effort into structure not prompts."
+    },
+    {
+      "id": "edge_ahe_supports_asg_si_convergence",
+      "source": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "target": "concept_asg_si_independently_arrives_at_the_plan",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Another independent arrival at the project's plan (with SEA, Self-Harness, SEAL, Release Gates): AHE's 'every edit a falsifiable contract' + revertible components + verified prediction is the project's Phase 1-3, reached separately in April 2026."
     }
   ]
 }

@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 261 nodes, 1026 edges · **Date:** 2026-09-05
+**Graph at generation:** 262 nodes, 1032 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -29,7 +29,7 @@ Opened and checked directly.
 | [2601.08129](https://arxiv.org/abs/2601.08129) | Emergent Coordination in Multi-Agent Systems via Pressure Fields and Temporal Decay - R. Rodriguez | `emergent_stigmergic_coordination` |
 | [2602.11583](https://arxiv.org/abs/2602.11583) | The Five Ws of Multi-Agent Communication: A Survey from MARL to Emergent Language and LLMs (TMLR 2026) | `pattern_five_w_message_instrumentation` |
 | [2604.19784](https://arxiv.org/abs/2604.19784) | Peer-Preservation in Frontier Models | `emergent_self_and_peer_preservation` |
-| [2604.25850](https://arxiv.org/abs/2604.25850) | Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses - J. Lin, S. Liu, C. Pan, L. Lin, S. Dou, Z. Xi, X. Huang, H. Yan, Z. Han, T. Gui, Y-G. Jiang | `concept_harness_evolution_subfield`, `pattern_harness_component_versioning`, `pattern_meta_harness_falsifiable_prediction` |
+| [2604.25850](https://arxiv.org/abs/2604.25850) | Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses - J. Lin, S. Liu, C. Pan, L. Lin, S. Dou, Z. Xi, X. Huang, H. Yan, Z. Han, T. Gui, Y-G. Jiang | `concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract`, `concept_harness_evolution_subfield`, `pattern_harness_component_versioning` +1 |
 | [2607.14159](https://arxiv.org/abs/2607.14159) | MemoHarness: Agent Harnesses That Learn from Experience - Y. Huang, W. Wang, H. Bao, Y. Ma, X. Luo, Y. Nian, H. Zhuang, Z. Liu, Y. Zhao, X. Zhang | `pattern_experience_bank` |
 | [2608.10218](https://arxiv.org/abs/2608.10218) | Mind Viruses: Self-Propagating Ideas in Multi-Agent LLM Systems - V. Papadopoulos, M. Shah, S. Zimmerman, J. Lindsey | `concept_inheritance_channel`, `emergent_mind_viruses` |
 | [2608.21156](https://arxiv.org/abs/2608.21156) | Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence - Y. Feng, Z. Xiang, C. Yang, Q. Ma et al. (36 authors) | `approach_graph_engineering`, `concept_agentic_os`, `concept_engineering_paradigm_ladder` +10 |
@@ -406,7 +406,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1
 - `docs/auto_sweep_2026-09-17-1800.md` — `concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker`
 - `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`, `concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension`
-- `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`
+- `docs/auto_sweep_2026-09-18-1200.md` — `concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract`, `concept_mechanism_incentive_compat_does_not_transfer`
 - `docs/auto_sweep_2026-09-19-0600.md` — `concept_epistemic_sybil_collapse`, `emergent_compositional_private_language`, `pattern_evidential_ancestry_tracking`
 - `docs/auto_sweep_2026-09-19-1800.md` — `concept_environment_evolution_curriculum`, `pattern_procedural_family_skill_consolidation`
 - `docs/auto_sweep_2026-09-20-1200.md` — `concept_self_concept_as_behavioral_lever`
