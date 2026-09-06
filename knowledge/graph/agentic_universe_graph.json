@@ -664,6 +664,10 @@
     {
       "date": "2026-10-20",
       "change": "Autonomous run 175. Phase 2 - utility-weighted retention in experience_bank.py (the run-174 conclusion). Entries carry used/helped; record_use(collection, id, helped) updates them after a retrieval's outcome is known (a live-run seam, no model call); utility_score is a Laplace-smoothed success rate with a 0.5 neutral prior for unused entries; prune(collection, keep_n, grace=5) evicts the lowest-utility entries beyond keep_n, protecting the grace most recent and keeping survivors' raw source_events. Operationalises concept_naive_trajectory_accumulation_already_helps (arXiv:2505.00234) exemplar-level curation. +7 selftest checks (was 8, now 15). phase2_experience_bank.md updated. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-20",
+      "change": "Autonomous run 176. DBLP. concept_agent_communication_is_a_layered_attack_surface (A Survey of LLM-Driven AI Agent Communication, arXiv:2506.19676): agent-agent + agent-tool communication (MCP, A2A) as three classes over a three-layered architecture, with per-layer security risks and countermeasures, plus experimental MCP/A2A vulnerabilities. Gives the swarm messaging topology a layered risk taxonomy; MCP servers are inbound channels for Phase 5; a companion decomposition to the six runtime responsibilities. +5 edges."
     }
   ],
   "nodes": [
@@ -6457,6 +6461,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-19-1800.md"
+      ]
+    },
+    {
+      "id": "concept_agent_communication_is_a_layered_attack_surface",
+      "label": "Agent-to-agent + agent-to-tool communication (MCP, A2A) is a three-layered attack surface with layer-specific risks; a 2025 survey demonstrates novel MCP/A2A vulnerabilities experimentally",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:agent_communication_security_taxonomy",
+      "confidence": 0.7,
+      "description": "A Survey of LLM-Driven AI Agent Communication: Protocols, Security Risks, and Defense Countermeasures (arXiv:2506.19676, 2025; VERIFIED via arXiv abstract read run 176, resolved via DBLP; repo github.com/theshi-1128/awesome-agent-communication-security). Agents no longer act as isolated LLMs - they communicate with other agents and tools, and organizations are racing to standardise protocols (Anthropic's MCP, Google's A2A). The survey gives the first clear definition of agent communication, a framework of THREE COMMUNICATION CLASSES over a THREE-LAYERED communication architecture, dissects the protocols per class, analyses security RISKS by WHICH LAYER they arise from, outlines defence countermeasures per risk, and runs EXPERIMENTS on MCP and A2A demonstrating novel vulnerabilities. For this project: (1) the nourishing-harness messaging topology (nourishing_harness_design.md 3.4: same-parent-ID filter, broadcast channels, cross-family monitor) is a channel design - this gives it a layered risk taxonomy to check against, per-layer rather than per-message; (2) the project USES MCP servers, so 'novel MCP vulnerabilities' land on pattern_execution_layer_enforcement / Phase 5 - an MCP tool server is an inbound channel that the exec layer must treat as untrusted, same as a self-written tool (concept_agents_writing_their_own_tools_with_a_test_gate); (3) 'from untrusted input to trusted memory' (concept_memory_poisoning_one_write_persists) is a communication-layer -> state-layer crossing, and pattern_five_w_message_instrumentation records the channel, which is the observability half of a layered defence; (4) a three-layered COMMUNICATION architecture is a companion decomposition to the six runtime RESPONSIBILITIES (concept_bottleneck_is_the_model_harness_coupling) - different cut, same 'the coupling is where it breaks' conclusion.",
+      "tags": [
+        "agent-communication-security",
+        "mcp",
+        "a2a",
+        "three-communication-classes",
+        "three-layered-architecture",
+        "per-layer-risk-taxonomy",
+        "protocol-vulnerabilities",
+        "survey-2025"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-20-0600.md",
+        "arXiv:2506.19676 (A Survey of LLM-Driven AI Agent Communication) - VERIFIED, abstract read run 176; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-20-0600.md"
       ]
     }
   ],
@@ -15170,6 +15202,61 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.45,
       "description": "A self-generated-trajectory database retrieved into every future task is the persistent-memory attack surface; utility-based retention does not screen for poisoning."
+    },
+    {
+      "id": "edge_agentcomm_refines_swarm_coordination",
+      "source": "concept_agent_communication_is_a_layered_attack_surface",
+      "target": "concept_swarm_decentralized_coordination",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "A layered security taxonomy for the decentralised communication the swarm layer depends on - risks located by communication layer, not just by message."
+    },
+    {
+      "id": "edge_agentcomm_supports_execution_layer_enforcement",
+      "source": "concept_agent_communication_is_a_layered_attack_surface",
+      "target": "pattern_execution_layer_enforcement",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "MCP/A2A servers are inbound channels with demonstrated novel vulnerabilities; the exec layer must treat a tool/agent channel as untrusted, same as a self-written tool."
+    },
+    {
+      "id": "edge_agentcomm_refines_subagent_coordination",
+      "source": "concept_agent_communication_is_a_layered_attack_surface",
+      "target": "emergent_subagent_training_induces_coordination",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45,
+      "description": "The message channel as an attack surface, given a protocol-layer structure - the same-parent-ID filter operates at one of the three layers, not all."
+    },
+    {
+      "id": "edge_agentcomm_refines_memory_poisoning",
+      "source": "concept_agent_communication_is_a_layered_attack_surface",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "'From untrusted input to trusted memory' is a communication-layer -> state-layer crossing; the layered taxonomy locates where the write channel needs the guard."
+    },
+    {
+      "id": "edge_agentcomm_supports_five_w",
+      "source": "concept_agent_communication_is_a_layered_attack_surface",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Recording sender/receiver/channel/purpose per message is the observability half of a layered defence - you cannot defend a layer you do not log."
     }
   ]
 }

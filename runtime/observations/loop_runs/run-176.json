@@ -1,0 +1,29 @@
+{
+  "run": 176,
+  "increment": "fold A Survey of LLM-Driven AI Agent Communication - security (arXiv:2506.19676) via DBLP",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 5
+  },
+  "citations": [
+    {
+      "id": "arXiv:2506.19676",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2506.19676"
+  ],
+  "trace_file": "runtime\\traces\\loop-176.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
