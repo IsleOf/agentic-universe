@@ -1,0 +1,11 @@
+# etsy_shop_state — periodic snapshot for agents/shop_health_monitor.py. SKELETON.
+shop_state:
+  shop_id: str
+  captured_at: iso8601
+  open_orders: int
+  message_queue: int
+  review_score: number
+  active_listings: int
+  per_listing:
+    - {listing_id: str, views_7d: int, favorites_7d: int, conversion_7d: number, revenue_7d: number}
+  anomalies: [str]      # review-score drop, stuck orders, listing fell out of search, ...

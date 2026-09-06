@@ -1,0 +1,16 @@
+# order_fulfillment — new Etsy receipt -> POD provider choice -> submit -> ledger
+# SKELETON.
+name: order_fulfillment
+trigger: etsy.receipt.created         # via tools/etsy_mcp_client.py receipts poll / webhook
+stages:
+  - id: choose_provider
+    uses: agents/pod_router.py::choose_provider
+    with: schemas/pod_cost_model.yaml
+    out: [provider, quote, rationale]
+  - id: submit
+    uses: agents/pod_router.py::submit
+    out: [provider_order_id]
+  - id: ledger
+    uses: agents/pod_router.py::ledger_append   # unified cost / margin
+  - id: track
+    uses: agents/shop_health_monitor.py         # tracking number back to the buyer

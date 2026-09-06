@@ -1,0 +1,541 @@
+{
+  "project": "etsy-agentic-space",
+  "format": "agentic-universe project graph v1",
+  "branch": "etsy-agentic-space",
+  "last_updated": "2026-09-07",
+  "note": "knowledge/notes/etsy_agentic_space.md",
+  "nodes": [
+    {
+      "id": "etsy__root",
+      "type": "component",
+      "label": "Etsy agentic shop-management space: the shop-level orchestrator",
+      "status": "scaffolded",
+      "confidence": 0.5,
+      "description": "One orchestrated system connecting market research -> AutoDesign -> listing automation -> POD fulfillment, with all state durable in the knowledge graph. Sits ABOVE Poster Studio and the autodesign-etsy branch; does not reinvent design or listing.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "root"
+      ]
+    },
+    {
+      "id": "etsy__researcher",
+      "type": "component",
+      "label": "agents/etsy_researcher.py - shop intelligence & market research",
+      "status": "to_build",
+      "confidence": 0.4,
+      "description": "Periodically samples target niches (maps, posters, gold-foil, personalized gifts) via the Apify Etsy MCP Scraper / Jentic listings endpoints; logs features (colours, layout, messaging, price bands, bestseller patterns) into the graph; emits design briefs + keyword packs.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "subsystem",
+        "research"
+      ]
+    },
+    {
+      "id": "etsy__creative",
+      "type": "component",
+      "label": "pipelines/poster_creative.yml - creative pipeline orchestration",
+      "status": "to_build",
+      "confidence": 0.4,
+      "description": "Feeds research-derived design briefs into AutoDesign (autodesign-etsy branch) -> Poster Studio SVG template engine -> framed-mockup + listing-image pipeline. Optional promo-video hook.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "subsystem",
+        "creative"
+      ]
+    },
+    {
+      "id": "etsy__lister",
+      "type": "component",
+      "label": "agents/etsy_lister.py - listing & pricing automation",
+      "status": "to_build",
+      "confidence": 0.4,
+      "description": "Takes generated assets + keyword packs; calls Etsy v3 (via Jentic or the MCP server) to create/update listings, sections, inventory, personalization, pricing rules. Scheduled SEO-refresh: rotate weak tags, seasonal keywords, title/description A/B tests.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "subsystem",
+        "listing"
+      ]
+    },
+    {
+      "id": "etsy__pod_router",
+      "type": "component",
+      "label": "agents/pod_router.py - fulfillment & POD routing",
+      "status": "to_build",
+      "confidence": 0.4,
+      "description": "Listens for new Etsy receipts; picks a POD provider (Prodigi / Printify / Merchize) by size, destination, all-in cost; pushes the order via that provider's API. Writes a unified cost/margin ledger.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "subsystem",
+        "fulfillment"
+      ]
+    },
+    {
+      "id": "etsy__shop_health",
+      "type": "component",
+      "label": "agents/shop_health_monitor.py - shop ops & customer comms",
+      "status": "to_build",
+      "confidence": 0.4,
+      "description": "Tracks shop state (open orders, message queue, review score, listing performance); drafts replies / review follow-ups / resolutions from templates via the Shop Management API.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "subsystem",
+        "ops"
+      ]
+    },
+    {
+      "id": "etsy__jentic_client",
+      "type": "component",
+      "label": "tools/jentic_client.py - secure Etsy v3 execution layer",
+      "status": "to_build",
+      "confidence": 0.4,
+      "description": "Wraps Jentic One: agents call Jentic, Jentic calls Etsy Open API v3 with the app credentials. Agents never see secrets; full request logging.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "etsy__mcp_client",
+      "type": "component",
+      "label": "tools/etsy_mcp_client.py - MCP tool-call surface",
+      "status": "to_build",
+      "confidence": 0.4,
+      "description": "Wraps the Etsy MCP server (and the Apify Etsy MCP Scraper for research) so agents issue structured tool calls: create listing, update tags, get active listings, list receipts, search listings.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "integration"
+      ]
+    },
+    {
+      "id": "etsy__poster_studio",
+      "type": "component",
+      "label": "Poster Studio (/home/dev/poster-studio) - SVG template engine + Etsy draft factory",
+      "status": "external",
+      "confidence": 0.7,
+      "description": "Existing project: browser poster designer, 300 DPI export, competitor->listing factory pipeline, Etsy draft creation. This branch consumes it; does not duplicate it.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "upstream"
+      ]
+    },
+    {
+      "id": "etsy__autodesign",
+      "type": "component",
+      "label": "autodesign-etsy branch - competitor extraction + novel design generation",
+      "status": "external",
+      "confidence": 0.7,
+      "description": "Existing Agentic Universe branch: CLIP-based design-element extraction, style clustering, Stable-Diffusion template generation, PosterBench scoring (AutoDesign, arXiv 2608.13560).",
+      "derived_from": [
+        "knowledge/notes/autodesign-etsy-flow-2026.md (autodesign-etsy branch)"
+      ],
+      "tags": [
+        "upstream"
+      ]
+    },
+    {
+      "id": "etsy__d_orchestrator_not_product",
+      "type": "decision",
+      "label": "Build an internal orchestrator, not another SaaS competitor",
+      "status": "decided",
+      "confidence": 0.7,
+      "description": "InsightAgent / Merch Titans / eRank etc. prove demand but are vendor-locked silos. The edge here is gluing research + design + listing + fulfillment for our own shops with graph-durable state - not selling a tool.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "decision"
+      ]
+    },
+    {
+      "id": "etsy__d_api_first",
+      "type": "decision",
+      "label": "API/MCP first; headless browser only for true API gaps",
+      "status": "decided",
+      "confidence": 0.75,
+      "description": "Primary path: Jentic One (secure execution, agents never see secrets) wrapped by the Etsy MCP server. Research path: Apify Etsy MCP Scraper. Playwright/Browser-Use from WSL2 is a secondary path for off-API flows only, given low TOS risk tolerance.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "decision",
+        "integration"
+      ]
+    },
+    {
+      "id": "etsy__d_experiments_are_forecasts",
+      "type": "decision",
+      "label": "Every listing experiment is a scored forecast, not a vibe",
+      "status": "decided",
+      "confidence": 0.6,
+      "description": "Adopt the epistemic-market discipline (epistemic_constitution.py, main graph runs 293/296): an A/B test predicts a conversion/revenue lift, is scored on resolution, and calibration is kept per niche. A listing A/B test is a paired live trial - treat it like one.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "decision",
+        "epistemic-market"
+      ]
+    },
+    {
+      "id": "etsy__d_branch_layout",
+      "type": "decision",
+      "label": "Dedicated branch off main with agents/pipelines/schemas/tools layout",
+      "status": "decided",
+      "confidence": 0.8,
+      "description": "Physically separate from proposals/ and autodesign-etsy; shares .git history. Skeleton: agents/*.py, pipelines/*.yml, schemas/*.yaml, tools/*_client.py, this note + this graph.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "decision"
+      ]
+    },
+    {
+      "id": "etsy__c_stop_at_draft",
+      "type": "constraint",
+      "label": "Stop-at-draft gate: no auto-publish to a live listing",
+      "status": "active",
+      "confidence": 0.85,
+      "description": "Inherited from poster-studio. Every listing write stops at DRAFT; publishing to a live listing needs explicit owner approval.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "constraint",
+        "safety"
+      ]
+    },
+    {
+      "id": "etsy__c_no_secrets_to_agents",
+      "type": "constraint",
+      "label": "Agents never see Etsy / POD credentials",
+      "status": "active",
+      "confidence": 0.85,
+      "description": "Credentials live only in the Jentic execution layer and the POD-provider adapters. This is why Jentic is the primary path.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "constraint",
+        "safety"
+      ]
+    },
+    {
+      "id": "etsy__c_estonian_company_payments",
+      "type": "constraint",
+      "label": "Etsy payments received through the Estonian company",
+      "status": "active",
+      "confidence": 0.7,
+      "description": "POD research done: Prodigi / Printify / Merchize cheapest; gold-foil printing for US-heavy demand. The cost/margin ledger must reflect this.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "etsy__c_tos_compliance",
+      "type": "constraint",
+      "label": "Stay within Etsy TOS - no ad-hoc scraping of authenticated flows",
+      "status": "active",
+      "confidence": 0.7,
+      "description": "Research scraping is limited to the Apify Etsy MCP Scraper's public search surface; authenticated actions go through the official API via Jentic.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "constraint",
+        "safety"
+      ]
+    },
+    {
+      "id": "etsy__q_next",
+      "type": "question",
+      "label": "The single highest-value next move",
+      "status": "open",
+      "confidence": 0.5,
+      "description": "Stand up tools/jentic_client.py + tools/etsy_mcp_client.py against the sandbox and get one read-only round trip (get active listings) working end to end. Everything else depends on the integration layer.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "question",
+        "next"
+      ]
+    },
+    {
+      "id": "etsy__q_research_playbooks",
+      "type": "question",
+      "label": "What are the research playbooks (niches, crawl frequency, features)?",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "Define the sampling strategy: which niches, top-N by niche, crawl cadence, which features to extract into the graph.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "etsy__q_pod_cost_model",
+      "type": "question",
+      "label": "Fill schemas/pod_cost_model.yaml with real Prodigi/Printify/Merchize numbers",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "Per-provider: size -> base cost, shipping by destination, turnaround, quality notes. The router's decision logic is only as good as this table.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "etsy__q_experiment_schema",
+      "type": "question",
+      "label": "Design schemas/experiment_listing_ab_test.yaml",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "A listing experiment record: hypothesis, predicted lift + confidence, variant definitions, start/stop, resolution metric, Brier on resolve. Mirrors the forecast ledger.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "question",
+        "epistemic-market"
+      ]
+    },
+    {
+      "id": "etsy__q_creative_handoff",
+      "type": "question",
+      "label": "How exactly does a design brief hand off to AutoDesign + Poster Studio?",
+      "status": "open",
+      "confidence": 0.35,
+      "description": "The brief -> SVG -> mockup -> listing-asset contract between this branch, autodesign-etsy, and poster-studio is undefined. Needs a schema.",
+      "derived_from": [
+        "knowledge/notes/etsy_agentic_space.md"
+      ],
+      "tags": [
+        "question"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "etsy__e1",
+      "source": "etsy__researcher",
+      "target": "etsy__root",
+      "type": "implements",
+      "description": "Subsystem 1 of the orchestrator."
+    },
+    {
+      "id": "etsy__e2",
+      "source": "etsy__creative",
+      "target": "etsy__root",
+      "type": "implements",
+      "description": "Subsystem 2 of the orchestrator."
+    },
+    {
+      "id": "etsy__e3",
+      "source": "etsy__lister",
+      "target": "etsy__root",
+      "type": "implements",
+      "description": "Subsystem 3 of the orchestrator."
+    },
+    {
+      "id": "etsy__e4",
+      "source": "etsy__pod_router",
+      "target": "etsy__root",
+      "type": "implements",
+      "description": "Subsystem 4 of the orchestrator."
+    },
+    {
+      "id": "etsy__e5",
+      "source": "etsy__shop_health",
+      "target": "etsy__root",
+      "type": "implements",
+      "description": "Shop ops / customer comms."
+    },
+    {
+      "id": "etsy__e6",
+      "source": "etsy__researcher",
+      "target": "etsy__mcp_client",
+      "type": "depends_on",
+      "description": "Uses the Apify Etsy MCP Scraper surface."
+    },
+    {
+      "id": "etsy__e7",
+      "source": "etsy__lister",
+      "target": "etsy__jentic_client",
+      "type": "depends_on",
+      "description": "Listing writes go through Jentic."
+    },
+    {
+      "id": "etsy__e8",
+      "source": "etsy__lister",
+      "target": "etsy__mcp_client",
+      "type": "depends_on",
+      "description": "Structured listing tool calls."
+    },
+    {
+      "id": "etsy__e9",
+      "source": "etsy__shop_health",
+      "target": "etsy__jentic_client",
+      "type": "depends_on",
+      "description": "Shop-management API calls."
+    },
+    {
+      "id": "etsy__e10",
+      "source": "etsy__mcp_client",
+      "target": "etsy__jentic_client",
+      "type": "depends_on",
+      "description": "MCP server wraps the Jentic execution layer for authenticated actions."
+    },
+    {
+      "id": "etsy__e11",
+      "source": "etsy__creative",
+      "target": "etsy__autodesign",
+      "type": "depends_on",
+      "description": "Design generation."
+    },
+    {
+      "id": "etsy__e12",
+      "source": "etsy__creative",
+      "target": "etsy__poster_studio",
+      "type": "depends_on",
+      "description": "SVG template engine + export + draft factory."
+    },
+    {
+      "id": "etsy__e13",
+      "source": "etsy__lister",
+      "target": "etsy__creative",
+      "type": "depends_on",
+      "description": "Listing assets come from the creative pipeline."
+    },
+    {
+      "id": "etsy__e14",
+      "source": "etsy__creative",
+      "target": "etsy__researcher",
+      "type": "depends_on",
+      "description": "Design briefs + keyword packs."
+    },
+    {
+      "id": "etsy__e15",
+      "source": "etsy__d_api_first",
+      "target": "etsy__jentic_client",
+      "type": "records",
+      "description": "Why Jentic is primary."
+    },
+    {
+      "id": "etsy__e16",
+      "source": "etsy__d_api_first",
+      "target": "etsy__mcp_client",
+      "type": "records",
+      "description": "MCP for structured tool calls; Apify for research."
+    },
+    {
+      "id": "etsy__e17",
+      "source": "etsy__c_no_secrets_to_agents",
+      "target": "etsy__jentic_client",
+      "type": "records",
+      "description": "Credentials only in the execution layer."
+    },
+    {
+      "id": "etsy__e18",
+      "source": "etsy__c_stop_at_draft",
+      "target": "etsy__lister",
+      "type": "blocks",
+      "description": "The lister cannot publish a live listing without approval."
+    },
+    {
+      "id": "etsy__e19",
+      "source": "etsy__d_experiments_are_forecasts",
+      "target": "etsy__q_experiment_schema",
+      "type": "records",
+      "description": "The experiment schema mirrors the forecast ledger."
+    },
+    {
+      "id": "etsy__e20",
+      "source": "etsy__c_estonian_company_payments",
+      "target": "etsy__q_pod_cost_model",
+      "type": "records",
+      "description": "The cost/margin ledger reflects the payment + POD setup."
+    },
+    {
+      "id": "etsy__e21",
+      "source": "etsy__d_orchestrator_not_product",
+      "target": "etsy__root",
+      "type": "records",
+      "description": "The founding decision."
+    },
+    {
+      "id": "etsy__e22",
+      "source": "etsy__d_branch_layout",
+      "target": "etsy__root",
+      "type": "records",
+      "description": "The branch skeleton."
+    },
+    {
+      "id": "etsy__e23",
+      "source": "etsy__q_next",
+      "target": "etsy__jentic_client",
+      "type": "blocks",
+      "description": "Nothing works until one read-only round trip does."
+    },
+    {
+      "id": "etsy__e24",
+      "source": "etsy__q_next",
+      "target": "etsy__mcp_client",
+      "type": "blocks",
+      "description": "Same - the integration layer is the critical path."
+    },
+    {
+      "id": "etsy__e25",
+      "source": "etsy__q_creative_handoff",
+      "target": "etsy__creative",
+      "type": "blocks",
+      "description": "The brief->asset contract is undefined."
+    },
+    {
+      "id": "etsy__e26",
+      "source": "etsy__q_pod_cost_model",
+      "target": "etsy__pod_router",
+      "type": "blocks",
+      "description": "The router needs the cost table."
+    },
+    {
+      "id": "etsy__e27",
+      "source": "etsy__q_research_playbooks",
+      "target": "etsy__researcher",
+      "type": "blocks",
+      "description": "The researcher needs a sampling strategy."
+    },
+    {
+      "id": "etsy__e28",
+      "source": "etsy__c_tos_compliance",
+      "target": "etsy__researcher",
+      "type": "blocks",
+      "description": "Research scraping limited to the public search surface."
+    }
+  ]
+}

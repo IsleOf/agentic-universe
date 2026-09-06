@@ -1,0 +1,16 @@
+# experiment_listing_ab_test — a listing experiment as a SCORED FORECAST. SKELETON.
+# Mirrors the forecast ledger in epistemic_constitution.py (main graph, runs 293/296).
+experiment:
+  experiment_id: uuid
+  listing_id: str
+  niche: str
+  hypothesis: str
+  predicted_lift: {metric: conversion|revenue|ctr, value: number, confidence: number}   # BEFORE the change
+  variants:
+    - {id: control, definition: {}}
+    - {id: treatment, definition: {title?: str, description?: str, tags?: [str], price?: number}}
+  started_at: iso8601
+  stop_rule: {min_days: int, min_impressions: int}
+  resolution: null        # {metric_value_control, metric_value_treatment, winner}
+  brier_score: null       # scored on resolve, per niche
+  policy_version: str

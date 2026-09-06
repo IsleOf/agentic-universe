@@ -1,0 +1,20 @@
+# poster_creative — design brief -> SVG -> framed mockup -> listing assets
+# SKELETON. Multi-agent flow, same style as the Agentic Universe graphs.
+name: poster_creative
+inputs: [design_brief, keyword_pack]     # from agents/etsy_researcher.py
+stages:
+  - id: generate_design
+    uses: autodesign-etsy            # CLIP extraction + style clustering + SD generation
+    out: [candidate_svgs, posterbench_scores]
+  - id: template_render
+    uses: poster-studio              # SVG template engine, draggable text, 300 DPI export
+    in: candidate_svgs
+    out: [print_files]
+  - id: mockups
+    uses: poster-studio/mockup       # framed / in-room mockups, listing gallery
+    out: [listing_images]
+  - id: promo_video            # optional
+    uses: whisper-video
+    enabled: false
+outputs: [print_files, listing_images, listing_video?]
+open_question: etsy__q_creative_handoff   # the brief->asset contract is undefined

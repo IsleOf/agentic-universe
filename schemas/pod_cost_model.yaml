@@ -1,0 +1,19 @@
+# pod_cost_model — per-provider cost table for agents/pod_router.py. FILL WITH REAL NUMBERS.
+# etsy__q_pod_cost_model — the router's decision logic is only as good as this table.
+providers:
+  prodigi:
+    sizes: {}          # size -> base_cost
+    shipping: {}        # destination -> cost, days
+    turnaround_days: null
+    quality_notes: "gold-foil?  US fulfillment?"
+  printify:
+    sizes: {}
+    shipping: {}
+    turnaround_days: null
+    quality_notes: ""
+  merchize:
+    sizes: {}
+    shipping: {}
+    turnaround_days: null
+    quality_notes: ""
+routing_rule: "min all-in cost s.t. turnaround <= X and quality tier >= Y; US-heavy demand"

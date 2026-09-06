@@ -1,0 +1,16 @@
+# etsy_listing — durable listing object stored in the knowledge graph. SKELETON.
+listing:
+  listing_id: str
+  shop_id: str
+  title: str
+  description: str
+  tags: [str]           # up to 13
+  price: {amount: number, currency: str}
+  personalization: {enabled: bool, instructions: str, required: bool}
+  sections: [str]
+  state: draft|active|inactive|expired      # this branch writes draft only
+  assets: {print_files: [path], listing_images: [path], listing_video: path?}
+  source_brief: ref(design_brief)
+  keyword_pack: ref(keyword_pack)
+  created_by: agent_id
+  policy_version: str

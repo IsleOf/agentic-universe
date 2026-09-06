@@ -1,0 +1,16 @@
+# listing_automation — assets + keyword pack -> Etsy draft + scheduled SEO refresh
+# SKELETON.
+name: listing_automation
+inputs: [print_files, listing_images, keyword_pack, pricing_rules]
+stages:
+  - id: create_draft
+    uses: agents/etsy_lister.py::create_draft
+    gate: stop_at_draft            # etsy__c_stop_at_draft — owner approves publish
+    out: [listing_id]
+  - id: seo_refresh
+    schedule: "monthly + seasonal"
+    uses: agents/etsy_lister.py::seo_refresh
+  - id: ab_test
+    uses: agents/etsy_lister.py::run_experiment
+    spec: schemas/experiment_listing_ab_test.yaml
+    note: every experiment is a scored forecast (etsy__d_experiments_are_forecasts)
