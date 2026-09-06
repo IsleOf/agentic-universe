@@ -776,6 +776,10 @@
     {
       "date": "2026-09-11",
       "change": "Autonomous run 203. Recency-weighted arxiv-fetch sweep (S2 rate-limited 429). Folded the exogenous-acceptance-gate cluster - two nodes: concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (SEAL, arXiv:2607.24300, verifier-deployment gap + sealed audit the agent cannot author/inspect + accept/reject only + incumbent retained on regression, six models three seeds, failures capability-stratified; corroborated by Falsifiable Release Gates arXiv:2607.13070, standing invariants across six releases, 122->563 tests, small model 20%->70% while auto-rejecting a confidence-inflating candidate) and concept_self_improvement_evaluation_is_noisy_and_task_order_dependent (Fragility, arXiv:2608.18066, Aug 2026 - eval noise amplified by the self-improving loop, improvement highly task-order dependent, underspecification the hypothesised cause). 8 edges: SEAL/Release-Gates support artifact_phase3_holdout_set, principle_structural_edits_gated_outside_the_agents, pattern_verifier_gated_promotion, and corroborate concept_asg_si_independently_arrives_at_the_plan; harness-tampering challenges the exogenous-acceptance node (persists even with gates); the fragility node challenges holdout_set (single-run noise) and the exogenous-acceptance node (a single sealed run is not enough) and supports geometric_reliability_decay. docs/phase3_holdout_set.md gains an 'External corroboration (run 203)' section. 236->238 nodes, 879->887 edges."
+    },
+    {
+      "date": "2026-09-11",
+      "change": "Autonomous run 204. Recency-weighted arxiv-fetch sweep (S2 still 429). Folded PACE (arXiv:2606.08106) as concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution: 'keep it if the score went up' applied repeatedly against a noisy held-out estimate is uncontrolled adaptive multiple testing - the agent p-hacks itself (greedy commits 30-42% false / 72-100% false with no real gain on Qwen2.5 0.5B-3B; 13-21 spurious self-modifications/run; degrades the most fragile agent 4.9 pts). PACE = a paired testing-by-betting e-process, commit only on decisive evidence, per-decision false-commit guarantee under optional stopping, ~18% lower eval cost. 6 edges: challenges artifact_phase3_improvement_loop and concept_self_harness_validates_the_three_loop (greedy acceptor, no validity guarantee); refines concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (exogenous AND anytime-valid) and concept_gate_faces_a_pretrained_grader_gamer (noise alone, no adversary); extends concept_self_improvement_evaluation_is_noisy_and_task_order_dependent; supports concept_geometric_reliability_decay. docs/what_would_make_this_wrong.md gains a run-204 update under section 2. 238->239 nodes, 887->893 edges."
     }
   ],
   "nodes": [
@@ -6900,6 +6904,37 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-11-0000.md"
+      ]
+    },
+    {
+      "id": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "label": "In self-evolving agents the commit gate (acceptor), not the proposer, is the reliability bottleneck; naive 'keep if score up' is self-p-hacking",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:acceptor_statistics",
+      "confidence": 0.72,
+      "description": "PACE - Paired Anytime-valid Commit Evaluation (arXiv:2606.08106, VERIFIED via arXiv abstract read run 204). Almost all self-evolution effort has gone into the PROPOSER; PACE argues the weak point is the ACCEPTOR - the rule that decides whether to commit a change. Applied hundreds of times against the same noisy held-out estimate, the ubiquitous 'keep it if the score went up' rule is uncontrolled adaptive multiple testing: the agent effectively p-hacks itself, accumulating false commits that make it churn and drift rather than improve. PACE recasts committing as a sequential hypothesis test - a training-free, anytime-valid commit gate where each candidate is compared to the incumbent on IDENTICAL instances and committed only when a testing-by-betting e-process accumulates decisive evidence, stopping early to save evaluations and controlling each candidate's false-commit probability at a user-set level even under optional stopping (a per-decision guarantee). On Qwen2.5 agents (0.5B-3B) self-evolving at the prompt level on GSM8K / SVAMP / ARC-Challenge: greedy acceptance commits 30-42% false and 10-33% harmful edits when a genuine improvement is hidden among noisy proposals; PACE commits the real one and essentially nothing else, matching greedy's held-out accuracy at sharply lower variance and ~18% lower evaluation cost. With NO real gain available, greedy commits 13-21 spurious self-modifications per run (72-100% false) and degrades the most fragile agent by 4.9 points, while PACE holds at baseline. Directly applicable to this project: verify_loop_edit is a deterministic 'grounded risk strictly decreases' gate fired ~once per run - lower per-run exposure than PACE's hundreds, but across 200+ runs the cumulative false-commit rate is real and has no statistical-validity guarantee. Adopting a paired e-process (candidate vs incumbent on identical held-out instances, commit on an e-value threshold) would give each promotion a bounded false-commit probability. Small-model (0.5B-3B) measured - the project's small/local-LLM regime; June 2026, so a currency note but the mechanism is model-agnostic.",
+      "tags": [
+        "PACE",
+        "acceptor-not-proposer",
+        "anytime-valid",
+        "e-process",
+        "testing-by-betting",
+        "adaptive-multiple-testing",
+        "self-p-hacking",
+        "false-commit-rate",
+        "optional-stopping",
+        "small-model-measured",
+        "recency-2026-06"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-11-0600.md",
+        "arXiv:2606.08106 (PACE: Anytime-Valid Acceptance Tests for Self-Evolving Agents) - VERIFIED, abstract read run 204"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-11-0600.md"
       ]
     }
   ],
@@ -16394,6 +16429,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.42,
       "description": "Evaluation noise compounding through the self-improving loop is one mechanism behind the observed geometric reliability decay - the loop amplifies per-step measurement error, not only per-step task error."
+    },
+    {
+      "id": "edge_acceptor_weakpoint_challenges_improvement_loop",
+      "source": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "verify_loop_edit's 'grounded risk strictly decreases' rule has no statistical-validity guarantee; over 200+ runs against the same held-out set it is uncontrolled adaptive multiple testing. PACE's paired e-process is the fix - commit on an accumulated e-value, not on a point improvement."
+    },
+    {
+      "id": "edge_acceptor_weakpoint_challenges_self_harness_three_loop",
+      "source": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "target": "concept_self_harness_validates_the_three_loop",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The three-loop's held-out regression check is a greedy acceptor; PACE shows greedy acceptors commit 30-42% false / 72-100% false with no real gain on small models - the loop being 'runnable and verifier-gated' is necessary but not sufficient for reliability."
+    },
+    {
+      "id": "edge_acceptor_weakpoint_refines_exogenous_acceptance",
+      "source": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.68,
+      "description": "SEAL says the acceptance signal must sit outside the agent's control; PACE says it must additionally be a statistically valid sequential test. Exogenous AND anytime-valid - the two conditions compose into the acceptor spec."
+    },
+    {
+      "id": "edge_acceptor_weakpoint_extends_eval_noise",
+      "source": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "target": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "The Fragility paper documents the noise; PACE is the response - if held-out estimates are noisy, the acceptor must be a test that controls error under that noise, not a threshold on a point estimate."
+    },
+    {
+      "id": "edge_acceptor_weakpoint_supports_reliability_decay",
+      "source": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "target": "concept_geometric_reliability_decay",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Churn and drift from false commits (13-21 spurious self-modifications per run with no real gain) is a concrete mechanism for per-step capability loss compounding over a long self-improvement trajectory."
+    },
+    {
+      "id": "edge_acceptor_weakpoint_refines_grader_gamer",
+      "source": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "target": "concept_gate_faces_a_pretrained_grader_gamer",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "A distinct acceptor failure from grader-gaming: here nothing is adversarial - noise alone plus a greedy rule produces false commits. The gate is fragile even against an honest proposer."
     }
   ]
 }

@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 238 nodes, 887 edges · **Date:** 2026-09-05
+**Graph at generation:** 239 nodes, 893 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -93,6 +93,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.05241](https://arxiv.org/abs/2606.05241) | (title not recorded) | `concept_search_time_contamination_inflates_agent_evals` |
 | [2606.05922](https://arxiv.org/abs/2606.05922) | (title not recorded) | `pattern_trajectory_only_harness_optimization` |
 | [2606.05985](https://arxiv.org/abs/2606.05985) | (title not recorded) | `emergent_pluralistic_ignorance`, `principle_diversity_maintenance` |
+| [2606.08106](https://arxiv.org/abs/2606.08106) | (title not recorded) | `concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution` |
 | [2606.09498](https://arxiv.org/abs/2606.09498) | (title not recorded) | `concept_self_harness_validates_the_three_loop` |
 | [2606.09854](https://arxiv.org/abs/2606.09854) | (title not recorded) | `emergent_deception_and_collusion`, `emergent_peer_recognition_survives_anonymization` |
 | [2606.11082](https://arxiv.org/abs/2606.11082) | (title not recorded) | `concept_interaction_language_shifts_emergence` |
@@ -356,6 +357,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-10-0000.md` — `concept_the_harness_context_assembly_is_a_privilege_escalation_vector`
 - `docs/auto_sweep_2026-09-10-1800.md` — `concept_compaction_cliff`, `emergent_authorization_laundering`, `emergent_stale_belief_propagation`
 - `docs/auto_sweep_2026-09-11-0000.md` — `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal`, `concept_self_improvement_evaluation_is_noisy_and_task_order_dependent`
+- `docs/auto_sweep_2026-09-11-0600.md` — `concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution`
 - `docs/auto_sweep_2026-09-11-1200.md` — `concept_agent_shaped_topology_is_agent_corruptible`
 - `docs/auto_sweep_2026-09-11-1800.md` — `principle_structural_edits_gated_outside_the_agents`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
