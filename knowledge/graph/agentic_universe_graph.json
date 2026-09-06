@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-05",
+  "last_updated": "2026-10-06",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -440,6 +440,10 @@
     {
       "date": "2026-10-05",
       "change": "Autonomous run 120. DBLP. concept_multi_round_interaction_compresses_semantic_space (Emergent Convergence in Multi-Agent LLM Annotation, arXiv:2512.00047): 7500 multi-round discussions / 125k utterances - the intrinsic dimensionality of output embeddings DECLINES over rounds (semantic compression); groups converge lexically + semantically, form asymmetric influence patterns, negotiate without role prompting. A geometric, measured form of the diversity keystone's failure mode - interaction itself compresses variety. Black-box interaction analysis positioned as a scalable complement to activation probes. +6 edges."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Autonomous run 121. Consolidation. self_improving_harness_plan.md gains a 'independent systems that match this plan' block (ASG-SI runnable ref impl / Self-Harness 9-of-9 +132% held-out / MetaSkill-Evolve recursive - the plan's middle loop should also evolve). what_would_make_this_wrong.md: new section 3b (the CONSCIENTIA persistent trade-off, the Layer-Isolated masking finding + its run-116 code fix, the semantic-compression finding); section 4 keystone update - diversity maintenance now has THREE erosion forces (shared priors / shared evidence / interaction itself), the design names only the first two. No graph node/edge change."
     }
   ],
   "nodes": [

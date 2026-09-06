@@ -1,7 +1,24 @@
 # Forward Plan: Self-Improving Agentic OS
 
-**Date:** 2026-09-05 · last reconciled run 48 · **Target:** a self-improving agentic OS with a dynamically improving harness
+**Date:** 2026-09-05 · last reconciled run 48 · plan-soundness update run 121 · **Target:** a self-improving agentic OS with a dynamically improving harness
 **Graph:** 61 nodes / 115 edges at authoring — current state in `docs/graph_state_2026-09.md` · **Supersedes as active plan:** `docs/emergence_first_posture.md` (posture unchanged, now has a build target)
+
+> **Independent systems that match this plan (found runs 109, 118, 119).** Three published frameworks now
+> instantiate this architecture, two with runnable code:
+> - **ASG-SI** (`concept_asg_si_independently_arrives_at_the_plan`, arXiv:2512.23760, 2025) — self-improvement
+>   as compilation into an *auditable skill graph*: improvements extracted from trajectories → normalised into
+>   a skill with an explicit interface → promoted only after verifier-backed replay + contract checks; rewards
+>   decomposed into reconstructible components from replayable evidence; a complete threat model; a **runnable
+>   reference implementation**. This is nearly the whole plan below. Difference: ASG-SI is RL-based, this plan
+>   is emergence-first.
+> - **Self-Harness** (`concept_self_harness_validates_the_three_loop`, arXiv:2606.09498) — an agent improves
+>   its own harness via Weakness Mining (from traces) → minimal Proposal → Validation (regression testing only).
+>   **9 of 9 model-benchmark combos improve held-out pass rate, up to +132%.** The Phase 3 loop below, working.
+> - **MetaSkill-Evolve** (`concept_recursive_meta_skill_evolution`, arXiv:2607.05297) — makes it *recursive*:
+>   the improvement procedure itself is a meta-skill that evolves on a slower timescale under the same
+>   pipeline. This plan's middle loop currently has a *fixed* procedure (`tools/loop_proposer.py`); per
+>   MetaSkill-Evolve it should also be under improvement. The Analyzer/Retriever/Allocator/Proposer/Evolver
+>   decomposition is cleaner than this plan's `loop_metrics → loop_proposer → improvement_loop` split.
 
 ---
 

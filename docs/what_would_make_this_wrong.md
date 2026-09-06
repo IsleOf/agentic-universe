@@ -48,11 +48,27 @@ The activation-probe channel (`pattern_activation_probe_monitoring`) is the desi
 
 `concept_habitat_slack` — "autotelic behaviour appears in the gap" — is the load-bearing claim under the whole habitat model, and it rests on one speculative node (`emergent_spontaneous_self_inquiry`) and the idle-agent probe that hasn't been run. If the budget sweep is flat, the habitat charter needs rewriting.
 
+## 3b. Two DBLP findings that cut both ways (runs 113, 115, 120)
+
+- `concept_safety_helpfulness_tradeoff_persists_under_optimisation` (CONSCIENTIA) — a *measured* safety-vs-task
+  trade-off that **does not converge away with policy optimisation**; a ~70% persuasion-susceptibility floor
+  even after adversarial training. The design assumes it can hold both sides (separate exploration/deployment
+  populations); this says the trade-off is real per-policy and persistent.
+- `concept_aggregate_score_masks_per_layer_regression` (Layer-Isolated Evaluation) — an aggregate pass rate
+  *masks* per-component regressions (aggregate −2 to −6pp while the faulty slice −25 to −91pp). The project's
+  Phase 3 verification used one aggregate held-out score → same blind spot, **now fixed** (run 116:
+  `verify_loop_edit` rejects a category regression the aggregate masks).
+- `concept_multi_round_interaction_compresses_semantic_space` (Emergent Convergence) — the diversity keystone's
+  failure mode, *measured geometrically*: the intrinsic dimensionality of group outputs declines over rounds.
+  Interaction itself compresses variety — a third force beyond shared priors and shared evidence. See item 4.
+
 ## 4. Diversity maintenance vs the reliability target — unresolved by design
 
 `concept_work_substitution_frontier` `challenges` `principle_diversity_maintenance`: replacing human work needs reliability; reliability pressure selects for convergence; convergence is the mode collapse that destroys the emergence. The proposed resolution (separate exploration and deployment populations, no shared evaluator) is a hypothesis with no evidence. And `emergent_sustained_heterogeneity` complicates even the premise — variety doesn't uniformly decay.
 
 **Update (run 52):** `concept_epistemic_sybil_collapse` (`2609.01873`, VERIFIED, 20k calls) adds a second, quantified hit on the keystone. Multiplying agents on a *fixed* evidence source collapsed naive posterior coverage from 0.940 to 0.263 (1→32 reports). The keystone's mechanism (heterogeneous models, decorrelated prompts) defends against *shared priors* but not against *shared evidence* — agents reading the same trace produce correlated errors whatever their model family. So "2 diverse ≥ 16 homogeneous" is a claim about generation diversity; it does not carry to aggregation. The design now needs `pattern_evidential_ancestry_tracking` (dedupe reports by evidence root) wherever the swarm votes, and especially in the Phase 2 experience bank — a pattern condensed from 12 agents that shared one trace is a single-source claim with a crowd's authority. Untested at swarm scale.
+
+**Update (runs 79, 120):** the keystone now has three distinct erosion forces, not one. (1) *Shared priors* — `concept_generative_process_diversity` (`2609.03422`, 38 models): what buys failure independence is generative-process diversity (NCD on raw outputs), not vendor or capability spread; modest effect (−0.216). (2) *Shared evidence* — the Sybil collapse above. (3) *Interaction itself* — `concept_multi_round_interaction_compresses_semantic_space` (`2512.00047`, 125k utterances): the intrinsic dimensionality of group outputs *declines over rounds*. So even a process-diverse population reading independent sources will compress if it deliberates long enough. Diversity maintenance has to counter all three; the design currently only names the first two.
 
 ## 5. Geometric reliability decay caps every long trajectory (added run 43)
 
