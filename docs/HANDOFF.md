@@ -27,8 +27,9 @@ Phases 0–5 of `docs/self_improving_harness_plan.md`, on the project's own rese
 | Phase 4 | `skill_induction` | induce + retire candidate skills, 20% permanently withheld |
 | Phase 5 | `exec_guard` | pre-commit hook — blocks an invalid graph, an orphan, a raw trace, a secret, a commit to `main` |
 
-Four probe rigs (`tools/probe_*.py`), each reproducing a real phenomenon in sim:
-`probe_idle_agent` (+ 4-arm sweep), `probe_subagent_coordination`, `probe_epistemic_sybil`, `probe_rho_holdout`.
+Five probe rigs (`tools/probe_*.py`), each reproducing a real phenomenon in sim:
+`probe_idle_agent` (+ 4-arm sweep), `probe_subagent_coordination`, `probe_epistemic_sybil`, `probe_rho_holdout`,
+`probe_activation_generalisation`.
 
 One self-edit has gone through the Phase 3 gate: run 80's **IDLE-STATE RULE** in `context/loop_policy` (v2) and
 the live `SKILL.md` — it directs idle runs to deepen a node / dry-run a probe / do an adversarial pass instead
@@ -45,6 +46,7 @@ interfaces are stable; swapping in a model changes nothing else.
 | `agent_read(source_id)` | `probe_epistemic_sybil.py` | a model estimating a value from a document |
 | `self_preference(cand)` | `probe_rho_holdout.py` | a model pairwise-judging two trajectories |
 | `relay_policy(agent, msg)` | `probe_subagent_coordination.py` | a model deciding whether to forward an out-of-scope instruction |
+| `sample_signal(kind, rng)` | `probe_activation_generalisation.py` | real activation vectors from a model layer, per collusion kind |
 | `PROPOSER_PROMPT` | `loop_proposer.py` | a model reading the context JSON, returning the proposal list shape |
 
 **First run to do:** point `agent_step` at a model and run

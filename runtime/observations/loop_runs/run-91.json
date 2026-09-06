@@ -1,0 +1,18 @@
+{
+  "run": 91,
+  "increment": "link the activation-probe generalisation rig into catalogue + HANDOFF",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-91.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

@@ -320,6 +320,10 @@
     {
       "date": "2026-09-28",
       "change": "Autonomous run 90. IDLE-STATE RULE: built tools/probe_activation_generalisation.py - the activation-probe generalisation test as a runnable rig. Fit a linear probe on assigned collusion vs benign, test on emergent collusion it never trained on. Dry-run: AUC 1.00 in-distribution -> 0.72 on emergent (gap 0.28); training on both recovers to 0.93. An activation probe trained only on labellable collusion is a detector for that scenario, not the general observation channel the two-part gate needs. Bears on what_would_make_this_wrong.md section 2. artifact_probe_activation_generalisation_rig added. 19 selftests GREEN."
+    },
+    {
+      "date": "2026-09-28",
+      "change": "Autonomous run 91. IDLE-STATE RULE (consolidation): linked the run-90 activation-probe generalisation rig into emergence_probe_catalogue.md (Runnable-rigs table + the pattern_activation_probe_monitoring entry) and docs/HANDOFF.md (5th rig, 5th stub sample_signal). arXiv still 429. No graph node/edge change."
     }
   ],
   "nodes": [
