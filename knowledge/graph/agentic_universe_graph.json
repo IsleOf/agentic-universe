@@ -1084,6 +1084,10 @@
     {
       "date": "2026-09-30",
       "change": "Autonomous run 283. IDLE-STATE clause b - dry-ran tools/probe_composed_design.py (sweep). Verdict COMPOSES BUT BOUNDED: composed design extends the usable horizon 12 -> 24 steps vs prose handoffs, but the base per-step failure rate sets a ceiling - you need short TASKS not just short agents. 2 edges connecting this to the run-262 fractal-decomposition node: artifact_probe_composed_design_rig supports concept_fractal_decomposition (fractal decomposition is the mechanism that makes tasks short); concept_fractal_decomposition refines concept_geometric_reliability_decay (keep every agent trajectory short so none hits the ~16-step decay wall). 314 nodes / 1250 -> 1252 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-30",
+      "change": "Autonomous run 284. IDLE-STATE clause b - dry-ran the last 2 unexercised probes. probe_activation_generalisation (run): AUC 1.0 in-distribution vs 0.716 emergent-untrained (gap 0.284) - a detector for the assigned scenario, not an observation channel. probe_rho_holdout (sweep): self-preferring evaluator reports 0.218 gain, only 0.073 (33.5%) survives held-out. 3 edges: activation_generalisation_rig supports the run-278 llm-as-judge-cant-detect-collusion node (even the activation channel does not generalise); rho_holdout_rig supports concept_calibrated_forecasting_before_action (3x inflation = why influence needs calibrated prediction not self-report) + grounds concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score. All 7 probe rigs now exercised this session. 314 nodes / 1252 -> 1255 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -22790,6 +22794,39 @@
       "approach_family": "orchestration_first",
       "confidence": 0.5,
       "description": "Geometric decay caps any long trajectory (~16 steps to collapse). Fractal decomposition responds by keeping every agent trajectory short and problem-shaped - deep only where the task is genuinely unresolved - so no single agent runs long enough to hit the decay wall."
+    },
+    {
+      "id": "edge_activation_gen_supports_llm_judge_collusion",
+      "source": "artifact_probe_activation_generalisation_rig",
+      "target": "concept_llm_as_judge_cannot_detect_collusion_use_behavioural_regret_or_interpretability",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Run 284 dry-run: AUC 1.0 in-distribution vs 0.716 on emergent-untrained collusion (gap 0.284) - \"a detector for the assigned scenario, not an observation channel\". Extends the run-278 finding beyond LLM-as-judge: even the activation-probe channel does not generalise from assigned to emergent collusion, so behavioural-regret metrics are more necessary, not less."
+    },
+    {
+      "id": "edge_rho_holdout_supports_calibrated_forecasting",
+      "source": "artifact_probe_rho_holdout_rig",
+      "target": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Run 284 dry-run: a self-preferring evaluator reports a 0.218 gain; only 0.073 (33.5%) survives on held-out. That 3x inflation is exactly why influence must be earned by CALIBRATED prediction scored against later ground truth, not by an agent reporting its own gain."
+    },
+    {
+      "id": "edge_rho_holdout_grounds_self_evolved_evaluator",
+      "source": "artifact_probe_rho_holdout_rig",
+      "target": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The runnable numbers for the claim: honest selection would have captured 0.095 held-out gain; the self-preference winner captures 0.073 - the evaluator that scores itself picks a worse edit AND reports a better number."
     }
   ]
 }
