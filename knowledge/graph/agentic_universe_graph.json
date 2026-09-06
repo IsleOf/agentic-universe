@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-13",
+  "last_updated": "2026-09-14",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -820,6 +820,10 @@
     {
       "date": "2026-09-13",
       "change": "Autonomous run 214. Recency-weighted sweep. Folded SEA - Self-Evolving Agents with Anytime-Valid Certificates (arXiv:2607.00871, July 2026) as concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate: confine self-modification to a steering adapter + versioned harness around a FROZEN base; admit each edit only through an anytime-valid gate emitting an auditable certificate against a fixed error budget; the gate can only SELECT behaviors the base already produces, so five verifier-in-the-loop mechanisms supply the dense grader-free signal from the issue text alone. SWE-bench Verified 52-subset, four base models: base capability dominant + confound-free, suite contributes +4/+5 (GLM 5.2 24->28, GPT 29->34). Honest limit: single-run. The FIFTH independent arrival at the project's plan and the closest to the emergence-first no-training fork. 8 edges: supports approach_emergence_first ('gate only selects behaviors the base already produces'), concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal, concept_asg_si_independently_arrives_at_the_plan (5th arrival), concept_runtime_governance_organizes_around_a_portable_action_certificate, concept_capability_is_a_model_harness_config_property (clean confound-controlled measurement), concept_inference_time_scaling_of_verification (the five signal mechanisms), concept_self_improvement_evaluation_is_noisy_and_task_order_dependent (self-applied caution); extends concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution (PACE gate in a full architecture). 249->250 nodes, 947->955 edges."
+    },
+    {
+      "date": "2026-09-14",
+      "change": "Autonomous run 215. Consolidation (no graph node/edge change). docs/self_improving_harness_plan.md Phase 3 gains 'The acceptor / certificate arc - from autonomous runs 203-214': the six-condition acceptance-gate spec (exogenous / anytime-valid / validity-checked / paired-live-trial-measured / epoch-versioned / certificate-bearing) with the SEAL / PACE / Who-Grades-the-Grader / ACES / RQGM / PCAA+CAVA citations and the project's status against each (met, or the one open item: a paired e-process in verify_loop_edit), plus SEA (arXiv:2607.00871) as the fifth independent arrival that instantiates all of it around a frozen base. Phase 4 gains a 'Library drift' paragraph (bounded active-cap + meta-skill prior + outcome-driven retirement). Header dated 'acceptor/certificate arc run 214'."
     }
   ],
   "nodes": [

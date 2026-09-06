@@ -1,0 +1,19 @@
+{
+  "run": 215,
+  "increment": "consolidation - fold the runs 203-214 acceptor/certificate arc into docs/self_improving_harness_plan.md (Phase 3 six-condition gate spec + SEA; Phase 4 library-drift paragraph)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-215.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

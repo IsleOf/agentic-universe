@@ -1,6 +1,6 @@
 # Forward Plan: Self-Improving Agentic OS
 
-**Date:** 2026-09-05 · last reconciled run 48 · plan-soundness update run 124 · **Target:** a self-improving agentic OS with a dynamically improving harness
+**Date:** 2026-09-05 · last reconciled run 48 · plan-soundness update run 124 · acceptor/certificate arc run 214 · **Target:** a self-improving agentic OS with a dynamically improving harness
 **Graph:** 61 nodes / 115 edges at authoring — current state in `docs/graph_state_2026-09.md` · **Supersedes as active plan:** `docs/emergence_first_posture.md` (posture unchanged, now has a build target)
 
 > **Independent systems that match this plan (found runs 109, 118, 119).** Three published frameworks now
@@ -160,11 +160,24 @@ Trajectory-only optimisation (RHO-style, `pattern_trajectory_only_harness_optimi
 
 **The acceptance criteria are constraints that cross a handoff** (added run 41). The verifier's verdict, the PROCTOR canary results, the recoverability check — all of these travel from the verifier to whatever promotes the edit, and `emergent_constraint_weakening_at_handoffs` says a prose verdict weakens in transit (100% blocker deactivation under standard compression). So the verdict is carried as `pattern_four_field_constraint`: **prerequisite** (which held-out set, which model families), **authority** (the frozen holdout, not the proposer), **fallback** (roll back on failure — and the rollback machinery is purpose-built, per EvoUndo), **execution consequence** (the edit is reverted and the proposal logged as rejected). A verdict that arrives as "looked mostly fine" has already failed.
 
+**The acceptor / certificate arc — from autonomous runs 203–214 (recency-weighted mid-2026 literature).** Six papers converge on a spec for the acceptance gate, and a seventh (`concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate`, SEA, arXiv:2607.00871) instantiates the whole thing around a frozen base — the fifth independent arrival at this plan. The gate must be:
+
+- **exogenous** — not authored or inspectable by the agent (`concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal`, SEAL arXiv:2607.24300 + Falsifiable Release Gates arXiv:2607.13070). *Met:* `holdout_tasks.py` is frozen and not proposer-readable.
+- **anytime-valid** — a sequential test with a bounded false-commit probability, not a threshold on a noisy point estimate (`concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution`, PACE arXiv:2606.08106: "keep it if the score went up" applied repeatedly is self-p-hacking — greedy commits 30–42% false / 72–100% with no real gain on small models). **Open** — the one adoptable code change: a paired e-process in `verify_loop_edit` (candidate vs incumbent on identical held-out instances, commit on an accumulated e-value).
+- **validity-checked** — the metric checked against an anchor the loop cannot edit, because task score proves only sufficiency, not validity (`concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score`, Who Grades the Grader arXiv:2607.12790: remove the anchor guards and the metric collapses to always-pass and *still trains skills just as well*). *Met:* hand-written checks anchored to verified findings.
+- **paired-live-trial measured** — Skill Lift from with/without trials under one model/sandbox/scorer; scan-gates and behaviour-gates are near-orthogonal (`concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans`, ACES arXiv:2608.20614, Spearman ρ=0.14 — empirical proof `exec_guard` and `holdout_tasks` are complementary, not redundant).
+- **epoch-versioned** — revised only at boundaries, with per-epoch guarantees (`concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries`, RQGM arXiv:2606.26294). `holdout_tasks.py` is epoch *N*; a deliberate human edit opens epoch *N+1*; regression claims compare only within an epoch.
+- **certificate-bearing** — each accepted edit carries an auditable certificate (a portable action envelope, approval binding, replay-ready proof) against a fixed error budget (`concept_runtime_governance_organizes_around_a_portable_action_certificate` / `concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes`, PCAA arXiv:2606.04104 + CAVA arXiv:2607.13716). *Adoptable:* assumption capture as an explicit bound checkpoint; enforceability classes for the `authority` field.
+
+And the retention side (`concept_unmanaged_skill_libraries_silently_drift`, Library Drift arXiv:2605.19576): outcome-driven retirement + a **bounded active-cap** + a meta-skill authoring prior; premature retirement (−0.019) is worse than none (+0.002), so the `experience_bank` grace window should be generous. See `docs/phase3_holdout_set.md` for the full table.
+
 ### Phase 4 — Skill induction
 
 Repeated wins crystallise into named skills. This is where a harness *actually* improves — not by better prompts but by growing a library of procedures.
 
 **The tension, recorded as a `challenges` edge:** crystallising an emergent role into a named skill ends the emergence that produced it. Later runs select the skill instead of rediscovering the role. **Distillation and discovery consume each other.** Run a fraction of tasks with the skill library withheld, permanently, or the system stops finding anything new.
+
+**Library drift (added run 208, `concept_unmanaged_skill_libraries_silently_drift`, arXiv:2605.19576).** Unbounded skill accumulation without outcome-driven lifecycle management silently degrades retrieval and injects false positives (LLM-authored skills +0.0pp vs human-curated +16.2pp on SkillsBench). The induction skeleton checks structure; it needs, in addition: a **bounded active-cap** (a hard limit on live skills, not just utility ranking), a **meta-skill authoring prior**, and **outcome-driven** (not age-driven) retirement — and a positive Skill-Lift paired trial before promotion (ACES). The `experience_bank` retention API (run 175) is the start; the active-cap is the gap.
 
 ### Phase 5 — Execution-layer enforcement
 
