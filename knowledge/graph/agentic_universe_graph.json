@@ -436,6 +436,10 @@
     {
       "date": "2026-10-05",
       "change": "Autonomous run 119. DBLP. concept_asg_si_independently_arrives_at_the_plan (ASG-SI, arXiv:2512.23760, 2025): self-improvement as iterative compilation into an auditable skill graph; each improvement extracted from trajectories, normalised into a skill with an explicit interface, promoted only after verifier-backed replay + contract checks; rewards decomposed into reconstructible components from replayable evidence (independent audit); experience synthesis + continual memory control; complete threat model + runnable reference implementation. Nearly the project's entire plan, published - with code to compare tools/ against. The one difference: ASG-SI is RL-based, the project is emergence-first. +7 edges."
+    },
+    {
+      "date": "2026-10-05",
+      "change": "Autonomous run 120. DBLP. concept_multi_round_interaction_compresses_semantic_space (Emergent Convergence in Multi-Agent LLM Annotation, arXiv:2512.00047): 7500 multi-round discussions / 125k utterances - the intrinsic dimensionality of output embeddings DECLINES over rounds (semantic compression); groups converge lexically + semantically, form asymmetric influence patterns, negotiate without role prompting. A geometric, measured form of the diversity keystone's failure mode - interaction itself compresses variety. Black-box interaction analysis positioned as a scalable complement to activation probes. +6 edges."
     }
   ],
   "nodes": [
@@ -5579,6 +5583,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-05-1200.md"
+      ]
+    },
+    {
+      "id": "concept_multi_round_interaction_compresses_semantic_space",
+      "label": "Multi-round LLM group interaction compresses the semantic space — intrinsic dimensionality of outputs declines over rounds",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:semantic_compression_over_rounds",
+      "confidence": 0.6,
+      "description": "Emergent Convergence in Multi-Agent LLM Annotation (arXiv:2512.00047, VERIFIED via arXiv abstract read run 120; resolved via DBLP). 7,500 multi-agent multi-round discussions on an inductive coding task, 125,000+ utterances with interactional histories. Analysing the geometry of output embeddings: INTRINSIC DIMENSIONALITY DECLINES OVER ROUNDS - i.e. multi-round interaction compresses the semantic space the group operates in. LLM groups also converge lexically and semantically, develop ASYMMETRIC INFLUENCE PATTERNS, and show negotiation-like behaviour despite no explicit role prompting. For this project: a geometric, measured form of the diversity keystone's failure mode (principle_diversity_maintenance) - interaction itself compresses variety, not just shared priors or shared evidence; complements concept_epistemic_sybil_collapse (correlated outputs) and emergent_pluralistic_ignorance (convergence). The asymmetric-influence result is emergent hub formation (emergent_self_organizing_roles / concept_topology_shapes_error_propagation). And the paper positions black-box interaction analysis as 'a scalable complement to internal probe-based interpretability' - independent endorsement of the Phase 0 trace-substrate + Five-W approach vs the activation probe.",
+      "tags": [
+        "semantic-compression",
+        "intrinsic-dimensionality-declines",
+        "multi-round-convergence",
+        "asymmetric-influence",
+        "emergent-negotiation",
+        "black-box-interaction-analysis",
+        "125k-utterances"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-05-1800.md",
+        "arXiv:2512.00047 (Emergent Convergence in Multi-Agent LLM Annotation) - VERIFIED, abstract read; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-05-1800.md"
       ]
     }
   ],
@@ -12841,6 +12872,71 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "self_improving_harness",
       "confidence": 0.7
+    },
+    {
+      "id": "edge_semcompress_challenges_diversity_maintenance",
+      "source": "concept_multi_round_interaction_compresses_semantic_space",
+      "target": "principle_diversity_maintenance",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.55,
+      "description": "A geometric measure: intrinsic dimensionality of group outputs declines over rounds - interaction itself compresses variety, an additional force beyond shared priors and shared evidence."
+    },
+    {
+      "id": "edge_semcompress_refines_sybil",
+      "source": "concept_multi_round_interaction_compresses_semantic_space",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "The dynamic (over-rounds) version of the static correlated-output collapse."
+    },
+    {
+      "id": "edge_semcompress_refines_pluralistic_ignorance",
+      "source": "concept_multi_round_interaction_compresses_semantic_space",
+      "target": "emergent_pluralistic_ignorance",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Lexical + semantic convergence over rounds is the visible-conformity dynamic, measured geometrically."
+    },
+    {
+      "id": "edge_semcompress_supports_self_organizing_roles",
+      "source": "concept_multi_round_interaction_compresses_semantic_space",
+      "target": "emergent_self_organizing_roles",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "'Asymmetric influence patterns despite no explicit role prompting' - emergent hub formation."
+    },
+    {
+      "id": "edge_semcompress_supports_five_w",
+      "source": "concept_multi_round_interaction_compresses_semantic_space",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Black-box interaction analysis as a scalable complement to probe-based interpretability' - independent endorsement of the Five-W / trace-substrate approach vs the activation probe."
+    },
+    {
+      "id": "edge_semcompress_instantiates_emergence",
+      "source": "concept_multi_round_interaction_compresses_semantic_space",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55
     }
   ]
 }
