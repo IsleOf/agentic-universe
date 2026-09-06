@@ -600,6 +600,10 @@
     {
       "date": "2026-10-16",
       "change": "Autonomous run 160. Consolidation. nourishing_harness_design.md section 3.4 gains a 'Consensus / voting protocol rules' bullet (from run-159's arXiv:2509.23537 ablations): (a) authorship hidden from voters - revealing it drives self-voting; (b) running vote tallies not shown to agents - visible in-progress votes amplify herding into premature consensus; votes revealed only after they close. Both cheap and specific; the same paper shows orchestration beats the strongest single model when the protocol is clean. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-16",
+      "change": "Autonomous run 161. DBLP. concept_cer_training_free_experience_replay_works (Contextual Experience Replay, arXiv:2506.06698, ACL 2025): a training-free dynamic memory buffer of environment dynamics + decision patterns, retrieved into context - +51% relative on WebArena over a GPT-4o baseline. Essentially the Phase 2 experience bank, published and working. Same family as ACE (context not weights), acting on the memory component. Inherits the memory-poisoning exposure. +5 edges."
     }
   ],
   "nodes": [
@@ -6226,6 +6230,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-16-0000.md"
+      ]
+    },
+    {
+      "id": "concept_cer_training_free_experience_replay_works",
+      "label": "Contextual Experience Replay: a training-free dynamic memory buffer of environment dynamics + decision patterns, retrieved into context - +51% relative on WebArena",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:training_free_experience_replay",
+      "confidence": 0.72,
+      "description": "Contextual Experience Replay / CER (arXiv:2506.06698, ACL 2025; VERIFIED via arXiv abstract read run 161, resolved via DBLP). A TRAINING-FREE framework for self-improvement of language agents in the context window: accumulate and synthesise past experiences into a DYNAMIC MEMORY BUFFER holding both ENVIRONMENT DYNAMICS and common DECISION-MAKING PATTERNS; agents retrieve relevant entries and augment themselves for new tasks. On WebArena, CER improves the GPT-4o agent baseline success rate by 51.0% relative (to 36.7%); on VisualWebArena, 31.9%. This is essentially artifact_phase2_experience_bank / pattern_experience_bank, published and working, with real benchmark gains: training-free, a dual-content buffer (environment dynamics + decision patterns, matching the experience bank's 'workflow patterns and step corrections, stored apart'), retrieve-and-augment. Same family as ACE (concept_ace_context_evolution_self_improvement) - context adaptation not weights - but acting on the MEMORY component rather than the system prompt. Caveat carried: CER's dynamic memory buffer IS the persistent-memory attack surface from concept_memory_poisoning_one_write_persists - an independent working instance of the design also inherits its exposure, and CER does not address poisoning.",
+      "tags": [
+        "contextual-experience-replay",
+        "training-free",
+        "dynamic-memory-buffer",
+        "environment-dynamics-plus-decision-patterns",
+        "webarena-+51pct-relative",
+        "retrieve-and-augment",
+        "acl-2025",
+        "experience-bank-published"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-16-1200.md",
+        "arXiv:2506.06698 (Contextual Experience Replay for Self-Improvement of Language Agents) - VERIFIED, abstract read run 161; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-16-1200.md"
       ]
     }
   ],
@@ -14620,6 +14652,61 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "A specific mechanism for the over-rounds compression: visible vote tallies accelerate convergence, sometimes before the group has actually explored."
+    },
+    {
+      "id": "edge_cer_supports_experience_bank_pattern",
+      "source": "concept_cer_training_free_experience_replay_works",
+      "target": "pattern_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "An independent published instance of the dual-layer experience bank: environment dynamics + decision patterns stored and retrieved, training-free, +51% relative on WebArena."
+    },
+    {
+      "id": "edge_cer_supports_phase2_artifact",
+      "source": "concept_cer_training_free_experience_replay_works",
+      "target": "artifact_phase2_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The Phase 2 build's design, working elsewhere with benchmark gains - retrieve-and-augment from a synthesised buffer, no weights."
+    },
+    {
+      "id": "edge_cer_instantiates_emergence_first",
+      "source": "concept_cer_training_free_experience_replay_works",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergence_first",
+      "confidence": 0.55,
+      "description": "Training-free self-improvement in the context window - the no-weight-training fork."
+    },
+    {
+      "id": "edge_cer_refines_ace",
+      "source": "concept_cer_training_free_experience_replay_works",
+      "target": "concept_ace_context_evolution_self_improvement",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Same context-not-weights family as ACE; CER acts on the memory/experience component, ACE on the system prompt - two halves of the same context-evolution loop."
+    },
+    {
+      "id": "edge_cer_challenged_by_memory_poisoning",
+      "source": "concept_memory_poisoning_one_write_persists",
+      "target": "concept_cer_training_free_experience_replay_works",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "CER's dynamic memory buffer is the persistent-memory attack surface: one poisoned write into the synthesised buffer persists and is retrieved into new tasks; CER does not address poisoning."
     }
   ]
 }
