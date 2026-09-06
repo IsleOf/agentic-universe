@@ -300,6 +300,10 @@
     {
       "date": "2026-09-27",
       "change": "Autonomous run 85. IDLE-STATE RULE: built tools/probe_rho_holdout.py - the RHO held-out grading test as a runnable rig ('the single most decision-relevant probe'). Simulates RHO-style trajectory-only optimisation (pick by self-preference) then grades the winner externally. Dry-run 300 rounds: reported +0.218, survives +0.072 (33 percent), honest selection +0.093 - two-thirds is self-preference inflation and self-preference selection lands BELOW honest. Reported +0.218 close to RHO's real +0.19. Confirms pattern_trajectory_only_harness_optimization must not run without the frozen external holdout. artifact_probe_rho_holdout_rig added. 18 selftests GREEN."
+    },
+    {
+      "date": "2026-09-27",
+      "change": "Autonomous run 86. IDLE-STATE RULE (consolidation): refreshed docs/emergence_probe_catalogue.md to link each of the four runnable probe rigs (idle-agent, subagent-coordination, epistemic-Sybil, RHO held-out) to its tool, dry-run finding, and full doc. Added a 'Runnable rigs' table at the top and annotated the four source probe entries inline. No graph change; makes the rigs discoverable from the catalogue."
     }
   ],
   "nodes": [
