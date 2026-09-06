@@ -1200,6 +1200,10 @@
     {
       "date": "2026-10-08",
       "change": "Autonomous run 313. Literature sweep (versioned-graph / agent-memory thread). Folded arXiv:2605.27825 (MRMMIA, May 2026, VERIFIED): membership inference attacks on chat-agent MEMORY - multi-recall-probe attack across black/gray/white-box, consistently beats baselines, first eval framework for membership leakage in agent memory (companion Interrogation Attack 2502.00306 for RAG). New node concept_agent_memory_leaks_membership_... + 3 edges: challenges pattern_experience_bank (write_gate screens writes, not recall) + concept_agent_memory_should_be_hybrid_... (more stores = more recall surface); extends concept_memory_poisoning_one_write_persists (a third attack class - exfiltration, not corruption). Currency: attack method, mechanism durable, numbers model-specific. 340 -> 341 nodes, 1356 -> 1359 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Autonomous run 314. Consistency touch (IDLE-STATE clause c; no node/edge change). docs/what_would_make_this_wrong.md section 1: folded the run-313 MRMMIA finding into the memory-poisoning paragraph as the THIRD attack class on the retrieve-heavy stance - poisoning corrupts, covert poisons evade the screen, membership inference exfiltrates; the write_gate is a write-side control and the v2 hybrid-memory design adds recall surface. 341 nodes / 1359 edges unchanged. Validator VALID."
     }
   ],
   "nodes": [
