@@ -864,6 +864,10 @@
     {
       "date": "2026-09-16",
       "change": "Autonomous run 225. Consolidation (IDLE-STATE RULE clause c - a consistency pass after seven straight literature folds). docs/harness_anatomy_self_audit.md: maps the project's tools/ to Harness Engineering's (arXiv:2609.00006) seven canonical subsystems and checks the four headline findings against the project - all four validate an existing choice (pure stdlib / deterministic experience_bank retrieval / SKILL.md loop / config loop_policy). Gaps surfaced: no explicit action/tool subsystem, no observability aggregation per run. Also checks the run-211 monograph's dependency chain (three links patched: search contamination run 166, format-repair run 194, category masking run 116; verification link hardened run 220; observability link open). tools/README.md selftest count 21->22 + probe_orchestration_value.py added to the probe table. 1 'grounds' edge from the harness-anatomy node to concept_bottleneck_is_the_model_harness_coupling. 257 nodes, 999->1000 edges."
+    },
+    {
+      "date": "2026-09-16",
+      "change": "Autonomous run 226. Build (closes the observability gap the run-225 self-audit surfaced). loop_metrics.status_line(local_summary, metrics) - a one-line per-run health glance: a light (healthy / watch / stop-and-look) chosen from plateau_watch OR this-run trace-invalid (stop), legibility-dip OR validate-failure (watch), else healthy; plus graph delta, verified/total citations, idle-streak (with a ! marker on plateau), trace_legibility, verified_citation_fraction. loop_session._write_summary stamps it into every run-<N>.json as 'status_line'; 'python tools/loop_metrics.py status' prints the latest. 3 new selftest checks (healthy light + run number + graph-delta string; plateau -> stop light + idle-streak marker; invalid trace -> stop light). BUILD SELFTEST GREEN (22 jobs). tools/README.md + docs/harness_anatomy_self_audit.md updated. 1 'informs' edge. 257 nodes, 1000->1001 edges."
     }
   ],
   "nodes": [
@@ -18285,6 +18289,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "docs/harness_anatomy_self_audit.md (run 225) maps the project's tools/ to the seven canonical subsystems and checks all four headline empirical findings (no framework / deterministic retrieval / SKILL.md leads MCP / prose->config) against the project - all four validate a choice already made. Two gaps surfaced: no explicit action/tool subsystem, and no observability aggregation (loop_metrics computes signals but nothing rolls them up per run)."
+    },
+    {
+      "id": "edge_observability_rollup_closes_dependency_chain_link",
+      "source": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The monograph's dependency chain names observability as a link that can invalidate downstream conclusions. Run 226 closes the project's open observability gap (found in the run-225 self-audit): loop_metrics.status_line renders plateau_watch / idle_run_streak / trace_legibility / verified_citation_fraction / this-run trace-validity + graph-delta into one health line (light circle / half circle / filled circle), stamped into every run-<N>.json by loop_session._write_summary and printable via 'python tools/loop_metrics.py status'. 3 new selftest checks."
     }
   ]
 }

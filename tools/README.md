@@ -69,7 +69,7 @@ Built runs 60–89; extended through run 180. Data flows left to right; each too
 | tool | subcommands | notes |
 | --- | --- | --- |
 | `improvement_loop.py` | `selftest` | propose → verify (fresh context, frozen holdout, PROCTOR canary) → grounded strict-decrease acceptance → promote/revert; `verify_loop_edit()` rejects: any task regression, a task-**category** regression (run 116), a verifier disagreement, and a **trace-legibility** regression (`legibility=(before,after)`, run 156) |
-| `loop_metrics.py` | `report`, `selftest` | metrics over the trace corpus; `idle_run_streak` / `plateau_watch` (run 130 — gate-passing-without-progress); `trace_legibility` (run 155 — monitorability tripwire); `propose_loop_edit()` |
+| `loop_metrics.py` | `report`, `status`, `selftest` | metrics over the trace corpus; `idle_run_streak` / `plateau_watch` (run 130 — gate-passing-without-progress); `trace_legibility` (run 155 — monitorability tripwire); `status_line()` (run 226 — one-line per-run health glance, `OK / WATCH / STOP`); `propose_loop_edit()` |
 | `loop_proposer.py` | `context`, `propose`, `prompt`, `selftest` | full-context proposer, 4 dimensions; `model_propose(call_model, ctx)` is the written model-proposer adapter (run 140); `PROPOSER_META` names the recursive-improvement seam (run 169) |
 | `holdout_tasks.py` | `list`, `baseline`, `score <id> <f>`, `selftest` | 17 frozen research/design questions with computable checks; baseline 17/17 = 1.00; `by_category` (literature/design); `SEARCH_SENSITIVE` — literature tasks must be scored search-off (run 166) |
 | `holdout_verifier2.py` | `baseline`, `selftest` | second independent scorer (key-fact overlap); disagreement with `holdout_tasks` = reject |

@@ -1,0 +1,23 @@
+{
+  "run": 226,
+  "increment": "build - loop_metrics.status_line: a one-line per-run health glance stamped into every run summary; closes the observability dependency-chain link from the run-225 self-audit; 0 nodes / 1 edge",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-226.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 226 OK · VALID · graph +0n/+1e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.79"
+}

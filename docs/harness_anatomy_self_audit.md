@@ -47,9 +47,10 @@ is the counterweight, and `docs/what_would_make_this_wrong.md` §4 tracks divers
 construction / execution / retrieval / state / verification / observability can invalidate downstream
 conclusions. The project's held-out set has patched three of these already — search contamination (run
 166), format-repair scoring (run 194), category masking (run 116) — and the paired e-process (run 220)
-addresses the multiple-testing weakness in the verification link. The unpatched link is **observability**:
-the trace substrate records events but there is no leading-indicator dashboard (`loop_metrics` computes
-`plateau_watch` / `idle_run_streak` / `trace_legibility` but nothing aggregates them per run).
+addresses the multiple-testing weakness in the verification link. The **observability** link was the one unpatched dependency — **closed run 226**: `loop_metrics.status_line`
+renders the key signals into a one-line health glance (`OK` / `WATCH` / `STOP`), `loop_session._write_summary`
+stamps it into every `run-<N>.json` as `status_line`, and `python tools/loop_metrics.py status` prints the
+latest. Example: `run 226 OK · VALID · graph +0n/+1e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.79`.
 
 ## Verdict
 

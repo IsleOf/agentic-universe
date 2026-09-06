@@ -145,6 +145,13 @@ class LoopSession:
                            if path and ROOT in path.parents else str(path) if path else None),
             "note": "raw trace gitignored (rule 9); this summary is committed",
         }
+        # per-run observability roll-up (run 226; docs/harness_anatomy_self_audit.md
+        # named observability the one un-patched dependency-chain link).
+        try:
+            from loop_metrics import status_line
+            summary["status_line"] = status_line(summary)
+        except Exception:
+            summary["status_line"] = None
         (RUN_SUMMARY_DIR / f"run-{self.run_no}.json").write_text(
             json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         return summary

@@ -255,6 +255,55 @@ def propose_loop_edit(metrics):
     return proposals or None
 
 
+# --- per-run observability roll-up (run 226) --------------------------------
+#
+# The harness-anatomy self-audit (run 225, docs/harness_anatomy_self_audit.md)
+# found the project's one un-patched dependency-chain link is observability:
+# `compute()` produces every signal but nothing renders a per-run glance. This
+# does — `loop_session._write_summary` stamps it into each run-<N>.json.
+
+def status_line(local_summary=None, metrics=None):
+    """A one-line health glance for a loop run. `local_summary` is this run's
+    `_write_summary` dict (graph_delta, trace_valid, citations); `metrics` is the
+    cross-run roll-up (defaults to `compute()`). Returns a string.
+
+    Light (ASCII, portable): OK healthy · WATCH (legibility dipping, or a validate
+    failed) · STOP (plateau, or this run's trace is invalid).
+    """
+    m = metrics if metrics is not None else compute()
+    ls = local_summary or {}
+
+    plateau = bool(m.get("plateau_watch"))
+    leg = m.get("trace_legibility")
+    leg_low = leg is not None and leg < THRESHOLDS["trace_legibility"]
+    vpr = m.get("validation_pass_rate")
+    vpr_low = vpr is not None and vpr < THRESHOLDS["validation_pass_rate"]
+    trace_bad = ls.get("trace_valid") is False
+
+    if plateau or trace_bad:
+        light = "STOP"
+    elif leg_low or vpr_low:
+        light = "WATCH"
+    else:
+        light = "OK"
+
+    gd = ls.get("graph_delta")
+    gd_str = (f"graph +{gd['nodes']}n/+{gd['edges']}e" if gd else "graph +0")
+    cites = ls.get("citations") or []
+    nv = sum(1 for c in cites if c.get("verified"))
+    vf = m.get("verified_citation_fraction")
+    parts = [
+        f"run {ls.get('run', '?')} {light}",
+        "VALID" if ls.get("trace_valid", True) else "TRACE-INVALID",
+        gd_str,
+        f"cites {nv}v/{len(cites)}",
+        f"idle-streak {m.get('idle_run_streak', 0)}" + ("!" if plateau else ""),
+        f"legible {leg:.2f}" if leg is not None else "legible n/a",
+        f"verified-frac {vf:.2f}" if vf is not None else "verified-frac n/a",
+    ]
+    return " · ".join(parts)
+
+
 def _selftest():
     import io
     import shutil
@@ -336,6 +385,25 @@ def _selftest():
             "reused roots surfaced": isinstance(m["reused_roots"], list),
             "propose_loop_edit returns a list or None":
                 propose_loop_edit(m) is None or isinstance(propose_loop_edit(m), list),
+            "status_line: healthy run shows a filled light and its run number":
+                status_line({"run": 42, "trace_valid": True,
+                             "graph_delta": {"nodes": 1, "edges": 3},
+                             "citations": [{"verified": True}, {"verified": False}]},
+                            metrics={**m, "plateau_watch": False, "trace_legibility": 0.99,
+                                     "validation_pass_rate": 1.0}).startswith("run 42 OK")
+                and "graph +1n/+3e" in status_line({"run": 42, "trace_valid": True,
+                    "graph_delta": {"nodes": 1, "edges": 3}, "citations": []},
+                    metrics={**m, "plateau_watch": False}),
+            "status_line: a plateau shows the stop-and-look light and an idle-streak marker":
+                status_line({"run": 9, "trace_valid": True, "graph_delta": None, "citations": []},
+                            metrics={**m, "plateau_watch": True, "idle_run_streak": 5}
+                            ).startswith("run 9 STOP")
+                and "idle-streak 5!" in status_line({"run": 9, "trace_valid": True,
+                    "graph_delta": None, "citations": []},
+                    metrics={**m, "plateau_watch": True, "idle_run_streak": 5}),
+            "status_line: an invalid trace shows the stop-and-look light":
+                status_line({"run": 9, "trace_valid": False, "graph_delta": None, "citations": []},
+                            metrics={**m, "plateau_watch": False}).startswith("run 9 STOP"),
         }
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
@@ -355,6 +423,7 @@ def _cli(argv=None):
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("selftest")
     sub.add_parser("report")
+    sub.add_parser("status")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
@@ -363,6 +432,16 @@ def _cli(argv=None):
         print(json.dumps(m, indent=2))
         props = propose_loop_edit(m)
         print("\nproposals:", json.dumps(props, indent=2) if props else "none")
+        return 0
+    if args.cmd == "status":
+        # the latest committed run summary, if any, for this run's local fields
+        latest = None
+        if Path(LIVE_RUNS).exists():
+            runs = sorted(Path(LIVE_RUNS).glob("run-*.json"),
+                          key=lambda q: int(q.stem.split("-")[1]))
+            if runs:
+                latest = json.loads(runs[-1].read_text(encoding="utf-8"))
+        print(status_line(latest))
         return 0
     return 2
 
