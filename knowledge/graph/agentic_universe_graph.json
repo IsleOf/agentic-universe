@@ -676,6 +676,10 @@
     {
       "date": "2026-10-21",
       "change": "Autonomous run 178. Consolidation. Folded run-177 (Baronchelli collective bias) into what_would_make_this_wrong.md section 4: a FIFTH diversity-keystone erosion channel, and the worst-shaped one - collective bias emerges even when no agent is individually biased, so individual-level diversity maintenance (heterogeneous models, decorrelated prompts, withheld fraction) cannot touch it; no design mechanism exists short of not letting the population form standing conventions. Updated the run-172 severity ranking's section-4 line: one channel may be structurally unresolvable without dropping the society surface. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-21",
+      "change": "Autonomous run 179. Graph hygiene. Removed 2 redundant edges (edge_self_org_roles_deprecates_natural_teaming, edge_synergy_deprecates_natural_teaming - same source/target/type=refines as the edge_*_refines_natural_teaming pair). Connected pattern_evaluation_driven_harness_optimization (inconclusive - openJiuwen headline numbers did not survive scrutiny) to ACE + Self-Harness with supports edges: the GENERAL pattern is now independently attested even though the specific product instance's gains were contested; node stays inconclusive. Net -0 edges (2 dropped, 2 added)."
     }
   ],
   "nodes": [
@@ -9883,28 +9887,6 @@
       "description": "Same critique as against the paradigm ladder: loop and graph are orthogonal, not a sequence. The node's framing of loops as the transient/lesser half is what is challenged, not the two concepts."
     },
     {
-      "id": "edge_self_org_roles_deprecates_natural_teaming",
-      "source": "emergent_self_organizing_roles",
-      "target": "emergent_natural_teaming",
-      "type": "refines",
-      "status": "to_test",
-      "verification_state": "needs_empirical_validation",
-      "approach_family": "emergent_behaviors",
-      "confidence": 0.6,
-      "description": "One of the three nodes that superseded natural_teaming: the role-differentiation half, with a mechanism."
-    },
-    {
-      "id": "edge_synergy_deprecates_natural_teaming",
-      "source": "emergent_higher_order_synergy",
-      "target": "emergent_natural_teaming",
-      "type": "refines",
-      "status": "to_test",
-      "verification_state": "needs_empirical_validation",
-      "approach_family": "emergent_behaviors",
-      "confidence": 0.55,
-      "description": "The cooperation/complementarity half, made measurable."
-    },
-    {
       "id": "edge_peer_recognition_instantiates_emergence",
       "source": "emergent_peer_recognition_survives_anonymization",
       "target": "approach_emergence_first",
@@ -15305,6 +15287,28 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.45,
       "description": "Norms are engineerable (committed minority as anchor) - Ostrom-style collective-choice mechanisms are how a population sets its own conventions deliberately rather than drifting or being captured."
+    },
+    {
+      "id": "edge_ace_supports_eval_driven_harness_opt",
+      "source": "concept_ace_context_evolution_self_improvement",
+      "target": "pattern_evaluation_driven_harness_optimization",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The general pattern - a deployed system optimises its own harness from evaluation signal, no weight training - is now independently attested by ACE, even though the openJiuwen headline numbers this node was built on did not survive apples-to-apples scrutiny."
+    },
+    {
+      "id": "edge_selfharness_supports_eval_driven_harness_opt",
+      "source": "concept_self_harness_validates_the_three_loop",
+      "target": "pattern_evaluation_driven_harness_optimization",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Self-Harness: 9/9 model-benchmark combos improve held-out pass rate via evaluation-driven harness edits - the pattern works even where the openJiuwen instance's gains were contested."
     }
   ]
 }
