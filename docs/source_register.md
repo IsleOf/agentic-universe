@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 268 nodes, 1068 edges · **Date:** 2026-09-05
+**Graph at generation:** 269 nodes, 1073 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -354,6 +354,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_rho_holdout.py — `artifact_probe_rho_holdout_rig`
 - tools/probe_subagent_coordination.py — `artifact_probe_subagent_coordination_rig`
 - tools/skill_induction.py — `artifact_phase4_skill_induction`
+- tools/task_ledger.py (run 244) — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - tools/topology_recover.py — `artifact_phase0_trace_substrate`
 - tools/trace_substrate.py — `artifact_phase0_trace_substrate`
 - unifies pattern_verifier_gated_promotion + concept_agent_shaped_topology_is_agent_corruptible + emergent_authorization_laundering — `principle_structural_edits_gated_outside_the_agents`
@@ -419,6 +420,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-20-0600.md` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`
 - `docs/auto_sweep_2026-09-20-1200.md` — `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`, `concept_self_concept_as_behavioral_lever`
 - `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness`, `pattern_disposable_branch_exploration`
+- `docs/auto_sweep_2026-09-21-0600.md` — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
@@ -479,6 +481,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/phase3_proposer.md` — `artifact_phase3_proposer_context`
 - `docs/phase4_skill_induction.md` — `artifact_phase4_skill_induction`
 - `docs/phase5_exec_guard.md` — `artifact_phase5_exec_guard`
+- `docs/practicing_what_we_preach.md section 4` — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - `docs/pretrained_grader_gaming.md` — `concept_gate_faces_a_pretrained_grader_gamer`
 - `docs/probe_activation_generalisation.md` — `artifact_probe_activation_generalisation_rig`
 - `docs/probe_composed_design.md` — `artifact_probe_composed_design_rig`

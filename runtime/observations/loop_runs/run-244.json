@@ -1,0 +1,20 @@
+{
+  "run": 244,
+  "increment": "build - tools/task_ledger.py + docs/task_ledger.md: a deterministic task ledger answering the owner's 'tasks get dropped' pain (next_ready deterministic pick + sweep_stale dropped-task recovery + atomic write/audit); 1 node, 5 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-244.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 244 OK · VALID · graph +0 · cites 0v/0 · idle-streak 2 · legible 1.00 · verified-frac 0.80"
+}

@@ -936,6 +936,10 @@
     {
       "date": "2026-09-21",
       "change": "Autonomous run 243. Build (recommendation #1 from docs/practicing_what_we_preach.md). tools/graph_diff.py: a mechanical structural diff of the knowledge graph between two git refs (or two files) - reports nodes/edges added / removed / relabelled / retyped, verification_state / confidence / status / approach_family changes, edge endpoint changes, and the new evolution_log entries. 'python tools/graph_diff.py HEAD~5 HEAD' or '... HEAD~1' (vs worktree). Answers the owner's traceability question: the graph already records THAT it changed (evolution_log / derived_from / harness version chains / run records); this is the mechanical WHAT. 10 selftest checks; added to selftest_all.py JOBS (now 23) and tools/README.md. The tool + JOBS entry landed in the run-242 push (40e762c); this run records it as an increment and confirms the full selftest set is GREEN with it. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-21",
+      "change": "Autonomous run 244. Build (recommendation #3 from docs/practicing_what_we_preach.md, answering the owner's 'tasks get dropped' pain). tools/task_ledger.py + docs/task_ledger.md: a deterministic task ledger the orchestrator reads/writes instead of the model holding task state in context (CordisBench / ASPIRE). One row per task, pending->active->done (+ blocked/failed/abandoned). Three anti-dropped-task mechanisms: next_ready() deterministic pick; sweep_stale() returns claimed-but-abandoned tasks to pending (PILOT re-dispatch); atomic write + .audit log. Pure stdlib, reference implementation, NOT wired into the loop. 12 selftest checks; added to selftest_all.py JOBS (24) and tools/README.md. New node pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth + 5 edges (implements pattern_execution_layer_enforcement + the CordisBench node; supports the PILOT live-supervisor node, the jobs-landscape node, artifact_phase2_experience_bank). 268->269 nodes, 1068->1073 edges."
     }
   ],
   "nodes": [
@@ -7944,6 +7948,36 @@
       "evidence_links": [
         "docs/jobs/README.md",
         "docs/auto_sweep_2026-09-20-1800.md"
+      ]
+    },
+    {
+      "id": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "label": "Don't let the model hold task state in its context: a deterministic task ledger the orchestrator reads/writes; next_ready() is a deterministic pick, sweep_stale() returns claimed-but-abandoned tasks to pending",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:deterministic_task_ledger",
+      "confidence": 0.68,
+      "description": "Built run 244 (tools/task_ledger.py + docs/task_ledger.md), answering the owner's 'tasks get dropped' pain in CLI agent orchestration. Two folded findings say do not let the model hold task state in its context: concept_component_lifecycle_reasoning_degrades_with_size (CordisBench - LLM state-reasoning degrades with system size, a finite reference semantics matches execution exactly) and concept_aspire_... (continued open-ended search erases earlier gains). So: the orchestrator reads and writes a file ledger; the LLM proposes tasks and reports outcomes; the file decides what is ready and what has been dropped. One row per task, statuses pending->active->done (+ blocked / failed / abandoned). Three anti-dropped-task mechanisms: (1) next_ready() is DETERMINISTIC - the oldest pending task whose deps are all done - so the orchestrator reads its next action rather than reasoning about it; (2) sweep_stale(max_active_secs) returns any task claimed but not finished within a timeout back to pending (a worker died / lost context / hit budget), the PILOT supervisor re-dispatch pattern; (3) atomic write via os.replace + an append-only .audit log per mutation. Reference implementation, pure stdlib, NOT wired into the loop - it is the pattern for the owner's orchestrations (poly-bot etc.): copy the one file, replace 'ask the LLM what to do next' with next_ready(), call sweep_stale() each tick, keep the ledger in a durable path. 12 selftest checks.",
+      "tags": [
+        "task-ledger",
+        "deterministic-next-action",
+        "sweep-stale",
+        "dropped-task-recovery",
+        "state-not-in-context",
+        "execution-layer-enforcement",
+        "reference-implementation",
+        "owner-pain-point"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-21-0600.md",
+        "tools/task_ledger.py (run 244)",
+        "docs/practicing_what_we_preach.md section 4"
+      ],
+      "evidence_links": [
+        "docs/task_ledger.md",
+        "docs/auto_sweep_2026-09-21-0600.md"
       ]
     }
   ],
@@ -19429,6 +19463,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Adds the demand-side view to 'what the shipping harnesses converged on': the same five patterns (dedicated harness teams, forward-deployed, eval-as-CI, self-improving-default, tiered orchestration) are what companies are HIRING for, worldwide, at $30K-$485K."
+    },
+    {
+      "id": "edge_task_ledger_implements_exec_layer_enforcement",
+      "source": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "target": "pattern_execution_layer_enforcement",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "Task tracking moved out of the model's context into a file the orchestrator reads/writes - the same move as exec_guard being a hook, not a prompt: the invariant (what is ready, what was dropped) lives in the execution path, not in reasoning that can be skipped or lost."
+    },
+    {
+      "id": "edge_task_ledger_supported_by_cordisbench",
+      "source": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "target": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "CordisBench: a finite reference semantics beats LLM state-reasoning that degrades with system size. next_ready() and dep resolution are that deterministic checker for task state."
+    },
+    {
+      "id": "edge_task_ledger_supports_live_supervisor",
+      "source": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "target": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "sweep_stale() is the PILOT supervisor's re-dispatch: a worker that stalls or is aborted does not lose its task - the ledger returns it to pending for the next worker or the supervisor."
+    },
+    {
+      "id": "edge_task_ledger_grounds_practicing_what_we_preach",
+      "source": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "target": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "The jobs analysis names tiered orchestration (routers/specialists/utilities) with visible human-in-the-loop handoffs as the converging standard; a shared task ledger is the substrate that makes those handoffs auditable and recoverable."
+    },
+    {
+      "id": "edge_task_ledger_relates_experience_bank",
+      "source": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "target": "artifact_phase2_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "The ledger's .audit log and per-task notes are task-adjacent experience captured automatically at the platform level (concept_human_knowledge_capture_must_be_platform_level...) - a feed the experience bank could condense from."
     }
   ]
 }
