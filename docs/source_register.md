@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 253 nodes, 973 edges · **Date:** 2026-09-05
+**Graph at generation:** 253 nodes, 974 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -326,6 +326,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/holdout_tasks.py — `artifact_phase3_holdout_set`
 - tools/holdout_verifier2.py — `artifact_phase3_heterogeneous_verifier`
 - tools/improvement_loop.py — `artifact_phase3_improvement_loop`
+- tools/improvement_loop.py paired_eprocess (run 220) - advisory anytime-valid paired commit gate — `concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution`
 - tools/loop_adapter.py — `artifact_loop_adapter_real_trace`
 - tools/loop_metrics.py — `artifact_loop_metrics_phase3_real`
 - tools/loop_proposer.py — `artifact_phase3_proposer_context`

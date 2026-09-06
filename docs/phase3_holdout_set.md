@@ -128,6 +128,18 @@ unmatched edit falls back to all tasks (conservative). `verify_loop_edit(edit=�
 puts the list in `evidence["behaviour_relevant_tasks"]` as an advisory — a future
 re-run can spend its budget on that subset instead of all 17.
 
+**Anytime-valid paired commit signal (added run 220).** `concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution`
+(PACE, arXiv:2606.08106): a plain "risk strictly decreased" threshold, applied
+against the same held-out set across 200+ runs, is uncontrolled adaptive
+multiple testing. `improvement_loop.paired_eprocess(paired_deltas, lam, alpha)`
+is a testing-by-betting e-process over the per-task deltas (`e_n = ∏(1 + λ·sign(Δ_i))`,
+commit when `e_n ≥ 1/α`); by Ville's inequality it holds its false-commit
+probability at `α` **even under optional stopping**. `verify_loop_edit` puts it
+in `evidence["paired_eprocess"]` as an **advisory** — the held-out re-run is
+single-shot (one delta per task, n ≤ 17), so it becomes load-bearing only once
+a re-run yields repeated measurements. Selftested (an all-wins stream commits; a
+50/50 noise stream and a single lucky win do not).
+
 **Content-not-format scoring (added run 194).** `concept_self_correction_is_mostly_format_repair_not_reasoning`
 (arXiv:2608.04355): most measured self-correction gain is format repair
 (parseability), not reasoning. `_normalize()` strips markdown emphasis / fences /

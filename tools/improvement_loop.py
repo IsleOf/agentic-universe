@@ -260,6 +260,53 @@ def tampering_flags(edit):
     return flags
 
 
+# --- anytime-valid paired commit gate (PACE, arXiv:2606.08106, run 220) ------
+
+def paired_eprocess(paired_deltas, *, lam=0.5, alpha=0.05):
+    """A testing-by-betting e-process for the paired null "the candidate is no
+    better than the incumbent on identical held-out instances".
+
+    `paired_deltas` — an iterable of per-instance (candidate_score - incumbent_score)
+    values on the SAME instances. Only the sign is used (win = +1, loss = -1,
+    tie = 0), so the test is distribution-free and needs no score calibration.
+
+    Bet e_n = prod_i (1 + lam * X_i) with X_i in {-1, 0, +1} and lam in [0, 1).
+    Under H0 (E[X_i] <= 0) each factor has mean <= 1, so e_n is a non-negative
+    supermartingale with e_0 = 1; by Ville's inequality P(sup_n e_n >= 1/alpha)
+    <= alpha, EVEN UNDER OPTIONAL STOPPING. So `committed` — e_value >= 1/alpha —
+    carries a per-decision false-commit probability of at most `alpha`, however
+    many times the loop peeks.
+
+    PACE's point (`concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution`):
+    the ubiquitous "commit iff the aggregate score went up", applied hundreds of
+    times against the same noisy held-out estimate, is uncontrolled adaptive
+    multiple testing. This gate is the fix. It is ADVISORY in `verify_loop_edit`
+    today because the loop's held-out re-run is single-shot (one delta per task,
+    n <= 17); it becomes load-bearing once a re-run yields repeated measurements.
+    """
+    if not 0.0 <= lam < 1.0:
+        raise ValueError("lam must be in [0, 1)")
+    if not 0.0 < alpha <= 1.0:
+        raise ValueError("alpha must be in (0, 1]")
+    e = 1.0
+    n = wins = losses = ties = 0
+    for d in paired_deltas:
+        x = 1 if d > 0 else (-1 if d < 0 else 0)
+        e *= (1.0 + lam * x)
+        n += 1
+        wins += x == 1
+        losses += x == -1
+        ties += x == 0
+    threshold = 1.0 / alpha
+    return {
+        "e_value": round(e, 4),
+        "n": n, "wins": wins, "losses": losses, "ties": ties,
+        "threshold": round(threshold, 4),
+        "committed": e >= threshold,
+        "lam": lam, "alpha": alpha,
+    }
+
+
 def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=None,
                      legibility=None, edit=None):
     """Phase 3 acceptance test for a loop-HARNESS edit, using the frozen held-out
@@ -338,6 +385,12 @@ def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=N
         except Exception:
             behaviour_tasks = None
 
+    # anytime-valid paired commit signal (PACE, arXiv:2606.08106, run 220).
+    # ADVISORY: the held-out re-run is single-shot, so this is one delta per task
+    # (n <= 17). It becomes load-bearing once a re-run yields repeated measures.
+    ep = paired_eprocess(candidate_scores.get(t, 0) - baseline_scores[t]
+                         for t in baseline_scores)
+
     accept = bool(strict_decrease and not regressed and not contested
                   and not cat_regressed and not legibility_regressed and not tamper)
     return {
@@ -356,8 +409,17 @@ def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=N
                      "legibility_regressed": legibility_regressed,
                      "legibility": list(legibility) if legibility is not None else None,
                      "tampering_flags": [list(f) for f in tamper],
-                     "behaviour_relevant_tasks": behaviour_tasks},
+                     "behaviour_relevant_tasks": behaviour_tasks,
+                     "paired_eprocess": ep},
     }
+
+
+def _raises(fn):
+    try:
+        fn()
+        return False
+    except Exception:
+        return True
 
 
 def _selftest():
@@ -453,6 +515,19 @@ def _selftest():
                                  legibility=(0.80, 0.95))["accept"] is True
                 and verify_loop_edit({"a": 1.0, "b": 0.0}, {"a": 1.0, "b": 1.0},
                                      legibility=(0.95, 0.94))["accept"] is True,
+            "paired e-process: an all-wins delta stream commits at alpha=0.05 (PACE, run 220)":
+                paired_eprocess([1] * 8, lam=0.5, alpha=0.05)["committed"] is True,
+            "paired e-process: a noisy 50/50 stream never commits (no self-p-hacking)":
+                paired_eprocess([1, -1] * 25, lam=0.5, alpha=0.05)["committed"] is False,
+            "paired e-process: a single lucky win does NOT clear the 1/alpha bar":
+                paired_eprocess([1], lam=0.5, alpha=0.05)["committed"] is False,
+            "paired e-process: ties are neutral (e stays 1.0)":
+                paired_eprocess([0] * 10)["e_value"] == 1.0,
+            "paired e-process: rejects an out-of-range lam":
+                _raises(lambda: paired_eprocess([1], lam=1.0)),
+            "verdict evidence carries the paired e-process (advisory, run 220)":
+                verify_loop_edit({"a": 1.0, "b": 0.0}, {"a": 1.0, "b": 1.0})
+                ["evidence"]["paired_eprocess"]["n"] == 2,
         }
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")

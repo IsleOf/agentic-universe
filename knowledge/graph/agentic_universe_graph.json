@@ -840,6 +840,10 @@
     {
       "date": "2026-09-15",
       "change": "Autonomous run 219. Orientation-layer refresh (no graph node/edge change). docs/graph_state_2026-09.md Snapshot block updated from the run-202 state (236 nodes / 879 edges) to run 219 (253 nodes / 973 edges; 78 needs-validation / 145 partially-validated / 18 validated / 5 inconclusive / 7 unset; families self_improving_harness 98, emergent_behaviors 74, agent_habitat 23, graph_engineering 20, nourishing_harness 17, orchestration_first 9). Added a 'Runs 202-218' section documenting the two dense mid-2026 literature arcs: the acceptor/certificate arc (six-condition acceptance-gate spec: SEAL/Release Gates, PACE, Who Grades the Grader, ACES, RQGM, PCAA/CAVA, + SEA + Library Drift) and the emergence/ecosystem arc (Govern the Repository, More Is Different, Engineering Reliable Coding Agents, misaligned convergence dynamics, OrchestraBench, incident-response MAS, + the when-does-multi-agent-help synthesis)."
+    },
+    {
+      "date": "2026-09-15",
+      "change": "Autonomous run 220. Build increment (the one open code item from the runs 203-214 acceptor cluster). tools/improvement_loop.py gains paired_eprocess(paired_deltas, lam=0.5, alpha=0.05) - a testing-by-betting e-process e_n = prod(1 + lam*sign(delta_i)) for the paired null 'the candidate is no better than the incumbent on identical held-out instances'; 'committed' when e_n >= 1/alpha, valid under optional stopping (Ville's inequality). Wired into verify_loop_edit's evidence as 'paired_eprocess' (ADVISORY - the held-out re-run is single-shot, n<=17). 6 new selftest checks (all-wins commits; 50/50 noise never commits - no self-p-hacking; a single lucky win does not clear 1/alpha; ties neutral; out-of-range lam rejected; evidence carries it). BUILD SELFTEST still GREEN (22 jobs). concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution updated (OPEN -> IMPLEMENTED advisory, conf 0.72->0.74) + new 'implements' edge to artifact_phase3_improvement_loop. self_improving_harness_plan.md Phase 3 and phase3_holdout_set.md updated. 253->253 nodes, 973->974 edges."
     }
   ],
   "nodes": [
@@ -6974,8 +6978,8 @@
       "verification_state": "partially_validated",
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:acceptor_statistics",
-      "confidence": 0.72,
-      "description": "PACE - Paired Anytime-valid Commit Evaluation (arXiv:2606.08106, VERIFIED via arXiv abstract read run 204). Almost all self-evolution effort has gone into the PROPOSER; PACE argues the weak point is the ACCEPTOR - the rule that decides whether to commit a change. Applied hundreds of times against the same noisy held-out estimate, the ubiquitous 'keep it if the score went up' rule is uncontrolled adaptive multiple testing: the agent effectively p-hacks itself, accumulating false commits that make it churn and drift rather than improve. PACE recasts committing as a sequential hypothesis test - a training-free, anytime-valid commit gate where each candidate is compared to the incumbent on IDENTICAL instances and committed only when a testing-by-betting e-process accumulates decisive evidence, stopping early to save evaluations and controlling each candidate's false-commit probability at a user-set level even under optional stopping (a per-decision guarantee). On Qwen2.5 agents (0.5B-3B) self-evolving at the prompt level on GSM8K / SVAMP / ARC-Challenge: greedy acceptance commits 30-42% false and 10-33% harmful edits when a genuine improvement is hidden among noisy proposals; PACE commits the real one and essentially nothing else, matching greedy's held-out accuracy at sharply lower variance and ~18% lower evaluation cost. With NO real gain available, greedy commits 13-21 spurious self-modifications per run (72-100% false) and degrades the most fragile agent by 4.9 points, while PACE holds at baseline. Directly applicable to this project: verify_loop_edit is a deterministic 'grounded risk strictly decreases' gate fired ~once per run - lower per-run exposure than PACE's hundreds, but across 200+ runs the cumulative false-commit rate is real and has no statistical-validity guarantee. Adopting a paired e-process (candidate vs incumbent on identical held-out instances, commit on an e-value threshold) would give each promotion a bounded false-commit probability. Small-model (0.5B-3B) measured - the project's small/local-LLM regime; June 2026, so a currency note but the mechanism is model-agnostic.",
+      "confidence": 0.74,
+      "description": "PACE - Paired Anytime-valid Commit Evaluation (arXiv:2606.08106, VERIFIED via arXiv abstract read run 204). Almost all self-evolution effort has gone into the PROPOSER; PACE argues the weak point is the ACCEPTOR - the rule that decides whether to commit a change. Applied hundreds of times against the same noisy held-out estimate, the ubiquitous 'keep it if the score went up' rule is uncontrolled adaptive multiple testing: the agent effectively p-hacks itself, accumulating false commits that make it churn and drift rather than improve. PACE recasts committing as a sequential hypothesis test - a training-free, anytime-valid commit gate where each candidate is compared to the incumbent on IDENTICAL instances and committed only when a testing-by-betting e-process accumulates decisive evidence, stopping early to save evaluations and controlling each candidate's false-commit probability at a user-set level even under optional stopping (a per-decision guarantee). On Qwen2.5 agents (0.5B-3B) self-evolving at the prompt level on GSM8K / SVAMP / ARC-Challenge: greedy acceptance commits 30-42% false and 10-33% harmful edits when a genuine improvement is hidden among noisy proposals; PACE commits the real one and essentially nothing else, matching greedy's held-out accuracy at sharply lower variance and ~18% lower evaluation cost. With NO real gain available, greedy commits 13-21 spurious self-modifications per run (72-100% false) and degrades the most fragile agent by 4.9 points, while PACE holds at baseline. Directly applicable to this project: verify_loop_edit is a deterministic 'grounded risk strictly decreases' gate fired ~once per run - lower per-run exposure than PACE's hundreds, but across 200+ runs the cumulative false-commit rate is real and has no statistical-validity guarantee. Adopting a paired e-process (candidate vs incumbent on identical held-out instances, commit on an e-value threshold) would give each promotion a bounded false-commit probability. Small-model (0.5B-3B) measured - the project's small/local-LLM regime; June 2026, so a currency note but the mechanism is model-agnostic. IMPLEMENTED (run 220, advisory): improvement_loop.paired_eprocess is a testing-by-betting e-process e_n = prod(1 + lam*sign(delta_i)) over the paired per-task held-out deltas, 'committed' when e_n >= 1/alpha; valid under optional stopping by Ville's inequality. In verify_loop_edit's evidence as 'paired_eprocess'. Advisory (not gating) because the held-out re-run is single-shot, n <= 17; load-bearing once a re-run yields repeated measurements. Selftested: an all-wins stream commits, a 50/50 noise stream and a single lucky win do not.",
       "tags": [
         "PACE",
         "acceptor-not-proposer",
@@ -6991,7 +6995,8 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-11-0600.md",
-        "arXiv:2606.08106 (PACE: Anytime-Valid Acceptance Tests for Self-Evolving Agents) - VERIFIED, abstract read run 204"
+        "arXiv:2606.08106 (PACE: Anytime-Valid Acceptance Tests for Self-Evolving Agents) - VERIFIED, abstract read run 204",
+        "tools/improvement_loop.py paired_eprocess (run 220) - advisory anytime-valid paired commit gate"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-11-0600.md"
@@ -17845,6 +17850,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "The criterion is falsifiable with the project's own tools: topology_recover.py + the trace schema can measure subtask verifiability, synthesis determinism, and evidence disjointness on a real swarm trace and predict whether the orchestration helped - a concrete Phase 6 probe design."
+    },
+    {
+      "id": "edge_acceptor_weakpoint_implemented_in_improvement_loop",
+      "source": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "improvement_loop.paired_eprocess (run 220) implements PACE's anytime-valid paired commit test as an advisory field in verify_loop_edit's evidence - the one adoptable code change from the runs 203-214 acceptor cluster. Advisory pending a multi-measurement held-out re-run; selftested (all-wins commits, 50/50 noise and a single win do not)."
     }
   ]
 }
