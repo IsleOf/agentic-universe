@@ -71,6 +71,40 @@ point the orchestration loop at one `task_ledger.json`, and:
 - keep the ledger in the repo (or a durable path), not in `/tmp` — it is the memory that survives a
   session boundary
 
+## The supervisor
+
+`tools/supervisor.py` (run 250) drives a ledger to completion — the PILOT pattern
+(`concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker`, arXiv:2608.26530)
+over the ledger as substrate. You supply `run_worker(task, *, hints) -> (ok, result_ref, note)` — swap in
+a real CLI-agent invocation. The supervisor supplies everything else:
+
+- **deterministic dispatch** — `next_ready()`, never an LLM guess
+- **stale recovery** — `sweep_stale` at the top of every `tick()`; a dead worker's task returns to
+  `pending`
+- **deadline + reject-over-budget** — if a worker finishes but took longer than `task_deadline_secs`, the
+  result is rejected and the retry budget handles it (PILOT: don't trust an over-budget run)
+- **retry budgeting** — via the ledger's `max_attempts`
+- **failure-mode digest** — repeated failures of a task accumulate `note`s that ride along in `hints` on
+  the next dispatch (PILOT's live self-evolution, lightweight — no model call)
+
+```python
+from supervisor import Supervisor
+from task_ledger import Ledger
+
+def run_worker(task, *, hints):
+    # invoke your CLI agent on task["goal"]; hints is a list of prior failure notes
+    ...
+    return (True, "artifacts/result.json", "")   # or (False, None, "why it failed")
+
+sup = Supervisor(Ledger("task_ledger.json"), run_worker, task_deadline_secs=1800)
+print(sup.run())            # ticks until nothing is open; returns the summary
+```
+
+The supervisor's decisions (dispatch what, abort what, retry what) are all computed from the ledger —
+`concept_component_lifecycle_reasoning_degrades_with_size`: don't ask the model to reason about
+orchestration state, read it.
+
 ## Selftest
 
-`python tools/task_ledger.py selftest` → GREEN (12 checks). `tools/selftest_all.py` includes it.
+`python tools/task_ledger.py selftest` → GREEN (12 checks); `python tools/supervisor.py selftest` → GREEN
+(8 checks). `tools/selftest_all.py` includes both.

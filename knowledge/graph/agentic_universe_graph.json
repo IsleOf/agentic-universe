@@ -960,6 +960,10 @@
     {
       "date": "2026-09-22",
       "change": "Autonomous run 249. Probe dry-run / sensitivity analysis (IDLE-STATE RULE clause b - the literature frontier is confirmed swept: s2 citations of WHARE 2609.00196 return nothing, of SEA 2607.00871 only the already-folded Self-Evolving Coding Agents survey 2608.03392). A 16-cell parameter grid on probe_orchestration_value (BASE_HERD in {0.35,0.42,0.50,0.60} x POISON_DRAG in {0.35,0.45,0.55,0.70}, 2500 trials/cell): the run-218 CONFIRMS verdict's SHAPE is parameter-robust - a1b1c1 always +0.526 vs single and strictly best of 8 combos; best partial always +0.192 (a0b1c1); a1b1c1 and a0b1c1 are insensitive to both knobs by construction. The one sensitive sub-check: 'vote_synthesis_never_strongly_helps' holds only for BASE_HERD >= ~0.42 (the probe's default 0.50 has margin; below the flip a vote is weakly helpful, never as good as a deterministic merge). docs/probe_orchestration_value.md gains a 'Sensitivity analysis (run 249)' section; artifact_probe_orchestration_value_rig description updated, confidence 0.7->0.72. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-22",
+      "change": "Autonomous run 250. Build (recommendation #5 from docs/practicing_what_we_preach.md, answering the owner's CLI-orchestration pain). tools/supervisor.py + docs/task_ledger.md#the-supervisor: a PILOT-pattern (arXiv:2608.26530) live supervisor over the run-244 task_ledger as substrate. run_worker(task, *, hints) is caller-supplied; the supervisor supplies deterministic dispatch (next_ready), stale recovery each tick, per-task deadline + reject-over-budget, retry budgeting (ledger max_attempts), and a failure-mode digest that rides along in hints on retries (PILOT live self-evolution, no model call). All decisions computed from the ledger, not reasoned (concept_component_lifecycle_reasoning_degrades_with_size). 8 selftest checks; added to selftest_all.py JOBS (25) and tools/README.md. New node pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest + 4 edges (implements concept_self_improvement_should_be_live_..., concept_multi_agent_helps_when_subtasks_are_verifiable_...; depends_on pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth; supports concept_the_agentic_labor_market_...). 271->272 nodes, 1087->1091 edges."
     }
   ],
   "nodes": [
@@ -8059,6 +8063,37 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-21-1800.md"
+      ]
+    },
+    {
+      "id": "pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+      "label": "A PILOT-pattern live supervisor over a deterministic task ledger: deterministic dispatch order, stale recovery each tick, per-task deadline + reject-over-budget, retry budgeting, and a failure-mode digest that rides along on retries",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:pilot_supervisor_over_ledger",
+      "confidence": 0.66,
+      "description": "Built run 250 (tools/supervisor.py + docs/task_ledger.md#the-supervisor), recommendation #5 from docs/practicing_what_we_preach.md, answering the owner's CLI-orchestration pain. The PILOT pattern (concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker, arXiv:2608.26530) implemented over pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth as substrate. run_worker(task, *, hints) -> (ok, result_ref, note) is supplied by the caller (a real CLI-agent invocation); the supervisor supplies everything else: (1) DETERMINISTIC DISPATCH - next_ready(), never an LLM guess (concept_component_lifecycle_reasoning_degrades_with_size); (2) STALE RECOVERY - sweep_stale at the top of every tick, a dead worker's task returns to pending; (3) DEADLINE + REJECT-OVER-BUDGET - a worker that finishes but took longer than task_deadline_secs has its result rejected and the retry budget handles it (PILOT: don't trust an over-budget run); (4) RETRY BUDGETING - via the ledger's max_attempts; (5) FAILURE-MODE DIGEST - repeated failures of a task accumulate notes that ride along in `hints` on the next dispatch (PILOT's live self-evolution, lightweight - no model call). All supervisor decisions are computed from the ledger, not reasoned. 8 selftest checks (flaky worker retried to success with the digest reaching the retry; dep order held; a hung worker's task swept and re-dispatched; an over-deadline task ends failed not silently done). Pure stdlib, reference implementation, NOT wired into the loop.",
+      "tags": [
+        "pilot-supervisor",
+        "supervisor-worker",
+        "deterministic-dispatch",
+        "reject-over-budget",
+        "failure-mode-digest",
+        "live-steering",
+        "task-ledger-substrate",
+        "reference-implementation",
+        "owner-pain-point"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-22-1800.md",
+        "tools/supervisor.py (run 250)",
+        "docs/practicing_what_we_preach.md section 4 recommendation 5"
+      ],
+      "evidence_links": [
+        "docs/task_ledger.md",
+        "docs/auto_sweep_2026-09-22-1800.md"
       ]
     }
   ],
@@ -19753,6 +19788,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "loop_metrics.run_novelty (run 248) is the advisory novelty signal the run-247 what_would_make_this_wrong.md section 4 note called for: the acceptance gate scores usefulness, nothing scores novelty, so a run that converges on a known-good pattern passes cleanly. run_novelty over a 6-run window is the continuous form of idle_run_streak; when it falls below 0.34 the proposer tells the next run to fold a source no earlier run has cited."
+    },
+    {
+      "id": "edge_supervisor_implements_pilot",
+      "source": "pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+      "target": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "PILOT's two coupled mechanisms - live steering (redirect/abort the active worker) and live self-evolution (distil failure modes into reusable notes during execution) - as a stdlib skeleton: the deadline + reject-over-budget is the steering, the failure-mode digest is the self-evolution."
+    },
+    {
+      "id": "edge_supervisor_depends_on_task_ledger",
+      "source": "pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "The supervisor is the active layer; the task ledger is the passive source of truth. next_ready() / sweep_stale() / max_attempts are all ledger operations - the supervisor adds only the tick loop, the deadline check, and the digest."
+    },
+    {
+      "id": "edge_supervisor_implements_deterministic_orchestration",
+      "source": "pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "The ledger's dep graph is the deterministic decomposition; each task's result_ref is its verifiable outcome; the supervisor's dispatch is a deterministic merge over that graph - the run-218 criterion's three conditions, made operational."
+    },
+    {
+      "id": "edge_supervisor_grounds_practicing_what_we_preach",
+      "source": "pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+      "target": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "The jobs analysis names tiered orchestration (routers/specialists/utilities) with visible human-in-the-loop handoffs as the converging standard; a ledger + supervisor is that substrate with the handoffs auditable (the .audit log) and recoverable (sweep_stale)."
     }
   ]
 }

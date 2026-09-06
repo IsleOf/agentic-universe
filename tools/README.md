@@ -16,6 +16,7 @@ python tools/selftest_all.py        # 22 selftests -> BUILD SELFTEST: GREEN
 | `knowledge_graph.py check-proposal <f>` | validate an `evolution/proposals/*.json` patch |
 | `graph_diff.py <ref-a> [<ref-b>]` | mechanical structural diff between two graph versions — nodes/edges added, removed, relabelled, retyped; `verification_state`/`confidence` changes; new `evolution_log` entries (run 243, `docs/practicing_what_we_preach.md` §1) |
 | `task_ledger.py` | a deterministic task ledger — the source of truth for an orchestration's tasks; `next_ready()` is a deterministic pick, `sweep_stale()` returns dropped (claimed-but-abandoned) tasks to `pending` (run 244, `docs/task_ledger.md`). Reference implementation, not wired into the loop. |
+| `supervisor.py` | a PILOT-pattern live supervisor over a `task_ledger`: deterministic dispatch order, stale recovery, per-task deadline + reject-over-budget, retry budgeting, and a failure-mode digest that rides along on retries (run 250, `docs/task_ledger.md#the-supervisor`). `run_worker` is a callable you supply. Reference implementation. |
 
 ## The self-improving-harness pipeline (`docs/self_improving_harness_plan.md`)
 

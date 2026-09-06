@@ -1,0 +1,20 @@
+{
+  "run": 250,
+  "increment": "build - tools/supervisor.py: a PILOT-pattern live supervisor over the task_ledger (deterministic dispatch, stale recovery, deadline + reject-over-budget, retry budgeting, failure-mode digest); recommendation #5 from practicing_what_we_preach.md; 1 node, 4 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-250.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 250 OK · VALID · graph +0 · cites 0v/0 · idle-streak 3 · legible 1.00 · verified-frac 0.80 · novelty 1.00"
+}

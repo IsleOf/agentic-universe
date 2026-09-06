@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 271 nodes, 1087 edges · **Date:** 2026-09-05
+**Graph at generation:** 272 nodes, 1091 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -357,6 +357,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_rho_holdout.py — `artifact_probe_rho_holdout_rig`
 - tools/probe_subagent_coordination.py — `artifact_probe_subagent_coordination_rig`
 - tools/skill_induction.py — `artifact_phase4_skill_induction`
+- tools/supervisor.py (run 250) — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - tools/task_ledger.py (run 244) — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - tools/topology_recover.py — `artifact_phase0_trace_substrate`
 - tools/trace_substrate.py — `artifact_phase0_trace_substrate`
@@ -426,6 +427,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-21-0600.md` — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - `docs/auto_sweep_2026-09-21-1200.md` — `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`
 - `docs/auto_sweep_2026-09-21-1800.md` — `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful`
+- `docs/auto_sweep_2026-09-22-1800.md` — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
@@ -487,6 +489,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/phase4_skill_induction.md` — `artifact_phase4_skill_induction`
 - `docs/phase5_exec_guard.md` — `artifact_phase5_exec_guard`
 - `docs/practicing_what_we_preach.md section 4` — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
+- `docs/practicing_what_we_preach.md section 4 recommendation 5` — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - `docs/pretrained_grader_gaming.md` — `concept_gate_faces_a_pretrained_grader_gamer`
 - `docs/probe_activation_generalisation.md` — `artifact_probe_activation_generalisation_rig`
 - `docs/probe_composed_design.md` — `artifact_probe_composed_design_rig`
