@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-10",
+  "last_updated": "2026-09-11",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -772,6 +772,10 @@
     {
       "date": "2026-09-10",
       "change": "Autonomous run 202. Orientation-layer refresh: docs/graph_state_2026-09.md 'Snapshot' block updated from the run-174 state (226 nodes / 811 edges) to run 202 (236 nodes / 879 edges; 78 needs-validation / 128 partially-validated / 18 validated / 5 inconclusive / 7 unset; families self_improving_harness 87, emergent_behaviors 70, agent_habitat 23, graph_engineering 20, nourishing_harness 17). Added a 'Runs 183-201' paragraph: the RECENCY WEIGHTING directive (2026-09-06, a weighting not a gate), the dedicated fetch skills, the s2-citations recency mechanism, and the Sept-2026 verification-hygiene + execution-layer thread (RSI survey / verification hierarchy 2607.07663; harness tampering 2609.00069 + tamper_audit 0/7 CLEAN; trajectory-judge 2609.00038 + Calibration Floor 2608.04355 -> holdout_tasks._normalize; HarnessLens 2608.27311 -> behavior_relevant_tasks; Live Trace Model 2609.01466; context privesc 2608.27299 -> Phase 0 MessageRole-CPE). No graph node/edge change."
+    },
+    {
+      "date": "2026-09-11",
+      "change": "Autonomous run 203. Recency-weighted arxiv-fetch sweep (S2 rate-limited 429). Folded the exogenous-acceptance-gate cluster - two nodes: concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (SEAL, arXiv:2607.24300, verifier-deployment gap + sealed audit the agent cannot author/inspect + accept/reject only + incumbent retained on regression, six models three seeds, failures capability-stratified; corroborated by Falsifiable Release Gates arXiv:2607.13070, standing invariants across six releases, 122->563 tests, small model 20%->70% while auto-rejecting a confidence-inflating candidate) and concept_self_improvement_evaluation_is_noisy_and_task_order_dependent (Fragility, arXiv:2608.18066, Aug 2026 - eval noise amplified by the self-improving loop, improvement highly task-order dependent, underspecification the hypothesised cause). 8 edges: SEAL/Release-Gates support artifact_phase3_holdout_set, principle_structural_edits_gated_outside_the_agents, pattern_verifier_gated_promotion, and corroborate concept_asg_si_independently_arrives_at_the_plan; harness-tampering challenges the exogenous-acceptance node (persists even with gates); the fragility node challenges holdout_set (single-run noise) and the exogenous-acceptance node (a single sealed run is not enough) and supports geometric_reliability_decay. docs/phase3_holdout_set.md gains an 'External corroboration (run 203)' section. 236->238 nodes, 879->887 edges."
     }
   ],
   "nodes": [
@@ -6838,6 +6842,64 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-10-0000.md"
+      ]
+    },
+    {
+      "id": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "label": "Reliable self-improvement requires at least one acceptance signal the agent cannot author or inspect",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:exogenous_acceptance",
+      "confidence": 0.73,
+      "description": "SEAL - Sealed Exogenous Acceptance Loop (arXiv:2607.24300, 'Self-Authored Verification Is Unreliable in Heuristic Self-Improving Agents', VERIFIED via arXiv abstract read run 203). The verifier-deployment gap: when the agent controls both the optimised object AND its verifier, self-assigned scores stay near-perfect while real deployment performance degrades or stays low. SEAL keeps self-authored tests but compares each candidate with the incumbent through a FIXED harness-side audit the agent cannot author or inspect; the agent receives only accept/reject; the whole incumbent state is retained after a clear regression. Outperforms unprotected baselines across six models and three seeds. Failures are stratified by capability: weaker agents damage previously-acquired strategies behind easy self-tests; stronger agents are more stable but still mismeasure the deployment distribution. Corroborated by Falsifiable Release Gates (arXiv:2607.13070, VERIFIED run 203): every new capability must pass a pre-declared machine-checkable acceptance suite while a fixed set of standing invariants is preserved across every gate; instantiated in an open runtime carried through six further releases with action-safety invariants INV-1..INV-6 unchanged, acceptance suite 122->563 tests, and gated self-improvement compounding a small model 20%->70% accuracy WHILE auto-rejecting a candidate that only inflated confidence. This is the project's Phase 3 design, now published twice independently (a third and fourth arrival after ASG-SI and Self-Harness): artifact_phase3_holdout_set is a frozen file the loop cannot edit (SEAL's sealed audit); verify_loop_edit returns accept/reject with the incumbent retained on regression (SEAL's loop); the IDLE-STATE RULE and the what_would_make_this_wrong severity invariants are standing invariants (Release Gates). Recency: both mid-2026, measured on 2026-era small models and open runtimes - the project's own regime, so the convergence carries weight.",
+      "tags": [
+        "exogenous-acceptance",
+        "verifier-deployment-gap",
+        "SEAL",
+        "sealed-audit",
+        "falsifiable-release-gates",
+        "standing-invariants",
+        "independent-convergence",
+        "capability-stratified-failure",
+        "accept-reject-only"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-11-0000.md",
+        "arXiv:2607.24300 (Self-Authored Verification Is Unreliable in Heuristic Self-Improving Agents) - VERIFIED, abstract read run 203",
+        "arXiv:2607.13070 (Falsifiable Release Gates for Self-Improving Systems: Standing Invariants at Scale) - VERIFIED, abstract read run 203"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-11-0000.md"
+      ]
+    },
+    {
+      "id": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "label": "Self-improving-agent evaluation is inherently noisy and highly task-order dependent; single-run scores mislead",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:evaluation_fragility",
+      "confidence": 0.7,
+      "description": "On the Fragility of Self-Improving Agents: Variance, Task Order, and Underspecification (arXiv:2608.18066, VERIFIED via arXiv abstract read run 203; Aug 2026 - the most current word on this). A comprehensive re-evaluation of two memory-based self-improving methods (textual memory bank, online task stream), broadened along two axes: multiple runs to quantify variance, and randomly shuffled task order. Two findings that expose the fragility: (1) agent evaluation is inherently noisy in complex environments and on multi-step tasks, and stacking a self-improving loop on top AMPLIFIES that noise; (2) improvement is highly dependent on task order - prior works adopt default orderings that impose an implicit curriculum acting as a hidden prerequisite for success. Hypothesised cause: task and environment underspecification; adding detailed rubrics and environment feedback to the memory-construction process partially closes the degradation but significant gaps remain (other uncharacterised factors persist). Advocates multi-run reporting and stress-testing; the underspecification finding calls for systems and interfaces enabling effective human oversight. Bears directly on the project: holdout_tasks scoring is single-run (deterministic where possible, but any LLM-graded task inherits this noise); loop_metrics.plateau_watch reads a flat score as a plateau when it may be evaluation variance; the FROZEN task ORDER of the held-out set is itself an implicit-curriculum choice worth stating explicitly.",
+      "tags": [
+        "evaluation-noise",
+        "task-order-dependence",
+        "implicit-curriculum",
+        "underspecification",
+        "multi-run-reporting",
+        "memory-based-self-improvement",
+        "reliability",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-11-0000.md",
+        "arXiv:2608.18066 (On the Fragility of Self-Improving Agents: Variance, Task Order, and Underspecification) - VERIFIED, abstract read run 203"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-11-0000.md"
       ]
     }
   ],
@@ -16244,6 +16306,94 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "Type-aware compaction pins 'rules'; if attacker content can be labelled a rule during context assembly it rides into the never-summarised tier - the pinning must verify the rule's provenance, not its label."
+    },
+    {
+      "id": "edge_exogenous_acceptance_supports_holdout_set",
+      "source": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "target": "artifact_phase3_holdout_set",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "The frozen held-out file the loop cannot edit is SEAL's sealed exogenous audit; verify_loop_edit's accept/reject with the incumbent retained on regression is SEAL's loop. SEAL is the published validation of this artifact's central design choice."
+    },
+    {
+      "id": "edge_exogenous_acceptance_supports_structural_gate",
+      "source": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "target": "principle_structural_edits_gated_outside_the_agents",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.72,
+      "description": "SEAL's load-bearing result stated as a principle: at least one acceptance signal must sit outside the agent's control - a self-authored test, however well-intentioned, is not sufficient."
+    },
+    {
+      "id": "edge_exogenous_acceptance_supports_verifier_gated_promotion",
+      "source": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.68,
+      "description": "Both SEAL and Falsifiable Release Gates instantiate verifier-gated promotion with rollback; Release Gates carries it through six real releases with the safety core unchanged."
+    },
+    {
+      "id": "edge_exogenous_acceptance_corroborates_asg_si",
+      "source": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "target": "concept_asg_si_independently_arrives_at_the_plan",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Third and fourth independent arrivals (SEAL, Release Gates) at the same verifier-gated-promotion + exogenous-acceptance design that ASG-SI and Self-Harness reached - the convergence is now a small cluster, not a single coincidence."
+    },
+    {
+      "id": "edge_harness_tampering_challenges_exogenous_acceptance",
+      "source": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Harness Tampering (2609.00069) shows integrity violations persist in the best agent's lineage even with gates present; SEAL's 'the agent cannot author or inspect the audit' is the design constraint that must be physically enforced, not assumed - tamper_audit.py is that enforcement for this loop."
+    },
+    {
+      "id": "edge_eval_fragility_challenges_holdout_set",
+      "source": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "target": "artifact_phase3_holdout_set",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Single-run held-out scoring inherits inherent evaluation noise (worse for any LLM-graded task), and a self-improving loop amplifies it; multi-run reporting on the step-2 re-run would harden the gate. The frozen task order is also an implicit curriculum."
+    },
+    {
+      "id": "edge_eval_fragility_challenges_exogenous_acceptance",
+      "source": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Even a sealed exogenous signal is noisy - SEAL's six-models-three-seeds is the right response (report variance); a single sealed run is not. The two findings compose: an exogenous audit is necessary but must be run multiple times."
+    },
+    {
+      "id": "edge_eval_fragility_supports_reliability_decay",
+      "source": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "target": "concept_geometric_reliability_decay",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.42,
+      "description": "Evaluation noise compounding through the self-improving loop is one mechanism behind the observed geometric reliability decay - the loop amplifies per-step measurement error, not only per-step task error."
     }
   ]
 }

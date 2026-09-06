@@ -32,6 +32,40 @@ A proposer that could read the checks would over-fit them. So: one file, never
 expanded by the loop itself, and the checks reward substance. If a future run
 wants to add a task it should be a deliberate human edit with a note.
 
+## External corroboration (added run 203)
+
+Two mid-2026 papers independently arrive at this exact design
+(`concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal`):
+
+- **SEAL — Sealed Exogenous Acceptance Loop** (arXiv:2607.24300, VERIFIED). The
+  *verifier–deployment gap*: when the agent controls both the optimised object
+  and its verifier, self-assigned scores stay near-perfect while real performance
+  degrades. Fix: keep self-authored tests but gate every candidate against the
+  incumbent through *a fixed harness-side audit the agent cannot author or
+  inspect*, returning **only accept/reject**, with the whole incumbent state
+  retained after a clear regression. Beats unprotected baselines across six models
+  and three seeds. Failures stratify by capability — weaker agents wreck acquired
+  strategies behind easy self-tests; stronger agents still mismeasure the
+  deployment distribution. This *is* `holdout_tasks.py` (the frozen file the loop
+  cannot edit) + `verify_loop_edit` (accept/reject, incumbent kept on regression).
+- **Falsifiable Release Gates** (arXiv:2607.13070, VERIFIED). Every new capability
+  passes a pre-declared machine-checkable acceptance suite; a fixed set of
+  *standing invariants* is preserved across every gate. Carried through six
+  releases of an open runtime: invariants unchanged, suite grew 122→563 tests,
+  gated self-improvement compounded a small model 20%→70% *while auto-rejecting a
+  candidate that only inflated confidence*. The project's IDLE-STATE RULE and the
+  what-would-make-this-wrong severity invariants are its standing invariants.
+
+And one **caution** (`concept_self_improvement_evaluation_is_noisy_and_task_order_dependent`,
+arXiv:2608.18066, VERIFIED, Aug 2026): self-improving-agent evaluation is
+inherently noisy on multi-step tasks and a self-improving loop *amplifies* that
+noise; improvement is highly task-order dependent (default orderings impose a
+hidden curriculum). Single-run held-out scoring inherits this — the deterministic
+checks are safe, but any LLM-graded re-run of step 2 should report across
+multiple runs, and the frozen task *order* here is itself an implicit-curriculum
+choice worth stating. `loop_metrics.plateau_watch` should not read a flat score
+as a plateau when it could be evaluation variance.
+
 ## Two uses
 
 ### 1. Historical baseline (retrospective quality)

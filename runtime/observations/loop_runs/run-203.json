@@ -1,0 +1,36 @@
+{
+  "run": 203,
+  "increment": "recency-weighted sweep - folded the exogenous-acceptance-gate cluster (SEAL arXiv:2607.24300 + Falsifiable Release Gates arXiv:2607.13070 + Fragility arXiv:2608.18066); 2 nodes, 8 edges; phase3_holdout_set.md external-corroboration section",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 16,
+  "trace_valid": true,
+  "counts": {
+    "claims": 3,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2607.24300",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2607.13070",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2608.18066",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2607.13070",
+    "arXiv:2607.24300",
+    "arXiv:2608.18066"
+  ],
+  "trace_file": "runtime\\traces\\loop-203.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

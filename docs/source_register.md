@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 236 nodes, 879 edges · **Date:** 2026-09-05
+**Graph at generation:** 238 nodes, 887 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -102,10 +102,12 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
 | [2607.05297](https://arxiv.org/abs/2607.05297) | (title not recorded) | `concept_recursive_meta_skill_evolution` |
 | [2607.07663](https://arxiv.org/abs/2607.07663) | (title not recorded) | `concept_self_improvement_strength_tracks_the_verification_hierarchy` |
+| [2607.13070](https://arxiv.org/abs/2607.13070) | (title not recorded) | `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
 | [2607.22585](https://arxiv.org/abs/2607.22585) | (title not recorded) | `concept_capability_is_a_model_harness_config_property`, `concept_harness_has_model_independent_failure_fingerprints` |
 | [2607.22758](https://arxiv.org/abs/2607.22758) | (title not recorded) | `concept_topology_shapes_error_propagation`, `emergent_information_cascades` |
+| [2607.24300](https://arxiv.org/abs/2607.24300) | (title not recorded) | `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal` |
 | [2607.24625](https://arxiv.org/abs/2607.24625) | (title not recorded) | `pattern_disposable_branch_exploration` |
 | [2607.27191](https://arxiv.org/abs/2607.27191) | (title not recorded) | `concept_motive_operative_split`, `concept_research_lifecycle_split` |
 | [2608.00102](https://arxiv.org/abs/2608.00102) | (title not recorded) | `concept_work_substitution_frontier` |
@@ -128,6 +130,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.14825](https://arxiv.org/abs/2608.14825) | Emergent Misaligned Communication in Multi-Agent LLM Commerce Simulations | `emergent_misaligned_communication_under_stress` |
 | [2608.16951](https://arxiv.org/abs/2608.16951) | (title not recorded) | `emergent_autonomous_discovery` |
 | [2608.17597](https://arxiv.org/abs/2608.17597) | HarnessRisk | `emergent_recognition_execution_gap`, `pattern_execution_layer_enforcement` |
+| [2608.18066](https://arxiv.org/abs/2608.18066) | (title not recorded) | `concept_self_improvement_evaluation_is_noisy_and_task_order_dependent` |
 | [2608.18398](https://arxiv.org/abs/2608.18398) | (title not recorded) | `concept_work_substitution_frontier` |
 | [2608.18554](https://arxiv.org/abs/2608.18554) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.19197](https://arxiv.org/abs/2608.19197) | (title not recorded) | `concept_graded_challenge`, `pattern_regret_as_difficulty_signal` |
@@ -352,6 +355,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-09-1800.md` — `concept_transparency_cuts_both_ways`, `emergent_whistleblowing`, `pattern_ostrom_swarm_governance`
 - `docs/auto_sweep_2026-09-10-0000.md` — `concept_the_harness_context_assembly_is_a_privilege_escalation_vector`
 - `docs/auto_sweep_2026-09-10-1800.md` — `concept_compaction_cliff`, `emergent_authorization_laundering`, `emergent_stale_belief_propagation`
+- `docs/auto_sweep_2026-09-11-0000.md` — `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal`, `concept_self_improvement_evaluation_is_noisy_and_task_order_dependent`
 - `docs/auto_sweep_2026-09-11-1200.md` — `concept_agent_shaped_topology_is_agent_corruptible`
 - `docs/auto_sweep_2026-09-11-1800.md` — `principle_structural_edits_gated_outside_the_agents`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
