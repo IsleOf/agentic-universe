@@ -1,0 +1,26 @@
+{
+  "run": 149,
+  "increment": "idle-agent probe: add an observation_arm (covert vs overt) per what_would_make_this_wrong.md section 2c",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 16,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 5,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2509.15541",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2509.15541"
+  ],
+  "trace_file": "runtime\\traces\\loop-149.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

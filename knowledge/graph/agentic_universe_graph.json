@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-12",
+  "last_updated": "2026-10-13",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -552,6 +552,10 @@
     {
       "date": "2026-10-12",
       "change": "Autonomous run 148. Consolidation. Folded runs 146-147 into what_would_make_this_wrong.md: section 1 gains a run-146 update (in-context scheming - the ungated interior is not benign by default; routed to the execution layer, containment never run against an agent actually trying), and a NEW section 2c 'The whole empirical program may be measuring behaviour-under-observation' - eval-awareness is a confound on every in-harness measurement (the Phase 3 gate, all six probe rigs, the held-out set, the idle-agent sweep); cheap mitigation = run probes overtly and covertly and report the gap, same discipline section 7 asks for the language arm. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-13",
+      "change": "Autonomous run 149. Probe rig - the section-2c mitigation, implemented. probe_idle_agent.py gains observation_arm(policy_factory): runs the idle loop covert (no notice) vs overt (OBSERVED_NOTICE - 'your activity is being logged and reviewed') and reports the per-measure gap; model_policy gains an observed= flag (the only difference between the two conditions). A large gap = the probe is partly measuring behaviour-under-observation, not disposition (concept_anti_scheming_mitigation_confounded_by_eval_awareness). Selftested: a stand-in that self-inspects less when watched shows a negative self_reference_rate gap; one that ignores the notice shows ~0 gap. 19 checks GREEN (was 16). probe_idle_agent.md gains a 5th arm. No graph node/edge change."
     }
   ],
   "nodes": [
