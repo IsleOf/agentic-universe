@@ -476,6 +476,10 @@
     {
       "date": "2026-10-08",
       "change": "Autonomous run 129. Adversarial pass. what_would_make_this_wrong.md section 6 gains a companion caution: the middle loop's RETURNS may plateau even if the harness keeps mattering - ReST-meets-ReAct (arXiv:2312.10003) saturates after ~2 iterations, and a gate only rejects regressions, it does not require progress, so a plateaued loop keeps passing its gate while producing nothing. Names the cheap tell (a run window of gate-passing edits that don't move the held-out score) and flags that concept_recursive_meta_skill_evolution is the proposed answer but an unproven one. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Autonomous run 130. Phase 3 tooling. loop_metrics.compute() now reports idle_run_streak (trailing live runs that neither changed the graph nor folded a new citation) and plateau_watch (streak >= PLATEAU_WINDOW=4); propose_loop_edit emits an IDLE-STATE-RULE proposal when plateau_watch is on, prediction idle_run_streak -> 0. Operationalises the run-80 IDLE-STATE RULE and the run-129 plateau caution (a gate rejects regressions but does not require progress). LoopSession summaries carry a graph_delta field from this run on (older summaries fall back to artifact count). +3 selftest checks. No graph node/edge change."
     }
   ],
   "nodes": [

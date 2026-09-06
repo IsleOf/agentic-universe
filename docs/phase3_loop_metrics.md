@@ -65,10 +65,32 @@ This is the same shape as `pattern_grounded_acceptance_only` under a missing
 oracle: you still require a grounded risk measure to move, you just can't close
 the loop automatically yet.
 
+## `idle_run_streak` / `plateau_watch` (added run 130)
+
+`compute()` now also reports **`idle_run_streak`** — the number of trailing live
+runs that neither changed the graph nor folded a citation no earlier run used —
+and **`plateau_watch`** (`idle_run_streak >= PLATEAU_WINDOW`, window 4).
+
+This operationalises two things that were judged by hand:
+
+- the **run-80 IDLE-STATE RULE** (idle ⇒ the run must deepen a node / dry-run a
+  probe / do an adversarial pass), and
+- the **run-129 caution**: a grounded-acceptance gate *rejects regressions but
+  does not require progress*, so a plateaued middle loop keeps passing its gate
+  while producing nothing. A long `idle_run_streak` with the acceptance gate
+  still passing is that plateau signature.
+
+When `plateau_watch` is true, `propose_loop_edit` emits a `(prompt,
+loop_procedure)` proposal that the next run must satisfy the IDLE-STATE RULE, with
+`idle_run_streak → 0` as the falsifiable prediction. A run that folds a **new**
+source, or writes any graph delta, is substantive and resets the streak;
+doc/hygiene-only runs do not. `LoopSession` summaries carry a `graph_delta` field
+from run 130 on; older summaries fall back to the artifact count.
+
 ## Selftest
 
 `python tools/loop_metrics.py selftest` → GREEN. `tools/selftest_all.py` runs
-nine selftests → `BUILD SELFTEST: GREEN`.
+the full suite → `BUILD SELFTEST: GREEN`.
 
 ## Next
 

@@ -1,0 +1,26 @@
+{
+  "run": 130,
+  "increment": "Phase 3 tooling - idle_run_streak / plateau_watch metric in loop_metrics.py",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2312.10003",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2312.10003"
+  ],
+  "trace_file": "runtime\\traces\\loop-130.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

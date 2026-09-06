@@ -56,6 +56,7 @@ class LoopSession:
         )
         self._counts = {"claims": 0, "tools": 0, "artifacts": 0, "notes": 0}
         self._cited = []
+        self._graph_delta = None
 
     # -- lifecycle --
     def __enter__(self):
@@ -110,6 +111,9 @@ class LoopSession:
                    "edges": list(edges) if edges else None},
         )
         self._counts["artifacts"] += 1
+        d_nodes = (nodes[1] - nodes[0]) if nodes else 0
+        d_edges = (edges[1] - edges[0]) if edges else 0
+        self._graph_delta = {"nodes": d_nodes, "edges": d_edges}
 
     def note(self, text):
         self._rec.note("researcher", text, layer="harness")
@@ -134,6 +138,7 @@ class LoopSession:
             "trace_events": n_events,
             "trace_valid": not errors,
             "counts": self._counts,
+            "graph_delta": self._graph_delta,  # {"nodes": d, "edges": d} or None if the run wrote no graph
             "citations": self._cited,
             "distinct_evidence_roots": distinct_roots,
             "trace_file": (str(path.relative_to(ROOT))
