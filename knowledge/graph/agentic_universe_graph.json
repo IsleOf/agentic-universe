@@ -996,6 +996,10 @@
     {
       "date": "2026-09-25",
       "change": "Autonomous run 259. Owner pushed docs/research/ (54 research directions in 5 parts + README) and research/2026-09-06-deepseek-harness-ecosystem.md to origin/main (2026-09-07). Brought both onto the proposals branch. Triage in docs/research/coverage_map.md: every direction classified COVERED / PARTIAL / NEW against the 275-node graph, with a 9-group fold plan (emergence-first, one per run). No node/edge change this run - orientation only. Headline: ~15 genuinely NEW directions (biggest: the epistemic-market cluster - claims/forecasts/pre-registration/evidence-cells/conditional-trust); the rest sharpen existing nodes (diversity keystone, environment_evolution_curriculum, progressive_risk_vesting, the gate cluster). DSH doc: provenance-cautioned (inflated headline numbers), folds as one convergence node + the five-track memory detail. 275 nodes / 1104 edges unchanged."
+    },
+    {
+      "date": "2026-09-25",
+      "change": "Autonomous run 260. Fold group 1 of the owner's research input (coverage_map.md) - the epistemic-market cluster (directions 42-45, 47, 50, 52). 6 nodes under a new branch_key orchestration_first:epistemic_market: the parent concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages + calibrated_forecasting_before_action, pre_registered_adversarial_collaboration, independent_evidence_cells_then_identity_masked_synthesis, conditional_trust_is_domain_keyed_not_global, counterfactual_reputation_credits_predicting_the_road_not_taken. 16 edges: the parent challenges the vote-herding node (markets price by evidence, not agreement) and refines the debate-repair pattern; forecasting extends the PACE acceptor; evidence-cells implements evidential-ancestry-tracking + constrains sybil-collapse + refines the anonymization finding; conditional-trust refines trust_gates + reputation_dynamics; counterfactual-reputation depends_on the rollback substrate. Emergence-first, all speculative/needs-validation. 275 -> 281 nodes, 1104 -> 1120 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8210,6 +8214,153 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-24-1800.md"
+      ]
+    },
+    {
+      "id": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "label": "Epistemic-market orchestration: organise agents around claims, forecasts and falsification, not messages",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.55,
+      "description": "Owner research direction 42-43 (docs/research/alternative_approaches_part5.md). Instead of manager/worker/swarm/debate, agents interact through structured falsifiable claim objects (statement, confidence, horizon, assumptions, evidence, disconfirmers, replication plan). Influence is earned by a calibration record and by artifacts that survive adversarial tests - not by persuasion or by winning a vote. Directly targets the failure the graph already names (agreement mistaken for truth; showing votes causes herding): a market prices claims by evidence and track record, so a persuasive low-reliability agent cannot dominate. Emergence-first: it is a substrate that lets useful epistemic structure emerge, not a fixed hierarchy.",
+      "tags": [
+        "epistemic-market",
+        "claims",
+        "falsification",
+        "orchestration",
+        "anti-herding"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-0600.md",
+        "docs/research/alternative_approaches_part5.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "label": "Calibrated forecasting before action is the influence currency",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.55,
+      "description": "Owner direction 44. Require an agent to predict an outcome before a consequential action ('this patch passes hidden tests with p=0.8'; 'this routing change cuts cost 15-25%'), then score calibration (Brier / log-loss) once results arrive. Builds an evidence-based trust graph, reveals false confidence, and makes system improvement measurable. Upstream of the project's acceptance test: PACE (concept_the_acceptor_not_the_proposer...) decides whether a committed edit really helped; a forecast ledger decides whose proposals to trust in the first place.",
+      "tags": [
+        "forecasting",
+        "calibration",
+        "brier-score",
+        "trust",
+        "epistemic-market"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-0600.md",
+        "docs/research/alternative_approaches_part5.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_pre_registered_adversarial_collaboration_beats_open_debate",
+      "label": "Pre-registered adversarial collaboration beats open debate",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.55,
+      "description": "Owner direction 45-46. Rival agents agree IN ADVANCE on the exact disputed claim, each side's point prediction, which evidence favours which side, the test environment and data split, the evaluation procedure, and what counts as a concession - then run the test. This reduces post-hoc reinterpretation and confirmation bias in a way open debate does not. A crop-disease multi-agent study found structured peer debate raised the weakest agent but did not beat the strongest anchor - debate is floor-raising, not ceiling-raising. Debate should be a controlled instrument (meta-moderator decides when it is worth invoking), not the default.",
+      "tags": [
+        "adversarial-collaboration",
+        "pre-registration",
+        "debate",
+        "evaluation"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-0600.md",
+        "docs/research/alternative_approaches_part5.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_independent_evidence_cells_then_identity_masked_synthesis",
+      "label": "Independent evidence cells, then identity-masked synthesis",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.6,
+      "description": "Owner direction 47. Agents investigate SEPARATELY with distinct sources/tools/models/prompts; outputs become structured claims with evidence; a synthesiser sees the claims but not agent identity or rhetorical chain-of-thought; a verifier checks citations and contradictions; only then are disagreements exposed for targeted resolution. Reduces social contagion, anchoring and herding - which matters more because stronger models appear MORE prone to majority-following. Operationalises pattern_evidential_ancestry_tracking (dedupe by evidence root) and the anonymization finding into a workflow.",
+      "tags": [
+        "evidence-cells",
+        "identity-masking",
+        "anti-herding",
+        "synthesis",
+        "verification"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-0600.md",
+        "docs/research/alternative_approaches_part5.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_conditional_trust_is_domain_keyed_not_global",
+      "label": "Conditional trust is domain-keyed, not global",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.6,
+      "description": "Owner direction 50. Trust is an edge labelled by domain and confidence (A -[0.88, coding-tests]-> B; A -[0.41, novel-research]-> B), updated only from demonstrated outcomes, calibration, independent replication and observed conflict-of-interest. An agent reliable at integration tests may be unreliable at normative judgement or self-evaluation. Routes tasks and voting weight by domain-calibrated reliability - a concrete structure for concept_trust_gates and emergent_reputation_and_trust_dynamics, and a defence against the majority-following dynamic.",
+      "tags": [
+        "trust-graph",
+        "conditional-trust",
+        "domain-calibration",
+        "routing"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-0600.md",
+        "docs/research/alternative_approaches_part5.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_counterfactual_reputation_credits_predicting_the_road_not_taken",
+      "label": "Counterfactual reputation credits predicting the road not taken",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.5,
+      "description": "Owner direction 52. Ordinary reputation rewards successful past actions; counterfactual reputation also re-runs selected REJECTED alternatives in sandboxed shadow environments and credits the agent who correctly predicted both the chosen path's outcome AND the rejected paths' failure modes. Rewards causal understanding over lucky results. Depends on a shadow-world / replay capability (coverage_map group 3) and connects to pattern_recoverability_constrained_evolution (the rollback substrate is most of what a counterfactual replay needs).",
+      "tags": [
+        "counterfactual-reputation",
+        "shadow-world",
+        "causal-understanding",
+        "credit-assignment"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-0600.md",
+        "docs/research/alternative_approaches_part5.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
       ]
     }
   ],
@@ -20091,6 +20242,182 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.55,
       "description": "XAMT's recommendation - intrinsic safety over perimeter detection - is the same move the project already makes for structural edits: judge the grounded EFFECT (did risk strictly decrease?), not the surface of the proposed change. The memory write path has no equivalent effect-level check yet; that is the gap XAMT points at."
+    },
+    {
+      "id": "edge_epistemic_market_challenges_herding",
+      "source": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "The herding node says exposing votes/opinions collapses independence. The epistemic market removes voting as the aggregation mechanism entirely - claims are priced by evidence and calibration record, not by how many agents agree - so there is no vote to herd on."
+    },
+    {
+      "id": "edge_epistemic_market_refines_debate_repair",
+      "source": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "target": "pattern_debate_against_reward_hacking",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Debate-as-evaluator-repair is one tool in the market, invoked by a meta-moderator only when evidence is incomplete-but-obtainable and hypotheses make different testable predictions - not the default aggregation step."
+    },
+    {
+      "id": "edge_forecasting_extends_acceptor",
+      "source": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "target": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "PACE guards the commit decision (did the edit really help, under optional stopping). A forecast ledger sits upstream: it scores whose PROPOSALS to trust before the edit is even tried, using the same currency - calibrated prediction against later ground truth."
+    },
+    {
+      "id": "edge_forecasting_supports_epistemic_market",
+      "source": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "The forecast ledger is the market's pricing mechanism."
+    },
+    {
+      "id": "edge_adv_collab_refines_debate_training",
+      "source": "concept_pre_registered_adversarial_collaboration_beats_open_debate",
+      "target": "concept_debate_training_reduces_judge_hacking",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "That node found a debate opponent only partly mitigates judge-hacking and the critic hacks too. Pre-registration removes the post-hoc move the critic exploits: the concession criterion is fixed before the data exists."
+    },
+    {
+      "id": "edge_adv_collab_supports_epistemic_market",
+      "source": "concept_pre_registered_adversarial_collaboration_beats_open_debate",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Pre-registered rival tests are how the market resolves contested claims."
+    },
+    {
+      "id": "edge_evidence_cells_implements_ancestry",
+      "source": "concept_independent_evidence_cells_then_identity_masked_synthesis",
+      "target": "pattern_evidential_ancestry_tracking",
+      "type": "implements",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "The cell protocol is a workflow form of ancestry tracking: separate investigation guarantees distinct evidence roots; identity-masked synthesis stops report multiplicity being read as corroboration."
+    },
+    {
+      "id": "edge_evidence_cells_constrains_sybil",
+      "source": "concept_independent_evidence_cells_then_identity_masked_synthesis",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "constrains",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Sybil collapse: many reports, one evidence root, false confidence. Independent cells force the roots apart before aggregation, which is the condition Sybil collapse says is required."
+    },
+    {
+      "id": "edge_evidence_cells_refines_anonymization",
+      "source": "concept_independent_evidence_cells_then_identity_masked_synthesis",
+      "target": "emergent_peer_recognition_survives_anonymization",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "Agents still recognise peer model families under anonymization, so identity-masking the SYNTHESIS input is necessary but not sufficient - the cells must also not see each other's reasoning during investigation, which is the part that blocks contagion."
+    },
+    {
+      "id": "edge_evidence_cells_supports_epistemic_market",
+      "source": "concept_independent_evidence_cells_then_identity_masked_synthesis",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "Evidence cells are how the market generates independent claims to price."
+    },
+    {
+      "id": "edge_conditional_trust_refines_trust_gates",
+      "source": "concept_conditional_trust_is_domain_keyed_not_global",
+      "target": "concept_trust_gates",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "Gives concept_trust_gates a structure: a trust value is meaningless without a domain key and a provenance (outcome / calibration / replication / COI), not a scalar reputation."
+    },
+    {
+      "id": "edge_conditional_trust_refines_reputation_dynamics",
+      "source": "concept_conditional_trust_is_domain_keyed_not_global",
+      "target": "emergent_reputation_and_trust_dynamics",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Emergent reputation tends to collapse to a single social-status scalar; domain-keyed edges resist that by making 'trusted' always 'trusted at X'."
+    },
+    {
+      "id": "edge_conditional_trust_supports_epistemic_market",
+      "source": "concept_conditional_trust_is_domain_keyed_not_global",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "The trust graph is how the market routes tasks and weights claims."
+    },
+    {
+      "id": "edge_counterfactual_reputation_extends_reputation",
+      "source": "concept_counterfactual_reputation_credits_predicting_the_road_not_taken",
+      "target": "emergent_reputation_and_trust_dynamics",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Adds a second axis to reputation: not just 'was right' but 'correctly predicted what the alternatives would have done' - which rewards causal models over outcome luck."
+    },
+    {
+      "id": "edge_counterfactual_reputation_depends_on_rollback",
+      "source": "concept_counterfactual_reputation_credits_predicting_the_road_not_taken",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "depends_on",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Re-running a rejected alternative in a shadow environment needs exactly the cheap-complete-rollback substrate this pattern already requires."
+    },
+    {
+      "id": "edge_counterfactual_reputation_supports_epistemic_market",
+      "source": "concept_counterfactual_reputation_credits_predicting_the_road_not_taken",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Counterfactual scoring is how the market credits foresight, not just outcomes."
     }
   ]
 }

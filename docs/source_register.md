@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 275 nodes, 1104 edges · **Date:** 2026-09-05
+**Graph at generation:** 281 nodes, 1120 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -433,6 +433,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-23-1200.md` — `concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps`
 - `docs/auto_sweep_2026-09-24-0600.md` — `pattern_memory_writes_pass_a_deterministic_risk_gate`
 - `docs/auto_sweep_2026-09-24-1800.md` — `concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics`
+- `docs/auto_sweep_2026-09-25-0600.md` — `concept_calibrated_forecasting_before_action_is_the_influence_currency`, `concept_conditional_trust_is_domain_keyed_not_global`, `concept_counterfactual_reputation_credits_predicting_the_road_not_taken` +3
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
@@ -503,6 +504,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/probe_orchestration_value.md` — `artifact_probe_orchestration_value_rig`
 - `docs/probe_rho_holdout.md` — `artifact_probe_rho_holdout_rig`
 - `docs/probe_subagent_coordination.md` — `artifact_probe_subagent_coordination_rig`
+- `docs/research/alternative_approaches_part5.md (owner research input)` — `concept_calibrated_forecasting_before_action_is_the_influence_currency`, `concept_conditional_trust_is_domain_keyed_not_global`, `concept_counterfactual_reputation_credits_predicting_the_road_not_taken` +3
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
