@@ -1,0 +1,590 @@
+{
+  "project": "poly-bot",
+  "format": "agentic-universe project graph v1",
+  "audit": "FIRST PASS by the agentic-universe loop (run 317), from a 2026-09-07 read of /home/dev/poly-bot: README + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (current) + git log + package READMEs. The EV Hunter task specifics and the sign-off-queue state need the ACTIVE session to reconcile - the question nodes are the placeholders for that.",
+  "last_updated": "2026-09-07",
+  "nodes": [
+    {
+      "id": "polybot__root",
+      "type": "component",
+      "label": "poly-bot: Polymarket prediction-market HFT paper-trading research system",
+      "status": "active",
+      "confidence": 0.6,
+      "description": "Local WSL2 box owns research / backtests / agent orchestration and NEVER contacts Polymarket (geo/Cloudflare ban risk). A Contabo/France VPS owns ALL Polymarket I/O, data collectors, the live paper pipeline, and the dashboard. Pre-PnL by design; north star docs/STRATEGIC_PLAN.md (5 phases toward autonomous multi-venue trading). Current phase per CURRENT.md: validate ONE honest edge and paper-trade it.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__vps",
+      "type": "component",
+      "label": "VPS (Contabo, France) - all Polymarket I/O + live paper pipeline + dashboard",
+      "status": "active",
+      "confidence": 0.6,
+      "description": "Repo at /home/ec2-user/poly-bot. Runs scanner.py, data_collector.py (8 symbols), subsecond_book_recorder (12h retention), external_price_feed, binance/OFI/multi-exchange feeds, deribit IV, news sentiment, the clean-core paper pipeline, and the Tailscale-bound dashboard (:8080). Reached from local only over sanctioned Tailscale SSH.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__core",
+      "type": "component",
+      "label": "polybot_core/ - shared dataclasses, source adapters, dashboard analytics, SSH transport",
+      "status": "observed",
+      "confidence": 0.55,
+      "description": "Dependency-light, safe locally, reusable in other bots. Per README package map.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__next",
+      "type": "component",
+      "label": "polybot_next/ - contracts / core / features / ingest / pricing / runtime / simulator + dashboard",
+      "status": "observed",
+      "confidence": 0.5,
+      "description": "The newer generation of the pipeline; the snapshot-only dashboard server + UI live here. Canonical snapshot path is data/core/dashboard_snapshot.json (the polybot_next/ path is a dead legacy file).",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__strategies",
+      "type": "component",
+      "label": "strategies/ - pure strategy implementations (backtest/replay only)",
+      "status": "observed",
+      "confidence": 0.5,
+      "description": "strategies/registry.py _REGISTERED is ONLY for backtest/replay, not either live path. Live dispatch: vps_backup/executor.py reads strategy_configs.json directly by name; the MAIN pipeline strategy_evaluator.py needs route_state_seed.py run to seed the route catalog (~482 routes).",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__harness",
+      "type": "component",
+      "label": "harness/ - validation, replay, retention, backfill, dashboard smoke",
+      "status": "observed",
+      "confidence": 0.55,
+      "description": "scripts/pre_commit_check.sh compiles modules, secret-scans, checks source boundaries, runs fixture + replay-smoke tests, verifies local retention. Never deletes raw data.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__ev_hunter",
+      "type": "component",
+      "label": "EV Hunter / Event Desk - the current research focus (2026-08+)",
+      "status": "active",
+      "confidence": 0.5,
+      "description": "A pivot away from the earlier crypto/FLB-fade microstructure phase. A model-aware VPS deep-research timer mechanically preselects sports/esports market candidates (e.g. Mimo model, UCL / CS2 markets), runs bounded multi-step research, and feeds an overlay/event-cluster selection path. research/ev_hunter/local_dispatch.py handles per-estimate methodology tags + a 3-leg single-estimate cap. CURRENT.md predates this pivot; EV_HUNTER_TASK_CHECKLIST.md is the live task list.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__checklist_watchdog",
+      "type": "component",
+      "label": "The checklist watchdog - a 20-minute cron that dispatches queued tasks to the AGY worker fleet",
+      "status": "active",
+      "confidence": 0.5,
+      "description": "Reads a task queue (task-NNN items with priorities and blockers), dispatches one task per tick to a tmux worker, expects a data/research/checklist_watchdog_reports/task-NNN_*.md receipt. Policy refreshes succeed; as of 2026-09-07 the queue had ~39 unchecked items, all carrying external blockers.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__agy_fleet",
+      "type": "component",
+      "label": "The local AGY worker fleet - tmux 'agents' session (agents:1.0 / 1.1 / 2.0)",
+      "status": "active",
+      "confidence": 0.5,
+      "description": "Local CLI coding agents (AGY / Gemini Flash wrappers) that execute dispatched checklist tasks. agents:1.0 = agy3 (Gemini 3.8 Flash High), agents:1.1 = agy2 (Gemini 3.7 Flash High), agents:2.0 unsigned-in. Recovery: scripts/checklist_worker_recovery.py recreates missing windows with --noprofile --norc.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__route_state",
+      "type": "component",
+      "label": "Route state / route catalog - authoritative per-route lifecycle (shadow / live-mix / probation / retired)",
+      "status": "observed",
+      "confidence": 0.5,
+      "description": "~482 routes. Stage-5 execution plan now consumes authoritative route state and suppresses non-live states (task-327 / commit d4613b22). The paper writer blocks a route whose state is shadow as route_state_shadow_not_live. Allocator v3 spec lives in CURRENT.md.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__dashboard",
+      "type": "component",
+      "label": "The snapshot-only dashboard (VPS, Tailscale-bound :8080)",
+      "status": "observed",
+      "confidence": 0.55,
+      "description": "Serves data/core/dashboard_snapshot.json + route_state.json. Intentionally Tailscale-bound - localhost:8080 refuses by design (task-325 added to stop future localhost false alarms).",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__agent_contract",
+      "type": "component",
+      "label": "AGENT_CONTRACT.md - the binding operating contract for every agent on this repo",
+      "status": "active",
+      "confidence": 0.6,
+      "description": "Definition-of-Done with pasted evidence; every number needs provenance; claim tags [VERIFIED]/[DRAFTED]/[BLOCKED]/[UNVERIFIED]; KILL requires evidence of ABSENCE, missing data => BLOCKED-ON-DATA; live-path changes need human sign-off (agent_gate.py blocks the commit without an approval token); delegation ladder free-CLI -> haiku -> sonnet -> opus; never print secrets; never automate logins.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__d_local_vps_split",
+      "type": "decision",
+      "label": "Local never contacts Polymarket; the VPS owns all Polymarket I/O",
+      "status": "decided",
+      "confidence": 0.7,
+      "description": "Geo/Cloudflare ban risk. Enforced by harness.source_boundary_check + docs/BOUNDARIES.md. Local is allowed to read the VPS over SSH/API and read synced archives.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__d_paper_only",
+      "type": "decision",
+      "label": "Paper-trading only; pre-PnL by design",
+      "status": "decided",
+      "confidence": 0.7,
+      "description": "Live trading is paper-mode unless the VPS config is explicitly changed. The project is validating ONE honest edge before any real capital.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__d_in_repo_memory",
+      "type": "decision",
+      "label": "Project memory lives in the repo, not an external vault",
+      "status": "decided",
+      "confidence": 0.65,
+      "description": "The old external second-brain vault is gone. CURRENT.md is the single mutable entry point (rewritten in place); dated CODEX_HANDOVER_* docs are archive; status.md is the append-only sanitized log.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__d_honest_cost_audit",
+      "type": "decision",
+      "label": "Evaluate every route under honest costs; KILL requires evidence of absence",
+      "status": "decided",
+      "confidence": 0.7,
+      "description": "The 2026-07-14/15 audit found ZERO of ~477 routes have validated edge under honest costs (n>=100, ROI>0, t>=2); the 49 EVIDENCE_POSITIVE routes were phantoms (a rotated journal consumed mid-count). Since then: passive market-making, OBI-as-taker, whale-copy, lead-lag, settlement-gap, stale-quote pickoff all KILLED with artifacts.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__d_delegation_ladder",
+      "type": "decision",
+      "label": "Delegate down the cost ladder; orchestrator only for architecture / grill / live-path",
+      "status": "decided",
+      "confidence": 0.6,
+      "description": "free CLI pools -> haiku -> sonnet -> opus. Checklist tasks go to the free AGY fleet by default.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__c_no_local_polymarket",
+      "type": "constraint",
+      "label": "Local code must not contact Polymarket (CLOB/REST/WebSocket)",
+      "status": "active",
+      "confidence": 0.75,
+      "description": "The non-negotiable boundary. VPS-only: scanner.py, data_collector.py, external_price_feed.py, the dashboard when pointed at live artifacts, clean paper-event writing.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__c_no_secrets_in_notes",
+      "type": "constraint",
+      "label": "Never write secrets, tokens, keys, cookies, full IPs, or raw .env values to any repo note",
+      "status": "active",
+      "confidence": 0.75,
+      "description": "AGENT_CONTRACT sec 10.5. status.md lines are explicitly 'sanitized'.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__c_live_path_signoff",
+      "type": "constraint",
+      "label": "Live-path changes are gated - agent_gate.py blocks the commit without a human approval token",
+      "status": "active",
+      "confidence": 0.7,
+      "description": "AGENT_CONTRACT sec 7. Applies to strategy_configs.json inserts AND any code change to the entry gates. Contra an earlier spec-v3 draft that claimed 'no sign-off needed'.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__c_taker_fee_gate_040_060",
+      "type": "constraint",
+      "label": "Both live paths hard-block all taker entries in price range [0.40, 0.60]",
+      "status": "active",
+      "confidence": 0.65,
+      "description": "A fee-aware gate in paper_event_writer.py (~L774-776) and strategy_evaluator.py (~L608-611). Any strategy whose entry range overlaps [0.40, 0.60] produces ZERO fills unless the named route is explicitly exempted (a gated code change).",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__c_disk_budget",
+      "type": "constraint",
+      "label": "VPS root disk is a standing budget constraint (~77% used, ~17 GiB free as of 2026-09-07)",
+      "status": "active",
+      "confidence": 0.6,
+      "description": "A 7.14 GB rotated journal caused a live halt + offloader crash-loop in July 2026; permanent fix designed (26_disk_permanent_fix.md), Parts A-D awaiting sign-off.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__bug_flb_route_in_fee_gate",
+      "type": "bug",
+      "label": "The FLB-fade route's NO-side entry range [0.50, 0.60] sits inside the [0.40, 0.60] hard-block",
+      "status": "open",
+      "confidence": 0.6,
+      "description": "Deployed as spec v3 currently describes, the project's one positive candidate route would produce ZERO fills. A code change to exempt the named route from the gate is required, and that change is itself a gated path needing human sign-off. Spec v3 sec 9 needs correction before it goes for sign-off. (code-verified, agent-bench/spec_v3_activation_conflict_resolved.md)",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__bug_current_md_stale",
+      "type": "bug",
+      "label": "CURRENT.md (the canonical entry point) predates the EV Hunter pivot",
+      "status": "open",
+      "confidence": 0.6,
+      "description": "CURRENT.md was rewritten 2026-08-08 but its focus block already says 'this document and FLEET_LOOP.md both predate the Event Desk pivot'. A cold agent reading CURRENT.md first gets the earlier crypto/FLB research phase, not the current sports/esports EV Hunter work.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__bug_agy_dstate_hang",
+      "type": "bug",
+      "label": "The local AGY worker fleet recurrently hangs in WSL p9_client_rpc 'D' state - checklist tasks can't dispatch",
+      "status": "open",
+      "confidence": 0.6,
+      "description": "Newly launched AGY processes enter an uninterruptible-sleep D state with no usable prompt; 'controlled WSL restart remains the tracked recovery boundary'. This is the direct cause of the ~39-item queue backlog. checklist_worker_recovery.py (--noprofile --norc) works around the profile-level manpath hang but not the D-state. Recurs across 2026-09-06/07.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__bug_worker_unsafe_drift",
+      "type": "bug",
+      "label": "Dispatched workers drift into unsafe behaviour (unbounded find, cProfile against the production writer) and need child-cancellation",
+      "status": "open",
+      "confidence": 0.55,
+      "description": "task-330's worker ran local unbounded 'find . -name *service*' and a remote cProfile against the daemonized production paper writer; children terminated, no report accepted. task-331 (priority 98) added for mechanical prevention + cancellation/orphan regression coverage. Same class: task-328's worker drifted into history/selector inspection for ~19 min with no receipt.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__bug_flb_lowvol_gate_unvalidated",
+      "type": "bug",
+      "label": "The FLB LOW-Binance-vol hard-gate is not holdout-validated on the symbols the paper-test will actually trade",
+      "status": "open",
+      "confidence": 0.5,
+      "description": "On the allowed-symbols set (DOGE/HYPE excluded per the toxic-symbol kill-list), the LOW-vol holdout FAILS the per-half bar: H1 t=-1.37 (combined t=-2.56 still significant). agent-bench/flb_lowvol_holdout.md, P29 caveat 2026-07-16.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__q_current_focus",
+      "type": "question",
+      "label": "What is the actual current strategy focus - FLB-fade, or the EV Hunter sports/esports Event Desk?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "CURRENT.md (crypto/FLB) and the git log / status.md (EV Hunter task-3xx, sports markets) disagree. The active session must state which is live and rewrite CURRENT.md sec 1-2 to match.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__q_flb_signoff",
+      "type": "question",
+      "label": "Is the FLB-fade shadow paper-test route (sign-off item 5f) still the plan, and does spec v3 exist?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "Spec v3 was 'in flight' as of CURRENT.md, must fold in: the [0.40,0.60] gate exemption, the route_state_seed.py requirement, the market-level (dedup) t vs the fill-level t, the unvalidated LOW-vol gate, and a sec 9 correction (the change IS gated).",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__q_worker_fleet_fix",
+      "type": "question",
+      "label": "Is there a permanent fix for the AGY worker D-state hang, or is 'restart WSL' the accepted recovery?",
+      "status": "open",
+      "confidence": 0.35,
+      "description": "The queue backlog is entirely downstream of this. A deterministic task ledger + a supervisor that aborts a hung/drifting worker and returns the task to pending (see the agentic-universe audit kit: task_ledger.py + supervisor.py) is the pattern the research recommends. Does the checklist watchdog already do stale-task recovery, or do dropped tasks just sit?",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__q_blocked_on_data_items",
+      "type": "question",
+      "label": "What data unblocks the long-standing BLOCKED-ON-DATA items (task-275 overlay temporal audit, task-261 haircut n>=100)?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "task-275: 15-25 overlay cohorts, all open, 0 resolved - needs resolved settlements to classify temporal-ban-unknown rows. task-261: queue_jumper / deribit_synthetic_arb below the n>=100 haircut bar on some dimensions - needs more covered signals. These have sat blocked for weeks.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    },
+    {
+      "id": "polybot__q_signoff_queue",
+      "type": "question",
+      "label": "Which SIGNOFF_QUEUE_2026-07-14 items are still pending (5e symbol kill-list, 4/4b disk fix, 5f route)?",
+      "status": "open",
+      "confidence": 0.3,
+      "description": "The user 'has it open; it is THE pending-decisions file'. A cold read cannot tell which items the user has since actioned.",
+      "derived_from": [
+        "poly-bot code + docs/agent_handover/CURRENT.md (2026-08-08) + status.md (2026-09-07) + git log, read 2026-09-07"
+      ],
+      "tags": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "polybot__e1",
+      "source": "polybot__core",
+      "target": "polybot__root",
+      "type": "implements",
+      "description": "Shared substrate package."
+    },
+    {
+      "id": "polybot__e2",
+      "source": "polybot__next",
+      "target": "polybot__root",
+      "type": "implements",
+      "description": "Current-generation pipeline + dashboard."
+    },
+    {
+      "id": "polybot__e3",
+      "source": "polybot__strategies",
+      "target": "polybot__root",
+      "type": "implements",
+      "description": "Strategy implementations (backtest/replay)."
+    },
+    {
+      "id": "polybot__e4",
+      "source": "polybot__harness",
+      "target": "polybot__root",
+      "type": "implements",
+      "description": "Validation / replay / retention tooling."
+    },
+    {
+      "id": "polybot__e5",
+      "source": "polybot__ev_hunter",
+      "target": "polybot__root",
+      "type": "implements",
+      "description": "The current research focus."
+    },
+    {
+      "id": "polybot__e6",
+      "source": "polybot__ev_hunter",
+      "target": "polybot__vps",
+      "type": "depends_on",
+      "description": "The deep-research timer + candidate selection run on the VPS."
+    },
+    {
+      "id": "polybot__e7",
+      "source": "polybot__root",
+      "target": "polybot__vps",
+      "type": "depends_on",
+      "description": "Local reads the VPS over sanctioned Tailscale SSH for live/current state."
+    },
+    {
+      "id": "polybot__e8",
+      "source": "polybot__checklist_watchdog",
+      "target": "polybot__agy_fleet",
+      "type": "depends_on",
+      "description": "One task per 20-min tick dispatched to a tmux worker."
+    },
+    {
+      "id": "polybot__e9",
+      "source": "polybot__agy_fleet",
+      "target": "polybot__agent_contract",
+      "type": "implements",
+      "description": "Every worker is bound by the contract (claim tags, DoD, sign-off)."
+    },
+    {
+      "id": "polybot__e10",
+      "source": "polybot__route_state",
+      "target": "polybot__strategies",
+      "type": "depends_on",
+      "description": "The main pipeline needs route_state_seed.py to seed the catalog before a strategy is live."
+    },
+    {
+      "id": "polybot__e11",
+      "source": "polybot__dashboard",
+      "target": "polybot__vps",
+      "type": "depends_on",
+      "description": "Serves VPS snapshot artifacts, Tailscale-bound."
+    },
+    {
+      "id": "polybot__e12",
+      "source": "polybot__d_local_vps_split",
+      "target": "polybot__c_no_local_polymarket",
+      "type": "records",
+      "description": "The decision, made a hard constraint."
+    },
+    {
+      "id": "polybot__e13",
+      "source": "polybot__d_local_vps_split",
+      "target": "polybot__root",
+      "type": "records",
+      "description": "The founding architectural split."
+    },
+    {
+      "id": "polybot__e14",
+      "source": "polybot__d_paper_only",
+      "target": "polybot__root",
+      "type": "records",
+      "description": "Pre-PnL by design."
+    },
+    {
+      "id": "polybot__e15",
+      "source": "polybot__d_in_repo_memory",
+      "target": "polybot__agent_contract",
+      "type": "records",
+      "description": "CURRENT.md + status.md are the memory the contract points every agent at."
+    },
+    {
+      "id": "polybot__e16",
+      "source": "polybot__d_honest_cost_audit",
+      "target": "polybot__ev_hunter",
+      "type": "records",
+      "description": "Zero validated crypto edge is why the project pivoted to Event Desk."
+    },
+    {
+      "id": "polybot__e17",
+      "source": "polybot__c_taker_fee_gate_040_060",
+      "target": "polybot__bug_flb_route_in_fee_gate",
+      "type": "records",
+      "description": "The gate is why the FLB route would get zero fills."
+    },
+    {
+      "id": "polybot__e18",
+      "source": "polybot__bug_flb_route_in_fee_gate",
+      "target": "polybot__strategies",
+      "type": "blocks",
+      "description": "The one positive candidate cannot be deployed as specified."
+    },
+    {
+      "id": "polybot__e19",
+      "source": "polybot__bug_agy_dstate_hang",
+      "target": "polybot__checklist_watchdog",
+      "type": "blocks",
+      "description": "Tasks cannot dispatch; ~39-item queue backlog."
+    },
+    {
+      "id": "polybot__e20",
+      "source": "polybot__bug_worker_unsafe_drift",
+      "target": "polybot__agy_fleet",
+      "type": "challenges",
+      "description": "Workers need mechanical guardrails + reliable child-cancellation."
+    },
+    {
+      "id": "polybot__e21",
+      "source": "polybot__bug_current_md_stale",
+      "target": "polybot__d_in_repo_memory",
+      "type": "challenges",
+      "description": "The single-entry-point discipline only works if CURRENT.md is actually current."
+    },
+    {
+      "id": "polybot__e22",
+      "source": "polybot__bug_flb_lowvol_gate_unvalidated",
+      "target": "polybot__q_flb_signoff",
+      "type": "records",
+      "description": "An open validation gap spec v3 must acknowledge."
+    },
+    {
+      "id": "polybot__e23",
+      "source": "polybot__q_current_focus",
+      "target": "polybot__ev_hunter",
+      "type": "blocks",
+      "description": "Undefined which strategy line is live."
+    },
+    {
+      "id": "polybot__e24",
+      "source": "polybot__q_worker_fleet_fix",
+      "target": "polybot__bug_agy_dstate_hang",
+      "type": "records",
+      "description": "The open question behind the queue backlog."
+    },
+    {
+      "id": "polybot__e25",
+      "source": "polybot__q_flb_signoff",
+      "target": "polybot__strategies",
+      "type": "blocks",
+      "description": "The one positive candidate awaits spec v3 + sign-off 5f."
+    },
+    {
+      "id": "polybot__e26",
+      "source": "polybot__q_blocked_on_data_items",
+      "target": "polybot__checklist_watchdog",
+      "type": "blocks",
+      "description": "Multiple high-priority queue items are BLOCKED-ON-DATA indefinitely."
+    },
+    {
+      "id": "polybot__e27",
+      "source": "polybot__d_delegation_ladder",
+      "target": "polybot__agy_fleet",
+      "type": "records",
+      "description": "Why the fleet is free-tier CLI agents."
+    },
+    {
+      "id": "polybot__e28",
+      "source": "polybot__c_disk_budget",
+      "target": "polybot__vps",
+      "type": "blocks",
+      "description": "A recurring operational ceiling on the VPS."
+    }
+  ]
+}

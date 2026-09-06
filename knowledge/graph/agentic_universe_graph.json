@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-08",
+  "last_updated": "2026-10-09",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1212,6 +1212,10 @@
     {
       "date": "2026-10-08",
       "change": "Autonomous run 316. Folded arXiv:2605.18747 (Code as Agent Harness survey, May 2026, VERIFIED) - queued since run 306. Frames code as the operational substrate for agent reasoning/acting/verification across 3 layers, and names 6 open harness-engineering challenges; the project has a mapped answer to 5 (evaluation beyond task success -> run 298 + run_novelty; verification under incomplete feedback -> Horizon Gap; regression-free harness improvement -> Phase 3 gate + acceptance_gate; consistent shared state -> task_ledger + run-218 criterion + fractal_flock; human oversight -> exec_guard + irreversibility budget), multimodal is out of scope. New node + 4 edges (supports harness-engineering-is-empirical + capability-is-config + the deterministic-spine split; informs the v2 plan as a checklist). 341 -> 342 nodes, 1359 -> 1363 edges. Validator VALID. The SEVerA/harness-engineering citation cluster is now fully folded (305-307, 316)."
+    },
+    {
+      "date": "2026-10-09",
+      "change": "Autonomous run 317. Owner request (poly-bot/poster-studio audit). Did a FIRST-PASS poly-bot audit from a 2026-09-07 read of /home/dev/poly-bot (README + docs/agent_handover/CURRENT.md + status.md + git log + package READMEs). docs/audits/poly-bot/poly-bot_project_graph.json (32 nodes / 28 edges, VALID against project_graph_scaffold) + docs/audits/poly-bot/PROJECT_STATE.md. Captures the stable architecture (local/VPS split, the non-negotiable no-local-Polymarket boundary, the package map, the AGENT_CONTRACT, the 2026-07 zero-validated-edge honest-cost audit, the EV Hunter / Event Desk pivot, the checklist-watchdog + AGY worker fleet), 6 bugs/tensions (FLB route falls inside the [0.40,0.60] taker fee-gate => zero fills; CURRENT.md predates the pivot; the AGY fleet recurring WSL p9_client_rpc D-state hang => ~39-item queue backlog; workers drift unsafe; LOW-vol gate unvalidated), and 6 question nodes flagged for the ACTIVE session to reconcile (EV Hunter specifics + the sign-off queue). Highest-value move identified: fix the worker D-state hang or wire task_ledger.py + supervisor.py from the audit kit. No main-graph node/edge change (342/1363); this is a per-project artifact under docs/audits/. Validator VALID."
     }
   ],
   "nodes": [
