@@ -780,6 +780,10 @@
     {
       "date": "2026-09-11",
       "change": "Autonomous run 204. Recency-weighted arxiv-fetch sweep (S2 still 429). Folded PACE (arXiv:2606.08106) as concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution: 'keep it if the score went up' applied repeatedly against a noisy held-out estimate is uncontrolled adaptive multiple testing - the agent p-hacks itself (greedy commits 30-42% false / 72-100% false with no real gain on Qwen2.5 0.5B-3B; 13-21 spurious self-modifications/run; degrades the most fragile agent 4.9 pts). PACE = a paired testing-by-betting e-process, commit only on decisive evidence, per-decision false-commit guarantee under optional stopping, ~18% lower eval cost. 6 edges: challenges artifact_phase3_improvement_loop and concept_self_harness_validates_the_three_loop (greedy acceptor, no validity guarantee); refines concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (exogenous AND anytime-valid) and concept_gate_faces_a_pretrained_grader_gamer (noise alone, no adversary); extends concept_self_improvement_evaluation_is_noisy_and_task_order_dependent; supports concept_geometric_reliability_decay. docs/what_would_make_this_wrong.md gains a run-204 update under section 2. 238->239 nodes, 887->893 edges."
+    },
+    {
+      "date": "2026-09-11",
+      "change": "Autonomous run 205. Recency-weighted arxiv-fetch sweep. Folded 'Who Grades the Grader?' (arXiv:2607.12790) as concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score: the metric itself can be the evolving object (evolve a composition of typed drawback detectors, select for agreement with a 10-item anchored reference set, regularise by consensus); +0.21 agreement with hidden ground truth (paired p=0.014). Safety result: remove the anchor guards and the metric collapses to a vacuous always-pass detector that trains skills JUST AS WELL - so downstream task score cannot validate a self-evolved evaluator (task score = sufficiency, not validity). Double Ratchet retains 88-110% of the ground-truth/rubric lift on MBPP+, Spider 2.0-Snow, report generation; an independent judge caught rubric-gaming and one added detector repaired it. 6 edges: supports artifact_phase3_holdout_set (frozen hand-written evaluator = the safe side) and artifact_phase3_heterogeneous_verifier (independent judge catches gaming); refines concept_self_improvement_strength_tracks_the_verification_hierarchy (an evolved evaluator's hierarchy position is not fixed) and concept_gate_faces_a_pretrained_grader_gamer; extends concept_aggregate_score_masks_per_layer_regression (a self-evolved aggregate can be vacuous); concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution supports it (PACE validates the commit decision, this validates the metric). 239->240 nodes, 893->899 edges."
     }
   ],
   "nodes": [
@@ -6935,6 +6939,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-11-0600.md"
+      ]
+    },
+    {
+      "id": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "label": "A self-evolved evaluator cannot be validated by downstream task score; it needs an anchored reference set, and validity is where safety lives",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:evaluator_validity",
+      "confidence": 0.7,
+      "description": "Who Grades the Grader? Co-Evolving Evaluation Metrics and Skills for Self-Improving LLM Agents (arXiv:2607.12790, VERIFIED via arXiv abstract read run 205). Every self-evolving-skill loop assumes a reliable evaluation metric already exists; in many real applications none does. This work makes the metric itself the evolving object: it searches compositions of small typed drawback detectors under a full evolutionary lifecycle, selecting for agreement with a TEN-ITEM ANCHORED REFERENCE SET and regularising by consensus over unlabeled outputs. What evolves is the function that grades one output - never the fixed task sets it is scored on - and the output is an inspectable expression, not an opaque judge. It is valid: on code generation it gains 0.21 agreement with hidden ground truth on a locked set that metric selection never reads (paired p=0.014), beating the bare LLM judge it contains. THE SAFETY RESULT: removing the anchor guards collapses the metric into a vacuous always-pass detector, while removing the detector lifecycle does not - inverting the lesson from skill evolution. That collapse is the warning: DOWNSTREAM TASK SCORE CANNOT VALIDATE A SELF-EVOLVED EVALUATOR, because the collapsed (always-pass) metric trains skills just as well - task score answers only sufficiency, not validity. Double Ratchet (co-evolving the metric with a lifecycle-managed skill loop) retains 88-110% of the lift ground truth or a hand-written rubric buys, across MBPP+, Spider 2.0-Snow, and report generation. When evolved skills gamed the report rubric, an INDEPENDENT judge caught it and one added detector repaired it. Bearing on the project: holdout_tasks.py is FROZEN and hand-written - the safe side of this result - but the finding is the counter-case (what a self-evolved gate collapses to) and its method (anchored reference set + consensus regularisation + independent judge) is the recipe if check-substance ever needs to adapt. Recency: July 2026, code-generation / small-agent regime.",
+      "tags": [
+        "who-grades-the-grader",
+        "double-ratchet",
+        "self-evolved-evaluator",
+        "anchored-reference-set",
+        "always-pass-collapse",
+        "task-score-is-only-sufficiency",
+        "inspectable-metric",
+        "independent-judge-catches-gaming",
+        "recency-2026-07"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-11-1200.md",
+        "arXiv:2607.12790 (Who Grades the Grader? Co-Evolving Evaluation Metrics and Skills for Self-Improving LLM Agents) - VERIFIED, abstract read run 205"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-11-1200.md"
       ]
     }
   ],
@@ -16495,6 +16528,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "A distinct acceptor failure from grader-gaming: here nothing is adversarial - noise alone plus a greedy rule produces false commits. The gate is fragile even against an honest proposer."
+    },
+    {
+      "id": "edge_evaluator_validity_supports_holdout_set",
+      "source": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "target": "artifact_phase3_holdout_set",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.68,
+      "description": "The project's choice to FREEZE the evaluator and hand-write the checks is the safe side of this result: a self-evolved evaluator collapses to a vacuous always-pass detector without anchor guards, and downstream task score cannot detect the collapse."
+    },
+    {
+      "id": "edge_evaluator_validity_supports_heterogeneous_verifier",
+      "source": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "target": "artifact_phase3_heterogeneous_verifier",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "'When evolved skills gamed the report rubric, an independent judge caught it and one added detector repaired it' - the two-independent-scorers design, validated by an independent group; the second scorer earns its cost exactly at the gaming case."
+    },
+    {
+      "id": "edge_evaluator_validity_refines_verification_hierarchy",
+      "source": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "If the evaluator is itself an evolving object, its position in the verification hierarchy is not fixed - it can silently collapse to intrinsic self-assessment (always-pass) while the loop keeps reporting improvement. The hierarchy must be pinned by an anchor the loop cannot edit."
+    },
+    {
+      "id": "edge_evaluator_validity_extends_aggregate_masks_regression",
+      "source": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "target": "concept_aggregate_score_masks_per_layer_regression",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "A stronger form of the masking problem: not only can an aggregate hide a per-layer regression, a self-evolved aggregate can be VACUOUS (always-pass) and still 'train skills just as well' - the score carries no validity signal at all."
+    },
+    {
+      "id": "edge_evaluator_validity_refines_grader_gamer",
+      "source": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "target": "concept_gate_faces_a_pretrained_grader_gamer",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "The grader-gaming threat, one level up: when the grader itself evolves, the gaming can be to make the grader trivial rather than to satisfy a fixed one. The anchor guards are the defense."
+    },
+    {
+      "id": "edge_acceptor_weakpoint_relates_evaluator_validity",
+      "source": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "target": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Two halves of 'fix the acceptor': PACE makes the commit decision statistically valid given a metric; Who Grades the Grader makes the metric itself valid. Both say the proposer is not where reliability is won or lost."
     }
   ]
 }
