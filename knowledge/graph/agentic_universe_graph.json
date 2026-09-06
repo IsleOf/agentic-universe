@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-28",
+  "last_updated": "2026-09-29",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -328,6 +328,10 @@
     {
       "date": "2026-09-28",
       "change": "Autonomous run 92. IDLE-STATE RULE: built tools/probe_composed_design.py - what_would_make_this_wrong.md section 5's experiment (does short-agent + four-field + folded-state compose?) as a runnable rig. Three configs (long agent / prose handoffs / four-field + folded state) swept over task length. Dry-run: config C dominates A and B everywhere and doubles the usable horizon (12 -> 24 steps at p_step 0.985). Verdict COMPOSES BUT BOUNDED - NOT falsified (decomposition helps, four-field beats prose) but the base per-step rate sets a ceiling: you need short TASKS not just short AGENTS. Folded into what_would_make_this_wrong.md section 5. artifact_probe_composed_design_rig added. 20 selftests GREEN."
+    },
+    {
+      "date": "2026-09-29",
+      "change": "Autonomous run 93. IDLE-STATE RULE: folded the run-92 composed-design verdict into nourishing_harness_design.md 3.1 ('this stack is a horizon extender, not a horizon remover - the orchestration layer's decomposition into short TASKS does at least as much work as the harness layer'), and linked the composed-design rig into emergence_probe_catalogue.md + docs/HANDOFF.md (6th rig, 6th stub). No graph node/edge change."
     }
   ],
   "nodes": [

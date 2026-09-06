@@ -16,6 +16,7 @@ changes. Run `python tools/<name> selftest` or `... sweep`.
 | epistemic-Sybil evidence roots | `tools/probe_epistemic_sybil.py` | reproduces 2609.01873 — coverage 1.00→0.10 on a shared source, holds on independent sources, ancestry-dedup recovers | `docs/probe_epistemic_sybil.md` |
 | RHO held-out grading | `tools/probe_rho_holdout.py` | only 33% of a self-preference-reported harness gain survives external grading; self-preference selection lands below honest selection | `docs/probe_rho_holdout.md` |
 | activation-probe generalisation | `tools/probe_activation_generalisation.py` | a probe trained on assigned collusion scores AUC 1.00 in-distribution but 0.72 on emergent collusion it never saw (gap 0.28) — a scenario detector, not a general channel | `docs/probe_activation_generalisation.md` |
+| composed-design test (§5) | `tools/probe_composed_design.py` | short-agent + four-field + folded-state doubles the usable task horizon (12→24 steps) and beats prose handoffs — but the base per-step rate still sets a ceiling: *composes but bounded* | `docs/probe_composed_design.md` |
 
 The rigs share the Phase 0 trace substrate (`tools/README.md`), so a real multi-probe run produces one
 continuous trace corpus.
