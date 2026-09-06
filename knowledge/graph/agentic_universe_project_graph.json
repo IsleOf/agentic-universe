@@ -1,7 +1,7 @@
 {
   "project": "agentic-universe",
   "format": "agentic-universe project graph v1",
-  "last_updated": "2026-09-24",
+  "last_updated": "2026-10-04",
   "nodes": [
     {
       "id": "au__root",
@@ -390,6 +390,36 @@
         "risk",
         "measurement"
       ]
+    },
+    {
+      "id": "au__c_acceptance_gate",
+      "label": "tools/acceptance_gate.py - exogenous gate -> replayable certificate",
+      "type": "component",
+      "status": "built",
+      "confidence": 0.6,
+      "description": "Composes verify_loop_edit + PACE e-value + process-adjusted flag + forecast Brier into a signed certificate (run 300). v2.1 core brick. Not yet wired as the commit gate.",
+      "derived_from": [
+        "docs/self_rebuild_v2.md"
+      ],
+      "tags": [
+        "v2",
+        "gate"
+      ]
+    },
+    {
+      "id": "au__q_v2_rebuild",
+      "label": "v2 self-rebuild: headless multi-agent loop on the exogenous gate",
+      "type": "question",
+      "status": "open",
+      "confidence": 0.4,
+      "description": "docs/self_rebuild_v2.md (run 299). 6 gated phases; v2.0 = provision a call_model budget. Blocks: probes, real acceptance gate, real swarm.",
+      "derived_from": [
+        "docs/self_rebuild_v2.md"
+      ],
+      "tags": [
+        "v2",
+        "next"
+      ]
     }
   ],
   "edges": [
@@ -560,6 +590,27 @@
       "target": "au__root",
       "type": "records",
       "description": "Mechanical change-traceability for the graph."
+    },
+    {
+      "id": "au__e_gate_implements_root",
+      "source": "au__c_acceptance_gate",
+      "target": "au__root",
+      "type": "implements",
+      "description": "The v2.1 acceptance gate for the loop."
+    },
+    {
+      "id": "au__e_v2_blocks_model_integration",
+      "source": "au__q_v2_rebuild",
+      "target": "au__q_model_integration",
+      "type": "depends_on",
+      "description": "v2.0 is the call_model binding."
+    },
+    {
+      "id": "au__e_gate_records_v2",
+      "source": "au__c_acceptance_gate",
+      "target": "au__q_v2_rebuild",
+      "type": "records",
+      "description": "First built brick of the v2 plan."
     }
   ],
   "evolution_log": [

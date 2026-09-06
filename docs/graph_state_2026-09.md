@@ -1,20 +1,50 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252, 279, 301.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 279)
+## Snapshot (run 301)
 
-**312 nodes · 1237 edges · 9 approach families · 210 `challenges` edges (~17% of all edges).**
+**330 nodes · 1321 edges · 9 approach families · 212 `challenges` edges (~16% of all edges).**
 
-`verification_state`: 109 needs-validation · **172 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
+`verification_state`: 114 needs-validation · **175 partially-validated** · **29 validated** · 5 inconclusive · 7 unset.
 (`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature
 nodes sit at `partially_validated`.)
-Families: self_improving_harness 122 · emergent_behaviors 86 · agent_habitat 27 · nourishing_harness 23 · graph_engineering 22 · orchestration_first 20 · rest 12.
-Edge types: supports 423 · challenges 210 · instantiates 194 · refines 185 · informs 72 · depends_on 44 · implements 33 · extends 22 · constrains 19 · grounds 15 · verifies 14 · rest 6.
+Families: self_improving_harness 131 · emergent_behaviors 87 · orchestration_first 27 · agent_habitat 27 · nourishing_harness 24 · graph_engineering 22 · rest 12.
+Edge types: supports 448 · challenges 212 · instantiates 199 · refines 199 · informs 78 · depends_on 44 · implements 43 · extends 31 · grounds 22 · verifies 20 · constrains 19 · rest 6.
+Selftests: `python tools/selftest_all.py` → **BUILD SELFTEST: GREEN** (36 jobs).
+
+**Runs 280–300** — the owner's three new research pushes folded, then the project turned to
+**rebuilding its own loop**.
+
+*Owner research (295–298):* `docs/HANDOFF.md` refreshed from run 88 → 294 (it was the
+unblock-everything doc, 206 runs stale). The **prediction-markets branch** (`knowledge/notes/
+prediction-markets-branch-2026-09.md`) folded (296) — its forecast → resolve → Brier →
+domain-calibration → replay-gate loop is an independent operational arrival at
+`epistemic_constitution.py`, and it names the external eval targets the forecast ledger lacks
+(ForecastBench, PredictionMarketBench, PolyBench); plus "calibration is not timeliness"
+(Prophet Arena `2510.17638`). The **agentic-tooling scan** folded (298), new parts only (~60% was
+already in the graph): AgentLens process-scoring (23.2% of passes are lucky retries) + StaminaBench
+(retry access is a 12× lever), model routing (`2606.22902`), hybrid vector+graph+KV+episodic memory
++ janitor agents.
+
+*Per-project audit unblocked (297):* `tools/project_graph_scaffold.py` hardened for external repos;
+`docs/project_audit_kit/` shipped — a 4-file drop-in + a prompt for the session auditing poly-bot
+(`/home/dev/poly-bot`) or poster-studio (`/home/dev/poster-studio`). A separate branch
+`etsy-agentic-space` was scaffolded off `main` at owner request (shop-level Etsy orchestrator).
+
+*The v2 self-rebuild (299–300):* `docs/self_rebuild_v2.md` — the loop redesigned on its own graph:
+a deterministic spine (task ledger + PILOT supervisor + an **exogenous acceptance gate**) and a
+generative edge (model-routed proposers + an 8-agent WSL/Windows worker roster + a Perplexity /
+NotebookLM browser scout on the `nodriver-session` contract). 6 gated migration phases; the #1
+unblock is a `call_model` budget; no training infra (the emergence-first bet holds). Run 300 built
+the v2.1 core brick: **`tools/acceptance_gate.py`** — `check()` composes `verify_loop_edit` + the
+PACE e-value + a process-adjusted flag (a repair-dependent pass → `accept_conditional`) + a forecast
+Brier into a signed, replayable certificate; `verify_certificate()` recomputes the hashes. Not yet
+wired as the commit gate.
 
 **Runs 269–279** — orientation refresh, then the run-262 challenge edges probe-tested, then a
 citation-chain sweep that found a crystallised subfield run 253 had marked swept.

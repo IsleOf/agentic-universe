@@ -1148,6 +1148,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 300. Built tools/acceptance_gate.py - the v2.1 core brick from docs/self_rebuild_v2.md section 7. check() composes verify_loop_edit (held-out + category + tamper + legibility) + the PACE e-value + a process-adjusted flag (repair-dependent pass -> accept_conditional, the AgentLens shape from run 298) + a forecast Brier score, and emits a signed replayable certificate to an append-only log (runtime/observations/certificates/, gitignored). verify_certificate() recomputes the proposal hash, certificate hash and Brier. Exogenous - a proposer cannot edit the held-out set, alpha or a past certificate. 11 selftest checks; selftest_all JOBS -> 36. tools/README.md + the v2 plan updated. 1 node + 5 edges. 329 -> 330 nodes."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 301. Orientation refresh (IDLE-STATE clause c; no main-graph node/edge change). docs/graph_state_2026-09.md Snapshot run 279 (312/1237) -> run 301 (330/1321; 36 selftests) + a \"Runs 280-300\" section: the owner three research pushes (prediction-markets branch fold 296, agentic-tooling scan fold 298, HANDOFF refresh 295), the per-project audit kit (297) + the etsy-agentic-space branch, and the v2 self-rebuild arc (plan 299 + acceptance_gate.py brick 300). docs/PROJECT_STATE.md brought to run 301: numbers, current-state, the single-highest-value-next-move now framed as \"provision a call_model budget\" (v2.0), + open question au__q_v2_rebuild. knowledge/graph/agentic_universe_project_graph.json (the 26-node self-graph) -> 28 nodes / 27 edges (au__c_acceptance_gate + au__q_v2_rebuild), VALID."
     }
   ],
   "nodes": [
