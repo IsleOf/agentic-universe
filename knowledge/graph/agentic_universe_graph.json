@@ -276,6 +276,10 @@
     {
       "date": "2026-09-25",
       "change": "Autonomous run 79. arXiv sweep (frontier still ~Sept 3). concept_generative_process_diversity (2609.03422 VERIFIED, 38 models / 10 benchmarks): generative-process diversity - NCD on raw outputs, residualised, grounded in Algorithmic Information Theory - predicts reduced correlated failure (-0.216, CI [-0.309,-0.122], negative on all ten), not attributable to semantic similarity or capability. Sharpens principle_diversity_maintenance: 'heterogeneous base models' must mean process-diverse, not different vendors. Modest effect - refines rather than resolves concept_epistemic_sybil_collapse (shared evidence still collapses aggregate confidence)."
+    },
+    {
+      "date": "2026-09-25",
+      "change": "Autonomous run 80. First closed Phase 3 cycle on the real loop harness. A model at the proposer seam rejected the heuristic's citation proposal (replay artifact) and proposed an IDLE-STATE RULE for context/loop_policy: when idle, deepen a node or dry-run a probe, do not refresh a README again. Held-out re-run 17/17 both verifiers, 0 disagreements; verify_loop_edit accept (risk 0->0, no regression); promoted context/loop_policy v1->v2, recoverability confirmed, written into SKILL.md + loop_adapter. Not autonomous (model call was a person; held-out re-run reasoned not re-executed) but the seams are unchanged. Prediction deferred, reverts on failure. artifact_phase3_first_closed_loop added."
     }
   ],
   "nodes": [
@@ -4845,6 +4849,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-25-1800.md"
+      ]
+    },
+    {
+      "id": "artifact_phase3_first_closed_loop",
+      "label": "First closed Phase 3 cycle — model proposer, held-out verify, edit promoted",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase3_closed_once",
+      "confidence": 0.7,
+      "description": "Run 80: the full Phase 3 loop executed once on the real loop harness. A model (the interactive agent, reasoning at the proposer seam) rejected the heuristic's citation proposal as a replay artifact and proposed an IDLE-STATE RULE for context/loop_policy - when idle, deepen a node or dry-run a probe, do not refresh a README again. Re-run on the 17 held-out questions: unchanged (edit is about run-mode selection, not research method), 17/17 both verifiers, 0 disagreements. verify_loop_edit: risk 0.0->0.0, strict_decrease true, no regression -> accept. Promoted context/loop_policy v1->v2 (3b94b18e), recoverability confirmed. Written into the live SKILL.md and loop_adapter. Not autonomous: the model call was a person and the held-out re-run was reasoned not re-executed; PROPOSER_PROMPT and verify_loop_edit are the unchanged seams. Prediction (idle runs stop churning READMEs) deferred, reverts on failure.",
+      "tags": [
+        "phase-3",
+        "first-closed-loop",
+        "model-proposer",
+        "idle-state-rule",
+        "promoted",
+        "deferred-verification"
+      ],
+      "derived_from": [
+        "docs/phase3_first_closed_loop.md",
+        "runtime/harness/context/loop_policy.history.json"
+      ],
+      "evidence_links": [
+        "docs/phase3_first_closed_loop.md"
       ]
     }
   ],
@@ -10751,6 +10781,58 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "Complementarity needs independent failure modes; process diversity is what produces them."
+    },
+    {
+      "id": "edge_closedloop_instantiates_sih",
+      "source": "artifact_phase3_first_closed_loop",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75
+    },
+    {
+      "id": "edge_closedloop_realizes_verifier_gate",
+      "source": "artifact_phase3_first_closed_loop",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "observation -> proposal -> verification (held-out, 2 verifiers) -> promotion -> recoverability, run once end to end."
+    },
+    {
+      "id": "edge_closedloop_depends_on_holdout",
+      "source": "artifact_phase3_first_closed_loop",
+      "target": "artifact_phase3_holdout_set",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.85
+    },
+    {
+      "id": "edge_closedloop_depends_on_proposer",
+      "source": "artifact_phase3_first_closed_loop",
+      "target": "artifact_phase3_proposer_context",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_closedloop_exercises_registry",
+      "source": "artifact_phase3_first_closed_loop",
+      "target": "artifact_phase1_harness_registry",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "git log on runtime/harness/ now shows a real harness change history - the Phase 1 'done when' criterion."
     }
   ]
 }

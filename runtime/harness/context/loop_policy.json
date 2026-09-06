@@ -16,6 +16,10 @@
   ],
   "do_not": [
     "re-sweep covered ground",
-    "re-add a paper already in derived_from"
+    "re-add a paper already in derived_from",
+    "refresh a README or retune a classifier when idle (run-80 rule)"
+  ],
+  "rules": [
+    "IDLE-STATE RULE (run 80): if the last 3 runs were all doc-refresh / hygiene / 'other', AND an arXiv sweep returned nothing past the known frontier, AND tools/selftest_all.py is GREEN, then the run's increment must be one of: (a) deepen ONE existing node with a targeted citation sweep (S2 citations on its source), (b) dry-run one probe design from docs/emergence_probe_catalogue.md end to end, or (c) a genuine consistency/adversarial pass. Do NOT refresh a README or retune a classifier again."
   ]
 }
