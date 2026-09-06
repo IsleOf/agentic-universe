@@ -45,6 +45,27 @@ every shared-pool combo:     <= +0.15
 missing verification degrades it to a modest benefit; missing deterministic synthesis (a vote) or disjoint
 evidence (a shared pool) erases it. The criterion is load-bearing, not a post-hoc relabelling.
 
+## Sensitivity analysis (run 249)
+
+A 16-cell grid — `BASE_HERD` ∈ {0.35, 0.42, 0.50, 0.60} × `POISON_DRAG` ∈ {0.35, 0.45, 0.55, 0.70},
+2,500 trials/combo — tests whether the **CONFIRMS** verdict is a parameter artifact:
+
+- **The core claim is parameter-robust.** In every cell: `single ≈ 0.454`; `a1b1c1` delta `+0.526`;
+  `a1b1c1` is strictly the best of the 8 combos; the best combo missing any one condition is `+0.192`
+  (a0b1c1 — deterministic + disjoint, no verification). `a1b1c1` and `a0b1c1` are by construction
+  insensitive to both knobs (deterministic synthesis skips the herding term; disjoint evidence skips the
+  poison term), so the criterion's positive direction does not depend on the sim's magnitudes.
+- **One sub-check is parameter-sensitive.** "No vote-synthesis config strongly helps" (`vote_ok`) holds
+  only for `BASE_HERD ≥ ~0.42`: at `BASE_HERD = 0.35` a verifiable + disjoint + *vote* config clears the
+  `STRONG = 0.15` bar (delta ~0.16). The probe's default `BASE_HERD = 0.50` has comfortable margin, and
+  the claim degrades gracefully — below the flip point a vote is *weakly* helpful, never as good as a
+  deterministic merge.
+
+Reading: the run-218 criterion's shape (verifiable + deterministic + disjoint ≫ any partial) is not an
+artifact; the strength of the "a vote is actively bad" claim depends on assuming herding costs at least a
+moderate fraction of tasks, which the literature (`concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding`)
+supports.
+
 ## Stub / Phase 6
 
 `_subtask_ok` and `_synthesis_ok` are the swap points for real agent runs. With a real multi-agent harness

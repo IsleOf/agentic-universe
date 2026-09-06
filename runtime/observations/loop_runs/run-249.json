@@ -1,0 +1,20 @@
+{
+  "run": 249,
+  "increment": "probe dry-run - 16-cell parameter sensitivity grid on probe_orchestration_value: the run-218 CONFIRMS verdict's shape is parameter-robust; one sub-check (vote never strongly helps) needs BASE_HERD >= ~0.42; 0 nodes / 0 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-249.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 249 OK · VALID · graph +0 · cites 0v/0 · idle-streak 2 · legible 1.00 · verified-frac 0.80 · novelty 1.00"
+}
