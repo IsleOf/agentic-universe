@@ -512,6 +512,10 @@
     {
       "date": "2026-10-10",
       "change": "Autonomous run 138. Correction + fold. CORRECTED concept_spontaneous_behaviour_beats_scripted_for_simulation: run 136 wrongly cross-referenced arXiv:2502.08691 as a 'companion' of Shall We Team Up - it is a separate paper (AgentSociety). Stripped the bogus id (Shall We Team Up is aclanthology 2024.findings-emnlp.297 only; its content was correctly captured). Added concept_agentsociety_large_scale_generative_society (arXiv:2502.08691): 10k+ agents, 5M interactions, claimed outcome-alignment with real experiments on polarization / inflammatory spread / UBI / shocks; a scripted-environment simulator - the contrast case to the unscripted result. +4 edges."
+    },
+    {
+      "date": "2026-10-10",
+      "change": "Autonomous run 139. Probe rig - the epistemic-Sybil probe's live-run seam (fourth of seven). probe_epistemic_sybil.py gains model_reader(call_model, corpus): a model reads a real document and the first number in its reply is taken as the estimate; unparseable reply or exception -> nan, dropped before aggregating. run_arm takes reader= and draws source ids from reader.sources. Selftested against a 40-doc fake corpus: the shared-source coverage collapse and dedup recovery both reproduce; an unparseable reply -> nan. 10 checks GREEN (was 7). Four of seven HANDOFF seams now written (model_policy / model_preference / model_relay / model_reader). No graph node/edge change."
     }
   ],
   "nodes": [

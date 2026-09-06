@@ -15,8 +15,9 @@ This rig simulates the *mechanism* — an agent reading a source produces an
 estimate with a per-source systematic bias plus small independent noise. Shared
 source ⇒ shared bias ⇒ correlated error ⇒ a naive mean of N reports is
 over-confident. No model call: the finding is statistical, and this reproduces it
-in a controlled sim so the probe is runnable when real LLM agents are substituted
-(swap `agent_read` for a model call over a document).
+in a controlled sim so the probe is runnable now. The live-run seam is written:
+`model_reader(call_model, corpus)` reads real documents; pass it as
+`run_arm(..., reader=...)`. Unparseable replies are `nan` and dropped.
 
 Instrumented with the Phase 0 `Recorder` (each read is a CLAIM carrying its
 evidence_root) and aggregated with `experience_bank`'s ancestry logic in spirit.
@@ -58,6 +59,36 @@ def agent_read(rng, source_id):
     return TRUE_VALUE + _source_bias(rng, source_id) + rng.gauss(0, READ_NOISE_SD)
 
 
+class model_reader:
+    """Adapt a real model into an `agent_read(rng, source_id)` over a document corpus.
+
+    `call_model(document_text) -> str` is the only seam: the model reads one
+    document and states its estimate of the disputed value; the first number in
+    the reply is taken. An unparseable reply is `nan` and that read is dropped
+    from the arm (the honest reading of "this agent produced no usable estimate").
+    `corpus` is `{source_id: document_text}`; `.sources` is the id list the arms
+    draw from. Swap this in via `run_arm(..., reader=model_reader(call_model, corpus))`
+    and the probe measures real correlated-error-from-shared-evidence instead of
+    the scripted bias.
+    """
+    _NUM = None
+
+    def __init__(self, call_model, corpus):
+        import re
+        type(self)._NUM = type(self)._NUM or re.compile(r"-?\d+(?:\.\d+)?")
+        self._call = call_model
+        self._corpus = dict(corpus)
+        self.sources = list(self._corpus)
+
+    def __call__(self, rng, source_id):
+        try:
+            reply = self._call(self._corpus.get(source_id, ""))
+            m = self._NUM.search(reply or "")
+            return float(m.group(0)) if m else float("nan")
+        except Exception:
+            return float("nan")
+
+
 def _ci95(reports):
     """Naive 95% CI of the mean, treating reports as i.i.d. (the mistake)."""
     n = len(reports)
@@ -73,37 +104,52 @@ def _covered(reports):
     return abs(m - TRUE_VALUE) <= half
 
 
-def run_arm(arm, n, trials=400, rec=None):
+def run_arm(arm, n, trials=400, rec=None, reader=None):
     """arm in {'shared', 'independent', 'dedup'}. Returns coverage fraction —
     how often the naive 95% CI actually contains TRUE_VALUE (should be ~0.95).
+
+    `reader` defaults to the scripted `agent_read`; pass `model_reader(call_model,
+    corpus)` for a live run — source ids are then drawn from `reader.sources` and
+    `nan` reads (unparseable model replies) are dropped before aggregating.
     """
     rng = random.Random(f"{SEED}-{arm}-{n}")
+    read = reader or agent_read
+    srcs = getattr(reader, "sources", None)
+    def _pick(salt=""):
+        return rng.choice(srcs) if srcs else f"doc-{rng.randrange(10_000)}{salt}"
+    def _clean(xs):
+        return [x for x in xs if x == x]  # drop nan
     hits = 0
+    counted = 0
     for _ in range(trials):
         if arm == "shared":
-            src = f"doc-{rng.randrange(10_000)}"
-            reports = [agent_read(rng, src) for _ in range(n)]
+            src = _pick()
+            reports = _clean([read(rng, src) for _ in range(n)])
             if rec:
                 for _i in range(n):
                     rec.claim("agent", "estimate of the disputed value", [src], layer="swarm")
         elif arm == "independent":
             reports = []
             for i in range(n):
-                src = f"doc-{rng.randrange(10_000)}-{i}"
-                reports.append(agent_read(rng, src))
+                src = _pick(f"-{i}")
+                reports.append(read(rng, src))
                 if rec:
                     rec.claim("agent", "estimate of the disputed value", [src], layer="swarm")
+            reports = _clean(reports)
         elif arm == "dedup":
             # arm 'shared' inputs, but collapse by evidence root before aggregating:
             # N readers of one doc count as ONE observation (its mean)
-            src = f"doc-{rng.randrange(10_000)}"
-            raw = [agent_read(rng, src) for _ in range(n)]
-            reports = [statistics.fmean(raw)]  # one deduped observation
+            src = _pick()
+            raw = _clean([read(rng, src) for _ in range(n)])
+            reports = [statistics.fmean(raw)] if raw else []
         else:
             raise ValueError(arm)
+        if not reports:
+            continue
+        counted += 1
         if _covered(reports):
             hits += 1
-    return round(hits / trials, 3)
+    return round(hits / counted, 3) if counted else None
 
 
 def sweep(ns=(1, 2, 4, 8, 16, 32)):
@@ -142,6 +188,26 @@ def _selftest():
         "DEDUP by evidence root recovers the shared arm": dedup_32 >= 0.85,
         "reproduces the paper's direction (0.94-ish -> collapse)": shared_1 > 0.85 and shared_32 < 0.4,
     }
+
+    # model_reader adapter: a fake model reads a document corpus
+    import re
+    _r = random.Random(SEED)
+    corpus = {f"src{i}": f"the value is approximately {TRUE_VALUE + _r.gauss(0, SOURCE_BIAS_SD):.2f}"
+              for i in range(40)}
+    def fake_call(doc):
+        m = re.search(r"-?\d+\.\d+", doc or "")
+        base = float(m.group(0)) if m else TRUE_VALUE
+        return f"My estimate: {base + random.Random(doc).gauss(0, READ_NOISE_SD):.2f}"
+    mr = model_reader(fake_call, corpus)
+    mr_shared_1 = run_arm("shared", 1, trials=300, reader=mr)
+    mr_shared_16 = run_arm("shared", 16, trials=300, reader=mr)
+    mr_dedup_16 = run_arm("dedup", 16, trials=300, reader=mr)
+    unparse = model_reader(lambda d: "I could not determine a value.", corpus)("x", "src0")
+    checks["model_reader reproduces shared-source collapse"] = (
+        mr_shared_1 is not None and mr_shared_16 is not None
+        and mr_shared_1 - mr_shared_16 > 0.25)
+    checks["model_reader dedup recovers coverage"] = mr_dedup_16 is not None and mr_dedup_16 >= 0.8
+    checks["model_reader unparseable reply -> nan"] = unparse != unparse
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print("\n  coverage by N (should be ~0.95 if aggregation is honest):")

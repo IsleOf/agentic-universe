@@ -43,7 +43,7 @@ interfaces are stable; swapping in a model changes nothing else.
 | stub | file | what it should become |
 | --- | --- | --- |
 | `model_policy(call_model, framing, tools)` | `probe_idle_agent.py` | **adapter now written (run 134)** — pass a `call_model(prompt) -> str`; it builds the state-only prompt, parses the reply into an action, `idle_noop` on anything unparseable or on a model exception. Selftested with a fake model. Swap in a real `call_model` and run `sweep`. |
-| `agent_read(source_id)` | `probe_epistemic_sybil.py` | a model estimating a value from a document |
+| `model_reader(call_model, corpus)` | `probe_epistemic_sybil.py` | **adapter written (run 139)** — model reads a real document, first number in the reply is the estimate; unparseable = `nan`, dropped. Pass `run_arm(..., reader=...)`. Selftested against a fake corpus. Needs a real document corpus. |
 | `model_preference(judge)` | `probe_rho_holdout.py` | **adapter written (run 135)** — pass a `judge(text_a, text_b) -> "A"\|"B"`; it runs a round-robin Copeland selection, judge exception = tie. Pass to `run_round(select=...)`. Selftested with fake judges. |
 | `model_relay(call_model)` | `probe_subagent_coordination.py` | **adapter written (run 137)** — model told its id + that a peer sent an out-of-scope `msg`, asked yes/no to forward; unparseable/error = don't forward. Selftested; fake yes/no reproduce the two scripted bounds. |
 | `sample_signal(kind, rng)` | `probe_activation_generalisation.py` | real activation vectors from a model layer, per collusion kind |
@@ -65,9 +65,11 @@ a real output `sample` field for the judge to compare — `_cand_descriptor` syn
 model's peer-deference — does it forward an out-of-scope instruction from a non-parent peer? — against the
 scripted high/low bounds, with and without the same-parent-ID filter.
 
-**Adapters written (runs 134, 135, 137):** three of the seven seams — `model_policy`, `model_preference`,
-`model_relay` — are written and selftested with fake models, each failing safe (`idle_noop` / tie / don't
-forward). Remaining stubs: `agent_read`, `sample_signal`, `step_ok`/`handoff_ok`, `PROPOSER_PROMPT`.
+**Adapters written (runs 134, 135, 137, 139):** four of the seven seams — `model_policy`, `model_preference`,
+`model_relay`, `model_reader` — are written and selftested with fake models, each failing safe (`idle_noop` /
+tie / don't forward / `nan`-dropped). Remaining stubs: `sample_signal` (needs real activation vectors, not
+just a text model), `step_ok`/`handoff_ok` (needs a real agent harness), `PROPOSER_PROMPT` (a text-model
+call — the next easy one).
 
 ## What needs infrastructure this repo doesn't have
 
