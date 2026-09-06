@@ -1016,6 +1016,10 @@
     {
       "date": "2026-09-26",
       "change": "Autonomous run 264. Fold group 5 of the owner's research input (coverage_map.md) - the developmental ladder (directions 22, 27, 28, 30). 4 nodes (branch_key nourishing_harness:developmental_ladder): concept_developmental_harness_affordances_unlock_on_demonstrated_reliability (6-stage ladder Seed->Steward; extends pattern_progressive_risk_vesting to capability-unlocks), concept_agent_authority_is_a_bounded_cognitive_light_cone_that_earns_expansion (Levin's light cone; refines the autonomy dial per-agent/per-domain), concept_governance_is_learned_as_a_graded_competence_not_a_final_policy_layer (constitutional curriculum; grounds approach_emergence_first), concept_developmental_benchmark_measures_maturity_across_stages_not_one_score (extends artifact_phase3_holdout_set to multi-axis + task genomes). 10 edges. Emergence-first, all speculative. 291 -> 295 nodes, 1150 -> 1160 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-26",
+      "change": "Autonomous run 265. Fold group 6 of the owner's research input (coverage_map.md) - curriculum refinements (directions 1, 23, 24, 25, 31). 4 nodes (branch_key self_improving_harness:curriculum_refinements): concept_go_explore_novelty_archive_return_then_explore (archive+restore+explore; instantiates intrinsic_motivation), concept_paired_designer_solver_self_play_at_the_capability_frontier_spade_lure (SPADE implements pattern_regret_as_difficulty_signal, LURE implements concept_graded_challenge; both instantiate concept_environment_evolution_curriculum; measured 2026 numbers), concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace (refines MAST taxonomy + the experience bank step store), concept_task_genome_every_environment_carries_a_full_provenance_record (extends the run-264 developmental benchmark). 12 edges. Emergence-first, all speculative. 295 -> 299 nodes, 1160 -> 1172 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8721,6 +8725,110 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-26-0600.md",
+        "docs/research/alternative_approaches_part3.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_go_explore_novelty_archive_return_then_explore",
+      "label": "Go-Explore: keep a novelty archive, return to a promising state, then explore outward",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:curriculum_refinements",
+      "confidence": 0.5,
+      "description": "Owner direction 1 (docs/research/alternative_approaches_part1.md), Induction Labs' 'intrinsic discovery'. Treat exploration as the goal: an RL policy seeks informationally novel terminal observations; maintain a novelty archive; choose a promising archived state, RESTORE it, and explore outward from there (the Go-Explore pattern - decouple 'get back to a frontier' from 'explore the frontier'). Self-generated command-observation rollouts become training data for a world-model curator trained only on high-novelty, high-utility traces. Counteracts model-collapse pressure by rewarding discovery rather than average-case correctness. Distinct from concept_curriculum_generation_not_intrinsic_drive's complaint (the field builds curricula, not curious agents) - this is a concrete curious-agent mechanism.",
+      "tags": [
+        "go-explore",
+        "novelty-archive",
+        "intrinsic-discovery",
+        "world-model",
+        "self-generated-data"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-1200.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)",
+        "docs/research/alternative_approaches_part3.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_paired_designer_solver_self_play_at_the_capability_frontier_spade_lure",
+      "label": "Paired designer/solver self-play at the capability frontier (SPADE, LURE)",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:curriculum_refinements",
+      "confidence": 0.55,
+      "description": "Owner directions 23-24. Two named 2026 systems instantiate concept_environment_evolution_curriculum with measured results. SPADE: one LLM in two roles - an environment DESIGNER writes complete stateful environments (reset/step interface, reward, verifier), a reasoning AGENT learns in them; the designer is rewarded on the learner's gap between hinted and unhinted performance (this IS pattern_regret_as_difficulty_signal). At 30B: +5.3 avg on held-out math/science/code/reasoning, +5.7 on BFCL-v4, +13.9 on ACEBench-Agent. LURE: pursuit-evasion self-play with a 'capture-frontier' reward that peaks when the solver succeeds on ~50% of rollouts (this IS concept_graded_challenge, with the difficulty band learned not hand-tuned). Recency: Sept 2026, current.",
+      "tags": [
+        "spade",
+        "lure",
+        "self-play",
+        "designer-solver",
+        "capability-frontier",
+        "curriculum"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-1200.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)",
+        "docs/research/alternative_approaches_part3.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace",
+      "label": "DiagEvo: improve from a hierarchical error-cause memory, not from every trace",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:curriculum_refinements",
+      "confidence": 0.55,
+      "description": "Owner direction 25. Self-evolution driven by an explicit hierarchical error-cause memory rather than external task resources: classify each failure by root cause (perception / world-model / planning / tool-schema / execution / verification / memory-retrieval / coordination / goal-drift / safety-policy / creativity-convergence), confidence, recurrence and repairability; produce multiple independent diagnoses; store only high-confidence, recurrent, high-impact causes (double-confidence filter); generate a TARGETED repair task; validate the repair generalises beyond the originating trace; promote only after hidden tests. A safer alternative to undifferentiated reflection, which produces verbose but low-transfer 'lessons'. Sharper than the failure digest supervisor.py already keys by goal.",
+      "tags": [
+        "diagevo",
+        "error-cause-memory",
+        "double-confidence",
+        "root-cause",
+        "self-evolution"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-1200.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)",
+        "docs/research/alternative_approaches_part3.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_task_genome_every_environment_carries_a_full_provenance_record",
+      "label": "Task genome: every environment carries a full provenance record",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:curriculum_refinements",
+      "confidence": 0.5,
+      "description": "Owner direction 31. Every executable environment in the curriculum carries: source code + verifier, difficulty estimate, capability tags, prerequisite skills, known exploits, diversity/niche coordinates, safety classification, and an agent-performance lineage. Makes curriculum evolution auditable and reusable - a designer cannot silently regenerate a leaked benchmark, and a solver's history against each genome is inspectable. The task-repository half of concept_developmental_benchmark_measures_maturity_across_stages_not_one_score.",
+      "tags": [
+        "task-genome",
+        "environment-provenance",
+        "curriculum-audit",
+        "benchmark-taxonomy"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-1200.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)",
         "docs/research/alternative_approaches_part3.md (owner research input)"
       ],
       "evidence_links": [
@@ -21222,6 +21330,138 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.45,
       "description": "A multi-axis maturity benchmark is the grounded evaluation a promotion gate reads - and its per-axis structure is what makes 'no axis regressed' checkable."
+    },
+    {
+      "id": "edge_go_explore_refines_curriculum_complaint",
+      "source": "concept_go_explore_novelty_archive_return_then_explore",
+      "target": "concept_curriculum_generation_not_intrinsic_drive",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "That node observes the field builds supervised curriculum generators, not curious agents. Go-Explore is a concrete curious-agent design: the reward is novelty of the terminal observation, not task success."
+    },
+    {
+      "id": "edge_go_explore_instantiates_intrinsic_motivation",
+      "source": "concept_go_explore_novelty_archive_return_then_explore",
+      "target": "concept_intrinsic_motivation",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "A runnable form of intrinsic motivation: archive + restore + explore, with self-generated rollouts feeding a world-model curator."
+    },
+    {
+      "id": "edge_go_explore_informs_qd_archive",
+      "source": "concept_go_explore_novelty_archive_return_then_explore",
+      "target": "concept_quality_diversity_archive_keeps_many_niches_not_one_leaderboard",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "The novelty archive and the QD archive are the same data structure used two ways - Go-Explore restores from it to explore, QD selects from it to maintain diversity under task pressure."
+    },
+    {
+      "id": "edge_spade_lure_instantiates_env_curriculum",
+      "source": "concept_paired_designer_solver_self_play_at_the_capability_frontier_spade_lure",
+      "target": "concept_environment_evolution_curriculum",
+      "type": "instantiates",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "SPADE and LURE are two named, measured 2026 instantiations of a harness that evolves its own training environments."
+    },
+    {
+      "id": "edge_spade_implements_regret_signal",
+      "source": "concept_paired_designer_solver_self_play_at_the_capability_frontier_spade_lure",
+      "target": "pattern_regret_as_difficulty_signal",
+      "type": "implements",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "SPADE's designer reward - the learner's hinted-minus-unhinted performance gap - is exactly reward-with-hints minus reward-without."
+    },
+    {
+      "id": "edge_lure_implements_graded_challenge",
+      "source": "concept_paired_designer_solver_self_play_at_the_capability_frontier_spade_lure",
+      "target": "concept_graded_challenge",
+      "type": "implements",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "LURE's capture-frontier reward peaks at ~50% solver success - a difficulty gradient held at the capability edge, with the band learned rather than hand-tuned."
+    },
+    {
+      "id": "edge_diagevo_refines_mast_taxonomy",
+      "source": "concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace",
+      "target": "concept_mast_multi_agent_failure_taxonomy",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "MAST catalogues multi-agent failure modes. DiagEvo turns a taxonomy like it into a self-evolution driver: diagnose by root cause, store only recurrent high-impact causes, generate a targeted repair."
+    },
+    {
+      "id": "edge_diagevo_extends_orchestration_failure_diagnosis",
+      "source": "concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace",
+      "target": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "That node diagnoses orchestration failure by cascade radius + per-mode recovery. DiagEvo adds the double-confidence filter (multiple independent diagnoses, keep only the agreed high-impact ones) before a repair is generated."
+    },
+    {
+      "id": "edge_diagevo_refines_experience_bank",
+      "source": "concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace",
+      "target": "pattern_experience_bank",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The step-level store already keeps 'what specific move was wrong here'. DiagEvo adds the hierarchy (root-cause class) and the filter (recurrent + high-impact + repairable only), so the store does not fill with one-off low-transfer lessons."
+    },
+    {
+      "id": "edge_task_genome_extends_dev_benchmark",
+      "source": "concept_task_genome_every_environment_carries_a_full_provenance_record",
+      "target": "concept_developmental_benchmark_measures_maturity_across_stages_not_one_score",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The task genome is the per-environment record the developmental benchmark reads; the benchmark is the cross-environment aggregation."
+    },
+    {
+      "id": "edge_task_genome_supports_env_curriculum",
+      "source": "concept_task_genome_every_environment_carries_a_full_provenance_record",
+      "target": "concept_environment_evolution_curriculum",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "An evolving curriculum needs provenance on each generated environment or it cannot detect benchmark leakage, difficulty drift, or a designer regenerating a solved task."
+    },
+    {
+      "id": "edge_task_genome_informs_holdout_set",
+      "source": "concept_task_genome_every_environment_carries_a_full_provenance_record",
+      "target": "artifact_phase3_holdout_set",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "The frozen held-out set is 17 tasks with computable checks but no genome record; adding difficulty / capability-tag / exploit fields would make its coverage auditable."
     }
   ]
 }
