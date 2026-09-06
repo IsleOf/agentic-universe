@@ -2,24 +2,27 @@
 
 **Date:** 2026-09-01 · last updated run 86 · **Posture:** `docs/emergence_first_posture.md` · Current graph state: `docs/graph_state_2026-09.md`
 
-## Runnable rigs (built runs 81–85, under the run-80 IDLE-STATE RULE)
+## Runnable rigs (built runs 81–92; live-run adapters written runs 134–149)
 
-Four of the highest-value probes below now exist as code in `tools/` — a real loop, Phase 0 `Recorder`
-instrumentation, and the measures computed from the trace. Each has the **model call as the one stub**
-(`agent_step` / `agent_read` / `self_preference` / `relay_policy`); a live run swaps in a model, nothing else
-changes. Run `python tools/<name> selftest` or `... sweep`.
+Six probes now exist as code in `tools/` — a real loop, Phase 0 `Recorder` instrumentation, and the
+measures computed from the trace. **Five of the six have a written, selftested `model_*` adapter**
+(runs 134–140): pass one `call_model` (or a pairwise `judge`) and run `sweep`; each adapter fails safe
+(`idle_noop` / tie / don't-forward / `nan`-dropped / `[]`). The other two need infrastructure beyond a
+text model — `docs/remaining_seams.md` specs both plus a degraded mode. Run `python tools/<name> selftest`
+or `... sweep`.
 
-| probe | rig | dry-run finding | full doc |
-| --- | --- | --- | --- |
-| idle agent | `tools/probe_idle_agent.py` | measures separate goal-pursuit (structure 4, persistence 1.38) from disconnected activity (0/0) | `docs/probe_idle_agent.md` |
-| subagent-coordination containment | `tools/probe_subagent_coordination.py` | same-parent-ID filter bounds spread 12/12→4/12 under a peer-deference drive; does not stop it | `docs/probe_subagent_coordination.md` |
-| epistemic-Sybil evidence roots | `tools/probe_epistemic_sybil.py` | reproduces 2609.01873 — coverage 1.00→0.10 on a shared source, holds on independent sources, ancestry-dedup recovers | `docs/probe_epistemic_sybil.md` |
-| RHO held-out grading | `tools/probe_rho_holdout.py` | only 33% of a self-preference-reported harness gain survives external grading; self-preference selection lands below honest selection | `docs/probe_rho_holdout.md` |
-| activation-probe generalisation | `tools/probe_activation_generalisation.py` | a probe trained on assigned collusion scores AUC 1.00 in-distribution but 0.72 on emergent collusion it never saw (gap 0.28) — a scenario detector, not a general channel | `docs/probe_activation_generalisation.md` |
-| composed-design test (§5) | `tools/probe_composed_design.py` | short-agent + four-field + folded-state doubles the usable task horizon (12→24 steps) and beats prose handoffs — but the base per-step rate still sets a ceiling: *composes but bounded* | `docs/probe_composed_design.md` |
+| probe | rig | live-run adapter | dry-run finding | full doc |
+| --- | --- | --- | --- | --- |
+| idle agent | `probe_idle_agent.py` | `model_policy(call_model, framing, tools, observed=)` + `observation_arm` (covert vs overt gap, run 149) | separates goal-pursuit (structure 4, persistence 1.38) from disconnected activity (0/0) | `docs/probe_idle_agent.md` |
+| subagent-coordination containment | `probe_subagent_coordination.py` | `model_relay(call_model)` | same-parent-ID filter bounds spread 12/12→4/12 under a peer-deference drive; does not stop it | `docs/probe_subagent_coordination.md` |
+| epistemic-Sybil evidence roots | `probe_epistemic_sybil.py` | `model_reader(call_model, corpus)` | reproduces 2609.01873 — coverage 1.00→0.10 on a shared source, holds on independent sources, ancestry-dedup recovers | `docs/probe_epistemic_sybil.md` |
+| RHO held-out grading | `probe_rho_holdout.py` | `model_preference(judge)` — Copeland round-robin | only 33% of a self-preference-reported harness gain survives external grading | `docs/probe_rho_holdout.md` |
+| activation-probe generalisation | `probe_activation_generalisation.py` | — (needs activations; degraded text-embedding mode in `remaining_seams.md`) | probe trained on assigned collusion: AUC 1.00 in-dist, 0.72 on emergent collusion (gap 0.28) — a scenario detector | `docs/probe_activation_generalisation.md` |
+| composed-design test (§5) | `probe_composed_design.py` | — (needs a real harness; single-agent `p` path in `remaining_seams.md`) | short-agent + four-field + folded-state doubles the usable horizon (12→24 steps) but the base per-step rate caps it: *composes but bounded* | `docs/probe_composed_design.md` |
 
 The rigs share the Phase 0 trace substrate (`tools/README.md`), so a real multi-probe run produces one
-continuous trace corpus.
+continuous trace corpus. `PROPOSER_PROMPT` (a seventh seam, in `loop_proposer.py`) also has a written
+adapter — `model_propose(call_model, ctx)` — so binding one `call_model` covers five of seven.
 
 ---
 

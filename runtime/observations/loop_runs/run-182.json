@@ -1,0 +1,19 @@
+{
+  "run": 182,
+  "increment": "consolidation - refresh emergence_probe_catalogue.md 'Runnable rigs' (stale on the model adapters)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-182.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

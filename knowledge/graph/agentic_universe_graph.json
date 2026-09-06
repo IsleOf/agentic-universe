@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-21",
+  "last_updated": "2026-10-22",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -688,6 +688,10 @@
     {
       "date": "2026-10-21",
       "change": "Autonomous run 181. Consolidation. tools/README.md refreshed - stale since run 76: selftest count 14->21; Phase 2 gains the retention API (record_use/utility_score/prune); Phase 3 rows note the category + legibility regression checks, idle_run_streak/plateau_watch/trace_legibility, model_propose, PROPOSER_META, SEARCH_SENSITIVE; a new 'Probe rigs' section (6 rigs, 5 with written model_* adapters); 'What is NOT built' rewritten (the one integration step is binding a call_model into 5 written adapters; recursive procedure / Phase 6 / population curation still open). No graph node/edge change."
+    },
+    {
+      "date": "2026-10-22",
+      "change": "Autonomous run 182. Consolidation. emergence_probe_catalogue.md 'Runnable rigs' section refreshed - stale on the live-run seams: it listed the four stubs as unresolved; now shows five of six probes have a written selftested model_* adapter (model_policy / model_relay / model_reader / model_preference, runs 134-140), the observation_arm (run 149), and links remaining_seams.md for the two that need activations / a real harness. PROPOSER_PROMPT (a seventh seam) also has model_propose. No graph node/edge change."
     }
   ],
   "nodes": [
