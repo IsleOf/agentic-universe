@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-07",
+  "last_updated": "2026-10-08",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1196,6 +1196,10 @@
     {
       "date": "2026-10-07",
       "change": "Autonomous run 312. Graph-hygiene consistency pass (IDLE-STATE clause c). Full structural audit of the 340-node / 1356-edge graph: 0 orphans, 0 dangling edges, 0 duplicate labels, 0 duplicate (source,target,type) edges, 0 self-loops, 0 confidence values out of [0,1], 0 nodes missing a description or approach_family. The only gap: 10 non-family nodes had no derived_from - all foundational seed-graph concepts or nourishing-harness-design nodes, now stamped (10 fixed: seed graph 2026-09-01 / docs/nourishing_harness_design.md). Remaining derived_from-less nodes are the approach_* family roots (correct - they are organising nodes). Literature: three threads swept this session and reconfirmed - harness-engineering (SEVerA chain, runs 305-307), emergence/deception (KnownLieBench + Among Us, 309-310), autotelic/open-ended (run 312 arxiv scan returned only pre-2026 or off-topic work; concept_habitat_slack stays unverifiable without the model integration, as what_would_make_this_wrong.md already states). No node/edge count change."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Autonomous run 313. Literature sweep (versioned-graph / agent-memory thread). Folded arXiv:2605.27825 (MRMMIA, May 2026, VERIFIED): membership inference attacks on chat-agent MEMORY - multi-recall-probe attack across black/gray/white-box, consistently beats baselines, first eval framework for membership leakage in agent memory (companion Interrogation Attack 2502.00306 for RAG). New node concept_agent_memory_leaks_membership_... + 3 edges: challenges pattern_experience_bank (write_gate screens writes, not recall) + concept_agent_memory_should_be_hybrid_... (more stores = more recall surface); extends concept_memory_poisoning_one_write_persists (a third attack class - exfiltration, not corruption). Currency: attack method, mechanism durable, numbers model-specific. 340 -> 341 nodes, 1356 -> 1359 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -10109,6 +10113,32 @@
       ],
       "evidence_links": [
         "tools/v2_integration.py"
+      ]
+    },
+    {
+      "id": "concept_agent_memory_leaks_membership_an_adversary_can_infer_whether_a_unit_is_in_the_store",
+      "label": "Agent memory leaks membership: an adversary can infer whether a candidate unit is in the memory store via recall probes",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:memory_security",
+      "confidence": 0.5,
+      "description": "arXiv:2605.27825 (MRMMIA, May 2026, VERIFIED via arxiv API). Membership inference attacks - do a given data record belong to a system private data - are the standard privacy-leakage measure; prior work targeted training corpora and retrieval databases, not AGENT MEMORY, which holds sensitive user-agent interactions, retrieved facts, and user preferences. MRMMIA (Multi-Recall Memory MIA) is a unified attack using multiple recall probes to the agent to extract the membership signal across black-box, gray-box and white-box settings; it consistently beats baselines and gives an initial evaluation framework for membership leakage in chat-agent memory. Companion: Interrogation Attack (2502.00306) does the same for RAG datastores with 30 natural-text queries, stealthily. Currency: May 2026, ~5 months; an attack method - the mechanism (recall behaviour is a membership oracle) is the durable part, the TPR numbers are model/config-specific.",
+      "tags": [
+        "memory",
+        "privacy",
+        "membership-inference",
+        "attack",
+        "retrieve-heavy-exposure",
+        "verified"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-08-0000.md",
+        "arXiv:2605.27825 (MRMMIA: Membership Inference Attacks on Memory in Chat Agents) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-08-0000.md"
       ]
     }
   ],
@@ -24762,6 +24792,39 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.6,
       "description": "Proves the v2 deterministic spine composes - the milestone the plan gates v2.3 on."
+    },
+    {
+      "id": "edge_mia_challenges_experience_bank",
+      "source": "concept_agent_memory_leaks_membership_an_adversary_can_infer_whether_a_unit_is_in_the_store",
+      "target": "pattern_experience_bank",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The experience bank screens INCOMING writes (write_gate) but does nothing about inference from RECALL behaviour: an adversary who can query the loop can probe whether a given workflow/step entry is stored."
+    },
+    {
+      "id": "edge_mia_challenges_hybrid_memory",
+      "source": "concept_agent_memory_leaks_membership_an_adversary_can_infer_whether_a_unit_is_in_the_store",
+      "target": "concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "More stores (vector + graph + KV + episodic) means more recall surface and more membership-inference exposure; the janitor / archival design has to weigh membership leakage, not only retrieval precision."
+    },
+    {
+      "id": "edge_mia_extends_memory_poisoning",
+      "source": "concept_agent_memory_leaks_membership_an_adversary_can_infer_whether_a_unit_is_in_the_store",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "A third attack class on the retrieve-heavy stance, alongside one-write-persists poisoning and covert bilevel-optimised poisons: this one does not corrupt the memory, it exfiltrates what is in it."
     }
   ]
 }

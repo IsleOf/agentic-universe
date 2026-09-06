@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 340 nodes, 1356 edges · **Date:** 2026-09-05
+**Graph at generation:** 341 nodes, 1359 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -108,6 +108,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2605.19576](https://arxiv.org/abs/2605.19576) | (title not recorded) | `concept_unmanaged_skill_libraries_silently_drift` |
 | [2605.22643](https://arxiv.org/abs/2605.22643) | (title not recorded) | `concept_incremental_attacks_boil_the_frog` |
 | [2605.24539](https://arxiv.org/abs/2605.24539) | (title not recorded) | `concept_harness_evolution_subfield` |
+| [2605.27825](https://arxiv.org/abs/2605.27825) | (title not recorded) | `concept_agent_memory_leaks_membership_an_adversary_can_infer_whether_a_unit_is_in_the_store` |
 | [2605.27922](https://arxiv.org/abs/2605.27922) | (title not recorded) | `concept_capability_is_a_model_harness_config_property` |
 | [2605.30621](https://arxiv.org/abs/2605.30621) | (title not recorded) | `concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic` |
 | [2606.00953](https://arxiv.org/abs/2606.00953) | (title not recorded) | `test_scenario_decomposition_granularity` |
@@ -502,6 +503,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-07-0000.md` — `concept_knownliebench_verify_the_agent_knows_the_entitlement_before_scoring_whether_it_lies_under_a_deployer_incentive`
 - `docs/auto_sweep_2026-10-07-0600.md` — `concept_current_llm_agent_deception_is_mostly_equivocation_linguistically_subtle_but_strategically_weak`, `concept_what_when_how_where_to_evolve`
 - `docs/auto_sweep_2026-10-07-1200.md` — `artifact_v2_integration_dry_run`
+- `docs/auto_sweep_2026-10-08-0000.md` — `concept_agent_memory_leaks_membership_an_adversary_can_infer_whether_a_unit_is_in_the_store`
 - `docs/auto_sweep_2026-10-08-1200.md` — `concept_ace_context_evolution_self_improvement`
 - `docs/auto_sweep_2026-10-08-1800.md` — `concept_horizon_gap_outcome_signals_decay`
 - `docs/auto_sweep_2026-10-09-1800.md` — `concept_spontaneous_behaviour_beats_scripted_for_simulation`
