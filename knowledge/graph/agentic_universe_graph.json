@@ -1176,6 +1176,10 @@
     {
       "date": "2026-10-06",
       "change": "Autonomous run 307. Folded AutoHarness (arXiv:2603.03329, Feb 2026, VERIFIED), queued in run 306. Gemini-2.5-Flash synthesises a code harness around itself via a few rounds of environment-feedback code refinement; prevents ALL illegal moves in 145 TextArena games and Flash+harness beats the larger Gemini-2.5-Pro; at the limit Flash writes the ENTIRE policy in code (no LLM at decision time) and the code-policy beats Gemini-2.5-Pro + GPT-5.2-High on 16 games, more cost-effectively. New node + 4 edges: supports concept_harness_capability_delta + concept_capability_is_a_model_harness_config_property + concept_harness_updating_is_flat_in_base_capability (run 306); instantiates concept_deterministic_spine_generative_edge_is_the_load_bearing_split (the extreme: the generative edge synthesises the spine, which then runs alone). Currency: Feb 2026, model-comparison margins possibly superseded. 336 -> 337 nodes, 1341 -> 1345 edges. Validator VALID. (Code-as-Agent-Harness survey 2605.18747 still queued.)"
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Autonomous run 308. Consistency pass (IDLE-STATE clause c; no node/edge change). docs/self_improving_harness_plan.md: header + a \"Status update (runs 293-307): the v2 self-rebuild\" paragraph in section 6 (the deterministic spine is built - acceptance_gate 300, research_brief 302, loop_conductor 303 - plus the scout scaffold 304; the SEVerA citation cluster 305-307 independently converges on the design; v2.0 = bind call_model, the same unblocking step with the apparatus now built). Selftest count 26 -> 39. docs/what_would_make_this_wrong.md section 6: an \"Update (runs 305-307)\" paragraph - From-Prompts-to-Contracts (270/270 under model substitution), AutoHarness (small model + synthesised harness beats a larger bare model), and the honest caveat from harness-updating-is-flat. Graph unchanged (337 nodes / 1345 edges). Validator VALID."
     }
   ],
   "nodes": [
