@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 259 nodes, 1011 edges · **Date:** 2026-09-05
+**Graph at generation:** 260 nodes, 1017 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -33,7 +33,7 @@ Opened and checked directly.
 | [2607.14159](https://arxiv.org/abs/2607.14159) | MemoHarness: Agent Harnesses That Learn from Experience - Y. Huang, W. Wang, H. Bao, Y. Ma, X. Luo, Y. Nian, H. Zhuang, Z. Liu, Y. Zhao, X. Zhang | `pattern_experience_bank` |
 | [2608.10218](https://arxiv.org/abs/2608.10218) | Mind Viruses: Self-Propagating Ideas in Multi-Agent LLM Systems - V. Papadopoulos, M. Shah, S. Zimmerman, J. Lindsey | `concept_inheritance_channel`, `emergent_mind_viruses` |
 | [2608.21156](https://arxiv.org/abs/2608.21156) | Graph Engineering in the Era of LLM Agents: From Individual Intelligence to System Intelligence - Y. Feng, Z. Xiang, C. Yang, Q. Ma et al. (36 authors) | `approach_graph_engineering`, `concept_agentic_os`, `concept_engineering_paradigm_ladder` +10 |
-| [2608.26530](https://arxiv.org/abs/2608.26530) | PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents | `pattern_continual_self_refinement`, `pattern_skill_induction`, `pattern_supervisor_stagnation_redirect` |
+| [2608.26530](https://arxiv.org/abs/2608.26530) | PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents | `concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker`, `pattern_continual_self_refinement`, `pattern_skill_induction` +1 |
 | [2608.27969](https://arxiv.org/abs/2608.27969) | openJiuwen: Beyond Static Harnesses for Long-Horizon Coding Agents (Huawei) - full results table checked; headline +3.39pp is a backend swap, same-backend comparison is +0.24pp within reported uncertainty | `concept_benchmark_headline_substitution`, `concept_harness_orchestration_pairing`, `pattern_evaluation_driven_harness_optimization` +2 |
 | [2608.29596](https://arxiv.org/abs/2608.29596) | Towards a Systems Foundation for Agentic Skills: Architecture, Lifecycle, and Security - nine-stage skill lifecycle, marketplace and adversarial threat analysis | `pattern_agentic_skill_lifecycle` |
 | [2608.29612](https://arxiv.org/abs/2608.29612) | LLMs Interpret, Embeddings Organize, Graphs Emerge: Agent-Driven Compilation of Scientific Knowledge - S-J. Ran, K. Zhang, X. Wu, L-S. Yang, W-J. Li | `emergent_additive_growth_bias`, `pattern_agent_driven_graph_compilation`, `pattern_graph_delta_as_change_unit` +2 |
@@ -403,6 +403,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement`, `concept_step_count_is_the_horizon_limit` +1
 - `docs/auto_sweep_2026-09-17-0600.md` — `concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it`
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1
+- `docs/auto_sweep_2026-09-17-1800.md` — `concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker`
 - `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`
 - `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`
 - `docs/auto_sweep_2026-09-19-0600.md` — `concept_epistemic_sybil_collapse`, `emergent_compositional_private_language`, `pattern_evidential_ancestry_tracking`

@@ -1,0 +1,27 @@
+{
+  "run": 230,
+  "increment": "recency-weighted sweep - folded PILOT in the Loop (arXiv:2608.26530): self-improvement should be live (supervisor redirects/aborts the active worker mid-run), not post-hoc; frozen backbones; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2608.26530",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.26530"
+  ],
+  "trace_file": "runtime\\traces\\loop-230.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 230 OK · VALID · graph +0 · cites 1v/1 · idle-streak 1 · legible 1.00 · verified-frac 0.79"
+}

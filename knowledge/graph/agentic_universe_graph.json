@@ -880,6 +880,10 @@
     {
       "date": "2026-09-17",
       "change": "Autonomous run 229. Orientation-layer refresh (no graph node/edge change). docs/graph_state_2026-09.md Snapshot block updated from the run-219 state (253/973) to run 229 (259 nodes / 1011 edges; 78 needs-validation / 150 partially-validated / 19 validated / 5 inconclusive / 7 unset; families self_improving_harness 103, emergent_behaviors 74, agent_habitat 23, graph_engineering 20, nourishing_harness 17, orchestration_first 10). Added a 'Runs 219-228' section: the shipped tools (paired_eprocess run 220, probe_orchestration_value run 221, loop_metrics.status_line run 226), the self-evolving-harness area mapping (Harness Engineering 2609.00006, Self-Evolving Coding Agents survey 2608.03392, SHAPER 2608.11350) + the harness_anatomy_self_audit, CordisBench (2609.01600), PCN-Rec (2601.09771)."
+    },
+    {
+      "date": "2026-09-17",
+      "change": "Autonomous run 230. Recency-weighted sweep. Folded PILOT in the Loop (arXiv:2608.26530, Aug 2026) as concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker: self-improvement should be LIVE not post-hoc - a supervisor-worker harness with live steering (a separate supervisor redirects/aborts the active worker mid-run) + live self-evolution (distil failure modes into skills during execution). Two frozen backbones, three benchmarks, first in 5/6 configs; Terminal-Bench 2.0 +9.8pp; self-improvement +14.6/+12.4; mean output tokens -42.9%/-47.4%, successful-evals-per-Mtoken +110%/+134%. 6 edges: extends concept_self_harness_validates_the_three_loop (middle loop as a live process); supports pattern_recoverability_constrained_evolution (abort = live recovery), concept_sea_steering_adapter_around_a_frozen_base... (frozen-backbone variant), artifact_probe_subagent_coordination_rig (adds the redirect-active-subagent capability), pattern_agentic_skill_lifecycle, concept_horizon_gap_outcome_signals_decay (dense in-run signal). 259->260 nodes, 1011->1017 edges."
     }
   ],
   "nodes": [
@@ -7621,6 +7625,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-17-0600.md"
+      ]
+    },
+    {
+      "id": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "label": "Self-improvement should be live, not post-hoc: a supervisor-worker harness where a separate supervisor redirects/aborts the active worker mid-run and distils failure modes into reusable skills during execution; ranks first in 5/6 configs, cuts mean output tokens ~45%",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:live_self_improvement",
+      "confidence": 0.68,
+      "description": "PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents (arXiv:2608.26530, VERIFIED via arXiv abstract read run 230; Aug 2026). Most self-improvement methods process a run's experience only AFTER execution ends, so they cannot redirect the active run or immediately apply and validate lessons from it. PILOT argues self-improvement should be LIVE - using emerging experience both to redirect the active run and to update the persistent harness. Existing architectures do not support this: single-agent self-correction mixes execution and assessment in one context; subagent delegation separates execution but cannot redirect an active subagent. PILOT is a SUPERVISOR-WORKER harness with two coupled mechanisms: (1) LIVE STEERING - a separate supervisor redirects or ABORTS the active worker during execution; (2) LIVE SELF-EVOLUTION - distils procedures and failure modes revealed during execution into reusable skills and memory. Across two FROZEN backbones and three benchmarks, PILOT ranks first in 5 of 6 configs; on Terminal-Bench 2.0 it beats counterpart harnesses by up to 9.8pp; in the self-improvement setting +14.6 (GLM-5.1) / +12.4 (Kimi-K2.6). Mean output tokens FALL 42.9% / 47.4%; successful evaluations per million output tokens RISE 110.3% / 134.0%. Bearing on the project: the project's three-loop is between-run (concept_self_harness_validates_the_three_loop) - observe-trace -> minimal proposal -> held-out regression, once per run. PILOT says the highest-value version runs the supervisor DURING the run, aborting a doomed worker rather than scoring it afterward. 'Abort the active worker' is a live recoverability mechanism; the token-efficiency numbers make the case that a supervisor watching a worker is cheaper than a long single context. Frozen-backbone, so it is in the emergence-first / no-training fork. Recency: Aug 2026, current frozen backbones (GLM-5.1, Kimi-K2.6).",
+      "tags": [
+        "PILOT",
+        "live-self-improvement",
+        "supervisor-worker",
+        "live-steering",
+        "abort-active-worker",
+        "live-self-evolution",
+        "frozen-backbone",
+        "token-efficiency",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-17-1800.md",
+        "arXiv:2608.26530 (PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents) - VERIFIED, abstract read run 230"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-17-1800.md"
       ]
     }
   ],
@@ -18479,6 +18512,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "'Reasoning across teardown ORDERS' and 'conditions that hold under ALL vs SOME orders' is the task-order-dependence problem inside the harness itself - the order components are torn down changes the outcome, and models are unreliable about it."
+    },
+    {
+      "id": "edge_live_si_extends_three_loop",
+      "source": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "target": "concept_self_harness_validates_the_three_loop",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.66,
+      "description": "The project's three-loop runs between runs (observe-trace -> proposal -> held-out regression, once per run). PILOT runs the supervisor DURING the run - the middle loop as a live process, aborting a doomed worker instead of scoring it afterward. A distinct architectural claim, not just a faster cadence."
+    },
+    {
+      "id": "edge_live_si_supports_recoverability",
+      "source": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'A separate supervisor redirects or ABORTS the active worker during execution' is live recoverability - stop the trajectory before it commits an unrecoverable act, rather than reverting afterward. The strongest form of recoverability-as-a-constraint."
+    },
+    {
+      "id": "edge_live_si_supports_frozen_base",
+      "source": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "target": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Two FROZEN backbones (GLM-5.1, Kimi-K2.6), harness-level improvement only - the frozen-base fork, now with a live supervisor-worker variant alongside SEA (coding) and SHAPER (embodied)."
+    },
+    {
+      "id": "edge_live_si_relates_subagent_coordination",
+      "source": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45,
+      "description": "PILOT is a supervisor-worker topology; the project's subagent-coordination probe studies same-parent-ID scope bounding in that topology. PILOT adds the missing capability the probe assumes away: a supervisor that can redirect an active subagent."
+    },
+    {
+      "id": "edge_live_si_supports_skill_lifecycle",
+      "source": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "target": "pattern_agentic_skill_lifecycle",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Live self-evolution distils procedures and failure modes revealed during execution into reusable skills and memory' - the skill lifecycle running mid-trajectory, not from a post-run trace sweep."
+    },
+    {
+      "id": "edge_live_si_supports_horizon_gap",
+      "source": "concept_self_improvement_should_be_live_a_supervisor_steers_and_aborts_the_active_worker",
+      "target": "concept_horizon_gap_outcome_signals_decay",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Long-horizon runs where outcome-only signals decay: PILOT manufactures a dense in-run signal (the supervisor's continuous assessment) - the same 'denser step-level signal' response, applied live."
     }
   ]
 }
