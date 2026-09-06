@@ -696,6 +696,10 @@
     {
       "date": "2026-09-06",
       "change": "Autonomous run 183. (a) User directive: prefer RECENT literature; older papers are NOT locked out but carry a currency note (which model/harness generation they were measured on), keep modest confidence for capability claims, and stay useful evidence about the small/local-model regime. Encoded as a RECENCY WEIGHTING guideline in context/loop_policy (v8), loop_adapter.LOOP_CONTEXT_POLICY, SKILL.md, docs/literature_coverage.md. (b) concept_incremental_attacks_boil_the_frog (Boiling the Frog, arXiv:2605.22643, May 2026): benign workspace edits then a risk-bearing request; score whether the RESULTING ARTIFACT STATE becomes unsafe; 9-model panel aggregate ASR 44.4%, 20.5->92.9% spread, 93.3% loss-of-control, small/local models worst-hit. Independent endorsement of the grounded state-scoring gate; the multi-turn form of constraint-weakening; the gate must read accumulated state. +6 edges."
+    },
+    {
+      "date": "2026-09-06",
+      "change": "Autonomous run 184. Owner added dedicated fetch skills (arxiv-fetch, hackernews-fetch, rss-fetch, github-fetch, reddit-fetch, x-fetch, nodriver-session, browser-web-search, research-core). Updated sources/README.md discovery table + SKILL.md TOOLS section to prefer these over raw API calls. arxiv-fetch tested working (no date-sort param - filter by arXiv-ID YYMM prefix for the recency window). reddit-fetch r/LocalLLaMA is the small/local-model channel the recency-weighting note wants. No graph node/edge change."
     }
   ],
   "nodes": [

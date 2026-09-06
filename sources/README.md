@@ -20,17 +20,23 @@ Kept verbatim because it will be right again. It is wrong *now* — during model
 
 Two jobs, not one. **Discovery** finds work; **adjudication** decides whether a piece of work says what it's cited as saying. As of 2026-09-05 discovery is well covered and adjudication is the gap — the three source-register corrections on file (pressure-field number drift, openJiuwen headline substitution, the graph-engineering critique) were all adjudication failures, not discovery failures.
 
-### Discovery
+**Dedicated fetch skills (added by owner, run 184 — prefer these over raw API calls).** Each is a tested,
+credential-free, fail-closed lane that emits normalized `source_records` + citations:
+`C:\Agents\skills\arxiv-fetch` · `hackernews-fetch` · `rss-fetch` · `github-fetch` · `reddit-fetch` ·
+`x-fetch` · `nodriver-session` (shared browser lifecycle + challenge/rate-limit detection) ·
+`browser-web-search`. **`research-core`** merges/dedups/validates across adapters and writes evidence
+reports. `research-fetch` (the older dispatcher) still covers `s2` / `forum` / `openreview` / `leaderboard`.
 
 | Venue | Why | Access | Wired? |
 | --- | --- | --- | --- |
-| arXiv (`cs.MA` `cs.AI` `cs.CL` `cs.SE`, plus `cs.HC` `cs.CY` `econ.GN` for the work-substitution angle) | Field publishes here first | `export.arxiv.org/api/query` — no key. The `/list/` HTML pages 404; use the API. | **yes** |
-| Hacker News | Practitioner signal, shipping tools, "harness" as a forming genre | `hn.algolia.com/api/v1/search_by_date` — no key, date-filterable | **yes** |
-| X / Twitter | Author threads days ahead of publication | `x-fetch` skill (`C:\Agents\skills\x-fetch`) — nodriver + shared profile | **yes** |
-| Reddit (`r/LocalLLaMA`, `r/MachineLearning`) | Failure reports that never reach arXiv | `reddit-fetch` skill — OAuth app + local token | **yes** |
-| YouTube | Paper-summary channels; see `docs/source_channels.md` for which | `youtube-transcript` skill — local, residential IP | **yes** |
-| GitHub search / trending / releases | What's actually shipping vs. what's a preprint claim | `research-fetch` skill: `github` | **yes** |
-| LessWrong / AI Alignment Forum | Sharpest early analysis of deception, scheming, situational awareness — months ahead of papers | `research-fetch` skill: `forum` | **yes** |
+| arXiv (`cs.MA` `cs.AI` `cs.CL` `cs.SE`, plus `cs.HC` `cs.CY` `econ.GN`) | Field publishes here first | **`arxiv-fetch` skill** — `python C:\Agents\skills\arxiv-fetch\scripts\fetch_arxiv.py --query "<q>" --max N`. No date-sort param; fetch a batch and filter by the arXiv ID YYMM prefix (2508/2509) for the recency window. Raw API + DBLP-HTML remain fallbacks. | **yes** |
+| Hacker News | Practitioner signal, shipping tools, "harness" as a forming genre | **`hackernews-fetch` skill** — public listing routes, date-filterable | **yes** |
+| RSS / Atom feeds | Lab blogs, release feeds, newsletter-style summaries | **`rss-fetch` skill** — RSS 2.0 + Atom, bounded public HTTP | **yes (new)** |
+| X / Twitter | Author threads days ahead of publication | `x-fetch` skill — nodriver + dedicated profile | **yes** |
+| Reddit (`r/LocalLLaMA`, `r/MachineLearning`) | Failure reports that never reach arXiv; **the small/local-model regime** the recency-weighting note cares about | `reddit-fetch` skill — browser / OAuth / PullPush lanes | **yes** |
+| YouTube | Paper-summary channels; see `docs/source_channels.md` | `youtube-transcript` skill — local, residential IP | **yes** |
+| GitHub search / trending / releases | What's actually shipping vs. a preprint claim | **`github-fetch` skill** — repo/issue/PR search + direct pages | **yes** |
+| LessWrong / AI Alignment Forum | Sharpest early analysis of deception, scheming, situational awareness | `research-fetch` skill: `forum` | **yes** |
 
 ### Adjudication
 

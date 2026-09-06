@@ -1,0 +1,19 @@
+{
+  "run": 184,
+  "increment": "owner added dedicated fetch skills - update sources/README.md + SKILL.md to prefer them; test arxiv-fetch",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-184.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
