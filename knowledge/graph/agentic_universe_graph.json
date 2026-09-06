@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-03",
+  "last_updated": "2026-10-04",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1132,6 +1132,10 @@
     {
       "date": "2026-10-03",
       "change": "Autonomous run 296. Folded the owner's prediction-markets branch (knowledge/notes/prediction-markets-branch-2026-09.md, origin/main, 2026-09-07) - a live Polymarket/Kalshi forecasting-agent ecosystem scan. 2 nodes: concept_the_prediction_market_ecosystem_independently_validates_the_forecast_ledger_loop (the branch's core loop IS epistemic_constitution.py's loop - independent operational arrival; names the external eval targets the forecast ledger lacks: ForecastBench 2409.19839, PredictionMarketBench 2602.00133, PolyBench 2604.14199, Replaying Prediction Markets 2607.14051, AQuA 2608.12841; Domain-Specific Calibration Dynamics 2602.19520 backs domain-keyed trust) and concept_a_calibrated_forecaster_still_lags_the_market_on_fresh_information_near_resolution (Prophet Arena 2510.17638 + PolyBench: calibration is not timeliness - the forecast ledger needs a time-to-resolution axis). 8 edges into the epistemic-market cluster (supports epistemic_constitution + domain-keyed trust; informs calibrated-forecasting; grounds probe_epistemic_market_rig; instantiates workflow_polymarket_bot_strategy_loop; freshness refines calibrated-forecasting + informs epistemic_constitution). Cross-method validation, not a new capability claim; the branch's profit anecdotes are explicitly unverified. 323 -> 325 nodes, 1295 -> 1303 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 297. No graph node/edge change. Hardened tools/project_graph_scaffold.py for use in an arbitrary target repo: cmd_new now creates docs/ and knowledge/graph/ if absent, and takes an optional root= (was hard-wired to the agentic-universe repo root). +2 selftest checks (10 total). Shipped docs/project_audit_kit/ - a 4-file pure-stdlib drop-in bundle (project_graph_scaffold + knowledge_graph + task_ledger + supervisor) with a README that is the exact prompt for the session auditing poly-bot (/home/dev/poly-bot) or poster-studio (/home/dev/poster-studio). docs/practicing_what_we_preach.md section 3 + tools/README.md updated. BUILD SELFTEST GREEN. The per-project audit - blocked on WSL paths since run 251 - is now executable."
     }
   ],
   "nodes": [

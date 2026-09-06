@@ -105,10 +105,11 @@ _The two or three assumptions the project rests on, and what would break each._
 """
 
 
-def cmd_new(name):
+def cmd_new(name, root=None):
+    root = Path(root) if root is not None else ROOT
     safe = name.replace("/", "_")
-    gpath = ROOT / "knowledge" / "graph" / f"{safe}_project_graph.json"
-    dpath = ROOT / "docs" / f"{safe}_PROJECT_STATE.md"
+    gpath = root / "knowledge" / "graph" / f"{safe}_project_graph.json"
+    dpath = root / "docs" / f"{safe}_PROJECT_STATE.md"
     if gpath.exists() or dpath.exists():
         raise SystemExit(f"refusing to overwrite: {gpath.name} / {dpath.name} already exist")
     g = starter_graph(safe)
@@ -116,11 +117,12 @@ def cmd_new(name):
     if errs:
         raise SystemExit("internal error: starter graph does not validate: " + "; ".join(errs))
     gpath.parent.mkdir(parents=True, exist_ok=True)
+    dpath.parent.mkdir(parents=True, exist_ok=True)
     gpath.write_text(json.dumps(g, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     dpath.write_text(starter_doc(safe), encoding="utf-8")
-    print(f"wrote {gpath.relative_to(ROOT)}")
-    print(f"wrote {dpath.relative_to(ROOT)}")
-    print("next: fill both, then `python tools/project_graph_scaffold.py validate " f"{gpath.relative_to(ROOT)}`")
+    print(f"wrote {gpath.relative_to(root)}")
+    print(f"wrote {dpath.relative_to(root)}")
+    print("next: fill both, then `python tools/project_graph_scaffold.py validate " f"{gpath.relative_to(root)}`")
 
 
 def cmd_validate(path):
@@ -139,6 +141,14 @@ def cmd_validate(path):
         return 1
     print(f"VALID  ({len(g.get('nodes', []))} nodes, {len(g.get('edges', []))} edges)")
     return 0
+
+
+def _raises(fn):
+    try:
+        fn()
+        return False
+    except (SystemExit, Exception):
+        return True
 
 
 def _selftest():
@@ -179,6 +189,15 @@ def _selftest():
         checks["cmd_validate rejects a dangling edge (base schema)"] = cmd_validate(dangle) == 1
         checks["starter doc says to read it first"] = \
             "reads this file and the graph **first**" in starter_doc("demo")
+        # cmd_new into a bare repo (no docs/ or knowledge/ yet) creates both trees
+        bare = tmp / "bare_repo"
+        bare.mkdir()
+        cmd_new("acme/widget", root=bare)
+        checks["cmd_new creates docs/ and knowledge/graph/ in a bare repo"] = (
+            (bare / "knowledge" / "graph" / "acme_widget_project_graph.json").is_file()
+            and (bare / "docs" / "acme_widget_PROJECT_STATE.md").is_file())
+        checks["cmd_new refuses to overwrite an existing project graph"] = \
+            _raises(lambda: cmd_new("acme/widget", root=bare))
 
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")

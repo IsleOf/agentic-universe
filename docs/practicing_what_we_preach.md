@@ -104,6 +104,15 @@ structure transfers, prose strategy does not). A validated graph is that structu
 if needed. The `human_llm_hybrid_graph.json` on `origin/main` is a separate graph and should stay
 separate.
 
+**Drop-in kit (run 297).** `docs/project_audit_kit/` is a 4-file, pure-stdlib bundle to copy into a
+target repo as `tools/`: `project_graph_scaffold.py` (+ its `knowledge_graph.py` dep — hardened run 297
+to create `docs/` and `knowledge/graph/` if the repo doesn't have them yet), plus `task_ledger.py` and
+`supervisor.py` for the dropped-task problem. `docs/project_audit_kit/README.md` is the exact prompt for
+the auditing session. poly-bot is at `/home/dev/poly-bot` (WSL), poster-studio at
+`/home/dev/poster-studio` — both are large, active repos whose hand-over state is scattered across many
+dated `.md` files; the in-flight checklist a cold audit can't recover is exactly what the active session
+should put in the `question` nodes.
+
 ---
 
 ## 4. The concrete pains → the folded research
