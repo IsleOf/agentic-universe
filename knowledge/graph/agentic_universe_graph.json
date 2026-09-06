@@ -1020,6 +1020,10 @@
     {
       "date": "2026-09-26",
       "change": "Autonomous run 265. Fold group 6 of the owner's research input (coverage_map.md) - curriculum refinements (directions 1, 23, 24, 25, 31). 4 nodes (branch_key self_improving_harness:curriculum_refinements): concept_go_explore_novelty_archive_return_then_explore (archive+restore+explore; instantiates intrinsic_motivation), concept_paired_designer_solver_self_play_at_the_capability_frontier_spade_lure (SPADE implements pattern_regret_as_difficulty_signal, LURE implements concept_graded_challenge; both instantiate concept_environment_evolution_curriculum; measured 2026 numbers), concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace (refines MAST taxonomy + the experience bank step store), concept_task_genome_every_environment_carries_a_full_provenance_record (extends the run-264 developmental benchmark). 12 edges. Emergence-first, all speculative. 295 -> 299 nodes, 1160 -> 1172 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-26",
+      "change": "Autonomous run 266. Fold group 7 of the owner's research input (coverage_map.md) - cultural transmission + productive scarcity + protocol evolution (directions 3, 4, 5, 6). 4 nodes (branch_key emergent_behaviors:culture_and_scarcity): concept_swarmworld_homogeneous_agents_differentiate_via_constraints_and_durable_artifacts (supports emergent_self_organizing_roles), concept_cultural_transmission_engine_local_cultures_with_diffusion_rules (extends emergent_social_conventions; challenges commons erosion), concept_orchestration_protocols_are_evolvable_code_kept_as_an_archive (extends recursive_meta_skill_evolution to the coordination procedure), concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default (refines the inverted-U; challenges approach_emergence_first - cultivated behaviour includes loans / vote trading / exclusion). 11 edges. Emergence-first, all speculative. 299 -> 303 nodes, 1172 -> 1183 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8830,6 +8834,105 @@
         "docs/auto_sweep_2026-09-26-1200.md",
         "docs/research/alternative_approaches_part1.md (owner research input)",
         "docs/research/alternative_approaches_part3.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_swarmworld_homogeneous_agents_differentiate_via_constraints_and_durable_artifacts",
+      "label": "SwarmWorld: homogeneous agents differentiate via constraints and durable artifacts",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:culture_and_scarcity",
+      "confidence": 0.5,
+      "description": "Owner direction 3 (docs/research/alternative_approaches_part1.md). Give initially homogeneous LLM agents resource budgets, incomplete local information, persistent shared artifacts, and room to specialise - then measure whether division of labour emerges. SwarmWorld reports agents differentiating into exploration, construction, maintenance and coordination behaviours WITHOUT fixed roles, with durable artifacts enabling cumulative technological development. Physical observation and persistent artifacts carry much of the reuse signal, not only direct agent chat. A second data point for emergent_self_organizing_roles and a reason to compare direct-message-first swarms against stigmergic ones.",
+      "tags": [
+        "swarmworld",
+        "role-differentiation",
+        "durable-artifacts",
+        "division-of-labour",
+        "ecological"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-1800.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_cultural_transmission_engine_local_cultures_with_diffusion_rules",
+      "label": "Cultural transmission engine: local cultures, and rules for what diffuses",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:culture_and_scarcity",
+      "confidence": 0.5,
+      "description": "Owner direction 4. Instead of updating every agent from one central skill library, let groups maintain LOCAL cultures - norms, conventions, procedures, evaluation styles - then study which practices diffuse, persist, mutate, or should be contained. Track adoption, persistence after the originator is removed, newcomer uptake, cross-community transfer. Credibility can come from an agent's own decision process (confidence, decision time), not model identity or verbosity. Lasting transmission requires a practice to be hard to discover independently, easy enough to learn, and visibly beneficial - each adopted practice ships with a minimal tutorial, a test, and a demonstrated advantage.",
+      "tags": [
+        "cultural-transmission",
+        "local-norms",
+        "social-learning",
+        "diffusion",
+        "practice-provenance"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-1800.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_orchestration_protocols_are_evolvable_code_kept_as_an_archive",
+      "label": "Orchestration protocols are evolvable code, kept as an archive not a winner",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:culture_and_scarcity",
+      "confidence": 0.5,
+      "description": "Owner direction 5. Treat the orchestration protocol as code - state -> recipient(s), message type, resource allocation, escalation action - and evolve it against MULTIPLE environments, scoring performance, cost, fairness, resilience, diversity preservation and exploitability. Keep a protocol ARCHIVE, not just the winner: different conditions need different social rules. An LLM-guided evolutionary approach to transmission programs improved collective performance up to 37% over standard baselines - and removing content-dependence removed the advantage, i.e. the gains come from state-aware routing, not more messages.",
+      "tags": [
+        "protocol-evolution",
+        "evolvable-orchestration",
+        "state-aware-routing",
+        "protocol-archive"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-1800.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default",
+      "label": "Productive scarcity is a research instrument, not a desirable default",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:culture_and_scarcity",
+      "confidence": 0.5,
+      "description": "Owner direction 6. Controlled scarcity of tools and resources forces planning, trade, specialisation, maintenance and institutions. A controlled multi-agent experiment reported that scarcity + restricted task access produced loans, credit arrangements, task-access promises, vote trading and strategic allocation WITHOUT any prompt to trade. That makes scarcity a powerful instrument and a hazard: safe design needs sandboxed non-financial credits, explicit prohibition of deception / coercion / side channels / irreversible commitments, and audit agents that explain resource flows and flag collusion or exclusion. Compare abundance / moderate / extreme scarcity to find the regime that promotes specialisation without destructive behaviour.",
+      "tags": [
+        "productive-scarcity",
+        "emergent-institutions",
+        "research-instrument",
+        "audit",
+        "guardrails"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-26-1800.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)"
       ],
       "evidence_links": [
         "docs/research/coverage_map.md"
@@ -21462,6 +21565,127 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "The frozen held-out set is 17 tasks with computable checks but no genome record; adding difficulty / capability-tag / exploit fields would make its coverage auditable."
+    },
+    {
+      "id": "edge_swarmworld_supports_self_organizing_roles",
+      "source": "concept_swarmworld_homogeneous_agents_differentiate_via_constraints_and_durable_artifacts",
+      "target": "emergent_self_organizing_roles",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "A second independent data point: homogeneous agents differentiate into a functional division of labour under constraints alone, no assigned roles."
+    },
+    {
+      "id": "edge_swarmworld_refines_stigmergy",
+      "source": "concept_swarmworld_homogeneous_agents_differentiate_via_constraints_and_durable_artifacts",
+      "target": "emergent_stigmergic_coordination",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "Sharpens the claim that durable artifacts, not chat, carry most of the reuse signal - and makes a direct-message vs stigmergic swarm comparison the experiment."
+    },
+    {
+      "id": "edge_cultural_transmission_extends_social_conventions",
+      "source": "concept_cultural_transmission_engine_local_cultures_with_diffusion_rules",
+      "target": "emergent_social_conventions",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "emergent_social_conventions is the phenomenon (norms arise). The transmission engine adds the structure: local cultures, and testable diffusion conditions (hard to discover, easy to learn, visibly beneficial)."
+    },
+    {
+      "id": "edge_cultural_transmission_challenges_commons_erosion",
+      "source": "concept_cultural_transmission_engine_local_cultures_with_diffusion_rules",
+      "target": "emergent_knowledge_commons_erosion",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Commons erosion says agent adoption privatises the shared knowledge others learn from. Local cultures with an explicit tutorial+test+advantage per adopted practice are a candidate counter-mechanism - the practice stays legible and re-learnable."
+    },
+    {
+      "id": "edge_cultural_transmission_informs_conditional_trust",
+      "source": "concept_cultural_transmission_engine_local_cultures_with_diffusion_rules",
+      "target": "concept_conditional_trust_is_domain_keyed_not_global",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "'Credibility from an agent's own decision process (confidence, decision time), not identity or verbosity' is an input to the domain-keyed trust edge."
+    },
+    {
+      "id": "edge_protocol_evolution_extends_recursive_meta_skill",
+      "source": "concept_orchestration_protocols_are_evolvable_code_kept_as_an_archive",
+      "target": "concept_recursive_meta_skill_evolution",
+      "type": "extends",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Recursive meta-skill evolution improves the improvement procedure. Protocol evolution applies the same move to the COORDINATION procedure - and insists on an archive, because the best social rule is condition-dependent."
+    },
+    {
+      "id": "edge_protocol_evolution_informs_market_orchestrator",
+      "source": "concept_orchestration_protocols_are_evolvable_code_kept_as_an_archive",
+      "target": "pattern_market_as_orchestrator",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "A repeated auction is one point in the protocol space; protocol evolution would search the space (auction / vote / delegate / escalate) rather than fixing on the auction."
+    },
+    {
+      "id": "edge_protocol_evolution_supports_epistemic_market",
+      "source": "concept_orchestration_protocols_are_evolvable_code_kept_as_an_archive",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "The claim market is itself a protocol; evolving and archiving protocols is how you find which market rules work under which conditions."
+    },
+    {
+      "id": "edge_scarcity_refines_environmental_pressure_u",
+      "source": "concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default",
+      "target": "concept_environmental_pressure_has_an_inverted_u",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "The inverted-U says cooperation and emergence peak at medium environmental pressure. Productive scarcity is a specific pressure knob, and the abundance / moderate / extreme comparison is the experiment that locates the peak."
+    },
+    {
+      "id": "edge_scarcity_informs_ostrom_governance",
+      "source": "concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Scarcity is what makes governance necessary: loans, task-access promises and vote trading emerge under scarcity, and Ostrom-style self-governance is the design response to keep them from becoming cartels."
+    },
+    {
+      "id": "edge_scarcity_challenges_emergence_first",
+      "source": "concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default",
+      "target": "approach_emergence_first",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "Emergence-first cultivates emergent behaviour. Scarcity shows the cultivated behaviour includes loans, vote trading and strategic exclusion - not inherently desirable - so the posture needs the audit-agent + explicit-prohibition guardrails this node names."
     }
   ]
 }
