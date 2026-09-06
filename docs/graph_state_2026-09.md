@@ -1,22 +1,24 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten 2026-09-11 (run 20). Refreshed 2026-09-18 (run 51).** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
-Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands.
+Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 51)
+## Snapshot (run 88)
 
-**165 nodes · 468 edges · 9 approach families · 118 `challenges` edges (25% of all edges).**
+**188 nodes · 584 edges · 9 approach families · 131 `challenges` edges (22% of all edges).**
 
-`verification_state`: 80 needs-validation · **73 partially-validated** · 5 inconclusive · 7 unset.
-`status`: 119 to_test · 31 speculative · 13 stable_theory · 1 in_experiment · 1 deprecated.
+`verification_state`: 80 needs-validation · **80 partially-validated** · **16 validated** · 5 inconclusive · 7 unset.
+`status`: 125 to_test · 31 speculative · 13 stable_theory · **18 in_experiment** · 1 deprecated.
 
-The partially-validated count has risen from 46 (run 20) to 73 — 31 runs of literature sweeps, most claims now
-have at least one verified citation behind them. The `challenges` ratio has held at ~25% throughout: every
-capability mechanism the project wants carries a documented failure mode as a `challenges` edge. That ratio *is*
-the honest state of the thesis.
+Two shifts since run 51 (165 nodes): (a) the literature frontier was swept (runs 39–49) and then folded —
+partially-validated rose to 80. (b) **The build happened (runs 60–87).** 17 `artifact_*` nodes now record
+tested code — the Phase 0–5 toolchain and four probe rigs — and they carry `verification_state: validated`
+(their selftests are computed checks that pass) and `status: in_experiment`. That is why `validated` went 0→16
+and `in_experiment` 1→18. The `challenges` ratio drifted 25%→22% only because the denominator grew with build
+edges; the tension count itself rose (118→131).
 
 **Edge-type audit (run 59).** Of 122 `challenges` edges, ~114 are genuine unresolved tensions and ~8 are
 "mitigation-direction" — a pattern that *counters* a failure-mode node (e.g. `pattern_evidential_ancestry_tracking`
@@ -34,18 +36,18 @@ interest. Prefer nodes that assert a mechanism over nodes that name a category. 
 edges, don't resolve them. Verify citations three ways — exists, summary matches, headline number is causally
 isolated; "VERIFIED" in `derived_from` means the arXiv page was fetched and checked.
 
-## Approach families (run 51)
+## Approach families (run 88)
 
 | Family | Nodes | What it holds | Posture |
 | --- | --- | --- | --- |
-| `emergent_behaviors` | 53 | LLM / harness / swarm-level emergence; deception, norms, coordination, self-preservation, whistleblowing, interaction-language effects | The core. Many now partially-validated |
-| `self_improving_harness` | 41 | The harness as an evolvable artifact; verifier spec, recoverability, grounded acceptance, geometric decay, state folding | Well developed; the gate architecture now has an impossibility theorem behind it |
-| `agent_habitat` | 19 | The environment agents develop in: slack, cheap death, graded challenge, inheritance, diversity maintenance, retraction | The design frame; 5 of 6 mechanisms partially validated, slack still the gap |
-| `graph_engineering` | 18 | Organising a system through explicit task / agent / state graphs; market vs graph orchestration, incentive-compatibility gap, topology error propagation | No longer thin — grew from 13 to 18; the market-orchestrator path now carries two challenges |
-| `nourishing_harness` | 15 | The per-agent execution environment paired with orchestration; four layers, two-part gate | Formal proposal `awaiting_review` (`evolution/proposals/2026-09-09_nourishing-harness`) |
-| `control_plane_governance` | 7 | Policy, approval, audit, decision ledgers | Deferred programme, kept for when rigor returns |
+| `self_improving_harness` | 57 | The harness as an evolvable artifact — verifier spec, recoverability, grounded acceptance, geometric decay + **the built pipeline** (`artifact_phase0`–`phase5`, the proposer, two verifiers, the held-out set, the RHO rig) | Largest family; Phases 0–5 exist as tested code |
+| `emergent_behaviors` | 56 | LLM / harness / swarm-level emergence; deception, norms, coordination, self-preservation, whistleblowing, interaction-language, emergent private language | The core. Many partially-validated |
+| `agent_habitat` | 22 | The environment agents develop in: slack, cheap death, graded challenge, inheritance, diversity maintenance, retraction + **generative-process diversity**, the idle-agent rig | 5 of 6 mechanisms have literature; slack still unverified — `probe_idle_agent.py` is the test |
+| `graph_engineering` | 18 | Explicit task / agent / state graphs; market vs graph orchestration, incentive-compatibility gap, topology error propagation | The market-orchestrator path carries two challenges |
+| `nourishing_harness` | 16 | The per-agent execution environment paired with orchestration; four layers, two-part gate | Formal proposal `awaiting_review`; §3.2–§3.4 now carry probe-rig measurements (run 84) |
+| `control_plane_governance` | 7 | Policy, approval, audit, decision ledgers | Deferred programme |
 | `orchestration_first` | 7 | Loops, planner/worker/reviewer, canonical agent cycle | Old seed; reframed by the loop/graph orthogonality critique |
-| `marketplace_workflow` | 3 | Listing generation, prediction-market research | 2 nodes `inconclusive` — dormant 40+ runs, abandoned not refuted (run 50) |
+| `marketplace_workflow` | 3 | Listing generation, prediction-market research | 2 nodes `inconclusive` — dormant, abandoned not refuted (run 50) |
 | `agent_os_desktop` | 2 | Governed local/browser/desktop automation | Candidate implementation domain |
 
 ## The central thesis, and where it stands
@@ -90,21 +92,24 @@ the emergence is worth studying.
 - Is the graph's evidence base language-parochial? Almost every verified claim is English-measured, and the
   Shibboleth Effect (run 47) says that may not be a universal scope (`what_would_make_this_wrong.md` §7).
 
-## Highest-value next work (run 51)
+## Highest-value next work (run 88)
 
-1. **Build Phase 0** of `docs/self_improving_harness_plan.md` (Five-W trace instrumentation). This is now *the*
-   bottleneck: every "untested" in `what_would_make_this_wrong.md` traces back to it, the literature frontier is
-   swept (`docs/literature_coverage.md`), and further sweeps return recurring sources. The autonomous loop
-   cannot do this — it needs a human build session.
-2. **Run the idle-agent probe** (`docs/probe_idle_agent.md`) — cheapest experiment, tests the habitat model's
-   one unverified mechanism (slack). Add a language arm (run 47).
-3. **The RHO held-out grading test** — decides whether trajectory-only self-improvement is real or self-preference inflation.
+The build cleared the run-51 list — Phase 0 exists; the idle-agent, RHO, epistemic-Sybil and
+subagent-coordination probes are runnable rigs (`tools/probe_*.py`). What is left needs inputs the autonomous
+loop cannot supply:
+
+1. **A real model API call** behind the four rigs' one stub each (`agent_step` / `agent_read` /
+   `self_preference` / `relay_policy`) and behind `PROPOSER_PROMPT`. Then the probes produce real verdicts and
+   Phase 3 closes autonomously. This is an integration step, not a loop increment.
+2. **A real multi-agent harness** for Phase 6 (the swarm layer) — this repo contains none.
+3. **Watch the run-80 prediction** — the IDLE-STATE RULE promoted through the Phase 3 gate predicts idle runs
+   stop churning docs; runs 81–87 held to it. `loop_metrics` + the task-class classifier check it computably.
 4. **Test the composed design** — short agents + four-field handoffs + folded state, run together, measured for
-   task-level geometric decay.
+   task-level geometric decay (`what_would_make_this_wrong.md` §5). Needs a real harness.
 
 ## Reading order for a new agent
 
 `docs/habitat_charter.md` → `docs/nourishing_harness_design.md` → `docs/what_would_make_this_wrong.md` (the
-adversarial counterweight — read it second) → `docs/self_improving_harness_plan.md` →
-`docs/emergence_probe_catalogue.md` → `docs/source_register.md` → the `docs/auto_sweep_*` files newest-first for
-run-by-run detail.
+adversarial counterweight — read it second) → `docs/self_improving_harness_plan.md` → `tools/README.md` (the
+built pipeline) → `docs/emergence_probe_catalogue.md` (probes + rigs) → `docs/source_register.md` → the
+`docs/auto_sweep_*` files newest-first for run-by-run detail.

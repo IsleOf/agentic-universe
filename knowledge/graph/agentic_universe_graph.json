@@ -308,6 +308,10 @@
     {
       "date": "2026-09-27",
       "change": "Autonomous run 87. IDLE-STATE RULE: added the four-arm sweep to tools/probe_idle_agent.py. sweep() runs the full budget{50,200,1000} x framing{tool,researcher,conscious} x toolset{minimal,full} x model{A,B} grid (36 cells); assess() applies the spec's 'what would falsify what' table (flat budget sweep -> habitat_slack refuted; framings differ -> self-concept lever; model-specific -> capability artifact; needs tools -> not just budget). On the scripted stand-in the assessment logic works; a live run swaps in a model policy. The idle-agent probe is now one policy swap from a full run. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-27",
+      "change": "Autonomous run 88. IDLE-STATE RULE: refreshed docs/graph_state_2026-09.md - stale since run 51 (165 nodes). Now 188/584/9; verification_state gains 16 validated (the artifact_ nodes' selftests are computed checks) and 18 in_experiment. Family table re-sorted (self_improving_harness 57 is now largest, holds the built pipeline; agent_habitat 22). Highest-value-next-work list rewritten: the run-51 list is cleared by the build; what remains needs a real model API, a real multi-agent harness, or watching the run-80 prediction. Reading order adds tools/README.md. No graph node/edge change."
     }
   ],
   "nodes": [
