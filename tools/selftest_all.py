@@ -29,6 +29,7 @@ JOBS = [
     ("loop_adapter.py", ["selftest"]),
     ("loop_session.py", ["selftest"]),
     ("loop_metrics.py", ["selftest"]),
+    ("holdout_tasks.py", ["selftest"]),
 ]
 
 

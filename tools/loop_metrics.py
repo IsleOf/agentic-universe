@@ -121,8 +121,10 @@ def propose_loop_edit(metrics):
                 "rationale": "the procedure already says verify three ways; making the per-run cap "
                              "explicit removes the ambiguity a busy run exploits",
             },
-            "verification": "BLOCKED — needs a frozen held-out set of research tasks to re-run the "
-                            "loop on; until then this is a grounded proposal, promoted manually",
+            "verification": "deferred-acceptance: promote manually, then after ~10 runs check "
+                            "verified_citation_fraction rose AND re-run the loop on "
+                            "tools/holdout_tasks.py — a research-quality regression below the "
+                            "1.00 historical baseline reverts the edit (frozen held-out set, run 69)",
         })
     vpr = metrics.get("validation_pass_rate")
     if vpr is not None and vpr < THRESHOLDS["validation_pass_rate"]:

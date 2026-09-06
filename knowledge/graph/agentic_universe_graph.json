@@ -232,6 +232,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 68. Built tools/loop_metrics.py - real metrics over the loop trace corpus (verified_citation_fraction 0.40, graph_write_rate 0.43, validation_pass_rate 1.00, evidence_root_reuse 0.06). propose_loop_edit() turns a below-threshold metric into a concrete loop-harness edit + prediction. Honest verification split: validation_pass_rate is computably verifiable, quality metrics are blocked on a frozen held-out research-task set that does not exist. Fixed the adapter to tag VERIFIED citations trust=full and to overwrite (not append) on replay. selftest_all.py runs 9 selftests, all GREEN. artifact_loop_metrics_phase3_real added."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 69. Built tools/holdout_tasks.py - the frozen held-out research-task set that Phase 3 verification of loop-harness edits was blocked on. 10 questions this project already verified, each with a computable substance-check. Historical baseline 10/10 at aggregate 1.00. improvement_loop.verify_loop_edit() uses it as the grounded risk: accept iff risk strictly decreases AND no task regressed. Phase 3 gap narrowed to: proposer (code) -> human promotes + re-runs loop on the set -> verify (code). selftest_all.py runs 10 selftests, all GREEN. artifact_phase3_holdout_set added."
     }
   ],
   "nodes": [
@@ -4645,6 +4649,32 @@
       ],
       "evidence_links": [
         "docs/phase3_loop_metrics.md"
+      ]
+    },
+    {
+      "id": "artifact_phase3_holdout_set",
+      "label": "Frozen held-out research-task set — the loop-harness acceptance test",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase3_holdout",
+      "confidence": 0.8,
+      "description": "tools/holdout_tasks.py, run 69: ten research questions this project has already verified (Shibboleth model-dependence, ECT 0/288 vs 252/288, habitat slack unverified, epistemic Sybil 0.94->0.26, VCG 100% vs 3.3%, geometric decay ~16 steps, compaction cliff 10%, activation probe survives awareness, self-concept lever scope, market orchestrator challenged), each with a computable check that rewards substance not phrasing. Frozen (one file, checks reward substance, not loop-expandable). Historical baseline: 10/10 covered, aggregate 1.00. improvement_loop.verify_loop_edit() uses it as the grounded risk for a loop-HARNESS edit: accept iff risk strictly decreases AND no single task regressed. Narrows the Phase 3 verification gap: proposer (code) -> human promotes + re-runs the loop on the set -> verify (code). Step 2 is the top-level human-in-the-loop, made explicit.",
+      "tags": [
+        "phase-3",
+        "held-out-set",
+        "frozen",
+        "acceptance-test",
+        "regression-guard",
+        "research-quality"
+      ],
+      "derived_from": [
+        "docs/phase3_holdout_set.md",
+        "tools/holdout_tasks.py"
+      ],
+      "evidence_links": [
+        "docs/phase3_holdout_set.md"
       ]
     }
   ],
@@ -10230,6 +10260,59 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "evidence_root_reuse = 0.06: three arXiv sources cited by more than one run - the ancestry concentration a swarm would need to dedupe."
+    },
+    {
+      "id": "edge_holdout_instantiates_sih",
+      "source": "artifact_phase3_holdout_set",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_holdout_unblocks_loopmetrics",
+      "source": "artifact_phase3_holdout_set",
+      "target": "artifact_loop_metrics_phase3_real",
+      "type": "supports",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8,
+      "description": "Supplies the frozen held-out set the loop_metrics quality proposals were blocked on."
+    },
+    {
+      "id": "edge_holdout_implements_proctor",
+      "source": "artifact_phase3_holdout_set",
+      "target": "pattern_deterministic_self_improvement_guardrails",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "A frozen held-out set the proposer never expands; checks reward substance so a memorised answer over-fits nothing."
+    },
+    {
+      "id": "edge_holdout_realizes_grounded_acceptance",
+      "source": "artifact_phase3_holdout_set",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "grounded risk = fraction of held-out tasks wrong; accept iff it strictly decreases and no task regressed."
+    },
+    {
+      "id": "edge_holdout_depends_on_phase3",
+      "source": "artifact_phase3_holdout_set",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75
     }
   ]
 }

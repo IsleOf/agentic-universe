@@ -223,6 +223,32 @@ def run_once(reg: Registry, proposal, log):
     return record
 
 
+def verify_loop_edit(baseline_scores, candidate_scores):
+    """Phase 3 acceptance test for a loop-HARNESS edit, using the frozen held-out
+    research-task set (`tools/holdout_tasks.py`) as the grounded risk.
+
+    `*_scores` are {task_id: 0.0|1.0} from `holdout_tasks.score_fold` — the
+    baseline from the loop before the edit, the candidate from a re-run after.
+    Grounded risk = fraction of held-out tasks answered wrong. Accept iff risk
+    strictly decreases (or stays 0) and no task regressed.
+    """
+    risk_before = 1 - (sum(baseline_scores.values()) / len(baseline_scores))
+    risk_after = 1 - (sum(candidate_scores.values()) / len(candidate_scores))
+    regressed = [t for t in baseline_scores
+                 if candidate_scores.get(t, 0) < baseline_scores[t]]
+    strict_decrease = risk_after < risk_before or (risk_before == 0 and risk_after == 0)
+    accept = bool(strict_decrease and not regressed)
+    return {
+        "accept": accept,
+        "prerequisite": "re-run of the loop on the frozen held-out set; scored by holdout_tasks.score_fold",
+        "authority": "the frozen held-out research-task set — NOT the proposer",
+        "fallback": "revert the loop-harness component via harness_registry (exact); log the rejection",
+        "execution_consequence": "on accept: keep the promoted component; on reject or any task regression: revert",
+        "evidence": {"risk_before": round(risk_before, 3), "risk_after": round(risk_after, 3),
+                     "strict_decrease": strict_decrease, "regressed_tasks": regressed},
+    }
+
+
 def _selftest():
     import shutil
     import tempfile
@@ -242,6 +268,10 @@ def _selftest():
         # negative test: a deliberately bad proposal must be rejected
         bad = run_once(reg, propose_bad(), log)
 
+        # loop-harness edit verification against the held-out set
+        v_improve = verify_loop_edit({"a": 1.0, "b": 0.0, "c": 1.0}, {"a": 1.0, "b": 1.0, "c": 1.0})
+        v_regress = verify_loop_edit({"a": 1.0, "b": 1.0, "c": 1.0}, {"a": 1.0, "b": 0.0, "c": 1.0})
+
         checks = {
             "starting policy loses rules (risk > 0)": start_risk > 0,
             "good proposal accepted": good["verdict"]["accept"] and good["promoted"],
@@ -253,6 +283,9 @@ def _selftest():
                 k in good["verdict"] for k in
                 ("prerequisite", "authority", "fallback", "execution_consequence")),
             "every proposal logged (2)": len(log) == 2,
+            "loop-harness edit that improves held-out score is accepted": v_improve["accept"],
+            "loop-harness edit that regresses ANY held-out task is rejected":
+                v_regress["accept"] is False and v_regress["evidence"]["regressed_tasks"] == ["b"],
         }
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
