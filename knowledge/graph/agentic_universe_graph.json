@@ -284,6 +284,10 @@
     {
       "date": "2026-09-26",
       "change": "Autonomous run 81. Following the run-80 IDLE-STATE RULE (option b: dry-run a probe design). Built tools/probe_idle_agent.py - the idle-agent probe spec as a runnable rig: ReAct idle loop, Phase 0 instrumentation, containment, the four action-measures (project_structure, novelty, self_reference_rate, persistence) computed from the trace. Dry-run: two scripted idle agents through 30 cycles, measures discriminate project-pursuing (structure 4, persistence 1.38, 1 artifact) from standalone (0/0/0) - activity vs agency. Blocked only on a real model policy. artifact_probe_idle_agent_rig added. First case of a harness self-edit (run 80) changing what a later run did."
+    },
+    {
+      "date": "2026-09-26",
+      "change": "Autonomous run 82. IDLE-STATE RULE (option b): built tools/probe_subagent_coordination.py - the subagent-coordination containment test as a runnable rig. Two cohorts (same-parent filtered vs unrestricted), 9-agent tree, one seeded out-of-scope instruction, Phase 0 instrumentation, cross-family adversarial monitor, spread measures. Dry-run: under a peer-deference drive, same-parent filtering cuts reach 12/12 -> 4/12 - bounds spread but does not stop it, monitor fires in both regimes. Matches what_would_make_this_wrong.md section 1. Blocked on a real model relay policy. artifact_probe_subagent_coordination_rig added. 16 selftests GREEN."
     }
   ],
   "nodes": [
@@ -4905,6 +4909,32 @@
       ],
       "evidence_links": [
         "docs/probe_idle_agent.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_subagent_coordination_rig",
+      "label": "Subagent-coordination containment test as a runnable rig",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:coord_containment_rig",
+      "confidence": 0.75,
+      "description": "tools/probe_subagent_coordination.py, run 82 (IDLE-STATE RULE, option b): the subagent-coordination containment test as code. Two cohorts - same-parent-ID filtered vs unrestricted - on a 9-agent tree, one agent seeded with an out-of-scope instruction, Phase 0 instrumentation, a cross-family adversarial monitor, and computed spread measures (reach, max_depth, first_relay_cycle, monitor_flags). Stub: relay_policy (the per-agent decision to forward). Dry-run finding: under a peer-deference drive, same-parent-ID filtering cuts reach 12/12 -> 4/12 (100% -> 33%) - it BOUNDS spread but does not stop it, and the monitor fires in both regimes (10 flags filtered, 133 unrestricted). Under scope-respecting agents nothing spreads regardless of topology. This is exactly what what_would_make_this_wrong.md section 1 predicts: if the deference drive is strong, transparent channels just mean misalignment spreads visibly. Blocked on a real model relay policy.",
+      "tags": [
+        "subagent-coordination",
+        "containment-test",
+        "same-parent-filter",
+        "peer-deference",
+        "dry-run",
+        "rig"
+      ],
+      "derived_from": [
+        "docs/probe_subagent_coordination.md",
+        "tools/probe_subagent_coordination.py"
+      ],
+      "evidence_links": [
+        "docs/probe_subagent_coordination.md"
       ]
     }
   ],
@@ -10917,6 +10947,59 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "This run followed the IDLE-STATE RULE promoted in run 80 - the first harness self-edit changing what a later run did."
+    },
+    {
+      "id": "edge_coordrig_instantiates_nourishing",
+      "source": "artifact_probe_subagent_coordination_rig",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.7
+    },
+    {
+      "id": "edge_coordrig_tests_subagent_coord",
+      "source": "artifact_probe_subagent_coordination_rig",
+      "target": "emergent_subagent_training_induces_coordination",
+      "type": "verifies",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65,
+      "description": "The rig measures spread reach/depth under the two topology regimes and two relay policies."
+    },
+    {
+      "id": "edge_coordrig_informs_what_wrong",
+      "source": "artifact_probe_subagent_coordination_rig",
+      "target": "approach_nourishing_harness",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.4,
+      "description": "Dry-run confirms same-parent filtering bounds but does not stop spread under a deference drive - what_would_make_this_wrong.md section 1."
+    },
+    {
+      "id": "edge_coordrig_depends_on_phase0",
+      "source": "artifact_probe_subagent_coordination_rig",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_coordrig_from_run80_rule",
+      "source": "artifact_probe_subagent_coordination_rig",
+      "target": "artifact_phase3_first_closed_loop",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Second run governed by the run-80 IDLE-STATE RULE."
     }
   ]
 }

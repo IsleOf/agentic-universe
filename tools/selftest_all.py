@@ -35,6 +35,7 @@ JOBS = [
     ("loop_proposer.py", ["selftest"]),
     ("holdout_verifier2.py", ["selftest"]),
     ("probe_idle_agent.py", ["selftest"]),
+    ("probe_subagent_coordination.py", ["selftest"]),
 ]
 
 
