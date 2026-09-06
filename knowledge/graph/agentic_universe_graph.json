@@ -1004,6 +1004,10 @@
     {
       "date": "2026-09-25",
       "change": "Autonomous run 261. Fold group 2 of the owner's research input (coverage_map.md) - active inference + interoception (directions 7, 12, 13, 15). 3 nodes (branch_key self_improving_harness:interoception): concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value (the ask/retrieve/act/stop decision as epistemic vs pragmatic value vs cost - the IDLE-STATE RULE is a hand-written special case), concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate (five health axes; loop_metrics.py already does two of them for the research loop), concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise (the four-way event classifier; a quality axis on run_novelty). 8 edges: interoception extends artifact_loop_metrics_phase3_real + refines emergent_metacognitive_monitoring + inherits the eval-awareness confound; learnable-novelty refines the within-run creativity-decline node; active-inference refines the idle-agent rig. Emergence-first, all speculative. 281 -> 284 nodes, 1120 -> 1128 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-25",
+      "change": "Autonomous run 262. Fold group 3 of the owner's research input (coverage_map.md) - structural coordination (directions 32, 33, 38, 39). 4 nodes (branch_key orchestration_first:structural_coordination): concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner (Kiro; challenges the run-218 multi-agent criterion - no synthesiser), concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries (depends_on the task ledger; refines shallow_hierarchy), concept_cellular_agent_architecture_persistent_cells_with_portable_seeds (refines trace-compilation; informs the anti-collusion identity-fluidity gap; challenges the shared experience bank), concept_deterministic_spine_generative_edge_is_the_load_bearing_split (refines execution-layer enforcement; supports PCN; grounds approach_emergence_first - the interior is free because the spine is not). 12 edges. Emergence-first, all speculative. 284 -> 288 nodes, 1128 -> 1140 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8436,6 +8440,107 @@
       "derived_from": [
         "docs/auto_sweep_2026-09-25-1200.md",
         "docs/research/alternative_approaches_part2.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "label": "Orchestratorless flock: coordinate through shared state, not a central planner",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:structural_coordination",
+      "confidence": 0.5,
+      "description": "Owner direction 32 (docs/research/alternative_approaches_part4.md), AWS Kiro 'flock' pattern. No central orchestrator or message bus: independent agents coordinate by reading a shared store (a direction file, append-only per-agent logs, workspace artifacts), each reads a bounded peer neighbourhood, makes ONE contribution, stores its artifact, appends an update. Local context stays bounded as the team grows; one agent failing loses one contribution, not the run; roles emerge from contributions. Three topologies: mesh (fast convergence, small groups), ring/amorphous (constant per-agent context at scale), recency-swarm (dynamic clustering around current work). A different point in the design space from concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic, which assumes a deterministic synthesiser exists.",
+      "tags": [
+        "orchestratorless",
+        "flock",
+        "kiro",
+        "shared-state",
+        "stigmergy",
+        "append-only"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-1800.md",
+        "docs/research/alternative_approaches_part4.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries",
+      "label": "Fractal decomposition: spawn recursively only at unresolved boundaries, then compress",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:structural_coordination",
+      "confidence": 0.5,
+      "description": "Owner direction 33. A root agent maps a task coarsely, resolves what it can, and creates child agents ONLY for regions of genuine uncertainty or excess complexity. Every child applies the same compact reasoning contract in a narrower context and must return one of: resolved artifact, verified uncertainty, blocked dependency, or new boundary map. Completed work is compressed and the child terminates - no permanent agent proliferation. Computation follows problem structure, not a fixed org chart. The task_ledger + supervisor toolkit is the substrate; what is missing is the adaptive-depth spawn/compress discipline.",
+      "tags": [
+        "fractal",
+        "recursive-decomposition",
+        "adaptive-spawning",
+        "bounded-context",
+        "compression"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-1800.md",
+        "docs/research/alternative_approaches_part4.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_cellular_agent_architecture_persistent_cells_with_portable_seeds",
+      "label": "Cellular agent architecture: persistent cells with portable seeds, not sessions",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:structural_coordination",
+      "confidence": 0.45,
+      "description": "Owner direction 38. Replace the 'session' with a persistent agent cell: a compact unit with a local world model, working + episodic memory, a small tool set, an operational health state, a local goal and authority boundary, a spawn policy, and interfaces to shared artifacts - not unrestricted global context. Cells form tissues (task teams), organs (specialist subsystems), organisms (projects). A cell migrates across projects by carrying a compact self-similar SEED, not a linear token history. Open: what belongs in the portable seed vs the shared store; how much independent memory buys diversity before it causes incoherence; cells fork only to fill a verified specialisation gap.",
+      "tags": [
+        "cellular",
+        "agent-cell",
+        "portable-seed",
+        "persistent-identity",
+        "semantic-roaming"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-1800.md",
+        "docs/research/alternative_approaches_part4.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "label": "Deterministic spine, generative edge: the load-bearing split",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:structural_coordination",
+      "confidence": 0.6,
+      "description": "Owner direction 39. A hybrid system: a deterministic spine (permissions, money movement, deployments, data writes, compliance, CI, rollback, audit trails) and a generative edge (research, hypothesis generation, planning, interface proposals, code drafts, anomaly interpretation). Agents are highly creative in PROPOSING action; consequential execution stays deterministic, policy-bound and auditable - agents supply information, they do not control the core pipelines. This is the project's existing posture (pattern_execution_layer_enforcement, artifact_phase5_exec_guard, concept_proof_carrying_negotiation) stated as one architectural principle, and the frame that makes emergence-first safe: the interior is free because the spine is not.",
+      "tags": [
+        "deterministic-spine",
+        "generative-edge",
+        "execution-layer",
+        "auditable",
+        "policy-bound"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-25-1800.md",
+        "docs/research/alternative_approaches_part4.md (owner research input)"
       ],
       "evidence_links": [
         "docs/research/coverage_map.md"
@@ -20584,6 +20689,138 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "The self-state vector is the belief state active-inference action selection reads from - uncertainty_level, context_integrity and cost_remaining are its direct inputs."
+    },
+    {
+      "id": "edge_flock_challenges_multiagent_criterion",
+      "source": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "The run-218 criterion requires a deterministic synthesiser to combine verified subtasks. The flock has no synthesiser and no central integrator - global structure accretes from bounded local contributions to shared artifacts. Either the criterion needs a third regime, or the flock only works where the artifacts themselves carry the integration (append-only logs, a direction file)."
+    },
+    {
+      "id": "edge_flock_refines_stigmergy",
+      "source": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "target": "emergent_stigmergic_coordination",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "Stigmergy is coordination through environment traces. The flock is an engineered stigmergic system: the shared store IS the environment, and the append-only logs are the traces."
+    },
+    {
+      "id": "edge_flock_informs_orchestration_probe",
+      "source": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "target": "artifact_probe_orchestration_value_rig",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.4,
+      "description": "The probe currently models SINGLE vs MULTI with a synthesiser. A flock arm (bounded neighbourhood, one contribution each, artifact accretion, no synthesiser) would test whether the run-218 verdict holds when integration is stigmergic."
+    },
+    {
+      "id": "edge_fractal_depends_on_task_ledger",
+      "source": "concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "depends_on",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Adaptive recursive spawning needs a deterministic record of which boundaries are open, which child owns which, and what each returned - exactly the task ledger, with a parent/child dependency field."
+    },
+    {
+      "id": "edge_fractal_refines_shallow_hierarchy",
+      "source": "concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries",
+      "target": "pattern_shallow_hierarchy",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "pattern_shallow_hierarchy treats depth as a tunable variable. Fractal decomposition makes depth ADAPTIVE and problem-shaped: deep only where the task is genuinely unresolved, collapsed elsewhere."
+    },
+    {
+      "id": "edge_fractal_informs_trace_compilation",
+      "source": "concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries",
+      "target": "concept_trace_compiles_to_per_consumer_views",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "The 'compress completed work on return' step is per-consumer trace compilation applied at each recursion boundary: the parent consumes a compiled view of the child's work, not its raw trace."
+    },
+    {
+      "id": "edge_cell_refines_trace_compilation",
+      "source": "concept_cellular_agent_architecture_persistent_cells_with_portable_seeds",
+      "target": "concept_trace_compiles_to_per_consumer_views",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "The portable seed is the extreme form of trace compilation: compress a cell's whole history into a self-similar unit small enough to migrate, retaining only what the next context needs."
+    },
+    {
+      "id": "edge_cell_informs_anticollusion_identity",
+      "source": "concept_cellular_agent_architecture_persistent_cells_with_portable_seeds",
+      "target": "concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "2601.00360's 'identity fluidity' gap - agents forked/renamed at will, so reputation loses its anchor. A persistent cell with a stable identity and a spawn policy is a partial answer: it gives reputation something durable to attach to."
+    },
+    {
+      "id": "edge_cell_challenges_experience_bank",
+      "source": "concept_cellular_agent_architecture_persistent_cells_with_portable_seeds",
+      "target": "pattern_experience_bank",
+      "type": "challenges",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.4,
+      "description": "The bank is a single shared store condensed from traces. Cellular architecture proposes per-cell episodic memory + a portable seed instead - raising the open question of how much memory should be cell-local before the population loses a common ground."
+    },
+    {
+      "id": "edge_spine_edge_refines_execution_layer",
+      "source": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "target": "pattern_execution_layer_enforcement",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "States the same move as one architectural principle: the spine is the execution layer, the edge is everything the agents reason about freely."
+    },
+    {
+      "id": "edge_spine_edge_supports_pcn",
+      "source": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "target": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "PCN is the spine/edge split at the negotiation layer: NL reasoning on the edge, a deterministic verifier on the spine that recomputes every constraint."
+    },
+    {
+      "id": "edge_spine_edge_grounds_emergence_first",
+      "source": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "target": "approach_emergence_first",
+      "type": "grounds",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "The frame that makes emergence-first safe: the interior can be free BECAUSE the spine - permissions, money, deploys, data writes, rollback - is deterministic and outside agent control."
     }
   ]
 }
