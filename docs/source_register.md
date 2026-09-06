@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 251 nodes, 961 edges · **Date:** 2026-09-05
+**Graph at generation:** 252 nodes, 965 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -66,6 +66,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2510.15568](https://arxiv.org/abs/2510.15568) | The Spark Effect: On Engineering Creative Diversity in Multi-Agent AI Systems | `pattern_structural_decoupling` |
 | [2510.19851](https://arxiv.org/abs/2510.19851) | (title not recorded) | `concept_cot_obfuscation_hits_the_message_channel_hardest` |
 | [2511.08710](https://arxiv.org/abs/2511.08710) | (title not recorded) | `concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium` |
+| [2511.15755](https://arxiv.org/abs/2511.15755) | (title not recorded) | `concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response` |
 | [2512.00047](https://arxiv.org/abs/2512.00047) | (title not recorded) | `concept_multi_round_interaction_compresses_semantic_space` |
 | [2512.18202](https://arxiv.org/abs/2512.18202) | Sophia: A Persistent Agent Framework of Artificial Life | `concept_autotelic_agency` |
 | [2512.23760](https://arxiv.org/abs/2512.23760) | (title not recorded) | `concept_asg_si_independently_arrives_at_the_plan` |
@@ -382,7 +383,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-13-1800.md` — `concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate`, `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`
 - `docs/auto_sweep_2026-09-14-0600.md` — `concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery`
-- `docs/auto_sweep_2026-09-14-1200.md` — `emergent_pluralistic_ignorance`
+- `docs/auto_sweep_2026-09-14-1200.md` — `concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response`, `emergent_pluralistic_ignorance`
 - `docs/auto_sweep_2026-09-15-0000.md` — `concept_curriculum_generation_not_intrinsic_drive`
 - `docs/auto_sweep_2026-09-15-0600.md` — `concept_irreversibility_budget`, `pattern_certified_runtime_alarm`, `pattern_provenance_based_authority`
 - `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `emergent_attribution_laundering`, `emergent_constraint_weakening_at_handoffs` +1

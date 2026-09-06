@@ -828,6 +828,10 @@
     {
       "date": "2026-09-14",
       "change": "Autonomous run 216. Emergence-side, from s2 citations of the herding paper (arXiv:2509.23537). Folded OrchestraBench (arXiv:2608.05263, Aug 2026) as concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery: a controlled failure-injection harness with cascade-radius + per-failure-mode recovery as primary metrics. Real Claude agent over a verifiable dependency chain: three recovery tiers across five MAST modes (tool faults ~1.0, ambiguous delegation ~0.30, latent/semantic ~0.0), ordering invariant across Sonnet/Opus/Haiku and a loan-approval reframing; blind retry reproduces latent faults and delays detection; cascade radius 0.9->4.7 across depths 3-7; trusted-state repair ablation shows containment comes from the trusted-state signal not autonomous detection. 6 edges: refines concept_mast_multi_agent_failure_taxonomy (per-mode recovery rates, model-invariant ordering) and emergent_information_cascades (measured depth growth law); supports artifact_phase0_trace_substrate ('where a cascade began' = its job), pattern_recoverability_constrained_evolution (trusted-state is load-bearing), emergent_recognition_execution_gap; challenges concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate (self-repair alone is not containment). 250->251 nodes, 955->961 edges."
+    },
+    {
+      "date": "2026-09-14",
+      "change": "Autonomous run 217. Emergence/orchestration side. Folded arXiv:2511.15755 (Multi-Agent LLM Orchestration for Incident Response) as concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response: 348 trials, multi-agent 100% actionable vs single-agent 1.7%, zero quality variance, ~40s latency for both; reframes MAS orchestration as a production-readiness requirement for incident response. CURRENCY / CONFIDENCE NOTE: Nov 2025, single domain, promotional framing (named product, 80x/140x headline multipliers) - folded at confidence 0.5 as a domain-specific counterweight. 4 edges: challenges concept_mast_multi_agent_failure_taxonomy ('MAS gains often minimal') and concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery (zero variance vs never-recovering modes); supports approach_orchestration_first (weak - narrow) and concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (deterministic synthesis, not a vote, sidesteps herding). 251->252 nodes, 961->965 edges."
     }
   ],
   "nodes": [
@@ -7336,6 +7340,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-14-0600.md"
+      ]
+    },
+    {
+      "id": "concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response",
+      "label": "In some domains (incident response) multi-agent orchestration is not a performance optimisation but a production-readiness requirement: 100% vs 1.7% actionable, zero quality variance across 348 trials",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:domain_specific_decisive_win",
+      "confidence": 0.5,
+      "description": "Multi-Agent LLM Orchestration Achieves Deterministic, High-Quality Decision Support for Incident Response (arXiv:2511.15755, VERIFIED via arXiv abstract read run 217). A reproducible containerised framework (MyAntFarm.ai). Across 348 controlled trials comparing a single-agent copilot vs a multi-agent system on identical incident scenarios: multi-agent achieves a 100% ACTIONABLE recommendation rate vs 1.7% for single-agent (an 80x improvement in action specificity, 140x in solution correctness), and multi-agent systems exhibit ZERO quality variance across all trials, enabling production SLA commitments impossible with inconsistent single-agent outputs. Both architectures have similar comprehension latency (~40s), so the architectural value is deterministic quality, not speed. Introduces Decision Quality (DQ) - validity + specificity + correctness. Framing: 'reframe multi-agent orchestration from a performance optimization to a production-readiness requirement for LLM-based incident response.' CURRENCY / CONFIDENCE NOTE: Nov 2025, a SINGLE domain (incident response), and the framing is promotional (a named product, 80x/140x headline multipliers); folded at confidence 0.5 as a domain-specific counterweight, not a general claim. Its value: it is a concrete domain where multi-agent DECISIVELY beats single-agent, which stands in tension with concept_mast_multi_agent_failure_taxonomy's 'MAS gains often minimal' and with 'Beyond the Strongest' discarding ~8 points of recoverable correctness - the resolution is that the win is task-structure dependent (incident response = decompose-diagnose-recommend, where specialised roles and a deterministic synthesis genuinely help).",
+      "tags": [
+        "incident-response",
+        "decision-quality",
+        "zero-quality-variance",
+        "domain-specific-win",
+        "production-readiness",
+        "single-domain",
+        "promotional-framing",
+        "currency-note-2025-11",
+        "orchestration-tension"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-14-1200.md",
+        "arXiv:2511.15755 (Multi-Agent LLM Orchestration Achieves Deterministic, High-Quality Decision Support for Incident Response) - VERIFIED, abstract read run 217"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-14-1200.md"
       ]
     }
   ],
@@ -17644,6 +17677,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "SEA lists 'self-repair' as one of its five verifier-in-the-loop signal mechanisms; OrchestraBench shows blind retry / self-repair reproduces latent faults and delays detection unless paired with attribution and a trusted-state signal - self-repair alone is not a containment mechanism."
+    },
+    {
+      "id": "edge_incident_response_win_challenges_mast",
+      "source": "concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response",
+      "target": "concept_mast_multi_agent_failure_taxonomy",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "A concrete domain (incident response, 348 trials) where multi-agent decisively beats single-agent (100% vs 1.7% actionable, zero variance) - a counterweight to MAST's 'MAS gains often minimal'. The resolution is task-structure dependence, recorded as a tension not a refutation."
+    },
+    {
+      "id": "edge_incident_response_win_supports_orchestration_first",
+      "source": "concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response",
+      "target": "approach_orchestration_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "Evidence for the orchestration-first family in at least one production domain - but narrow (single domain, promotional framing), so a weak support edge."
+    },
+    {
+      "id": "edge_incident_response_win_relates_herding",
+      "source": "concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response",
+      "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.4,
+      "description": "Consistent with 'orchestration can beat the strongest model': here the mechanism is a deterministic synthesis step over specialised diagnostic agents (not a vote), which sidesteps the herding failure mode entirely."
+    },
+    {
+      "id": "edge_incident_response_win_challenges_orchestration_diag",
+      "source": "concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response",
+      "target": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.38,
+      "description": "OrchestraBench finds latent/semantic failure modes never recover; this reports ZERO quality variance over 348 trials. Either incident response avoids those modes by task structure, or the promotional framing is over-claiming - a tension worth resolving with the DQ metric details."
     }
   ]
 }

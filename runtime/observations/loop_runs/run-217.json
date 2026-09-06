@@ -1,0 +1,26 @@
+{
+  "run": 217,
+  "increment": "emergence/orchestration - folded arXiv:2511.15755 (incident-response MAS): a domain where multi-agent decisively beats single-agent (100% vs 1.7%, zero variance); folded at conf 0.5 as a domain-specific counterweight to MAST; 1 node, 4 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2511.15755",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2511.15755"
+  ],
+  "trace_file": "runtime\\traces\\loop-217.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
