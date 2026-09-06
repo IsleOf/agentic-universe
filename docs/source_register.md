@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 234 nodes, 862 edges · **Date:** 2026-09-05
+**Graph at generation:** 235 nodes, 868 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -154,7 +154,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.26623](https://arxiv.org/abs/2608.26623) | (title not recorded) | `emergent_evaluator_mode_collapse` |
 | [2608.26896](https://arxiv.org/abs/2608.26896) | (title not recorded) | `emergent_deception_and_collusion` |
 | [2608.27086](https://arxiv.org/abs/2608.27086) | (title not recorded) | `pattern_agentic_skill_lifecycle` |
-| [2608.27311](https://arxiv.org/abs/2608.27311) | (title not recorded) | `concept_verification_is_the_binding_constraint` |
+| [2608.27311](https://arxiv.org/abs/2608.27311) | (title not recorded) | `concept_behavior_aware_verification_beats_the_fixed_task_set`, `concept_verification_is_the_binding_constraint` |
 | [2608.27808](https://arxiv.org/abs/2608.27808) | (title not recorded) | `pattern_certified_runtime_alarm` |
 | [2608.28027](https://arxiv.org/abs/2608.28027) | (title not recorded) | `concept_agentic_os`, `pattern_provenance_based_authority` |
 | [2608.28363](https://arxiv.org/abs/2608.28363) | (title not recorded) | `concept_harness_evolution_subfield`, `pattern_recoverability_constrained_evolution` |
@@ -346,7 +346,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-09-0000.md - deprecated, superseded by three specific nodes` — `emergent_natural_teaming`
 - `docs/auto_sweep_2026-09-09-0000.md - filed inconclusive (dormant)` — `workflow_polymarket_bot_strategy_loop`, `workflow_poster_studio_listing_pipeline`
 - `docs/auto_sweep_2026-09-09-0000.md - reframed after the loop/graph orthogonality critique` — `concept_loop_vs_graph`
-- `docs/auto_sweep_2026-09-09-0600.md` — `emergent_peer_recognition_survives_anonymization`
+- `docs/auto_sweep_2026-09-09-0600.md` — `concept_behavior_aware_verification_beats_the_fixed_task_set`, `emergent_peer_recognition_survives_anonymization`
 - `docs/auto_sweep_2026-09-09-1800.md` — `concept_transparency_cuts_both_ways`, `emergent_whistleblowing`, `pattern_ostrom_swarm_governance`
 - `docs/auto_sweep_2026-09-10-1800.md` — `concept_compaction_cliff`, `emergent_authorization_laundering`, `emergent_stale_belief_propagation`
 - `docs/auto_sweep_2026-09-11-1200.md` — `concept_agent_shaped_topology_is_agent_corruptible`

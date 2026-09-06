@@ -744,6 +744,10 @@
     {
       "date": "2026-09-09",
       "change": "Autonomous run 195. Consolidation. self_improving_harness_plan.md Phase 3 gains 'The verification-hygiene checks - from autonomous runs 186-194': the RSI survey's verification hierarchy (formal > PRM > judge > rubric > meta-eval > intrinsic; strength tracks it) as the frame, and the four measured failure modes now in verify_loop_edit - category regression, trace-legibility regression, harness-tampering flags (+ tamper_audit.py on the loop's own lineage, 0/7 clean), format-not-content scoring (holdout_tasks._normalize). The named next step: a trace-level 'how was it reached' stratification for silent faults. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-09",
+      "change": "Autonomous run 196. Recent citation-sweep (S2 citations of Agentic Harness Engineering 2604.25850). concept_behavior_aware_verification_beats_the_fixed_task_set (Verify Smarter Evolve Further / HarnessLens, arXiv:2608.27311): verifying each candidate harness edit selectively on behaviour-relevant tasks with an attributable-evidence gate (not the fixed task set) gives +7.6-13.6% held-out at substantially lower evaluation budget. A CONSTRUCTIVE answer to concept_verification_is_the_binding_constraint; 'aggregate scores obscure regressions' = the run-116 masking finding with a method; the attributable-evidence gate = the four-field verdict's authority field operationalised. +6 edges."
     }
   ],
   "nodes": [
@@ -6753,6 +6757,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-08-1200.md"
+      ]
+    },
+    {
+      "id": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "label": "HarnessLens: verifying each candidate harness edit on BEHAVIOR-RELEVANT tasks with an attributable-evidence gate (not the fixed task set) gives +7.6-13.6% held-out at substantially lower evaluation budget",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:behavior_aware_verification",
+      "confidence": 0.74,
+      "description": "Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification / HarnessLens (arXiv:2608.27311, Aug 2026; VERIFIED via arxiv-fetch run 196; found via S2 citations of Agentic Harness Engineering). Premise: existing propose-and-verify methods score EVERY candidate on a FIXED task set, which (a) wastes rollouts on unrelated behaviours and (b) lets aggregate scores OBSCURE specific regressions. HarnessLens is a budget-aware framework: it jointly explores the task space and user-configurable components, derives candidate modifications from execution trajectories, and SELECTIVELY VERIFIES each candidate on BEHAVIOUR-RELEVANT tasks using an ATTRIBUTABLE-EVIDENCE GATE. Across 3 agent harnesses and 4 benchmarks: +7.6-13.6% average held-out performance at SUBSTANTIALLY LESS evaluation budget than competing baselines. 'Behaviour-aware verification with explicit attribution enables more reliable AND sample-efficient harness evolution under constrained interaction budgets.' Code released. For this project: (1) a direct, CONSTRUCTIVE answer to concept_verification_is_the_binding_constraint - the project's verify_loop_edit scores against ALL 17 held-out tasks every time; HarnessLens says for an edit targeting behaviour X, verify on the tasks that exercise X plus a regression sample, and attribute the score change to the edit; (2) 'aggregate scores obscure specific regressions' is the run-116 masking finding (concept_aggregate_score_masks_per_layer_regression), independently, with a method attached - per-task attributability, not just per-category; (3) the 'attributable-evidence gate' is the four-field verdict's `authority` field made operational - the verdict must trace the score delta to the edit, cf. pattern_evidential_ancestry_tracking; (4) it raises the effective signal strength (concept_self_improvement_strength_tracks_the_verification_hierarchy) by removing the noise of unrelated tasks.",
+      "tags": [
+        "harnesslens",
+        "behavior-aware-verification",
+        "attributable-evidence-gate",
+        "selective-verification-not-fixed-set",
+        "+7.6-13.6pct-held-out",
+        "lower-eval-budget",
+        "aggregate-scores-obscure-regressions",
+        "aug-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-09-0600.md",
+        "arXiv:2608.27311 (Verify Smarter, Evolve Further / HarnessLens) - VERIFIED, abstract read run 196 via arxiv-fetch; found via S2 citations of Agentic Harness Engineering"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-09-0600.md"
       ]
     }
   ],
@@ -15972,6 +16004,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Constructive: score verify_loop_edit's held-out re-run with grammar-constrained decoding or a parse-normalised answer, so a format fix cannot register as a held-out improvement."
+    },
+    {
+      "id": "edge_behavaware_refines_verification_binding_constraint",
+      "source": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "A constructive answer: verify a candidate edit selectively on behaviour-relevant tasks (not the whole fixed set) with an attributable-evidence gate - +7.6-13.6% held-out at substantially lower budget."
+    },
+    {
+      "id": "edge_behavaware_refines_masking",
+      "source": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "target": "concept_aggregate_score_masks_per_layer_regression",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Aggregate scores obscure specific regressions' is the run-116 masking finding independently - and HarnessLens attaches a method: per-task attributable verification, finer than the per-category check."
+    },
+    {
+      "id": "edge_behavaware_informs_holdout_set",
+      "source": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "target": "artifact_phase3_holdout_set",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "verify_loop_edit scores against all 17 held-out tasks every re-run; behaviour-aware verification says pick the tasks that exercise the edited behaviour + a regression sample, and attribute the delta."
+    },
+    {
+      "id": "edge_behavaware_informs_improvement_loop",
+      "source": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The 'attributable-evidence gate' is the four-field verdict's authority field made operational - the verdict must trace the score change to the edit."
+    },
+    {
+      "id": "edge_behavaware_supports_ancestry_tracking",
+      "source": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "target": "pattern_evidential_ancestry_tracking",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "Attributable evidence for a verification verdict is the same discipline as tracing a claim to its evidence root."
+    },
+    {
+      "id": "edge_behavaware_supports_verification_hierarchy",
+      "source": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "Removing the noise of unrelated tasks raises the effective signal strength of the gate - a way to move up the hierarchy without changing the signal type."
     }
   ]
 }
