@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 274 nodes, 1101 edges · **Date:** 2026-09-05
+**Graph at generation:** 275 nodes, 1104 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -68,6 +68,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2511.08710](https://arxiv.org/abs/2511.08710) | (title not recorded) | `concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium` |
 | [2511.15755](https://arxiv.org/abs/2511.15755) | (title not recorded) | `concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response` |
 | [2512.00047](https://arxiv.org/abs/2512.00047) | (title not recorded) | `concept_multi_round_interaction_compresses_semantic_space` |
+| [2512.15790](https://arxiv.org/abs/2512.15790) | (title not recorded) | `concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics` |
 | [2512.18202](https://arxiv.org/abs/2512.18202) | Sophia: A Persistent Agent Framework of Artificial Life | `concept_autotelic_agency` |
 | [2512.23760](https://arxiv.org/abs/2512.23760) | (title not recorded) | `concept_asg_si_independently_arrives_at_the_plan` |
 | [2601.00360](https://arxiv.org/abs/2601.00360) | (title not recorded) | `concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps` |
@@ -431,6 +432,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-22-1800.md` — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - `docs/auto_sweep_2026-09-23-1200.md` — `concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps`
 - `docs/auto_sweep_2026-09-24-0600.md` — `pattern_memory_writes_pass_a_deterministic_risk_gate`
+- `docs/auto_sweep_2026-09-24-1800.md` — `concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`

@@ -988,6 +988,10 @@
     {
       "date": "2026-09-24",
       "change": "Autonomous run 256. BUILD - tools/experience_bank.py write gate. Serves au__q_memory_capture (project graph) and the owner's stated 'agent memory' pain. write_gate(): deterministic, never-model-judged, runs on every add(). HARD-rejects (raises MemoryWriteRejected) an unknown collection, empty/>2000-char pattern, or instruction-injection markers in pattern/retrieval-key (a planted imperative is a prompt-injection with persistence once retrieved). SOFT-flags missing evidence roots / source manifest to _gate + _writes.audit but still writes. 9 new selftest checks (24 total in experience_bank; selftest_all unchanged at 26 jobs). New node pattern_memory_writes_pass_a_deterministic_risk_gate + 3 edges: implements concept_human_knowledge_capture_must_be_platform_level (the 'risk gate on every write' it names), constrains concept_memory_poisoning_one_write_persists (bounds the attack), refines pattern_experience_bank. 274 nodes / 1101 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-24",
+      "change": "Autonomous run 258. Third-method literature sweep (arxiv-fetch, distinct query - S2 was rate-limited). Folded arXiv:2512.15790 'Bilevel Optimization for Covert Memory Tampering in Heterogeneous Multi-Agent Architectures (XAMT)' (Dec 2025, ~9 months - a threat-model paper, ages slowly). New node concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics: MARL replay buffers and RAG knowledge bases share a centralized-memory vulnerability; XAMT formalises the attack as bilevel optimisation (minimise perturbation for covertness, maximise behaviour divergence) yielding stealthy minimal-perturbation poisons that evade detection heuristics at sub-percent rates. 3 edges: challenges pattern_memory_writes_pass_a_deterministic_risk_gate (the run-256 gate is exactly the perimeter heuristic XAMT evades - the honest bound), extends concept_memory_poisoning_one_write_persists (adds the covertness mechanism + cross-architecture generality), supports pattern_grounded_acceptance_only (the paper's 'intrinsic safety over perimeter detection' is the project's own move for structural edits - the memory path lacks the equivalent effect-level check). 275 nodes / 1104 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8174,6 +8178,34 @@
       "evidence_links": [
         "tools/experience_bank.py",
         "docs/auto_sweep_2026-09-24-0600.md"
+      ]
+    },
+    {
+      "id": "concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics",
+      "label": "Covert memory poisons are bilevel-optimized to evade detection heuristics",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:covert_memory_poison",
+      "confidence": 0.5,
+      "description": "arXiv:2512.15790 (XAMT, Dec 2025, ~9 months old at fold - a threat-model paper; the attack framework does not age, the SMAC / SafeRAG benchmark numbers may). Both MARL (shared experience-replay buffer) and RAG LLM agents (external knowledge base) share one vulnerability: a centralized memory component. XAMT formalises the attack as bilevel optimisation - the upper level minimises perturbation magnitude (covertness), the lower level maximises system-behaviour divergence toward an adversary target - producing stealthy, minimal-perturbation poisons that evade detection heuristics at sub-percent rates (<=1% of MARL writes, <=0.1% of RAG writes). The paper's own conclusion: prioritise intrinsic safety over perimeter-based detection. This is the honest bound on any write-side screen: a poison optimised for covertness carries no crude markers and a plausible provenance.",
+      "tags": [
+        "memory",
+        "memory-poisoning",
+        "adversarial",
+        "covert",
+        "rag",
+        "experience-replay",
+        "safety",
+        "threat-model"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-24-1800.md",
+        "arXiv:2512.15790 (XAMT - Bilevel Optimization for Covert Memory Tampering)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-24-1800.md"
       ]
     }
   ],
@@ -20022,6 +20054,39 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.7,
       "description": "Adds a pre-write screen to the dual-layer bank. Composes with the existing write-side disciplines (source_manifest stamping, raw source_events retention, evidential-ancestry dedup) - all deterministic, all on the write path."
+    },
+    {
+      "id": "edge_xamt_challenges_write_gate",
+      "source": "concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics",
+      "target": "pattern_memory_writes_pass_a_deterministic_risk_gate",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "write_gate is a perimeter/detection heuristic - it matches crude injection markers and structural anomalies. XAMT crafts minimal-perturbation poisons specifically to evade that class: no markers, plausible provenance, sub-0.1% write rate. The gate stops the crude planted imperative; it does not stop an optimised covert poison. This is the citation for the limitation the constrains-edge already names."
+    },
+    {
+      "id": "edge_xamt_extends_memory_poisoning_persists",
+      "source": "concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "concept_memory_poisoning_one_write_persists established that one adversarial write persists and ordinary injection defences miss it. XAMT adds the mechanism (bilevel optimisation for covertness) and the generality (the same threat class spans MARL replay buffers and RAG knowledge bases, not just LLM agent memory)."
+    },
+    {
+      "id": "edge_xamt_supports_grounded_acceptance",
+      "source": "concept_covert_memory_poisons_are_bilevel_optimized_to_evade_detection_heuristics",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "XAMT's recommendation - intrinsic safety over perimeter detection - is the same move the project already makes for structural edits: judge the grounded EFFECT (did risk strictly decrease?), not the surface of the proposed change. The memory write path has no equivalent effect-level check yet; that is the gap XAMT points at."
     }
   ]
 }
