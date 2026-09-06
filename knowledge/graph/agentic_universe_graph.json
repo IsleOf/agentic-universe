@@ -1044,6 +1044,10 @@
     {
       "date": "2026-09-28",
       "change": "Autonomous run 273. IDLE-STATE RULE clause b - built the FLOCK arm for tools/probe_orchestration_value.py, testing the challenges edge run 262 put on the run-218 multi-agent criterion. run_flock(): no synthesiser - K agents append to a shared store, each reads a bounded neighbourhood and can be dragged by a wrong contribution, plus a no-final-review penalty; the store is the output, passing at >=95% subtasks right. Result (verifiable + disjoint): flock helps +0.31 vs SINGLE, below the deterministic-synthesis ceiling (+0.52) but far above any vote-synthesis MULTI; a shared pool still kills it (+0.04). Finding: run-218 condition (b) is not strictly 'deterministic synthesis' - it is 'deterministic synthesis OR bounded-neighbourhood stigmergic accretion'; (a) and (c) still bind. The run-262 challenges edge becomes a refinement. 5 new rig selftest checks (14 total); BUILD SELFTEST GREEN. Graph: 305 nodes / 1207 -> 1209 edges (2 new edges: rig refines flock; flock refines the criterion). rig node + challenges-edge descriptions updated. Validator VALID."
+    },
+    {
+      "date": "2026-09-28",
+      "change": "Autonomous run 274. IDLE-STATE RULE clause b - dry-ran tools/probe_epistemic_sybil.py (sweep). SHARED evidence root: posterior coverage collapses 1.00 -> 0.12 as agents go 1 -> 32; INDEPENDENT roots: 1.00 -> ~0.96 (recovers); DEDUP by evidence root: 1.00 throughout. Added edge artifact_probe_epistemic_sybil_rig grounds concept_independent_evidence_cells_then_identity_masked_synthesis (run 260): the protocol's 'investigate separately' step is the INDEPENDENT curve, its 'dedup-then-identity-masked-synthesis' step is the DEDUP curve - the rig is the runnable evidence that the protocol's structure, not identity-masking alone, buys the recovery. 305 nodes / 1209 -> 1210 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -22044,6 +22048,17 @@
       "approach_family": "orchestration_first",
       "confidence": 0.55,
       "description": "Widens condition (b): the run-218 criterion's 'deterministic synthesis' should read 'deterministic synthesis OR bounded-neighbourhood stigmergic accretion'. The flock is the second admissible integration mode; a vote/consensus is still not one."
+    },
+    {
+      "id": "edge_sybilrig_grounds_evidence_cells",
+      "source": "artifact_probe_epistemic_sybil_rig",
+      "target": "concept_independent_evidence_cells_then_identity_masked_synthesis",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "Run 274 dry-run (sweep, 1->32 agents): SHARED evidence root -> posterior coverage collapses 1.00 -> 0.12; INDEPENDENT roots -> 1.00 -> ~0.96 (recovers); DEDUP by evidence root -> 1.00 throughout. The evidence-cell protocol's two load-bearing steps are exactly these columns: 'investigate separately with distinct sources' produces the INDEPENDENT curve, 'identity-masked synthesis after dedup by evidence root' produces the DEDUP curve. The rig is the runnable evidence that the protocol's structure - not its identity-masking alone - is what buys the recovery."
     }
   ]
 }
