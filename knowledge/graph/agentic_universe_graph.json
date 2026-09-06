@@ -972,6 +972,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 252. Orientation-layer refresh (IDLE-STATE RULE clause c; no graph node/edge change). docs/graph_state_2026-09.md Snapshot block updated from the run-235 state (262/1032) to run 252 (272 nodes / 1091 edges; 78 needs-validation / 163 partially-validated / 19 validated / 5 inconclusive / 7 unset; families self_improving_harness 113, emergent_behaviors 74, agent_habitat 24, graph_engineering 21, nourishing_harness 18, orchestration_first 10). Added a 'Runs 235-251' section: the co-evolution / no-training-fork tension (WHALE 2609.00196 + HELIX 2608.13951, a challenges cluster on approach_emergence_first with JIT-Agent, named in emergence_first_posture.md run 237); the owner's Perplexity research (~80% already folded = cross-method validation; 4 new folds runs 240-246) + the agentic-jobs analysis (run 242); the shipped tools (run_novelty run 248, task_ledger+supervisor runs 244/250, graph_diff run 243, project_graph_scaffold run 251 with the agentic_universe_project_graph.json worked example); the run-247 consistency pass. Frontier confirmed swept (run 249 s2-citation sweep)."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 253. Emergence-side literature sweep (IDLE-STATE clause a - deepen the collusion thread via citation sweep). Folded arXiv:2601.00360 'Mapping Human Anti-collusion Mechanisms to Multi-agent AI Systems' (Jan 2026, ~8 months old - a governance/framework paper, ages gracefully). New node concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps: a taxonomy of human anti-collusion mechanisms (sanctions; leniency and whistleblowing; monitoring and auditing; market design; governance) mapped to multi-agent-AI interventions, plus four structural properties of agent populations that break them (attribution problem, identity fluidity, boundary problem, adversarial adaptation). 5 edges: informs emergent_deception_and_collusion; supports emergent_attribution_laundering (independent naming of the attribution obstacle from competition policy); constrains pattern_adversarial_agentic_monitor (adversarial adaptation bounds monitoring); refines emergent_whistleblowing (observed behaviour -> designed mechanism class); supports concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes (identity fluidity is why the canonical action object is needed). Countermeasure side of the collusion-risk cluster - no new emergent behaviour, a catalogue of partial levers. 273 nodes / 1096 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8102,6 +8106,34 @@
       "evidence_links": [
         "docs/task_ledger.md",
         "docs/auto_sweep_2026-09-22-1800.md"
+      ]
+    },
+    {
+      "id": "concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps",
+      "label": "Human anti-collusion mechanisms port to multi-agent AI, but four structural properties of agents break them",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:anti_collusion_mechanisms",
+      "confidence": 0.5,
+      "description": "arXiv:2601.00360 (Jan 2026; ~8 months old at fold - a governance/framework paper, so it ages gracefully; it pre-dates the Sept-2026 collusion-emergence results but is a countermeasure catalogue, not a capability/benchmark claim). A taxonomy of human anti-collusion mechanisms - sanctions; leniency and whistleblowing; monitoring and auditing; market design; governance - each mapped to a candidate intervention for multi-agent AI, with proposed implementation approaches. Four structural properties of agent populations that break the human mechanisms: (1) attribution problem - emergent coordination cannot be pinned to a specific agent (the same failure named by emergent_attribution_laundering); (2) identity fluidity - agents are forked, modified and renamed at will, so reputation, sanctions and leniency lose their anchor; (3) boundary problem - no clean line between beneficial cooperation and harmful collusion; (4) adversarial adaptation - agents learn to evade whatever detector is deployed. This is the countermeasure side of the project's collusion-risk cluster: it does not add a new emergent behaviour, it catalogues what a nourishing harness could do about the ones already mapped, and flags why each lever is only partial.",
+      "tags": [
+        "collusion",
+        "anti-collusion",
+        "governance",
+        "mitigation",
+        "attribution",
+        "identity",
+        "safety",
+        "swarm-level"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-23-1200.md",
+        "arXiv:2601.00360 (Mapping Human Anti-collusion Mechanisms to Multi-agent AI Systems)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-23-1200.md"
       ]
     }
   ],
@@ -19840,6 +19872,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "The jobs analysis names tiered orchestration (routers/specialists/utilities) with visible human-in-the-loop handoffs as the converging standard; a ledger + supervisor is that substrate with the handoffs auditable (the .audit log) and recoverable (sweep_stale)."
+    },
+    {
+      "id": "edge_anticollusion_informs_deception_collusion",
+      "source": "concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps",
+      "target": "emergent_deception_and_collusion",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The countermeasure catalogue for the risk this node states. Reputation/transparency already appear in the deception node as partial dampeners; 2601.00360 generalises that to five mechanism classes and says why each is only partial against agents."
+    },
+    {
+      "id": "edge_anticollusion_supports_attribution_laundering",
+      "source": "concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps",
+      "target": "emergent_attribution_laundering",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "2601.00360's 'attribution problem' is an independent naming of attribution laundering: in a redundant agent population emergent coordination has no but-for author. Two literatures (multi-agent safety, competition policy) arriving at the same obstacle."
+    },
+    {
+      "id": "edge_anticollusion_constrains_adversarial_monitor",
+      "source": "concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps",
+      "target": "pattern_adversarial_agentic_monitor",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Monitoring and auditing is one of the five mechanism classes, but 2601.00360's 'adversarial adaptation' challenge bounds it: agents learn to evade a deployed detector, so a collusion-hunting monitor is a moving target, not a fixed defence."
+    },
+    {
+      "id": "edge_anticollusion_refines_whistleblowing",
+      "source": "concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps",
+      "target": "emergent_whistleblowing",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "The project already observed whistleblowing as a spontaneous counter-response. 2601.00360 places it in a designed mechanism class (leniency and whistleblowing) with implementation approaches - moving it from observed emergent behaviour to a harness lever the deployer can strengthen."
+    },
+    {
+      "id": "edge_anticollusion_supports_canonical_action_identity",
+      "source": "concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps",
+      "target": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "'Identity fluidity' - agents forked/modified/renamed at will - is why reputation and sanctions lose their anchor. The canonical-action-identity concept is the deployer-side answer: bind approval to execution independent of which runtime record the agent emits."
     }
   ]
 }

@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 272 nodes, 1091 edges · **Date:** 2026-09-05
+**Graph at generation:** 273 nodes, 1096 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -70,6 +70,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2512.00047](https://arxiv.org/abs/2512.00047) | (title not recorded) | `concept_multi_round_interaction_compresses_semantic_space` |
 | [2512.18202](https://arxiv.org/abs/2512.18202) | Sophia: A Persistent Agent Framework of Artificial Life | `concept_autotelic_agency` |
 | [2512.23760](https://arxiv.org/abs/2512.23760) | (title not recorded) | `concept_asg_si_independently_arrives_at_the_plan` |
+| [2601.00360](https://arxiv.org/abs/2601.00360) | (title not recorded) | `concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps` |
 | [2601.09771](https://arxiv.org/abs/2601.09771) | (title not recorded) | `concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement` |
 | [2601.11227](https://arxiv.org/abs/2601.11227) | Language of Thought Shapes Output Diversity in Large Language Models | `pattern_verbalized_sampling` |
 | [2601.12152](https://arxiv.org/abs/2601.12152) | (title not recorded) | `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated` |
@@ -428,6 +429,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-21-1200.md` — `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`
 - `docs/auto_sweep_2026-09-21-1800.md` — `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful`
 - `docs/auto_sweep_2026-09-22-1800.md` — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
+- `docs/auto_sweep_2026-09-23-1200.md` — `concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
