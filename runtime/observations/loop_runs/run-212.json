@@ -1,0 +1,26 @@
+{
+  "run": 212,
+  "increment": "recency-weighted sweep - folded CAVA (arXiv:2607.13716): deployer-side governance needs a canonical action object binding approval to execution across heterogeneous runtimes; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2607.13716",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2607.13716"
+  ],
+  "trace_file": "runtime\\traces\\loop-212.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

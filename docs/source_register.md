@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 247 nodes, 935 edges · **Date:** 2026-09-05
+**Graph at generation:** 248 nodes, 941 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -111,6 +111,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2607.12790](https://arxiv.org/abs/2607.12790) | (title not recorded) | `concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score` |
 | [2607.13070](https://arxiv.org/abs/2607.13070) | (title not recorded) | `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
+| [2607.13716](https://arxiv.org/abs/2607.13716) | (title not recorded) | `concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes` |
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
 | [2607.22585](https://arxiv.org/abs/2607.22585) | (title not recorded) | `concept_capability_is_a_model_harness_config_property`, `concept_harness_has_model_independent_failure_fingerprints` |
 | [2607.22758](https://arxiv.org/abs/2607.22758) | (title not recorded) | `concept_topology_shapes_error_propagation`, `emergent_information_cascades` |
@@ -373,7 +374,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-12-1200.md` — `concept_ai_native_software_ecosystems_are_complex_adaptive_systems`, `concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property`
 - `docs/auto_sweep_2026-09-12-1800.md` — `concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium`
 - `docs/auto_sweep_2026-09-13-0000.md` — `concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain`
-- `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
+- `docs/auto_sweep_2026-09-13-0600.md` — `concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes`, `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
 - `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`
 - `docs/auto_sweep_2026-09-14-1200.md` — `emergent_pluralistic_ignorance`

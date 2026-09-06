@@ -808,6 +808,10 @@
     {
       "date": "2026-09-13",
       "change": "Autonomous run 211. Recency-weighted arxiv-fetch sweep (S2 on Govern-the-Repository returned nothing - too new). Folded 'Engineering Reliable Coding Agents' (arXiv:2608.13867, Aug 2026) as concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain: a monograph-length structured multivocal review (164 scholarly + 100 practitioner + 29 benchmark + 17 case records). Coding agents are evaluated as models but deployed as systems; reliability is a dependency chain across harness / execution state / retrieval / memory / permissions / verification / observability; many apparent model failures originate elsewhere; a fix at one layer often fails to propagate end-to-end; task-construction weaknesses can invalidate downstream conclusions. Contributes a versioned 206-record reliability catalog + a dependency/repair-asymmetry framework + runnable protocols. 6 edges: supports concept_bottleneck_is_the_model_harness_coupling (a large synthesis restating it), concept_aggregate_score_masks_per_layer_regression (non-propagation confirmed), concept_capability_is_a_model_harness_config_property, concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property (system-level and ecosystem-level, both above the component); informs artifact_phase3_holdout_set (task-construction catalog); supports pattern_recoverability_constrained_evolution (repair asymmetry from the ops side). 246->247 nodes, 929->935 edges."
+    },
+    {
+      "date": "2026-09-13",
+      "change": "Autonomous run 212. Recency-weighted sweep. Folded CAVA (arXiv:2607.13716, July 2026) as concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes: one operational act appears as many incompatible runtime records; deployer-side governance needs a canonical action object binding approval to execution, reproducible by an independent verifier. Sits below Proof-Carrying Agent Actions (PCAA = the route-review-prove process; CAVA = the action object it governs). Formalises canonical action identity, approval binding, receipt integrity, attestation; 96-seed 384-variant benchmark incl wrapper bypass, attestation tamper detection, policy degradation. 6 edges: supports pattern_evidence_carrying_termination (a typed certificate at action granularity), pattern_four_field_constraint (approval binding = authority+prerequisite as a runtime object), artifact_phase5_exec_guard (the general form of the narrow git hook), concept_agentic_os (canonicalization is a runtime responsibility), concept_harness_tampering_persists_in_real_self_improvement_runs (wrapper-bypass / tamper-detection = tamper_audit at the action layer); detects emergent_authorization_laundering (a laundered approval cannot produce a reproducible bound receipt). 247->248 nodes, 935->941 edges."
     }
   ],
   "nodes": [
@@ -7198,6 +7202,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-13-0000.md"
+      ]
+    },
+    {
+      "id": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "label": "One operational act appears as many incompatible runtime records; deployer-side governance needs a canonical action object binding approval to execution that an independent verifier can reproduce later",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:canonical_action_identity",
+      "confidence": 0.62,
+      "description": "CAVA - Canonical Action Verification and Attestation for Runtime Governance of Agentic AI Systems (arXiv:2607.13716, VERIFIED via arXiv abstract read run 212; July 2026). Agentic systems act through heterogeneous runtimes - local coding hooks, SDK tools, browser automation, managed-agent traces, API gateways, workflow engines - so a single operational act (publishing code, changing identity state, moving money, exporting data) is represented by many incompatible runtime records. That makes a basic governance question hard: WHAT action was actually approved, WHAT evidence binds the approval to execution, and can an independent verifier REPRODUCE the same action identity later? CAVA is a runtime-semantics layer that converts heterogeneous agent activity into CANONICAL runtime action objects. It sits BELOW Proof-Carrying Agent Actions (PCAA): PCAA defines the deployer-owned route-review-prove governance process, CAVA defines the stable action object that process governs. It formalizes canonical action identity, semantic pattern detection, approval binding, receipt integrity, runtime-portable projection, and optional attestation substrates. Evaluated on a 96-seed, 384-variant benchmark covering semantic equivalence, semantic separation, WRAPPER BYPASS, false-positive control, approval binding, receipt reproducibility, ATTESTATION TAMPER DETECTION, runtime portability, policy degradation, and Azure deployment drills. Bearing on the project: this is pattern_evidence_carrying_termination (a typed certificate binding a claim to trace evidence) and pattern_four_field_constraint (approval = authority + prerequisite) generalised to the ACTION level, and it is the concrete defence against emergent_authorization_laundering - 'what evidence binds the approval to execution' plus independent-verifier reproducibility is exactly what a laundered 'I was allowed to X' cannot produce. Recency: July 2026, current; a systems formulation with a benchmark, not yet independently replicated.",
+      "tags": [
+        "CAVA",
+        "canonical-action-identity",
+        "approval-binding",
+        "receipt-integrity",
+        "attestation-tamper-detection",
+        "wrapper-bypass",
+        "proof-carrying-agent-actions",
+        "deployer-side-governance",
+        "recency-2026-07"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-13-0600.md",
+        "arXiv:2607.13716 (CAVA: Canonical Action Verification and Attestation for Runtime Governance of Agentic AI Systems) - VERIFIED, abstract read run 212"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-13-0600.md"
       ]
     }
   ],
@@ -17220,6 +17253,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "The monograph's explicit 'repair asymmetry across the agent lifecycle' framework is recoverability-as-a-constraint from the operations side: some layers are cheap to repair, others propagate damage that is expensive or impossible to undo - so evolution must be gated on the expensive-to-repair ones."
+    },
+    {
+      "id": "edge_canonical_action_supports_evidence_carrying_termination",
+      "source": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "target": "pattern_evidence_carrying_termination",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.66,
+      "description": "A canonical runtime action object with approval binding and receipt integrity is pattern_evidence_carrying_termination at the action granularity: a typed certificate binding the act to the evidence that authorised it, reproducible by an independent verifier."
+    },
+    {
+      "id": "edge_canonical_action_supports_four_field",
+      "source": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "target": "pattern_four_field_constraint",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "'Approval binding' formalises the four-field constraint's AUTHORITY and PREREQUISITE fields as a runtime object: the approval is recorded, bound to the execution, and portable across runtimes."
+    },
+    {
+      "id": "edge_canonical_action_detects_authorization_laundering",
+      "source": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "target": "emergent_authorization_laundering",
+      "type": "detects",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.58,
+      "description": "The direct defence: a laundered 'I was allowed to X' fabricated in memory cannot produce a bound approval receipt an independent verifier can reproduce. CAVA's approval-binding + receipt-reproducibility tests are the check emergent_authorization_laundering says the gate needs."
+    },
+    {
+      "id": "edge_canonical_action_supports_exec_guard",
+      "source": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "target": "artifact_phase5_exec_guard",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "exec_guard is a narrow pre-commit instance; CAVA is the general form - a runtime-portable canonical action object with attestation - the direction Phase 5 would grow if it moved from a git hook to a real runtime boundary."
+    },
+    {
+      "id": "edge_canonical_action_supports_agentic_os",
+      "source": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "target": "concept_agentic_os",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Canonicalization and attestation are runtime responsibilities: CAVA explicitly places the stable action object below the mutable governance process - the runtime-as-fixed-point split, in the action layer."
+    },
+    {
+      "id": "edge_canonical_action_relates_harness_tampering",
+      "source": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "target": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "CAVA's wrapper-bypass and attestation-tamper-detection benchmark axes are the action-layer analogue of tamper_audit.py's lineage check - both ask whether the record of what happened can be trusted against an adversary inside the system."
     }
   ]
 }
