@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 256 nodes, 993 edges · **Date:** 2026-09-05
+**Graph at generation:** 257 nodes, 999 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -136,6 +136,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.08523](https://arxiv.org/abs/2608.08523) | (title not recorded) | `pattern_checkpoint_and_switch` |
 | [2608.09096](https://arxiv.org/abs/2608.09096) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
 | [2608.09885](https://arxiv.org/abs/2608.09885) | SHE: trajectory-driven safety harness evolution | `pattern_trajectory_driven_safety_evolution` |
+| [2608.11350](https://arxiv.org/abs/2608.11350) | (title not recorded) | `concept_shaper_a_frozen_model_is_its_own_harness_optimizer` |
 | [2608.12253](https://arxiv.org/abs/2608.12253) | One Frozen Simulator Is Not Enough | `emergent_evaluator_mode_collapse` |
 | [2608.12921](https://arxiv.org/abs/2608.12921) | (title not recorded) | `pattern_causal_edge_pruning` |
 | [2608.13867](https://arxiv.org/abs/2608.13867) | (title not recorded) | `concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain` |
@@ -395,6 +396,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-15-0600.md` — `concept_irreversibility_budget`, `pattern_certified_runtime_alarm`, `pattern_provenance_based_authority`
 - `docs/auto_sweep_2026-09-15-1800.md` — `concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform`
 - `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `concept_self_evolving_coding_agents_taxonomy_by_evolution_target`, `emergent_attribution_laundering` +2
+- `docs/auto_sweep_2026-09-16-0600.md` — `concept_shaper_a_frozen_model_is_its_own_harness_optimizer`
 - `docs/auto_sweep_2026-09-16-1800.md` — `emergent_no_equilibrium_convergence`, `pattern_market_as_orchestrator`
 - `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_step_count_is_the_horizon_limit`, `pattern_deterministic_state_folding`
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1

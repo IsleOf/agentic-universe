@@ -856,6 +856,10 @@
     {
       "date": "2026-09-16",
       "change": "Autonomous run 223. Recency-weighted sweep. Folded the Self-Evolving Coding Agents survey (arXiv:2608.03392, Aug 2026) as concept_self_evolving_coding_agents_taxonomy_by_evolution_target: a taxonomy centred on targets of evolution (framework / memory / skills+tools / components / workflow+topology / environment+context) + orthogonal when/which-signal perspectives; executable feedback is the code-specific signal that makes SWE a natural self-evolution domain; seven shared challenges (feedback reliability, benchmark overfitting, reversibility, complexity, safety, cost, generalization) = the project's own worry list. 6 edges: refines concept_what_when_how_where_to_evolve (the coding-specific instance); supports concept_horizon_gap_outcome_signals_decay (executable feedback = dense step signal), pattern_recoverability_constrained_evolution (reversibility named), concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution (feedback reliability + benchmark overfitting), concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform (static vs dynamic views), concept_search_time_contamination_inflates_agent_evals (benchmark overfitting). 255->256 nodes, 987->993 edges."
+    },
+    {
+      "date": "2026-09-16",
+      "change": "Autonomous run 224. Recency-weighted sweep. Folded SHAPER (arXiv:2608.11350, Aug 2026) as concept_shaper_a_frozen_model_is_its_own_harness_optimizer: train-free embodied adaptation - a FROZEN model evolves its own reusable skills + context-code harness through target-environment rollouts, serving as BOTH planner and optimizer; beats pure execution, SFT, and test-time-scaling (verifier-free selection, voting) on VLABench + ESI-Bench. The same-frozen-model-as-planner-and-optimizer is the project's loop structure, demonstrated in the embodied domain where fixed action interfaces make it the only viable route. 6 edges: supports concept_sea_steering_adapter_around_a_frozen_base... (cross-domain frozen-base support), approach_emergence_first (no-training thesis from the constraint side), concept_self_harness_validates_the_three_loop (planner=optimizer); refines concept_ace_context_evolution_self_improvement (context-code harness = context playbook + executable glue), supports pattern_agentic_skill_lifecycle; challenges concept_inference_time_scaling_of_verification (persistent evolution beats selection at decision time, in fixed-interface settings). 256->257 nodes, 993->999 edges."
     }
   ],
   "nodes": [
@@ -7511,6 +7515,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-16-0000.md"
+      ]
+    },
+    {
+      "id": "concept_shaper_a_frozen_model_is_its_own_harness_optimizer",
+      "label": "SHAPER: train-free embodied adaptation - a frozen model evolves its own reusable skills + context-code harness through target-environment rollouts, serving as BOTH planner and optimizer; a practical route when training is expensive, unavailable, or undesirable",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:shaper_frozen_planner_optimizer",
+      "confidence": 0.62,
+      "description": "SHAPER - Self-evolving framework for train-free embodied adaptation (arXiv:2608.11350, VERIFIED via arXiv abstract read run 224; Aug 2026). Embodied agents are systems around a foundation model, where performance depends on the skills, context, action interfaces, and execution harness around the model - not only weights. SFT and RL adapt agents but need data, rewards, and training runs; train-free code-centric approaches often need programmable robot APIs unavailable in FIXED-INTERFACE settings. SHAPER keeps model parameters FROZEN and improves the non-parametric agent system by evolving REUSABLE SKILLS and a CONTEXT-CODE HARNESS through target-environment rollouts. The same frozen model serves as BOTH planner AND optimizer - it refines its own external skills and harness without parameter updates. Evaluated on VLABench and ESI-Bench (different low-level action interfaces), beating pure execution, SFT, and test-time-scaling baselines (verifier-free selection, voting). Bearing on the project: the same-frozen-model-as-planner-and-optimizer is EXACTLY the project's loop structure - Claude proposes edits to its own harness with no weight training - now demonstrated in the embodied domain, where fixed action interfaces make it the only viable route. Extends the frozen-base thread (SEA, Self-Harness) beyond coding into robotics; 'context-code harness' is concept_ace_context_evolution_self_improvement's context playbook plus executable glue. Recency: Aug 2026; one framework, two embodied benchmarks - modest confidence.",
+      "tags": [
+        "SHAPER",
+        "train-free",
+        "frozen-model",
+        "planner-and-optimizer",
+        "context-code-harness",
+        "reusable-skills",
+        "embodied",
+        "fixed-interface",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-16-0600.md",
+        "arXiv:2608.11350 (Self-Evolving Embodied Agents via Skill-Harness Evolution) - VERIFIED, abstract read run 224"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-16-0600.md"
       ]
     }
   ],
@@ -18171,6 +18204,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "'Benchmark overfitting' as a named challenge includes search-time contamination: a web-connected coding agent re-run on a benchmark can retrieve the fix - the survey confirms this is a recognised field-level failure mode, which holdout_tasks.SEARCH_SENSITIVE already guards against."
+    },
+    {
+      "id": "edge_shaper_supports_sea_frozen_base",
+      "source": "concept_shaper_a_frozen_model_is_its_own_harness_optimizer",
+      "target": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Same stance (frozen base, evolve the harness/skills, no weight training) in a different domain: SEA does it for coding, SHAPER for embodied fixed-interface tasks. The frozen-base fork now has cross-domain support."
+    },
+    {
+      "id": "edge_shaper_supports_emergence_first",
+      "source": "concept_shaper_a_frozen_model_is_its_own_harness_optimizer",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "'Skill-and-harness optimization is a practical route to self-evolving agents when model training is expensive, unavailable, or undesirable' - the emergence-first / no-training thesis, argued from the constraint side (fixed robot interfaces)."
+    },
+    {
+      "id": "edge_shaper_supports_self_harness_three_loop",
+      "source": "concept_shaper_a_frozen_model_is_its_own_harness_optimizer",
+      "target": "concept_self_harness_validates_the_three_loop",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'The same frozen model serves as both planner and optimizer' is the project's loop structure exactly - Claude proposes edits to its own harness - now demonstrated in embodied rollouts, not just coding traces."
+    },
+    {
+      "id": "edge_shaper_refines_ace_context_evolution",
+      "source": "concept_shaper_a_frozen_model_is_its_own_harness_optimizer",
+      "target": "concept_ace_context_evolution_self_improvement",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "SHAPER's 'context-code harness' = ACE's evolving context playbook plus the executable glue an embodied agent needs; context evolution generalised from text tasks to action interfaces."
+    },
+    {
+      "id": "edge_shaper_supports_skill_lifecycle",
+      "source": "concept_shaper_a_frozen_model_is_its_own_harness_optimizer",
+      "target": "pattern_agentic_skill_lifecycle",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Reusable skills evolved through rollouts and reused across a target environment - the skill lifecycle in the embodied setting, where the skill is a parameterised motion/subtask rather than a text procedure."
+    },
+    {
+      "id": "edge_shaper_challenges_test_time_scaling",
+      "source": "concept_shaper_a_frozen_model_is_its_own_harness_optimizer",
+      "target": "concept_inference_time_scaling_of_verification",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "SHAPER beats test-time-scaling baselines (verifier-free selection, voting) - persistent skill/harness evolution outperforms spending the same inference budget on selection at decision time, at least in fixed-interface embodied settings. A mild tension: WHERE to spend the compute."
     }
   ]
 }
