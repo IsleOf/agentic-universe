@@ -60,14 +60,23 @@ LOOP_CONTEXT_POLICY = {
     "pin": ["charter conventions", "literature_coverage state", "graph validation rule"],
     "compress": ["older sweep docs", "search results"],
     "do_not": ["re-sweep covered ground", "re-add a paper already in derived_from",
-               "refresh a README or retune a classifier when idle (run-80 rule)"],
+               "refresh a README or retune a classifier when idle (run-80 rule)",
+               "give an old capability/model-benchmark result the same weight as a current one "
+               "(recency weighting, user directive 2026-09-06)"],
     "rules": [
         "IDLE-STATE RULE (run 80): if the last 3 runs were all doc-refresh / hygiene / 'other', "
         "AND an arXiv sweep returned nothing past the known frontier, AND tools/selftest_all.py is GREEN, "
         "then the run's increment must be one of: (a) deepen ONE existing node with a targeted citation "
         "sweep (S2 citations on its source), (b) dry-run one probe design from "
         "docs/emergence_probe_catalogue.md end to end, or (c) a genuine consistency/adversarial pass. "
-        "Do NOT refresh a README or retune a classifier again."
+        "Do NOT refresh a README or retune a classifier again.",
+        "RECENCY WEIGHTING (user directive, 2026-09-06 - a weighting, NOT a gate): PREFER the last ~30 "
+        "days (sort arXiv/S2 by submittedDate descending; today is 2026-09-06). Older papers are NOT "
+        "locked out. When folding one: (i) note in the node which model / harness generation it was "
+        "measured on; (ii) keep confidence modest and add 'possibly superseded' if it is a "
+        "capability / model-benchmark claim, since it describes OLD models and harnesses; (iii) an old "
+        "result is still valid evidence about the SMALL / LOCAL LLM regime - say so. Latest information "
+        "gets more weight in any tension.",
     ],
 }
 

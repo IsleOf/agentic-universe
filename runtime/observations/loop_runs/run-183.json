@@ -1,0 +1,29 @@
+{
+  "run": 183,
+  "increment": "user directive - RECENCY WEIGHTING (prefer recent, not a gate); fold Boiling the Frog (arXiv:2605.22643) with a model-currency note",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 45,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 5,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "citations": [
+    {
+      "id": "arXiv:2605.22643",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2605.22643"
+  ],
+  "trace_file": "runtime\\traces\\loop-183.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

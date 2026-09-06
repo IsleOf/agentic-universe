@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-22",
+  "last_updated": "2026-09-06",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -692,6 +692,10 @@
     {
       "date": "2026-10-22",
       "change": "Autonomous run 182. Consolidation. emergence_probe_catalogue.md 'Runnable rigs' section refreshed - stale on the live-run seams: it listed the four stubs as unresolved; now shows five of six probes have a written selftested model_* adapter (model_policy / model_relay / model_reader / model_preference, runs 134-140), the observation_arm (run 149), and links remaining_seams.md for the two that need activations / a real harness. PROPOSER_PROMPT (a seventh seam) also has model_propose. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-06",
+      "change": "Autonomous run 183. (a) User directive: prefer RECENT literature; older papers are NOT locked out but carry a currency note (which model/harness generation they were measured on), keep modest confidence for capability claims, and stay useful evidence about the small/local-model regime. Encoded as a RECENCY WEIGHTING guideline in context/loop_policy (v8), loop_adapter.LOOP_CONTEXT_POLICY, SKILL.md, docs/literature_coverage.md. (b) concept_incremental_attacks_boil_the_frog (Boiling the Frog, arXiv:2605.22643, May 2026): benign workspace edits then a risk-bearing request; score whether the RESULTING ARTIFACT STATE becomes unsafe; 9-model panel aggregate ASR 44.4%, 20.5->92.9% spread, 93.3% loss-of-control, small/local models worst-hit. Independent endorsement of the grounded state-scoring gate; the multi-turn form of constraint-weakening; the gate must read accumulated state. +6 edges."
     }
   ],
   "nodes": [
@@ -6520,6 +6524,36 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-20-0600.md"
+      ]
+    },
+    {
+      "id": "concept_incremental_attacks_boil_the_frog",
+      "label": "Incremental 'boiling frog' attacks - benign workspace edits then a risk-bearing request - succeed 44% aggregate / 93% on loss-of-control chains across 9 models; scoring the resulting artifact STATE is the right object",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:incremental_multi_turn_attacks",
+      "confidence": 0.74,
+      "description": "Boiling the Frog: A Multi-Turn Benchmark for Agentic Safety (arXiv:2605.22643, May 2026; VERIFIED via arXiv abstract read run 183, resolved via DBLP). Premise the project shares: when a model is an AGENT, the safety-relevant object is WHAT IT DOES in an environment, not what it says. Method: each scenario begins with BENIGN workspace edits and LATER introduces a risk-bearing request; stateful multi-turn over a PERSISTENT WORKSPACE, payload at controlled positions in the turn sequence, and the score is whether the RESULTING ARTIFACT STATE becomes unsafe (three-level risk taxonomy grounded in EU AI Act Annex I/III + the GPAI Code of Practice). 9-model panel: aggregate strict attack success rate 44.4%; model-level 20.5% (Claude Haiku 4.5) to 92.9% (Gemini 3.1 Flash Lite); chain-category ASR up to 93.3% on loss-of-control scenarios. RECENCY NOTE (user directive 2026-09-06): the panel is mid-2026 models; the METHODOLOGY (score artifact state; incremental multi-turn) is generation-independent, the per-model ASR numbers are a snapshot and current frontier models may differ - but the 20x model spread and the small-model-heavy tail (Flash Lite, Seed Lite worst) is exactly the SMALL / LOCAL model regime the nourishing-harness bet has to survive. For this project: (1) 'score the resulting artifact state, not the responses' is EXACTLY the design's grounded, non-transcript gate (pattern_grounded_acceptance_only / concept_transcript_only_gate_is_provably_insufficient); (2) the incremental / boiling-frog dynamic is the multi-turn form of emergent_constraint_weakening_at_handoffs - benign context accumulates, then the payload lands, so the two-part gate on an irreversible action must consider ACCUMULATED workspace state, not just the current action; (3) the persistent workspace is the shared artifact store - connects to concept_memory_poisoning_one_write_persists; (4) model choice is a first-order SAFETY variable, and small/local models are the worst-hit (concept_capability_is_a_model_harness_config_property on the safety axis).",
+      "tags": [
+        "boiling-the-frog",
+        "incremental-attack",
+        "multi-turn-agentic-safety",
+        "persistent-workspace",
+        "score-artifact-state-not-response",
+        "44pct-aggregate-asr",
+        "93pct-loss-of-control",
+        "9-model-panel",
+        "small-local-models-worst-hit",
+        "may-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-06-0000.md",
+        "arXiv:2605.22643 (Boiling the Frog: A Multi-Turn Benchmark for Agentic Safety, May 2026) - VERIFIED, abstract read run 183; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-06-0000.md"
       ]
     }
   ],
@@ -15321,6 +15355,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Self-Harness: 9/9 model-benchmark combos improve held-out pass rate via evaluation-driven harness edits - the pattern works even where the openJiuwen instance's gains were contested."
+    },
+    {
+      "id": "edge_boilfrog_supports_grounded_acceptance",
+      "source": "concept_incremental_attacks_boil_the_frog",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "An independent agentic safety benchmark scores whether the resulting ARTIFACT STATE becomes unsafe - the grounded, non-transcript object the design's gate already uses."
+    },
+    {
+      "id": "edge_boilfrog_supports_transcript_only_insufficient",
+      "source": "concept_incremental_attacks_boil_the_frog",
+      "target": "concept_transcript_only_gate_is_provably_insufficient",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Evaluating model responses under prompting is no longer sufficient' for agent safety - the impossibility proof's conclusion, from a benchmark design."
+    },
+    {
+      "id": "edge_boilfrog_refines_constraint_weakening",
+      "source": "concept_incremental_attacks_boil_the_frog",
+      "target": "emergent_constraint_weakening_at_handoffs",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The multi-turn / incremental form: benign context accumulates over the turn sequence, then the risk-bearing request lands and the model complies - 44% aggregate, 93% on loss-of-control chains."
+    },
+    {
+      "id": "edge_boilfrog_challenges_terminal_gate_only",
+      "source": "concept_incremental_attacks_boil_the_frog",
+      "target": "principle_terminal_gate_only",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45,
+      "description": "Gating one irreversible action in isolation misses the boiling-frog attack: the payload is only unsafe given the ACCUMULATED workspace state, so the gate must read the state history, not just the current action."
+    },
+    {
+      "id": "edge_boilfrog_refines_capability_is_config",
+      "source": "concept_incremental_attacks_boil_the_frog",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Model-level ASR 20.5% -> 92.9% across 9 models, small/local models worst-hit - model choice is a first-order SAFETY variable, especially in the small-local regime."
+    },
+    {
+      "id": "edge_boilfrog_refines_memory_poisoning",
+      "source": "concept_incremental_attacks_boil_the_frog",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "The persistent workspace where benign edits accumulate is the shared-state attack surface; boiling-frog is the multi-turn injection version."
     }
   ]
 }

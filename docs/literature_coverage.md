@@ -63,10 +63,24 @@ resolves the arXiv id, then `curl https://arxiv.org/abs/<id>` reads the abstract
 (`citation_abstract` meta tag). Run 108 used this to fold Harness-Bench. Or set an OpenReview token per
 `openreview.py` header for the `forum` command.
 
+## RECENCY WEIGHTING (user directive, 2026-09-06 — a weighting, not a gate)
+
+**Prefer the last ~30 days.** Sort every arXiv / S2 query `sortBy=submittedDate&sortOrder=descending`
+(today is 2026-09-06). Older papers are **not** locked out — but they describe **old models and old agent
+harnesses**, so when folding one:
+
+- name the model / harness generation it was measured on, in the node;
+- keep confidence modest and add "possibly superseded" if it is a capability or model-benchmark claim;
+- an old result is still valid evidence about the **small / local LLM regime** — say so explicitly
+  (small local models today behave more like frontier models of a year ago).
+
+Latest information gets more weight in any tension between sources. Encoded in `context/loop_policy` (v8),
+`SKILL.md`, `tools/loop_adapter.py`.
+
 ## Guidance for the scheduled task
 
-If a sweep returns only recurring sources, switch to: (a) the OpenReview watch-list above, (b) an unexplored
-area, (c) opening an indexed-not-opened paper from `docs/source_register.md`, or (d) graph hygiene. Do not
-re-add a node for a paper already in `derived_from` anywhere. When all four research channels (arXiv / forum /
-GitHub / OpenReview) are quiet, a documented hold is the correct increment — the 6h scheduled task carries the
-loop.
+If a recent sweep returns only recurring sources, switch to: (a) the OpenReview watch-list above,
+(b) opening an indexed-not-opened paper from `docs/source_register.md`, (c) a citation-sweep deepen of a
+weak node, or (d) graph hygiene / a consistency pass. Do not re-add a node for a paper already in
+`derived_from` anywhere. When all channels are quiet, a documented hold is the correct increment — the 6h
+scheduled task carries the loop.
