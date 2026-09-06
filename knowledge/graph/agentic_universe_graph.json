@@ -256,6 +256,10 @@
     {
       "date": "2026-09-24",
       "change": "Autonomous run 74. Widened tools/holdout_tasks.py from 10 to 17 tasks - added 7 design-reasoning checks (two-part gate, four-field constraint fields, transcript-gate impossibility, six habitat mechanisms, harness/orchestration orthogonality, cross-family observer rule, emergence-layer attribution). A harness edit that degrades design recall is now caught, not just one that degrades literature recall. Historical baseline 17/17 aggregate 1.00. selftest_all.py still 13 selftests, all GREEN."
+    },
+    {
+      "date": "2026-09-24",
+      "change": "Autonomous run 75. Built tools/holdout_verifier2.py - the heterogeneous verifier. A second held-out scorer (key-fact overlap: gold numbers, arXiv ids, negation parity, snake_case terms) with no shared code with the hand-written predicates. verify_loop_edit now uses the conservative min-of-two score and rejects an edit where the two verifiers disagree on a changed task. Verifiers agree on all 17 gold texts. Completes the computed spine of the Phase 3 verifier spec. selftest_all.py runs 14 selftests, all GREEN. artifact_phase3_heterogeneous_verifier added."
     }
   ],
   "nodes": [
@@ -4773,6 +4777,30 @@
       ],
       "evidence_links": [
         "docs/phase3_proposer.md"
+      ]
+    },
+    {
+      "id": "artifact_phase3_heterogeneous_verifier",
+      "label": "Phase 3 heterogeneous verifier — two independent held-out scorers",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase3_hetero_verifier",
+      "confidence": 0.75,
+      "description": "tools/holdout_verifier2.py, run 75: a second held-out scorer that scores the same answers a different way (key-fact overlap: gold numbers, arXiv ids, negation parity, snake_case terms) with no shared code with holdout_tasks' hand-written predicates. verify_loop_edit now takes the conservative score (min of the two verifiers per task) and rejects an edit if the two verifiers disagree on any task whose score changed - a logged disagreement is signal because a same-family pair agrees by construction (emergent_peer_recognition_survives_anonymization). On the 17 gold texts the verifiers agree on all (rate 1.0). Completes the computed spine of the Phase 3 verifier spec; the actual model call is the one thing still owed.",
+      "tags": [
+        "phase-3",
+        "heterogeneous-verifier",
+        "disagreement-as-reject",
+        "verification-completeness-gap"
+      ],
+      "derived_from": [
+        "docs/phase3_heterogeneous_verifier.md",
+        "tools/holdout_verifier2.py"
+      ],
+      "evidence_links": [
+        "docs/phase3_heterogeneous_verifier.md"
       ]
     }
   ],
@@ -10572,6 +10600,59 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.65,
       "description": "Each proposal carries a falsifiable prediction (metric/direction/from/target) - evolution as experiment, not search."
+    },
+    {
+      "id": "edge_hv2_instantiates_sih",
+      "source": "artifact_phase3_heterogeneous_verifier",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75
+    },
+    {
+      "id": "edge_hv2_implements_completeness_gap",
+      "source": "artifact_phase3_heterogeneous_verifier",
+      "target": "concept_verification_completeness_gap",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75,
+      "description": "Two independent scoring methods for the same held-out answers; disagreement on a changed task is a reject."
+    },
+    {
+      "id": "edge_hv2_implements_structural_decoupling",
+      "source": "artifact_phase3_heterogeneous_verifier",
+      "target": "pattern_structural_decoupling",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The judge is not one method - decorrelated by construction (no shared predicate code)."
+    },
+    {
+      "id": "edge_hv2_depends_on_holdout",
+      "source": "artifact_phase3_heterogeneous_verifier",
+      "target": "artifact_phase3_holdout_set",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.85
+    },
+    {
+      "id": "edge_hv2_grounds_evaluator_collapse_answer",
+      "source": "artifact_phase3_heterogeneous_verifier",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "A second decorrelated scorer is the graph's own repair for evaluator collapse, now implemented for the loop-harness held-out check."
     }
   ]
 }

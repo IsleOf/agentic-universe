@@ -33,6 +33,7 @@ JOBS = [
     ("skill_induction.py", ["selftest"]),
     ("exec_guard.py", ["selftest"]),
     ("loop_proposer.py", ["selftest"]),
+    ("holdout_verifier2.py", ["selftest"]),
 ]
 
 

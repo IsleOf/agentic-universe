@@ -223,29 +223,40 @@ def run_once(reg: Registry, proposal, log):
     return record
 
 
-def verify_loop_edit(baseline_scores, candidate_scores):
+def verify_loop_edit(baseline_scores, candidate_scores, verifier_disagreements=None):
     """Phase 3 acceptance test for a loop-HARNESS edit, using the frozen held-out
     research-task set (`tools/holdout_tasks.py`) as the grounded risk.
 
-    `*_scores` are {task_id: 0.0|1.0} from `holdout_tasks.score_fold` — the
-    baseline from the loop before the edit, the candidate from a re-run after.
+    `*_scores` are {task_id: 0.0|1.0} — the baseline from the loop before the
+    edit, the candidate from a re-run after. For the heterogeneous check
+    (`tools/holdout_verifier2.py`), pass the CONSERVATIVE scores (min of the two
+    verifiers) and the list of tasks the two verifiers disagreed on.
+
     Grounded risk = fraction of held-out tasks answered wrong. Accept iff risk
-    strictly decreases (or stays 0) and no task regressed.
+    strictly decreases (or stays 0), no task regressed, and the two verifiers do
+    not disagree on any task that changed — a disagreement on a changed task
+    means the computed check alone can't be trusted for it
+    (`concept_verification_completeness_gap`), so it's a reject.
     """
     risk_before = 1 - (sum(baseline_scores.values()) / len(baseline_scores))
     risk_after = 1 - (sum(candidate_scores.values()) / len(candidate_scores))
     regressed = [t for t in baseline_scores
                  if candidate_scores.get(t, 0) < baseline_scores[t]]
+    changed = {t for t in baseline_scores if candidate_scores.get(t, 0) != baseline_scores[t]}
+    contested = sorted(changed & set(verifier_disagreements or []))
     strict_decrease = risk_after < risk_before or (risk_before == 0 and risk_after == 0)
-    accept = bool(strict_decrease and not regressed)
+    accept = bool(strict_decrease and not regressed and not contested)
     return {
         "accept": accept,
-        "prerequisite": "re-run of the loop on the frozen held-out set; scored by holdout_tasks.score_fold",
-        "authority": "the frozen held-out research-task set — NOT the proposer",
+        "prerequisite": "re-run of the loop on the frozen held-out set; scored by two independent verifiers "
+                        "(holdout_tasks predicate + holdout_verifier2 fact-overlap)",
+        "authority": "the frozen held-out research-task set + verifier agreement — NOT the proposer",
         "fallback": "revert the loop-harness component via harness_registry (exact); log the rejection",
-        "execution_consequence": "on accept: keep the promoted component; on reject or any task regression: revert",
+        "execution_consequence": "on accept: keep the promoted component; on reject, any regression, or a "
+                                 "verifier disagreement on a changed task: revert",
         "evidence": {"risk_before": round(risk_before, 3), "risk_after": round(risk_after, 3),
-                     "strict_decrease": strict_decrease, "regressed_tasks": regressed},
+                     "strict_decrease": strict_decrease, "regressed_tasks": regressed,
+                     "contested_changed_tasks": contested},
     }
 
 
@@ -271,6 +282,9 @@ def _selftest():
         # loop-harness edit verification against the held-out set
         v_improve = verify_loop_edit({"a": 1.0, "b": 0.0, "c": 1.0}, {"a": 1.0, "b": 1.0, "c": 1.0})
         v_regress = verify_loop_edit({"a": 1.0, "b": 1.0, "c": 1.0}, {"a": 1.0, "b": 0.0, "c": 1.0})
+        # an improvement on a task the two verifiers disagree about -> reject
+        v_contested = verify_loop_edit({"a": 1.0, "b": 0.0}, {"a": 1.0, "b": 1.0},
+                                       verifier_disagreements=["b"])
 
         checks = {
             "starting policy loses rules (risk > 0)": start_risk > 0,
@@ -286,6 +300,9 @@ def _selftest():
             "loop-harness edit that improves held-out score is accepted": v_improve["accept"],
             "loop-harness edit that regresses ANY held-out task is rejected":
                 v_regress["accept"] is False and v_regress["evidence"]["regressed_tasks"] == ["b"],
+            "loop-harness edit contested by the two verifiers is rejected":
+                v_contested["accept"] is False
+                and v_contested["evidence"]["contested_changed_tasks"] == ["b"],
         }
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")

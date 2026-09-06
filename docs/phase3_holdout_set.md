@@ -2,8 +2,9 @@
 
 **Date:** 2026-09-23 (autonomous run 69) · **Status:** built, selftest GREEN, historical baseline 1.00 · **Plan:** `docs/self_improving_harness_plan.md` §4 Phase 3 · **Unblocks:** `docs/phase3_loop_metrics.md`'s verification gap
 
-`tools/holdout_tasks.py`. Ten research questions this project has already
-established and verified, each with a **computable** check on a candidate answer.
+`tools/holdout_tasks.py`. Seventeen questions this project has already
+established and verified — ten literature findings plus seven design-reasoning
+claims (added run 74) — each with a **computable** check on a candidate answer.
 The acceptance test a loop-harness edit has to pass.
 
 ## The tasks (17)
