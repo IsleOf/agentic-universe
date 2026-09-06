@@ -1,0 +1,41 @@
+{
+  "run": 201,
+  "increment": "consolidation - the execution-layer threat surface table in phase5_exec_guard.md (4 attack classes from Sept-2026 literature)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 4,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2606.04329",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2608.27299",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2506.19676",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.00069",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2506.19676",
+    "arXiv:2606.04329",
+    "arXiv:2608.27299",
+    "arXiv:2609.00069"
+  ],
+  "trace_file": "runtime\\traces\\loop-201.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

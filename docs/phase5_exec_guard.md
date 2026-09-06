@@ -68,10 +68,29 @@ necessarily contain secret-detection *patterns*, and a pattern is not a leak.
 Every phase of `docs/self_improving_harness_plan.md` §4 now exists as tested
 code. All twelve selftests green under one predicate.
 
+## The execution-layer threat surface (added run 201, from Sept-2026 literature)
+
+`exec_guard.py` is one narrow instance of `pattern_execution_layer_enforcement`. The 2026 literature has
+mapped four attack classes the execution layer — not the gate, not the model — has to bound:
+
+| class | node | what the exec layer owes |
+| --- | --- | --- |
+| **memory poisoning** | `concept_memory_poisoning_one_write_persists` (arXiv:2606.04329) | the write path to the experience bank / shared store is a privileged action; one poisoned write persists; injection defenses don't cover it; source-event backing on every retrieved entry |
+| **context privilege escalation** | `concept_the_harness_context_assembly_is_a_privilege_escalation_vector` (arXiv:2608.27299) | context assembly is a trusted op that can promote attacker content to a privileged instruction level (RCE on 6 harnesses); the privilege-labelling logic belongs in the runtime, not the mutable harness; Phase 0 now flags a MessageRole-CPE (run 200) |
+| **agent-communication attacks** | `concept_agent_communication_is_a_layered_attack_surface` (arXiv:2506.19676) | MCP / A2A servers are untrusted inbound channels; per-layer risk taxonomy, not per-message |
+| **harness tampering** | `concept_harness_tampering_persists_in_real_self_improvement_runs` (arXiv:2609.00069) | a self-improving edit can violate authorization / provenance / completeness and survive validation; `tools/tamper_audit.py` runs the audit on the loop's own lineage |
+
+`concept_agentic_os`'s "only the harness layer mutates fast; the runtime is the fixed point everything is
+verified from" is the unifying answer: each of these four is a case of something that must sit in the
+runtime (write-mediation, privilege-labelling, channel trust, integrity audit) being reachable from the
+mutable layer.
+
 ## What is still owed (honestly)
 
 - **A model proposer** (Phase 3's is deterministic) and **heterogeneous
   cross-family verifiers** (the spec requires them for the general case).
+- **The four execution-layer threat classes above** — `exec_guard` covers none of them; they need a real
+  runtime/harness boundary, not a pre-commit hook.
 - **Automatic Phase 3 on the loop harness** — the held-out set exists; the loop
   re-running itself on it is a human step.
 - **The retraction / deprecation stage** of the skill lifecycle (Phase 4 induces,

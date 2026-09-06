@@ -764,6 +764,10 @@
     {
       "date": "2026-09-10",
       "change": "Autonomous run 200. Phase 0 - the run-199 conclusion in the trace schema. trace_substrate.py: a MESSAGE event may optionally carry instruction_level (level in the assembled context) and source_level (origin's level), ordered system > developer > user > tool > retrieved > untrusted (INSTRUCTION_LEVELS). validate_event flags a MessageRole-CPE when instruction_level outranks source_level - the trace catches the harness's own context assembly elevating attacker content (concept_the_harness_context_assembly_is_a_privilege_escalation_vector, arXiv:2608.27299). Backward compatible (both fields optional). +1 selftest check (clean pair validates, promoted pair flagged). phase0_trace_substrate.md updated. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-10",
+      "change": "Autonomous run 201. Consolidation. phase5_exec_guard.md gains 'The execution-layer threat surface' - a table of the four attack classes the 2026 literature has mapped that the execution layer (not the gate, not the model) must bound: memory poisoning (2606.04329), context privilege escalation (2608.27299), agent-communication attacks (2506.19676), harness tampering (2609.00069). concept_agentic_os's runtime-as-fixed-point is the unifying answer - each is a case of something that belongs in the runtime being reachable from the mutable harness. exec_guard covers none of them (it is a pre-commit hook); they need a real runtime/harness boundary. No graph node/edge change."
     }
   ],
   "nodes": [
