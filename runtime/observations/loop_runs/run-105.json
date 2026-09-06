@@ -1,0 +1,18 @@
+{
+  "run": 105,
+  "increment": "AT REST - all research channels blocked, holding for the scheduled task",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-105.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-01",
+  "last_updated": "2026-10-02",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -376,6 +376,10 @@
     {
       "date": "2026-10-01",
       "change": "Autonomous run 104. IDLE-STATE RULE + OpenReview. Search surfaced 4 harness/RHO titles whose content is not yet accessible (openreview forum needs a token; arXiv/S2 429). Added an OpenReview watch-list to docs/literature_coverage.md - Harness-Bench (harness-vs-model performance benchmark, highest priority), Self-Harness, and the two RHO OpenReview submissions - to fold when a content source clears. Updated the scheduled-task guidance with the 4-channel rotation and 'a documented hold is the correct increment when all quiet'. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-02",
+      "change": "Autonomous run 105. AT REST / EXTERNAL WALL. All content research channels blocked: arXiv API returns empty/429 (abstract pages work via curl but need an id), Semantic Scholar 429, OpenReview forum needs a token, forum 'new' still tops out at 2026-09-01 (folded). The OpenReview watch-list (run 104, literature_coverage.md) is the queue for when a source clears. Build complete through Phase 5; six probe rigs; 194 nodes / 624 edges; 21 selftests GREEN; every doc current. No increment available without new external inputs - the 6h scheduled task carries the loop and will fold the watch-list when arXiv/S2 clear. No graph change."
     }
   ],
   "nodes": [
