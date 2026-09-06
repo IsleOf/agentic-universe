@@ -1,0 +1,19 @@
+{
+  "run": 218,
+  "increment": "synthesis node - concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic; resolves the accumulated multi-agent tension into a testable task-structure criterion; 1 node, 8 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-218.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

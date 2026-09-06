@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 252 nodes, 965 edges · **Date:** 2026-09-05
+**Graph at generation:** 253 nodes, 973 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -318,6 +318,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - runtime/observations/loop_history_summary.json — `artifact_loop_adapter_real_trace`, `artifact_loop_metrics_phase3_real`
 - runtime/observations/loop_runs/run-67.json — `artifact_loop_session_live_recording`
 - same sweep: no verifiable mechanism work since the run-5 sources (Sophia, Tao of Agency, Learnable Novelty - all position/framework). The field is investing in supervised curriculum generation, not intrinsic drive. — `concept_intrinsic_motivation`
+- synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
 - tools/exec_guard.py — `artifact_phase5_exec_guard`
 - tools/experience_bank.py — `artifact_phase2_experience_bank`
@@ -384,6 +385,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`
 - `docs/auto_sweep_2026-09-14-0600.md` — `concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery`
 - `docs/auto_sweep_2026-09-14-1200.md` — `concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response`, `emergent_pluralistic_ignorance`
+- `docs/auto_sweep_2026-09-14-1800.md` — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - `docs/auto_sweep_2026-09-15-0000.md` — `concept_curriculum_generation_not_intrinsic_drive`
 - `docs/auto_sweep_2026-09-15-0600.md` — `concept_irreversibility_budget`, `pattern_certified_runtime_alarm`, `pattern_provenance_based_authority`
 - `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `emergent_attribution_laundering`, `emergent_constraint_weakening_at_handoffs` +1

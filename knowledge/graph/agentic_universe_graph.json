@@ -832,6 +832,10 @@
     {
       "date": "2026-09-14",
       "change": "Autonomous run 217. Emergence/orchestration side. Folded arXiv:2511.15755 (Multi-Agent LLM Orchestration for Incident Response) as concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response: 348 trials, multi-agent 100% actionable vs single-agent 1.7%, zero quality variance, ~40s latency for both; reframes MAS orchestration as a production-readiness requirement for incident response. CURRENCY / CONFIDENCE NOTE: Nov 2025, single domain, promotional framing (named product, 80x/140x headline multipliers) - folded at confidence 0.5 as a domain-specific counterweight. 4 edges: challenges concept_mast_multi_agent_failure_taxonomy ('MAS gains often minimal') and concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery (zero variance vs never-recovering modes); supports approach_orchestration_first (weak - narrow) and concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (deterministic synthesis, not a vote, sidesteps herding). 251->252 nodes, 961->965 edges."
+    },
+    {
+      "date": "2026-09-14",
+      "change": "Autonomous run 218. Synthesis node (no new citation, IDLE-STATE RULE clause c - a consistency/adversarial pass resolving accumulated tension). concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic resolves the multi-agent tension the graph accumulated (MAST 'gains often minimal' vs 'Beyond the Strongest' discards ~8 pts vs herding-if-votes-shown vs incident-response 100%-vs-1.7% vs epistemic Sybil collapse): multi-agent helps when (a) the task decomposes into independently-verifiable subtasks, (b) recombination is a DETERMINISTIC synthesis step not a vote/consensus, (c) agents work from disjoint evidence slices. Testable with the project's Phase 0 trace substrate + topology_recover. 8 edges: refines concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse; depends_on pattern_structural_decoupling; supports approach_orchestration_first and artifact_phase0_trace_substrate (a falsifiable Phase 6 probe). 252->253 nodes, 965->973 edges."
     }
   ],
   "nodes": [
@@ -7369,6 +7373,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-14-1200.md"
+      ]
+    },
+    {
+      "id": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "label": "Multi-agent orchestration helps when the task decomposes into independently-verifiable subtasks recombined by a deterministic synthesis step; it hurts when agents vote, share partial reasoning, or recombine by consensus",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:when_multi_agent_helps",
+      "confidence": 0.6,
+      "description": "A synthesis node (run 218, no new citation) resolving the multi-agent tension the graph has accumulated. The conflicting evidence: concept_mast_multi_agent_failure_taxonomy ('MAS gains often minimal', 14 failure modes); 'Beyond the Strongest' (orchestration on GPQA-Diamond reached 87.4% while at least one agent was right in 95.5% - discards ~8 points of individually-recoverable correctness, via concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery); concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (it CAN beat the strongest model, but only if authorship and vote tallies are hidden); concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response (100% vs 1.7% actionable, zero variance, in one domain); concept_epistemic_sybil_collapse (multiplying agents on SHARED evidence collapses aggregate confidence). The resolving criterion: multi-agent pays off when (a) the task DECOMPOSES into subtasks each with an independent, checkable success condition, (b) the subtask outputs are recombined by a DETERMINISTIC synthesis step (a computed merge, a schema fill, a typed aggregation) rather than by a vote or a consensus discussion, and (c) the agents work from DISJOINT evidence / context slices (pattern_structural_decoupling), not a shared pool. It hurts when agents see each other's partial reasoning (herding), vote (herding + epistemic Sybil collapse), or recompose by consensus (latent/semantic failure modes never recover, OrchestraBench). Incident response fits (a)+(b)+(c) - decompose / diagnose / recommend with specialised roles and a deterministic recommendation synthesis; open-ended reasoning benchmarks (GPQA) fit none, which is why orchestration discards recoverable correctness there. This is a testable claim: the project's Phase 0 trace substrate + topology_recover.py can measure (a)/(b)/(c) on any real swarm trace and predict whether the orchestration helped.",
+      "tags": [
+        "when-multi-agent-helps",
+        "verifiable-subtasks",
+        "deterministic-synthesis",
+        "disjoint-evidence",
+        "task-structure-criterion",
+        "synthesis-node",
+        "no-vote",
+        "testable-prediction"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-14-1800.md",
+        "synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-14-1800.md"
       ]
     }
   ],
@@ -17721,6 +17753,94 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.38,
       "description": "OrchestraBench finds latent/semantic failure modes never recover; this reports ZERO quality variance over 348 trials. Either incident response avoids those modes by task structure, or the promotional framing is over-claiming - a tension worth resolving with the DQ metric details."
+    },
+    {
+      "id": "edge_when_ma_helps_refines_mast",
+      "source": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "target": "concept_mast_multi_agent_failure_taxonomy",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "'MAS gains often minimal' is conditional: minimal when the recombination is a vote or a consensus discussion (most of MAST's modes live at recombination), substantial when subtasks are verifiable and synthesis is deterministic."
+    },
+    {
+      "id": "edge_when_ma_helps_refines_herding",
+      "source": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.6,
+      "description": "Hiding authorship and vote tallies is one instance of the general rule: agents must not see each other's partial reasoning. A deterministic synthesis step over disjoint-evidence agents is the clean form - no votes to hide."
+    },
+    {
+      "id": "edge_when_ma_helps_refines_orchestration_diag",
+      "source": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "target": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "OrchestraBench's never-recovering latent/semantic modes are recombination failures: they arise when one agent's flawed partial output is silently absorbed by another. A deterministic synthesis step with per-subtask verification is where they get caught."
+    },
+    {
+      "id": "edge_when_ma_helps_explains_incident_response",
+      "source": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "target": "concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Incident response is the positive case: decompose (triage / correlate / diagnose) into checkable subtasks, recombine by a deterministic recommendation synthesis - so the domain win is predicted by the criterion, not an anomaly."
+    },
+    {
+      "id": "edge_when_ma_helps_depends_on_structural_decoupling",
+      "source": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "target": "pattern_structural_decoupling",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "Condition (c) IS structural decoupling: agents on disjoint evidence / context slices. Without it, multiplying agents just multiplies correlated errors (concept_epistemic_sybil_collapse)."
+    },
+    {
+      "id": "edge_when_ma_helps_challenges_epistemic_sybil_collapse",
+      "source": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Epistemic Sybil collapse is the failure when condition (c) is violated (shared evidence); the criterion says decoupled evidence + deterministic synthesis avoids it, and evidential-ancestry tracking is how you verify the decoupling held."
+    },
+    {
+      "id": "edge_when_ma_helps_supports_orchestration_first",
+      "source": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "target": "approach_orchestration_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Gives the orchestration-first family a scoping condition instead of an unconditional claim: it is the right approach for verifiable-decomposable tasks with deterministic synthesis, and the wrong one for open-ended consensus reasoning."
+    },
+    {
+      "id": "edge_when_ma_helps_testable_via_trace_substrate",
+      "source": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "The criterion is falsifiable with the project's own tools: topology_recover.py + the trace schema can measure subtask verifiability, synthesis determinism, and evidence disjointness on a real swarm trace and predict whether the orchestration helped - a concrete Phase 6 probe design."
     }
   ]
 }
