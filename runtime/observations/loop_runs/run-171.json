@@ -1,0 +1,26 @@
+{
+  "run": 171,
+  "increment": "consolidation - fold run-170 shutdown resistance into nourishing_harness_design.md section 4 + probe_idle_agent.md containment",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2509.14260",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2509.14260"
+  ],
+  "trace_file": "runtime\\traces\\loop-171.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
