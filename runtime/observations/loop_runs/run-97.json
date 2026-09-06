@@ -1,0 +1,25 @@
+{
+  "run": 97,
+  "increment": "fold Anthropic 'Training a Misaligned Reward Seeker' into the graph",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:J76LZCC55RdHeqEhz",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:J76LZCC55RdHeqEhz"
+  ],
+  "trace_file": "runtime\\traces\\loop-97.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
