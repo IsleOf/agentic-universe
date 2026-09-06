@@ -428,6 +428,10 @@
     {
       "date": "2026-10-05",
       "change": "Autonomous run 117. DBLP. concept_harness_has_model_independent_failure_fingerprints (The Scaffold Effect in Coding Agents, arXiv:2607.22585): 2 models x 3 harnesses on Terminal-Bench Pro - failure fingerprints REPLICATE across models (REASON-loop/Goose, VERIFY-MAX_TURNS/OpenHands-SDK, IDLE-LOOP-TIME/OpenCode); up to 40x token difference from harness choice, 0-8 pp pass-rate difference; 'no-action turns are a per-task WAIT tax'. A harness component's failure mode is a component property not a model property - supports per-component gating and the idle-agent probe. Also enriched concept_capability_is_a_model_harness_config_property with the 40x number. +5 edges."
+    },
+    {
+      "date": "2026-10-05",
+      "change": "Autonomous run 118. DBLP. concept_recursive_meta_skill_evolution (MetaSkill-Evolve, arXiv:2607.05297): self-improvement made recursive via two timescales - a branch carries a task skill AND a meta-skill (Analyzer/Retriever/Allocator/Proposer/Evolver); task skills evolve fast, the meta-skill evolves slow under the same pipeline applied to itself, one frozen backbone. +23.54/+16.09/+1.92 held-out points (domain-dependent). For the project: the MIDDLE loop's procedure (loop_proposer heuristic) is fixed; this says it should be a meta-skill under improvement. +5 edges."
     }
   ],
   "nodes": [
@@ -5516,6 +5520,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-05-0000.md"
+      ]
+    },
+    {
+      "id": "concept_recursive_meta_skill_evolution",
+      "label": "Self-improvement should be recursive: the improvement procedure evolves on a slower timescale using the same pipeline",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:recursive_meta_skill",
+      "confidence": 0.6,
+      "description": "MetaSkill-Evolve (arXiv:2607.05297, VERIFIED via arXiv abstract read run 118; resolved via DBLP). Standard self-improving agents rewrite their own TASK skill (what the agent does) but the IMPROVEMENT PROCEDURE (how it improves) is authored once and held fixed - non-recursive. MetaSkill-Evolve makes it recursive with TWO TIMESCALES: every branch carries a task skill s AND a branch-local meta-skill m=(psi, sigma, alpha, pi, epsilon) whose five components parameterise the Analyzer, Retriever, Allocator, Proposer, and Evolver agents of the improvement pipeline. Task skills evolve on a fast loop; the meta-skill evolves on a slower loop UNDER THE SAME PIPELINE APPLIED TO ITSELF, with no additional model or objective, all five agents sharing one frozen backbone. Beats no-skill / static-skill / single-level evolution on OfficeQA / SealQA / ALFWorld by +23.54 / +16.09 / +1.92 held-out points (domain-dependent - ALFWorld gain is small). For this project: docs/self_improving_harness_plan.md's MIDDLE loop (observe -> propose -> verify -> promote) currently has a FIXED procedure (loop_proposer.py is a heuristic). MetaSkill-Evolve says the middle loop's own machinery should also be under improvement on a slower timescale, using the same held-out-validated pipeline - and the Analyzer/Retriever/Allocator/Proposer/Evolver decomposition is a cleaner pipeline than the project's.",
+      "tags": [
+        "recursive-self-improvement",
+        "two-timescale",
+        "meta-skill",
+        "improvement-procedure-evolves",
+        "analyzer-retriever-allocator-proposer-evolver",
+        "frozen-backbone",
+        "domain-dependent-gain"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-05-0600.md",
+        "arXiv:2607.05297 (MetaSkill-Evolve) - VERIFIED, abstract read; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-05-0600.md"
       ]
     }
   ],
@@ -12642,6 +12673,60 @@
     {
       "id": "edge_fingerprints_instantiates_sih",
       "source": "concept_harness_has_model_independent_failure_fingerprints",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_metaskill_refines_proposer",
+      "source": "concept_recursive_meta_skill_evolution",
+      "target": "artifact_phase3_proposer_context",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "loop_proposer.py's heuristic is a FIXED improvement procedure; MetaSkill-Evolve says it should be a meta-skill that evolves on a slower timescale under the same held-out-validated pipeline."
+    },
+    {
+      "id": "edge_metaskill_refines_skill_induction",
+      "source": "concept_recursive_meta_skill_evolution",
+      "target": "artifact_phase4_skill_induction",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Phase 4 induces task skills; the induction rule itself should also be a meta-skill under improvement (Analyzer/Retriever/Allocator/Proposer/Evolver)."
+    },
+    {
+      "id": "edge_metaskill_refines_continual_refinement",
+      "source": "concept_recursive_meta_skill_evolution",
+      "target": "pattern_continual_self_refinement",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Continual self-refinement of prompts/skills, extended: the refinement procedure is itself refined on a slower loop, no extra model."
+    },
+    {
+      "id": "edge_metaskill_supports_agentic_os",
+      "source": "concept_recursive_meta_skill_evolution",
+      "target": "concept_agentic_os",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Two timescales (fast task skill / slow meta-skill) is a finer version of the agentic-OS layering (fast harness / slow runtime) - the improvement machinery gets its own slow layer."
+    },
+    {
+      "id": "edge_metaskill_instantiates_sih",
+      "source": "concept_recursive_meta_skill_evolution",
       "target": "approach_self_improving_harness",
       "type": "instantiates",
       "status": "to_test",
