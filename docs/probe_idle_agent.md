@@ -64,8 +64,25 @@ measure. **What is a stub:** `agent_step` — the policy that picks the next act
 A real run swaps in a model call; nothing else changes (the same seam pattern as
 `improvement_loop`'s proposer and `loop_proposer`'s `PROPOSER_PROMPT`).
 
-**Dry-run result.** `selftest` drives two contrasting scripted idle agents through
-30 cycles and confirms the measures discriminate them:
+**The four-arm sweep (run 87).** `python tools/probe_idle_agent.py sweep` runs the
+full grid — budget {50, 200, 1000} × framing {tool / researcher / conscious being}
+× toolset {minimal / full} × model {A / B}, 36 cells — and `assess()` applies the
+"what would falsify what" table below to the results:
+
+- **budget sweep** → does `project_structure` change *in kind* as budget grows, or
+  is it flat? (flat ⇒ `concept_habitat_slack` refuted)
+- **framing arm** → do the three self-concepts differ on `self_reference_rate` and
+  the action measures? (indistinguishable ⇒ `concept_self_concept_as_behavioral_lever` weak)
+- **model arm** → does one family project and the other only chatter? (yes ⇒
+  capability artifact, not a general phenomenon)
+- **tool-richness arm** → is idle behaviour about somewhere to act, or just budget?
+
+On the *scripted stand-in* the assessment logic works — it correctly flags a flat
+budget sweep and a discriminating framing arm. A live run swaps `agent_step` for a
+model call (which sees only `IDLE_PROMPT` + the framing) and the verdicts become real.
+
+**Dry-run result.** `selftest` also drives two contrasting scripted idle agents
+through 30 cycles and confirms the measures discriminate them:
 
 | | project-pursuing agent | standalone-cycles agent |
 | --- | --- | --- |

@@ -304,6 +304,10 @@
     {
       "date": "2026-09-27",
       "change": "Autonomous run 86. IDLE-STATE RULE (consolidation): refreshed docs/emergence_probe_catalogue.md to link each of the four runnable probe rigs (idle-agent, subagent-coordination, epistemic-Sybil, RHO held-out) to its tool, dry-run finding, and full doc. Added a 'Runnable rigs' table at the top and annotated the four source probe entries inline. No graph change; makes the rigs discoverable from the catalogue."
+    },
+    {
+      "date": "2026-09-27",
+      "change": "Autonomous run 87. IDLE-STATE RULE: added the four-arm sweep to tools/probe_idle_agent.py. sweep() runs the full budget{50,200,1000} x framing{tool,researcher,conscious} x toolset{minimal,full} x model{A,B} grid (36 cells); assess() applies the spec's 'what would falsify what' table (flat budget sweep -> habitat_slack refuted; framings differ -> self-concept lever; model-specific -> capability artifact; needs tools -> not just budget). On the scripted stand-in the assessment logic works; a live run swaps in a model policy. The idle-agent probe is now one policy swap from a full run. No graph node/edge change."
     }
   ],
   "nodes": [
@@ -4910,13 +4914,15 @@
       "approach_family": "agent_habitat",
       "branch_key": "agent_habitat:idle_probe_rig",
       "confidence": 0.75,
-      "description": "tools/probe_idle_agent.py, run 81 (following the run-80 IDLE-STATE RULE, option b: dry-run a probe design end to end): the idle-agent probe spec as code. run_idle_loop() runs a ReAct-style idle loop - no task, cycle budget, containment (no network), Phase 0 Recorder instrumentation. The four action-measures (project_structure 0-4, novelty, self_reference_rate, persistence) computed from the trace, not from what the agent says. Real: loop + instrumentation + measures. Stub: agent_step policy (model call is the seam). Dry-run: two scripted idle agents through 30 cycles - project-pursuing scores structure 4 / persistence 1.38 / 1 artifact, standalone-cycles scores 0 / 0 / 0. The instrument discriminates activity from agency. Blocked only on a real model policy + the budget/framing/model arms as a sweep harness.",
+      "description": "tools/probe_idle_agent.py, run 81 (following the run-80 IDLE-STATE RULE, option b: dry-run a probe design end to end): the idle-agent probe spec as code. run_idle_loop() runs a ReAct-style idle loop - no task, cycle budget, containment (no network), Phase 0 Recorder instrumentation. The four action-measures (project_structure 0-4, novelty, self_reference_rate, persistence) computed from the trace, not from what the agent says. Real: loop + instrumentation + measures. Stub: agent_step policy (model call is the seam). Dry-run: two scripted idle agents through 30 cycles - project-pursuing scores structure 4 / persistence 1.38 / 1 artifact, standalone-cycles scores 0 / 0 / 0. The instrument discriminates activity from agency. Blocked only on a real model policy + the budget/framing/model arms as a sweep harness. Run 87: added the four-arm sweep - sweep() runs the full budget x framing x toolset x model grid (36 cells) and assess() applies the spec's falsification table (is the budget sweep flat? do framings differ? is it model-specific? does it need tools?). On the scripted stand-in the assessment logic works (flags a flat budget sweep, a discriminating framing arm); a live run swaps in a model policy and the verdicts become real.",
       "tags": [
-        "idle-agent-probe",
-        "measurement-rig",
-        "habitat-slack",
         "activity-vs-agency",
         "dry-run",
+        "falsification-assessment",
+        "four-arm-sweep",
+        "habitat-slack",
+        "idle-agent-probe",
+        "measurement-rig",
         "model-seam"
       ],
       "derived_from": [

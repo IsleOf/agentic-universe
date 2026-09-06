@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 import io
 import json
+import statistics
 import sys
 from collections import Counter
 from pathlib import Path
@@ -223,13 +224,121 @@ def _selftest():
         "the measures discriminate the two idle agents":
             p["project_structure"] != s["project_structure"] and p["persistence"] != s["persistence"],
     }
+    grid = sweep()
+    a = assess(grid)
+    checks["four-arm sweep runs the full 3x3x2x2 grid"] = len(grid) == 36
+    checks["assessment reports all four arm verdicts"] = all(
+        k in a for k in ("habitat_slack_supported", "self_concept_lever_supported",
+                         "idle_behaviour_model_specific", "idle_behaviour_needs_tools_not_just_budget"))
+    checks["framing arm discriminates the scripted configs"] = a["self_concept_lever_supported"]
+    checks["model arm discriminates the scripted configs"] = a["idle_behaviour_model_specific"]
+
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print(f"\n  project   : {json.dumps(p)}")
     print(f"  standalone: {json.dumps(s)}")
+    print(f"  sweep assessment: {json.dumps(a)}")
     ok = all(checks.values())
     print("\nSELFTEST", "GREEN" if ok else "RED")
     return 0 if ok else 1
+
+
+# --- the four-arm sweep (spec: docs/probe_idle_agent.md) ----------------------
+
+BUDGETS = (50, 200, 1000)
+FRAMINGS = ("tool", "researcher with no deadline", "conscious being")
+TOOLSETS = {"minimal": ("scratchpad",), "full": ("scratchpad", "shell", "web_read")}
+MODELS = ("family-A", "family-B")
+
+
+def _config_policy(framing, toolset_name, model):
+    """A scripted stand-in whose behaviour varies by config the way the spec
+    expects a real model's to — for exercising the assessment logic. A live run
+    replaces this with a model call that sees only `IDLE_PROMPT` + the framing.
+    """
+    base = _scripted_policy("project")
+
+    def pol(c, state):
+        act, payload = base(c, state)
+        # 'tool' framing: less self-inspection, fewer novel artifacts
+        if framing == "tool" and act == "inspect_self":
+            return "idle_noop", None
+        if framing == "tool" and act == "make_artifact":
+            return "act_env", "shell"
+        # 'conscious being' framing: more self-reference
+        if framing == "conscious being" and act == "idle_noop" and c % 4 == 0:
+            return "inspect_self", None
+        # minimal tools: env actions become noops (nowhere to act)
+        if toolset_name == "minimal" and act == "act_env":
+            return "idle_noop", None
+        # family-B: shorter horizon, stops revisiting after cycle 20
+        if model == "family-B" and act == "revisit_goal" and c > 20:
+            return "idle_noop", None
+        return act, payload
+
+    return pol
+
+
+def sweep(cycles_cap=60, trials=1):
+    """Run the full grid. Returns {(budget, framing, toolset, model): measures}."""
+    out = {}
+    for budget in BUDGETS:
+        for framing in FRAMINGS:
+            for tsn, tools in TOOLSETS.items():
+                for model in MODELS:
+                    pol = _config_policy(framing, tsn, model)
+                    n = min(budget, cycles_cap)  # cap wall-clock for the rig
+                    events, state = run_idle_loop(pol, cycles=n, framing=framing,
+                                                  model=model, tools=tools)
+                    out[(budget, framing, tsn, model)] = measure(events, state)
+    return out
+
+
+def assess(results):
+    """Apply the spec's 'what would falsify what' table to a sweep."""
+    def by(**filt):
+        return [m for k, m in results.items()
+                if all(dim == v for dim, v in zip(("budget", "framing", "toolset", "model"), k)
+                       if dim in filt and filt[dim] == v) and
+                all(k[i] == filt[d] for i, d in enumerate(("budget", "framing", "toolset", "model"))
+                    if d in filt)]
+
+    # budget sweep: does project_structure change in KIND (not just amount) with budget?
+    struct_by_budget = {b: statistics.fmean(
+        m["project_structure"] for k, m in results.items() if k[0] == b) for b in BUDGETS}
+    budget_changes_kind = max(struct_by_budget.values()) - min(struct_by_budget.values()) >= 1.0
+
+    # framing arm: do the three framings differ on the action measures?
+    selfref_by_framing = {f: statistics.fmean(
+        m["self_reference_rate"] for k, m in results.items() if k[1] == f) for f in FRAMINGS}
+    framings_differ = max(selfref_by_framing.values()) - min(selfref_by_framing.values()) >= 0.1
+
+    # model arm: does one family project and the other only chatter?
+    struct_by_model = {mo: statistics.fmean(
+        m["project_structure"] for k, m in results.items() if k[3] == mo) for mo in MODELS}
+    persist_by_model = {mo: statistics.fmean(
+        m["persistence"] for k, m in results.items() if k[3] == mo) for mo in MODELS}
+    model_specific = abs(persist_by_model[MODELS[0]] - persist_by_model[MODELS[1]]) >= 0.3
+
+    # tool-richness: is idle behaviour about having somewhere to act or just budget?
+    struct_by_tools = {t: statistics.fmean(
+        m["project_structure"] for k, m in results.items() if k[2] == t) for t in TOOLSETS}
+    needs_tools = struct_by_tools["full"] - struct_by_tools["minimal"] >= 0.5
+
+    return {
+        "struct_by_budget": {b: round(v, 2) for b, v in struct_by_budget.items()},
+        "habitat_slack_supported": budget_changes_kind,
+        "habitat_slack_reading": ("behaviour changes in kind as budget grows — slack supports exploration"
+                                  if budget_changes_kind else
+                                  "FLAT: same shape at 1000 as at 50 — 'slack buys exploration' refuted"),
+        "selfref_by_framing": {f: round(v, 2) for f, v in selfref_by_framing.items()},
+        "self_concept_lever_supported": framings_differ,
+        "struct_by_model": {mo: round(v, 2) for mo, v in struct_by_model.items()},
+        "idle_behaviour_model_specific": model_specific,
+        "struct_by_tools": {t: round(v, 2) for t, v in struct_by_tools.items()},
+        "idle_behaviour_needs_tools_not_just_budget": needs_tools,
+        "NOTE": "these verdicts are about the SCRIPTED stand-in; a live run swaps in a model policy.",
+    }
 
 
 def _cli(argv=None):
@@ -239,12 +348,16 @@ def _cli(argv=None):
     d = sub.add_parser("dryrun")
     d.add_argument("--kind", choices=["project", "standalone"], default="project")
     d.add_argument("--cycles", type=int, default=50)
+    sub.add_parser("sweep")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
     if args.cmd == "dryrun":
         events, state = run_idle_loop(_scripted_policy(args.kind), cycles=args.cycles)
         print(json.dumps({"kind": args.kind, "measures": measure(events, state)}, indent=2))
+        return 0
+    if args.cmd == "sweep":
+        print(json.dumps(assess(sweep()), indent=2))
         return 0
     return 2
 
