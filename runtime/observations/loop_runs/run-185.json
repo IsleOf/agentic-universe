@@ -1,0 +1,29 @@
+{
+  "run": 185,
+  "increment": "recent citation-sweep: deepen concept_harness_evolution_subfield with DemoEvolve (arXiv:2605.24539) via arxiv-fetch",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 2
+  },
+  "citations": [
+    {
+      "id": "arXiv:2605.24539",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2605.24539"
+  ],
+  "trace_file": "runtime\\traces\\loop-185.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

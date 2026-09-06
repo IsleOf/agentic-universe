@@ -700,6 +700,10 @@
     {
       "date": "2026-09-06",
       "change": "Autonomous run 184. Owner added dedicated fetch skills (arxiv-fetch, hackernews-fetch, rss-fetch, github-fetch, reddit-fetch, x-fetch, nodriver-session, browser-web-search, research-core). Updated sources/README.md discovery table + SKILL.md TOOLS section to prefer these over raw API calls. arxiv-fetch tested working (no date-sort param - filter by arXiv-ID YYMM prefix for the recency window). reddit-fetch r/LocalLLaMA is the small/local-model channel the recency-weighting note wants. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-06",
+      "change": "Autonomous run 185. Recent citation-sweep (S2 citations of Self-Harness 2606.09498 -> a fresh 2026 harness-evolution cluster: HarnessEvolve, HarnessDev, HarnessFix, HarnessCompass, DemoEvolve, CordisBench). Deepened concept_harness_evolution_subfield: 15+ -> 20+ systems, and folded DemoEvolve (arXiv:2605.24539, VERIFIED via arxiv-fetch): self-rollout harness evolution WORKS on short attributable episodes but BREAKS in long-horizon stochastic regimes; a few competent human demonstrations anchor the diagnosis where reward-only search is noise. The answer to the binding constraint when the SIGNAL (not the cost) is unreliable. +2 edges."
     }
   ],
   "nodes": [
@@ -3252,17 +3256,24 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:subfield",
       "confidence": 0.7,
-      "description": "As of 2026-09 the citation graph around Agentic Harness Engineering (arXiv:2604.25850) holds 15+ distinct systems in a few weeks: Self-Harness, HarnessEvolve, HarnessDev, WHALE (joint harness-weight optimisation), EvoUndo, Retrospective Harness Optimisation, Hierarchical Self-Improvement, Meta-Harness, Dalek, plus benchmarks (CordisBench, HarnessRisk) that treat 'can an LLM evolve its own harness' as a measured question. The convergence is itself evidence: the shared shape across independent groups - components as files, falsifiable prediction per edit, trajectory-driven updates, verifier-gated promotion - is what this project's approach_self_improving_harness family already asserts, arrived at separately.",
+      "description": "As of 2026-09 the citation graph around Agentic Harness Engineering (arXiv:2604.25850) holds 20+ distinct systems in a few weeks: Self-Harness, HarnessEvolve, HarnessDev, HarnessFix (provenance-and-control-flow-aware localized repair), HarnessCompass, DemoEvolve, WHALE (joint harness-weight optimisation), EvoUndo, Retrospective Harness Optimisation, Hierarchical Self-Improvement, Meta-Harness, Dalek, plus benchmarks (CordisBench - reasoning about component lifecycles in dynamic harnesses; HarnessRisk) treating 'can an LLM evolve its own harness' as a measured question. The convergence is itself evidence: the shared shape across independent groups - components as files, falsifiable prediction per edit, trajectory-driven updates, verifier-gated promotion - is what this project's approach_self_improving_harness family already asserts, arrived at separately. NEW MECHANISM worth naming (DemoEvolve, arXiv:2605.24539, May 2026, VERIFIED via arxiv-fetch run 185): self-rollout harness evolution WORKS when episodes are short and failures are attributable (Liar's Dice), but BREAKS in long-horizon stochastic regimes (Balatro) - sparse rewards, high-variance outcomes, unattributable failures - where reward-only search is misled by candidate-selection noise and textual knowledge alone does not stabilise. DemoEvolve bootstraps with a few COMPETENT HUMAN TRAJECTORIES as expert reference for the coding proposer, making sparse-feedback harness evolution 'more diagnosable, localizable, and stable'. This is the answer to concept_verification_is_the_binding_constraint when you cannot even get a reliable SIGNAL - not a better verifier, a few demonstrations to anchor diagnosis.",
       "tags": [
-        "subfield",
+        "20-plus-systems",
+        "citation-graph",
         "convergence",
+        "demoevolve",
         "harness-evolution",
-        "citation-graph"
+        "harnessfix",
+        "self-rollout-breaks-in-long-horizon-stochastic",
+        "sparse-feedback-needs-demonstrations",
+        "subfield"
       ],
       "derived_from": [
         "docs/research_fetch_sweep_2026-09-05.md",
         "arXiv:2604.25850 citation set via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened",
-        "arXiv:2608.28363, 2608.27311, 2609.01437, 2608.09096 - four now opened directly (2026-09-06)"
+        "arXiv:2608.28363, 2608.27311, 2609.01437, 2608.09096 - four now opened directly (2026-09-06)",
+        "arXiv:2605.24539 (DemoEvolve: Overcoming Sparse Feedback in Agentic Harness Evolution with Demonstrations, May 2026) - VERIFIED, abstract read run 185 via arxiv-fetch",
+        "docs/auto_sweep_2026-09-06-1200.md"
       ],
       "evidence_links": [
         "docs/research_fetch_sweep_2026-09-05.md"
@@ -15425,6 +15436,28 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "The persistent workspace where benign edits accumulate is the shared-state attack surface; boiling-frog is the multi-turn injection version."
+    },
+    {
+      "id": "edge_subfield_refines_verification_binding_constraint",
+      "source": "concept_harness_evolution_subfield",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "DemoEvolve: when the binding constraint is not verification COST but signal RELIABILITY (long-horizon stochastic, sparse rewards, unattributable failures), the fix is a few competent human demonstrations to anchor the diagnosis, not a better verifier."
+    },
+    {
+      "id": "edge_subfield_challenges_trajectory_only_harness_opt",
+      "source": "concept_harness_evolution_subfield",
+      "target": "pattern_trajectory_only_harness_optimization",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "DemoEvolve shows trajectory-only / self-rollout harness evolution BREAKS in long-horizon stochastic regimes - reward-only search is misled by candidate-selection noise; short attributable episodes are the precondition RHO's stance quietly assumes."
     }
   ]
 }

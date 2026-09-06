@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 229 nodes, 830 edges · **Date:** 2026-09-05
+**Graph at generation:** 229 nodes, 832 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -86,6 +86,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2605.05007](https://arxiv.org/abs/2605.05007) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
 | [2605.22643](https://arxiv.org/abs/2605.22643) | (title not recorded) | `concept_incremental_attacks_boil_the_frog` |
+| [2605.24539](https://arxiv.org/abs/2605.24539) | (title not recorded) | `concept_harness_evolution_subfield` |
 | [2605.27922](https://arxiv.org/abs/2605.27922) | (title not recorded) | `concept_capability_is_a_model_harness_config_property` |
 | [2606.00953](https://arxiv.org/abs/2606.00953) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2606.04329](https://arxiv.org/abs/2606.04329) | (title not recorded) | `concept_memory_poisoning_one_write_persists` |
@@ -328,6 +329,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `architecture/foundations.md` — `pattern_five_w_message_instrumentation`
 - `architecture/foundations.md: write an executable GREEN/RED predicate before building a loop` — `concept_work_substitution_frontier`
 - `docs/auto_sweep_2026-09-06-0000.md` — `concept_incremental_attacks_boil_the_frog`
+- `docs/auto_sweep_2026-09-06-1200.md` — `concept_harness_evolution_subfield`
 - `docs/auto_sweep_2026-09-06-2115.md` — `concept_harness_self_evolution_is_domain_dependent`, `pattern_recoverability_constrained_evolution`
 - `docs/auto_sweep_2026-09-07-0000.md` — `pattern_alternating_weight_harness_optimization`, `pattern_trajectory_only_harness_optimization`
 - `docs/auto_sweep_2026-09-07-0600.md` — `pattern_activation_probe_monitoring`
