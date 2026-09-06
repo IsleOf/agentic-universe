@@ -1,0 +1,25 @@
+{
+  "run": 129,
+  "increment": "adversarial pass - the middle loop's returns may plateau (what_would_make_this_wrong.md section 6)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:2312.10003",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2312.10003"
+  ],
+  "trace_file": "runtime\\traces\\loop-129.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

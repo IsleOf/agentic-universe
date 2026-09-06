@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-07",
+  "last_updated": "2026-10-08",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -472,6 +472,10 @@
     {
       "date": "2026-10-07",
       "change": "Autonomous run 128. Consolidation. nourishing_harness_design.md gains section 4b - a cross-check of the design against the two 2026 comprehensive-survey frames (six coupled runtime responsibilities; inputs/system/environment/optimisers; what/when/how/where to evolve). Names the design's real risk surface as the seams between responsibilities (e.g. compaction dropping a rule the gate relies on), maps the three surveys' shared worry list (safety/scalability/co-evolution) onto the design's open questions 2/3/4. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Autonomous run 129. Adversarial pass. what_would_make_this_wrong.md section 6 gains a companion caution: the middle loop's RETURNS may plateau even if the harness keeps mattering - ReST-meets-ReAct (arXiv:2312.10003) saturates after ~2 iterations, and a gate only rejects regressions, it does not require progress, so a plateaued loop keeps passing its gate while producing nothing. Names the cheap tell (a run window of gate-passing edits that don't move the held-out score) and flags that concept_recursive_meta_skill_evolution is the proposed answer but an unproven one. No graph node/edge change."
     }
   ],
   "nodes": [
