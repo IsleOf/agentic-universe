@@ -1,0 +1,32 @@
+{
+  "run": 246,
+  "increment": "incorporate the owner's Perplexity deep-research - folded 'Can LLM Agents Discover?' (arXiv:2608.30047): multi-turn research-agent P-Creativity declines exploration->exploitation within a run; novel but less useful than humans; + the four-role team-formation taxonomy; 1 node, 6 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2608.30047",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2601.13865",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2601.13865",
+    "arXiv:2608.30047"
+  ],
+  "trace_file": "runtime\\traces\\loop-246.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 246 OK · VALID · graph +0 · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.80"
+}

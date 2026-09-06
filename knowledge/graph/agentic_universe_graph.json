@@ -944,6 +944,10 @@
     {
       "date": "2026-09-21",
       "change": "Autonomous run 245. Incorporating the owner's Perplexity deep-research (cont.). Folded AI Steerability 360 (arXiv:2603.07837, Mar 2026, IBM) as concept_llm_steering_has_four_control_surfaces_input_structural_state_output: a steering toolkit organised around four model control surfaces - input (prompt), structural (weights/architecture), state (activations/attentions), output (decoding) - composable via a common pipeline interface with use-case + benchmark classes. The taxonomy partitions the project's positions: input = context/loop_policy + ACE; structural = the weight-training fork declined (WHALE/JIT-Agent); state = activation-probe monitoring; output = the diversity toolkit (verbalized sampling, entropy-max). Addresses the steering-skill-drives-quality-variance finding (run 240). Currency note: Mar 2026, a toolkit not a capability claim. 6 edges: refines concept_bottleneck_is_the_model_harness_coupling (a taxonomy of where the coupling is exercised); supports concept_human_effort_shifts_from_ideating_to_verifying... (steering as a comparable artifact), concept_whale_... (three of four surfaces used, fourth on the table), pattern_activation_probe_monitoring (state surface), pattern_verbalized_sampling (output surface), concept_capability_is_a_model_harness_config_property (a pipeline IS a harness config). 269->270 nodes, 1073->1079 edges."
+    },
+    {
+      "date": "2026-09-21",
+      "change": "Autonomous run 246. Incorporating the owner's Perplexity deep-research (last substantive fold). Folded 'Can LLM Agents Discover?' (arXiv:2608.30047, Aug 2026) as concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful: a framework for multi-turn LLM research-agent creativity on ML engineering tasks (MLE-Bench, AIDE / AIRA-Dojo), three dimensions P-Creativity (vs the agent's own prior solutions) / H-Creativity (vs the human corpus) / Usefulness. Findings: (1) all agents' P-Creativity DECLINES as a run goes exploration -> exploitation; (2) LLMs are more H-Creative than medal-winning humans yet lower performance - novel, not as useful. The project IS a multi-turn research agent; (1) grounds the IDLE-STATE RULE / plateau_watch at a within-run grain, (2) is the novelty/usefulness gap (the held-out set scores usefulness, nothing scores novelty). Companion: the four-role taxonomy (Initiator/Generator/Evaluator/Refiner, arXiv:2601.13865, from the dossier) - project maps Initiator=human standing goal, Generator+Refiner=loop, Evaluator=frozen held-out set. 6 edges: supports concept_aspire_... (creativity curve of 'continued search erases gains'), concept_horizon_gap_outcome_signals_decay, concept_the_agentic_labor_market_... (novelty/usefulness gap), concept_human_effort_shifts_from_ideating_to_verifying... (the four-role split); refines concept_self_harness_validates_the_three_loop (within-run decay); informs principle_diversity_maintenance (diversity maintained across a run, not only a swarm). 270->271 nodes, 1079->1085 edges."
     }
   ],
   "nodes": [
@@ -8011,6 +8015,38 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-21-1200.md"
+      ]
+    },
+    {
+      "id": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "label": "Multi-turn LLM research agents: P-Creativity (novelty vs the agent's own prior solutions) declines as a run shifts exploration -> exploitation; H-Creativity exceeds medal-winning humans but task performance is lower - novel, not as useful",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:within_run_creativity_decline",
+      "confidence": 0.68,
+      "description": "Can LLM Agents Discover? Evaluating Creativity on ML Engineering Tasks (arXiv:2608.30047, VERIFIED via arXiv abstract read run 246; Aug 2026). SOURCE: the owner's Perplexity deep-research 'Human Knowledge Capture & Creative Work Automation' (knowledge/notes/2026-09-04-human-knowledge-creative-automation.md on origin/main, section 4) - cross-checked and folded here. A framework for evaluating multi-turn LLM research agents' creativity on ML engineering tasks (10 Kaggle-style MLE-Bench tasks, agents AIDE and AIRA-Dojo), three dimensions: P-CREATIVITY (psychological novelty - novel relative to the agent's OWN prior solutions within a run), H-CREATIVITY (historical novelty - novel relative to the human solution corpus), USEFULNESS (task performance). An LLM-as-a-Judge pipeline verified against human creativity judgments. Findings: (1) ALL agents exhibit DECLINING P-CREATIVITY as they transition from exploration to exploitation within a run; (2) LLMs exhibit GREATER H-CREATIVITY than medal-winning humans, yet achieve LOWER performance - more novel, less useful. Bearing on the project: the project IS a multi-turn LLM research agent, and finding (1) is the empirical grounding for the IDLE-STATE RULE and loop_metrics.plateau_watch at a FINER grain - not just 'the last 3 runs were doc-only' but 'within a single run, an agent that keeps going gets less novel'. It is the ASPIRE 'continued search erases gains' finding measured as a creativity curve. Finding (2) is the 'novelty without usefulness' caution the jobs analysis also flags ('LLM agents can discover novel solutions, but usefulness varies') - the loop's held-out set scores usefulness, nothing scores novelty, so a run that is novel-but-useless still passes the gate. Companion (same dossier section): 'Understanding Human-Multi-Agent Team Formation for Creative Work' (arXiv:2601.13865) - four roles for both humans and agents: Initiator (frames problem, sets constraints), Generator (explores), Evaluator (judges novelty/usefulness/quality), Refiner (iterates) - the project maps Initiator=human (standing goal), Generator+Refiner=loop, Evaluator=frozen held-out set. Recency: Aug 2026, current agent frameworks.",
+      "tags": [
+        "can-llm-agents-discover",
+        "p-creativity",
+        "h-creativity",
+        "exploration-to-exploitation-decline",
+        "novel-but-less-useful",
+        "within-run-plateau",
+        "mle-bench",
+        "four-role-team-formation",
+        "perplexity-deep-research-source",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-21-1800.md",
+        "arXiv:2608.30047 (Can LLM Agents Discover? Evaluating Creativity on ML Engineering Tasks) - VERIFIED, abstract read run 246",
+        "arXiv:2601.13865 (Understanding Human-Multi-Agent Team Formation for Creative Work) - from the owner's dossier, four-role taxonomy, NOT independently opened",
+        "knowledge/notes/2026-09-04-human-knowledge-creative-automation.md (owner's Perplexity deep-research, origin/main) - source"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-21-1800.md"
       ]
     }
   ],
@@ -19617,6 +19653,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "A steering pipeline that composes input + state + output methods IS a harness configuration; the toolkit operationalises 'capability is a model x harness-config property' as a composable, benchmarkable object."
+    },
+    {
+      "id": "edge_creativity_decline_supports_aspire",
+      "source": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "target": "concept_aspire_vague_goal_self_evolution_is_dominated_by_goal_interpretation_and_local_gains_dont_transfer",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "ASPIRE's 'continued search and training can erase earlier improvements' measured as a creativity curve: P-Creativity declines monotonically as a run goes exploration -> exploitation. The loop is not just non-monotone in score, it is decreasing in novelty."
+    },
+    {
+      "id": "edge_creativity_decline_refines_three_loop",
+      "source": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "target": "concept_self_harness_validates_the_three_loop",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The IDLE-STATE RULE and plateau_watch operate ACROSS runs (last 3 runs doc-only). This says the same decay happens WITHIN a run - an argument for a finer-grained check, or for keeping runs short (the 'minimal proposal' discipline is also a novelty-preservation move)."
+    },
+    {
+      "id": "edge_creativity_decline_supports_horizon_gap",
+      "source": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "target": "concept_horizon_gap_outcome_signals_decay",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Exploration -> exploitation within a horizon is the same shape as outcome signals decaying with horizon: the longer the run, the more the agent repeats itself and the weaker the signal that it is still discovering."
+    },
+    {
+      "id": "edge_creativity_decline_informs_diversity_maintenance",
+      "source": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "target": "principle_diversity_maintenance",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "P-Creativity decline is diversity collapse within a single agent's run - the same mechanism as cross-agent diversity collapse, on a shorter timescale. Diversity has to be maintained not only across a swarm but across a run."
+    },
+    {
+      "id": "edge_creativity_decline_challenges_holdout_gate",
+      "source": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "target": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "'LLMs are more H-Creative than medal-winning humans yet lower performance' - the novelty/usefulness gap the jobs analysis also names ('usefulness varies'). The loop's held-out set scores usefulness; nothing scores novelty, so a novel-but-useless run still passes the gate."
+    },
+    {
+      "id": "edge_creativity_decline_supports_who_owns_creativity",
+      "source": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "target": "concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "The four-role team-formation taxonomy (Initiator / Generator / Evaluator / Refiner, arXiv:2601.13865) is the same Ideator/Writer/Evaluator split as Who Owns Creativity - and the project's mapping is explicit: Initiator = the human's standing goal, Generator + Refiner = the loop, Evaluator = the frozen held-out set."
     }
   ]
 }

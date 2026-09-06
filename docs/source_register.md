@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 270 nodes, 1079 edges · **Date:** 2026-09-05
+**Graph at generation:** 271 nodes, 1085 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -73,6 +73,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2601.09771](https://arxiv.org/abs/2601.09771) | (title not recorded) | `concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement` |
 | [2601.11227](https://arxiv.org/abs/2601.11227) | Language of Thought Shapes Output Diversity in Large Language Models | `pattern_verbalized_sampling` |
 | [2601.12152](https://arxiv.org/abs/2601.12152) | (title not recorded) | `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated` |
+| [2601.13865](https://arxiv.org/abs/2601.13865) | (title not recorded) | `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful` |
 | [2601.14691](https://arxiv.org/abs/2601.14691) | (title not recorded) | `concept_rewriting_cot_alone_defeats_judges_90pct` |
 | [2601.15808](https://arxiv.org/abs/2601.15808) | (title not recorded) | `concept_inference_time_scaling_of_verification` |
 | [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
@@ -189,6 +190,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.28553](https://arxiv.org/abs/2608.28553) | (title not recorded) | `emergent_stigmergic_coordination` |
 | [2608.29028](https://arxiv.org/abs/2608.29028) | (title not recorded) | `emergent_constraint_weakening_at_handoffs` |
 | [2608.29174](https://arxiv.org/abs/2608.29174) | (title not recorded) | `emergent_sustained_heterogeneity` |
+| [2608.30047](https://arxiv.org/abs/2608.30047) | (title not recorded) | `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful` |
 | [2608.30147](https://arxiv.org/abs/2608.30147) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.30980](https://arxiv.org/abs/2608.30980) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
@@ -423,6 +425,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-20-1800.md` — `concept_augmentation_automation_divergence`, `concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-21-0600.md` — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - `docs/auto_sweep_2026-09-21-1200.md` — `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`
+- `docs/auto_sweep_2026-09-21-1800.md` — `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
@@ -499,7 +502,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`, `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`
 - `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md (Perplexity deep research, 2026-09-04)` — `approach_self_improving_harness`, `concept_agentic_os`, `concept_context_economics` +10
-- `knowledge/notes/2026-09-04-human-knowledge-creative-automation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`
+- `knowledge/notes/2026-09-04-human-knowledge-creative-automation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful`, `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue`
 - `knowledge/notes/human-llm-hybrid-cycle-2026.md (JOCB, Aug 2026)` — `concept_motive_operative_split`
 
 ## Owner input and research aggregation
