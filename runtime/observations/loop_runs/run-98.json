@@ -1,0 +1,25 @@
+{
+  "run": 98,
+  "increment": "fold Byrnes loss-function misalignment taxonomy into the graph",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:GRmvZsHXH4vaijPMv",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:GRmvZsHXH4vaijPMv"
+  ],
+  "trace_file": "runtime\\traces\\loop-98.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

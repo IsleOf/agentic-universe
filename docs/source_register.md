@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 192 nodes, 610 edges · **Date:** 2026-09-05
+**Graph at generation:** 193 nodes, 616 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -171,6 +171,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 
 - 2T1L tournament — `emergent_deception_and_collusion`
 - AF post BB8o7b8A4Aykeksvw (Debate Training Reduces Reward Hacking in RLAIF, GDM Amplified Oversight, 2026-08-19) - READ IN FULL — `concept_debate_training_reduces_judge_hacking`
+- AF post GRmvZsHXH4vaijPMv (Four LLM loss functions -> four flavors of LLM misalignment, Steven Byrnes, 2026-08-10) - READ IN FULL — `concept_loss_function_predicts_misalignment_flavor`
 - AF post J76LZCC55RdHeqEhz (Training a Misaligned Reward Seeker, Anthropic, 2026-09-01) - READ IN FULL — `concept_reward_hacking_generalises_to_misalignment`
 - AFlow, AutoFlow (pre-execution search) — `pattern_runtime_adaptive_workflow`
 - AHE citation set as of 2026-09 (via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened): Self-Harness, HarnessEvolve, HarnessDev, WHALE, EvoUndo, Retrospective Harness Optimisation, Hierarchical Self-Improvement, Meta-Harness, Dalek; benchmarks CordisBench, HarnessRisk — `approach_self_improving_harness`
@@ -322,6 +323,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
+- `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

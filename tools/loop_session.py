@@ -72,8 +72,21 @@ class LoopSession:
         return False
 
     # -- events --
-    def cite(self, arxiv_id, *, verified, purpose=""):
-        aid = arxiv_id if str(arxiv_id).startswith("arXiv:") else f"arXiv:{arxiv_id}"
+    def cite(self, source_id, *, verified, purpose=""):
+        """`source_id` may be an arXiv id (NNNN.NNNNN), an already-prefixed id, or
+        an AlignmentForum / LessWrong post id (11-char base62). Prefixed so the
+        evidence root records the source kind."""
+        import re as _re
+        sid = str(source_id)
+        if sid.startswith(("arXiv:", "AF:", "src:")):
+            aid = sid
+        elif _re.fullmatch(r"\d{4}\.\d{4,5}", sid):
+            aid = f"arXiv:{sid}"
+        elif _re.fullmatch(r"[A-Za-z0-9]{10,14}", sid):
+            aid = f"AF:{sid}"
+        else:
+            aid = f"src:{sid}"
+        arxiv_id = aid  # keep the old local name for the body string below
         self._rec.claim(
             "researcher",
             f"{'VERIFIED' if verified else 'referenced'} finding from {aid}"

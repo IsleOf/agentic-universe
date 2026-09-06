@@ -95,6 +95,8 @@ def seed_loop_harness(reg: Registry):
 _RUN_RE = re.compile(r"(?:Autonomous )?run (\d+)", re.I)
 _ARXIV_RE = re.compile(r"\b(\d{4}\.\d{4,5})\b")
 _VERIFIED_RE = re.compile(r"(\d{4}\.\d{4,5})[^.]{0,40}?VERIFIED", re.I)
+# AlignmentForum / LessWrong post ids cited in the log ("AF post XXXX", "AF XXXX")
+_AF_RE = re.compile(r"\bAF (?:post )?([A-Za-z0-9]{10,17})\b")
 _EDGES_RE = re.compile(r"(\d+)\s*(?:->|→)\s*(\d+)\s*edges", re.I)
 _NODES_RE = re.compile(r"(\d+)\s*(?:->|→)\s*(\d+)\s*nodes", re.I)
 
@@ -128,6 +130,13 @@ def replay_history(graph_path, rec: Recorder, limit=None):
         for axid in sorted(mentioned):
             rec.claim("researcher", f"referenced arXiv:{axid} (not independently opened this run)",
                       [f"arXiv:{axid}"], layer="harness", trust="low")
+            n_claims += 1
+
+        # AlignmentForum / LessWrong posts read this run (forum source) -> CLAIM
+        for pid in sorted(set(_AF_RE.findall(text))):
+            full = "READ IN FULL" in text.upper() or "read in full" in text
+            rec.claim("researcher", f"{'read in full' if full else 'referenced'} AF post {pid}",
+                      [f"AF:{pid}"], layer="harness", trust="full" if full else "low")
             n_claims += 1
 
         # graph writes -> ARTIFACT. The evolution_log records deltas
@@ -201,8 +210,8 @@ def _selftest():
             "real trace validates": not errors,
             f"trace has events ({n_events})": n_events > 50,
             f"replayed {counts['runs']} runs": counts["runs"] == 40,
-            "claims carry real arXiv evidence roots": len(roots) >= 8
-                and all(r.startswith("arXiv:") for r in roots),
+            "claims carry real source evidence roots": len(roots) >= 8
+                and all(r.startswith(("arXiv:", "AF:")) for r in roots),
             "condense produced workflow entries from the real trace":
                 bank.stats()["workflow"] >= 1,
             "workflow entries dedupe evidence roots (ancestry, not claim count)":
