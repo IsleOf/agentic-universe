@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-28",
+  "last_updated": "2026-09-29",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1056,6 +1056,10 @@
     {
       "date": "2026-09-28",
       "change": "Autonomous run 276. IDLE-STATE RULE clause a - citation sweep of arXiv:2601.00360 (anti-collusion, folded run 253) surfaced 4 recent citers; folded the two directly on the collusion thread. concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe (Colosseum, arXiv:2602.15198, Feb 2026): audit action-collusion as regret vs the cooperative optimum; a secret-channel probe elicits 'emergent collusion' in most out-of-the-box models; 'collusion on paper' (plan in text, act non-collusively) mirrors the recognition-execution gap. concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering (Institutional AI, arXiv:2601.11369, Jan 2026): a public immutable governance graph + Oracle/Controller runtime + append-only governance log; on a Cournot collusion case (N=90/condition) severe collusion 50% -> 5.6% (d=1.28), while a prompt-only constitution yields nothing - 'declarative prohibitions do not bind under optimisation pressure'. 9 edges: Colosseum grounds emergent_deception_and_collusion + refines recognition_execution_gap + instantiates the adversarial monitor; Institutional AI implements the anti-collusion-gaps node + supports canonical_action_identity + reward_hacking_generalises + grounds the spine/edge split + challenges the biased-equilibrium node. Branch_key emergent_behaviors:collusion_audit_and_governance. 305 -> 307 nodes, 1211 -> 1220 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-29",
+      "change": "Autonomous run 277. IDLE-STATE RULE clause a - folded the last 2 citers of arXiv:2601.00360. concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise (arXiv:2601.19082, Jan 2026): repeated Prisoner's Dilemma - as stakes grow EGT predicts defection takes over, but LLMs become MORE cooperative (a signature of alignment training); language shifts it too. challenges the biased-equilibrium node, supports emergent_no_equilibrium_convergence, refines concept_interaction_language_shifts_emergence. concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools (Traccia, arXiv:2607.14309, Jul 2026): three disjoint governance stacks leave agentic architectures exposed; an OpenTelemetry-unified platform is the fix - independent arrival at the trace-substrate + loop_metrics stack framed as EU-AI-Act compliance. supports concept_ahe_three_observability_pillars. 6 edges. The 4-citer sweep of 2601.00360 (runs 276-277) is now complete. 307 -> 309 nodes, 1220 -> 1226 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9073,6 +9077,58 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-28-1800.md"
+      ]
+    },
+    {
+      "id": "concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise",
+      "label": "LLM strategic play diverges from game theory - it becomes MORE cooperative as stakes rise",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:strategic_behaviour",
+      "confidence": 0.6,
+      "description": "arXiv:2601.19082 (Jan 2026 - citer of 2601.00360). Repeated Prisoner's Dilemma, two levers: stake size and the language the interaction is described in. Supervised classifiers label each run's canonical strategy (always-cooperate, always-defect, Tit-for-Tat, Win-Stay-Lose-Shift); an evolutionary-game-theory (EGT) baseline says what the strategy distribution SHOULD be under the same payoffs. The two disagree revealingly: as stakes grow, EGT predicts defection takes over the population - but LLMs move the OPPOSITE way, becoming more cooperative. The authors read this as a signature of alignment training and the human-like reasoning patterns inherited from training data. Language also shifts the picture. Directly bears on what_would_make_this_wrong.md sec 7 (language-parochial) and on any design that models agent populations with game-theoretic priors.",
+      "tags": [
+        "strategic-behaviour",
+        "prisoners-dilemma",
+        "cooperation",
+        "alignment-training",
+        "game-theory-divergence",
+        "language-effect"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-29-0000.md",
+        "arXiv:2601.19082 (Payoff scaling)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-29-0000.md"
+      ]
+    },
+    {
+      "id": "concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools",
+      "label": "Agentic governance needs unified observability, not disjoint eval / ML-workflow / APM tools",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:observability",
+      "confidence": 0.5,
+      "description": "arXiv:2607.14309 (Traccia, Jul 2026 - citer of 2601.00360). Current governance tooling is three disjoint stacks - LLM evaluation, ML-workflow tracking, application performance monitoring - and the gaps between them leave an unbounded-state-space agentic architecture exposed to alignment drift, SaaS-security issues and unauthorised 'shadow AI' deployment. Proposes an OpenTelemetry-based platform that unifies the three into one trace/span model. For this project: an independent arrival at the trace-substrate + loop_metrics + harness-registry stack, framed as a compliance need (EU AI Act transparency / accountability).",
+      "tags": [
+        "observability",
+        "opentelemetry",
+        "governance",
+        "alignment-drift",
+        "compliance",
+        "unified-tracing"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-29-0000.md",
+        "arXiv:2607.14309 (Traccia)"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-29-0000.md"
       ]
     }
   ],
@@ -22230,6 +22286,72 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.45,
       "description": "That node says misaligned interaction converges to a predictable biased equilibrium. Institutional AI shows the equilibrium is a function of the INSTITUTION, not just the agents: change the mechanism (governance graph) and the equilibrium shifts (tier 3.1 -> 1.8)."
+    },
+    {
+      "id": "edge_payoff_challenges_biased_equilibrium",
+      "source": "concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise",
+      "target": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "That node predicts convergence to a predictable biased equilibrium. Payoff-scaling shows LLM populations do NOT converge to the game-theoretic equilibrium - as stakes rise they move away from the EGT prediction (toward cooperation), because alignment training overrides the payoff structure."
+    },
+    {
+      "id": "edge_payoff_refines_interaction_language_shifts_emergence",
+      "source": "concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise",
+      "target": "concept_interaction_language_shifts_emergence",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "A second, quantified data point that the language an interaction is described in shifts the strategy distribution - here in a repeated Prisoner's Dilemma, alongside the stake-size lever."
+    },
+    {
+      "id": "edge_payoff_supports_no_equilibrium_convergence",
+      "source": "concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise",
+      "target": "emergent_no_equilibrium_convergence",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "emergent_no_equilibrium_convergence: LLM-agent markets do not converge the way human ones do. Payoff-scaling is the same finding in a repeated game - the EGT fixed point is not where LLMs land."
+    },
+    {
+      "id": "edge_payoff_informs_scarcity",
+      "source": "concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise",
+      "target": "concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "Scarcity raises the stakes; payoff-scaling says higher stakes push LLMs toward cooperation, not defection - so the loans / vote-trading emergent behaviour under scarcity is not simple payoff-driven defection, it is a more complex alignment-shaped response."
+    },
+    {
+      "id": "edge_traccia_supports_ahe_observability",
+      "source": "concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools",
+      "target": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "AHE's three observability pillars (component / experience / decision) and Traccia's unified OpenTelemetry trace model are the same claim from a research vs a compliance angle: governance of a self-modifying agent needs ONE trace substrate, not three disjoint stacks."
+    },
+    {
+      "id": "edge_traccia_informs_loop_metrics",
+      "source": "concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools",
+      "target": "artifact_loop_metrics_phase3_real",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "loop_metrics + the Phase-0 trace substrate are this project's unified-observability layer; Traccia is the external validation that this is a governance requirement (EU AI Act), not just an engineering convenience."
     }
   ]
 }

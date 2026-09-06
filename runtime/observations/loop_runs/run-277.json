@@ -1,0 +1,35 @@
+{
+  "run": 277,
+  "increment": "fold last 2 citers of 2601.00360: Payoff scaling (2601.19082) + Traccia (2607.14309)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 8,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 6
+  },
+  "citations": [
+    {
+      "id": "arXiv:2601.19082",
+      "verified": false
+    },
+    {
+      "id": "arXiv:2607.14309",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2601.19082",
+    "arXiv:2607.14309"
+  ],
+  "trace_file": "runtime\\traces\\loop-277.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 277 OK · VALID · graph +2n/+6e · cites 0v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.78 · novelty 1.00"
+}

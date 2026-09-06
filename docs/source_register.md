@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 307 nodes, 1220 edges · **Date:** 2026-09-05
+**Graph at generation:** 309 nodes, 1226 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -79,6 +79,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2601.13865](https://arxiv.org/abs/2601.13865) | (title not recorded) | `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful` |
 | [2601.14691](https://arxiv.org/abs/2601.14691) | (title not recorded) | `concept_rewriting_cot_alone_defeats_judges_90pct` |
 | [2601.15808](https://arxiv.org/abs/2601.15808) | (title not recorded) | `concept_inference_time_scaling_of_verification` |
+| [2601.19082](https://arxiv.org/abs/2601.19082) | (title not recorded) | `concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise` |
 | [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
 | [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
 | [2602.15198](https://arxiv.org/abs/2602.15198) | (title not recorded) | `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe` |
@@ -125,6 +126,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2607.13070](https://arxiv.org/abs/2607.13070) | (title not recorded) | `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
 | [2607.13716](https://arxiv.org/abs/2607.13716) | (title not recorded) | `concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes` |
+| [2607.14309](https://arxiv.org/abs/2607.14309) | (title not recorded) | `concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools` |
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
 | [2607.22585](https://arxiv.org/abs/2607.22585) | (title not recorded) | `concept_capability_is_a_model_harness_config_property`, `concept_harness_has_model_independent_failure_fingerprints` |
 | [2607.22758](https://arxiv.org/abs/2607.22758) | (title not recorded) | `concept_topology_shapes_error_propagation`, `emergent_information_cascades` |
@@ -446,6 +448,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-27-0000.md` — `concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture`
 - `docs/auto_sweep_2026-09-27-0600.md` — `artifact_emergence_safety_case_template`
 - `docs/auto_sweep_2026-09-28-1800.md` — `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe`, `concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering`
+- `docs/auto_sweep_2026-09-29-0000.md` — `concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools`, `concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
