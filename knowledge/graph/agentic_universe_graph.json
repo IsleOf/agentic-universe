@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-16",
+  "last_updated": "2026-09-17",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -868,6 +868,10 @@
     {
       "date": "2026-09-16",
       "change": "Autonomous run 226. Build (closes the observability gap the run-225 self-audit surfaced). loop_metrics.status_line(local_summary, metrics) - a one-line per-run health glance: a light (healthy / watch / stop-and-look) chosen from plateau_watch OR this-run trace-invalid (stop), legibility-dip OR validate-failure (watch), else healthy; plus graph delta, verified/total citations, idle-streak (with a ! marker on plateau), trace_legibility, verified_citation_fraction. loop_session._write_summary stamps it into every run-<N>.json as 'status_line'; 'python tools/loop_metrics.py status' prints the latest. 3 new selftest checks (healthy light + run number + graph-delta string; plateau -> stop light + idle-streak marker; invalid trace -> stop light). BUILD SELFTEST GREEN (22 jobs). tools/README.md + docs/harness_anatomy_self_audit.md updated. 1 'informs' edge. 257 nodes, 1000->1001 edges."
+    },
+    {
+      "date": "2026-09-17",
+      "change": "Autonomous run 227. Recency-weighted sweep. Folded PCN-Rec (arXiv:2601.09771, Jan 2026) as concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement: a pipeline that separates NL reasoning from deterministic enforcement - two agents negotiate (User Advocate / Policy Agent), a mediator LLM emits a JSON certificate of claimed constraint satisfaction, a deterministic verifier recomputes ALL constraints and accepts only verifier-checked certificates, constrained-greedy repair on failure yields an auditable trace. MovieLens-100K: 98.55% pass on feasible users vs a one-shot LLM baseline, 0.021 NDCG@10 drop (p<0.05). CURRENCY NOTE: Jan 2026, one benchmark, recommendation domain - conf 0.6, architecture is domain-general. 5 edges: supports pattern_grounded_acceptance_only (a working small instance with numbers), concept_runtime_governance_organizes_around_a_portable_action_certificate (certificate at slate granularity), concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic (conditions a+b, and it wins), concept_config_driven_control_plane; refines pattern_evidence_carrying_termination (adds an explicit repair stage). 257->258 nodes, 1001->1006 edges."
     }
   ],
   "nodes": [
@@ -7552,6 +7556,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-16-0600.md"
+      ]
+    },
+    {
+      "id": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "label": "PCN-Rec: separate natural-language reasoning from deterministic enforcement - two agents negotiate + a mediator emits a JSON certificate + a deterministic verifier recomputes every constraint and accepts only verifier-checked certificates, with constrained-greedy repair on failure",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:proof_carrying_negotiation",
+      "confidence": 0.6,
+      "description": "PCN-Rec - Agentic Proof-Carrying Negotiation for Reliable Governance-Constrained Recommendation (arXiv:2601.09771, VERIFIED via arXiv abstract read run 227; Jan 2026). LLM recommenders generate compelling lists but struggle to reliably satisfy governance constraints (minimum long-tail exposure, diversity). PCN-Rec is a pipeline that SEPARATES natural-language reasoning from DETERMINISTIC ENFORCEMENT: a base recommender (MF/CF) produces a candidate window of size W; two agents negotiate it - a User Advocate optimising relevance, a Policy Agent enforcing constraints; a mediator LLM synthesises a top-N slate PLUS a structured JSON CERTIFICATE describing the claimed constraint satisfaction; a DETERMINISTIC VERIFIER recomputes ALL constraints from the slate and accepts ONLY verifier-checked certificates; on failure a deterministic constrained-greedy REPAIR produces a compliant slate for re-verification, yielding an AUDITABLE TRACE. On MovieLens-100K: 98.55% pass rate on feasible users (n=551, W=80) vs a one-shot single-LLM baseline without verification/repair, preserving utility (0.021 absolute NDCG@10 drop, 0.403 vs 0.424; p<0.05). Bearing on the project: a clean small-scale instance of pattern_grounded_acceptance_only + pattern_evidence_carrying_termination - the LLM proposes and explains, a deterministic check is the authority, and a repair loop keeps the trace auditable. The two-agents-plus-deterministic-mediator structure is exactly the run-218 criterion (verifiable subtasks + DETERMINISTIC synthesis) applied to a governed recommendation task. Recency/currency: Jan 2026, one benchmark (MovieLens-100K), recommendation domain - modest confidence; the architecture is domain-general.",
+      "tags": [
+        "PCN-Rec",
+        "proof-carrying-negotiation",
+        "nl-reasoning-vs-deterministic-enforcement",
+        "json-certificate",
+        "deterministic-verifier",
+        "constrained-greedy-repair",
+        "auditable-trace",
+        "currency-note-2026-01"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-17-0000.md",
+        "arXiv:2601.09771 (PCN-Rec: Agentic Proof-Carrying Negotiation for Reliable Governance-Constrained Recommendation) - VERIFIED, abstract read run 227"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-17-0000.md"
       ]
     }
   ],
@@ -18300,6 +18332,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "The monograph's dependency chain names observability as a link that can invalidate downstream conclusions. Run 226 closes the project's open observability gap (found in the run-225 self-audit): loop_metrics.status_line renders plateau_watch / idle_run_streak / trace_legibility / verified_citation_fraction / this-run trace-validity + graph-delta into one health line (light circle / half circle / filled circle), stamped into every run-<N>.json by loop_session._write_summary and printable via 'python tools/loop_metrics.py status'. 3 new selftest checks."
+    },
+    {
+      "id": "edge_pcn_supports_grounded_acceptance",
+      "source": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.62,
+      "description": "A working small-scale instance: the LLM proposes and explains (a JSON certificate of claimed constraint satisfaction), a deterministic verifier that recomputes every constraint is the authority, and only verifier-checked certificates are accepted - grounded acceptance, with numbers (98.55% pass, 0.021 NDCG drop)."
+    },
+    {
+      "id": "edge_pcn_refines_evidence_carrying_termination",
+      "source": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "target": "pattern_evidence_carrying_termination",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The JSON certificate + deterministic re-check + constrained-greedy repair loop yielding an auditable trace is evidence-carrying termination with an explicit REPAIR stage - the certificate is not just checked, a failed check triggers a deterministic fix and re-verification."
+    },
+    {
+      "id": "edge_pcn_supports_runtime_certificate",
+      "source": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "target": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "PCAA's action certificate at the recommendation-slate granularity: a structured certificate of claimed policy satisfaction, verifier-checked, with the repair trace as the replay-ready proof."
+    },
+    {
+      "id": "edge_pcn_instantiates_deterministic_synthesis",
+      "source": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Two negotiating agents (User Advocate / Policy Agent) whose outputs are recombined by a DETERMINISTIC verifier + constrained-greedy repair - conditions (a) verifiable and (b) deterministic-synthesis of the run-218 criterion, and it wins (98.55% vs a one-shot baseline)."
+    },
+    {
+      "id": "edge_pcn_supports_config_driven_control_plane",
+      "source": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "target": "concept_config_driven_control_plane",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.45,
+      "description": "The Policy Agent enforces governance constraints that are configuration, not model behaviour - a config-driven control plane for a HITL-style multi-agent recommendation loop, with the deterministic verifier as the enforcement point."
     }
   ]
 }

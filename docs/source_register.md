@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 257 nodes, 1001 edges · **Date:** 2026-09-05
+**Graph at generation:** 258 nodes, 1006 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -70,6 +70,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2512.00047](https://arxiv.org/abs/2512.00047) | (title not recorded) | `concept_multi_round_interaction_compresses_semantic_space` |
 | [2512.18202](https://arxiv.org/abs/2512.18202) | Sophia: A Persistent Agent Framework of Artificial Life | `concept_autotelic_agency` |
 | [2512.23760](https://arxiv.org/abs/2512.23760) | (title not recorded) | `concept_asg_si_independently_arrives_at_the_plan` |
+| [2601.09771](https://arxiv.org/abs/2601.09771) | (title not recorded) | `concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement` |
 | [2601.11227](https://arxiv.org/abs/2601.11227) | Language of Thought Shapes Output Diversity in Large Language Models | `pattern_verbalized_sampling` |
 | [2601.14691](https://arxiv.org/abs/2601.14691) | (title not recorded) | `concept_rewriting_cot_alone_defeats_judges_90pct` |
 | [2601.15808](https://arxiv.org/abs/2601.15808) | (title not recorded) | `concept_inference_time_scaling_of_verification` |
@@ -398,7 +399,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `concept_self_evolving_coding_agents_taxonomy_by_evolution_target`, `emergent_attribution_laundering` +2
 - `docs/auto_sweep_2026-09-16-0600.md` — `concept_shaper_a_frozen_model_is_its_own_harness_optimizer`
 - `docs/auto_sweep_2026-09-16-1800.md` — `emergent_no_equilibrium_convergence`, `pattern_market_as_orchestrator`
-- `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_step_count_is_the_horizon_limit`, `pattern_deterministic_state_folding`
+- `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement`, `concept_step_count_is_the_horizon_limit` +1
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1
 - `docs/auto_sweep_2026-09-18-0000.md` — `concept_interaction_language_shifts_emergence`
 - `docs/auto_sweep_2026-09-18-1200.md` — `concept_mechanism_incentive_compat_does_not_transfer`

@@ -1,0 +1,27 @@
+{
+  "run": 227,
+  "increment": "recency-weighted sweep - folded PCN-Rec (arXiv:2601.09771): proof-carrying negotiation separates NL reasoning from deterministic enforcement; a JSON certificate + deterministic verifier + constrained-greedy repair; folded at conf 0.6 (currency note); 1 node, 5 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2601.09771",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2601.09771"
+  ],
+  "trace_file": "runtime\\traces\\loop-227.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 227 OK · VALID · graph +0 · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.79"
+}
