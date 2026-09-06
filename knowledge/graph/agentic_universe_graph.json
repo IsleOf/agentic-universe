@@ -740,6 +740,10 @@
     {
       "date": "2026-09-09",
       "change": "Autonomous run 194. Phase 3 - content-not-format scoring in holdout_tasks.py (the run-193 conclusion). _normalize() strips markdown emphasis/fences/heading marks and collapses whitespace before every _has_all/_has_any/_lacks match, so a re-run that only REFORMATS its answer (a format-repair 'gain' per concept_self_correction_is_mostly_format_repair_not_reasoning, arXiv:2608.04355) cannot move a held-out score - only a content change can. +2 selftest checks (41/41). phase3_holdout_set.md updated. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-09",
+      "change": "Autonomous run 195. Consolidation. self_improving_harness_plan.md Phase 3 gains 'The verification-hygiene checks - from autonomous runs 186-194': the RSI survey's verification hierarchy (formal > PRM > judge > rubric > meta-eval > intrinsic; strength tracks it) as the frame, and the four measured failure modes now in verify_loop_edit - category regression, trace-legibility regression, harness-tampering flags (+ tamper_audit.py on the loop's own lineage, 0/7 clean), format-not-content scoring (holdout_tasks._normalize). The named next step: a trace-level 'how was it reached' stratification for silent faults. No graph node/edge change."
     }
   ],
   "nodes": [

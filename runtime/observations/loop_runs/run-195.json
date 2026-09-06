@@ -1,0 +1,36 @@
+{
+  "run": 195,
+  "increment": "consolidation - fold the runs 186-194 verification-hygiene thread into self_improving_harness_plan.md Phase 3",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 3,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2607.07663",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.00069",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2608.04355",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2607.07663",
+    "arXiv:2608.04355",
+    "arXiv:2609.00069"
+  ],
+  "trace_file": "runtime\\traces\\loop-195.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
