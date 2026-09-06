@@ -484,6 +484,10 @@
     {
       "date": "2026-10-08",
       "change": "Autonomous run 131. DBLP. concept_ace_context_evolution_self_improvement (ACE - Agentic Context Engineering, arXiv:2510.04618): self-improvement by evolving context PLAYBOOKS (generation/reflection/curation), NOT weight updates; +10.6% agents / +8.6% finance, matches the top AppWorld agent with a smaller open model, no labelled supervision. Names 'context collapse' (= concept_compaction_cliff) as a first-class failure mode and fixes it with structured incremental updates (= type-aware compaction). A keystone-supporting result for the emergence-first / no-weight-training bet. +6 edges."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Autonomous run 132. DBLP. concept_horizon_gap_outcome_signals_decay (The Horizon Gap, arXiv:2608.06663, 1547-paper survey): outcome-only signals grow uninformative as horizons lengthen -> the field manufactures denser step-level signal (the case FOR the Phase 0 trace substrate, and a sharpening of the run-129 plateau point). Disambiguates long-horizon / long-context / long-term-memory. Names the project's open questions as the field's: model-vs-harness capability decomposition, correlated bias in process signals used for both train and eval, whether long-horizon reliability admits general theory. +6 edges."
     }
   ],
   "nodes": [
@@ -5796,6 +5800,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-08-1200.md"
+      ]
+    },
+    {
+      "id": "concept_horizon_gap_outcome_signals_decay",
+      "label": "The Horizon Gap survey (1,547 papers): outcome-only signals grow uninformative as horizons lengthen; the field's response is to manufacture denser step-level signal - and it names the project's open questions as the field's",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:horizon_gap_survey",
+      "confidence": 0.72,
+      "description": "The Horizon Gap: Planning, Memory, Execution, Training, and Evaluation for Long-Horizon LLM Agents (arXiv:2608.06663, 2026; VERIFIED via arXiv abstract read run 132, resolved via DBLP). Surveys 1,547 arXiv papers 2024-2026 (systematic seed harvest, disclosed 26.8% bleed filter). Three contributions that bear directly on this project: (1) DISAMBIGUATES three routinely-conflated properties - long-horizon (task property: required steps), long-context (model property: token capacity), long-term memory (system property: persistence across steps/sessions); the project should keep these distinct (cf. concept_step_count_is_the_horizon_limit: step count, not context length, drives degradation). (2) CENTRAL FINDING across all six lifecycle categories: OUTCOME-ONLY SIGNALS GROW UNINFORMATIVE AS HORIZONS LENGTHEN, and the field's response - process reward models, credit assignment, trajectory-level diagnostics - manufactures denser step-level signal. This is the empirical case FOR the Phase 0 trace substrate + Five-W instrumentation (dense step-level signal), and sharpens the run-129 plateau point: an outcome-only acceptance gate (one aggregate held-out score) weakens exactly as the loop's horizon grows. (3) NAMES three open measurement problems that are this project's open questions verbatim: decomposing model vs harness capability (concept_capability_is_a_model_harness_config_property, concept_bottleneck_is_the_model_harness_coupling); managing correlated bias in process-level signals used for BOTH training and evaluation (concept_epistemic_sybil_collapse on signals, pretrained_grader_gaming.md, the ECC generator!=evaluator rule); and whether long-horizon reliability admits general predictive theory (the open question under concept_geometric_reliability_decay's geometric law). Also treats critical/diagnostic literature as first-class - the docs/what_would_make_this_wrong.md stance.",
+      "tags": [
+        "horizon-gap",
+        "1547-paper-survey",
+        "outcome-signals-decay-with-horizon",
+        "denser-step-level-signal",
+        "long-horizon-vs-long-context-vs-long-term-memory",
+        "model-vs-harness-capability-open",
+        "correlated-process-signal-bias",
+        "survey-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-08-1800.md",
+        "arXiv:2608.06663 (The Horizon Gap) - VERIFIED, abstract read run 132; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-08-1800.md"
       ]
     }
   ],
@@ -13409,6 +13441,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "Generation -> reflection -> curation is the same observe -> propose -> validate loop, acting on the context playbook rather than the harness code."
+    },
+    {
+      "id": "edge_horizongap_supports_five_w",
+      "source": "concept_horizon_gap_outcome_signals_decay",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "'Outcome-only signals grow uninformative as horizons lengthen; the field manufactures denser step-level signal' - the empirical case for the Phase 0 trace substrate."
+    },
+    {
+      "id": "edge_horizongap_refines_geometric_reliability_decay",
+      "source": "concept_horizon_gap_outcome_signals_decay",
+      "target": "concept_geometric_reliability_decay",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Names as an OPEN problem whether long-horizon reliability admits general predictive theory - a caution that the geometric decay law may not be universal across task types."
+    },
+    {
+      "id": "edge_horizongap_supports_step_count_horizon_limit",
+      "source": "concept_horizon_gap_outcome_signals_decay",
+      "target": "concept_step_count_is_the_horizon_limit",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Independently disambiguates long-horizon (steps) from long-context (tokens) as distinct properties - the same separation the step-count result makes empirically."
+    },
+    {
+      "id": "edge_horizongap_refines_capability_is_config",
+      "source": "concept_horizon_gap_outcome_signals_decay",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Decomposing model vs harness capability' is named as an unsolved field-level measurement problem, not a settled result."
+    },
+    {
+      "id": "edge_horizongap_supports_pretrained_grader_gaming",
+      "source": "concept_horizon_gap_outcome_signals_decay",
+      "target": "concept_gate_faces_a_pretrained_grader_gamer",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Correlated bias in process-level signals used for BOTH training and evaluation' is the same hazard as a grader the interior is pre-disposed to game - and it worsens when the same signal trains and judges."
+    },
+    {
+      "id": "edge_horizongap_supports_what_would_make_wrong_stance",
+      "source": "concept_horizon_gap_outcome_signals_decay",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Complements the run-124 survey: both 2026 surveys name model-vs-harness attribution as the central open measurement problem."
     }
   ]
 }

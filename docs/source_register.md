@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 210 nodes, 716 edges · **Date:** 2026-09-05
+**Graph at generation:** 211 nodes, 722 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -94,6 +94,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.02827](https://arxiv.org/abs/2608.02827) | (title not recorded) | `principle_diversity_maintenance` |
 | [2608.03585](https://arxiv.org/abs/2608.03585) | (title not recorded) | `emergent_knowledge_commons_erosion` |
 | [2608.04507](https://arxiv.org/abs/2608.04507) | (title not recorded) | `emergent_reputation_and_trust_dynamics` |
+| [2608.06663](https://arxiv.org/abs/2608.06663) | (title not recorded) | `concept_horizon_gap_outcome_signals_decay` |
 | [2608.06984](https://arxiv.org/abs/2608.06984) | HarnessSafe | `concept_cheap_death`, `pattern_execution_layer_enforcement`, `pattern_trajectory_driven_safety_evolution` |
 | [2608.07169](https://arxiv.org/abs/2608.07169) | Agent Memory Distillation (AMD) | `concept_inheritance_channel`, `pattern_agent_memory_distillation` |
 | [2608.08523](https://arxiv.org/abs/2608.08523) | (title not recorded) | `pattern_checkpoint_and_switch` |
@@ -358,6 +359,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-06-1800.md` — `concept_bottleneck_is_the_model_harness_coupling`
 - `docs/auto_sweep_2026-10-07-0600.md` — `concept_what_when_how_where_to_evolve`
 - `docs/auto_sweep_2026-10-08-1200.md` — `concept_ace_context_evolution_self_improvement`
+- `docs/auto_sweep_2026-10-08-1800.md` — `concept_horizon_gap_outcome_signals_decay`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
