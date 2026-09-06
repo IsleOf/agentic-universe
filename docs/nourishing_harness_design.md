@@ -111,6 +111,30 @@ Then **removing the restriction is the experiment**: lift same-parent-ID filteri
 - **Type-aware compaction, not lean-tail** (revised run 18). Hermes ships lean-tail compression as a default, but `concept_compaction_cliff` shows uniform compaction keeps only 10% of safety rules after five rounds — rules and episodic logs compress at equal rates, and only the rules need exact wording. Compaction here is type-classified: rules, identity documents, and standing constraints are **pinned and never summarised**; episodic logs and search results are what gets compressed. Knowledge-Triage-style, 2–4× better rule retention.
 - Retrieve-don't-recompute — a durable answer store the agent queries instead of re-deriving (Nate B. Jones's "OpenBrain" pattern; this project's own knowledge graph is one). Guard it: `emergent_authorization_laundering` shows a memory store *is* part of the authorization policy — a "was allowed to X" record is acted on 98.6% of the time. Permission-shaped records need source-event backing, not just presence.
 
+## 4b. Cross-check against the 2026 survey frames
+
+Two comprehensive surveys landed the model-harness / self-evolution field's design space on record
+(runs 124, 126, 127). This design should be legible in their terms.
+
+- **Six coupled runtime responsibilities** (`concept_bottleneck_is_the_model_harness_coupling`,
+  arXiv:2606.20683): observation / context / control / action / state / verification. This design touches
+  all six — Five-W instrumentation (observation), type-aware compaction + code-as-context (context), the
+  continual-refinement loop (control), dynamic tool loading (action), the experience bank (state), the
+  two-part gate (verification). The survey's claim is that quality is won or lost in the *coupling*, so
+  the design's real risk surface is the seams: e.g. compaction (context) silently dropping a rule the gate
+  (verification) relies on — which is exactly why §4's compaction is type-classified and rules are pinned.
+- **Inputs / Agent System / Environment / Optimisers** (`concept_what_when_how_where_to_evolve`,
+  arXiv:2508.07407): System Inputs = the graded-challenge feeder + task stream; Agent System = the
+  harness + society; Environment = the sandbox + validator + holdout; Optimisers = the continual-refinement
+  loop + grounded-acceptance gate. The frame's warning is *domain-coupled objectives don't transfer* — the
+  nourishment processes are tuned to this habitat and should not be assumed portable.
+- **What / when / how / where to evolve** (same node, arXiv:2507.21046): this design evolves the *harness
+  and the society* (what), at rest between rounds for standing behaviour but continuously for proposals
+  (when — §3.3), via grounded risk measure + textual critique (how), single-habitat (where). The narrow
+  *what/when* is the safety margin, not a limitation to engineer away.
+- All three surveys' shared worry list — **safety, scalability, co-evolution** — is this design's §6 open
+  questions 2, 3, and 4 respectively.
+
 ## 5. Build order
 
 **Phase 0 (the trace substrate) is done** (runs 60–67, `docs/phase0_trace_substrate.md`): Five-W instrumentation, role recovery gate GREEN, live per-run recording. So the "nothing here is measurable" blocker is cleared. What is built from this list: Five-W instrumentation (item 1), the experience bank (feeds item 3's inheritance), the withheld-fraction and skill-retirement (item 4's diversity/retraction). What is not: the code kernel, the pre-request intermediary, the slack allocator, the cheap-death sandbox, the society surface. The three swarm probes of item 6 exist as rigs (`tools/probe_*.py`) awaiting a real model policy.

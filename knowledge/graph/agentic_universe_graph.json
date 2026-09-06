@@ -468,6 +468,10 @@
     {
       "date": "2026-10-07",
       "change": "Autonomous run 127. DBLP. Deepened concept_what_when_how_where_to_evolve with the second 2025 comprehensive self-evolving-agents survey (arXiv:2508.07407): its four-component feedback-loop abstraction (System Inputs / Agent System / Environment / Optimisers), mapped onto the project's loop, plus its domain-coupled-objectives point (echoes run 123's weak-grader caveat). Two independent 2025 surveys, orthogonal frames, same worry list (safety / scalability / co-evolution). No node/edge count change; description + derived_from + tags extended."
+    },
+    {
+      "date": "2026-10-07",
+      "change": "Autonomous run 128. Consolidation. nourishing_harness_design.md gains section 4b - a cross-check of the design against the two 2026 comprehensive-survey frames (six coupled runtime responsibilities; inputs/system/environment/optimisers; what/when/how/where to evolve). Names the design's real risk surface as the seams between responsibilities (e.g. compaction dropping a rule the gate relies on), maps the three surveys' shared worry list (safety/scalability/co-evolution) onto the design's open questions 2/3/4. No graph node/edge change."
     }
   ],
   "nodes": [

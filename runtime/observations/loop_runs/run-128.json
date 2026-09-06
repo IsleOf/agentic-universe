@@ -1,0 +1,35 @@
+{
+  "run": 128,
+  "increment": "cross-check nourishing_harness_design.md against the two 2026 survey frames",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 3,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:2606.20683",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2507.21046",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2508.07407",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2507.21046",
+    "arXiv:2508.07407",
+    "arXiv:2606.20683"
+  ],
+  "trace_file": "runtime\\traces\\loop-128.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
