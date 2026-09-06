@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 242 nodes, 911 edges · **Date:** 2026-09-05
+**Graph at generation:** 243 nodes, 918 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -85,6 +85,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
 | [2605.05007](https://arxiv.org/abs/2605.05007) | (title not recorded) | `test_scenario_decomposition_granularity` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
+| [2605.19576](https://arxiv.org/abs/2605.19576) | (title not recorded) | `concept_unmanaged_skill_libraries_silently_drift` |
 | [2605.22643](https://arxiv.org/abs/2605.22643) | (title not recorded) | `concept_incremental_attacks_boil_the_frog` |
 | [2605.24539](https://arxiv.org/abs/2605.24539) | (title not recorded) | `concept_harness_evolution_subfield` |
 | [2605.27922](https://arxiv.org/abs/2605.27922) | (title not recorded) | `concept_capability_is_a_model_harness_config_property` |
@@ -364,6 +365,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-11-1200.md` — `concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score`, `concept_agent_shaped_topology_is_agent_corruptible`
 - `docs/auto_sweep_2026-09-11-1800.md` — `concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans`, `principle_structural_edits_gated_outside_the_agents`
 - `docs/auto_sweep_2026-09-12-0000.md` — `concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries`
+- `docs/auto_sweep_2026-09-12-0600.md` — `concept_unmanaged_skill_libraries_silently_drift`
 - `docs/auto_sweep_2026-09-13-0600.md` — `concept_topology_shapes_error_propagation`, `pattern_causal_edge_pruning`
 - `docs/auto_sweep_2026-09-13-1800.md` — `pattern_checkpoint_and_switch`, `pattern_disposable_branch_exploration`
 - `docs/auto_sweep_2026-09-14-0000.md` — `pattern_regret_as_difficulty_signal`

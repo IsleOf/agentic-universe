@@ -792,6 +792,10 @@
     {
       "date": "2026-09-12",
       "change": "Autonomous run 207. Recency-weighted sweep. Folded the Red Queen Godel Machine (arXiv:2606.26294) as concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries: a fixed verifier goes stale as the agent improves; RQGM's controlled utility evolution organises search into epochs with a fixed within-epoch criterion, utility updated only at epoch boundaries, so guarantees hold per epoch. Adding a complementary agent-as-a-judge code-review signal beats SOTA at 1.35-1.72x fewer tokens; co-evolved writers 1.78-1.86x higher acceptance, co-evolved graders +9% ground truth; an adversarial objective discovers reviewers equally stringent on AI and human work (corrects 1.91x AI-paper over-acceptance). 6 edges: refines artifact_phase3_holdout_set (the frozen set is epoch N; a deliberate edit opens epoch N+1) and concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (exogenous need not be static); supports artifact_phase3_heterogeneous_verifier (diverse judge panel), concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score (anchored co-evolved grader = the constructive complement), pattern_recoverability_constrained_evolution (per-epoch = a revert unit); challenges concept_asg_si_independently_arrives_at_the_plan (stationary-verifier assumption). docs/phase3_holdout_set.md external-corroboration section gains the epoch-discipline paragraph. 241->242 nodes, 905->911 edges."
+    },
+    {
+      "date": "2026-09-12",
+      "change": "Autonomous run 208. Recency-weighted arxiv-fetch sweep. Folded Library Drift (arXiv:2605.19576) as concept_unmanaged_skill_libraries_silently_drift: unbounded skill accumulation without outcome-driven lifecycle management causes retrieval degradation, false-positive injections, stagnation (LLM-authored skills +0.0pp vs human-curated +16.2pp on SkillsBench). Reproducible triggers (disable injection: flat +0.002; premature retirement: harmful -0.019); trace-level diagnostics (append-only per-skill contribution log); verified fix (outcome-driven retirement + bounded active-cap + meta-skill authoring prior: held-out pass@1 0.258 -> 0.584 over 100 rounds on MBPP+ hard-100). 7 edges: supports pattern_agentic_skill_lifecycle, artifact_phase2_experience_bank (the run-175 retention API is its justification; grace window should be generous), concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans, artifact_phase0_trace_substrate (the append-only contribution log = a leading indicator); constrains artifact_phase4_skill_induction (adds a bounded active-cap + meta-skill prior; premature retirement is harmful); challenges concept_cer_training_free_experience_replay_works (unbounded buffer drifts); refines concept_memory_poisoning_one_write_persists (false-positive injection = non-adversarial poisoning). 242->243 nodes, 911->918 edges."
     }
   ],
   "nodes": [
@@ -7035,6 +7039,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-12-0000.md"
+      ]
+    },
+    {
+      "id": "concept_unmanaged_skill_libraries_silently_drift",
+      "label": "Self-evolving skill libraries silently drift - unbounded accumulation without outcome-driven retirement degrades retrieval; the fix is outcome-driven retirement + a bounded active-cap + a meta-skill authoring prior",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:library_drift",
+      "confidence": 0.72,
+      "description": "Library Drift: Diagnosing and Fixing a Silent Failure Mode in Self-Evolving LLM Skill Libraries (arXiv:2605.19576, VERIFIED via arXiv abstract read run 208; May 2026). LIBRARY DRIFT: unbounded skill accumulation without outcome-driven lifecycle management causes retrieval degradation, false-positive injections, and performance stagnation. The symptom is confirmed - LLM-authored skills deliver +0.0pp gain while human-curated ones deliver +16.2pp (SkillsBench) - but the mechanism had not been isolated. Contributions: (1) a reproducible trigger - ablations that isolate drift: disabling skill injection gives a flat floor (+0.002), imposing premature retirement is actively harmful (-0.019); (2) trace-level diagnostics - an APPEND-ONLY EVIDENCE LOG with per-skill contribution scores, attribution verdicts, and router-engagement metrics that make the failure visible BEFORE it reaches end-task scores; (3) a verified fix - a minimal governance recipe (outcome-driven retirement + bounded active-cap + meta-skill authoring prior) lifting held-out pass@1 from a 0.258 baseline to a late-window mean of 0.584 (rolling gain +0.328) on MBPP+ hard-100 over 100 rounds. Eight ablations decompose which governance mechanisms are load-bearing and which are subsumed. Bearing on the project: this is the published justification for the experience_bank retention API (run 175: utility_score, prune with a grace window, record_use(helped)) and skill_induction.retire() (run 173) - and it adds two things the project does not yet have: a BOUNDED ACTIVE-CAP (not just utility-ranked pruning) and a META-SKILL AUTHORING PRIOR, plus the warning that PREMATURE retirement is worse than none (-0.019), which argues the run-175 grace window should be generous. The append-only per-skill contribution log is a Phase 0 trace-substrate application. Recency: May 2026, MBPP+ / code-agent regime; the drift mechanism is model-agnostic, the pass@1 numbers are task-specific.",
+      "tags": [
+        "library-drift",
+        "skill-lifecycle",
+        "outcome-driven-retirement",
+        "bounded-active-cap",
+        "meta-skill-authoring-prior",
+        "per-skill-contribution-score",
+        "premature-retirement-harm",
+        "SkillsBench",
+        "recency-2026-05"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-12-0600.md",
+        "arXiv:2605.19576 (Library Drift: Diagnosing and Fixing a Silent Failure Mode in Self-Evolving LLM Skill Libraries) - VERIFIED, abstract read run 208"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-12-0600.md"
       ]
     }
   ],
@@ -16793,6 +16826,83 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "ASG-SI (and the project's own design) assumes a stationary verifier-backed replay; RQGM's premise is that this goes stale as capability grows. The challenge is mild - the fix is a versioning discipline, not an architecture change."
+    },
+    {
+      "id": "edge_library_drift_supports_agentic_skill_lifecycle",
+      "source": "concept_unmanaged_skill_libraries_silently_drift",
+      "target": "pattern_agentic_skill_lifecycle",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.72,
+      "description": "Library drift is the failure mode the lifecycle pattern exists to prevent, now isolated with reproducible triggers: without outcome-driven retirement the library accumulates dead weight; the lifecycle is not optional polish."
+    },
+    {
+      "id": "edge_library_drift_constrains_phase4_skill_induction",
+      "source": "concept_unmanaged_skill_libraries_silently_drift",
+      "target": "artifact_phase4_skill_induction",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.68,
+      "description": "The Phase 4 skeleton induces and retires; Library Drift adds two missing mechanisms - a BOUNDED active-cap (hard limit on live skills, not just utility ranking) and a meta-skill authoring prior - and warns that premature retirement is actively harmful (-0.019), so retirement must be outcome-driven, not age-driven."
+    },
+    {
+      "id": "edge_library_drift_supports_experience_bank_artifact",
+      "source": "concept_unmanaged_skill_libraries_silently_drift",
+      "target": "artifact_phase2_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The run-175 retention API (utility_score, prune with a grace window, record_use(helped)) is exactly outcome-driven lifecycle management; Library Drift is its published justification and argues the grace window should be generous (premature retirement -0.019 vs no injection +0.002)."
+    },
+    {
+      "id": "edge_library_drift_supports_skill_lift",
+      "source": "concept_unmanaged_skill_libraries_silently_drift",
+      "target": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Per-skill contribution scores + attribution verdicts + router-engagement metrics is Skill Lift measured continuously per library entry rather than once at promotion - the same 'measure the artifact's added value, not its shape' principle."
+    },
+    {
+      "id": "edge_library_drift_challenges_cer_replay",
+      "source": "concept_unmanaged_skill_libraries_silently_drift",
+      "target": "concept_cer_training_free_experience_replay_works",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "CER's training-free memory buffer accumulates trajectories; Library Drift says unbounded accumulation silently degrades retrieval and injects false positives. CER's +51% is real but contingent on the buffer not drifting - a bounded active-cap and outcome-driven eviction are prerequisites at scale."
+    },
+    {
+      "id": "edge_library_drift_refines_memory_poisoning",
+      "source": "concept_unmanaged_skill_libraries_silently_drift",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "'False-positive injections' from an unmanaged library is the non-adversarial analogue of memory poisoning: no attacker, just a low-value skill that keeps getting retrieved and mis-routed - and it persists the same way until an outcome-driven process evicts it."
+    },
+    {
+      "id": "edge_library_drift_supports_trace_substrate",
+      "source": "concept_unmanaged_skill_libraries_silently_drift",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The append-only evidence log with per-skill contribution scores that 'makes the failure visible before it reaches end-task scores' is a Phase 0 trace-substrate application - the leading indicator the substrate is meant to provide."
     }
   ]
 }
