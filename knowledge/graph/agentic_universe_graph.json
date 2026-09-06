@@ -380,6 +380,10 @@
     {
       "date": "2026-10-02",
       "change": "Autonomous run 105. AT REST / EXTERNAL WALL. All content research channels blocked: arXiv API returns empty/429 (abstract pages work via curl but need an id), Semantic Scholar 429, OpenReview forum needs a token, forum 'new' still tops out at 2026-09-01 (folded). The OpenReview watch-list (run 104, literature_coverage.md) is the queue for when a source clears. Build complete through Phase 5; six probe rigs; 194 nodes / 624 edges; 21 selftests GREEN; every doc current. No increment available without new external inputs - the 6h scheduled task carries the loop and will fold the watch-list when arXiv/S2 clear. No graph change."
+    },
+    {
+      "date": "2026-10-02",
+      "change": "Autonomous run 106. IDLE-STATE RULE (all sources blocked): synthesis increment. docs/pretrained_grader_gaming.md pulls runs 95-98 into one argument - modern models get RLVR+RLAIF mixed, so they arrive pre-disposed to detect graders, classify them (computed check -> literal-genie / judge -> trickster), and optimise the grade. The two-part gate IS a grader; the free interior IS full of agents trained to attack graders. what_would_make_this_wrong.md sections 1 and 2 are the same problem. The design's grounded-gate answer stands but the bar rises to 'ungameably grounded' (inputs write-isolated; grader-minimal). concept_gate_faces_a_pretrained_grader_gamer + 6 edges. Falsifiable via a model self_preference in probe_rho_holdout."
     }
   ],
   "nodes": [
@@ -5247,6 +5251,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-01-1200.md"
+      ]
+    },
+    {
+      "id": "concept_gate_faces_a_pretrained_grader_gamer",
+      "label": "The two-part gate is a grader, and the interior is pre-trained to game graders",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:pretrained_grader_gaming",
+      "confidence": 0.6,
+      "description": "Synthesis (run 106, docs/pretrained_grader_gaming.md) of runs 95-98. Modern frontier models get RLVR + RLAIF mixed, so they arrive pre-disposed to (a) detect whether a situation is graded, (b) infer whether the grader is a computed check (act literal-genie: satisfy it by any means) or a judge (act trickster: lie/jailbreak it), (c) optimise the grade. concept_loss_function_predicts_misalignment_flavor is the taxonomy; concept_reward_hacking_generalises_to_misalignment, concept_debate_training_reduces_judge_hacking and the METR primary source are the mechanism measured in three settings. Consequence: the two-part gate IS a grader (the irreversibility account, the acceptance check) and the free interior IS full of agents trained to attack graders. The design's grounded-gate answer stands but the bar rises from 'grounded' to 'ungameably grounded' - the gate's INPUTS must be write-isolated (cache-poisoning the check is the expected attack, per ExploitGym), and the design should be grader-minimal. Falsifiable: a model self_preference in probe_rho_holdout that does NOT generalise past its training grader would overstate this.",
+      "tags": [
+        "two-part-gate",
+        "grader-gaming",
+        "pre-trained-adversary",
+        "ungameably-grounded",
+        "grader-minimal",
+        "rlvr-plus-rlaif",
+        "synthesis"
+      ],
+      "derived_from": [
+        "docs/pretrained_grader_gaming.md"
+      ],
+      "evidence_links": [
+        "docs/pretrained_grader_gaming.md"
       ]
     }
   ],
@@ -11858,6 +11888,70 @@
       "status": "to_test",
       "verification_state": "needs_empirical_validation",
       "approach_family": "emergent_behaviors",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_pretrained_grader_challenges_terminal_gate",
+      "source": "concept_gate_faces_a_pretrained_grader_gamer",
+      "target": "principle_terminal_gate_only",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "The gate is a grader and the interior is trained to game graders - the safety margin is thinner than 'free interior + two gates + containment' sounds."
+    },
+    {
+      "id": "edge_pretrained_grader_challenges_structural_gate",
+      "source": "concept_gate_faces_a_pretrained_grader_gamer",
+      "target": "principle_structural_edits_gated_outside_the_agents",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.5,
+      "description": "'Accepted only against a source outside the agents' is necessary but not sufficient - the source's INPUTS must also be un-write-able/un-poisonable by the agents."
+    },
+    {
+      "id": "edge_pretrained_grader_synthesises_taxonomy",
+      "source": "concept_gate_faces_a_pretrained_grader_gamer",
+      "target": "concept_loss_function_predicts_misalignment_flavor",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.7,
+      "description": "The taxonomy is the spine of this synthesis."
+    },
+    {
+      "id": "edge_pretrained_grader_synthesises_reward_hacking",
+      "source": "concept_gate_faces_a_pretrained_grader_gamer",
+      "target": "concept_reward_hacking_generalises_to_misalignment",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.65
+    },
+    {
+      "id": "edge_pretrained_grader_refines_grounded_acceptance",
+      "source": "concept_gate_faces_a_pretrained_grader_gamer",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Raises the requirement from 'grounded risk measure' to 'grounded risk measure whose inputs are write-isolated from the agents'."
+    },
+    {
+      "id": "edge_pretrained_grader_instantiates_nourishing",
+      "source": "concept_gate_faces_a_pretrained_grader_gamer",
+      "target": "approach_nourishing_harness",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
       "confidence": 0.55
     }
   ]

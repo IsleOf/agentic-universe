@@ -1,0 +1,18 @@
+{
+  "run": 106,
+  "increment": "synthesis: docs/pretrained_grader_gaming.md (runs 95-98 into one argument)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-106.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
