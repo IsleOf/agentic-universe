@@ -580,6 +580,10 @@
     {
       "date": "2026-10-15",
       "change": "Autonomous run 155. Phase 3 tooling - the run-154 monitorability conclusion, made computable. loop_metrics.compute() now reports trace_legibility (fraction of describable events - STEP/CLAIM/TOOL_CALL/NOTE - whose free-text field explains itself: >=15 chars, >=3 words, not a placeholder); threshold 0.70; propose_loop_edit emits a keep-the-notes-explanatory proposal below it. Real corpus ~0.996 - a tripwire, not a current problem. Operationalises concept_cot_monitorability_is_a_fragile_property_to_preserve: a harness edit that makes the loop emit opaque notes degrades the signal the outer loop reads. +4 selftest checks. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-15",
+      "change": "Autonomous run 156. Phase 3 - trace legibility is now a first-class acceptance criterion. improvement_loop.verify_loop_edit gains an optional legibility=(before, after) param; an edit that trades the loop's own trace legibility for held-out score (drop > 0.02) is REJECTED, alongside the existing task-regression, category-regression (run 116), and verifier-disagreement checks. Mirrors the run-116 masking fix. Operationalises concept_cot_monitorability_is_a_fragile_property_to_preserve at the gate. +2 selftest checks. phase3_holdout_set.md updated. No graph node/edge change."
     }
   ],
   "nodes": [

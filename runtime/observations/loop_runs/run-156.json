@@ -1,0 +1,26 @@
+{
+  "run": 156,
+  "increment": "Phase 3 - add a trace-legibility regression check to verify_loop_edit (the run-154/155 monitorability conclusion at the gate)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2507.11473",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2507.11473"
+  ],
+  "trace_file": "runtime\\traces\\loop-156.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

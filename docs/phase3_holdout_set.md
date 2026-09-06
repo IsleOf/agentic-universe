@@ -52,7 +52,11 @@ the regression bar.
 
 - grounded risk = fraction of held-out tasks answered wrong
 - **accept iff** risk strictly decreases (or stays 0) **and no single task
-  regressed**
+  regressed** **and no task *category* regressed** (run 116, arXiv:2606.11686
+  "masking") **and no trace-legibility regression** (run 156, optional
+  `legibility=(before, after)` from `loop_metrics.trace_legibility` — an edit that
+  trades the loop's own trace legibility for held-out score is rejected;
+  `concept_cot_monitorability_is_a_fragile_property_to_preserve`)
 - verdict carries the four fields; `authority` is "the frozen held-out set — NOT
   the proposer"
 
