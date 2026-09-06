@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 214 nodes, 743 edges · **Date:** 2026-09-05
+**Graph at generation:** 215 nodes, 750 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -45,6 +45,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | arXiv | Work | Used for |
 | --- | --- | --- |
 | [2312.10003](https://arxiv.org/abs/2312.10003) | (title not recorded) | `concept_rest_react_founds_the_trajectory_retrain_loop` |
+| [2412.04984](https://arxiv.org/abs/2412.04984) | (title not recorded) | `concept_frontier_models_can_scheme_in_context` |
 | [2502.02534](https://arxiv.org/abs/2502.02534) | (title not recorded) | `concept_adaptive_self_improvement_in_the_low_data_regime` |
 | [2502.08691](https://arxiv.org/abs/2502.08691) | (title not recorded) | `concept_agentsociety_large_scale_generative_society` |
 | [2506.03053](https://arxiv.org/abs/2506.03053) | (title not recorded) | `concept_moral_preferences_are_framing_brittle` |
@@ -366,6 +367,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-09-1800.md` — `concept_spontaneous_behaviour_beats_scripted_for_simulation`
 - `docs/auto_sweep_2026-10-10-0600.md` — `concept_agentsociety_large_scale_generative_society`
 - `docs/auto_sweep_2026-10-11-0600.md` — `concept_inference_time_scaling_of_verification`
+- `docs/auto_sweep_2026-10-12-0600.md` — `concept_frontier_models_can_scheme_in_context`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

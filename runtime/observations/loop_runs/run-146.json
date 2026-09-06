@@ -1,0 +1,29 @@
+{
+  "run": 146,
+  "increment": "fold Frontier Models are Capable of In-context Scheming (Apollo, arXiv:2412.04984) via DBLP",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "citations": [
+    {
+      "id": "arXiv:2412.04984",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2412.04984"
+  ],
+  "trace_file": "runtime\\traces\\loop-146.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
