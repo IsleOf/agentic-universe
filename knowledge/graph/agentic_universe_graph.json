@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-29",
+  "last_updated": "2026-09-30",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1072,6 +1072,10 @@
     {
       "date": "2026-09-29",
       "change": "Autonomous run 280. Orientation refresh (IDLE-STATE clause c; no node/edge change). docs/graph_state_2026-09.md Snapshot run-268 (305/1193) -> run-279 (312/1237; 109 needs-validation / 172 partially-validated / 19 validated; emergent_behaviors now 86, self_improving_harness 122). Added a Runs 269-279 section: orientation refresh, the probe-testing of the run-262 challenge edges (FLOCK arm widens run-218 condition b; sybil dry-run grounds evidence-cells), the posture analysis (fold is a gap-fill not a stance change), and the collusion-audit subfield fold from the 2601.00360 citation chain. Prior run-268 snapshot kept inline. 312 nodes / 1237 edges."
+    },
+    {
+      "date": "2026-09-30",
+      "change": "Autonomous run 281. IDLE-STATE RULE clause a - folded arXiv:2609.00595 (SoK: When Safe Agents Fail Together, Sept 2026, VERIFIED), the hub the 2601.00360 citation chain kept pointing at. A 197-work execution-centered systematization of multi-agent-LLM security. Node concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract: core caution = the run-218 point for security ('without an execution-level view a multi-agent setting can be mistaken for a genuine multi-agent effect'); A-I-R framework (adversary position x interaction interface x resulting system-level risk); five-part defense contract (path target / observation / intervention / trust boundary / recovery) with path closure + recovery as the hard problems; 44 audited benchmarks mostly fail to isolate the interaction effect. 7 edges: grounds the when-multi-agent-helps criterion, supports artifact_phase0_trace_substrate (the instrument its method needs), extends the coding-agent-reliability-is-a-system-property node, refines attribution_laundering + the collusion-audit-subfield node, instantiates pattern_execution_layer_enforcement, supports counterfactual_reputation. Branch_key emergent_behaviors:mas_security_sok. 312 -> 313 nodes, 1237 -> 1244 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9216,6 +9220,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-29-0600.md"
+      ]
+    },
+    {
+      "id": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "label": "Multi-agent security needs an execution-centered view: the A-I-R attack framework + a five-part defense contract (SoK, 197 works)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:mas_security_sok",
+      "confidence": 0.65,
+      "description": "arXiv:2609.00595 (SoK, Sept 2026, VERIFIED - the hub the 2601.00360 citation chain kept pointing at). Systematizes multi-agent-LLM security from an EXECUTION-CENTERED analysis of 197 works. Core caution, which is this project's own run-218 point stated for security: 'without an execution-level view, a multi-agent setting can easily be mistaken for evidence of a genuinely multi-agent security effect.' Taxonomy: 6 interaction interfaces, 4 adversary positions, 7 system-level risks, 8 recurring attack paths. The A-I-R framework organizes any attack by Adversary position x Interaction interface x Resulting system-level risk. Defenses are a FIVE-PART CONTRACT - path target, observation, intervention, trust boundary, recovery - and the two hard open problems are PATH CLOSURE (does the defense actually cut the attack path end to end) and RECOVERY. Audits 44 eval/benchmark works: the open challenges are isolating interaction effects, comparable diagnostic metrics, reuse across MAS designs, and open-system operation. Prescription: trace attacks end to end, test whether defenses close those paths, evaluate system-level effects with appropriate counterfactuals.",
+      "tags": [
+        "mas-security",
+        "sok",
+        "execution-centered",
+        "air-framework",
+        "path-closure",
+        "five-part-contract",
+        "systematization"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-30-0000.md",
+        "arXiv:2609.00595 (SoK: When Safe Agents Fail Together) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-30-0000.md"
       ]
     }
   ],
@@ -22560,6 +22591,83 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "The constructive side: an executable governance runtime that attaches consequences to coordination evidence IS a terminal gate for a society of agents, and it is now measured to work (severe collusion 50->5.6pct) where a written policy does not."
+    },
+    {
+      "id": "edge_sok_grounds_when_ma_helps",
+      "source": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "SoK's central caution IS the run-218 point for the security case: an execution-level view is what separates a genuine multi-agent effect from an artifact of the setting. The A-I-R framework is the adversarial complement to probe_orchestration_value's benefit analysis."
+    },
+    {
+      "id": "edge_sok_supports_trace_substrate",
+      "source": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "'Trace attacks end to end' + 'path closure' require exactly the Phase 0 execution trace - an append-only, per-actor record with the topology recoverable. The trace substrate is the instrument SoK's method needs."
+    },
+    {
+      "id": "edge_sok_extends_coding_agent_reliability",
+      "source": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "target": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "That node: coding agents are evaluated as models but deployed as systems. SoK generalises it to security: MAS risks are system-level (7 of them), and 44 audited benchmarks mostly fail to isolate the interaction effect."
+    },
+    {
+      "id": "edge_sok_refines_attribution_laundering",
+      "source": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "target": "emergent_attribution_laundering",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "MAS 'move information, state, decisions, and authority across principal boundaries' - the A-I-R adversary-position axis is a structured way to say where in that flow the but-for cause dissolves."
+    },
+    {
+      "id": "edge_sok_instantiates_execution_layer",
+      "source": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "target": "pattern_execution_layer_enforcement",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "The five-part defense contract's 'intervention' + 'path closure' are execution-layer enforcement made into an auditable checklist: a defense that does not close the path end to end is not a defense."
+    },
+    {
+      "id": "edge_sok_supports_counterfactual_reputation",
+      "source": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "target": "concept_counterfactual_reputation_credits_predicting_the_road_not_taken",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "'Evaluate system-level effects with appropriate counterfactuals' is the same discipline: you cannot score a MAS defense (or an agent's judgement) without re-running the counterfactual where it was absent."
+    },
+    {
+      "id": "edge_sok_refines_collusion_audit_subfield",
+      "source": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "target": "concept_covert_agent_collusion_runs_on_steganographic_channels_and_detection_is_an_arms_race",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Places covert-channel collusion in the A-I-R grid: adversary position = colluding insiders, interaction interface = a hidden channel, resulting risk = degraded joint objective. The steganalysis arms race is one 'attack path' of the eight."
     }
   ]
 }

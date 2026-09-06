@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 312 nodes, 1235 edges · **Date:** 2026-09-05
+**Graph at generation:** 313 nodes, 1244 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -206,6 +206,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.00069](https://arxiv.org/abs/2609.00069) | (title not recorded) | `concept_harness_tampering_persists_in_real_self_improvement_runs` |
 | [2609.00196](https://arxiv.org/abs/2609.00196) | (title not recorded) | `concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model`, `pattern_alternating_weight_harness_optimization` |
 | [2609.00275](https://arxiv.org/abs/2609.00275) | (title not recorded) | `concept_irreversibility_budget` |
+| [2609.00595](https://arxiv.org/abs/2609.00595) | (title not recorded) | `concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract` |
 | [2609.01035](https://arxiv.org/abs/2609.01035) | (title not recorded) | `pattern_progressive_risk_vesting` |
 | [2609.01058](https://arxiv.org/abs/2609.01058) | (title not recorded) | `concept_curriculum_generation_not_intrinsic_drive` |
 | [2609.01222](https://arxiv.org/abs/2609.01222) | (title not recorded) | `concept_the_harness_context_assembly_is_a_privilege_escalation_vector` |
@@ -451,7 +452,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-29-0000.md` — `concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools`, `concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise`
 - `docs/auto_sweep_2026-09-29-0600.md` — `concept_covert_agent_collusion_runs_on_steganographic_channels_and_detection_is_an_arms_race`, `concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026`, `concept_llm_as_judge_cannot_detect_collusion_use_behavioural_regret_or_interpretability`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
-- `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
+- `docs/auto_sweep_2026-09-30-0000.md` — `concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract`, `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
 - `docs/auto_sweep_2026-10-01-1200.md` — `concept_moral_preferences_are_framing_brittle`
 - `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`

@@ -1,0 +1,30 @@
+{
+  "run": 281,
+  "increment": "fold SoK arXiv:2609.00595 - 197-work execution-centered MAS security systematization (A-I-R framework)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.00595",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.00595"
+  ],
+  "trace_file": "runtime\\traces\\loop-281.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 281 OK · VALID · graph +1n/+7e · cites 1v/1 · idle-streak 1 · legible 1.00 · verified-frac 0.77 · novelty 1.00"
+}
