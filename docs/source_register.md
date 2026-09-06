@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 222 nodes, 792 edges · **Date:** 2026-09-05
+**Graph at generation:** 223 nodes, 797 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -64,6 +64,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2512.18202](https://arxiv.org/abs/2512.18202) | Sophia: A Persistent Agent Framework of Artificial Life | `concept_autotelic_agency` |
 | [2512.23760](https://arxiv.org/abs/2512.23760) | (title not recorded) | `concept_asg_si_independently_arrives_at_the_plan` |
 | [2601.11227](https://arxiv.org/abs/2601.11227) | Language of Thought Shapes Output Diversity in Large Language Models | `pattern_verbalized_sampling` |
+| [2601.14691](https://arxiv.org/abs/2601.14691) | (title not recorded) | `concept_rewriting_cot_alone_defeats_judges_90pct` |
 | [2601.15808](https://arxiv.org/abs/2601.15808) | (title not recorded) | `concept_inference_time_scaling_of_verification` |
 | [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
 | [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
@@ -383,6 +384,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-15-1200.md` — `pattern_structural_decoupling`
 - `docs/auto_sweep_2026-10-16-0000.md` — `concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding`
 - `docs/auto_sweep_2026-10-16-1200.md` — `concept_cer_training_free_experience_replay_works`
+- `docs/auto_sweep_2026-10-17-0000.md` — `concept_rewriting_cot_alone_defeats_judges_90pct`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

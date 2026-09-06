@@ -608,6 +608,10 @@
     {
       "date": "2026-10-17",
       "change": "Autonomous run 162. Consolidation. graph_state_2026-09.md refreshed (last done run 145 at 214/743; now 222/792, 35 validated, 21% challenges): a 'runs 146-161' paragraph (scheming / monitorability / multi-agent adversarial thread), evidence-for gained CER + orchestration-beats-strongest, evidence-against gained the diversity-keystone fourth channel + compute-efficiency paradox + in-context scheming + memory poisoning, family node-counts updated (self_improving_harness 57->76, emergent 56->68). No graph node/edge change."
+    },
+    {
+      "date": "2026-10-17",
+      "change": "Autonomous run 163. DBLP. concept_rewriting_cot_alone_defeats_judges_90pct (Gaming the Judge, arXiv:2601.14691): rewriting an agent's CoT while HOLDING ACTIONS AND OBSERVATIONS FIXED inflates SOTA VLM judge false-positive rates by up to 90% across 800 trajectories; content-based manipulation beats style-based; scaling judge compute reduces but does not eliminate it. The strongest empirical support yet for concept_transcript_only_gate_is_provably_insufficient, and the paper's own fix ('verify against observable evidence') is the design's grounded gate. +5 edges."
     }
   ],
   "nodes": [
@@ -6262,6 +6266,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-16-1200.md"
+      ]
+    },
+    {
+      "id": "concept_rewriting_cot_alone_defeats_judges_90pct",
+      "label": "Rewriting an agent's chain-of-thought while holding actions and observations fixed inflates SOTA judge false-positive rates by up to 90% - the empirical form of the transcript-gate impossibility proof",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:cot_rewrite_defeats_judges",
+      "confidence": 0.8,
+      "description": "Gaming the Judge: Unfaithful Chain-of-Thought Can Undermine Agent Evaluation (arXiv:2601.14691, 2026; VERIFIED via arXiv abstract read run 163, resolved via DBLP). LLM/VLM judges evaluate agents in NON-VERIFIABLE settings from trajectories including CoT, implicitly assuming the CoT faithfully reflects the agent's reasoning AND the environment state. Systematically REWRITING the agent's CoT while HOLDING ACTIONS AND OBSERVATIONS FIXED: manipulated reasoning alone inflates the FALSE-POSITIVE RATE of state-of-the-art VLM judges by UP TO 90% across 800 trajectories on diverse web tasks. Content-based manipulation (fabricating progress signals) beats style-based (presentation only). Prompting techniques and scaling judge-time compute REDUCE BUT DO NOT ELIMINATE it. Conclusion: need judging mechanisms that verify reasoning claims against OBSERVABLE EVIDENCE. For this project: (1) the STRONGEST EMPIRICAL SUPPORT YET for concept_transcript_only_gate_is_provably_insufficient - this is the impossibility proof demonstrated: same actions + same observations, different transcript, judge flips 90% of the time; (2) the fix the paper names ('verify reasoning claims against observable evidence') is exactly DeepVerifier's rubrics + OUTCOME approach (concept_inference_time_scaling_of_verification) and the design's grounded, non-transcript gate (pattern_grounded_acceptance_only); (3) 'scaling judge-time compute reduces but does not eliminate' is a mild caution on DeepVerifier's inference-time-scaling claim - more verification compute is not a full fix; (4) the two-part gate must NOT read CoT claims, only environment state - reinforces what_would_make_this_wrong.md section 2.",
+      "tags": [
+        "gaming-the-judge",
+        "cot-rewrite-attack",
+        "actions-observations-held-fixed",
+        "90pct-fpr-inflation",
+        "800-trajectories",
+        "content-beats-style",
+        "verify-against-observable-evidence",
+        "non-verifiable-settings"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-17-0000.md",
+        "arXiv:2601.14691 (Gaming the Judge: Unfaithful Chain-of-Thought Can Undermine Agent Evaluation) - VERIFIED, abstract read run 163; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-17-0000.md"
       ]
     }
   ],
@@ -14711,6 +14743,61 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "CER's dynamic memory buffer is the persistent-memory attack surface: one poisoned write into the synthesised buffer persists and is retrieved into new tasks; CER does not address poisoning."
+    },
+    {
+      "id": "edge_gamejudge_supports_transcript_impossibility",
+      "source": "concept_rewriting_cot_alone_defeats_judges_90pct",
+      "target": "concept_transcript_only_gate_is_provably_insufficient",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "The empirical form of the proof: same actions + same observations, rewritten transcript, SOTA judge false-positive rate up 90%. Text-indistinguishable-underneath is not hypothetical."
+    },
+    {
+      "id": "edge_gamejudge_supports_grounded_acceptance",
+      "source": "concept_rewriting_cot_alone_defeats_judges_90pct",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "'Need judging mechanisms that verify reasoning claims against observable evidence' - the grounded, non-transcript acceptance gate, stated as the paper's own conclusion."
+    },
+    {
+      "id": "edge_gamejudge_challenges_inference_time_verification",
+      "source": "concept_rewriting_cot_alone_defeats_judges_90pct",
+      "target": "concept_inference_time_scaling_of_verification",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "'Scaling judge-time compute reduces but does not eliminate susceptibility' - a mild caution that more verification compute is not a full fix for a transcript-reading judge."
+    },
+    {
+      "id": "edge_gamejudge_supports_cot_obfuscation",
+      "source": "concept_rewriting_cot_alone_defeats_judges_90pct",
+      "target": "concept_cot_obfuscation_hits_the_message_channel_hardest",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Same channel, evaluator side: manipulating the reasoning trace (external CoT) defeats the judge, just as it evades the monitor."
+    },
+    {
+      "id": "edge_gamejudge_supports_evaluator_mode_collapse",
+      "source": "concept_rewriting_cot_alone_defeats_judges_90pct",
+      "target": "emergent_evaluator_mode_collapse",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "A specific, quantified evaluator failure mode - the judge scores a fabricated-progress transcript as success."
     }
   ]
 }
