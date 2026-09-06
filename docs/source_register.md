@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 339 nodes, 1352 edges · **Date:** 2026-09-05
+**Graph at generation:** 340 nodes, 1356 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -352,6 +352,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - runtime/observations/loop_history_summary.json — `artifact_loop_adapter_real_trace`, `artifact_loop_metrics_phase3_real`
 - runtime/observations/loop_runs/run-67.json — `artifact_loop_session_live_recording`
 - same sweep: no verifiable mechanism work since the run-5 sources (Sophia, Tao of Agency, Learnable Novelty - all position/framework). The field is investing in supervised curriculum generation, not intrinsic drive. — `concept_intrinsic_motivation`
+- seed graph 2026-09-01 (foundational concept, not a literature fold) — `concept_agent_os_desktop_shell`, `concept_memory_and_learning`, `concept_swarm_decentralized_coordination` +5
 - synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
 - tools/epistemic_constitution.py — `artifact_epistemic_constitution_harness`
@@ -389,6 +390,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/task_ledger.py (run 244) — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - tools/topology_recover.py — `artifact_phase0_trace_substrate`
 - tools/trace_substrate.py — `artifact_phase0_trace_substrate`
+- tools/v2_integration.py — `artifact_v2_integration_dry_run`
 - unifies pattern_verifier_gated_promotion + concept_agent_shaped_topology_is_agent_corruptible + emergent_authorization_laundering — `principle_structural_edits_gated_outside_the_agents`
 - zylos.ai 'Goal Persistence and Goal Drift' — `emergent_goal_persistence_and_drift`
 - zylos.ai emergent behaviour survey — `emergent_self_organizing_roles`
@@ -499,6 +501,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-06-1800.md` — `concept_bottleneck_is_the_model_harness_coupling`
 - `docs/auto_sweep_2026-10-07-0000.md` — `concept_knownliebench_verify_the_agent_knows_the_entitlement_before_scoring_whether_it_lies_under_a_deployer_incentive`
 - `docs/auto_sweep_2026-10-07-0600.md` — `concept_current_llm_agent_deception_is_mostly_equivocation_linguistically_subtle_but_strategically_weak`, `concept_what_when_how_where_to_evolve`
+- `docs/auto_sweep_2026-10-07-1200.md` — `artifact_v2_integration_dry_run`
 - `docs/auto_sweep_2026-10-08-1200.md` — `concept_ace_context_evolution_self_improvement`
 - `docs/auto_sweep_2026-10-08-1800.md` — `concept_horizon_gap_outcome_signals_decay`
 - `docs/auto_sweep_2026-10-09-1800.md` — `concept_spontaneous_behaviour_beats_scripted_for_simulation`
@@ -527,7 +530,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/harness_field_study_2026-09-06.md` — `concept_harness_convergence_2026_09`
 - `docs/harness_field_study_2026-09-06.md - Agent Zero Context Window Usage Indicator, Hermes lean-tail compression as default: token cost is now first-class UI across shipping harnesses` — `concept_context_economics`
 - `docs/jobs/ (owner's agentic-jobs analysis, 6 files, brought from origin/main run 242) - 100+ postings Aug-Sep 2026` — `concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness`
-- `docs/nourishing_harness_design.md` — `approach_nourishing_harness`, `concept_harness_orchestration_pairing`
+- `docs/nourishing_harness_design.md` — `approach_nourishing_harness`, `concept_harness_orchestration_pairing`, `process_append_only_reward_ledger` +1
 - `docs/phase0_live_recording.md` — `artifact_loop_session_live_recording`
 - `docs/phase0_trace_substrate.md` — `artifact_phase0_trace_substrate`
 - `docs/phase1_harness_registry.md` — `artifact_phase1_harness_registry`

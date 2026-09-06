@@ -1192,6 +1192,10 @@
     {
       "date": "2026-10-07",
       "change": "Autonomous run 311. IDLE-STATE clause b - built tools/v2_integration.py, a dry-run proving the three v2 deterministic-spine bricks compose end to end: a scout research_brief -> validate + dedup check -> to_graph_patch -> loop_conductor.Conductor with the REAL acceptance_gate.check -> a certificate that verify_certificate replays. 14 selftest checks incl. the negative paths. selftest_all JOBS -> 40. 1 node + 4 edges. 339 -> 340 nodes, 1352 -> 1356 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-07",
+      "change": "Autonomous run 312. Graph-hygiene consistency pass (IDLE-STATE clause c). Full structural audit of the 340-node / 1356-edge graph: 0 orphans, 0 dangling edges, 0 duplicate labels, 0 duplicate (source,target,type) edges, 0 self-loops, 0 confidence values out of [0,1], 0 nodes missing a description or approach_family. The only gap: 10 non-family nodes had no derived_from - all foundational seed-graph concepts or nourishing-harness-design nodes, now stamped (10 fixed: seed graph 2026-09-01 / docs/nourishing_harness_design.md). Remaining derived_from-less nodes are the approach_* family roots (correct - they are organising nodes). Literature: three threads swept this session and reconfirmed - harness-engineering (SEVerA chain, runs 305-307), emergence/deception (KnownLieBench + Among Us, 309-310), autotelic/open-ended (run 312 arxiv scan returned only pre-2026 or off-topic work; concept_habitat_slack stays unverifiable without the model integration, as what_would_make_this_wrong.md already states). No node/edge count change."
     }
   ],
   "nodes": [
@@ -1349,6 +1353,9 @@
         "agent-cycle",
         "planning",
         "verification"
+      ],
+      "derived_from": [
+        "seed graph 2026-09-01 (foundational concept, not a literature fold)"
       ]
     },
     {
@@ -1383,6 +1390,9 @@
         "memory",
         "learning",
         "knowledge-updates"
+      ],
+      "derived_from": [
+        "seed graph 2026-09-01 (foundational concept, not a literature fold)"
       ]
     },
     {
@@ -1399,6 +1409,9 @@
         "gates",
         "approval",
         "policy"
+      ],
+      "derived_from": [
+        "seed graph 2026-09-01 (foundational concept, not a literature fold)"
       ]
     },
     {
@@ -1414,6 +1427,9 @@
         "multi-agent",
         "orchestration",
         "patterns"
+      ],
+      "derived_from": [
+        "seed graph 2026-09-01 (foundational concept, not a literature fold)"
       ]
     },
     {
@@ -1431,6 +1447,9 @@
         "desktop",
         "capabilities",
         "policy"
+      ],
+      "derived_from": [
+        "seed graph 2026-09-01 (foundational concept, not a literature fold)"
       ]
     },
     {
@@ -1504,6 +1523,9 @@
         "governance",
         "decisions",
         "audit"
+      ],
+      "derived_from": [
+        "docs/nourishing_harness_design.md"
       ]
     },
     {
@@ -1520,6 +1542,9 @@
         "ledger",
         "learning",
         "governance"
+      ],
+      "derived_from": [
+        "docs/nourishing_harness_design.md"
       ]
     },
     {
@@ -1770,6 +1795,9 @@
         "autonomy",
         "emergence",
         "observation-first"
+      ],
+      "derived_from": [
+        "seed graph 2026-09-01 (foundational concept, not a literature fold)"
       ]
     },
     {
@@ -1787,6 +1815,9 @@
         "self-organization",
         "local-rules",
         "multi-agent"
+      ],
+      "derived_from": [
+        "seed graph 2026-09-01 (foundational concept, not a literature fold)"
       ]
     },
     {
@@ -1848,6 +1879,9 @@
         "strategy",
         "tool-use",
         "invention"
+      ],
+      "derived_from": [
+        "seed graph 2026-09-01 (foundational concept, not a literature fold)"
       ]
     },
     {
