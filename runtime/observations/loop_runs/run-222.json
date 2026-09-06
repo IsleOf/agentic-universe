@@ -1,0 +1,26 @@
+{
+  "run": 222,
+  "increment": "recency-weighted sweep - folded Harness Engineering (arXiv:2609.00006): source-code anatomy of 11 production coding harnesses; seven canonical subsystems; no framework / deterministic retrieval / SKILL.md leads MCP / prose->config; the coding harness became a platform in H1 2026; 1 node, 8 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2609.00006",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.00006"
+  ],
+  "trace_file": "runtime\\traces\\loop-222.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

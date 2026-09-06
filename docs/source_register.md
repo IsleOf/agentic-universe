@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 254 nodes, 979 edges · **Date:** 2026-09-05
+**Graph at generation:** 255 nodes, 987 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -182,6 +182,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.30147](https://arxiv.org/abs/2608.30147) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.30980](https://arxiv.org/abs/2608.30980) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
+| [2609.00006](https://arxiv.org/abs/2609.00006) | (title not recorded) | `concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform` |
 | [2609.00038](https://arxiv.org/abs/2609.00038) | (title not recorded) | `concept_outcome_only_judges_miss_silent_faults` |
 | [2609.00069](https://arxiv.org/abs/2609.00069) | (title not recorded) | `concept_harness_tampering_persists_in_real_self_improvement_runs` |
 | [2609.00196](https://arxiv.org/abs/2609.00196) | (title not recorded) | `pattern_alternating_weight_harness_optimization` |
@@ -391,6 +392,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-14-1800.md` — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - `docs/auto_sweep_2026-09-15-0000.md` — `concept_curriculum_generation_not_intrinsic_drive`
 - `docs/auto_sweep_2026-09-15-0600.md` — `concept_irreversibility_budget`, `pattern_certified_runtime_alarm`, `pattern_provenance_based_authority`
+- `docs/auto_sweep_2026-09-15-1800.md` — `concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform`
 - `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `emergent_attribution_laundering`, `emergent_constraint_weakening_at_handoffs` +1
 - `docs/auto_sweep_2026-09-16-1800.md` — `emergent_no_equilibrium_convergence`, `pattern_market_as_orchestrator`
 - `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_step_count_is_the_horizon_limit`, `pattern_deterministic_state_folding`

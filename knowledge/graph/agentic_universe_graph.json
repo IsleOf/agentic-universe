@@ -848,6 +848,10 @@
     {
       "date": "2026-09-15",
       "change": "Autonomous run 221. Build. tools/probe_orchestration_value.py - a runnable rig for the run-218 synthesis concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic. Controlled sim: SINGLE (one agent, accumulation penalty) vs MULTI (K=8 fresh agents + synthesis) with three knobs - (a) verifiable subtask retry, (b) deterministic vs vote synthesis (BASE_HERD 0.50), (c) disjoint vs shared poisoned pool (verification can't fix a poisoned-pool error). Dry-run 4000 trials/combo: SINGLE ~0.46; a&b&c +0.52 delta, strictly the best of 8 combos; every combo missing one condition <=+0.20; vote-synthesis / shared-pool combos never exceed +0.15. Verdict CONFIRMS. Added to selftest_all.py JOBS (BUILD SELFTEST GREEN). New node artifact_probe_orchestration_value_rig (validated) + 5 edges (verifies concept_multi_agent_helps_..., concept_epistemic_sybil_collapse, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding; depends_on artifact_phase0_trace_substrate; supports approach_emergence_first as a Phase 6 probe). The run-218 synthesis node updated with the rig verdict. 253->254 nodes, 974->979 edges."
+    },
+    {
+      "date": "2026-09-15",
+      "change": "Autonomous run 222. Recency-weighted sweep (s2 citations of SEA arXiv:2607.00871). Folded Harness Engineering (arXiv:2609.00006, July 2026) as concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform: a source-code anatomy of 11 production coding harnesses (Claude Code, Codex CLI, ..., Hermes, ...) + Omnigent the first meta-harness; seven canonical subsystems, 13 observations, 29 design patterns. Findings across ~4M LOC: no runtime imports an agentic framework; none uses vector code-retrieval (deterministic retrieval only); SKILL.md leads MCP 9/11 vs 8/11; a longitudinal source-diff shows convergence becoming imitation and behavioural policy migrating from prompt prose to configuration; the coding harness turned from tool to platform in H1 2026. Direct validation of the project's build choices (pure stdlib, deterministic experience_bank retrieval, SKILL.md loop, config loop_policy). 8 edges: supports concept_bottleneck_is_the_model_harness_coupling (the seven subsystems), artifact_phase2_experience_bank (deterministic retrieval is mainstream), emergent_constraint_weakening_at_handoffs (prose->config migration), pattern_agentic_skill_lifecycle, approach_self_improving_harness (Omnigent), concept_capability_is_a_model_harness_config_property; refines concept_harness_convergence_2026_09; challenges pattern_structural_decoupling (convergence = ecosystem-level diversity erosion). 254->255 nodes, 979->987 edges."
     }
   ],
   "nodes": [
@@ -7444,6 +7448,37 @@
       ],
       "evidence_links": [
         "docs/probe_orchestration_value.md"
+      ]
+    },
+    {
+      "id": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "label": "Source-code anatomy of 11 production coding harnesses: seven canonical subsystems, 29 patterns; no runtime imports an agentic framework or uses vector code-retrieval; SKILL.md leads MCP (9/11 vs 8/11); behavioural policy migrating from prompt prose to configuration; the coding harness turned from tool to platform in H1 2026",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_engineering_anatomy",
+      "confidence": 0.76,
+      "description": "Harness Engineering: Anatomy, Architecture, and Evolution of Coding Agents - A Source-Code Study of Eleven Systems (arXiv:2609.00006, VERIFIED via arXiv abstract read run 222; July 2026). The most comprehensive empirical foundation to date for 'harness engineering' (named as a discipline in early 2026): a source-code anatomy of ELEVEN production coding harnesses - Claude Code, Codex CLI, Gemini CLI, Mistral Vibe, OpenHands, Aider, Mini-SWE-Agent, Hermes, Pi, OpenCode, OpenClaw - plus Omnigent, 'the first meta-harness', as a contrast point. Defines a harness (loop + tools + context management + safety controls + orchestration + extension surfaces), maps its SEVEN canonical subsystems with the minimal and maximal implementation of each, and dissects all eleven along those subsystems. Yields 13 cross-cutting observations and a catalog of 29 recurring design patterns. Headline findings, across ~4 MILLION lines of Python / TypeScript / Rust and surviving a threefold corpus expansion: (1) NO agent runtime imports a general-purpose agentic framework; (2) NONE retrieves code with vector embeddings - the field runs on hand-rolled async loops and DETERMINISTIC retrieval; (3) SKILL.md skills lead MCP in adoption (9/11 vs 8/11); (4) ACP ships in six systems with a new third role: harness hosting. A controlled LONGITUDINAL sample (the original eight systems re-pinned and source-diffed across one quarter) shows 'convergence becoming imitation' and 'behavioral policy migrating from prompt prose to configuration'. Thesis: in the first half of 2026 the coding harness completed a turn from tool to platform. Closes with 18 design recommendations and a 90-line minimum-viable-harness scaffold. Bearing on the project: this is direct empirical validation of the project's build choices - pure stdlib / no framework (finding 1), substring / deterministic retrieval in experience_bank (finding 2), SKILL.md for the scheduled loop (finding 3), and context/loop_policy as a CONFIG component not prose (the prose-to-configuration migration). The seven canonical subsystems are the concept_bottleneck_is_the_model_harness_coupling decomposition, empirically grounded. Omnigent the meta-harness is approach_self_improving_harness shipped by someone else. Recency: July 2026, current harness generation, and it names Hermes (the owner's own agent).",
+      "tags": [
+        "harness-engineering",
+        "eleven-systems-source-study",
+        "seven-canonical-subsystems",
+        "no-agentic-framework",
+        "deterministic-retrieval",
+        "skill-md-leads-mcp",
+        "prose-to-configuration",
+        "omnigent-meta-harness",
+        "tool-to-platform",
+        "recency-2026-07",
+        "large-empirical"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-15-1800.md",
+        "arXiv:2609.00006 (Harness Engineering: Anatomy, Architecture, and Evolution of Coding Agents - A Source-Code Study of Eleven Systems) - VERIFIED, abstract read run 222"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-15-1800.md"
       ]
     }
   ],
@@ -17950,6 +17985,94 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "A concrete Phase 6 (swarm-layer) probe design: the criterion is falsifiable with a real multi-agent harness by swapping _subtask_ok / _synthesis_ok for agent runs."
+    },
+    {
+      "id": "edge_harness_anatomy_supports_model_harness_coupling",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.72,
+      "description": "The seven canonical subsystems mapped across 11 production harnesses ARE the model-harness-coupling decomposition (observation / context / control / action / state / verification + extension), empirically grounded in ~4M lines of real code rather than a survey abstraction."
+    },
+    {
+      "id": "edge_harness_anatomy_validates_experience_bank_retrieval",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "artifact_phase2_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "'None of eleven production harnesses retrieves code with vector embeddings - the field runs on deterministic retrieval' directly validates experience_bank's substring/key retrieval as the mainstream choice, not a shortcut - a vector index would be the outlier."
+    },
+    {
+      "id": "edge_harness_anatomy_supports_config_over_prose",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "emergent_constraint_weakening_at_handoffs",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.58,
+      "description": "The longitudinal finding 'behavioral policy migrating from prompt prose to configuration' is the field independently doing what emergent_constraint_weakening_at_handoffs argues for: prose weakens in transit, configuration does not - context/loop_policy is a config component for this reason."
+    },
+    {
+      "id": "edge_harness_anatomy_supports_skill_lifecycle",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "pattern_agentic_skill_lifecycle",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "SKILL.md skills lead MCP in adoption (9/11 vs 8/11) - the skill-as-externalised-procedural-knowledge pattern is the dominant extension surface in production, which is what the lifecycle pattern assumes."
+    },
+    {
+      "id": "edge_harness_anatomy_supports_self_improving_family",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "approach_self_improving_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Omnigent, 'the first meta-harness', analysed here as a contrast point - the self-improving-harness family now has a shipped production instance in the corpus, not only research prototypes."
+    },
+    {
+      "id": "edge_harness_anatomy_refines_harness_convergence",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "concept_harness_convergence_2026_09",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Gives the run-of-2026-09 'what the shipping harnesses converged on' observation a source-diffed longitudinal basis: convergence is real and is 'becoming imitation' - the same 29 patterns re-appearing across systems over a quarter."
+    },
+    {
+      "id": "edge_harness_anatomy_challenges_structural_decoupling",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "pattern_structural_decoupling",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "'Convergence becoming imitation' across eleven production harnesses is diversity erosion at the ecosystem level - if every harness copies the same 29 patterns, the structural decoupling that keeps a multi-harness system diverse is quietly disappearing."
+    },
+    {
+      "id": "edge_harness_anatomy_supports_capability_is_config",
+      "source": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "A harness with seven subsystems each spanning a minimal-to-maximal implementation range is exactly 'capability is a model-harness-config property' - the same model in a minimal vs maximal harness is a different agent."
     }
   ]
 }
