@@ -412,6 +412,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 113. DBLP. concept_safety_helpfulness_tradeoff_persists_under_optimisation (CONSCIENTIA, arXiv:2604.09746): a multi-agent NYC-navigation sim with persuasive adversaries and KTO policy learning. Best Blue policy improves task success 46.0->57.3% but susceptibility to adversarial steering stays at 70.7%; a persistent safety-helpfulness trade-off - resisting steering does NOT co-occur with maximal task completion, and does not converge away with optimisation. A measured instance of the capability-vs-safety tension the design assumes it can hold both sides of. +5 edges. Graph passes 200 nodes."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 114. Consolidation: refreshed docs/graph_state_2026-09.md snapshot (193->200 nodes, 616->660 edges, 90 partially-validated) and the evidence-for / evidence-against sections with the DBLP batch (108-113): Self-Harness added to evidence-for as the strongest 'plan is instantiable' datapoint (9/9 combos, +132% held-out); Harness-Bench's 'execution-alignment failure', CONSCIENTIA's persistent safety-helpfulness trade-off, and the run-106 pretrained-grader-gamer synthesis added to evidence-against. No graph node/edge change."
     }
   ],
   "nodes": [

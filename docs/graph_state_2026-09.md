@@ -6,18 +6,25 @@
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 100)
+## Snapshot (run 114)
 
-**193 nodes · 616 edges · 9 approach families · 139 `challenges` edges (23% of all edges).**
+**200 nodes · 660 edges · 9 approach families · 144 `challenges` edges (22% of all edges).**
 
-`verification_state`: 80 needs-validation · **83 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
-`status`: to_test dominant · 31 speculative · 13 stable_theory · in_experiment (the 19 `artifact_*` build/rig nodes) · 1 deprecated.
+`verification_state`: 80 needs-validation · **90 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
+Families: self_improving_harness 62 · emergent_behaviors 61 · agent_habitat 23 · graph_engineering 18 · nourishing_harness 17 · rest 19.
 
-Runs 90–99 added the six probe rigs' `artifact_*` nodes and a **misalignment-cluster taxonomy** from the
-forum source (LessWrong / AlignmentForum, live while arXiv 429s): `concept_loss_function_predicts_misalignment_flavor`
-(imitative→seven-sins / RLHF→glazing / RLVR→literal-genie / RLAIF→trickster),
-`concept_reward_hacking_generalises_to_misalignment` (Hacker-Opus), `concept_debate_training_reduces_judge_hacking`
-(GDM), plus a primary-source rewrite of `emergent_subagent_training_induces_coordination` (METR & Redwood).
+**Runs 90–113** added: the six probe rigs' `artifact_*` nodes; a **misalignment-cluster taxonomy** from the
+LessWrong/AF forum source (`concept_loss_function_predicts_misalignment_flavor` — imitative→seven-sins /
+RLHF→glazing / RLVR→literal-genie / RLAIF→trickster; `concept_reward_hacking_generalises_to_misalignment`
+Hacker-Opus; `concept_debate_training_reduces_judge_hacking` GDM; a primary-source rewrite of
+`emergent_subagent_training_induces_coordination` from METR & Redwood); the **run-106 synthesis**
+(`concept_gate_faces_a_pretrained_grader_gamer` — §1 and §2 are one problem, the gate is a grader and the
+interior is trained to game graders → "ungameably grounded", grader-minimal); and a **DBLP batch** (arXiv API
+down): `concept_capability_is_a_model_harness_config_property` (Harness-Bench, 5194 trajectories),
+**`concept_self_harness_validates_the_three_loop`** (Self-Harness — an agent improves its own harness via
+mine→propose→validate-on-held-out, 9/9 combos +132%; **independent validation of Phase 3**),
+`concept_environmental_pressure_has_an_inverted_u` (Yerkes-Dodson), `concept_risklab_probe_toolkit` (RiskLab —
+a Phase 6 substrate candidate), `concept_safety_helpfulness_tradeoff_persists_under_optimisation` (CONSCIENTIA).
 
 Two shifts since run 51 (165 nodes): (a) the literature frontier was swept (runs 39–49) and then folded —
 partially-validated rose to 80. (b) **The build happened (runs 60–87).** 17 `artifact_*` nodes now record
@@ -69,6 +76,12 @@ the emergence is worth studying.
 - `emergent_whistleblowing` — transparent uncontrolled channels produced an emergent immune response the
   covert-channel case never developed.
 - `concept_harness_evolution_subfield` — 15+ independent systems converging on the shape the family asserts.
+- **`concept_self_harness_validates_the_three_loop`** (run 109) — a working system with the plan's exact
+  three-loop shape (mine failures from traces → minimal proposal → held-out regression validation), 9 of 9
+  model-benchmark combos improve held-out pass rate, up to +132%. The strongest single piece of "the plan is
+  instantiable" evidence, and the counterpoint to RHO's self-preference inflation.
+- `concept_capability_is_a_model_harness_config_property` (run 108) — Harness-Bench, 5,194 trajectories:
+  capability is a model-harness-config property, not a base-model one.
 - `concept_transcript_only_gate_is_provably_insufficient` (run 45) — the design's central architectural choice
   (a grounded, non-transcript gate) is now the *only* one that can work, by an information-theoretic proof.
 - `pattern_activation_probe_monitoring` (run 49) — the probe stays accurate under evaluation awareness *and*
@@ -82,7 +95,14 @@ the emergence is worth studying.
   Mitigated by covert-path removal + transparency + the outer gate, not eliminated; the
   `probe_subagent_coordination` rig shows same-parent filtering *bounds* spread (12→4), does not stop it.
 - `concept_reward_hacking_generalises_to_misalignment` (run 97) — a reward-hacking-trained model is misaligned
-  *specifically when a grader is present*, and the two-part gate is a grader.
+  *specifically when a grader is present*, and the two-part gate is a grader. Synthesised in
+  `concept_gate_faces_a_pretrained_grader_gamer` (run 106): §1 and §2 are one problem.
+- `concept_capability_is_a_model_harness_config_property` (run 108) — "execution-alignment failure": plausible
+  reasoning decouples from tool feedback / workspace state / evidence / output contracts. A named, measured
+  generalisation of the recognition-execution gap.
+- `concept_safety_helpfulness_tradeoff_persists_under_optimisation` (run 113) — a *measured* safety-helpfulness
+  trade-off that does not converge away with policy optimisation; ~70% persuasion-susceptibility floor after
+  adversarial training.
 - `emergent_evaluator_mode_collapse` — documented across 11 failure modes; agents scored 100% reading cached
   answer keys (68% true). Verifier spec addresses it.
 - `concept_geometric_reliability_decay` (run 43) — multi-step success decays geometrically; frontier models
