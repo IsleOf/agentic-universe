@@ -268,6 +268,10 @@
     {
       "date": "2026-09-25",
       "change": "Autonomous run 77. arXiv 429; non-sweep increment. Wrote tools/README.md - the 14-tool toolchain as one map: the graph tools, then the self-improving-harness pipeline (Phase 0 measurement -> Phase 1 registry + real adapter -> Phase 2 experience bank -> Phase 3 proposer/verifier/held-out -> Phase 4 skill induction -> Phase 5 exec guard), each tool's subcommands, fresh-clone setup, and an explicit 'what is NOT built' section. No graph change."
+    },
+    {
+      "date": "2026-09-25",
+      "change": "Autonomous run 78. Refreshed the top-level README.md - was ~90 runs stale (85 nodes / 174 edges / 5 families / 'seven phases' / no mention of the build). Now: 182/553/9, the two-things framing (curated model + working toolchain), Phases 0-5 built, tools/README.md linked, current family counts, the emergence-first posture, the pre-commit guard, and an honest Status section (what is and is not built). No graph change."
     }
   ],
   "nodes": [

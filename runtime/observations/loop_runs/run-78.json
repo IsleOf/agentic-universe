@@ -1,0 +1,18 @@
+{
+  "run": 78,
+  "increment": "refresh top-level README.md (~90 runs stale)",
+  "ok": true,
+  "harness_manifest_hash": "a0a320e06a4204c4",
+  "trace_events": 7,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 1,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-78.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
