@@ -968,6 +968,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 251. Build (recommendation #2 method + 'practice what it preaches'). tools/project_graph_scaffold.py: scaffold + validate a per-project knowledge graph + a PROJECT_STATE.md handover doc in this project's format (node types component/decision/constraint/bug/question; edge types depends_on/implements/challenges/blocks/records; reuses knowledge_graph.validate_graph + vocabulary lints). 8 selftest checks; added to selftest_all.py JOBS (26). WORKED EXAMPLE: knowledge/graph/agentic_universe_project_graph.json (26 nodes / 24 edges, VALID - the agentic-universe project itself as components/decisions/constraints/open-questions) + docs/PROJECT_STATE.md (a compact handover a fresh session reads first). docs/practicing_what_we_preach.md section 3 updated to point at the tool + example. The project now practices its own section-3 recommendation. No change to the main graph's nodes/edges."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 252. Orientation-layer refresh (IDLE-STATE RULE clause c; no graph node/edge change). docs/graph_state_2026-09.md Snapshot block updated from the run-235 state (262/1032) to run 252 (272 nodes / 1091 edges; 78 needs-validation / 163 partially-validated / 19 validated / 5 inconclusive / 7 unset; families self_improving_harness 113, emergent_behaviors 74, agent_habitat 24, graph_engineering 21, nourishing_harness 18, orchestration_first 10). Added a 'Runs 235-251' section: the co-evolution / no-training-fork tension (WHALE 2609.00196 + HELIX 2608.13951, a challenges cluster on approach_emergence_first with JIT-Agent, named in emergence_first_posture.md run 237); the owner's Perplexity research (~80% already folded = cross-method validation; 4 new folds runs 240-246) + the agentic-jobs analysis (run 242); the shipped tools (run_novelty run 248, task_ledger+supervisor runs 244/250, graph_diff run 243, project_graph_scaffold run 251 with the agentic_universe_project_graph.json worked example); the run-247 consistency pass. Frontier confirmed swept (run 249 s2-citation sweep)."
     }
   ],
   "nodes": [

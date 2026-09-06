@@ -1,0 +1,20 @@
+{
+  "run": 252,
+  "increment": "orientation-layer refresh - docs/graph_state_2026-09.md Snapshot from run-235 (262/1032) to run-252 (272/1091) + a 'Runs 235-251' section (the co-evolution tension, the owner's research incorporated, the shipped tools, the project self-graph)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-252.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 252 STOP · VALID · graph +0 · cites 0v/0 · idle-streak 5! · legible 1.00 · verified-frac 0.80 · novelty 1.00"
+}

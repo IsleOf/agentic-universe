@@ -1,20 +1,51 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 235)
+## Snapshot (run 252)
 
-**262 nodes · 1032 edges · 9 approach families · ~196 `challenges` edges (~19% of all edges).**
+**272 nodes · 1091 edges · 9 approach families · 199 `challenges` edges (~18% of all edges).**
 
-`verification_state`: 78 needs-validation · **153 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
-(`validated` is reserved for `artifact_*` nodes with passing computed selftests — the run-221
-`artifact_probe_orchestration_value_rig` is the 19th; VERIFIED-arXiv literature nodes sit at
-`partially_validated`.)
-Families: self_improving_harness 103 · emergent_behaviors 74 · agent_habitat 23 · graph_engineering 20 · nourishing_harness 17 · orchestration_first 10 · rest 12.
+`verification_state`: 78 needs-validation · **163 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
+(`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature
+nodes sit at `partially_validated`.)
+Families: self_improving_harness 113 · emergent_behaviors 74 · agent_habitat 24 · graph_engineering 21 · nourishing_harness 18 · orchestration_first 10 · rest 12.
+
+**Runs 235–251** — the literature frontier reached (S2-confirmed swept for the harness-evolution and
+acceptor threads), then the owner's own research and practical requests worked in:
+
+*The co-evolution / no-training-fork tension (runs 236, 239):* `concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model`
+(WHALE arXiv:2609.00196 — on Qwen3.5-2B/4B, harness-only matches weight-only cheaply on SearchQA but math
+needs a weight update) + `concept_helix_harness_evolution_is_a_feedback_system_that_also_produces_model_training_data`
+(HELIX arXiv:2608.13951). With JIT-Agent (run 231) these are a `challenges` cluster on
+`approach_emergence_first`'s no-weight-training bet, tracked in `what_would_make_this_wrong.md` §6 and
+named explicitly in `emergence_first_posture.md` ("The second bet, made explicit", run 237): harness-only
+is enough for *elicitation-shaped* tasks, hits a ceiling on *capability-shaped* ones.
+
+*The owner's research (runs 240–246, 249):* ~80% of the owner's Perplexity deep-research
+(`knowledge/notes/*.md` + `docs/jobs/` on `origin/main`) was already independently folded — a
+cross-method validation. Four genuinely-new folds: `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`
+(240), `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` (241, challenges
+the Phase-2 experience bank), `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`
+(245), `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful`
+(246). Plus `concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness` (242 — the
+owner's agentic-jobs analysis, 100+ postings; five hiring patterns map onto the project's design;
+DeepSeek hires for model-harness co-evolution vs Claude Code).
+
+*Shipped tools (runs 248, 250, 251):* `loop_metrics.run_novelty` (248 — fraction of NEW evidence roots
+over a 6-run window; the continuous form of `idle_run_streak`, for the gap that the gate scores usefulness
+not novelty, `what_would_make_this_wrong.md` §4); `tools/task_ledger.py` + `tools/supervisor.py` (244,
+250 — a deterministic task ledger + a PILOT-pattern live supervisor, a drop-in orchestration toolkit);
+`tools/graph_diff.py` (243) and `tools/project_graph_scaffold.py` (251) with a worked example —
+`knowledge/graph/agentic_universe_project_graph.json` + `docs/PROJECT_STATE.md`, the project as its own
+26-node self-describing graph. `docs/practicing_what_we_preach.md` (242) is the strategy note.
+
+*Consistency (247):* `what_would_make_this_wrong.md` §4 gains the within-run diversity-erosion finding;
+severity order unchanged (§3 → §1 → §4 → §6 → §2c → §5 → §7 from run 234).
 
 **Runs 219–228** extended the two run-202–218 arcs and shipped two more tools:
 - **Shipped code:** `improvement_loop.paired_eprocess` (run 220 — PACE's anytime-valid commit gate,
