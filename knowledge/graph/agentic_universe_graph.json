@@ -1204,6 +1204,10 @@
     {
       "date": "2026-10-08",
       "change": "Autonomous run 314. Consistency touch (IDLE-STATE clause c; no node/edge change). docs/what_would_make_this_wrong.md section 1: folded the run-313 MRMMIA finding into the memory-poisoning paragraph as the THIRD attack class on the retrieve-heavy stance - poisoning corrupts, covert poisons evade the screen, membership inference exfiltrates; the write_gate is a write-side control and the v2 hybrid-memory design adds recall surface. 341 nodes / 1359 edges unchanged. Validator VALID."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Autonomous run 315. IDLE-STATE clause b - dry-ran tools/probe_composed_design.py sweep end to end (not exercised since run 92). Verdict unchanged: COMPOSES BUT BOUNDED - short agents + four-field handoffs + folded state (C) extend the usable horizon 12 -> 24 steps vs prose handoffs, but the base per-step failure rate still caps it (C at 100 steps = 0.192). Matches what_would_make_this_wrong.md section 5. Reconfirmation, no graph node/edge change (341/1359). Validator VALID."
     }
   ],
   "nodes": [
