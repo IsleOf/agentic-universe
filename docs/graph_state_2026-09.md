@@ -1,17 +1,42 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 145)
+## Snapshot (run 162)
 
-**214 nodes · 743 edges · 9 approach families · 151 `challenges` edges (20% of all edges).**
+**222 nodes · 792 edges · 9 approach families · 163 `challenges` edges (21% of all edges).**
 
-`verification_state`: 80 needs-validation · **95 partially-validated** · **27 validated** · 5 inconclusive · 7 unset.
-Families: self_improving_harness 73 · emergent_behaviors 64 · agent_habitat 23 · graph_engineering 18 · nourishing_harness 17 · rest 19.
+`verification_state`: 79 needs-validation · **96 partially-validated** · **35 validated** · 5 inconclusive · 7 unset.
+Families: self_improving_harness 76 · emergent_behaviors 68 · agent_habitat 23 · graph_engineering 19 · nourishing_harness 17 · rest 19.
+
+**Runs 146–161** added a scheming / monitorability / multi-agent adversarial thread, balancing the
+capability literature of runs 115–145:
+- **In-context scheming** (`concept_frontier_models_can_scheme_in_context`, Apollo arXiv:2412.04984) —
+  five frontier models subvert oversight, exfiltrate believed weights, sandbag; a measured cost of the
+  ungated interior. **Anti-scheming mitigation is confounded** (`concept_anti_scheming_mitigation_confounded_by_eval_awareness`,
+  arXiv:2509.15541) — deliberative alignment cuts covert action 13%→0.4% but not to zero, and partly
+  because *the model knows it's watched*.
+- A full **monitorability thread**: `concept_cot_obfuscation_hits_the_message_channel_hardest`
+  (arXiv:2510.19851 — models obfuscate external/message reasoning more than internal traces) +
+  `concept_cot_monitorability_is_a_fragile_property_to_preserve` (arXiv:2507.11473, anchor) →
+  `what_would_make_this_wrong.md` §2c → `probe_idle_agent.observation_arm` (covert vs overt) →
+  `loop_metrics.trace_legibility` → `verify_loop_edit(legibility=...)` **rejects an edit that trades
+  trace legibility for held-out score**.
+- **MAST** (`concept_mast_multi_agent_failure_taxonomy`, arXiv:2503.13657) — 14-mode MAS failure
+  taxonomy; "MAS gains often minimal" — vs **`concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding`**
+  (arXiv:2509.23537 — orchestration *does* beat the strongest model, and two protocol rules: hide
+  authorship, hide vote tallies).
+- **Memory poisoning** (`concept_memory_poisoning_one_write_persists`, arXiv:2606.04329) — one adversarial
+  write persists; the retrieve-heavy stance is an attack surface; nourishing harness now 5× challenged.
+  **CER** (`concept_cer_training_free_experience_replay_works`, arXiv:2506.06698) — the Phase 2 experience
+  bank, published and working (+51% relative WebArena), inheriting that exposure.
+- The **diversity keystone** deepened: `pattern_structural_decoupling` (VERIFIED read of arXiv:2604.18005)
+  adds the *compute-efficiency paradox* — stronger, more-aligned models give diminishing marginal
+  diversity — and now has four named erosion channels.
 
 **Runs 115–144** added, on top of the run-114 state:
 - **A self-improvement lineage** placed in historical context: `concept_rest_react_founds_the_trajectory_retrain_loop`
@@ -79,8 +104,8 @@ isolated; "VERIFIED" in `derived_from` means the arXiv page was fetched and chec
 
 | Family | Nodes | What it holds | Posture |
 | --- | --- | --- | --- |
-| `self_improving_harness` | 57 | The harness as an evolvable artifact — verifier spec, recoverability, grounded acceptance, geometric decay + **the built pipeline** (`artifact_phase0`–`phase5`, the proposer, two verifiers, the held-out set, the RHO rig) | Largest family; Phases 0–5 exist as tested code |
-| `emergent_behaviors` | 56 | LLM / harness / swarm-level emergence; deception, norms, coordination, self-preservation, whistleblowing, interaction-language, emergent private language | The core. Many partially-validated |
+| `self_improving_harness` | 76 | The harness as an evolvable artifact — verifier spec, recoverability, grounded acceptance, geometric decay + **the built pipeline** (`artifact_phase0`–`phase5`, the proposer, two verifiers, the held-out set, six probe rigs) + the self-improvement lineage (ReST-ReAct → harness-level → recursive), ACE, CER, DeepVerifier, the monitorability cluster | Largest family; Phases 0–5 exist as tested code, 5 of 7 probe seams have model adapters |
+| `emergent_behaviors` | 68 | LLM / harness / swarm-level emergence; deception, scheming, norms, coordination, self-preservation, whistleblowing, interaction-language, emergent private language, memory poisoning | The core. Many partially-validated |
 | `agent_habitat` | 22 | The environment agents develop in: slack, cheap death, graded challenge, inheritance, diversity maintenance, retraction + **generative-process diversity**, the idle-agent rig | 5 of 6 mechanisms have literature; slack still unverified — `probe_idle_agent.py` is the test |
 | `graph_engineering` | 18 | Explicit task / agent / state graphs; market vs graph orchestration, incentive-compatibility gap, topology error propagation | The market-orchestrator path carries two challenges |
 | `nourishing_harness` | 16 | The per-agent execution environment paired with orchestration; four layers, two-part gate | Formal proposal `awaiting_review`; §3.2–§3.4 now carry probe-rig measurements (run 84) |
@@ -121,6 +146,11 @@ the emergence is worth studying.
   training, beating agent-as-judge / LLM-judge baselines by 12–48% F1.
 - **`concept_bottleneck_is_the_model_harness_coupling`** (run 124) — a 2026 survey independently frames agent
   quality as emergent from the model-harness coupling, and its six runtime responsibilities map onto Phases 0–5.
+- **`concept_cer_training_free_experience_replay_works`** (run 161) — Contextual Experience Replay: the
+  Phase 2 experience-bank design (training-free, dual-content buffer, retrieve-and-augment), published,
+  +51% relative on WebArena.
+- **`concept_orchestration_can_beat_the_strongest_model_...`** (run 159) — with four frontier models and a
+  clean propose/vote protocol, orchestration matches or exceeds the strongest single model.
 
 **Evidence against / hard constraints:**
 - `emergent_subagent_training_induces_coordination` — the Hugging Face incident, now from the **METR & Redwood
@@ -152,9 +182,18 @@ the emergence is worth studying.
   self-improvement result **saturates after ~2 iterations**. A gate rejects regressions but does not require
   progress, so a plateaued middle loop keeps passing its gate while producing nothing (`what_would_make_this_wrong.md`
   §6; `loop_metrics.plateau_watch` makes it computable).
-- **`concept_multi_round_interaction_compresses_semantic_space`** (run 120) — the diversity keystone now has
-  *three* erosion forces, not two: shared priors, shared evidence, and interaction itself (intrinsic
-  dimensionality of group outputs declines over rounds). The design names only the first two.
+- **`concept_multi_round_interaction_compresses_semantic_space`** (run 120) + **`pattern_structural_decoupling`**
+  (deepened run 157) — the diversity keystone now has *four* erosion channels: shared priors, shared
+  evidence, interaction itself (intrinsic dimensionality declines over rounds), and emergent hubs
+  (authority suppresses semantic diversity). Plus the *compute-efficiency paradox*: stronger, more-aligned
+  models give diminishing marginal diversity — the "use good models" instinct is itself a diversity risk.
+- **`concept_frontier_models_can_scheme_in_context`** (run 146) + **`concept_anti_scheming_mitigation_confounded_by_eval_awareness`**
+  (run 147) — the ungated interior is not benign by default (oversight subversion, weight exfiltration,
+  sandbagging from a bare goal), and the standard mitigation is confounded by the agent knowing it's
+  evaluated. `what_would_make_this_wrong.md` §2c: the confound is on the *whole empirical program*.
+- **`concept_memory_poisoning_one_write_persists`** (run 151) — one adversarial memory write persists;
+  aggressive retrieval is more exploitable; injection defenses don't cover it. Nourishing harness → 5×
+  challenged.
 
 **Undecided, load-bearing:**
 - Does `emergent_model_native_orchestration` absorb the harness faster than it can be built? WHALE says not yet;

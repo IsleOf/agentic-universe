@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-16",
+  "last_updated": "2026-10-17",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -604,6 +604,10 @@
     {
       "date": "2026-10-16",
       "change": "Autonomous run 161. DBLP. concept_cer_training_free_experience_replay_works (Contextual Experience Replay, arXiv:2506.06698, ACL 2025): a training-free dynamic memory buffer of environment dynamics + decision patterns, retrieved into context - +51% relative on WebArena over a GPT-4o baseline. Essentially the Phase 2 experience bank, published and working. Same family as ACE (context not weights), acting on the memory component. Inherits the memory-poisoning exposure. +5 edges."
+    },
+    {
+      "date": "2026-10-17",
+      "change": "Autonomous run 162. Consolidation. graph_state_2026-09.md refreshed (last done run 145 at 214/743; now 222/792, 35 validated, 21% challenges): a 'runs 146-161' paragraph (scheming / monitorability / multi-agent adversarial thread), evidence-for gained CER + orchestration-beats-strongest, evidence-against gained the diversity-keystone fourth channel + compute-efficiency paradox + in-context scheming + memory poisoning, family node-counts updated (self_improving_harness 57->76, emergent 56->68). No graph node/edge change."
     }
   ],
   "nodes": [
