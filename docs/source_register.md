@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 255 nodes, 987 edges · **Date:** 2026-09-05
+**Graph at generation:** 256 nodes, 993 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -125,6 +125,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.02178](https://arxiv.org/abs/2608.02178) | (title not recorded) | `emergent_social_conventions` |
 | [2608.02758](https://arxiv.org/abs/2608.02758) | (title not recorded) | `emergent_pluralistic_ignorance` |
 | [2608.02827](https://arxiv.org/abs/2608.02827) | (title not recorded) | `principle_diversity_maintenance` |
+| [2608.03392](https://arxiv.org/abs/2608.03392) | (title not recorded) | `concept_self_evolving_coding_agents_taxonomy_by_evolution_target` |
 | [2608.03585](https://arxiv.org/abs/2608.03585) | (title not recorded) | `emergent_knowledge_commons_erosion` |
 | [2608.04355](https://arxiv.org/abs/2608.04355) | (title not recorded) | `concept_self_correction_is_mostly_format_repair_not_reasoning` |
 | [2608.04507](https://arxiv.org/abs/2608.04507) | (title not recorded) | `emergent_reputation_and_trust_dynamics` |
@@ -393,7 +394,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-15-0000.md` — `concept_curriculum_generation_not_intrinsic_drive`
 - `docs/auto_sweep_2026-09-15-0600.md` — `concept_irreversibility_budget`, `pattern_certified_runtime_alarm`, `pattern_provenance_based_authority`
 - `docs/auto_sweep_2026-09-15-1800.md` — `concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform`
-- `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `emergent_attribution_laundering`, `emergent_constraint_weakening_at_handoffs` +1
+- `docs/auto_sweep_2026-09-16-0000.md` — `concept_overseer_degradation`, `concept_self_evolving_coding_agents_taxonomy_by_evolution_target`, `emergent_attribution_laundering` +2
 - `docs/auto_sweep_2026-09-16-1800.md` — `emergent_no_equilibrium_convergence`, `pattern_market_as_orchestrator`
 - `docs/auto_sweep_2026-09-17-0000.md` — `concept_geometric_reliability_decay`, `concept_step_count_is_the_horizon_limit`, `pattern_deterministic_state_folding`
 - `docs/auto_sweep_2026-09-17-1200.md` — `concept_transcript_only_gate_is_provably_insufficient`, `pattern_evidence_carrying_termination`, `pattern_grounded_acceptance_only` +1

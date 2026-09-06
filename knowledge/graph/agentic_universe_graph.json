@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-15",
+  "last_updated": "2026-09-16",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -852,6 +852,10 @@
     {
       "date": "2026-09-15",
       "change": "Autonomous run 222. Recency-weighted sweep (s2 citations of SEA arXiv:2607.00871). Folded Harness Engineering (arXiv:2609.00006, July 2026) as concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform: a source-code anatomy of 11 production coding harnesses (Claude Code, Codex CLI, ..., Hermes, ...) + Omnigent the first meta-harness; seven canonical subsystems, 13 observations, 29 design patterns. Findings across ~4M LOC: no runtime imports an agentic framework; none uses vector code-retrieval (deterministic retrieval only); SKILL.md leads MCP 9/11 vs 8/11; a longitudinal source-diff shows convergence becoming imitation and behavioural policy migrating from prompt prose to configuration; the coding harness turned from tool to platform in H1 2026. Direct validation of the project's build choices (pure stdlib, deterministic experience_bank retrieval, SKILL.md loop, config loop_policy). 8 edges: supports concept_bottleneck_is_the_model_harness_coupling (the seven subsystems), artifact_phase2_experience_bank (deterministic retrieval is mainstream), emergent_constraint_weakening_at_handoffs (prose->config migration), pattern_agentic_skill_lifecycle, approach_self_improving_harness (Omnigent), concept_capability_is_a_model_harness_config_property; refines concept_harness_convergence_2026_09; challenges pattern_structural_decoupling (convergence = ecosystem-level diversity erosion). 254->255 nodes, 979->987 edges."
+    },
+    {
+      "date": "2026-09-16",
+      "change": "Autonomous run 223. Recency-weighted sweep. Folded the Self-Evolving Coding Agents survey (arXiv:2608.03392, Aug 2026) as concept_self_evolving_coding_agents_taxonomy_by_evolution_target: a taxonomy centred on targets of evolution (framework / memory / skills+tools / components / workflow+topology / environment+context) + orthogonal when/which-signal perspectives; executable feedback is the code-specific signal that makes SWE a natural self-evolution domain; seven shared challenges (feedback reliability, benchmark overfitting, reversibility, complexity, safety, cost, generalization) = the project's own worry list. 6 edges: refines concept_what_when_how_where_to_evolve (the coding-specific instance); supports concept_horizon_gap_outcome_signals_decay (executable feedback = dense step signal), pattern_recoverability_constrained_evolution (reversibility named), concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution (feedback reliability + benchmark overfitting), concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform (static vs dynamic views), concept_search_time_contamination_inflates_agent_evals (benchmark overfitting). 255->256 nodes, 987->993 edges."
     }
   ],
   "nodes": [
@@ -7479,6 +7483,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-15-1800.md"
+      ]
+    },
+    {
+      "id": "concept_self_evolving_coding_agents_taxonomy_by_evolution_target",
+      "label": "Self-evolving coding agents, taxonomised by target of evolution (framework / memory / skills+tools / components / workflow+topology / environment+context); executable feedback is the code-specific signal; shared challenges: feedback reliability, benchmark overfitting, reversibility, complexity, safety, cost, generalization",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:coding_agent_evolution_taxonomy",
+      "confidence": 0.68,
+      "description": "Self-Evolving Coding Agents (survey, arXiv:2608.03392, VERIFIED via arXiv abstract read run 223; Aug 2026). A structured synthesis of self-evolving CODING agents - distinguished from conventional coding agents and from general self-evolving agents. Taxonomy centred on the TARGETS OF EVOLUTION: framework, memory, skills and tools, components, workflow and topology, environment and context - i.e. the agent persistently updates one of these from prior coding interactions. Two orthogonal perspectives: WHEN evolution occurs, and WHICH code-specific signals drive it. The domain-specific point: executable feedback, repository-level context, and coding trajectories make software engineering a NATURAL domain for agent self-evolution (dense verifiable signal) - but the same features introduce challenges: FEEDBACK RELIABILITY, BENCHMARK OVERFITTING, REVERSIBILITY, system complexity, safety, cost, and generalization. Bearing on the project: this is concept_what_when_how_where_to_evolve (the general self-evolving-agents taxonomy) specialised to code, and its seven-item challenge list is the project's own worry list - feedback reliability + benchmark overfitting are the acceptor cluster (SEAL / PACE / Who Grades the Grader / search-contamination), reversibility is pattern_recoverability_constrained_evolution, safety is what_would_make_this_wrong.md. 'Executable feedback is the dense code-specific signal' is the same argument as concept_horizon_gap_outcome_signals_decay (the field manufactures denser step-level signal). Recency: Aug 2026, a survey so it lags primary work by ~1-2 quarters.",
+      "tags": [
+        "self-evolving-coding-agents",
+        "targets-of-evolution",
+        "executable-feedback",
+        "feedback-reliability",
+        "benchmark-overfitting",
+        "reversibility",
+        "survey",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-16-0000.md",
+        "arXiv:2608.03392 (Self-Evolving Coding Agents) - VERIFIED, abstract read run 223"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-16-0000.md"
       ]
     }
   ],
@@ -18073,6 +18105,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "A harness with seven subsystems each spanning a minimal-to-maximal implementation range is exactly 'capability is a model-harness-config property' - the same model in a minimal vs maximal harness is a different agent."
+    },
+    {
+      "id": "edge_coding_evolution_taxonomy_refines_what_when_how_where",
+      "source": "concept_self_evolving_coding_agents_taxonomy_by_evolution_target",
+      "target": "concept_what_when_how_where_to_evolve",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.66,
+      "description": "The coding-specific instance of the general what/when/how/where taxonomy: 'targets of evolution' (framework / memory / skills+tools / components / workflow+topology / environment+context) is the 'what', specialised, and 'which code-specific signals' names executable feedback as the 'how'."
+    },
+    {
+      "id": "edge_coding_evolution_taxonomy_supports_horizon_gap",
+      "source": "concept_self_evolving_coding_agents_taxonomy_by_evolution_target",
+      "target": "concept_horizon_gap_outcome_signals_decay",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Executable feedback + repository context + coding trajectories make SWE a natural domain for self-evolution' is the positive form of the horizon-gap argument: code gives a dense verifiable step signal that open-ended tasks lack."
+    },
+    {
+      "id": "edge_coding_evolution_taxonomy_supports_recoverability",
+      "source": "concept_self_evolving_coding_agents_taxonomy_by_evolution_target",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Reversibility' is named as one of seven shared challenges of self-evolving coding agents - the survey-level confirmation that recoverability-as-a-constraint is a field concern, not a project idiosyncrasy."
+    },
+    {
+      "id": "edge_coding_evolution_taxonomy_relates_acceptor_cluster",
+      "source": "concept_self_evolving_coding_agents_taxonomy_by_evolution_target",
+      "target": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Feedback reliability' and 'benchmark overfitting' - two of the survey's seven challenges - are exactly what the runs 203-214 acceptor cluster (SEAL / PACE / Who Grades the Grader / search-contamination) addresses."
+    },
+    {
+      "id": "edge_coding_evolution_taxonomy_supports_harness_anatomy",
+      "source": "concept_self_evolving_coding_agents_taxonomy_by_evolution_target",
+      "target": "concept_harness_engineering_is_an_empirical_discipline_the_coding_harness_became_a_platform",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Companion Aug-2026 synthesis: the harness-anatomy paper maps the SUBSYSTEMS a coding harness has; this survey maps how each subsystem gets EVOLVED - the static and dynamic views of the same object."
+    },
+    {
+      "id": "edge_coding_evolution_taxonomy_relates_search_contamination",
+      "source": "concept_self_evolving_coding_agents_taxonomy_by_evolution_target",
+      "target": "concept_search_time_contamination_inflates_agent_evals",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "'Benchmark overfitting' as a named challenge includes search-time contamination: a web-connected coding agent re-run on a benchmark can retrieve the fix - the survey confirms this is a recognised field-level failure mode, which holdout_tasks.SEARCH_SENSITIVE already guards against."
     }
   ]
 }
