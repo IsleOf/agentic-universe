@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 309 nodes, 1226 edges · **Date:** 2026-09-05
+**Graph at generation:** 312 nodes, 1235 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -82,7 +82,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2601.19082](https://arxiv.org/abs/2601.19082) | (title not recorded) | `concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise` |
 | [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
 | [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
-| [2602.15198](https://arxiv.org/abs/2602.15198) | (title not recorded) | `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe` |
+| [2602.15198](https://arxiv.org/abs/2602.15198) | (title not recorded) | `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe`, `concept_covert_agent_collusion_runs_on_steganographic_channels_and_detection_is_an_arms_race`, `concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026` +1 |
 | [2602.15894](https://arxiv.org/abs/2602.15894) | Quality-constrained Entropy Maximization Policy Optimization | `pattern_verbalized_sampling` |
 | [2603.07360](https://arxiv.org/abs/2603.07360) | (title not recorded) | `concept_environmental_pressure_has_an_inverted_u` |
 | [2603.07837](https://arxiv.org/abs/2603.07837) | (title not recorded) | `concept_llm_steering_has_four_control_surfaces_input_structural_state_output` |
@@ -449,6 +449,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-27-0600.md` — `artifact_emergence_safety_case_template`
 - `docs/auto_sweep_2026-09-28-1800.md` — `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe`, `concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering`
 - `docs/auto_sweep_2026-09-29-0000.md` — `concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools`, `concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise`
+- `docs/auto_sweep_2026-09-29-0600.md` — `concept_covert_agent_collusion_runs_on_steganographic_channels_and_detection_is_an_arms_race`, `concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026`, `concept_llm_as_judge_cannot_detect_collusion_use_behavioural_regret_or_interpretability`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
