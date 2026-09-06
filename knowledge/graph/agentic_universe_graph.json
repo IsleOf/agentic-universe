@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-04",
+  "last_updated": "2026-10-05",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1152,6 +1152,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 301. Orientation refresh (IDLE-STATE clause c; no main-graph node/edge change). docs/graph_state_2026-09.md Snapshot run 279 (312/1237) -> run 301 (330/1321; 36 selftests) + a \"Runs 280-300\" section: the owner three research pushes (prediction-markets branch fold 296, agentic-tooling scan fold 298, HANDOFF refresh 295), the per-project audit kit (297) + the etsy-agentic-space branch, and the v2 self-rebuild arc (plan 299 + acceptance_gate.py brick 300). docs/PROJECT_STATE.md brought to run 301: numbers, current-state, the single-highest-value-next-move now framed as \"provision a call_model budget\" (v2.0), + open question au__q_v2_rebuild. knowledge/graph/agentic_universe_project_graph.json (the 26-node self-graph) -> 28 nodes / 27 edges (au__c_acceptance_gate + au__q_v2_rebuild), VALID."
+    },
+    {
+      "date": "2026-10-05",
+      "change": "Autonomous run 302. Built tools/research_brief.py - the v2.2 brick from docs/self_rebuild_v2.md section 5: the typed object a literature scout emits. validate_brief() enforces currency_note (required) + already_in_graph (the dedup review) + slug ids + verdict/candidate consistency. to_graph_patch() -> the check_patch shape. check_against_graph() mechanises \"do not duplicate work\": id collision = hard stop, >=4-shared-significant-word label = near_label, an unacknowledged near_label = unreviewed_overlap. 11 selftest checks; selftest_all JOBS -> 37. 1 node (artifact_research_brief) + 2 edges. 330 -> 331 nodes."
     }
   ],
   "nodes": [
@@ -9769,6 +9773,32 @@
       "derived_from": [
         "docs/self_rebuild_v2.md",
         "docs/auto_sweep_2026-10-04-1800.md"
+      ],
+      "evidence_links": [
+        "docs/self_rebuild_v2.md"
+      ]
+    },
+    {
+      "id": "artifact_research_brief",
+      "label": "research_brief.py - the typed object a literature scout produces, with a mechanised dedup check",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "tools/research_brief.py (run 302), the v2.2 brick from docs/self_rebuild_v2.md section 5. A brief = {source, fetched, currency_note, verdict, already_in_graph, candidate_nodes, candidate_edges}. validate_brief() enforces the disciplines the loop keeps by hand: currency_note is REQUIRED (recency weighting is not optional), already_in_graph must be present (the dedup review), node ids must be lower_snake_case slugs, verdict in {fold, partial-fold, already-covered, not-substantive} must match whether candidates are present. to_graph_patch() emits the {proposal_metadata, add_nodes, add_edges} shape knowledge_graph.check_patch validates. check_against_graph() mechanises the owner directive \"do not duplicate work\": an id collision is a hard stop; a candidate label sharing >=4 significant words with an existing node label is a near_label; a near_label the brief did not acknowledge sets unreviewed_overlap. 11 selftest checks; selftest_all JOBS -> 37. Turns the ad-hoc owner-pushes-md / loop-folds-it-days-later flow (runs 240-246, 253, 296, 298) into a typed pipeline the v2 scout emits.",
+      "tags": [
+        "research-brief",
+        "dedup",
+        "recency-weighting",
+        "v2",
+        "self-rebuild",
+        "pipeline"
+      ],
+      "derived_from": [
+        "docs/self_rebuild_v2.md",
+        "docs/auto_sweep_2026-10-05-0600.md"
       ],
       "evidence_links": [
         "docs/self_rebuild_v2.md"
@@ -24040,6 +24070,28 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "The forecast check reuses the epistemic-constitution shape: predicted probability in, Brier out, per-proposer over time."
+    },
+    {
+      "id": "edge_brief_implements_v2_plan",
+      "source": "artifact_research_brief",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The v2.2 brick from section 5 of the plan - the scout output contract."
+    },
+    {
+      "id": "edge_brief_operationalises_additive_bias",
+      "source": "artifact_research_brief",
+      "target": "emergent_additive_growth_bias",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "check_against_graph is a deterministic guard against the graph curation bias this node warns about: a candidate that duplicates an existing node cannot be folded without an explicit acknowledgement."
     }
   ]
 }

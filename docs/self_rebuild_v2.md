@@ -138,8 +138,10 @@ serialization, persistent cooldowns, challenge classification, no credential ext
    "owner runs Perplexity → pushes `.md`" step. NotebookLM path: upload the current graph +
    recent sweeps as sources, ask it for gaps / contradictions, capture the response.
 2. **`research-brief`** — turns a scout run into the structured object the graph writer folds
-   (candidate nodes, edges, `derived_from`, currency note), not free prose. Mirrors the
-   project-graph vocabulary.
+   (candidate nodes, edges, `derived_from`, currency note), not free prose. **Built run 302
+   (`tools/research_brief.py`): `validate_brief` + `to_graph_patch` + `check_against_graph`
+   (the mechanised dedup check).** The scout still fills the brief; the skill wraps the
+   fetch.
 3. **`acceptance-gate`** — wraps the held-out set + PACE e-process + process score + forecast
    check into one `gate check <proposal>` call that emits a certificate or a repair.
 4. **`loop-conductor`** — the scheduled entry point: read policy, pick increment, dispatch
@@ -227,7 +229,7 @@ the Phase 3 gate, not a resource request.
 |---|---|---|
 | **v2.0** | bind one `call_model`; probe-runner runs `probe_idle_agent sweep` in a WSL sandbox; result → the gate | the sweep produces a falsifiable answer on `concept_habitat_slack` |
 | **v2.1** | `acceptance-gate` skill: held-out + PACE + process score + certificate log, wired as the conductor's commit gate | a known-bad edit is rejected + repaired; a known-good edit certified — **core brick built run 300 (`tools/acceptance_gate.py`): `check()` composes the checks + a process-adjusted flag + a forecast Brier into a replayable signed certificate; `verify()` replays it. Not yet wired as the commit gate.** |
-| **v2.2** | `perplexity-notebooklm` + `research-brief` skills; nightly scout writes deduped briefs | a brief folds through the gate with no human step |
+| **v2.2** | `perplexity-notebooklm` + `research-brief` skills; nightly scout writes deduped briefs | a brief folds through the gate with no human step — **`research_brief.py` built run 302 (validate + patch + dedup check); `perplexity-notebooklm` and the nightly wiring remain**|
 | **v2.3** | conductor headless on the 6h task; ledger-driven; supervisor aborts over-budget work | 10 consecutive autonomous runs, all gated, no dropped tasks (`sweep_stale` clean) |
 | **v2.4** | CLI executor pool + dissent agent; fan-out only under the finding-11 criterion | a fanned-out run beats the single-agent baseline on a verifiable multi-part task; open question 6 gets a real datapoint |
 | **v2.5** | janitor: per-consumer views, experience-bank GC, drift report | monitoring questions answered from views at <1/10 the tokens of raw trace |

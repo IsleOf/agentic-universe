@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 329 nodes, 1316 edges · **Date:** 2026-09-05
+**Graph at generation:** 331 nodes, 1323 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -482,8 +482,9 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-04-0000.md` — `concept_safety_helpfulness_tradeoff_persists_under_optimisation`
 - `docs/auto_sweep_2026-10-04-0600.md` — `concept_agent_memory_should_be_hybrid_vector_graph_kv_episodic_with_janitor_agents`, `concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop`, `concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever`
 - `docs/auto_sweep_2026-10-04-1200.md` — `artifact_self_rebuild_v2_plan`, `concept_aggregate_score_masks_per_layer_regression`
+- `docs/auto_sweep_2026-10-04-1800.md` — `artifact_acceptance_gate`
 - `docs/auto_sweep_2026-10-05-0000.md` — `concept_harness_has_model_independent_failure_fingerprints`
-- `docs/auto_sweep_2026-10-05-0600.md` — `concept_recursive_meta_skill_evolution`
+- `docs/auto_sweep_2026-10-05-0600.md` — `artifact_research_brief`, `concept_recursive_meta_skill_evolution`
 - `docs/auto_sweep_2026-10-05-1200.md` — `concept_asg_si_independently_arrives_at_the_plan`
 - `docs/auto_sweep_2026-10-05-1800.md` — `concept_multi_round_interaction_compresses_semantic_space`
 - `docs/auto_sweep_2026-10-06-0600.md` — `concept_rest_react_founds_the_trajectory_retrain_loop`
@@ -550,7 +551,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
-- `docs/self_rebuild_v2.md` — `artifact_self_rebuild_v2_plan`
+- `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_research_brief`, `artifact_self_rebuild_v2_plan`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`, `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`

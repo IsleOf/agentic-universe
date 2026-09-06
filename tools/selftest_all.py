@@ -56,6 +56,7 @@ JOBS = [
     ("epistemic_constitution.py", ["selftest"]),
     ("fractal_flock.py", ["selftest"]),
     ("acceptance_gate.py", ["selftest"]),
+    ("research_brief.py", ["selftest"]),
 ]
 
 
