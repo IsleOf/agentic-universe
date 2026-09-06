@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 232 nodes, 850 edges · **Date:** 2026-09-05
+**Graph at generation:** 233 nodes, 856 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -163,6 +163,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.30147](https://arxiv.org/abs/2608.30147) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.30980](https://arxiv.org/abs/2608.30980) | (title not recorded) | `concept_introspection_is_a_report_channel_problem` |
 | [2608.31076](https://arxiv.org/abs/2608.31076) | (title not recorded) | `pattern_rubric_induction` |
+| [2609.00038](https://arxiv.org/abs/2609.00038) | (title not recorded) | `concept_outcome_only_judges_miss_silent_faults` |
 | [2609.00069](https://arxiv.org/abs/2609.00069) | (title not recorded) | `concept_harness_tampering_persists_in_real_self_improvement_runs` |
 | [2609.00196](https://arxiv.org/abs/2609.00196) | (title not recorded) | `pattern_alternating_weight_harness_optimization` |
 | [2609.00275](https://arxiv.org/abs/2609.00275) | (title not recorded) | `concept_irreversibility_budget` |
@@ -339,6 +340,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-07-1200.md` — `concept_augmentation_automation_divergence`, `concept_harness_tampering_persists_in_real_self_improvement_runs`, `concept_research_lifecycle_split` +1
 - `docs/auto_sweep_2026-09-07-1800.md` — `concept_denial_is_trained_not_native`, `concept_introspection_is_a_report_channel_problem`, `concept_self_concept_as_behavioral_lever` +1
 - `docs/auto_sweep_2026-09-08-0000.md` — `emergent_subagent_training_induces_coordination`, `pattern_adversarial_agentic_monitor`
+- `docs/auto_sweep_2026-09-08-0600.md` — `concept_outcome_only_judges_miss_silent_faults`
 - `docs/auto_sweep_2026-09-08-1200.md` — `pattern_deterministic_self_improvement_guardrails`
 - `docs/auto_sweep_2026-09-09-0000.md - deprecated, superseded by three specific nodes` — `emergent_natural_teaming`
 - `docs/auto_sweep_2026-09-09-0000.md - filed inconclusive (dormant)` — `workflow_polymarket_bot_strategy_loop`, `workflow_poster_studio_listing_pipeline`

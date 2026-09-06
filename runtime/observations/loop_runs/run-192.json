@@ -1,0 +1,29 @@
+{
+  "run": 192,
+  "increment": "recent citation-sweep: fold trajectory-judge - what outcome-only judges miss (arXiv:2609.00038) via S2 citations of MAST",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.00038",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.00038"
+  ],
+  "trace_file": "runtime\\traces\\loop-192.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

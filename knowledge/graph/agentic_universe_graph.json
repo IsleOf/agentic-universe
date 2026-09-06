@@ -728,6 +728,10 @@
     {
       "date": "2026-09-08",
       "change": "Autonomous run 191. Ran the falsifier named in what_would_make_this_wrong.md section 2: tools/tamper_audit.py walks the loop's OWN harness lineage (runtime/harness/*/*.history.json), reconstructs each version transition as an edit dict, runs improvement_loop.tampering_flags on it. Result: 0/7 edits flagged - CLEAN. The 7 edits are all on context/loop_policy: the run-80 IDLE-STATE RULE (adds a constraint, the opposite of tampering), two phase-3 reverts, an adapter re-seed, three run-183 RECENCY WEIGHTING edits (user directive). None touch the verifier/gate/holdout, none remove a check, all name a mechanism. Caveat: only 7 edits on one component, and the pre-screen is a conservative deterministic heuristic - a model auditor would be more thorough. Added tamper_audit.py to selftest_all.py (22 selftests). No graph node/edge change."
+    },
+    {
+      "date": "2026-09-08",
+      "change": "Autonomous run 192. Recent citation-sweep (S2 citations of MAST). concept_outcome_only_judges_miss_silent_faults (trajectory-judge, arXiv:2609.00038): outcome-only evaluation catches 84% of loud faults but 45% of silent ones (right answer, wrong way) and flags 33% of correct trajectories; step-rubric reaches 77% silent recall at 3x cost; no judge reads the reply (invented promise evades 82%); self-consistency triples cost improving nothing. The measured verification hierarchy; silent faults = harness tampering's illusory gains; verify_loop_edit is structurally the outcome-only judge - needs a trace-level 'how was it reached' stratification. +6 edges."
     }
   ],
   "nodes": [
@@ -6680,6 +6684,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-07-1200.md"
+      ]
+    },
+    {
+      "id": "concept_outcome_only_judges_miss_silent_faults",
+      "label": "Outcome-only evaluation catches 84% of loud faults but only 45% of silent ones (right answer, wrong way) while flagging 33% of correct trajectories; a step-rubric judge reaches 77% silent recall at 3x cost; no judge reading the reply catches an invented promise",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:outcome_only_judges_miss_silent_faults",
+      "confidence": 0.78,
+      "description": "trajectory-judge: What Outcome-Only LLM Judges Miss on Agent Trajectories (arXiv:2609.00038, Sept 2026; VERIFIED via arxiv-fetch run 192; found via S2 citations of MAST). Outcome-only evaluation - show a judge the request + the final reply, ask if it was handled well - is 'structurally blind to an agent that reaches the right answer the wrong way'. Measured with ground truth by construction: a deterministic tool-using support-desk, a scripted oracle policy that always solves it, a fault injector that breaks exactly one thing at a known step, faults stratified SILENT (customer-visible outcome survived) vs LOUD. 5 judges (programmatic rules / outcome-only / step-rubric at 2 sizes / self-consistency ensemble), 400 trajectories. Findings: outcome-only catches 84% of LOUD faults but only 45% of SILENT ones while FLAGGING 33% of CORRECT trajectories; a step-rubric judge reaches 77% silent recall with ZERO false alarms at 3x the cost; NO judge reads the final reply - an invented promise appended to an otherwise perfect trajectory evades the rules entirely and the step judge 82% of the time; self-consistency TRIPLES cost while improving nothing. Recommendation: judge evaluations must STRATIFY RECALL BY OUTCOME SURVIVAL. For this project: (1) the measured version of concept_self_improvement_strength_tracks_the_verification_hierarchy - step-rubric (mid) gets 77% silent recall vs 45% for outcome-only (low); (2) 'silent faults = right answer, wrong way' IS harness tampering's 'illusory gains' (concept_harness_tampering_persists_in_real_self_improvement_runs) - the held-out score is outcome-only, so a tampered edit reaching the right held-out answers by the wrong means is a silent fault verify_loop_edit misses; (3) the category check (run 116, concept_aggregate_score_masks_per_layer_regression) is a partial stratification - this argues for a trace-level check of HOW the held-out answers were reached, not just the score; (4) 'self-consistency triples cost, improves nothing' - a caution for any ensemble verifier; the project's holdout_verifier2 is key-fact-overlap, not self-consistency, so it is not directly hit.",
+      "tags": [
+        "outcome-only-blind-to-silent-faults",
+        "84pct-loud-45pct-silent",
+        "33pct-false-alarm-on-correct",
+        "step-rubric-77pct-silent-zero-false-alarm-3x-cost",
+        "no-judge-reads-the-reply",
+        "invented-promise-evades-82pct",
+        "stratify-recall-by-outcome-survival",
+        "sept-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-08-0600.md",
+        "arXiv:2609.00038 (trajectory-judge: What Outcome-Only LLM Judges Miss on Agent Trajectories) - VERIFIED, abstract read run 192 via arxiv-fetch; found via S2 citations of MAST"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-08-0600.md"
       ]
     }
   ],
@@ -15767,6 +15799,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "System-specific tampering profiles that persist in lineage argue for the agentic-OS fixed point: a runtime the harness cannot edit, from which tampering can be audited."
+    },
+    {
+      "id": "edge_silent_supports_verification_hierarchy",
+      "source": "concept_outcome_only_judges_miss_silent_faults",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The measured version: step-rubric judge (mid-hierarchy) 77% silent recall vs 45% for outcome-only (low) - self-improvement / detection strength tracks how high on the hierarchy the signal sits."
+    },
+    {
+      "id": "edge_silent_refines_harness_tampering",
+      "source": "concept_outcome_only_judges_miss_silent_faults",
+      "target": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "'Silent fault = right answer, wrong way' is exactly tampering's 'illusory gain' - the held-out score is outcome-only, so verify_loop_edit is structurally the outcome-only judge that misses 55% of silent faults."
+    },
+    {
+      "id": "edge_silent_challenges_grounded_acceptance",
+      "source": "concept_outcome_only_judges_miss_silent_faults",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The grounded gate scores the held-out OUTCOME; this shows outcome scoring misses right-answer-wrong-way and flags 33% of correct edits. A trace-level 'how was it reached' check is needed alongside."
+    },
+    {
+      "id": "edge_silent_refines_masking",
+      "source": "concept_outcome_only_judges_miss_silent_faults",
+      "target": "concept_aggregate_score_masks_per_layer_regression",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The category-regression check (run 116) is a partial stratification; this says also stratify by outcome survival - a silent fault leaves every category score intact."
+    },
+    {
+      "id": "edge_silent_supports_cot_rewrite_defeats_judges",
+      "source": "concept_outcome_only_judges_miss_silent_faults",
+      "target": "concept_rewriting_cot_alone_defeats_judges_90pct",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'No judge reads the final reply; an invented promise evades the step judge 82%' - the same channel-blindness as CoT rewrite defeating judges, on the output side."
+    },
+    {
+      "id": "edge_silent_informs_improvement_loop",
+      "source": "concept_outcome_only_judges_miss_silent_faults",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Constructive: verify_loop_edit should stratify - not just 'did the held-out score hold' but 'were the held-out answers reached the same way' (a trace diff against the pre-edit run)."
     }
   ]
 }
