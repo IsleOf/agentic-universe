@@ -732,6 +732,10 @@
     {
       "date": "2026-09-08",
       "change": "Autonomous run 192. Recent citation-sweep (S2 citations of MAST). concept_outcome_only_judges_miss_silent_faults (trajectory-judge, arXiv:2609.00038): outcome-only evaluation catches 84% of loud faults but 45% of silent ones (right answer, wrong way) and flags 33% of correct trajectories; step-rubric reaches 77% silent recall at 3x cost; no judge reads the reply (invented promise evades 82%); self-consistency triples cost improving nothing. The measured verification hierarchy; silent faults = harness tampering's illusory gains; verify_loop_edit is structurally the outcome-only judge - needs a trace-level 'how was it reached' stratification. +6 edges."
+    },
+    {
+      "date": "2026-09-08",
+      "change": "Autonomous run 193. Recent citation-sweep (S2 citations of the RSI survey 2607.07663). concept_self_correction_is_mostly_format_repair_not_reasoning (The Calibration Floor, arXiv:2608.04355): most measured LLM self-correction gain is FORMAT repair not reasoning - format effects exceed content effects (p=1.7e-3), grammar-constrained decoding closes 71% of the gap, content margin exactly zero on frontier despite +0.275 total, a cited gating protocol does NOT replicate on a small model, floor-scale models get content change AND harm. The small/local-model form of silent faults / illusory gains; a direct non-replication across scale; verify_loop_edit should score with a parse-normalised answer. +6 edges."
     }
   ],
   "nodes": [
@@ -6712,6 +6716,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-08-0600.md"
+      ]
+    },
+    {
+      "id": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "label": "Most measured LLM self-correction gain is FORMAT REPAIR (making the answer parseable), not reasoning: format effects exceed content effects (p=1.7e-3); grammar-constrained decoding closes 71% of the gap; content margin is exactly zero on frontier models despite +0.275 total effect; a cited gating protocol does not replicate on a small model",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_correction_is_format_repair",
+      "confidence": 0.78,
+      "description": "The Calibration Floor: Format Repair Can Masquerade as Self-Correction at Small-to-Mid Scale (arXiv:2608.04355, Aug 2026; VERIFIED via arxiv-fetch run 193; found via S2 citations of the RSI survey). Accuracy changes after LLM self-revision are usually read as changes in REASONING; the paper shows this fails at the ANSWER-EXTRACTION boundary and tests it CAUSALLY. Across Qwen3.5 (0.8B-9B), Gemma-4-12B, and two frontier models via API, 29+ cells: decompose the always-revise accuracy shift into a CONTENT margin (both answers parseable) and FORMAT-recovery/loss margins (parseability changes). On 12 cells with meaningful unparseable-answer rates, FORMAT EFFECTS EXCEED CONTENT EFFECTS (Wilcoxon p=1.7e-3). Causal: forcing already-generated reasoning through grammar-constrained decoding so every answer is parseable closes a MEDIAN 71% of the gap between the naive total effect and the content-margin estimate. FLOOR-SCALE (0.8B/2B) models have far higher odds of content-level change AND HARM than capable-scale models (p<1e-7). Replicating a CITED confidence-gating protocol verbatim on Qwen3.5 does NOT reproduce its reported gain (same near-zero content margin). Frontier check: format-dominance INTENSIFIES with scale - content margin exactly zero in all 5 frontier cells despite total effects up to +0.275. Calibration-floor SQUEEZE: floor-scale cells have headroom but insufficient signal; capable-scale cells have signal but little headroom; only one cell marginally viable, negligible sealed-holdout gain. 'Content is a minority share of what the field has measured as self-correction.' For this project: (1) the small/local-model form of concept_outcome_only_judges_miss_silent_faults and harness tampering's illusory gain - a self-improvement gain that is format, not content, is a silent fault; (2) a DIRECT non-replication - a published self-improvement method (confidence gating) does not transfer from its original scale to a small model, so the recency-weighting note's 'old/small-model results != frontier' cuts BOTH ways; (3) concept_naive_trajectory_accumulation_already_helps (run 174) and any held-out gain in verify_loop_edit must be decomposed content-vs-format, e.g. score with grammar-constrained decoding or a parse-normalised answer; (4) capability_is_a_model_harness_config_property on the self-improvement axis - the SAME method has opposite content margins at floor vs frontier scale.",
+      "tags": [
+        "calibration-floor",
+        "format-repair-not-reasoning",
+        "content-vs-format-margin",
+        "grammar-constrained-decoding-closes-71pct",
+        "floor-scale-content-change-and-harm",
+        "confidence-gating-does-not-replicate",
+        "format-dominance-intensifies-with-scale",
+        "small-local-model",
+        "aug-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-08-1200.md",
+        "arXiv:2608.04355 (The Calibration Floor: Format Repair Can Masquerade as Self-Correction at Small-to-Mid Scale) - VERIFIED, abstract read run 193 via arxiv-fetch; found via S2 citations of the RSI survey"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-08-1200.md"
       ]
     }
   ],
@@ -15865,6 +15898,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Constructive: verify_loop_edit should stratify - not just 'did the held-out score hold' but 'were the held-out answers reached the same way' (a trace diff against the pre-edit run)."
+    },
+    {
+      "id": "edge_calfloor_refines_silent_faults",
+      "source": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "target": "concept_outcome_only_judges_miss_silent_faults",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The small/local-model form: a self-improvement gain measured as accuracy change is often a format fix (parseability) not a reasoning change - a silent fault the outcome-only score credits."
+    },
+    {
+      "id": "edge_calfloor_refines_harness_tampering",
+      "source": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "target": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Format-repair-masquerading-as-self-correction is the 'illusory performance gain' half of harness tampering, isolated causally with grammar-constrained decoding."
+    },
+    {
+      "id": "edge_calfloor_challenges_naive_accumulation",
+      "source": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "target": "concept_naive_trajectory_accumulation_already_helps",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "The naive-accumulation gains (ALFWorld 73->89% etc) were measured as accuracy change; per the calibration floor, some fraction may be format/parseability recovery rather than a better decision - they need the content-vs-format decomposition."
+    },
+    {
+      "id": "edge_calfloor_supports_verification_hierarchy",
+      "source": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Content is a minority share of what the field has measured as self-correction' - a survey-scale confirmation that the weak signal (accuracy delta) overstates genuine improvement."
+    },
+    {
+      "id": "edge_calfloor_refines_capability_is_config",
+      "source": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The SAME self-correction method has opposite content margins at floor scale vs frontier scale - self-improvement efficacy is a model-scale property, and a published method does not transfer."
+    },
+    {
+      "id": "edge_calfloor_informs_improvement_loop",
+      "source": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Constructive: score verify_loop_edit's held-out re-run with grammar-constrained decoding or a parse-normalised answer, so a format fix cannot register as a held-out improvement."
     }
   ]
 }
