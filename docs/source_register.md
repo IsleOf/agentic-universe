@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 336 nodes, 1341 edges · **Date:** 2026-09-05
+**Graph at generation:** 337 nodes, 1345 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -86,6 +86,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2602.04431](https://arxiv.org/abs/2602.04431) | (title not recorded) | `concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary` |
 | [2602.15198](https://arxiv.org/abs/2602.15198) | (title not recorded) | `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe`, `concept_covert_agent_collusion_runs_on_steganographic_channels_and_detection_is_an_arms_race`, `concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026` +1 |
 | [2602.15894](https://arxiv.org/abs/2602.15894) | Quality-constrained Entropy Maximization Policy Optimization | `pattern_verbalized_sampling` |
+| [2603.03329](https://arxiv.org/abs/2603.03329) | (title not recorded) | `concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time` |
 | [2603.07360](https://arxiv.org/abs/2603.07360) | (title not recorded) | `concept_environmental_pressure_has_an_inverted_u` |
 | [2603.07837](https://arxiv.org/abs/2603.07837) | (title not recorded) | `concept_llm_steering_has_four_control_surfaces_input_structural_state_output` |
 | [2603.10808](https://arxiv.org/abs/2603.10808) | (title not recorded) | `concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue` |
@@ -492,7 +493,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-05-1800.md` — `artifact_perplexity_notebooklm_scout`, `concept_multi_round_interaction_compresses_semantic_space`
 - `docs/auto_sweep_2026-10-06-0000.md` — `concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback`
 - `docs/auto_sweep_2026-10-06-0600.md` — `concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic`, `concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses`, `concept_rest_react_founds_the_trajectory_retrain_loop`
-- `docs/auto_sweep_2026-10-06-1200.md` — `concept_adaptive_self_improvement_in_the_low_data_regime`
+- `docs/auto_sweep_2026-10-06-1200.md` — `concept_adaptive_self_improvement_in_the_low_data_regime`, `concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time`
 - `docs/auto_sweep_2026-10-06-1800.md` — `concept_bottleneck_is_the_model_harness_coupling`
 - `docs/auto_sweep_2026-10-07-0600.md` — `concept_what_when_how_where_to_evolve`
 - `docs/auto_sweep_2026-10-08-1200.md` — `concept_ace_context_evolution_self_improvement`

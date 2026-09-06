@@ -1172,6 +1172,10 @@
     {
       "date": "2026-10-06",
       "change": "Autonomous run 306. SEVerA citation sweep (S2) surfaced 5 citers; EvoUndo (2608.28363) is already folded (pattern_recoverability_constrained_evolution). Folded the two genuinely-new harness-engineering papers. concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic (arXiv:2605.30621, VERIFIED): harness-updating flat across tiers (Qwen3.5-9B ~ Claude Opus 4.6), harness-benefit non-monotonic (mid-tier gains most) -> spend capability budget on the task-solver not the evolver; challenges JIT-Agent's trainable-harness claim, informs the run-298 routing node + the v2 plan. concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses (arXiv:2607.08028, VERIFIED): deterministic behaviour in code/manifests/schemas around a replaceable composition boundary; checks held 270/270 under model substitution; prompt-only lets violations through, a bolt-on guardrail over-refuses (88/120) vs the harness's 120/120 -> supports harness-engineering-is-empirical + capability-is-config + the acceptance gate (composed in, not bolted on) + the v2 spine. 8 edges. 334 -> 336 nodes, 1333 -> 1341 edges. Validator VALID. (AutoHarness 2603.03329 + Code-as-Agent-Harness survey 2605.18747 noted, not yet folded.)"
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Autonomous run 307. Folded AutoHarness (arXiv:2603.03329, Feb 2026, VERIFIED), queued in run 306. Gemini-2.5-Flash synthesises a code harness around itself via a few rounds of environment-feedback code refinement; prevents ALL illegal moves in 145 TextArena games and Flash+harness beats the larger Gemini-2.5-Pro; at the limit Flash writes the ENTIRE policy in code (no LLM at decision time) and the code-policy beats Gemini-2.5-Pro + GPT-5.2-High on 16 games, more cost-effectively. New node + 4 edges: supports concept_harness_capability_delta + concept_capability_is_a_model_harness_config_property + concept_harness_updating_is_flat_in_base_capability (run 306); instantiates concept_deterministic_spine_generative_edge_is_the_load_bearing_split (the extreme: the generative edge synthesises the spine, which then runs alone). Currency: Feb 2026, model-comparison margins possibly superseded. 336 -> 337 nodes, 1341 -> 1345 edges. Validator VALID. (Code-as-Agent-Harness survey 2605.18747 still queued.)"
     }
   ],
   "nodes": [
@@ -9950,6 +9954,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-06-0600.md"
+      ]
+    },
+    {
+      "id": "concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time",
+      "label": "AutoHarness: a small model synthesises a code harness from environment feedback that beats a larger model - and can generate the whole policy in code, removing the LLM from decision time",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_anatomy",
+      "confidence": 0.55,
+      "description": "arXiv:2603.03329 (AutoHarness, Feb 2026, VERIFIED via arxiv API). Motivation: in the Kaggle GameArena chess competition 78% of Gemini-2.5-Flash losses were illegal moves - actions strictly prohibited by the environment, not merely suboptimal. AutoHarness has Gemini-2.5-Flash synthesise a code harness around itself through a few rounds of iterative code refinement given environment feedback; the harness prevents ALL illegal moves across 145 TextArena games (1- and 2-player), and Flash+harness outperforms the larger Gemini-2.5-Pro. Pushed to the limit, Flash generates the ENTIRE policy in code, eliminating the LLM at decision time; the code-policy beats Gemini-2.5-Pro and GPT-5.2-High on 16 TextArena 1-player games and is more cost-effective. Currency: Feb 2026, names Gemini 2.5 / GPT-5.2, so the model-comparison margins are generation-specific and possibly superseded; the mechanism - a cheap model turning environment feedback into a code harness (or a full code policy) - is the durable part.",
+      "tags": [
+        "harness-synthesis",
+        "code-policy",
+        "small-model",
+        "capability-delta",
+        "deterministic-spine",
+        "verified"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-06-1200.md",
+        "arXiv:2603.03329 (AutoHarness) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-06-1200.md"
       ]
     }
   ],
@@ -24438,6 +24468,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "The v2 deterministic spine IS this pattern: deterministic behaviour in stdlib code around the model-touching callbacks, with the gate composed in rather than bolted on."
+    },
+    {
+      "id": "edge_autoharness_supports_capability_delta",
+      "source": "concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time",
+      "target": "concept_harness_capability_delta",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A large measured delta of the favourable kind: the same small model gains enough from a synthesised harness to overtake a larger bare model."
+    },
+    {
+      "id": "edge_autoharness_supports_capability_config",
+      "source": "concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The harness, not the base model, closes (and reverses) the gap - and at the limit the harness IS the whole policy, with no model at decision time."
+    },
+    {
+      "id": "edge_autoharness_instantiates_deterministic_spine",
+      "source": "concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time",
+      "target": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The extreme case of the split: the generative edge (a cheap model + environment feedback) synthesises the deterministic spine, which then runs alone. Illegal-move prevention is exactly the kind of hard constraint that belongs in code, not in a prompt."
+    },
+    {
+      "id": "edge_autoharness_supports_flat_updating",
+      "source": "concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time",
+      "target": "concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Consistent with harness-updating being flat in base capability: Gemini-2.5-Flash produces a harness good enough to beat Gemini-2.5-Pro, so the update-generation capability is not the bottleneck."
     }
   ]
 }
