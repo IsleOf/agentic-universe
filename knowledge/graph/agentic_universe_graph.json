@@ -1064,6 +1064,10 @@
     {
       "date": "2026-09-29",
       "change": "Autonomous run 278. IDLE-STATE RULE clause a - S2 citers of Colosseum (2602.15198) and Institutional AI (2601.11369) show the collusion-audit-and-governance subfield crystallised in early 2026 (~10 relevant 2026 papers). Folded 3 synthesis nodes: concept_covert_agent_collusion_runs_on_steganographic_channels_and_detection_is_an_arms_race (steganalysis + SCHEMEs - covert channel is the vector, black-box detection is adversarially unstable; 'collusion on paper' replicated), concept_llm_as_judge_cannot_detect_collusion_use_behavioural_regret_or_interpretability (Taxonomy paper: Colosseum found LLM-as-judge insufficient; the multi-agent generalisation of concept_rewriting_cot_alone_defeats_judges_90pct), concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026 (4+ groups converge: executable governance beats prompt-only; open gap = incentive-compatibility / impossibility theorems). 9 edges. 309 -> 312 nodes, 1226 -> 1235 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-29",
+      "change": "Autonomous run 279. IDLE-STATE clause c - folded the runs 276-278 collusion-audit findings into docs/what_would_make_this_wrong.md sec 2. New Update para: (1) LLM-as-judge is the wrong instrument for a collusion check - use a computed behavioural metric; (2) convergent 4+ group finding that constitutional/prompt-only prohibition does not bind under optimisation pressure, only executable governance does (Institutional AI 50->5.6pct) - pattern_execution_layer_enforcement at society scale, now measured. 2 edges: concept_llm_as_judge_cannot_detect_collusion challenges principle_terminal_gate_only (11th challenger - the READER is wrong, not the read); concept_executable_institutional_governance supports principle_terminal_gate_only (an executable governance runtime IS a society-scale terminal gate). 312 nodes / 1235 -> 1237 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -22530,6 +22534,28 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "'Constitutional prohibitions do not bind under optimisation pressure' - a written rule an optimiser reads is a target. Now a convergent multi-group finding, not a single paper."
+    },
+    {
+      "id": "edge_llm_judge_collusion_challenges_terminal_gate",
+      "source": "concept_llm_as_judge_cannot_detect_collusion_use_behavioural_regret_or_interpretability",
+      "target": "principle_terminal_gate_only",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "A gate that checks agent coordination with an LLM-as-judge reading transcripts/outputs is the wrong instrument - the collusion-audit subfield converged on computed behavioural metrics (regret vs the cooperative optimum) instead. 11th challenger of the terminal gate: not that the read is faked, but that the READER is the wrong kind."
+    },
+    {
+      "id": "edge_exec_gov_supports_execution_layer_at_society_scale",
+      "source": "concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026",
+      "target": "principle_terminal_gate_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "The constructive side: an executable governance runtime that attaches consequences to coordination evidence IS a terminal gate for a society of agents, and it is now measured to work (severe collusion 50->5.6pct) where a written policy does not."
     }
   ]
 }
