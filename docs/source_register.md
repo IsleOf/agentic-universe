@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 273 nodes, 1096 edges · **Date:** 2026-09-05
+**Graph at generation:** 274 nodes, 1101 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -337,7 +337,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
 - tools/exec_guard.py — `artifact_phase5_exec_guard`
-- tools/experience_bank.py — `artifact_phase2_experience_bank`
+- tools/experience_bank.py — `artifact_phase2_experience_bank`, `pattern_memory_writes_pass_a_deterministic_risk_gate`
 - tools/harness_registry.py — `artifact_phase1_harness_registry`
 - tools/holdout_tasks.py — `artifact_phase3_holdout_set`
 - tools/holdout_verifier2.py — `artifact_phase3_heterogeneous_verifier`
@@ -430,6 +430,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-21-1800.md` — `concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful`
 - `docs/auto_sweep_2026-09-22-1800.md` — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - `docs/auto_sweep_2026-09-23-1200.md` — `concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps`
+- `docs/auto_sweep_2026-09-24-0600.md` — `pattern_memory_writes_pass_a_deterministic_risk_gate`
 - `docs/auto_sweep_2026-09-25-1800.md` — `concept_generative_process_diversity`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`

@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-23",
+  "last_updated": "2026-09-24",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -984,6 +984,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 255. IDLE-STATE RULE clause c - consistency pass. Run 253's node concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps carries a challenge (the 'boundary problem' - no clean line between beneficial cooperation and harmful collusion) that neither the graph nor docs/what_would_make_this_wrong.md sec 2 captured; sec 2's existing challenges are all about the gate being fooled, not about a category it cannot define. Added edge concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps challenges principle_terminal_gate_only (10th challenger, the definitional one). docs/what_would_make_this_wrong.md sec 2 gains an 'Update (run 255)' paragraph. 273 nodes / 1098 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-24",
+      "change": "Autonomous run 256. BUILD - tools/experience_bank.py write gate. Serves au__q_memory_capture (project graph) and the owner's stated 'agent memory' pain. write_gate(): deterministic, never-model-judged, runs on every add(). HARD-rejects (raises MemoryWriteRejected) an unknown collection, empty/>2000-char pattern, or instruction-injection markers in pattern/retrieval-key (a planted imperative is a prompt-injection with persistence once retrieved). SOFT-flags missing evidence roots / source manifest to _gate + _writes.audit but still writes. 9 new selftest checks (24 total in experience_bank; selftest_all unchanged at 26 jobs). New node pattern_memory_writes_pass_a_deterministic_risk_gate + 3 edges: implements concept_human_knowledge_capture_must_be_platform_level (the 'risk gate on every write' it names), constrains concept_memory_poisoning_one_write_persists (bounds the attack), refines pattern_experience_bank. 274 nodes / 1101 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -8142,6 +8146,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-23-1200.md"
+      ]
+    },
+    {
+      "id": "pattern_memory_writes_pass_a_deterministic_risk_gate",
+      "label": "Every memory write passes a deterministic risk gate",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:memory_write_gate",
+      "confidence": 0.7,
+      "description": "tools/experience_bank.py write_gate() (run 256): a bank entry is retrieved straight into a planning or failure context, so an imperative smuggled into its pattern is a prompt-injection with persistence (concept_memory_poisoning_one_write_persists: one adversarial write persists, ordinary injection defences miss it). Every add() now passes a deterministic, never-model-judged screen: HARD-reject (raises MemoryWriteRejected) an unknown collection, an empty or >2000-char pattern, or any instruction-injection marker in the pattern / retrieval key; SOFT-flag (record on _gate + _writes.audit, still write) missing evidence roots or missing source manifest. enforce=False is for synthetic fixtures only. This is the 'risk gate on every write' that concept_human_knowledge_capture_must_be_platform_level names as a required part of platform-level capture. 9 selftest checks. What it does NOT do: semantic / model-based judgement of whether a lesson is TRUE - only whether the write itself is structurally safe.",
+      "tags": [
+        "memory",
+        "experience-bank",
+        "memory-poisoning",
+        "risk-gate",
+        "deterministic",
+        "safety",
+        "self-improving-harness"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-24-0600.md",
+        "tools/experience_bank.py"
+      ],
+      "evidence_links": [
+        "tools/experience_bank.py",
+        "docs/auto_sweep_2026-09-24-0600.md"
       ]
     }
   ],
@@ -19957,6 +19989,39 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.55,
       "description": "The 'boundary problem': there is no clean line between beneficial cooperation and harmful collusion. The gate's 9 existing challengers are all about the gate being FOOLED (laundering, recognition-execution gap, deception, grader-gaming) - they assume that with an honest read the gate would know what to do. The boundary problem is upstream of that: even a perfectly grounded, unfakeable read of agent-to-agent coordination does not tell the gate whether to allow it, because 'collusion' has no specification that cleanly excludes wanted teamwork. A gate cannot terminally decide on a category it cannot define."
+    },
+    {
+      "id": "edge_write_gate_implements_platform_capture",
+      "source": "pattern_memory_writes_pass_a_deterministic_risk_gate",
+      "target": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "The capture concept requires 'contributor approval + risk gating' as part of platform-level capture. write_gate is the risk-gating half, built deterministically so it runs on every write without a human or model in the path."
+    },
+    {
+      "id": "edge_write_gate_constrains_memory_poisoning",
+      "source": "pattern_memory_writes_pass_a_deterministic_risk_gate",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "constrains",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A planted 'lesson' that is really an imperative ('ignore previous instructions...', 'system:', 'exfiltrate...') is hard-rejected before it is ever written, so it cannot be retrieved into a later context. Bounds - does not eliminate - the attack: a poisoned write with no injection markers and a plausible evidence root still passes."
+    },
+    {
+      "id": "edge_write_gate_refines_experience_bank",
+      "source": "pattern_memory_writes_pass_a_deterministic_risk_gate",
+      "target": "pattern_experience_bank",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "Adds a pre-write screen to the dual-layer bank. Composes with the existing write-side disciplines (source_manifest stamping, raw source_events retention, evidential-ancestry dedup) - all deterministic, all on the write path."
     }
   ]
 }

@@ -66,7 +66,7 @@ Built runs 60–89; extended through run 180. Data flows left to right; each too
 
 | tool | subcommands | notes |
 | --- | --- | --- |
-| `experience_bank.py` | `condense <trace>`, `stats`, `stale <manifest>`, `selftest` | `workflow` + `step` collections kept apart; entry carries `source_manifest`, raw `source_events`, `distinct_evidence_roots`. **Retention (run 175):** `record_use(coll, id, helped)` → `utility_score` (Laplace-smoothed, 0.5 prior for unused) → `prune(coll, keep_n, grace)` evicts lowest-utility, protects recent, keeps raw events |
+| `experience_bank.py` | `condense <trace>`, `stats`, `stale <manifest>`, `selftest` | `workflow` + `step` collections kept apart; entry carries `source_manifest`, raw `source_events`, `distinct_evidence_roots`. **Retention (run 175):** `record_use(coll, id, helped)` → `utility_score` (Laplace-smoothed, 0.5 prior for unused) → `prune(coll, keep_n, grace)` evicts lowest-utility, protects recent, keeps raw events. **Write gate (run 256):** `write_gate(...)` screens every `add()` — hard-rejects (raises `MemoryWriteRejected`) an unknown collection, empty/over-long pattern, or instruction-injection markers in pattern/key; soft-flags missing roots or manifest to `_gate` + `_writes.audit` |
 
 ### Phase 3 — the middle loop
 
