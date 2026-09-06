@@ -1,0 +1,20 @@
+{
+  "run": 247,
+  "increment": "consistency/adversarial pass - what_would_make_this_wrong.md section 4 gains the within-run diversity-erosion + novelty-measurement-gap finding from run 246; 0 nodes / 1 edge",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-247.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 247 OK · VALID · graph +0 · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80"
+}

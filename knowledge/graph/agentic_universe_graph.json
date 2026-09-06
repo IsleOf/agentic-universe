@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-21",
+  "last_updated": "2026-09-22",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -948,6 +948,10 @@
     {
       "date": "2026-09-21",
       "change": "Autonomous run 246. Incorporating the owner's Perplexity deep-research (last substantive fold). Folded 'Can LLM Agents Discover?' (arXiv:2608.30047, Aug 2026) as concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful: a framework for multi-turn LLM research-agent creativity on ML engineering tasks (MLE-Bench, AIDE / AIRA-Dojo), three dimensions P-Creativity (vs the agent's own prior solutions) / H-Creativity (vs the human corpus) / Usefulness. Findings: (1) all agents' P-Creativity DECLINES as a run goes exploration -> exploitation; (2) LLMs are more H-Creative than medal-winning humans yet lower performance - novel, not as useful. The project IS a multi-turn research agent; (1) grounds the IDLE-STATE RULE / plateau_watch at a within-run grain, (2) is the novelty/usefulness gap (the held-out set scores usefulness, nothing scores novelty). Companion: the four-role taxonomy (Initiator/Generator/Evaluator/Refiner, arXiv:2601.13865, from the dossier) - project maps Initiator=human standing goal, Generator+Refiner=loop, Evaluator=frozen held-out set. 6 edges: supports concept_aspire_... (creativity curve of 'continued search erases gains'), concept_horizon_gap_outcome_signals_decay, concept_the_agentic_labor_market_... (novelty/usefulness gap), concept_human_effort_shifts_from_ideating_to_verifying... (the four-role split); refines concept_self_harness_validates_the_three_loop (within-run decay); informs principle_diversity_maintenance (diversity maintained across a run, not only a swarm). 270->271 nodes, 1079->1085 edges."
+    },
+    {
+      "date": "2026-09-22",
+      "change": "Autonomous run 247. Consistency / adversarial pass (IDLE-STATE RULE clause c). docs/what_would_make_this_wrong.md section 4 gains a run-246/247 update: the diversity keystone erodes WITHIN a single run (concept_agent_creativity_declines_..., 2608.30047 - P-Creativity declines exploration->exploitation), not only across a swarm or across runs; and the measurement gap - the frozen held-out set scores USEFULNESS, nothing scores NOVELTY, so a run that converges hard on a known-good pattern (the opposite of novel) passes the gate with no signal the loop has stopped discovering. Proposed: an advisory novelty term in verify_loop_edit's evidence. 1 challenges edge (concept_agent_creativity_declines_... -> principle_diversity_maintenance). No graph node change."
     }
   ],
   "nodes": [
@@ -19719,6 +19723,17 @@
       "approach_family": "agent_habitat",
       "confidence": 0.45,
       "description": "The four-role team-formation taxonomy (Initiator / Generator / Evaluator / Refiner, arXiv:2601.13865) is the same Ideator/Writer/Evaluator split as Who Owns Creativity - and the project's mapping is explicit: Initiator = the human's standing goal, Generator + Refiner = the loop, Evaluator = the frozen held-out set."
+    },
+    {
+      "id": "edge_creativity_decline_challenges_diversity_maintenance_within_run",
+      "source": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "target": "principle_diversity_maintenance",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "docs/what_would_make_this_wrong.md section 4 (run 247): the diversity keystone erodes WITHIN a single run (P-Creativity declines exploration->exploitation), not only across a swarm or across runs, and the frozen held-out set scores usefulness with no novelty term - so a run that stops discovering and converges hard on a known-good pattern still passes the gate. Diversity maintenance has no within-run mechanism beyond the 'minimal proposal' discipline."
     }
   ]
 }
