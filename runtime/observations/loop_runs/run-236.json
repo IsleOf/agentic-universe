@@ -1,0 +1,27 @@
+{
+  "run": 236,
+  "increment": "node-deepening sweep (s2 citations of AHE) - folded WHALE (arXiv:2609.00196): joint weight-harness optimization; optimizing either alone is bottlenecked by the frozen counterpart; the sharpest empirical challenge to the no-weight-training fork, on small models; 1 node, 5 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2609.00196",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.00196"
+  ],
+  "trace_file": "runtime\\traces\\loop-236.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 236 OK · VALID · graph +0 · cites 1v/1 · idle-streak 2 · legible 1.00 · verified-frac 0.80"
+}

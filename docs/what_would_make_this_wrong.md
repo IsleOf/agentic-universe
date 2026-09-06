@@ -35,6 +35,15 @@ Updated order: **§3 (habitat mechanism unverified) → §1 (ungated interior) �
 trained-harness alternative to the no-training fork) → §2c (measurement validity) → §5 (reliability decay)
 → §7 (language)**. §2-the-gate-design drops out of the top tier.
 
+**§6 second data point (run 236): `concept_whale_...` (WHALE, arXiv:2609.00196).** Sharper than
+JIT-Agent and on the project's own regime: on **Qwen3.5-2B/4B**, harness-only optimization is
+*bottlenecked by the frozen model* — it matches peak weight-only accuracy cheaply on SearchQA but improves
+math accuracy *only after a weight update*. Alternating weight+harness beats harness-only by up to 24pp.
+The honest reading: harness-only is enough where the task is **elicitation-shaped**, and hits a ceiling
+where it is **capability-shaped**. Many of the project's targets (research direction-setting, graph
+engineering, adversarial reading) are elicitation-shaped — but "harness-only gets most of the value" is now
+a bet with a measured cost on the tasks where it doesn't.
+
 ## Current severity ranking (run 172)
 
 The sections below are in their original order; this is the live ranking after ~150 runs of additions.
