@@ -74,6 +74,25 @@ bank): `BUILD SELFTEST: GREEN`.
 - **Runs only on synthetic traces.** Same blocker as Phases 0–1: no real harness
   is wired in.
 
+## Retention (added run 175)
+
+`concept_naive_trajectory_accumulation_already_helps` (arXiv:2505.00234): keeping
+an agent's own successful trajectories as in-context examples beats a model
+upgrade even with *naive* accumulation, and *exemplar-level curation* — retaining
+by empirical utility, not recency — pushes it further. Wired in:
+
+- `record_use(collection, id, helped)` — updates an entry's `used`/`helped` after
+  a retrieval's outcome is known (a live-run seam; no model call).
+- `utility_score(entry)` — Laplace-smoothed success rate; an unused entry gets the
+  `0.5` neutral prior so it is neither promoted nor evicted before it is tried.
+- `prune(collection, keep_n, grace=5)` — evicts the lowest-utility entries beyond
+  `keep_n`, protecting the `grace` most recent (unproven, not yet a fair test) and
+  keeping every survivor's raw `source_events` intact.
+
+The paper's *database-level* curation (population-based training over a population
+of example collections) is `principle_diversity_maintenance` applied to the
+memory and is not built — it needs multiple concurrent banks.
+
 ## Next
 
 Phase 3 — the proposer/verifier loop. The proposer reads the bank + traces and

@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-19",
+  "last_updated": "2026-10-20",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -660,6 +660,10 @@
     {
       "date": "2026-10-19",
       "change": "Autonomous run 174. Snapshot line in graph_state_2026-09.md refreshed to run 174 (226/811; validated 35->18 after the run-173 correction). DBLP fold: concept_naive_trajectory_accumulation_already_helps (Self-Generated In-Context Examples, arXiv:2505.00234, NeurIPS 2025): even NAIVE retention of an agent's own successful trajectories as in-context examples beats a model upgrade (ALFWorld 73->89%); population-based DB curation + utility-based exemplar retention -> 93%. A data point FOR the experience bank even in simple form; diversity maintenance applied to memory; a concept_harness_capability_delta instance. +5 edges."
+    },
+    {
+      "date": "2026-10-20",
+      "change": "Autonomous run 175. Phase 2 - utility-weighted retention in experience_bank.py (the run-174 conclusion). Entries carry used/helped; record_use(collection, id, helped) updates them after a retrieval's outcome is known (a live-run seam, no model call); utility_score is a Laplace-smoothed success rate with a 0.5 neutral prior for unused entries; prune(collection, keep_n, grace=5) evicts the lowest-utility entries beyond keep_n, protecting the grace most recent and keeping survivors' raw source_events. Operationalises concept_naive_trajectory_accumulation_already_helps (arXiv:2505.00234) exemplar-level curation. +7 selftest checks (was 8, now 15). phase2_experience_bank.md updated. No graph node/edge change."
     }
   ],
   "nodes": [

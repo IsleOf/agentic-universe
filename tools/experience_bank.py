@@ -26,6 +26,15 @@ implemented here:
   observation, not N. Entries record `distinct_evidence_roots`, never an agent
   count, and `condense()` dedupes CLAIM events by their `evidence_roots`.
 
+Retention (run 175, `concept_naive_trajectory_accumulation_already_helps`,
+arXiv:2505.00234): naive accumulation of successes already beats a model upgrade,
+and *exemplar-level curation* pushes it further. `record_use(collection, id,
+helped)` updates an entry's `used`/`helped` after a retrieval's outcome is known;
+`utility_score` is a Laplace-smoothed success rate (unused = 0.5 neutral prior);
+`prune(collection, keep_n, grace=5)` evicts the lowest-utility entries beyond
+`keep_n`, protecting the `grace` most recent and keeping every survivor's raw
+`source_events`.
+
 Pure stdlib. Reads Phase 0 traces (`tools/trace_substrate.py` schema).
 """
 from __future__ import annotations
@@ -78,6 +87,12 @@ class ExperienceBank:
             "token_cost": token_cost or {},
             "note": note,
             "ts": round(time.time(), 3),
+            # utility-weighted retention (concept_naive_trajectory_accumulation_already_helps,
+            # arXiv:2505.00234, run 175): retain an entry by its EMPIRICAL usefulness
+            # as an in-context example, not recency or count. `helped`/`used` are
+            # updated by record_use() after a retrieval's outcome is known.
+            "used": 0,
+            "helped": 0,
         }
         entry["id"] = _hash({"c": collection, "k": retrieval_key, "p": pattern})
         self._path(collection, entry["id"]).write_text(
@@ -100,6 +115,48 @@ class ExperienceBank:
         """Step-level entries matching an error signature."""
         return [e for e in self._all("step")
                 if error_signature in e["retrieval_key"] or e["retrieval_key"] in error_signature]
+
+    @staticmethod
+    def utility_score(entry):
+        """Empirical usefulness of an entry as an in-context example: a smoothed
+        success rate over its uses. An unused entry gets the neutral prior 0.5 so
+        it is neither promoted nor evicted before it has been tried."""
+        used = entry.get("used", 0)
+        if not used:
+            return 0.5
+        return (entry.get("helped", 0) + 1) / (used + 2)  # Laplace-smoothed
+
+    def record_use(self, collection, entry_id, helped):
+        """Update an entry's utility after a retrieval whose outcome is known.
+        `helped` is a bool: did having this entry in context precede a success?"""
+        p = self._path(collection, entry_id)
+        if not p.exists():
+            raise KeyError(entry_id)
+        e = json.loads(p.read_text(encoding="utf-8"))
+        e["used"] = e.get("used", 0) + 1
+        e["helped"] = e.get("helped", 0) + (1 if helped else 0)
+        p.write_text(json.dumps(e, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        return e
+
+    def prune(self, collection, keep_n, *, grace=5):
+        """Evict the lowest-utility entries beyond `keep_n`, keeping the raw
+        source_events of the survivors intact. The `grace` most recent entries are
+        never pruned (they have not had a fair chance to prove utility). Returns
+        the ids evicted. Naive accumulation already helps (arXiv:2505.00234); this
+        is the *exemplar-level curation* that pushed it further."""
+        entries = self._all(collection)
+        if len(entries) <= keep_n:
+            return []
+        by_recency = sorted(entries, key=lambda e: e.get("ts", 0), reverse=True)
+        protected = {e["id"] for e in by_recency[:grace]}
+        ranked = sorted(entries, key=lambda e: (self.utility_score(e), e.get("ts", 0)), reverse=True)
+        keep = {e["id"] for e in ranked[:keep_n]} | protected
+        evicted = []
+        for e in entries:
+            if e["id"] not in keep:
+                self._path(collection, e["id"]).unlink()
+                evicted.append(e["id"])
+        return evicted
 
     def stale(self, current_manifest):
         """Every entry whose source harness state differs from the current one.
@@ -277,6 +334,42 @@ def _selftest():
             "nothing stale against its own source manifest": stale_now == [],
             "everything stale after a harness edit": len(stale_after_edit) == len(added),
         }
+
+        # utility-weighted retention (run 175)
+        ub = ExperienceBank(base=tmp / "ubank")
+        mk = lambda k, t: ub.add("workflow", f"pattern {k}", retrieval_key=k, source_trace="t",
+                                 source_manifest="m", source_events=[{"seq": 0}],
+                                 distinct_evidence_roots=[], note="")
+        e_good = mk("good", 0); e_bad = mk("bad", 0); e_new = mk("new", 0)
+        for eid, ts in ((e_good["id"], 100), (e_bad["id"], 101), (e_new["id"], 102)):
+            _p = ub._path("workflow", eid); _e = json.loads(_p.read_text()); _e["ts"] = ts
+            _p.write_text(json.dumps(_e, indent=2) + "\n", encoding="utf-8")
+        for _ in range(6):
+            ub.record_use("workflow", e_good["id"], helped=True)
+            ub.record_use("workflow", e_bad["id"], helped=False)
+        checks["utility_score: proven-useful > neutral prior > proven-useless"] = (
+            ub.utility_score(json.loads(ub._path("workflow", e_good["id"]).read_text())) > 0.5
+            > ub.utility_score(json.loads(ub._path("workflow", e_bad["id"]).read_text())))
+        checks["utility_score: an unused entry gets the 0.5 neutral prior"] = (
+            ub.utility_score(json.loads(ub._path("workflow", e_new["id"]).read_text())) == 0.5)
+        # add filler so there is something to prune, then keep the best 1 (+ grace).
+        # give fillers strictly-increasing ts so "most recent" is well-defined.
+        fillers = [mk(f"f{i}", 0) for i in range(4)]
+        for j, f in enumerate(fillers):
+            fp = ub._path("workflow", f["id"])
+            fe = json.loads(fp.read_text()); fe["ts"] = 200 + j
+            fp.write_text(json.dumps(fe, indent=2) + "\n", encoding="utf-8")
+            for _ in range(3):
+                ub.record_use("workflow", f["id"], helped=False)
+        evicted = ub.prune("workflow", keep_n=1, grace=2)
+        surviving = {e["id"] for e in ub._all("workflow")}
+        checks["prune keeps the highest-utility entry"] = e_good["id"] in surviving
+        checks["prune evicts a proven-useless entry"] = e_bad["id"] in evicted
+        checks["prune protects the grace-window most recent"] = (
+            fillers[-1]["id"] in surviving and fillers[-2]["id"] in surviving)
+        checks["prune keeps raw source_events on survivors"] = all(
+            e.get("source_events") for e in ub._all("workflow"))
+        checks["prune is a no-op below keep_n"] = ExperienceBank(base=tmp / "tiny").prune("workflow", 10) == []
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         print("\n  bank stats:", json.dumps(bank.stats()))
