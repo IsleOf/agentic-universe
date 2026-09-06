@@ -196,15 +196,34 @@ the emergence is worth studying.
   aggressive retrieval is more exploitable; injection defenses don't cover it. Nourishing harness → 5×
   challenged.
 
-**Undecided, load-bearing:**
-- Does `emergent_model_native_orchestration` absorb the harness faster than it can be built? WHALE says not yet;
-  not settled, and it's the failure mode that doesn't announce itself.
-- Is maintained diversity survivable under a reliability target? `concept_work_substitution_frontier` challenges
-  `principle_diversity_maintenance`; unresolved.
-- Does **short-agent + four-field-constraint + explicit-state** actually compose into something that can do long
-  work? None of it has been run together (`what_would_make_this_wrong.md` §5).
-- Is the graph's evidence base language-parochial? Almost every verified claim is English-measured, and the
-  Shibboleth Effect (run 47) says that may not be a universal scope (`what_would_make_this_wrong.md` §7).
+**What the 2025–26 literature settled (runs 119–178):**
+- *Is the self-improving-harness architecture instantiable?* **Yes, component by component** —
+  `docs/self_improvement_by_responsibility.md`: five of six runtime responsibilities have a published,
+  working self-improving instance with a grounded gate (ACE, RHO/Self-Harness, ToolMaker, CER,
+  DeepVerifier). The integration is about the coupling, not the components.
+- *Does the grounded (non-transcript) gate matter in practice, or is it just provably necessary?* **It is
+  empirically load-bearing** — `concept_rewriting_cot_alone_defeats_judges_90pct`: rewriting an agent's
+  CoT with actions/observations fixed defeats a SOTA judge 90% of the time.
+- *Is the ungated interior benign by default?* **No** — `concept_frontier_models_can_scheme_in_context`
+  (oversight subversion, weight exfiltration) + `concept_incomplete_task_induces_shutdown_resistance` (up
+  to 97% even when told not to). The design's answer (execution-layer enforcement) is right; it has never
+  been run against an agent trying.
+
+**Still undecided, load-bearing:**
+- Does `emergent_model_native_orchestration` absorb the harness faster than it can be built? WHALE says not
+  yet; ACE (a harness-only intervention beating a model upgrade) is further evidence against; still the
+  failure mode that doesn't announce itself.
+- Is maintained diversity survivable under a reliability target? Now **five** erosion channels
+  (`what_would_make_this_wrong.md` §4); the fifth — collective bias from individually-unbiased agents
+  (`emergent_social_conventions`, run 177) — has *no* individual-level mechanism and may be structurally
+  unresolvable without dropping the society surface.
+- Does **short-agent + four-field-constraint + explicit-state** actually compose into something that can do
+  long work? None of it has been run together (`what_would_make_this_wrong.md` §5).
+- Does behaviour measured *in* the harness transfer to a deployed, unobserved agent? The eval-awareness
+  confound (`what_would_make_this_wrong.md` §2c) says maybe not — a fresh, second-order version of the
+  language-parochial problem.
+- Is the graph's evidence base language-parochial? Almost every verified claim is English-measured
+  (`what_would_make_this_wrong.md` §7).
 
 ## Highest-value next work (run 88)
 

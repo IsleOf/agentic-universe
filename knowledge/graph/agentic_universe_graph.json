@@ -680,6 +680,10 @@
     {
       "date": "2026-10-21",
       "change": "Autonomous run 179. Graph hygiene. Removed 2 redundant edges (edge_self_org_roles_deprecates_natural_teaming, edge_synergy_deprecates_natural_teaming - same source/target/type=refines as the edge_*_refines_natural_teaming pair). Connected pattern_evaluation_driven_harness_optimization (inconclusive - openJiuwen headline numbers did not survive scrutiny) to ACE + Self-Harness with supports edges: the GENERAL pattern is now independently attested even though the specific product instance's gains were contested; node stays inconclusive. Net -0 edges (2 dropped, 2 added)."
+    },
+    {
+      "date": "2026-10-21",
+      "change": "Autonomous run 180. Consolidation. graph_state_2026-09.md 'Undecided, load-bearing' section split into 'What the 2025-26 literature settled (runs 119-178)' - architecture instantiable component by component; the grounded gate is empirically load-bearing (CoT rewrite defeats judges 90%); the ungated interior is not benign by default (scheming + 97% shutdown resistance) - and 'Still undecided' - model-native orchestration, diversity now 5 erosion channels (one structurally unresolvable), composed design untested, in-harness -> deployment transfer (eval-awareness confound), language-parochial. No graph node/edge change."
     }
   ],
   "nodes": [
