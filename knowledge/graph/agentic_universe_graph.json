@@ -240,6 +240,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 70. Built Phase 4 skeleton - skill induction (tools/skill_induction.py). Classifies the loop's 56-run history into task classes; a class recurring >=4x becomes a candidate skill written to the harness registry (status=candidate, no auto-promotion). Induced literature_sweep (22) and build (9). Enforces distillation vs discovery: withheld_runs() marks a fixed deterministic 20% of runs permanently skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). selftest_all.py runs 11 selftests, all GREEN. artifact_phase4_skill_induction added."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 71. Built Phase 5 - execution-layer enforcement (tools/exec_guard.py), installed as .git/hooks/pre-commit. Blocks (git commit physically fails): committing to main, staging a raw jsonl trace, a secret-shaped string, an invalid graph, an orphan node. emergent_recognition_execution_gap answered: the hook is the half of the system a prose instruction is not. Completes the plan skeleton - every phase 0-5 now exists as tested code; 12 selftests under tools/selftest_all.py. artifact_phase5_exec_guard added."
     }
   ],
   "nodes": [
@@ -4704,6 +4708,32 @@
       ],
       "evidence_links": [
         "docs/phase4_skill_induction.md"
+      ]
+    },
+    {
+      "id": "artifact_phase5_exec_guard",
+      "label": "Phase 5 execution-layer guard — pre-commit hook the loop cannot talk past",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:phase5_built",
+      "confidence": 0.8,
+      "description": "tools/exec_guard.py, run 71: execution-path enforcement of the loop's invariants, installed as .git/hooks/pre-commit. Blocks (commit physically fails): committing to main, staging a raw runtime/**/*.jsonl, a secret-shaped string in a staged file, an invalid graph, an orphan node. This is emergent_recognition_execution_gap answered: a prose 'VALIDATE before commit' is the half of the system that does not govern behaviour; the hook is the other half. Selftest GREEN (5 checks). Skips scanning its own source + trace_substrate.py (both hold detection patterns, not leaks). Completes the plan skeleton - every phase 0-5 now exists as tested code, 12 selftests under one predicate.",
+      "tags": [
+        "phase-5",
+        "execution-enforcement",
+        "pre-commit-hook",
+        "recognition-execution-gap",
+        "plan-skeleton-complete"
+      ],
+      "derived_from": [
+        "docs/phase5_exec_guard.md",
+        "tools/exec_guard.py",
+        "hooks/pre-commit"
+      ],
+      "evidence_links": [
+        "docs/phase5_exec_guard.md"
       ]
     }
   ],
@@ -10396,6 +10426,49 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "Gives the lifecycle its induction stage; the deprecation stage (retraction) is still owed."
+    },
+    {
+      "id": "edge_phase5_instantiates_sih",
+      "source": "artifact_phase5_exec_guard",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.8
+    },
+    {
+      "id": "edge_phase5_challenges_recognition_gap",
+      "source": "artifact_phase5_exec_guard",
+      "target": "emergent_recognition_execution_gap",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "The gap says a noticed-unsafe action still executes; the hook makes git commit physically fail, in the execution path not the prompt."
+    },
+    {
+      "id": "edge_phase5_implements_terminal_gate",
+      "source": "artifact_phase5_exec_guard",
+      "target": "principle_terminal_gate_only",
+      "type": "implements",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "One external gate on one consequential act (the commit/push); the interior (the run's reasoning) is untouched."
+    },
+    {
+      "id": "edge_phase5_depends_on_graph_validate",
+      "source": "artifact_phase5_exec_guard",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Reuses trace_substrate's secret patterns for the staged-file scan."
     }
   ]
 }

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Agentic Universe loop guard (Phase 5). Installed by tools/exec_guard.py.
+exec python "$(git rev-parse --show-toplevel)/tools/exec_guard.py" check --hook

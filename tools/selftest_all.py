@@ -31,6 +31,7 @@ JOBS = [
     ("loop_metrics.py", ["selftest"]),
     ("holdout_tasks.py", ["selftest"]),
     ("skill_induction.py", ["selftest"]),
+    ("exec_guard.py", ["selftest"]),
 ]
 
 
