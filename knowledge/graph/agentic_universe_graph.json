@@ -712,6 +712,10 @@
     {
       "date": "2026-09-07",
       "change": "Autonomous run 187. Consolidation. Folded run-186's verification hierarchy into self_improvement_by_responsibility.md: reading note 2 now ranks the five self-improving instances on the hierarchy (ToolMaker unit tests near-formal > Self-Harness/ACE outcome-grounded > DeepVerifier rubric-band > CER no gate); two new reading notes - (5) research direction-setting is the top-of-hierarchy human bottleneck = the project's loop-picks-increment / human-sets-direction structure, confirmed; (6) governance-grade measurement is the underpopulated niche and loop_metrics + verify_loop_edit are exactly that. The 'what this changes' close adds: each loop's gate must sit as high on the hierarchy as its domain allows or its failure modes are predictable. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-07",
+      "change": "Autonomous run 188. Recent citation-sweep (S2 citations of ACE 2510.04618). concept_trace_compiles_to_per_consumer_views (Live Trace Model, arXiv:2609.01466 - already cited for the agent-side 30/30, this folds the OBSERVER-side half): a trace outgrows both consumers (human observer + agent context); compile an append-only ledger into typed state and per-consumer views; the observer view answers monitoring questions at ~14-15x fewer tokens / 5-7x cheaper / 0.85 vs 0.48 accuracy vs raw-trace reading. Eleven trace-folding requirements + a falsification boundary. Adds the human observer as a third Phase 0 consumer; quantifies trace_legibility's value. +5 edges."
     }
   ],
   "nodes": [
@@ -6606,6 +6610,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-06-1800.md"
+      ]
+    },
+    {
+      "id": "concept_trace_compiles_to_per_consumer_views",
+      "label": "A long-horizon trace outgrows BOTH consumers (the human observer and the agent's own context); compiling an append-only ledger into per-consumer views answers monitoring questions at ~14x fewer tokens and 0.85 accuracy vs 0.48 for raw-trace reading",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:trace_per_consumer_views",
+      "confidence": 0.72,
+      "description": "Parsing the Stream: A Live Trace Model for Long-Horizon Agents and Their Observers (arXiv:2609.01466, Sept 2026; VERIFIED via arxiv-fetch run 188; already cited by pattern_deterministic_state_folding for the agent-side 30/30 result - this folds the OBSERVER-side half). Frame: a long-horizon agent's trace outgrows BOTH of its consumers - the human observer monitoring the run, and the agent itself, whose bounded context the trace must be folded back into. Mechanism: an APPEND-ONLY EVENT LEDGER folded incrementally into TYPED RUN STATE and COMPILED INTO PER-CONSUMER VIEWS. Observer side (LLM reader as proxy): the compiled view answers monitoring questions using ~14-15x FEWER input tokens, at 5-7x LOWER COST, with HIGHER accuracy (0.85-0.87 vs 0.48) than a budget-capped single-call read of the raw trace - transferable conditional on the question set being covered by the view schema. Agent side (the 30/30 vs 8/30 already in the graph): maintaining the running statistic in per-step state beats full-context prompting, though a prompt-level scratchpad matches accuracy at lower cost - the fold's remaining edge is DETERMINISTIC AUDITABILITY and serving the observer from the SAME state. Also: ELEVEN candidate requirements for trace folding derived from observed failures, and an order-sensitive task family on which the fold ceases to help (a falsification boundary). For this project: (1) the Phase 0 trace substrate is already dual-use (emergence probe + experience-bank condensation) - this adds the HUMAN OBSERVER as a third consumer and says the substrate should compile per-consumer views, not hand each consumer the raw ledger; (2) the observer-side 14x/0.85-vs-0.48 result is the quantified case for concept_cot_monitorability_is_a_fragile_property_to_preserve and trace_legibility (run 155) - a compiled view is MORE legible AND cheaper than the raw trace; (3) 'serve the observer from the same state the agent folds into' is a design principle the experience bank should adopt - one typed state, many views.",
+      "tags": [
+        "live-trace-model",
+        "per-consumer-views",
+        "append-only-ledger-to-typed-state",
+        "14x-fewer-tokens-observer",
+        "0.85-vs-0.48-monitoring-accuracy",
+        "eleven-trace-folding-requirements",
+        "deterministic-auditability",
+        "three-consumers",
+        "sept-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-07-0600.md",
+        "arXiv:2609.01466 (Parsing the Stream: A Live Trace Model for Long-Horizon Agents and Their Observers) - VERIFIED, observer-side half read run 188 via arxiv-fetch"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-07-0600.md"
       ]
     }
   ],
@@ -15561,6 +15594,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "'Improving the evaluator' is one of the survey's four what-axes and 'improvement of the improvement signal itself' its most novel move - the recursive step this project names but has not wired (PROPOSER_META)."
+    },
+    {
+      "id": "edge_perconsumer_supports_five_w",
+      "source": "concept_trace_compiles_to_per_consumer_views",
+      "target": "pattern_five_w_message_instrumentation",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The Phase 0 trace substrate is the append-only ledger; this says compile it into per-consumer views (observer / agent / experience-bank) rather than handing each the raw ledger."
+    },
+    {
+      "id": "edge_perconsumer_refines_deterministic_state_folding",
+      "source": "concept_trace_compiles_to_per_consumer_views",
+      "target": "pattern_deterministic_state_folding",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The observer-side half of the same paper: a prompt scratchpad matches the fold's accuracy for the AGENT, so the fold's real edge is deterministic auditability and serving the OBSERVER from the same typed state."
+    },
+    {
+      "id": "edge_perconsumer_supports_monitorability",
+      "source": "concept_trace_compiles_to_per_consumer_views",
+      "target": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Quantified: a compiled view answers monitoring questions at 0.85-0.87 accuracy vs 0.48 for a budget-capped raw-trace read, ~14x fewer tokens - a compiled view is MORE legible and cheaper than the raw trace."
+    },
+    {
+      "id": "edge_perconsumer_supports_experience_bank",
+      "source": "concept_trace_compiles_to_per_consumer_views",
+      "target": "pattern_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "'One typed state, many views' - the experience bank is one such view; it should compile from the same folded state the observer reads, not re-parse the raw trace."
+    },
+    {
+      "id": "edge_perconsumer_supports_context_economics",
+      "source": "concept_trace_compiles_to_per_consumer_views",
+      "target": "concept_context_economics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "5-7x lower cost and 14x fewer tokens for the observer view - trace compilation is a context-economy lever, and the eleven trace-folding requirements are the spec."
     }
   ]
 }

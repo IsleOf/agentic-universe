@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 230 nodes, 838 edges · **Date:** 2026-09-05
+**Graph at generation:** 231 nodes, 843 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -169,7 +169,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2609.01058](https://arxiv.org/abs/2609.01058) | (title not recorded) | `concept_curriculum_generation_not_intrinsic_drive` |
 | [2609.01245](https://arxiv.org/abs/2609.01245) | (title not recorded) | `concept_geometric_reliability_decay` |
 | [2609.01437](https://arxiv.org/abs/2609.01437) | (title not recorded) | `concept_harness_self_evolution_is_domain_dependent` |
-| [2609.01466](https://arxiv.org/abs/2609.01466) | (title not recorded) | `pattern_deterministic_state_folding` |
+| [2609.01466](https://arxiv.org/abs/2609.01466) | (title not recorded) | `concept_trace_compiles_to_per_consumer_views`, `pattern_deterministic_state_folding` |
 | [2609.01491](https://arxiv.org/abs/2609.01491) | (title not recorded) | `emergent_compositional_private_language`, `emergent_language_formation`, `emergent_stigmergic_coordination` |
 | [2609.01660](https://arxiv.org/abs/2609.01660) | (title not recorded) | `concept_step_count_is_the_horizon_limit` |
 | [2609.01779](https://arxiv.org/abs/2609.01779) | (title not recorded) | `emergent_information_cascades` |
@@ -334,7 +334,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-06-1800.md` — `concept_self_improvement_strength_tracks_the_verification_hierarchy`
 - `docs/auto_sweep_2026-09-06-2115.md` — `concept_harness_self_evolution_is_domain_dependent`, `pattern_recoverability_constrained_evolution`
 - `docs/auto_sweep_2026-09-07-0000.md` — `pattern_alternating_weight_harness_optimization`, `pattern_trajectory_only_harness_optimization`
-- `docs/auto_sweep_2026-09-07-0600.md` — `pattern_activation_probe_monitoring`
+- `docs/auto_sweep_2026-09-07-0600.md` — `concept_trace_compiles_to_per_consumer_views`, `pattern_activation_probe_monitoring`
 - `docs/auto_sweep_2026-09-07-1200.md` — `concept_augmentation_automation_divergence`, `concept_research_lifecycle_split`, `emergent_knowledge_commons_erosion`
 - `docs/auto_sweep_2026-09-07-1800.md` — `concept_denial_is_trained_not_native`, `concept_introspection_is_a_report_channel_problem`, `concept_self_concept_as_behavioral_lever` +1
 - `docs/auto_sweep_2026-09-08-0000.md` — `emergent_subagent_training_induces_coordination`, `pattern_adversarial_agentic_monitor`
