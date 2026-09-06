@@ -1076,6 +1076,10 @@
     {
       "date": "2026-09-30",
       "change": "Autonomous run 281. IDLE-STATE RULE clause a - folded arXiv:2609.00595 (SoK: When Safe Agents Fail Together, Sept 2026, VERIFIED), the hub the 2601.00360 citation chain kept pointing at. A 197-work execution-centered systematization of multi-agent-LLM security. Node concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract: core caution = the run-218 point for security ('without an execution-level view a multi-agent setting can be mistaken for a genuine multi-agent effect'); A-I-R framework (adversary position x interaction interface x resulting system-level risk); five-part defense contract (path target / observation / intervention / trust boundary / recovery) with path closure + recovery as the hard problems; 44 audited benchmarks mostly fail to isolate the interaction effect. 7 edges: grounds the when-multi-agent-helps criterion, supports artifact_phase0_trace_substrate (the instrument its method needs), extends the coding-agent-reliability-is-a-system-property node, refines attribution_laundering + the collusion-audit-subfield node, instantiates pattern_execution_layer_enforcement, supports counterfactual_reputation. Branch_key emergent_behaviors:mas_security_sok. 312 -> 313 nodes, 1237 -> 1244 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-30",
+      "change": "Autonomous run 282. IDLE-STATE clause a - folded arXiv:2602.04431 (MaMa, Feb 2026, VERIFIED), surfaced alongside the SoK. concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary: automated design of agentic systems robust to a compromised subset of agents, as a Stackelberg game (Meta-Agent designer vs best-responding Meta-Adversary); LLM-based adversarial search; MaMa systems defend worst-case attacks at no task-success cost and generalise to stronger/different adversaries and LLMs. 6 edges: refines the SoK node (path closure by adversarial search), extends pattern_adversarial_agentic_monitor (adversary moved to design time), supports concept_the_acceptor_not_the_proposer (worst-case acceptance) + pattern_grounded_acceptance_only, informs the self-evolving-coding-agents taxonomy, mildly challenges approach_emergence_first (design-time vs observe). Branch_key self_improving_harness:adversarial_system_design. 313 -> 314 nodes, 1244 -> 1250 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9247,6 +9251,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-30-0000.md"
+      ]
+    },
+    {
+      "id": "concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary",
+      "label": "MaMa: design a safe agentic system as a Stackelberg game - Meta-Agent vs a best-responding Meta-Adversary",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:adversarial_system_design",
+      "confidence": 0.6,
+      "description": "arXiv:2602.04431 (MaMa, Feb 2026, VERIFIED - surfaced alongside the SoK). Automated design of agentic systems that stay safe when a SUBSET of agents is compromised. Formalised as a Stackelberg security game: a Meta-Agent (system designer) proposes designs; a best-responding Meta-Adversary selects and compromises a subset of agents to minimise safety and returns the strongest attack it found; the Meta-Agent iterates on that feedback (LLM-based adversarial search). Empirically: MaMa-designed systems defend worst-case attacks while matching the task-success of systems optimised for success alone, and GENERALISE to stronger adversaries, different attack objectives, and different underlying LLMs. The adversarial complement of concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution: the acceptor question is \"did this edit help?\"; the MaMa question is \"does this design survive its own worst adversary?\", and the answer is the acceptance signal.",
+      "tags": [
+        "adversarial-design",
+        "stackelberg-game",
+        "meta-adversary",
+        "worst-case-robustness",
+        "automated-design",
+        "mas-security"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-30-0600.md",
+        "arXiv:2602.04431 (MaMa) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-30-0600.md"
       ]
     }
   ],
@@ -22668,6 +22698,72 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.5,
       "description": "Places covert-channel collusion in the A-I-R grid: adversary position = colluding insiders, interaction interface = a hidden channel, resulting risk = degraded joint objective. The steganalysis arms race is one 'attack path' of the eight."
+    },
+    {
+      "id": "edge_mama_refines_sok",
+      "source": "concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary",
+      "target": "concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "A concrete method for the SoK five-part contract: the Meta-Adversary explores adversary positions x interfaces (the A-I grid) and the Meta-Agent iterates until the strongest attack is closed - path closure by adversarial search rather than by checklist."
+    },
+    {
+      "id": "edge_mama_extends_adversarial_monitor",
+      "source": "concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary",
+      "target": "pattern_adversarial_agentic_monitor",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The adversarial monitor hunts collusion at runtime; MaMa moves the adversary to DESIGN time - a Meta-Adversary that compromises agents and reports the worst attack, so the design is hardened before deployment."
+    },
+    {
+      "id": "edge_mama_supports_acceptor",
+      "source": "concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary",
+      "target": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "MaMa gives the acceptor an adversarial form: accept a design only if it survives the strongest attack the Meta-Adversary can find, not just if it scores well on task success. Worst-case, not average-case, acceptance."
+    },
+    {
+      "id": "edge_mama_informs_self_evolving_taxonomy",
+      "source": "concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary",
+      "target": "concept_self_evolving_coding_agents_taxonomy_by_evolution_target",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Adds an evolution TARGET the taxonomy under-weights: adversarial robustness of the multi-agent topology, evolved via a designer-vs-adversary game rather than via task feedback."
+    },
+    {
+      "id": "edge_mama_supports_grounded_acceptance",
+      "source": "concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "A grounded evaluation whose risk metric is the strongest discovered attack: promote a structural edit only when the worst-case-attack outcome does not worsen."
+    },
+    {
+      "id": "edge_mama_challenges_emergence_first",
+      "source": "concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary",
+      "target": "approach_emergence_first",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "MaMa designs the system against a worst-case adversary at design time rather than giving agents room and observing. A mild pull toward control-first - though the design SEARCH is open-ended, and the result generalises beyond the training adversary, which is the emergence-first hope."
     }
   ]
 }

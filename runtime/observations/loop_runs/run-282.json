@@ -1,0 +1,30 @@
+{
+  "run": 282,
+  "increment": "fold MaMa arXiv:2602.04431 - design safe agentic systems as a Stackelberg game",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 7,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "citations": [
+    {
+      "id": "arXiv:2602.04431",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2602.04431"
+  ],
+  "trace_file": "runtime\\traces\\loop-282.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 282 OK · VALID · graph +1n/+6e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.77 · novelty 1.00"
+}

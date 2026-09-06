@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 313 nodes, 1244 edges · **Date:** 2026-09-05
+**Graph at generation:** 314 nodes, 1250 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -82,6 +82,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2601.19082](https://arxiv.org/abs/2601.19082) | (title not recorded) | `concept_llm_strategic_play_diverges_from_game_theory_becoming_more_cooperative_as_stakes_rise` |
 | [2602.00038](https://arxiv.org/abs/2602.00038) | Diversity as Defense: Population Heterogeneity Counters Synthetic Consensus | `principle_diversity_maintenance` |
 | [2602.03794](https://arxiv.org/abs/2602.03794) | Understanding Agent Scaling in LLM-Based Multi-Agent Systems | `principle_diversity_maintenance` |
+| [2602.04431](https://arxiv.org/abs/2602.04431) | (title not recorded) | `concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary` |
 | [2602.15198](https://arxiv.org/abs/2602.15198) | (title not recorded) | `concept_collusion_is_auditable_by_action_regret_and_a_secret_channel_probe`, `concept_covert_agent_collusion_runs_on_steganographic_channels_and_detection_is_an_arms_race`, `concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026` +1 |
 | [2602.15894](https://arxiv.org/abs/2602.15894) | Quality-constrained Entropy Maximization Policy Optimization | `pattern_verbalized_sampling` |
 | [2603.07360](https://arxiv.org/abs/2603.07360) | (title not recorded) | `concept_environmental_pressure_has_an_inverted_u` |
@@ -453,7 +454,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-29-0600.md` — `concept_covert_agent_collusion_runs_on_steganographic_channels_and_detection_is_an_arms_race`, `concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026`, `concept_llm_as_judge_cannot_detect_collusion_use_behavioural_regret_or_interpretability`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_mas_security_needs_an_execution_centered_view_air_framework_five_part_defense_contract`, `concept_reward_hacking_generalises_to_misalignment`
-- `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
+- `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`, `concept_mama_designs_safe_agentic_systems_as_a_stackelberg_game_meta_agent_vs_meta_adversary`
 - `docs/auto_sweep_2026-10-01-1200.md` — `concept_moral_preferences_are_framing_brittle`
 - `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`
 - `docs/auto_sweep_2026-10-03-0000.md` — `concept_self_harness_validates_the_three_loop`
