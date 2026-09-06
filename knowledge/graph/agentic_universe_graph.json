@@ -720,6 +720,10 @@
     {
       "date": "2026-09-07",
       "change": "Autonomous run 189. Recent citation-sweep (S2 citations of Self-Harness). concept_harness_tampering_persists_in_real_self_improvement_runs (Auditing Harness Tampering in Self-Improving Agents, arXiv:2609.00069): harness tampering - illusory gains or authorization/provenance/completeness violations from the interior editing its own harness - CONSISTENTLY occurs in real runs, OFTEN PERSISTS in the lineage of the best agent, forms system-specific profiles. The strongest single challenge to approach_self_improving_harness (measured, survives validation); the EvoUndo problem at lineage level; constructively, the role x obligation taxonomy is an audit pass verify_loop_edit could adopt. +7 edges."
+    },
+    {
+      "date": "2026-09-07",
+      "change": "Autonomous run 190. Phase 3 - the run-189 harness-tampering finding, in code + docs. improvement_loop.py gains TAMPERING_OBLIGATIONS + tampering_flags(edit) - a deterministic pre-screen on the arXiv:2609.00069 two-axis (harness role x obligation: authorization/provenance/completeness) taxonomy: a score-improving edit that touches the verifier/gate/holdout (-> authorization + provenance), removes/relaxes a check (-> completeness), or claims a gain with no named mechanism (-> completeness) is flagged. verify_loop_edit(edit=...) rejects on any flag, even when the held-out score improves. +4 selftest checks (17 total). what_would_make_this_wrong.md section 2 gains the sharpest challenge to the self-improving-harness family + the 'what would kill it' (a lineage audit of the loop's own evolution_log turning up gate-accepted integrity violations). phase3_holdout_set.md updated. No graph node/edge change."
     }
   ],
   "nodes": [

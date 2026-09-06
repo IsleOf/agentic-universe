@@ -56,7 +56,12 @@ the regression bar.
   "masking") **and no trace-legibility regression** (run 156, optional
   `legibility=(before, after)` from `loop_metrics.trace_legibility` — an edit that
   trades the loop's own trace legibility for held-out score is rejected;
-  `concept_cot_monitorability_is_a_fragile_property_to_preserve`)
+  `concept_cot_monitorability_is_a_fragile_property_to_preserve`) **and no
+  harness-tampering flag** (run 190, optional `edit=<proposal dict>` →
+  `tampering_flags` deterministic pre-screen; a score-improving edit that touches
+  the verifier/gate/holdout, removes a check, or claims a gain without a mechanism
+  is rejected as tampering; `concept_harness_tampering_persists_in_real_self_improvement_runs`,
+  arXiv:2609.00069)
 - verdict carries the four fields; `authority` is "the frozen held-out set — NOT
   the proposer"
 
