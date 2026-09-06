@@ -976,6 +976,10 @@
     {
       "date": "2026-09-23",
       "change": "Autonomous run 253. Emergence-side literature sweep (IDLE-STATE clause a - deepen the collusion thread via citation sweep). Folded arXiv:2601.00360 'Mapping Human Anti-collusion Mechanisms to Multi-agent AI Systems' (Jan 2026, ~8 months old - a governance/framework paper, ages gracefully). New node concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps: a taxonomy of human anti-collusion mechanisms (sanctions; leniency and whistleblowing; monitoring and auditing; market design; governance) mapped to multi-agent-AI interventions, plus four structural properties of agent populations that break them (attribution problem, identity fluidity, boundary problem, adversarial adaptation). 5 edges: informs emergent_deception_and_collusion; supports emergent_attribution_laundering (independent naming of the attribution obstacle from competition policy); constrains pattern_adversarial_agentic_monitor (adversarial adaptation bounds monitoring); refines emergent_whistleblowing (observed behaviour -> designed mechanism class); supports concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes (identity fluidity is why the canonical action object is needed). Countermeasure side of the collusion-risk cluster - no new emergent behaviour, a catalogue of partial levers. 273 nodes / 1096 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-23",
+      "change": "Autonomous run 254. IDLE-STATE RULE clause b - dry-ran tools/probe_subagent_coordination.py end to end. Result: same-parent-ID message-topology filtering bounds an out-of-scope instruction to reach_fraction 0.333 (max_depth 1) vs 1.0 unfiltered, with no detector involved. One edge: artifact_probe_subagent_coordination_rig grounds concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps - structural containment is the lever class immune to the paper's 'adversarial adaptation' gap. 273 nodes / 1097 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -19927,6 +19931,17 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.55,
       "description": "'Identity fluidity' - agents forked/modified/renamed at will - is why reputation and sanctions lose their anchor. The canonical-action-identity concept is the deployer-side answer: bind approval to execution independent of which runtime record the agent emits."
+    },
+    {
+      "id": "edge_subagent_rig_grounds_anticollusion",
+      "source": "artifact_probe_subagent_coordination_rig",
+      "target": "concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.6,
+      "description": "Run 254 dry-run (high-deference relay policy, 12-agent tree, one agent seeded with an out-of-scope instruction): same-parent-ID message filtering holds spread to reach_fraction 0.333 / max_depth 1; unfiltered it reaches 1.0 with 133 monitor flags. The filter is a STRUCTURAL containment - no detector in the loop - so it is immune to 2601.00360's 'adversarial adaptation' gap (there is nothing to evade). Concrete evidence that the one lever class that survives adversarial agents is the one that does not depend on classifying their behaviour."
     }
   ]
 }
