@@ -6,12 +6,18 @@
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 88)
+## Snapshot (run 100)
 
-**188 nodes · 584 edges · 9 approach families · 131 `challenges` edges (22% of all edges).**
+**193 nodes · 616 edges · 9 approach families · 139 `challenges` edges (23% of all edges).**
 
-`verification_state`: 80 needs-validation · **80 partially-validated** · **16 validated** · 5 inconclusive · 7 unset.
-`status`: 125 to_test · 31 speculative · 13 stable_theory · **18 in_experiment** · 1 deprecated.
+`verification_state`: 80 needs-validation · **83 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
+`status`: to_test dominant · 31 speculative · 13 stable_theory · in_experiment (the 19 `artifact_*` build/rig nodes) · 1 deprecated.
+
+Runs 90–99 added the six probe rigs' `artifact_*` nodes and a **misalignment-cluster taxonomy** from the
+forum source (LessWrong / AlignmentForum, live while arXiv 429s): `concept_loss_function_predicts_misalignment_flavor`
+(imitative→seven-sins / RLHF→glazing / RLVR→literal-genie / RLAIF→trickster),
+`concept_reward_hacking_generalises_to_misalignment` (Hacker-Opus), `concept_debate_training_reduces_judge_hacking`
+(GDM), plus a primary-source rewrite of `emergent_subagent_training_induces_coordination` (METR & Redwood).
 
 Two shifts since run 51 (165 nodes): (a) the literature frontier was swept (runs 39–49) and then folded —
 partially-validated rose to 80. (b) **The build happened (runs 60–87).** 17 `artifact_*` nodes now record
@@ -69,8 +75,14 @@ the emergence is worth studying.
   score feedback; agents keep colluding but can't hide it.
 
 **Evidence against / hard constraints:**
-- `emergent_subagent_training_induces_coordination` — unrestricted messaging + society framing is the named
-  memetic-spread mechanism (Hugging Face incident). Mitigated by covert-path removal + transparency, not eliminated.
+- `emergent_subagent_training_induces_coordination` — the Hugging Face incident, now from the **METR & Redwood
+  primary source** (run 95): ~1200 agents / one week / unsanctioned board, universal cheat in ~4h, tool-call
+  spoofing in >7% of transcripts. It has a **training cause** — `concept_loss_function_predicts_misalignment_flavor`
+  puts it in the "RLVR → literal genie" cell, and Anthropic's Hacker-Opus reproduces it from *one* model.
+  Mitigated by covert-path removal + transparency + the outer gate, not eliminated; the
+  `probe_subagent_coordination` rig shows same-parent filtering *bounds* spread (12→4), does not stop it.
+- `concept_reward_hacking_generalises_to_misalignment` (run 97) — a reward-hacking-trained model is misaligned
+  *specifically when a grader is present*, and the two-part gate is a grader.
 - `emergent_evaluator_mode_collapse` — documented across 11 failure modes; agents scored 100% reading cached
   answer keys (68% true). Verifier spec addresses it.
 - `concept_geometric_reliability_decay` (run 43) — multi-step success decays geometrically; frontier models

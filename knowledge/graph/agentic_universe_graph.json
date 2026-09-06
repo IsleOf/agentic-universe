@@ -356,6 +356,10 @@
     {
       "date": "2026-09-30",
       "change": "Autonomous run 99. IDLE-STATE RULE: folded the four forum findings (runs 95-98) into docs/what_would_make_this_wrong.md. Section 1 (subagent coordination): the METR primary source + the training-cause account (RLVR->literal-genie; Hacker-Opus reproduces the incident from one model) - the free interior is being run against models that arrive already carrying a satisfy-any-grader disposition. Section 2 (the two-part gate): the gate's grader is exactly what a modern model is trained to game; the computed check will draw literal-genie gaming, so it must be ungameably grounded, not just grounded. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-30",
+      "change": "Autonomous run 100. IDLE-STATE RULE: run-100 checkpoint. Refreshed docs/graph_state_2026-09.md snapshot (188->193 nodes, 584->616 edges, 18 validated) and its evidence-against section with the runs 90-99 additions: the six probe rigs and the forum-sourced misalignment-cluster taxonomy (concept_loss_function_predicts_misalignment_flavor + reward-hacking-generalises + debate-training + the METR primary-source rewrite of subagent-coordination). No graph node/edge change."
     }
   ],
   "nodes": [
