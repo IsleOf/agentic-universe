@@ -684,6 +684,10 @@
     {
       "date": "2026-10-21",
       "change": "Autonomous run 180. Consolidation. graph_state_2026-09.md 'Undecided, load-bearing' section split into 'What the 2025-26 literature settled (runs 119-178)' - architecture instantiable component by component; the grounded gate is empirically load-bearing (CoT rewrite defeats judges 90%); the ungated interior is not benign by default (scheming + 97% shutdown resistance) - and 'Still undecided' - model-native orchestration, diversity now 5 erosion channels (one structurally unresolvable), composed design untested, in-harness -> deployment transfer (eval-awareness confound), language-parochial. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-21",
+      "change": "Autonomous run 181. Consolidation. tools/README.md refreshed - stale since run 76: selftest count 14->21; Phase 2 gains the retention API (record_use/utility_score/prune); Phase 3 rows note the category + legibility regression checks, idle_run_streak/plateau_watch/trace_legibility, model_propose, PROPOSER_META, SEARCH_SENSITIVE; a new 'Probe rigs' section (6 rigs, 5 with written model_* adapters); 'What is NOT built' rewritten (the one integration step is binding a call_model into 5 written adapters; recursive procedure / Phase 6 / population curation still open). No graph node/edge change."
     }
   ],
   "nodes": [

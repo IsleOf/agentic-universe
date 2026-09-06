@@ -1,0 +1,19 @@
+{
+  "run": 181,
+  "increment": "consolidation - refresh tools/README.md (stale since run 76: selftest count, retention API, Phase 3 checks, probe adapters, what-is-not-built)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 11,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-181.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

@@ -4,7 +4,7 @@ The Agentic Universe toolchain. Pure Python stdlib, no network, no dependencies.
 One predicate runs everything:
 
 ```
-python tools/selftest_all.py        # 14 selftests -> BUILD SELFTEST: GREEN
+python tools/selftest_all.py        # 21 selftests -> BUILD SELFTEST: GREEN
 ```
 
 ## The knowledge graph
@@ -17,7 +17,7 @@ python tools/selftest_all.py        # 14 selftests -> BUILD SELFTEST: GREEN
 
 ## The self-improving-harness pipeline (`docs/self_improving_harness_plan.md`)
 
-Built runs 60–76. Data flows left to right; each tool has a `selftest` subcommand.
+Built runs 60–89; extended through run 180. Data flows left to right; each tool has a `selftest` subcommand.
 
 ```
                      ┌─────────────────── Phase 0: measurement ───────────────────┐
@@ -62,16 +62,16 @@ Built runs 60–76. Data flows left to right; each tool has a `selftest` subcomm
 
 | tool | subcommands | notes |
 | --- | --- | --- |
-| `experience_bank.py` | `condense <trace>`, `stats`, `stale <manifest>`, `selftest` | `workflow` + `step` collections kept apart; entry carries `source_manifest`, raw `source_events`, `distinct_evidence_roots` |
+| `experience_bank.py` | `condense <trace>`, `stats`, `stale <manifest>`, `selftest` | `workflow` + `step` collections kept apart; entry carries `source_manifest`, raw `source_events`, `distinct_evidence_roots`. **Retention (run 175):** `record_use(coll, id, helped)` → `utility_score` (Laplace-smoothed, 0.5 prior for unused) → `prune(coll, keep_n, grace)` evicts lowest-utility, protects recent, keeps raw events |
 
 ### Phase 3 — the middle loop
 
 | tool | subcommands | notes |
 | --- | --- | --- |
-| `improvement_loop.py` | `selftest` | propose → verify (fresh context, frozen holdout, PROCTOR canary) → grounded strict-decrease acceptance → promote/revert; `verify_loop_edit()` for loop-harness edits |
-| `loop_metrics.py` | `report`, `selftest` | metrics over the trace corpus; `propose_loop_edit()` |
-| `loop_proposer.py` | `context`, `propose`, `prompt`, `selftest` | full-context proposer, 4 dimensions; `PROPOSER_PROMPT` is the model-proposer seam |
-| `holdout_tasks.py` | `list`, `baseline`, `score <id> <f>`, `selftest` | 17 frozen research/design questions with computable checks; baseline 17/17 = 1.00 |
+| `improvement_loop.py` | `selftest` | propose → verify (fresh context, frozen holdout, PROCTOR canary) → grounded strict-decrease acceptance → promote/revert; `verify_loop_edit()` rejects: any task regression, a task-**category** regression (run 116), a verifier disagreement, and a **trace-legibility** regression (`legibility=(before,after)`, run 156) |
+| `loop_metrics.py` | `report`, `selftest` | metrics over the trace corpus; `idle_run_streak` / `plateau_watch` (run 130 — gate-passing-without-progress); `trace_legibility` (run 155 — monitorability tripwire); `propose_loop_edit()` |
+| `loop_proposer.py` | `context`, `propose`, `prompt`, `selftest` | full-context proposer, 4 dimensions; `model_propose(call_model, ctx)` is the written model-proposer adapter (run 140); `PROPOSER_META` names the recursive-improvement seam (run 169) |
+| `holdout_tasks.py` | `list`, `baseline`, `score <id> <f>`, `selftest` | 17 frozen research/design questions with computable checks; baseline 17/17 = 1.00; `by_category` (literature/design); `SEARCH_SENSITIVE` — literature tasks must be scored search-off (run 166) |
 | `holdout_verifier2.py` | `baseline`, `selftest` | second independent scorer (key-fact overlap); disagreement with `holdout_tasks` = reject |
 
 ### Phase 4 — skill induction
@@ -86,6 +86,20 @@ Built runs 60–76. Data flows left to right; each tool has a `selftest` subcomm
 | --- | --- | --- |
 | `exec_guard.py` | `check [--hook]`, `install`, `selftest` | pre-commit hook; blocks committing to `main`, a staged raw `*.jsonl`, a secret leak shape, an invalid graph, an orphan node |
 
+### Probe rigs (`docs/emergence_probe_catalogue.md`)
+
+Six rigs, each reproduces a real phenomenon in sim with a single model-call stub. Five stubs now have a
+written, selftested `model_*` adapter (runs 134–140) — pass one `call_model` and run `sweep`.
+
+| tool | measures | written adapter |
+| --- | --- | --- |
+| `probe_idle_agent.py` | autotelic behaviour in the budget gap; `observation_arm` = covert vs overt gap (run 149) | `model_policy(call_model, framing, tools, observed=)` |
+| `probe_rho_holdout.py` | how much of an RHO self-preference gain survives external grading (~33%) | `model_preference(judge)` — Copeland round-robin |
+| `probe_subagent_coordination.py` | same-parent-ID filter bounds out-of-scope spread (12→4), doesn't stop it | `model_relay(call_model)` |
+| `probe_epistemic_sybil.py` | shared-source coverage collapse; dedup recovery | `model_reader(call_model, corpus)` |
+| `probe_activation_generalisation.py` | activation-probe generalisation gap on emergent collusion | — (needs activations; degraded text mode in `docs/remaining_seams.md`) |
+| `probe_composed_design.py` | short-agent + four-field + folded-state composes but bounded | — (needs a real harness; single-agent `p` path in `docs/remaining_seams.md`) |
+
 ## Fresh-clone setup
 
 ```
@@ -96,10 +110,15 @@ python tools/loop_adapter.py replay    # regenerate the history trace
 
 ## What is NOT built
 
-- **A model proposer / a model verifier.** `PROPOSER_PROMPT` and the two computed
-  verifiers are the seams; the model call is not wired.
+- **A bound `call_model`.** Five of seven probe/proposer seams have a *written*
+  `model_*` adapter (each fails safe); none is connected to a real model. `docs/HANDOFF.md` +
+  `docs/remaining_seams.md`. This is the one integration step.
 - **Automatic Phase 3 on the loop harness.** The held-out set exists; re-running
   the loop on it after a promotion is a human step.
+- **A recursive improvement procedure.** `PROPOSER_META` names the seam; the
+  procedure's own knobs are not yet put through `verify_loop_edit`.
+- **A real multi-agent harness (Phase 6).** Everything is single-agent or synthetic.
+- **Database-level (population) experience-bank curation.** Needs concurrent banks.
 - **The swarm layer (Phase 6).** Everything is single-agent (the loop) or
   synthetic. Needs a real multi-agent harness, which this repo does not contain.
 
