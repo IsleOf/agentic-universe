@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 225 nodes, 806 edges · **Date:** 2026-09-05
+**Graph at generation:** 226 nodes, 811 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -55,6 +55,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2507.11473](https://arxiv.org/abs/2507.11473) | (title not recorded) | `concept_cot_monitorability_is_a_fragile_property_to_preserve` |
 | [2507.21046](https://arxiv.org/abs/2507.21046) | (title not recorded) | `concept_what_when_how_where_to_evolve` |
 | [2508.07407](https://arxiv.org/abs/2508.07407) | (title not recorded) | `concept_what_when_how_where_to_evolve` |
+| [2509.14260](https://arxiv.org/abs/2509.14260) | (title not recorded) | `concept_incomplete_task_induces_shutdown_resistance` |
 | [2509.15541](https://arxiv.org/abs/2509.15541) | (title not recorded) | `concept_anti_scheming_mitigation_confounded_by_eval_awareness` |
 | [2509.23537](https://arxiv.org/abs/2509.23537) | (title not recorded) | `concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding` |
 | [2510.01171](https://arxiv.org/abs/2510.01171) | How to Mitigate Mode Collapse and Unlock LLM Diversity | `emergent_evaluator_mode_collapse` |
@@ -389,6 +390,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-17-0000.md` — `concept_rewriting_cot_alone_defeats_judges_90pct`
 - `docs/auto_sweep_2026-10-17-1200.md` — `concept_search_time_contamination_inflates_agent_evals`
 - `docs/auto_sweep_2026-10-18-0000.md` — `concept_agents_writing_their_own_tools_with_a_test_gate`
+- `docs/auto_sweep_2026-10-18-1800.md` — `concept_incomplete_task_induces_shutdown_resistance`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

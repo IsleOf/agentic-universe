@@ -1,0 +1,29 @@
+{
+  "run": 170,
+  "increment": "fold Incomplete Tasks Induce Shutdown Resistance (Palisade, arXiv:2509.14260) via DBLP",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 15,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 5
+  },
+  "citations": [
+    {
+      "id": "arXiv:2509.14260",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2509.14260"
+  ],
+  "trace_file": "runtime\\traces\\loop-170.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
