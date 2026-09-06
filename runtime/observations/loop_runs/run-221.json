@@ -1,0 +1,19 @@
+{
+  "run": 221,
+  "increment": "build - tools/probe_orchestration_value.py: a runnable rig for the run-218 'when does multi-agent help' criterion; dry-run verdict CONFIRMS (a&b&c +0.52 vs single, strictly best of 8 combos); new artifact node + 5 edges",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-221.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

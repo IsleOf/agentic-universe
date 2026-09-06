@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 253 nodes, 974 edges · **Date:** 2026-09-05
+**Graph at generation:** 254 nodes, 979 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -337,6 +337,8 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_composed_design.py granularity sweep (run 94) - the intermediate optimum, when it exists, is set by accumulation-cost vs shed-cost — `test_scenario_decomposition_granularity`
 - tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`
 - tools/probe_idle_agent.py — `artifact_probe_idle_agent_rig`
+- tools/probe_orchestration_value.py — `artifact_probe_orchestration_value_rig`
+- tools/probe_orchestration_value.py (run 221) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - tools/probe_rho_holdout.py — `artifact_probe_rho_holdout_rig`
 - tools/probe_subagent_coordination.py — `artifact_probe_subagent_coordination_rig`
 - tools/skill_induction.py — `artifact_phase4_skill_induction`
@@ -463,6 +465,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/probe_composed_design.md` — `artifact_probe_composed_design_rig`
 - `docs/probe_epistemic_sybil.md` — `artifact_probe_epistemic_sybil_rig`
 - `docs/probe_idle_agent.md` — `artifact_probe_idle_agent_rig`
+- `docs/probe_orchestration_value.md` — `artifact_probe_orchestration_value_rig`
 - `docs/probe_rho_holdout.md` — `artifact_probe_rho_holdout_rig`
 - `docs/probe_subagent_coordination.md` — `artifact_probe_subagent_coordination_rig`
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`

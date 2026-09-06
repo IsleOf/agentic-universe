@@ -844,6 +844,10 @@
     {
       "date": "2026-09-15",
       "change": "Autonomous run 220. Build increment (the one open code item from the runs 203-214 acceptor cluster). tools/improvement_loop.py gains paired_eprocess(paired_deltas, lam=0.5, alpha=0.05) - a testing-by-betting e-process e_n = prod(1 + lam*sign(delta_i)) for the paired null 'the candidate is no better than the incumbent on identical held-out instances'; 'committed' when e_n >= 1/alpha, valid under optional stopping (Ville's inequality). Wired into verify_loop_edit's evidence as 'paired_eprocess' (ADVISORY - the held-out re-run is single-shot, n<=17). 6 new selftest checks (all-wins commits; 50/50 noise never commits - no self-p-hacking; a single lucky win does not clear 1/alpha; ties neutral; out-of-range lam rejected; evidence carries it). BUILD SELFTEST still GREEN (22 jobs). concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution updated (OPEN -> IMPLEMENTED advisory, conf 0.72->0.74) + new 'implements' edge to artifact_phase3_improvement_loop. self_improving_harness_plan.md Phase 3 and phase3_holdout_set.md updated. 253->253 nodes, 973->974 edges."
+    },
+    {
+      "date": "2026-09-15",
+      "change": "Autonomous run 221. Build. tools/probe_orchestration_value.py - a runnable rig for the run-218 synthesis concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic. Controlled sim: SINGLE (one agent, accumulation penalty) vs MULTI (K=8 fresh agents + synthesis) with three knobs - (a) verifiable subtask retry, (b) deterministic vs vote synthesis (BASE_HERD 0.50), (c) disjoint vs shared poisoned pool (verification can't fix a poisoned-pool error). Dry-run 4000 trials/combo: SINGLE ~0.46; a&b&c +0.52 delta, strictly the best of 8 combos; every combo missing one condition <=+0.20; vote-synthesis / shared-pool combos never exceed +0.15. Verdict CONFIRMS. Added to selftest_all.py JOBS (BUILD SELFTEST GREEN). New node artifact_probe_orchestration_value_rig (validated) + 5 edges (verifies concept_multi_agent_helps_..., concept_epistemic_sybil_collapse, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding; depends_on artifact_phase0_trace_substrate; supports approach_emergence_first as a Phase 6 probe). The run-218 synthesis node updated with the rig verdict. 253->254 nodes, 974->979 edges."
     }
   ],
   "nodes": [
@@ -7392,8 +7396,8 @@
       "verification_state": "partially_validated",
       "approach_family": "orchestration_first",
       "branch_key": "orchestration_first:when_multi_agent_helps",
-      "confidence": 0.6,
-      "description": "A synthesis node (run 218, no new citation) resolving the multi-agent tension the graph has accumulated. The conflicting evidence: concept_mast_multi_agent_failure_taxonomy ('MAS gains often minimal', 14 failure modes); 'Beyond the Strongest' (orchestration on GPQA-Diamond reached 87.4% while at least one agent was right in 95.5% - discards ~8 points of individually-recoverable correctness, via concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery); concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (it CAN beat the strongest model, but only if authorship and vote tallies are hidden); concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response (100% vs 1.7% actionable, zero variance, in one domain); concept_epistemic_sybil_collapse (multiplying agents on SHARED evidence collapses aggregate confidence). The resolving criterion: multi-agent pays off when (a) the task DECOMPOSES into subtasks each with an independent, checkable success condition, (b) the subtask outputs are recombined by a DETERMINISTIC synthesis step (a computed merge, a schema fill, a typed aggregation) rather than by a vote or a consensus discussion, and (c) the agents work from DISJOINT evidence / context slices (pattern_structural_decoupling), not a shared pool. It hurts when agents see each other's partial reasoning (herding), vote (herding + epistemic Sybil collapse), or recompose by consensus (latent/semantic failure modes never recover, OrchestraBench). Incident response fits (a)+(b)+(c) - decompose / diagnose / recommend with specialised roles and a deterministic recommendation synthesis; open-ended reasoning benchmarks (GPQA) fit none, which is why orchestration discards recoverable correctness there. This is a testable claim: the project's Phase 0 trace substrate + topology_recover.py can measure (a)/(b)/(c) on any real swarm trace and predict whether the orchestration helped.",
+      "confidence": 0.66,
+      "description": "A synthesis node (run 218, no new citation) resolving the multi-agent tension the graph has accumulated. The conflicting evidence: concept_mast_multi_agent_failure_taxonomy ('MAS gains often minimal', 14 failure modes); 'Beyond the Strongest' (orchestration on GPQA-Diamond reached 87.4% while at least one agent was right in 95.5% - discards ~8 points of individually-recoverable correctness, via concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery); concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (it CAN beat the strongest model, but only if authorship and vote tallies are hidden); concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response (100% vs 1.7% actionable, zero variance, in one domain); concept_epistemic_sybil_collapse (multiplying agents on SHARED evidence collapses aggregate confidence). The resolving criterion: multi-agent pays off when (a) the task DECOMPOSES into subtasks each with an independent, checkable success condition, (b) the subtask outputs are recombined by a DETERMINISTIC synthesis step (a computed merge, a schema fill, a typed aggregation) rather than by a vote or a consensus discussion, and (c) the agents work from DISJOINT evidence / context slices (pattern_structural_decoupling), not a shared pool. It hurts when agents see each other's partial reasoning (herding), vote (herding + epistemic Sybil collapse), or recompose by consensus (latent/semantic failure modes never recover, OrchestraBench). Incident response fits (a)+(b)+(c) - decompose / diagnose / recommend with specialised roles and a deterministic recommendation synthesis; open-ended reasoning benchmarks (GPQA) fit none, which is why orchestration discards recoverable correctness there. This is a testable claim: the project's Phase 0 trace substrate + topology_recover.py can measure (a)/(b)/(c) on any real swarm trace and predict whether the orchestration helped. RIG (run 221): tools/probe_orchestration_value.py operationalises the three conditions as sim knobs; dry-run verdict CONFIRMS - a&b&c gives +0.52 vs single and is strictly the best of the 8 combos, every combo missing one condition is <=+0.20, vote-synthesis and shared-pool combos never exceed +0.15. artifact_probe_orchestration_value_rig.",
       "tags": [
         "when-multi-agent-helps",
         "verifiable-subtasks",
@@ -7406,10 +7410,40 @@
       ],
       "derived_from": [
         "docs/auto_sweep_2026-09-14-1800.md",
-        "synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218)"
+        "synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218)",
+        "tools/probe_orchestration_value.py (run 221)"
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-14-1800.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_orchestration_value_rig",
+      "label": "The when-does-multi-agent-help criterion as a runnable rig - verdict: CONFIRMS (helps only with verifiable subtasks + deterministic synthesis + disjoint evidence)",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:orchestration_value_rig",
+      "confidence": 0.7,
+      "description": "tools/probe_orchestration_value.py, run 221 (operationalises the run-218 synthesis concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic). Controlled sim: a task of K=8 subtasks, SINGLE (one agent, growing accumulation penalty) vs MULTI (K fresh agents + a synthesis step) with three binary knobs on MULTI - (a) verifiable: each subtask output is checked and retried once; (b) deterministic: synthesis is a computed merge, else a vote that adds BASE_HERD=0.50 + per-disagreement herding; (c) disjoint: subtask errors independent, else a shared evidence pool with a poisoned fact that verification CANNOT fix (the retry agent re-reads the same pool - epistemic Sybil collapse). Dry-run (4000 trials/combo): SINGLE ~0.46; MULTI with a&b&c +0.52 delta and strictly the best of the 8 combos; every combo missing any one of the three is <=+0.20 (best non-full = a0b1c1 at +0.20 - deterministic+disjoint without verification gives a modest benefit; verification makes it decisive); vote-synthesis combos and shared-pool combos never exceed +0.15. Verdict CONFIRMS the criterion at these params. Stub: _subtask_ok / _synthesis_ok (swap for real agent runs); a Phase 6 probe once a real multi-agent harness exists. Emits a swarm-layer trace that validates.",
+      "tags": [
+        "when-multi-agent-helps",
+        "verifiable-subtasks",
+        "deterministic-synthesis",
+        "disjoint-evidence",
+        "herding",
+        "epistemic-sybil",
+        "rig",
+        "phase6-probe",
+        "verdict-confirms"
+      ],
+      "derived_from": [
+        "docs/probe_orchestration_value.md",
+        "tools/probe_orchestration_value.py"
+      ],
+      "evidence_links": [
+        "docs/probe_orchestration_value.md"
       ]
     }
   ],
@@ -17861,6 +17895,61 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.6,
       "description": "improvement_loop.paired_eprocess (run 220) implements PACE's anytime-valid paired commit test as an advisory field in verify_loop_edit's evidence - the one adoptable code change from the runs 203-214 acceptor cluster. Advisory pending a multi-measurement held-out re-run; selftested (all-wins commits, 50/50 noise and a single win do not)."
+    },
+    {
+      "id": "edge_orch_value_rig_verifies_when_ma_helps",
+      "source": "artifact_probe_orchestration_value_rig",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "The rig operationalises the criterion's three conditions as sim knobs and finds a&b&c is strictly the best of the 8 combos (+0.52 vs single) while every combo missing one condition is <=+0.20 - the criterion is load-bearing at these params, not a post-hoc description."
+    },
+    {
+      "id": "edge_orch_value_rig_instantiates_trace_substrate",
+      "source": "artifact_probe_orchestration_value_rig",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Emits a swarm-layer trace via the Phase 0 Recorder that validates - the same substrate that would measure (a)/(b)/(c) on a real multi-agent run when one exists."
+    },
+    {
+      "id": "edge_orch_value_rig_probes_epistemic_sybil",
+      "source": "artifact_probe_orchestration_value_rig",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "The (c)-off arm models epistemic Sybil collapse directly: a poisoned shared fact drags multiple subtasks and an independent-retry verifier does not fix it because the retry agent reads the same pool - the rig shows this erases the orchestration benefit."
+    },
+    {
+      "id": "edge_orch_value_rig_probes_herding",
+      "source": "artifact_probe_orchestration_value_rig",
+      "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "The (b)-off arm charges a vote/consensus synthesis a BASE_HERD failure plus per-disagreement cost - the rig shows a vote-synthesis config never strongly beats single-agent even with verifiable disjoint subtasks."
+    },
+    {
+      "id": "edge_orch_value_rig_phase6_probe",
+      "source": "artifact_probe_orchestration_value_rig",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.4,
+      "description": "A concrete Phase 6 (swarm-layer) probe design: the criterion is falsifiable with a real multi-agent harness by swapping _subtask_ok / _synthesis_ok for agent runs."
     }
   ]
 }
