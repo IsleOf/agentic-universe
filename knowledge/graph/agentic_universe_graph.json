@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-14",
+  "last_updated": "2026-09-15",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -836,6 +836,10 @@
     {
       "date": "2026-09-14",
       "change": "Autonomous run 218. Synthesis node (no new citation, IDLE-STATE RULE clause c - a consistency/adversarial pass resolving accumulated tension). concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic resolves the multi-agent tension the graph accumulated (MAST 'gains often minimal' vs 'Beyond the Strongest' discards ~8 pts vs herding-if-votes-shown vs incident-response 100%-vs-1.7% vs epistemic Sybil collapse): multi-agent helps when (a) the task decomposes into independently-verifiable subtasks, (b) recombination is a DETERMINISTIC synthesis step not a vote/consensus, (c) agents work from disjoint evidence slices. Testable with the project's Phase 0 trace substrate + topology_recover. 8 edges: refines concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse; depends_on pattern_structural_decoupling; supports approach_orchestration_first and artifact_phase0_trace_substrate (a falsifiable Phase 6 probe). 252->253 nodes, 965->973 edges."
+    },
+    {
+      "date": "2026-09-15",
+      "change": "Autonomous run 219. Orientation-layer refresh (no graph node/edge change). docs/graph_state_2026-09.md Snapshot block updated from the run-202 state (236 nodes / 879 edges) to run 219 (253 nodes / 973 edges; 78 needs-validation / 145 partially-validated / 18 validated / 5 inconclusive / 7 unset; families self_improving_harness 98, emergent_behaviors 74, agent_habitat 23, graph_engineering 20, nourishing_harness 17, orchestration_first 9). Added a 'Runs 202-218' section documenting the two dense mid-2026 literature arcs: the acceptor/certificate arc (six-condition acceptance-gate spec: SEAL/Release Gates, PACE, Who Grades the Grader, ACES, RQGM, PCAA/CAVA, + SEA + Library Drift) and the emergence/ecosystem arc (Govern the Repository, More Is Different, Engineering Reliable Coding Agents, misaligned convergence dynamics, OrchestraBench, incident-response MAS, + the when-does-multi-agent-help synthesis)."
     }
   ],
   "nodes": [

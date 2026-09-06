@@ -1,18 +1,62 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 202)
+## Snapshot (run 219)
 
-**236 nodes · 879 edges · 9 approach families · 179 `challenges` edges (~20% of all edges).**
+**253 nodes · 973 edges · 9 approach families · 190 `challenges` edges (~20% of all edges).**
 
-`verification_state`: 78 needs-validation · **128 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
+`verification_state`: 78 needs-validation · **145 partially-validated** · **18 validated** · 5 inconclusive · 7 unset.
 (`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature nodes sit at `partially_validated`. The `validated` count fell 35→18 at run 173 when a consistency pass corrected abstract-read literature nodes.)
-Families: self_improving_harness 87 · emergent_behaviors 70 · agent_habitat 23 · graph_engineering 20 · nourishing_harness 17 · rest 19.
+Families: self_improving_harness 98 · emergent_behaviors 74 · agent_habitat 23 · graph_engineering 20 · nourishing_harness 17 · orchestration_first 9 · rest 12.
+
+**Runs 202–218** — two dense mid-2026 literature arcs, recency-weighted (RECENCY WEIGHTING directive of
+2026-09-06: prefer the last ~30 days; older papers carry a currency note + modest confidence + a
+small/local-model relevance note).
+
+*The acceptor / certificate arc (runs 203–208, 214–215)* — the whole propose → evaluate → commit → certify
+→ retain pipeline of harness self-improvement, now a six-condition acceptance-gate spec in
+`docs/self_improving_harness_plan.md` Phase 3:
+- **exogenous** — `concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal` (SEAL
+  arXiv:2607.24300 + Falsifiable Release Gates arXiv:2607.13070) — MET
+- **anytime-valid** — `concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution` (PACE
+  arXiv:2606.08106: repeated "keep if score up" is self-p-hacking) — **OPEN**, a paired e-process in
+  `verify_loop_edit`
+- **validity-checked** — `concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score` (Who Grades
+  the Grader arXiv:2607.12790: strip the anchor and the metric collapses to always-pass) — MET
+- **paired-live-trial measured** — `concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans`
+  (ACES arXiv:2608.20614: scan-gates vs behaviour-gates Spearman ρ=0.14 — `exec_guard` and `holdout_tasks`
+  proven complementary)
+- **epoch-versioned** — `concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries`
+  (RQGM arXiv:2606.26294)
+- **certificate-bearing** — `concept_runtime_governance_organizes_around_a_portable_action_certificate` +
+  `concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes` (PCAA
+  arXiv:2606.04104 + CAVA arXiv:2607.13716)
+- plus `concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate` (SEA
+  arXiv:2607.00871) — the fifth independent arrival at the plan, instantiating all of it around a **frozen
+  base**; and `concept_unmanaged_skill_libraries_silently_drift` (Library Drift arXiv:2605.19576) — the
+  retention side (bounded active-cap + meta-skill prior + outcome-driven retirement).
+
+*The emergence / ecosystem arc (runs 209–213, 216–218):*
+- `concept_ai_native_software_risk_is_an_ecosystem_property_not_an_agent_property` (Govern the Repository
+  arXiv:2606.28235 — 930k agent PRs; ~half of integration-friction variance is repository-level; ICC 0.30
+  vs 0.16 agent vs human) + `concept_ai_native_software_ecosystems_are_complex_adaptive_systems` (More Is
+  Different arXiv:2604.19827 — CAS theory, seven falsifiable propositions)
+- `concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain` (Engineering
+  Reliable Coding Agents arXiv:2608.13867 — a 164-work synthesis restating the project's thesis; a
+  206-record reliability catalog)
+- `concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium` (arXiv:2511.08710,
+  a Nov-2025 toy model, conf 0.5 with a currency note)
+- `concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery` (OrchestraBench
+  arXiv:2608.05263 — three model-invariant MAST recovery tiers; blind retry hides latent faults) +
+  `concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response` (arXiv:2511.15755,
+  conf 0.5, a domain-specific tension) → **synthesis** `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`:
+  multi-agent pays off iff (a) subtasks are independently verifiable, (b) synthesis is deterministic not a
+  vote, (c) agents work from disjoint evidence — falsifiable with the Phase 0 trace substrate.
 
 **Runs 183–201** — the **RECENCY WEIGHTING** directive (2026-09-06): prefer literature from the last ~30
 days; older papers are *not* locked out but carry a currency note, modest confidence on any
