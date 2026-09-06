@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-30",
+  "last_updated": "2026-10-01",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -368,6 +368,10 @@
     {
       "date": "2026-09-30",
       "change": "Autonomous run 102. IDLE-STATE RULE + GitHub source (arXiv frozen, forum folded). Second pass over research-fetch github releases: two early-Sept convergences toward what the design assumed - (1) explicit tool/skill allow-lists as a default (OpenHands v1.16.0, was all-on) = the dynamic-tool-loading answer to concept_tool_definition_tax; (2) stateless MCP serving (agno v3.0.6, MCPConfig(stateless=True) + /mcp/server-card + sessionless protocol era) = per-connection state removed for horizontal scale, the harness/orchestration thin interface standardised. Extended concept_harness_convergence_2026_09 + 3 supports edges; docs/harness_field_study_2026-09-06.md gains a September update section. No new node."
+    },
+    {
+      "date": "2026-10-01",
+      "change": "Autonomous run 103. IDLE-STATE RULE + OpenReview source (arXiv 429, forum + github folded). OpenReview search surfaced MAEBE (Multi-Agent Emergent Behavior Evaluation, arXiv:2506.03053, ICML 2025 workshop) - not previously in the graph. concept_moral_preferences_are_framing_brittle: LLM moral preferences (esp. Instrumental Harm) shift significantly with question framing, individually and in ensembles; an ensemble's moral reasoning cannot be predicted from isolated agents (confirms concept_emergence_layer_model on the moral domain); peer pressure drives convergence even when supervised. Moral framing = a third behavioural lever alongside self-concept and interaction language. +5 edges."
     }
   ],
   "nodes": [
@@ -5208,6 +5212,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-30-0600.md"
+      ]
+    },
+    {
+      "id": "concept_moral_preferences_are_framing_brittle",
+      "label": "LLM moral preferences shift significantly with question framing, individually and in ensembles",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:moral_framing_brittleness",
+      "confidence": 0.6,
+      "description": "MAEBE - Multi-Agent Emergent Behavior Evaluation (arXiv:2506.03053, VERIFIED via arXiv abstract read run 103; ICML 2025 Multi-Agent Systems Workshop). Using the Greatest Good Benchmark with a double-inversion question technique: LLM moral preferences - particularly for Instrumental Harm - are surprisingly brittle and shift significantly with question framing, in both individual agents and ensembles. Two further findings: (1) an ensemble's moral reasoning CANNOT be reliably predicted from how its individual agents behave in isolation - emergent group dynamics (independent confirmation of concept_emergence_layer_model on the moral-reasoning domain); (2) peer pressure influences convergence even when the ensemble is supervised. For this project: moral/value framing is another behavioural lever alongside self-concept (concept_self_concept_as_behavioral_lever) and interaction language (concept_interaction_language_shifts_emergence) - and a swarm's aggregate values are not a safe readout from its members'.",
+      "tags": [
+        "moral-preferences",
+        "framing-brittleness",
+        "instrumental-harm",
+        "ensemble-unpredictability",
+        "peer-pressure-convergence",
+        "maebe",
+        "greatest-good-benchmark"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-01-1200.md",
+        "arXiv:2506.03053 (MAEBE: Multi-Agent Emergent Behavior Evaluation) - VERIFIED, abstract read"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-01-1200.md"
       ]
     }
   ],
@@ -11766,6 +11797,60 @@
       "approach_family": "graph_engineering",
       "confidence": 0.4,
       "description": "Stateless serving + a server-card describing the tools is the harness/orchestration thin interface being standardised in the open."
+    },
+    {
+      "id": "edge_maebe_supports_layer_model",
+      "source": "concept_moral_preferences_are_framing_brittle",
+      "target": "concept_emergence_layer_model",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "MAEBE: an ensemble's moral reasoning cannot be predicted from isolated-agent behaviour - independent confirmation that swarm-level results need swarm-level measurement, on the moral-reasoning domain."
+    },
+    {
+      "id": "edge_maebe_refines_self_concept_lever",
+      "source": "concept_moral_preferences_are_framing_brittle",
+      "target": "concept_self_concept_as_behavioral_lever",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.5,
+      "description": "Moral/value framing is a third behavioural lever alongside self-concept and interaction language - all cheap, all content-independent, all move behaviour."
+    },
+    {
+      "id": "edge_maebe_challenges_diversity_maintenance",
+      "source": "concept_moral_preferences_are_framing_brittle",
+      "target": "principle_diversity_maintenance",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "Peer pressure influences convergence even when supervised - another force eroding the diversity the keystone must defend."
+    },
+    {
+      "id": "edge_maebe_refines_pluralistic_ignorance",
+      "source": "concept_moral_preferences_are_framing_brittle",
+      "target": "emergent_pluralistic_ignorance",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Peer-pressure convergence in a supervised ensemble is the visible-conformity half of pluralistic ignorance, on moral questions specifically."
+    },
+    {
+      "id": "edge_maebe_instantiates_emergence",
+      "source": "concept_moral_preferences_are_framing_brittle",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55
     }
   ]
 }

@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 193 nodes, 616 edges · **Date:** 2026-09-05
+**Graph at generation:** 194 nodes, 624 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -44,6 +44,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 
 | arXiv | Work | Used for |
 | --- | --- | --- |
+| [2506.03053](https://arxiv.org/abs/2506.03053) | (title not recorded) | `concept_moral_preferences_are_framing_brittle` |
 | [2510.01171](https://arxiv.org/abs/2510.01171) | How to Mitigate Mode Collapse and Unlock LLM Diversity | `emergent_evaluator_mode_collapse` |
 | [2510.15568](https://arxiv.org/abs/2510.15568) | The Spark Effect: On Engineering Creative Diversity in Multi-Agent AI Systems | `pattern_structural_decoupling` |
 | [2512.18202](https://arxiv.org/abs/2512.18202) | Sophia: A Persistent Agent Framework of Artificial Life | `concept_autotelic_agency` |
@@ -198,6 +199,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes multi-query tool_search — `concept_tool_definition_tax`
 - GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes v0.21.0 Bot Mode — `pattern_agent_society_surface`
 - GitHub release notes, 30-day window Aug-Sep 2026 (research-fetch github) - Hermes v0.21.0: sub-agents can be steered live mid-flight, shipped — `pattern_supervisor_stagnation_redirect`
+- GitHub releases Sep 2026 (run 102): OpenHands v1.16.0 'replace the all-on skill catalog with an explicit allow-list' (gated tool loading as a default); agno v3.0.6 stateless MCP serving + /mcp/server-card + sessionless protocol era (per-connection state removed for horizontal scale) — `concept_harness_convergence_2026_09`
 - Governing the Swarm: Config-Driven Control Plane for Human-in-the-Loop Multi-Agent Systems at Scale (Hackernoon, 2026-07-30) — `concept_config_driven_control_plane`
 - HuggingGPT, LLMCompiler (plan compiled to dataflow DAG for parallel dispatch) — `pattern_task_organization_graph`
 - ICLR 2026 'Evidence for Limited Metacognition in LLMs' — `emergent_metacognitive_monitoring`
@@ -324,6 +326,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
+- `docs/auto_sweep_2026-10-01-1200.md` — `concept_moral_preferences_are_framing_brittle`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
