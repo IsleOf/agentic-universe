@@ -56,6 +56,19 @@ Two mid-2026 papers independently arrive at this exact design
   candidate that only inflated confidence*. The project's IDLE-STATE RULE and the
   what-would-make-this-wrong severity invariants are its standing invariants.
 
+And the **discipline for revising it** (`concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries`,
+arXiv:2606.26294, the Red Queen Gödel Machine, VERIFIED): a fixed verifier goes
+stale as the agent improves, but updating it mid-stream breaks every comparison.
+RQGM's answer — organise into **epochs** with a fixed within-epoch criterion,
+update the utility only at epoch boundaries, so self-improvement guarantees hold
+*per epoch* — is exactly the shape a deliberate human edit here should take: the
+current 17-task set is epoch *N*; a deliberate revision (with a note) opens epoch
+*N+1*; held-out regression claims are only comparable *within* an epoch, and the
+sweep docs should say which epoch a run's baseline belongs to. RQGM also shows a
+co-evolved grader reaching 9% higher ground-truth accuracy when anchored — an
+evolved evaluator *can* improve, which is the constructive complement to Who
+Grades the Grader's collapse warning.
+
 And one **caution** (`concept_self_improvement_evaluation_is_noisy_and_task_order_dependent`,
 arXiv:2608.18066, VERIFIED, Aug 2026): self-improving-agent evaluation is
 inherently noisy on multi-step tasks and a self-improving loop *amplifies* that

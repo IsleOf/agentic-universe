@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-11",
+  "last_updated": "2026-09-12",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -788,6 +788,10 @@
     {
       "date": "2026-09-11",
       "change": "Autonomous run 206. Recency-weighted arxiv-fetch sweep. Folded ACES (arXiv:2608.20614, Aug 2026) as concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans: a skill's deployment value is Skill Lift - paired live trials with and without it under one model/sandbox/scorer, trajectories normalised to ATIF, six runtime metrics. On 145 real skills scan-only gates and LLM-judge evaluation have Spearman rho=0.14 (near-orthogonal); across 947 paired cases mean composite Skill Lift 0.2134 (95% CI [0.1967, 0.2301]), positive in 72.8%. Largest gains in skill execution / behaviour check / efficiency - signals scans cannot observe. Open-source as NVIDIA SkillEvaluator. 6 edges: supports artifact_phase3_holdout_set (paired with/without = baseline vs candidate scores) and artifact_phase5_exec_guard (rho=0.14 proves scan and behaviour gates are complementary, not redundant); constrains artifact_phase4_skill_induction (an induced skill must show positive Skill Lift, not just pass a shape check); supports pattern_procedural_family_skill_consolidation, concept_behavior_aware_verification_beats_the_fixed_task_set, and concept_trace_compiles_to_per_consumer_views (ATIF = a compiled trace view). 240->241 nodes, 899->905 edges."
+    },
+    {
+      "date": "2026-09-12",
+      "change": "Autonomous run 207. Recency-weighted sweep. Folded the Red Queen Godel Machine (arXiv:2606.26294) as concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries: a fixed verifier goes stale as the agent improves; RQGM's controlled utility evolution organises search into epochs with a fixed within-epoch criterion, utility updated only at epoch boundaries, so guarantees hold per epoch. Adding a complementary agent-as-a-judge code-review signal beats SOTA at 1.35-1.72x fewer tokens; co-evolved writers 1.78-1.86x higher acceptance, co-evolved graders +9% ground truth; an adversarial objective discovers reviewers equally stringent on AI and human work (corrects 1.91x AI-paper over-acceptance). 6 edges: refines artifact_phase3_holdout_set (the frozen set is epoch N; a deliberate edit opens epoch N+1) and concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal (exogenous need not be static); supports artifact_phase3_heterogeneous_verifier (diverse judge panel), concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score (anchored co-evolved grader = the constructive complement), pattern_recoverability_constrained_evolution (per-epoch = a revert unit); challenges concept_asg_si_independently_arrives_at_the_plan (stationary-verifier assumption). docs/phase3_holdout_set.md external-corroboration section gains the epoch-discipline paragraph. 241->242 nodes, 905->911 edges."
     }
   ],
   "nodes": [
@@ -7001,6 +7005,36 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-11-1800.md"
+      ]
+    },
+    {
+      "id": "concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries",
+      "label": "A fixed verifier goes stale as the agent improves; the disciplined fix is epochs - a fixed within-epoch criterion, utility updated only at epoch boundaries, so guarantees hold per epoch",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:non_stationary_utility",
+      "confidence": 0.66,
+      "description": "The Red Queen Godel Machine - Co-Evolving Agents and Their Evaluators (RQGM, arXiv:2606.26294, VERIFIED via arXiv abstract read run 207; June 2026). Self-improving agents' search methods generally assume a STATIONARY evaluation criterion - a fixed verifier, benchmark, or labeled dataset that stays valid as the agent improves. This ignores a central feature of evolution: species adapt as their environments change with them. RQGM makes evaluation part of the improvement loop and opens search to evolving evaluators, adversarial objectives, and dynamic utilities. The mechanism that keeps it sound: CONTROLLED UTILITY EVOLUTION - search is organised into epochs with a FIXED within-epoch evaluation criterion, while the utility can be updated only at epoch boundaries, so self-improvement guarantees hold PER EPOCH as the objective evolves across them. Results: on verifiable coding tasks, adding a complementary agent-as-a-judge code-review signal improves test pass rate over prior SOTA at 1.35x-1.72x fewer tokens; on scientific paper writing/reviewing and Olympiad proof writing/grading, co-evolved writers reach 1.78x-1.86x higher acceptance under a diverse agent-as-a-judge panel and co-evolved graders reach 9% higher ground-truth accuracy; the strongest baseline reviewer over-accepts AI-generated papers at up to 1.91x the human rate, and RQGM corrects this by an adversarial objective that discovers reviewers equally stringent on AI and human work. Bearing on the project: this is the discipline for revising holdout_tasks.py. The current 17-task frozen set is epoch N; a deliberate human edit (with a note) opens epoch N+1; held-out regression claims are only comparable WITHIN an epoch, and sweep docs should record which epoch a run's baseline belongs to. RQGM's anchored co-evolved grader (+9% ground truth) is the constructive complement to Who Grades the Grader's always-pass collapse. Recency/currency: June 2026, RL / Godel-machine framing (the project is emergence-first / no weight training) - the epoch discipline transfers; the RL search does not.",
+      "tags": [
+        "RQGM",
+        "red-queen",
+        "non-stationary-utility",
+        "controlled-utility-evolution",
+        "epochs",
+        "per-epoch-guarantee",
+        "co-evolved-evaluator",
+        "adversarial-objective",
+        "agent-as-a-judge",
+        "recency-2026-06"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-12-0000.md",
+        "arXiv:2606.26294 (The Red Queen Godel Machine: Co-Evolving Agents and Their Evaluators) - VERIFIED, abstract read run 207"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-12-0000.md"
       ]
     }
   ],
@@ -16693,6 +16727,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "ATIF - a normalised Agent Trajectory Interchange Format that a grader then reads - is a per-consumer compiled trace view: the raw trajectory compiled into the shape the skill-grader needs."
+    },
+    {
+      "id": "edge_non_stationary_refines_holdout_set",
+      "source": "concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries",
+      "target": "artifact_phase3_holdout_set",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.66,
+      "description": "Gives the frozen held-out set a revision discipline: it is the fixed within-epoch criterion; a deliberate human edit opens a new epoch; regression claims compare only within an epoch. Freezing forever is one valid policy (never leave epoch N); the risk it accepts is a stale criterion."
+    },
+    {
+      "id": "edge_non_stationary_refines_exogenous_acceptance",
+      "source": "concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The acceptance signal must be exogenous (SEAL) but need not be static: RQGM keeps it exogenous within an epoch and lets it evolve - under human control - at boundaries. Exogenous, anytime-valid, validity-checked, AND epoch-versioned is the full acceptor spec."
+    },
+    {
+      "id": "edge_non_stationary_supports_heterogeneous_verifier",
+      "source": "concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries",
+      "target": "artifact_phase3_heterogeneous_verifier",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.58,
+      "description": "RQGM's gains come largely from adding a COMPLEMENTARY agent-as-a-judge signal and a DIVERSE judge panel - the two-independent-scorers design, and a reason to grow the panel rather than tune one scorer."
+    },
+    {
+      "id": "edge_non_stationary_complements_evaluator_validity",
+      "source": "concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries",
+      "target": "concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The constructive complement: Who Grades the Grader shows an unanchored evolved evaluator collapses to always-pass; RQGM shows an anchored co-evolved grader reaches 9% higher ground-truth accuracy. Anchor + epoch discipline = a safely evolving evaluator."
+    },
+    {
+      "id": "edge_non_stationary_supports_recoverability",
+      "source": "concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Per-epoch guarantees are a recoverability boundary: a bad epoch boundary is a single revertible unit, and within-epoch the incumbent is retained on regression."
+    },
+    {
+      "id": "edge_non_stationary_challenges_asg_si",
+      "source": "concept_evaluation_criteria_are_non_stationary_update_them_only_at_epoch_boundaries",
+      "target": "concept_asg_si_independently_arrives_at_the_plan",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "ASG-SI (and the project's own design) assumes a stationary verifier-backed replay; RQGM's premise is that this goes stale as capability grows. The challenge is mild - the fix is a versioning discipline, not an architecture change."
     }
   ]
 }
