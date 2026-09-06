@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-27",
+  "last_updated": "2026-09-28",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -312,6 +312,10 @@
     {
       "date": "2026-09-27",
       "change": "Autonomous run 88. IDLE-STATE RULE: refreshed docs/graph_state_2026-09.md - stale since run 51 (165 nodes). Now 188/584/9; verification_state gains 16 validated (the artifact_ nodes' selftests are computed checks) and 18 in_experiment. Family table re-sorted (self_improving_harness 57 is now largest, holds the built pipeline; agent_habitat 22). Highest-value-next-work list rewritten: the run-51 list is cleared by the build; what remains needs a real model API, a real multi-agent harness, or watching the run-80 prediction. Reading order adds tools/README.md. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-28",
+      "change": "Autonomous run 89. IDLE-STATE RULE: wrote docs/HANDOFF.md - the single 'what to do next' doc, replacing the pre-build HANDOVER.md. Covers where things are (branch, graph, toolchain, selftests), what is built (Phases 0-5 + 4 probe rigs + the run-80 self-edit), the ONE unblocking step (wire a model into the 5 stubs: agent_step / agent_read / self_preference / relay_policy / PROPOSER_PROMPT) with a first-run recommendation (idle-agent probe), what needs infrastructure this repo lacks (Phase 6, composed-design test), how to watch and revert the run-80 prediction, and open housekeeping. No graph node/edge change."
     }
   ],
   "nodes": [
