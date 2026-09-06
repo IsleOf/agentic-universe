@@ -35,19 +35,33 @@ ROOT = Path(__file__).resolve().parents[1]
 
 # --- the frozen set ------------------------------------------------------
 
+import re as _re
+
+_MD = _re.compile(r"[*_`#>|]+")
+
+
+def _normalize(text):
+    """Content-not-format normalisation (concept_self_correction_is_mostly_format_repair_not_reasoning,
+    arXiv:2608.04355, run 194): strip markdown emphasis/fences/heading marks and
+    collapse whitespace before matching, so a re-run that only reformats its
+    answer (a format-repair 'gain') cannot register as a held-out improvement -
+    only a content change can move a score."""
+    return _re.sub(r"\s+", " ", _MD.sub(" ", (text or "").lower())).strip()
+
+
 def _has_all(text, *terms):
-    t = text.lower()
-    return all(term.lower() in t for term in terms)
+    t = _normalize(text)
+    return all(_normalize(term) in t for term in terms)
 
 
 def _has_any(text, *terms):
-    t = text.lower()
-    return any(term.lower() in t for term in terms)
+    t = _normalize(text)
+    return any(_normalize(term) in t for term in terms)
 
 
 def _lacks(text, *terms):
-    t = text.lower()
-    return not any(term.lower() in t for term in terms)
+    t = _normalize(text)
+    return not any(_normalize(term) in t for term in terms)
 
 
 HOLDOUT = [
@@ -313,6 +327,15 @@ def _selftest():
     res = score_corpus(_load_docs())
     checks["baseline computes over the doc corpus"] = res["aggregate_over_covered"] is not None
     checks["baseline covers most tasks"] = res["covered"] >= 7
+
+    # content-not-format scoring (run 194): reformatting the gold answer does not
+    # change its score; a content change still does
+    _t = HOLDOUT[0]
+    _fmt = f"### **{_t['gold']}**\n\n> {_t['question']}"   # same content, heavy markdown
+    checks["a reformatted gold answer still passes (format is not credited)"] = (
+        score_fold(_t["id"], _fmt) == 1.0)
+    checks["a content-wrong answer still fails"] = (
+        score_fold(_t["id"], "Yes, the Shibboleth Effect is universal and model-independent.") == 0.0)
 
     # Search-Time Contamination (run 165): literature tasks are search-sensitive,
     # design tasks are not

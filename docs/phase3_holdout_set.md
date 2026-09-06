@@ -71,6 +71,14 @@ regressed task.
 
 ## The remaining gap (narrowed, not closed)
 
+**Content-not-format scoring (added run 194).** `concept_self_correction_is_mostly_format_repair_not_reasoning`
+(arXiv:2608.04355): most measured self-correction gain is format repair
+(parseability), not reasoning. `_normalize()` strips markdown emphasis / fences /
+heading marks and collapses whitespace before every match, so a re-run that only
+*reformats* its answer cannot move a held-out score — only a content change can.
+Selftested (a heavily-marked-up gold answer still passes; a content-wrong answer
+still fails).
+
 `verify_loop_edit` needs `candidate_scores` — the loop's answers *after* the edit.
 Producing them means **re-running the loop on the ten questions**. In this
 environment that is a human step: the loop cannot re-execute its own past

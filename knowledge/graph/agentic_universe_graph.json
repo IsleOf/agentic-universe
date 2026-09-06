@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-08",
+  "last_updated": "2026-09-09",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -736,6 +736,10 @@
     {
       "date": "2026-09-08",
       "change": "Autonomous run 193. Recent citation-sweep (S2 citations of the RSI survey 2607.07663). concept_self_correction_is_mostly_format_repair_not_reasoning (The Calibration Floor, arXiv:2608.04355): most measured LLM self-correction gain is FORMAT repair not reasoning - format effects exceed content effects (p=1.7e-3), grammar-constrained decoding closes 71% of the gap, content margin exactly zero on frontier despite +0.275 total, a cited gating protocol does NOT replicate on a small model, floor-scale models get content change AND harm. The small/local-model form of silent faults / illusory gains; a direct non-replication across scale; verify_loop_edit should score with a parse-normalised answer. +6 edges."
+    },
+    {
+      "date": "2026-09-09",
+      "change": "Autonomous run 194. Phase 3 - content-not-format scoring in holdout_tasks.py (the run-193 conclusion). _normalize() strips markdown emphasis/fences/heading marks and collapses whitespace before every _has_all/_has_any/_lacks match, so a re-run that only REFORMATS its answer (a format-repair 'gain' per concept_self_correction_is_mostly_format_repair_not_reasoning, arXiv:2608.04355) cannot move a held-out score - only a content change can. +2 selftest checks (41/41). phase3_holdout_set.md updated. No graph node/edge change."
     }
   ],
   "nodes": [
