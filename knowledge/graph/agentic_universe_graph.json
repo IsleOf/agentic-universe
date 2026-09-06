@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-26",
+  "last_updated": "2026-09-27",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -296,6 +296,10 @@
     {
       "date": "2026-09-26",
       "change": "Autonomous run 84. IDLE-STATE RULE (option c): adversarial pass over nourishing_harness_design.md with the three probe rigs and the Phase 0-5 build in hand. Edits: (1) 3.2 habitat table gains a Status column - slack/cheap-death specced, graded-challenge trace substrate built, inheritance = experience_bank, diversity = withheld_runs(), retraction = retire(); the slack row now states the hypothesis is UNVERIFIED and points at probe_idle_agent.py. (2) 3.4 same-parent-ID filtering annotated with the run-82 measurement - bounds spread 12/12->4/12 under a deference drive, does not stop it, reach is a constant fraction not a cap. (3) 3.4 disagreement-aggregation gains a Sybil caveat - anonymous flags must dedup by evidence root (run 83). (4) 5 build order - Phase 0 marked done, what is/isn't built listed. No graph node/edge change; documentation honesty pass."
+    },
+    {
+      "date": "2026-09-27",
+      "change": "Autonomous run 85. IDLE-STATE RULE: built tools/probe_rho_holdout.py - the RHO held-out grading test as a runnable rig ('the single most decision-relevant probe'). Simulates RHO-style trajectory-only optimisation (pick by self-preference) then grades the winner externally. Dry-run 300 rounds: reported +0.218, survives +0.072 (33 percent), honest selection +0.093 - two-thirds is self-preference inflation and self-preference selection lands BELOW honest. Reported +0.218 close to RHO's real +0.19. Confirms pattern_trajectory_only_harness_optimization must not run without the frozen external holdout. artifact_probe_rho_holdout_rig added. 18 selftests GREEN."
     }
   ],
   "nodes": [
@@ -4970,6 +4974,32 @@
       ],
       "evidence_links": [
         "docs/probe_epistemic_sybil.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_rho_holdout_rig",
+      "label": "RHO held-out grading test as a runnable rig",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:rho_holdout_rig",
+      "confidence": 0.75,
+      "description": "tools/probe_rho_holdout.py, run 85 (IDLE-STATE RULE). Simulates RHO-style trajectory-only harness optimisation: pick the candidate with the highest self-preference (true quality + a style-match bias), then grade it on a frozen external held-out set. Dry-run, 300 rounds: self-preference reports +0.218, only +0.072 survives external grading (33 percent), honest external selection would have gotten +0.093. Two-thirds of an RHO-style gain is self-preference inflation and self-preference selection lands BELOW honest selection. Reported +0.218 sits close to RHO's real +0.19. Confirms the plan's rule: pattern_trajectory_only_harness_optimization must not run without the frozen external holdout - which is exactly what improvement_loop + holdout_tasks provide. Stub: self_preference (swap for a real pairwise judge).",
+      "tags": [
+        "rho",
+        "held-out-grading",
+        "self-preference-inflation",
+        "trajectory-only",
+        "dry-run",
+        "rig"
+      ],
+      "derived_from": [
+        "docs/probe_rho_holdout.md",
+        "tools/probe_rho_holdout.py"
+      ],
+      "evidence_links": [
+        "docs/probe_rho_holdout.md"
       ]
     }
   ],
@@ -11088,6 +11118,69 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Third run governed by the run-80 IDLE-STATE RULE."
+    },
+    {
+      "id": "edge_rhorig_instantiates_sih",
+      "source": "artifact_probe_rho_holdout_rig",
+      "target": "approach_self_improving_harness",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.75
+    },
+    {
+      "id": "edge_rhorig_challenges_trajectory_only",
+      "source": "artifact_probe_rho_holdout_rig",
+      "target": "pattern_trajectory_only_harness_optimization",
+      "type": "challenges",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "Measures the inflation: only ~33 percent of a self-preference-reported gain survives external grading, and self-preference selection lands below honest selection."
+    },
+    {
+      "id": "edge_rhorig_supports_holdout",
+      "source": "artifact_probe_rho_holdout_rig",
+      "target": "artifact_phase3_holdout_set",
+      "type": "supports",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "The frozen external grader this probe says is mandatory is exactly holdout_tasks."
+    },
+    {
+      "id": "edge_rhorig_supports_grounded_acceptance",
+      "source": "artifact_probe_rho_holdout_rig",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.65,
+      "description": "Grounded strict-decrease acceptance is the external grader; the rig quantifies what running without it costs."
+    },
+    {
+      "id": "edge_rhorig_depends_on_phase0",
+      "source": "artifact_probe_rho_holdout_rig",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6
+    },
+    {
+      "id": "edge_rhorig_from_run80_rule",
+      "source": "artifact_probe_rho_holdout_rig",
+      "target": "artifact_phase3_first_closed_loop",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5
     }
   ]
 }
