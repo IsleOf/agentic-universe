@@ -416,6 +416,10 @@
     {
       "date": "2026-10-04",
       "change": "Autonomous run 114. Consolidation: refreshed docs/graph_state_2026-09.md snapshot (193->200 nodes, 616->660 edges, 90 partially-validated) and the evidence-for / evidence-against sections with the DBLP batch (108-113): Self-Harness added to evidence-for as the strongest 'plan is instantiable' datapoint (9/9 combos, +132% held-out); Harness-Bench's 'execution-alignment failure', CONSCIENTIA's persistent safety-helpfulness trade-off, and the run-106 pretrained-grader-gamer synthesis added to evidence-against. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 115. DBLP sweep on scaffold/harness evaluation. concept_aggregate_score_masks_per_layer_regression (Layer-Isolated Evaluation, arXiv:2606.11686): a deployed agent decomposed into a fixed layer taxonomy, each with a deterministic no-LLM assertion slice, locked baseline, CI on every change. MASKING: aggregate pass-rate -2 to -6 pp while the faulty layer's slice -25 to -91 pp. Empirical case for concept_verification_completeness_gap; independent production validation of Phase 5 + the two-verifier design + the regression fixture; a cleaner layer taxonomy than the registry's 5 component kinds. +6 edges."
     }
   ],
   "nodes": [
@@ -5446,6 +5450,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-04-0000.md"
+      ]
+    },
+    {
+      "id": "concept_aggregate_score_masks_per_layer_regression",
+      "label": "An end-to-end pass rate masks per-layer regressions; a deterministic no-LLM per-layer harness localises them",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:layer_isolated_eval",
+      "confidence": 0.7,
+      "description": "Layer-Isolated Evaluation (arXiv:2606.11686, VERIFIED via arXiv abstract read run 115; resolved via DBLP). A deployed ordering agent is decomposed into a fixed layer taxonomy (ontology, intent, routing, decomposition, escalation, safety, memory, cross-cutting envelope/defense), each exercised by its own assertion slice in a DETERMINISTIC, NO-LLM 'pure' mode. The pure suite (238 cases / 23 slices, 2.39 s, ~10 ms/case) runs in CI on every change against a LOCKED per-slice baseline. Validated by controlled regression injection across 7 non-safety layers. Key finding - MASKING: the aggregate pass-rate barely moves (-1.7 to -5.9 pp for six local regressions) while the matching slice CRATERS (-25 to -91 pp). Localisation: the injected layer's slice is the single worst-hit in 5 of 7 and top-3 in 7 of 7 (mean rank 1.29 of 19), replicating on a structurally different second tenant. Positioned as the deterministic instantiation of component-level evaluation. For this project: the empirical case for concept_verification_completeness_gap (a single held-out number is insufficient), independent production validation of Phase 5 (exec_guard's no-LLM pre-commit gate) + the two-verifier design + the improvement_loop regression fixture, and a cleaner layer taxonomy than the harness registry's five component kinds.",
+      "tags": [
+        "layer-isolated-eval",
+        "masking",
+        "no-llm-per-layer-harness",
+        "locked-baseline",
+        "regression-injection",
+        "aggregate-hides-per-layer",
+        "-25-to-91pp",
+        "component-level-evaluation"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-04-1200.md",
+        "arXiv:2606.11686 (Layer-Isolated Evaluation: Gating the Deterministic Scaffold ...) - VERIFIED, abstract read; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-04-1200.md"
       ]
     }
   ],
@@ -12447,6 +12479,72 @@
       "verification_state": "needs_empirical_validation",
       "approach_family": "emergent_behaviors",
       "confidence": 0.55
+    },
+    {
+      "id": "edge_masking_supports_completeness_gap",
+      "source": "concept_aggregate_score_masks_per_layer_regression",
+      "target": "concept_verification_completeness_gap",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.7,
+      "description": "Aggregate -2 to -6 pp while the faulty layer's slice -25 to -91 pp: a single held-out number provably misses per-component regressions - the empirical case for keeping component checks."
+    },
+    {
+      "id": "edge_masking_supports_phase5",
+      "source": "concept_aggregate_score_masks_per_layer_regression",
+      "target": "artifact_phase5_exec_guard",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A no-LLM per-layer harness with a locked baseline in CI on every change is exec_guard's no-LLM pre-commit gate, done in production."
+    },
+    {
+      "id": "edge_masking_supports_hetero_verifier",
+      "source": "concept_aggregate_score_masks_per_layer_regression",
+      "target": "artifact_phase3_heterogeneous_verifier",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "The masking result is why holdout_verifier2 (two independent scorers) and per-component checks beat one aggregate held-out score."
+    },
+    {
+      "id": "edge_masking_supports_proctor",
+      "source": "concept_aggregate_score_masks_per_layer_regression",
+      "target": "pattern_deterministic_self_improvement_guardrails",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Controlled regression injection to validate the harness = PROCTOR's canary / the improvement_loop negative test, generalised to per-layer."
+    },
+    {
+      "id": "edge_masking_refines_registry",
+      "source": "concept_aggregate_score_masks_per_layer_regression",
+      "target": "artifact_phase1_harness_registry",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "The ontology/intent/routing/decomposition/escalation/safety/memory/envelope taxonomy is a cleaner decomposition than the registry's prompt/tool/context/hook/topology - worth adopting for per-component gating."
+    },
+    {
+      "id": "edge_masking_supports_agentic_os",
+      "source": "concept_aggregate_score_masks_per_layer_regression",
+      "target": "concept_agentic_os",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Gating the deterministic scaffold from a no-LLM fixed point' is the agentic-OS layering (runtime verified from a fixed point) in production."
     }
   ]
 }
