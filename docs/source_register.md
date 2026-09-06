@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 229 nodes, 832 edges · **Date:** 2026-09-05
+**Graph at generation:** 230 nodes, 838 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -101,6 +101,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2606.20683](https://arxiv.org/abs/2606.20683) | (title not recorded) | `concept_bottleneck_is_the_model_harness_coupling` |
 | [2606.28456](https://arxiv.org/abs/2606.28456) | lying in sustainability games | `emergent_deception_and_collusion` |
 | [2607.05297](https://arxiv.org/abs/2607.05297) | (title not recorded) | `concept_recursive_meta_skill_evolution` |
+| [2607.07663](https://arxiv.org/abs/2607.07663) | (title not recorded) | `concept_self_improvement_strength_tracks_the_verification_hierarchy` |
 | [2607.13285](https://arxiv.org/abs/2607.13285) | Harness Handbook: behavior-centric representations for evolving harnesses | `pattern_harness_component_versioning` |
 | [2607.18433](https://arxiv.org/abs/2607.18433) | Intelligence from Learnable Novelty | `concept_autotelic_agency` |
 | [2607.22585](https://arxiv.org/abs/2607.22585) | (title not recorded) | `concept_capability_is_a_model_harness_config_property`, `concept_harness_has_model_independent_failure_fingerprints` |
@@ -330,6 +331,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `architecture/foundations.md: write an executable GREEN/RED predicate before building a loop` — `concept_work_substitution_frontier`
 - `docs/auto_sweep_2026-09-06-0000.md` — `concept_incremental_attacks_boil_the_frog`
 - `docs/auto_sweep_2026-09-06-1200.md` — `concept_harness_evolution_subfield`
+- `docs/auto_sweep_2026-09-06-1800.md` — `concept_self_improvement_strength_tracks_the_verification_hierarchy`
 - `docs/auto_sweep_2026-09-06-2115.md` — `concept_harness_self_evolution_is_domain_dependent`, `pattern_recoverability_constrained_evolution`
 - `docs/auto_sweep_2026-09-07-0000.md` — `pattern_alternating_weight_harness_optimization`, `pattern_trajectory_only_harness_optimization`
 - `docs/auto_sweep_2026-09-07-0600.md` — `pattern_activation_probe_monitoring`

@@ -704,6 +704,10 @@
     {
       "date": "2026-09-06",
       "change": "Autonomous run 185. Recent citation-sweep (S2 citations of Self-Harness 2606.09498 -> a fresh 2026 harness-evolution cluster: HarnessEvolve, HarnessDev, HarnessFix, HarnessCompass, DemoEvolve, CordisBench). Deepened concept_harness_evolution_subfield: 15+ -> 20+ systems, and folded DemoEvolve (arXiv:2605.24539, VERIFIED via arxiv-fetch): self-rollout harness evolution WORKS on short attributable episodes but BREAKS in long-horizon stochastic regimes; a few competent human demonstrations anchor the diagnosis where reward-only search is noise. The answer to the binding constraint when the SIGNAL (not the cost) is unreliable. +2 edges."
+    },
+    {
+      "date": "2026-09-06",
+      "change": "Autonomous run 186. Recent citation-sweep (S2 citations of DeepVerifier 2601.15808). concept_self_improvement_strength_tracks_the_verification_hierarchy (Recursive Self-Improvement in AI, arXiv:2607.07663, 1250-paper survey): every improvement loop claims a signal substitutes for human judgment; a verification hierarchy (formal verifier > PRM > judge > rubric > meta-eval > intrinsic) and demonstrated strength TRACKS it; failure modes (self-confirming, model collapse, diversity collapse) follow from violations; research direction-setting is the top-of-hierarchy human bottleneck; governance-grade measurement is the underpopulated niche. Unifies the grader-gaming + diversity-collapse threads as one weak-signal phenomenon; confirms the project's human-sets-direction structure. +6 edges."
     }
   ],
   "nodes": [
@@ -6569,6 +6573,35 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-09-06-0000.md"
+      ]
+    },
+    {
+      "id": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "label": "A 1,250-paper survey: every improvement loop is a claim that some signal substitutes for human judgment; demonstrated self-improvement strength tracks a verification hierarchy (formal verifier > ... > intrinsic self-assessment), and its failure modes follow from violating it",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:verification_hierarchy_bounds_rsi",
+      "confidence": 0.75,
+      "description": "Recursive Self-Improvement in AI: From Bounded Self-Refinement to Autonomous Research Loops (arXiv:2607.07663, Jul 2026; VERIFIED via arxiv-fetch run 186; found via S2 citations of DeepVerifier). A survey of 1,250 arXiv papers (2024-2026) along two axes: WHAT the system improves (deployment behaviour / policy via training / its EVALUATOR / the research process itself) x DEGREE OF LOOP CLOSURE (human-in-loop -> fully closed). Separates BOUNDED self-refinement - convergent, evaluable, already industrial - from open-ended RECURSIVE self-improvement (RSI), which 'remains bounded by grounding requirements, collapse dynamics, and compute constraints on EVERY measured axis'. Core claim: 'every improvement loop is a claim that some signal can substitute for human judgment.' The survey orders those signals into a VERIFICATION HIERARCHY - formal verifiers (strongest) -> process reward models -> judges -> rubrics -> meta-evaluation -> intrinsic self-assessment (weakest) - and finds (a) demonstrated self-improvement STRENGTH tracks the hierarchy, (b) the failure modes (self-confirming loops, model collapse, diversity collapse) follow from VIOLATIONS of it, and (c) the 'research direction-setting' bottleneck that keeps humans in the loop sits at the TOP of the hierarchy. Names governance-grade MEASUREMENT of self-improvement as the field's most underpopulated niche. For this project: (1) 'every loop claims a signal substitutes for human judgment' IS pattern_grounded_acceptance_only / concept_transcript_only_gate_is_provably_insufficient stated as a general law; the two-part gate should sit as HIGH on the hierarchy as the domain allows (computed check + environment state, not a judge); (2) the failure-modes-follow-from-violations result unifies concept_gate_faces_a_pretrained_grader_gamer (self-confirming) and principle_diversity_maintenance's five erosion channels (diversity collapse) as one phenomenon - weak signal; (3) 'research direction-setting is the top-of-hierarchy human bottleneck' is exactly the project's structure (the loop picks increments, a human sets direction) - independent confirmation that is the right place to keep the human; (4) 'governance-grade measurement is underpopulated' is the plateau_watch / trace_legibility / Phase-3-metrics thread, and a place the project is actually ahead.",
+      "tags": [
+        "1250-paper-survey",
+        "verification-hierarchy",
+        "signal-substitutes-for-human-judgment",
+        "bounded-vs-recursive-self-improvement",
+        "strength-tracks-hierarchy",
+        "failure-modes-from-hierarchy-violations",
+        "research-direction-setting-bottleneck",
+        "governance-grade-measurement-underpopulated",
+        "survey-jul-2026"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-06-1800.md",
+        "arXiv:2607.07663 (Recursive Self-Improvement in AI: From Bounded Self-Refinement to Autonomous Research Loops) - VERIFIED, abstract read run 186 via arxiv-fetch; found via S2 citations of DeepVerifier"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-09-06-1800.md"
       ]
     }
   ],
@@ -15458,6 +15491,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.45,
       "description": "DemoEvolve shows trajectory-only / self-rollout harness evolution BREAKS in long-horizon stochastic regimes - reward-only search is misled by candidate-selection noise; short attributable episodes are the precondition RHO's stance quietly assumes."
+    },
+    {
+      "id": "edge_verhier_supports_grounded_acceptance",
+      "source": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "'Every improvement loop is a claim that some signal can substitutes for human judgment' - the general law the grounded-acceptance gate instantiates; and self-improvement strength tracks how high on the verification hierarchy the signal sits."
+    },
+    {
+      "id": "edge_verhier_refines_verification_binding_constraint",
+      "source": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "RSI 'remains bounded by grounding requirements ... on every measured axis' - verification is the constraint at the field level, and there is a measurable hierarchy of how strong a signal is."
+    },
+    {
+      "id": "edge_verhier_refines_what_when_how_where",
+      "source": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "target": "concept_what_when_how_where_to_evolve",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "A complementary two-axis survey (what improves x loop closure) over 1250 papers - and it adds the verification-hierarchy ordering that the what/when/how/where cut does not have."
+    },
+    {
+      "id": "edge_verhier_supports_pretrained_grader_gamer",
+      "source": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "target": "concept_gate_faces_a_pretrained_grader_gamer",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Self-confirming loops' is a named failure mode that follows from using a weak (gameable) signal - the pretrained-grader-gamer problem, generalised."
+    },
+    {
+      "id": "edge_verhier_supports_diversity_maintenance",
+      "source": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "'Diversity collapse' is listed as a failure mode that follows from verification-hierarchy violations - the same weak-signal root as the keystone's erosion channels."
+    },
+    {
+      "id": "edge_verhier_refines_recursive_meta_skill",
+      "source": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "target": "concept_recursive_meta_skill_evolution",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "'Improving the evaluator' is one of the survey's four what-axes and 'improvement of the improvement signal itself' its most novel move - the recursive step this project names but has not wired (PROPOSER_META)."
     }
   ]
 }
