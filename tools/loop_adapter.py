@@ -182,7 +182,7 @@ def _selftest():
         buf = io.StringIO()
         rec = Recorder(run_id="loop-history", sink=buf, layer="harness", language="en",
                        harness_manifest=manifest)
-        counts = replay_history(GRAPH, rec, limit=40)  # deep enough to include literature-sweep runs
+        counts = replay_history(GRAPH, rec, limit=None)  # full history — robust to the loop's current mode mix
         rec.close()
         text = buf.getvalue()
 
@@ -209,8 +209,8 @@ def _selftest():
             "harness seeded (4 components)": len(manifest["components"]) == 4,
             "real trace validates": not errors,
             f"trace has events ({n_events})": n_events > 50,
-            f"replayed {counts['runs']} runs": counts["runs"] == 40,
-            "claims carry real source evidence roots": len(roots) >= 8
+            f"replayed {counts['runs']} runs": counts["runs"] >= 50,
+            "claims carry real source evidence roots": len(roots) >= 20
                 and all(r.startswith(("arXiv:", "AF:")) for r in roots),
             "condense produced workflow entries from the real trace":
                 bank.stats()["workflow"] >= 1,

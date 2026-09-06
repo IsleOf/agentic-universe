@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-30",
+  "last_updated": "2026-10-01",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -360,6 +360,10 @@
     {
       "date": "2026-09-30",
       "change": "Autonomous run 100. IDLE-STATE RULE: run-100 checkpoint. Refreshed docs/graph_state_2026-09.md snapshot (188->193 nodes, 584->616 edges, 18 validated) and its evidence-against section with the runs 90-99 additions: the six probe rigs and the forum-sourced misalignment-cluster taxonomy (concept_loss_function_predicts_misalignment_flavor + reward-hacking-generalises + debate-training + the METR primary-source rewrite of subagent-coordination). No graph node/edge change."
+    },
+    {
+      "date": "2026-10-01",
+      "change": "Autonomous run 101. AT REST. arXiv 429 (checked via API and curl); forum 'new' sort returns no design-relevant post dated after Sept 1 not already folded (runs 95-98). Build complete through Phase 5; six probe rigs; every doc current; 21 selftests GREEN. No increment warranted - per the run-80 IDLE-STATE RULE and the run-100 note, holding. The 6h scheduled task carries the loop and will resume the sweep cadence when a source moves. No graph change."
     }
   ],
   "nodes": [
