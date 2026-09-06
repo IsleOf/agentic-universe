@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-24",
+  "last_updated": "2026-09-25",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -260,6 +260,10 @@
     {
       "date": "2026-09-24",
       "change": "Autonomous run 75. Built tools/holdout_verifier2.py - the heterogeneous verifier. A second held-out scorer (key-fact overlap: gold numbers, arXiv ids, negation parity, snake_case terms) with no shared code with the hand-written predicates. verify_loop_edit now uses the conservative min-of-two score and rejects an edit where the two verifiers disagree on a changed task. Verifiers agree on all 17 gold texts. Completes the computed spine of the Phase 3 verifier spec. selftest_all.py runs 14 selftests, all GREEN. artifact_phase3_heterogeneous_verifier added."
+    },
+    {
+      "date": "2026-09-25",
+      "change": "Autonomous run 76. Improved the skill_induction task-class classifier: added a 'design integration' class, priority-ordered keyword matching (specific classes before broad), ~2x keyword coverage. 'other' dropped from 20/61 to 7/61 workflow entries (remaining 7 are pre-loop seed/schema runs). Now induces 3 skills (build, citation_upgrade, literature_sweep); loop_proposer's mode-diversity dimension has accurate input. 14 selftests still GREEN."
     }
   ],
   "nodes": [
@@ -4710,7 +4714,7 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:phase4_skeleton",
       "confidence": 0.7,
-      "description": "tools/skill_induction.py, run 70: classifies the loop's 56-run history (via experience-bank workflow entries) into task classes; a class recurring >= 4 times becomes a candidate skill written to the harness registry as a tool component, status=candidate (no auto-promotion). Induced literature_sweep (support 22) and build (support 9). Enforces the distillation/discovery tension: withheld_runs() marks a fixed 20% of runs permanently and deterministically skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). Not built: LLM clustering, auto-promotion, finer task-class classification (needs live per-run summaries). Run 72: added retire() - the deprecation stage of pattern_agentic_skill_lifecycle (principle_retraction_capacity). A skill whose task class is unseen in the last 12 workflow entries is marked deprecated - kept and auditable, not deleted - and stops being offered; idempotent, and revives if the class recurs. On the real corpus, literature_sweep deprecates (12 straight build runs).",
+      "description": "tools/skill_induction.py, run 70: classifies the loop's 56-run history (via experience-bank workflow entries) into task classes; a class recurring >= 4 times becomes a candidate skill written to the harness registry as a tool component, status=candidate (no auto-promotion). Induced literature_sweep (support 22) and build (support 9). Enforces the distillation/discovery tension: withheld_runs() marks a fixed 20% of runs permanently and deterministically skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). Not built: LLM clustering, auto-promotion, finer task-class classification (needs live per-run summaries). Run 72: added retire() - the deprecation stage of pattern_agentic_skill_lifecycle (principle_retraction_capacity). A skill whose task class is unseen in the last 12 workflow entries is marked deprecated - kept and auditable, not deleted - and stops being offered; idempotent, and revives if the class recurs. On the real corpus, literature_sweep deprecates (12 straight build runs). Run 76: task-class classifier expanded (added 'design integration' class, priority-ordered keyword matching, ~2x keyword coverage) - 'other' dropped from 20/61 to 7/61 workflow entries (the remaining 7 are genuinely pre-loop seed/schema runs). Now induces build, citation_upgrade, literature_sweep; loop_proposer's mode-diversity dimension has accurate input.",
       "tags": [
         "distillation-vs-discovery",
         "lifecycle-complete",

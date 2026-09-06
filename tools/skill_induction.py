@@ -50,24 +50,38 @@ MIN_SUPPORT = 4          # a task class must recur >= this many times
 WITHHELD_FRACTION = 0.20  # permanently, per principle_diversity_maintenance
 RETIRE_WINDOW = 12        # runs; a skill unseen for this many recent runs is retired
 
-# canonical task-class labels, matched against the free-text run notes
+# canonical task-class labels, matched against the free-text run notes.
+# Order matters: more specific classes are checked before broad ones when scores tie.
 TASK_CLASSES = {
-    "literature sweep": ["sweep", "arxiv", "folded in", "new finding"],
-    "citation upgrade": ["citation upgrade", "abstract-read", "abstract read", "-> verified", "verified run"],
-    "consistency re-read": ["consistency", "re-read", "reconcil", "internal-consistency"],
-    "graph hygiene": ["hygiene", "orphan", "edge-type audit", "inconclusive", "retraction"],
-    "doc refresh": ["refresh", "rewrote", "stale", "graph_state"],
-    "build": ["built", "tools/", "selftest", "phase 0", "phase 1", "phase 2", "phase 3", "gate green"],
+    "build": ["built", "tools/", "selftest", "gate green", "phase 0", "phase 1", "phase 2",
+              "phase 3", "phase 4", "phase 5", "skeleton", "loop_session", "harness_registry",
+              "trace substrate", "pre-commit hook", "predicate"],
+    "citation upgrade": ["citation upgrade", "citation check", "abstract-read", "abstract read",
+                         "-> verified", "verified run", "both citations", "verified real but",
+                         "upgraded to verified", "headline number"],
+    "consistency re-read": ["consistency", "re-read", "reconcil", "internal-consistency",
+                            "read the 4 design docs", "read the four design docs", "no contradictions"],
+    "design integration": ["folded run", "into the design", "revised docs/nourishing", "revised the design",
+                           "one rule unifying", "unifying", "design consequence", "revised nourishing_harness"],
+    "graph hygiene": ["hygiene", "orphan", "edge-type audit", "challenges-edge audit", "inconclusive",
+                      "retraction", "structural edge", "structural edges", "reconciled verification_state"],
+    "doc refresh": ["refresh", "rewrote", "rewritten", "stale", "graph_state", "map of swept",
+                    "literature_coverage", "coverage map"],
+    "literature sweep": ["sweep", "arxiv", "folded in", "new finding", "folded a verified",
+                         "cross-lingual", "market dynamics", "narrow", "cs.ma", "past ~sept"],
 }
 
 
 def classify(note_text):
     t = note_text.lower()
+    order = list(TASK_CLASSES)
     hits = [(cls, sum(t.count(k) for k in kws)) for cls, kws in TASK_CLASSES.items()]
     hits = [(c, n) for c, n in hits if n > 0]
     if not hits:
         return "other"
-    return max(hits, key=lambda x: x[1])[0]
+    # highest keyword count wins; ties broken by declaration order (most specific first)
+    best = max(n for _, n in hits)
+    return next(c for c in order if (c, best) in hits)
 
 
 def _build_corpus_bank(tmp):
@@ -170,6 +184,9 @@ def _procedure_for(cls):
                          "nodes against newer evidence; reconcile status/verification_state.",
         "doc refresh": "compare a public-facing doc's snapshot numbers + tables to the current graph; rewrite "
                        "the stale parts; point counts at graph_state.",
+        "design integration": "take a run's finding; locate the design section(s) it bears on; revise the "
+                              "prose so the finding is reflected and the challenges edges stay honest; note "
+                              "which sections changed in the sweep doc.",
         "build": "GREEN/RED predicate first; pure stdlib matching knowledge_graph.py style; selftest; add to "
                  "selftest_all.py; doc + artifact_ graph node; record the run via LoopSession.",
     }.get(cls, "n/a")
