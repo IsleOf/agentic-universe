@@ -752,6 +752,10 @@
     {
       "date": "2026-09-10",
       "change": "Autonomous run 197. Phase 3 - behaviour-aware verification (the run-196 HarnessLens conclusion). holdout_tasks.behavior_relevant_tasks(edit) returns the held-out tasks an edit's change/dimension/component text touches (its behaviour categories, keyed by _BEHAVIOUR_KEYS) PLUS a fixed _REGRESSION_SAMPLE; an unmatched edit -> all tasks (conservative). verify_loop_edit(edit=...) puts the list in evidence['behaviour_relevant_tasks'] as an advisory - a future re-run spends its budget on that subset not all 17. +5 selftest checks (holdout 45/45; improvement_loop). phase3_holdout_set.md updated. No graph node/edge change."
+    },
+    {
+      "date": "2026-09-10",
+      "change": "Autonomous run 198. Consistency pass. The runs 186-197 verification-thread nodes had in-degree ~0 (the additive-growth-bias rim shape, same as run 144's finding). Wove them: HarnessLens refines harness-tampering (attributable-evidence gate is a partial tampering defence); per-consumer-views refines silent-faults (an observer view is the step-level trace an outcome-only judge lacks); Calibration-Floor + HarnessLens both refine DeepVerifier (format-recovery caveat / scale verification smartly not uniformly). +4 edges, 0 nodes."
     }
   ],
   "nodes": [
@@ -16074,6 +16078,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.4,
       "description": "Removing the noise of unrelated tasks raises the effective signal strength of the gate - a way to move up the hierarchy without changing the signal type."
+    },
+    {
+      "id": "edge_behavaware_refines_harness_tampering",
+      "source": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "target": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "HarnessLens's attributable-evidence gate is a PARTIAL defence against tampering: attributing the score delta to the specific edit makes an illusory gain elsewhere unable to hide behind the aggregate."
+    },
+    {
+      "id": "edge_perconsumer_refines_silent_faults",
+      "source": "concept_trace_compiles_to_per_consumer_views",
+      "target": "concept_outcome_only_judges_miss_silent_faults",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "A per-consumer OBSERVER view is a compiled step-level trace - exactly the signal an outcome-only judge lacks; the 0.85-vs-0.48 monitoring gap is the same silent-fault blind spot, quantified."
+    },
+    {
+      "id": "edge_calfloor_refines_deepverifier",
+      "source": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+      "target": "concept_inference_time_scaling_of_verification",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "DeepVerifier iteratively revises outputs against rubrics at inference; the Calibration Floor warns that some of the resulting accuracy gain may be format recovery, not the reasoning improvement the rubric feedback targets."
+    },
+    {
+      "id": "edge_behavaware_refines_deepverifier",
+      "source": "concept_behavior_aware_verification_beats_the_fixed_task_set",
+      "target": "concept_inference_time_scaling_of_verification",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.4,
+      "description": "Both scale verification smartly rather than uniformly - DeepVerifier by spending inference compute on rubric checks, HarnessLens by spending rollout budget only on behaviour-relevant tasks."
     }
   ]
 }

@@ -1,0 +1,22 @@
+{
+  "run": 198,
+  "increment": "consistency pass - weave the runs 186-197 verification-thread nodes together (in-degree ~0)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 4
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-198.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
