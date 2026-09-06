@@ -480,6 +480,10 @@
     {
       "date": "2026-10-08",
       "change": "Autonomous run 130. Phase 3 tooling. loop_metrics.compute() now reports idle_run_streak (trailing live runs that neither changed the graph nor folded a new citation) and plateau_watch (streak >= PLATEAU_WINDOW=4); propose_loop_edit emits an IDLE-STATE-RULE proposal when plateau_watch is on, prediction idle_run_streak -> 0. Operationalises the run-80 IDLE-STATE RULE and the run-129 plateau caution (a gate rejects regressions but does not require progress). LoopSession summaries carry a graph_delta field from this run on (older summaries fall back to artifact count). +3 selftest checks. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Autonomous run 131. DBLP. concept_ace_context_evolution_self_improvement (ACE - Agentic Context Engineering, arXiv:2510.04618): self-improvement by evolving context PLAYBOOKS (generation/reflection/curation), NOT weight updates; +10.6% agents / +8.6% finance, matches the top AppWorld agent with a smaller open model, no labelled supervision. Names 'context collapse' (= concept_compaction_cliff) as a first-class failure mode and fixes it with structured incremental updates (= type-aware compaction). A keystone-supporting result for the emergence-first / no-weight-training bet. +6 edges."
     }
   ],
   "nodes": [
@@ -5764,6 +5768,34 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-07-0600.md"
+      ]
+    },
+    {
+      "id": "concept_ace_context_evolution_self_improvement",
+      "label": "ACE: self-improvement by evolving context playbooks (no weight updates) beats strong baselines, and names 'context collapse' as a first-class failure mode with a structural fix",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:context_evolution_no_weights",
+      "confidence": 0.72,
+      "description": "ACE - Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models (arXiv:2510.04618, 2025; VERIFIED via arXiv abstract read run 131, resolved via DBLP). Self-improvement by CONTEXT ADAPTATION - modifying inputs with instructions, strategies, evidence - NOT weight updates. Treats contexts as evolving PLAYBOOKS refined through generation -> reflection -> curation. Two named failure modes of naive context adaptation: BREVITY BIAS (concise summaries drop domain insight) and CONTEXT COLLAPSE (iterative rewriting erodes detail over time) - the latter is exactly concept_compaction_cliff, and ACE's fix (structured, incremental updates that preserve detailed knowledge) is the same shape as this project's type-aware compaction (nourishing_harness_design.md section 4: rules pinned, never summarised). Adapts WITHOUT labelled supervision, from natural execution feedback (like RHO / pattern_trajectory_only_harness_optimization). Results: +10.6% on agents, +8.6% on finance; matches the top-ranked production agent on the AppWorld leaderboard overall and beats it on the harder test-challenge split with a smaller open model; lower adaptation latency and rollout cost. Works both offline (system prompts) and online (agent memory). A keystone-supporting result for the emergence-first / no-weight-training bet: evolving context beats strong baselines with low overhead.",
+      "tags": [
+        "context-adaptation-not-weights",
+        "evolving-playbooks",
+        "generation-reflection-curation",
+        "context-collapse",
+        "brevity-bias",
+        "no-labelled-supervision",
+        "appworld-leaderboard",
+        "+10.6pp-agents"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-08-1200.md",
+        "arXiv:2510.04618 (ACE - Agentic Context Engineering) - VERIFIED, abstract read run 131; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-08-1200.md"
       ]
     }
   ],
@@ -13311,6 +13343,72 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Complementary 2026-era lens: the model-harness survey cuts by runtime responsibility, this one by what/when/how/where the evolution acts - both land on co-evolution as the frontier."
+    },
+    {
+      "id": "edge_ace_instantiates_emergence_first",
+      "source": "concept_ace_context_evolution_self_improvement",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergence_first",
+      "confidence": 0.6,
+      "description": "Self-improvement by context adaptation, explicitly not weight updates - the fork this project takes."
+    },
+    {
+      "id": "edge_ace_supports_self_improving_harness",
+      "source": "concept_ace_context_evolution_self_improvement",
+      "target": "approach_self_improving_harness",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Evolving context playbooks is a harness-layer self-improvement loop, beating strong baselines with low overhead."
+    },
+    {
+      "id": "edge_ace_supports_compaction_cliff",
+      "source": "concept_ace_context_evolution_self_improvement",
+      "target": "concept_compaction_cliff",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "'Context collapse - iterative rewriting erodes detail over time' names concept_compaction_cliff as a first-class failure mode; ACE's structured-incremental-update fix matches the type-aware-compaction mitigation."
+    },
+    {
+      "id": "edge_ace_supports_trajectory_only_harness_opt",
+      "source": "concept_ace_context_evolution_self_improvement",
+      "target": "pattern_trajectory_only_harness_optimization",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Adapts without labelled supervision, from natural execution feedback - same no-external-grader stance as RHO."
+    },
+    {
+      "id": "edge_ace_supports_context_economics",
+      "source": "concept_ace_context_evolution_self_improvement",
+      "target": "concept_context_economics",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Reduces adaptation latency and rollout cost while scaling with long-context models - context as the managed scarce resource."
+    },
+    {
+      "id": "edge_ace_refines_self_harness_three_loop",
+      "source": "concept_ace_context_evolution_self_improvement",
+      "target": "concept_self_harness_validates_the_three_loop",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Generation -> reflection -> curation is the same observe -> propose -> validate loop, acting on the context playbook rather than the harness code."
     }
   ]
 }
