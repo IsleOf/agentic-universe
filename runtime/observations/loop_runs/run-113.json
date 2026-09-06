@@ -1,0 +1,25 @@
+{
+  "run": 113,
+  "increment": "fold CONSCIENTIA (arXiv:2604.09746, via DBLP)",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 13,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "citations": [
+    {
+      "id": "arXiv:2604.09746",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2604.09746"
+  ],
+  "trace_file": "runtime\\traces\\loop-113.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

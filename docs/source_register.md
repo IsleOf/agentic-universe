@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 198 nodes, 650 edges · **Date:** 2026-09-05
+**Graph at generation:** 200 nodes, 660 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -57,6 +57,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2603.26089](https://arxiv.org/abs/2603.26089) | mental self-modelling deficits | `emergent_consciousness_like_self_modeling`, `emergent_theory_of_mind` |
 | [2603.28990](https://arxiv.org/abs/2603.28990) | self-organizing roles / Drop the Hierarchy and Roles | `emergent_self_organizing_roles` |
 | [2604.08465](https://arxiv.org/abs/2604.08465) | peer-preservation (companion) | `emergent_self_and_peer_preservation` |
+| [2604.09746](https://arxiv.org/abs/2604.09746) | (title not recorded) | `concept_safety_helpfulness_tradeoff_persists_under_optimisation` |
 | [2604.11623](https://arxiv.org/abs/2604.11623) | Context Kubernetes | `concept_agentic_os` |
 | [2604.13051](https://arxiv.org/abs/2604.13051) | (title not recorded) | `emergent_consciousness_cluster` |
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
@@ -228,6 +229,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - OpenReview 2026 'What Do LLM Agents Do When Left Alone?' — `concept_habitat_slack`, `emergent_spontaneous_self_inquiry`
 - Proof-or-Stop (binds accepted evidence to state before permitting a transition) — `pattern_runtime_state_graph`
 - ResearchLoop (durable control state, evidence-based lifecycle transitions) — `pattern_runtime_state_graph`
+- RiskLab (ACL 2026 Demo, 10.18653/v1/2026.acl-demo.17) - VERIFIED via ACL Anthology page — `concept_risklab_probe_toolkit`
 - SBCO self-supervised harness optimisation — `emergent_model_native_orchestration`
 - Science Advances-style convention studies — `emergent_social_conventions`
 - SkillGraph, Captain Agent (recruits and reorganises experts as requirements emerge) — `pattern_agent_coordination_graph`
@@ -333,6 +335,8 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`
 - `docs/auto_sweep_2026-10-03-0000.md` — `concept_self_harness_validates_the_three_loop`
 - `docs/auto_sweep_2026-10-03-1200.md` — `concept_environmental_pressure_has_an_inverted_u`
+- `docs/auto_sweep_2026-10-03-1800.md` — `concept_risklab_probe_toolkit`
+- `docs/auto_sweep_2026-10-04-0000.md` — `concept_safety_helpfulness_tradeoff_persists_under_optimisation`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`

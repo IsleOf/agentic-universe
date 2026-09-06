@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-03",
+  "last_updated": "2026-10-04",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -408,6 +408,10 @@
     {
       "date": "2026-10-03",
       "change": "Autonomous run 112. DBLP -> ACL Anthology (RiskLab has no arXiv version). concept_risklab_probe_toolkit (ACL 2026 Demo): an open toolkit for probing emergent multi-agent risk via a topology-environment-protocol-agent-task quintuple with trajectory-grounded evaluation and a risk-detector registry; four risk categories (collusion / resource overreach / semantic drift / strategic misreporting) mapping to existing graph nodes. Independent convergence on the project's probe-rig + trace-substrate approach; a candidate substrate to port the six tools/probe_*.py rigs onto for a real run. +5 edges."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Autonomous run 113. DBLP. concept_safety_helpfulness_tradeoff_persists_under_optimisation (CONSCIENTIA, arXiv:2604.09746): a multi-agent NYC-navigation sim with persuasive adversaries and KTO policy learning. Best Blue policy improves task success 46.0->57.3% but susceptibility to adversarial steering stays at 70.7%; a persistent safety-helpfulness trade-off - resisting steering does NOT co-occur with maximal task completion, and does not converge away with optimisation. A measured instance of the capability-vs-safety tension the design assumes it can hold both sides of. +5 edges. Graph passes 200 nodes."
     }
   ],
   "nodes": [
@@ -5411,6 +5415,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-03-1800.md"
+      ]
+    },
+    {
+      "id": "concept_safety_helpfulness_tradeoff_persists_under_optimisation",
+      "label": "Resistance to adversarial persuasion trades against task completion, and policy optimisation does not dissolve it",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:safety_helpfulness_tradeoff",
+      "confidence": 0.6,
+      "description": "CONSCIENTIA (arXiv:2604.09746, VERIFIED via arXiv abstract read run 113; resolved via DBLP). A large-scale multi-agent NYC-navigation simulation: Blue agents navigate efficiently, Red agents use persuasive language to divert them onto billboard-heavy routes for ad revenue; hidden identities make navigation socially mediated (trust vs deceive). Policies learned iteratively via Kahneman-Tversky Optimization across repeated rounds. Findings: the best Blue policy improves task success 46.0% -> 57.3%, but SUSCEPTIBILITY to adversarial steering STAYS HIGH at 70.7%; later policies show stronger selective cooperation while preserving efficiency; and a PERSISTENT safety-helpfulness trade-off remains - policies that better resist adversarial steering do not simultaneously maximise task completion. The trade-off does not converge away with more optimisation. For this project: a concrete measured instance of the capability-vs-safety tension the design assumes it can hold both sides of (concept_work_substitution_frontier challenges principle_diversity_maintenance), and a ~70% persuasion-susceptibility floor even after adversarial training - relevant to the messaging-topology design and to emergent_subagent_training_induces_coordination.",
+      "tags": [
+        "safety-helpfulness-tradeoff",
+        "persuasion-susceptibility",
+        "70-percent-floor",
+        "kto",
+        "adversarial-steering",
+        "conscientia",
+        "does-not-converge-away"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-04-0000.md",
+        "arXiv:2604.09746 (CONSCIENTIA: Can LLM Agents Learn to Strategize?) - VERIFIED, abstract read; resolved via DBLP"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-04-0000.md"
       ]
     }
   ],
@@ -12357,6 +12388,60 @@
       "status": "to_test",
       "verification_state": "needs_empirical_validation",
       "approach_family": "self_improving_harness",
+      "confidence": 0.55
+    },
+    {
+      "id": "edge_tradeoff_supports_substitution_frontier",
+      "source": "concept_safety_helpfulness_tradeoff_persists_under_optimisation",
+      "target": "concept_work_substitution_frontier",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "A measured safety-helpfulness trade-off that does not converge away with optimisation - concrete instance of the reliability-vs-capability tension."
+    },
+    {
+      "id": "edge_tradeoff_challenges_diversity_maintenance",
+      "source": "concept_safety_helpfulness_tradeoff_persists_under_optimisation",
+      "target": "principle_diversity_maintenance",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_habitat",
+      "confidence": 0.45,
+      "description": "The design's proposed resolution (separate exploration and deployment populations) still has to hold both sides of a trade-off that CONSCIENTIA shows persists per-policy."
+    },
+    {
+      "id": "edge_tradeoff_refines_subagent_coord",
+      "source": "concept_safety_helpfulness_tradeoff_persists_under_optimisation",
+      "target": "emergent_subagent_training_induces_coordination",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Susceptibility to adversarial persuasion stays at ~70% even after adversarial training - the peer-influence channel is reducible but has a high floor."
+    },
+    {
+      "id": "edge_tradeoff_refines_reputation_trust",
+      "source": "concept_safety_helpfulness_tradeoff_persists_under_optimisation",
+      "target": "emergent_reputation_and_trust_dynamics",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.45,
+      "description": "Hidden identities force per-interaction trust/deceive decisions; optimised policies show 'stronger selective cooperation' - trust becomes conditional, not global."
+    },
+    {
+      "id": "edge_tradeoff_instantiates_emergence",
+      "source": "concept_safety_helpfulness_tradeoff_persists_under_optimisation",
+      "target": "approach_emergence_first",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
       "confidence": 0.55
     }
   ]
