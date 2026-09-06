@@ -1,0 +1,26 @@
+{
+  "run": 158,
+  "increment": "consolidation - fold run-157's compute-efficiency paradox into nourishing_harness_design.md 3.2 + what_would_make_this_wrong.md 4",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 12,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 3,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2604.18005",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2604.18005"
+  ],
+  "trace_file": "runtime\\traces\\loop-158.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

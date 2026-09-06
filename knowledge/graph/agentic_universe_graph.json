@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-15",
+  "last_updated": "2026-10-16",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -588,6 +588,10 @@
     {
       "date": "2026-10-15",
       "change": "Autonomous run 157. DBLP. Deepened pattern_structural_decoupling with a VERIFIED read of Diversity Collapse in Multi-Agent LLM Systems (arXiv:2604.18005): the three-level analysis (model intelligence / agent cognition / system dynamics), the COMPUTE EFFICIENCY PARADOX (stronger aligned models -> diminishing marginal diversity despite higher per-sample quality), authority-driven dynamics suppress semantic diversity, collapse is 'from the interaction structure rather than inherent model insufficiency' - the same conclusion as concept_multi_round_interaction_compresses_semantic_space from a second study. +3 edges; description + derived_from (VERIFIED) + tags extended."
+    },
+    {
+      "date": "2026-10-16",
+      "change": "Autonomous run 158. Consolidation. Folded run-157's compute-efficiency paradox into two docs. nourishing_harness_design.md section 3.2 (Diversity maintenance row): the population must deliberately include less-capable/less-aligned model variants (stronger aligned models -> diminishing marginal diversity); authority dynamics suppress semantic diversity so the society surface must not let a high-status agent dominate; heterogeneity buys independence at generation, not against interaction compression - a round cap or re-seeding is also needed. what_would_make_this_wrong.md section 4: the compute-efficiency paradox cuts against the 'use good models' instinct; emergent hubs are a fourth erosion channel; (3) confirmed from a second study. No graph node/edge change."
     }
   ],
   "nodes": [
