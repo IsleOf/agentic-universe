@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 303 nodes, 1183 edges · **Date:** 2026-09-05
+**Graph at generation:** 305 nodes, 1193 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -329,6 +329,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - niteagent.com multi-agent safety frontier — `emergent_information_cascades`
 - principle_diversity_maintenance requires a permanently withheld fraction of runs — `pattern_skill_induction`
 - reconciles emergent_subagent_training_induces_coordination (run 6) — `concept_transparency_cuts_both_ways`
+- research/2026-09-06-deepseek-harness-ecosystem.md (owner research input) — `concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture`
 - revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
 - run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI — `concept_context_economics`
 - runtime/harness/context/loop_policy.history.json — `artifact_phase3_first_closed_loop`
@@ -440,6 +441,8 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-09-26-0600.md` — `concept_agent_authority_is_a_bounded_cognitive_light_cone_that_earns_expansion`, `concept_developmental_benchmark_measures_maturity_across_stages_not_one_score`, `concept_developmental_harness_affordances_unlock_on_demonstrated_reliability` +1
 - `docs/auto_sweep_2026-09-26-1200.md` — `concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace`, `concept_go_explore_novelty_archive_return_then_explore`, `concept_paired_designer_solver_self_play_at_the_capability_frontier_spade_lure` +1
 - `docs/auto_sweep_2026-09-26-1800.md` — `concept_cultural_transmission_engine_local_cultures_with_diffusion_rules`, `concept_orchestration_protocols_are_evolvable_code_kept_as_an_archive`, `concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default` +1
+- `docs/auto_sweep_2026-09-27-0000.md` — `concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture`
+- `docs/auto_sweep_2026-09-27-0600.md` — `artifact_emergence_safety_case_template`
 - `docs/auto_sweep_2026-09-29-1800.md` — `concept_debate_training_reduces_judge_hacking`
 - `docs/auto_sweep_2026-09-30-0000.md` — `concept_reward_hacking_generalises_to_misalignment`
 - `docs/auto_sweep_2026-09-30-0600.md` — `concept_loss_function_predicts_misalignment_flavor`
@@ -479,6 +482,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-19-1800.md` — `concept_naive_trajectory_accumulation_already_helps`
 - `docs/auto_sweep_2026-10-20-0600.md` — `concept_agent_communication_is_a_layered_attack_surface`
 - `docs/auto_sweep_2026-10-20-1200.md` — `emergent_social_conventions`
+- `docs/emergence_safety_case_template.md` — `artifact_emergence_safety_case_template`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
 - `docs/graph_state_2026-09.md (experiments 4-5)` — `test_scenario_assigned_vs_emergent_roles`
@@ -509,7 +513,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/probe_orchestration_value.md` — `artifact_probe_orchestration_value_rig`
 - `docs/probe_rho_holdout.md` — `artifact_probe_rho_holdout_rig`
 - `docs/probe_subagent_coordination.md` — `artifact_probe_subagent_coordination_rig`
-- `docs/research/alternative_approaches_part1.md (owner research input)` — `concept_cultural_transmission_engine_local_cultures_with_diffusion_rules`, `concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace`, `concept_go_explore_novelty_archive_return_then_explore` +8
+- `docs/research/alternative_approaches_part1.md (owner research input)` — `artifact_emergence_safety_case_template`, `concept_cultural_transmission_engine_local_cultures_with_diffusion_rules`, `concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace` +9
 - `docs/research/alternative_approaches_part2.md (owner research input)` — `concept_active_inference_action_selection_weighs_epistemic_and_pragmatic_value`, `concept_interoceptive_harness_a_self_state_vector_drives_pause_ask_simplify_delegate`, `concept_learnable_novelty_is_surprise_that_compresses_not_irreducible_noise`
 - `docs/research/alternative_approaches_part3.md (owner research input)` — `concept_agent_authority_is_a_bounded_cognitive_light_cone_that_earns_expansion`, `concept_developmental_benchmark_measures_maturity_across_stages_not_one_score`, `concept_developmental_harness_affordances_unlock_on_demonstrated_reliability` +5
 - `docs/research/alternative_approaches_part4.md (owner research input)` — `concept_cellular_agent_architecture_persistent_cells_with_portable_seeds`, `concept_deterministic_spine_generative_edge_is_the_load_bearing_split`, `concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries` +1

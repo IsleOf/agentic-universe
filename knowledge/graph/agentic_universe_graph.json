@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-09-26",
+  "last_updated": "2026-09-27",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1024,6 +1024,14 @@
     {
       "date": "2026-09-26",
       "change": "Autonomous run 266. Fold group 7 of the owner's research input (coverage_map.md) - cultural transmission + productive scarcity + protocol evolution (directions 3, 4, 5, 6). 4 nodes (branch_key emergent_behaviors:culture_and_scarcity): concept_swarmworld_homogeneous_agents_differentiate_via_constraints_and_durable_artifacts (supports emergent_self_organizing_roles), concept_cultural_transmission_engine_local_cultures_with_diffusion_rules (extends emergent_social_conventions; challenges commons erosion), concept_orchestration_protocols_are_evolvable_code_kept_as_an_archive (extends recursive_meta_skill_evolution to the coordination procedure), concept_productive_scarcity_is_a_research_instrument_not_a_desirable_default (refines the inverted-U; challenges approach_emergence_first - cultivated behaviour includes loans / vote trading / exclusion). 11 edges. Emergence-first, all speculative. 299 -> 303 nodes, 1172 -> 1183 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-27",
+      "change": "Autonomous run 267. Fold group 8 of the owner's research input (coverage_map.md) - the DeepSeek-harness ecosystem survey (research/2026-09-06-deepseek-harness-ecosystem.md). One node concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture (provenance-cautioned: inflated headline numbers; value is the pattern catalogue). Almost every 'pattern worth adopting' it lists - versioned/auditable/rollback-safe state, benchmark-gated admission with encrypted rubric + separate scorer, event-sourced replay, source-backed compression, evidence-first evolution - is a choice this project already made (same shape as the run-11 graph-engineering-videos fold). One new detail carried: a five-track layered memory (global/user/project/project+branch/daily) with an intent-native remember/link/recall protocol. 5 edges: supports pattern_verifier_gated_promotion + pattern_recoverability_constrained_evolution; refines pattern_experience_bank; informs concept_agentic_os + the agentic-labor-market node. 303 -> 304 nodes, 1183 -> 1188 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-27",
+      "change": "Autonomous run 268. Fold group 9 (final) of the owner's research input (coverage_map.md) - doc artifacts. (a) docs/emergence_safety_case_template.md (owner direction 11): a reusable six-point template - desired behaviour / minimal affordances / observable precursors / failure analogues / containment / transfer test - filled in next to every emergence experiment, with a worked example for probe_subagent_coordination.py. New node artifact_emergence_safety_case_template + 5 edges (instantiates principle_affordance_over_constraint, depends_on concept_irreversibility_budget, supports approach_emergence_first). (b) docs/research/open_questions.md (owner direction 54): the seven open research questions anchored to the nodes folded for them (runs 260-266) and given falsifiable shapes - the project's next EXPERIMENTAL frontier, gated on the model-integration handoff. 304 -> 305 nodes, 1188 -> 1193 edges. The 9-group fold of the owner's 54-direction research input is complete (runs 259-268). Validator VALID."
     }
   ],
   "nodes": [
@@ -8936,6 +8944,58 @@
       ],
       "evidence_links": [
         "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture",
+      "label": "A large 'plugin-everything' agent ecosystem converges on this project's architecture",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "branch_key": "graph_engineering:ecosystem_convergence",
+      "confidence": 0.45,
+      "description": "Owner input research/2026-09-06-deepseek-harness-ecosystem.md - a survey of a 2026 open-source agent runtime ('everything is a plugin': models, tools, skills, sessions, sandboxes, loops, UI all swappable from config) and its self-evolution plugins. PROVENANCE CAUTION: the headline numbers (200K stars in two weeks, 453k LOC, 3,800 plugins) are not independently checked and read as inflated; treat the survey as a pattern catalogue, not a verified market report. The value: almost every 'pattern worth adopting' it lists is a choice THIS project already made - versioned / auditable / rollback-safe state layers, benchmark-gated plugin admission with an encrypted rubric and a separate scorer model, event-sourced replay reconstructing full lineage, source-backed context compression, evidence-first evolution (candidates evaluated before admission), LLM-supervised deterministic execution. Same shape as the run-11 graph-engineering-videos fold: independent convergence of a large ecosystem on the project's own bets. One genuinely new detail worth carrying: a five-track layered memory - global / user-specific / project / project-key+git-branch / daily - with an intent-native protocol (remember / link / recall) instead of INSERT / SELECT.",
+      "tags": [
+        "ecosystem-convergence",
+        "plugin-architecture",
+        "layered-memory",
+        "provenance-caution",
+        "independent-convergence"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-27-0000.md",
+        "research/2026-09-06-deepseek-harness-ecosystem.md (owner research input)"
+      ],
+      "evidence_links": [
+        "docs/research/coverage_map.md"
+      ]
+    },
+    {
+      "id": "artifact_emergence_safety_case_template",
+      "label": "Emergence safety-case template — six points to fill before any emergence experiment",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:emergence_safety_case",
+      "confidence": 0.6,
+      "description": "docs/emergence_safety_case_template.md (run 268), from owner research direction 11. A reusable six-point template filled in next to every experiment that gives agents room to develop emergent behaviour: (1) desired behaviour, stated observably; (2) minimal affordances - everything beyond the minimum is attack surface; (3) observable precursors, read from environment state not self-report; (4) failure analogues - sabotage / collusion / deception / monoculture / runaway consumption / attribution laundering, each with the signal that would show it; (5) containment - pause / reset / replay / audit, isolation guarantees, irreversibility budget, source-of-truth log outside agent write; (6) transfer test - does it persist usefully in a new environment without the harmful side effects. Includes a filled example for tools/probe_subagent_coordination.py. Consolidates the containment discipline that was scattered across what_would_make_this_wrong.md and the probe specs.",
+      "tags": [
+        "safety-case",
+        "emergence",
+        "template",
+        "containment",
+        "experiment-design"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-09-27-0600.md",
+        "docs/research/alternative_approaches_part1.md (owner research input)",
+        "docs/emergence_safety_case_template.md"
+      ],
+      "evidence_links": [
+        "docs/emergence_safety_case_template.md",
+        "docs/research/open_questions.md"
       ]
     }
   ],
@@ -21686,6 +21746,116 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.4,
       "description": "Emergence-first cultivates emergent behaviour. Scarcity shows the cultivated behaviour includes loans, vote trading and strategic exclusion - not inherently desirable - so the posture needs the audit-agent + explicit-prohibition guardrails this node names."
+    },
+    {
+      "id": "edge_ecosystem_convergence_supports_verifier_gated",
+      "source": "concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture",
+      "target": "pattern_verifier_gated_promotion",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "The ecosystem's self-evolution plugins gate every candidate through a held-out benchmark with an encrypted rubric and a separate scorer model before admission - an independent arrival at verifier-gated promotion."
+    },
+    {
+      "id": "edge_ecosystem_convergence_supports_recoverability",
+      "source": "concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "supports",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.5,
+      "description": "Versioned, rollback-safe state layers with deterministic inverse edits from an audit journal - the same recoverability-as-hard-constraint the project requires."
+    },
+    {
+      "id": "edge_ecosystem_convergence_refines_experience_bank",
+      "source": "concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture",
+      "target": "pattern_experience_bank",
+      "type": "refines",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45,
+      "description": "The five-track memory (global / user / project / project+branch / daily) is a finer partition than the bank's workflow/step split; the project+branch track in particular maps onto this repo's own proposals-branch working style, and the intent-native remember/link/recall protocol is a cleaner seam than raw file writes."
+    },
+    {
+      "id": "edge_ecosystem_convergence_informs_agentic_os",
+      "source": "concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture",
+      "target": "concept_agentic_os",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.45,
+      "description": "'Everything is a plugin' is the runtime/harness/knowledge split taken to its limit - the same architecture concept_agentic_os describes, with the boundaries made swappable from config."
+    },
+    {
+      "id": "edge_ecosystem_convergence_informs_labor_market",
+      "source": "concept_a_large_plugin_everything_agent_ecosystem_converges_on_this_projects_architecture",
+      "target": "concept_the_agentic_labor_market_organises_around_agent_equals_model_plus_harness",
+      "type": "informs",
+      "status": "speculative",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "graph_engineering",
+      "confidence": 0.4,
+      "description": "A large plugin ecosystem where the runtime is free and only the model costs money is the market form of agent = model + harness: the harness layer commoditises into swappable parts."
+    },
+    {
+      "id": "edge_safety_case_instantiates_affordance",
+      "source": "artifact_emergence_safety_case_template",
+      "target": "principle_affordance_over_constraint",
+      "type": "instantiates",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "Point 2 (minimal affordances) is affordance-over-constraint as a checklist item: name what the behaviour needs, withhold the rest."
+    },
+    {
+      "id": "edge_safety_case_depends_on_irreversibility_budget",
+      "source": "artifact_emergence_safety_case_template",
+      "target": "concept_irreversibility_budget",
+      "type": "depends_on",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "Point 5 (containment) requires the irreversibility budget be set for the run before it starts."
+    },
+    {
+      "id": "edge_safety_case_grounds_what_would_make_wrong",
+      "source": "artifact_emergence_safety_case_template",
+      "target": "concept_frontier_models_can_scheme_in_context",
+      "type": "grounds",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.4,
+      "description": "The template operationalises the response to 'the ungated interior is not benign by default': every emergence experiment now states its failure analogues and containment up front."
+    },
+    {
+      "id": "edge_safety_case_supports_emergence_first",
+      "source": "artifact_emergence_safety_case_template",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.55,
+      "description": "Makes emergence-first runnable safely: cultivate the behaviour (points 1-2) inside a stated containment (points 3-5) with a transfer check (point 6)."
+    },
+    {
+      "id": "edge_safety_case_informs_probe_subagent",
+      "source": "artifact_emergence_safety_case_template",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "informs",
+      "status": "in_experiment",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "confidence": 0.45,
+      "description": "The template's filled example is this rig; conversely the rig's containment spec (disposable instance, no egress, fail-safe relay seam) is where points 2 and 5 came from."
     }
   ]
 }
