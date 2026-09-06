@@ -372,6 +372,10 @@
     {
       "date": "2026-10-01",
       "change": "Autonomous run 103. IDLE-STATE RULE + OpenReview source (arXiv 429, forum + github folded). OpenReview search surfaced MAEBE (Multi-Agent Emergent Behavior Evaluation, arXiv:2506.03053, ICML 2025 workshop) - not previously in the graph. concept_moral_preferences_are_framing_brittle: LLM moral preferences (esp. Instrumental Harm) shift significantly with question framing, individually and in ensembles; an ensemble's moral reasoning cannot be predicted from isolated agents (confirms concept_emergence_layer_model on the moral domain); peer pressure drives convergence even when supervised. Moral framing = a third behavioural lever alongside self-concept and interaction language. +5 edges."
+    },
+    {
+      "date": "2026-10-01",
+      "change": "Autonomous run 104. IDLE-STATE RULE + OpenReview. Search surfaced 4 harness/RHO titles whose content is not yet accessible (openreview forum needs a token; arXiv/S2 429). Added an OpenReview watch-list to docs/literature_coverage.md - Harness-Bench (harness-vs-model performance benchmark, highest priority), Self-Harness, and the two RHO OpenReview submissions - to fold when a content source clears. Updated the scheduled-task guidance with the 4-channel rotation and 'a documented hold is the correct increment when all quiet'. No graph node/edge change."
     }
   ],
   "nodes": [
