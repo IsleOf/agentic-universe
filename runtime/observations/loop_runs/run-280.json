@@ -1,0 +1,20 @@
+{
+  "run": 280,
+  "increment": "orientation refresh: graph_state Snapshot 305/1193 -> 312/1237 + Runs 269-279 section",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-280.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 280 OK · VALID · graph +0 · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.77 · novelty 1.00"
+}

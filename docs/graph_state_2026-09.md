@@ -6,15 +6,47 @@
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 268)
+## Snapshot (run 279)
 
-**305 nodes · 1193 edges · 9 approach families · 206 `challenges` edges (~17% of all edges).**
+**312 nodes · 1237 edges · 9 approach families · 210 `challenges` edges (~17% of all edges).**
 
-`verification_state`: 109 needs-validation · **165 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
+`verification_state`: 109 needs-validation · **172 partially-validated** · **19 validated** · 5 inconclusive · 7 unset.
 (`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature
 nodes sit at `partially_validated`.)
-Families: self_improving_harness 121 · emergent_behaviors 80 · agent_habitat 27 · graph_engineering 22 · nourishing_harness 23 · orchestration_first 20 · rest 12.
-Edge types: supports 410 · challenges 206 · instantiates 192 · refines 178 · informs 62 · depends_on 44 · implements 32 · extends 19 · constrains 18 · verifies 14 · grounds 12 · rest 6.
+Families: self_improving_harness 122 · emergent_behaviors 86 · agent_habitat 27 · nourishing_harness 23 · graph_engineering 22 · orchestration_first 20 · rest 12.
+Edge types: supports 423 · challenges 210 · instantiates 194 · refines 185 · informs 72 · depends_on 44 · implements 33 · extends 22 · constrains 19 · grounds 15 · verifies 14 · rest 6.
+
+**Runs 269–279** — orientation refresh, then the run-262 challenge edges probe-tested, then a
+citation-chain sweep that found a crystallised subfield run 253 had marked swept.
+
+*Orientation (269, 271, 272):* the three top-level docs (`graph_state`, `PROJECT_STATE.md`,
+`self_improving_harness_plan.md` §5) brought current after the owner-research fold. *Integration (270):*
+14 inbound + cross-cluster edges — 24 of the 30 fold nodes had been leaf-only.
+
+*Probe-testing the fold (273–275):* `probe_orchestration_value` gained a **FLOCK arm** — stigmergic
+accretion (no synthesiser) with verifiable + disjoint subtasks helps +0.31 vs SINGLE, below the
+deterministic-synthesis ceiling but far above any vote, so run-218 condition (b) widens to "deterministic
+synthesis OR bounded-neighbourhood stigmergic accretion" and the run-262 `challenges` edge becomes a
+`refines`. `probe_epistemic_sybil` dry-run **grounds** the evidence-cells node (shared root → coverage
+0.12; independent → 0.96; dedup → 1.00). `docs/research/posture_tension_analysis.md` (275): the owner's
+fold is a gap-fill (proposer-side evaluation rigor), not a stance change; only productive-scarcity
+genuinely challenges emergence-first, and the owner's own safety-case template answers it.
+
+*Collusion-audit subfield (276–279):* the `2601.00360` citation chain (4 direct citers → their citers)
+surfaced ~10 relevant 2026 papers. New branch_key `emergent_behaviors:collusion_audit_and_governance`
+(~9 nodes): Colosseum (`2602.15198` — audit action-collusion as regret vs the cooperative optimum + a
+secret-channel probe; "collusion on paper"); Institutional AI (`2601.11369` — governance graph +
+Oracle/Controller, severe collusion **50% → 5.6%**; prompt-only constitution yields nothing); Payoff
+scaling (`2601.19082` — LLMs get *more* cooperative as stakes rise, opposite of game theory); Traccia
+(`2607.14309` — unified OpenTelemetry observability as EU-AI-Act framing). Synthesis (278): covert
+steganographic channels are the vector and detection is an arms race; LLM-as-judge cannot detect collusion
+(use behavioural regret); executable governance beats constitutional — convergent across 4+ groups. Folded
+into `what_would_make_this_wrong.md` §2 (279): the gate's collusion check must be a computed behavioural
+metric, and a written prohibition does not bind under optimisation pressure — now measured.
+
+### Snapshot (run 268) — prior
+
+**305 nodes · 1193 edges.**
 
 **Runs 253–268** — the collusion thread closed out, one tool built, then the owner's 54-direction
 research input triaged and fully folded (9 groups).

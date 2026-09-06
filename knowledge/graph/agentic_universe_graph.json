@@ -1068,6 +1068,10 @@
     {
       "date": "2026-09-29",
       "change": "Autonomous run 279. IDLE-STATE clause c - folded the runs 276-278 collusion-audit findings into docs/what_would_make_this_wrong.md sec 2. New Update para: (1) LLM-as-judge is the wrong instrument for a collusion check - use a computed behavioural metric; (2) convergent 4+ group finding that constitutional/prompt-only prohibition does not bind under optimisation pressure, only executable governance does (Institutional AI 50->5.6pct) - pattern_execution_layer_enforcement at society scale, now measured. 2 edges: concept_llm_as_judge_cannot_detect_collusion challenges principle_terminal_gate_only (11th challenger - the READER is wrong, not the read); concept_executable_institutional_governance supports principle_terminal_gate_only (an executable governance runtime IS a society-scale terminal gate). 312 nodes / 1235 -> 1237 edges. Validator VALID."
+    },
+    {
+      "date": "2026-09-29",
+      "change": "Autonomous run 280. Orientation refresh (IDLE-STATE clause c; no node/edge change). docs/graph_state_2026-09.md Snapshot run-268 (305/1193) -> run-279 (312/1237; 109 needs-validation / 172 partially-validated / 19 validated; emergent_behaviors now 86, self_improving_harness 122). Added a Runs 269-279 section: orientation refresh, the probe-testing of the run-262 challenge edges (FLOCK arm widens run-218 condition b; sybil dry-run grounds evidence-cells), the posture analysis (fold is a gap-fill not a stance change), and the collusion-audit subfield fold from the 2601.00360 citation chain. Prior run-268 snapshot kept inline. 312 nodes / 1237 edges."
     }
   ],
   "nodes": [
