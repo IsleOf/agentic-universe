@@ -528,6 +528,10 @@
     {
       "date": "2026-10-11",
       "change": "Autonomous run 142. DBLP. concept_inference_time_scaling_of_verification (DeepVerifier, arXiv:2601.15808, ACL 2026 Findings): self-evolve a research agent by iteratively verifying its own outputs against rubrics (from a 5x13 DRA Failure Taxonomy) - inference-time scaling of VERIFICATION, no training, +8-11% GAIA/XBench; DeepVerifier beats agent-as-judge/LLM-judge by 12-48% F1. A direct answer to concept_verification_is_the_binding_constraint. Caveats: verification asymmetry is conditional (cf. transcript-only impossibility); a crafted rubric is still a gameable grader. +6 edges."
+    },
+    {
+      "date": "2026-10-11",
+      "change": "Autonomous run 143. Consolidation. docs/remaining_seams.md - a full spec of the two probe seams a text call_model cannot fill: sample_signal (needs residual-stream vectors at a fixed layer; degraded text-embedding mode specified, with the caveat that the design's bet is specifically that INTERNAL signal generalises where surface signal does not) and step_ok/handoff_ok (needs a real multi-agent harness for the empirical per-step p and handoff shed rate; single-agent p-measurement path specified as the cheap half-step). HANDOFF.md stub table links it. No graph node/edge change."
     }
   ],
   "nodes": [

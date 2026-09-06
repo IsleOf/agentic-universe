@@ -46,8 +46,8 @@ interfaces are stable; swapping in a model changes nothing else.
 | `model_reader(call_model, corpus)` | `probe_epistemic_sybil.py` | **adapter written (run 139)** — model reads a real document, first number in the reply is the estimate; unparseable = `nan`, dropped. Pass `run_arm(..., reader=...)`. Selftested against a fake corpus. Needs a real document corpus. |
 | `model_preference(judge)` | `probe_rho_holdout.py` | **adapter written (run 135)** — pass a `judge(text_a, text_b) -> "A"\|"B"`; it runs a round-robin Copeland selection, judge exception = tie. Pass to `run_round(select=...)`. Selftested with fake judges. |
 | `model_relay(call_model)` | `probe_subagent_coordination.py` | **adapter written (run 137)** — model told its id + that a peer sent an out-of-scope `msg`, asked yes/no to forward; unparseable/error = don't forward. Selftested; fake yes/no reproduce the two scripted bounds. |
-| `sample_signal(kind, rng)` | `probe_activation_generalisation.py` | real activation vectors from a model layer, per collusion kind |
-| `step_ok` / `handoff_ok` | `probe_composed_design.py` | real agent sub-step / handoff outcomes (to measure the actual per-step `p` and shed rate) |
+| `sample_signal(kind, rng)` | `probe_activation_generalisation.py` | real activation vectors from a model layer, per collusion kind — spec + degraded text-embedding mode in `docs/remaining_seams.md` |
+| `step_ok` / `handoff_ok` | `probe_composed_design.py` | real agent sub-step / handoff outcomes — spec + single-agent `p`-measurement path in `docs/remaining_seams.md` |
 | `model_propose(call_model, context)` | `loop_proposer.py` | **adapter written (run 140)** — hands the model `PROPOSER_PROMPT.format(...)`, parses the JSON list leniently, drops malformed proposals, `[]` on failure (loop falls back to `heuristic_propose`). Selftested. |
 
 **First run to do:** pass a real `call_model` into `model_policy` (wire it in `sweep`/`_config_policy`) and run
