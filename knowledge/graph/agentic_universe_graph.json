@@ -1108,6 +1108,10 @@
     {
       "date": "2026-10-02",
       "change": "Autonomous run 289. BUILD - tools/probe_redteam_rate.py, the fourth runnable rig for an open research question (open_questions.md Q4: optimal red-team challenge rate before a system cant act?). Sweeps the challenge rate; a PARALYSIS_KNEE (r~0.35) above which throughput decays super-linearly. Verdict CONFIRMS: net value is an INVERTED-U - -39 (r=0) -> +17 (r=0.5 optimum) -> -37 (r=1.0); both endpoints >20 below the interior optimum. A concrete instance of concept_environmental_pressure_has_an_inverted_u. 7 selftest checks, selftest_all JOBS -> 30, BUILD SELFTEST GREEN. New node artifact_probe_redteam_rate_rig + 3 edges (instantiates the inverted-U node, supports concept_irreversibility_budget, refines pattern_ostrom_swarm_governance - a permanent red team needs a rate cap). 317 -> 318 nodes, 1268 -> 1271 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-02",
+      "change": "Autonomous run 290. BUILD - tools/probe_trust_transfer.py, the fifth runnable rig for an open research question (open_questions.md Q5: can trust transfer across task families without universal authority?). 8 agents x task families with a cluster similarity structure; three trust models (universal / domain_keyed / similarity_weighted) fit on train families, ranked on held-out. Verdict CONFIRMS: held-out rank corr similarity_weighted +0.76 > universal +0.49 > domain_keyed -0.00 (chance); authority concentration universal 1.00 vs similarity 0.59. Trust transfers partially, scaled by family similarity, without universal authority. 7 selftest checks, selftest_all JOBS -> 31, BUILD SELFTEST GREEN. New node artifact_probe_trust_transfer_rig + 3 edges (verifies concept_conditional_trust_is_domain_keyed_not_global, challenges emergent_reputation_and_trust_dynamics - a scalar reputation over-grants authority, supports artifact_probe_epistemic_market_rig). 318 -> 319 nodes, 1271 -> 1274 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9411,6 +9415,33 @@
       ],
       "evidence_links": [
         "tools/probe_redteam_rate.py",
+        "docs/research/open_questions.md"
+      ]
+    },
+    {
+      "id": "artifact_probe_trust_transfer_rig",
+      "label": "The trust-transfer rig - similarity-weighted trust transfers across task families without universal authority",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:epistemic_market",
+      "confidence": 0.65,
+      "description": "tools/probe_trust_transfer.py (run 290) - runnable rig for open question 5. AGENTS=8 with a latent competence per task FAMILY, generated with a cluster similarity structure (same-cluster families correlated, cross-cluster near-independent). Three trust models fit on 9 train families, used to rank agents on 3 held-out families: UNIVERSAL (one scalar, assumes full transfer), DOMAIN_KEYED (per-family, held-out family = cold start on the global prior), SIMILARITY_WEIGHTED (held-out trust = cluster-weighted average of train-family trust). Dry-run (1500-2000 trials): held-out rank correlation similarity_weighted +0.76 > universal +0.49 > domain_keyed -0.00 (chance); authority concentration (same agent ranked top across ALL held-out families) universal 1.00 vs similarity_weighted 0.59. Verdict CONFIRMS: trust transfers - partially, scaled by family similarity - without granting universal authority. Domain-keyed alone throws away real cross-family signal (cold start); universal alone overclaims and concentrates authority. 7 selftest checks; selftest_all JOBS -> 31.",
+      "tags": [
+        "trust-transfer",
+        "conditional-trust",
+        "task-family",
+        "similarity-weighted",
+        "open-question-5",
+        "authority-concentration"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-02-0600.md",
+        "tools/probe_trust_transfer.py"
+      ],
+      "evidence_links": [
+        "tools/probe_trust_transfer.py",
         "docs/research/open_questions.md"
       ]
     }
@@ -23130,6 +23161,39 @@
       "approach_family": "nourishing_harness",
       "confidence": 0.45,
       "description": "A permanent red-team institution (part5 #48) needs a rate cap: unbounded challenge authority freezes the system it governs. The rig gives the cap a shape (interior optimum, sharp fall past the knee)."
+    },
+    {
+      "id": "edge_trust_transfer_rig_verifies_conditional_trust",
+      "source": "artifact_probe_trust_transfer_rig",
+      "target": "concept_conditional_trust_is_domain_keyed_not_global",
+      "type": "verifies",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "The runnable test of the domain-keyed claim, sharpened: strict per-family trust (no transfer) predicts held-out families at chance, and universal trust overclaims + concentrates authority. The working middle is similarity-weighted transfer - trust IS domain-keyed, but the keys have a similarity metric."
+    },
+    {
+      "id": "edge_trust_transfer_rig_challenges_reputation_dynamics",
+      "source": "artifact_probe_trust_transfer_rig",
+      "target": "emergent_reputation_and_trust_dynamics",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "Emergent reputation tends to a single social-status scalar (authority concentration 1.00 here). The rig shows that scalar predicts a NEW task family only at +0.49 - well below what its universal claim implies - so a scalar reputation systematically over-grants authority."
+    },
+    {
+      "id": "edge_trust_transfer_rig_supports_market_rig",
+      "source": "artifact_probe_trust_transfer_rig",
+      "target": "artifact_probe_epistemic_market_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "The epistemic market routes by trust (probe_epistemic_market); this rig says the trust graph it routes on must be similarity-keyed, not a scalar - otherwise routing concentrates on one agent regardless of the task family."
     }
   ]
 }

@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 318 nodes, 1271 edges · **Date:** 2026-09-05
+**Graph at generation:** 319 nodes, 1274 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -369,6 +369,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_redteam_rate.py — `artifact_probe_redteam_rate_rig`
 - tools/probe_rho_holdout.py — `artifact_probe_rho_holdout_rig`
 - tools/probe_subagent_coordination.py — `artifact_probe_subagent_coordination_rig`
+- tools/probe_trust_transfer.py — `artifact_probe_trust_transfer_rig`
 - tools/skill_induction.py — `artifact_phase4_skill_induction`
 - tools/supervisor.py (run 250) — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - tools/task_ledger.py (run 244) — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
@@ -463,6 +464,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-01-1200.md` — `artifact_probe_identity_masking_rig`, `concept_moral_preferences_are_framing_brittle`
 - `docs/auto_sweep_2026-10-01-1800.md` — `artifact_probe_adversarial_collaboration_rig`
 - `docs/auto_sweep_2026-10-02-0000.md` — `artifact_probe_redteam_rate_rig`
+- `docs/auto_sweep_2026-10-02-0600.md` — `artifact_probe_trust_transfer_rig`
 - `docs/auto_sweep_2026-10-02-1800.md` — `concept_capability_is_a_model_harness_config_property`
 - `docs/auto_sweep_2026-10-03-0000.md` — `concept_self_harness_validates_the_three_loop`
 - `docs/auto_sweep_2026-10-03-1200.md` — `concept_environmental_pressure_has_an_inverted_u`

@@ -45,6 +45,7 @@ JOBS = [
     ("probe_identity_masking.py", ["selftest"]),
     ("probe_adversarial_collaboration.py", ["selftest"]),
     ("probe_redteam_rate.py", ["selftest"]),
+    ("probe_trust_transfer.py", ["selftest"]),
     ("tamper_audit.py", ["selftest"]),
     ("graph_diff.py", ["selftest"]),
     ("task_ledger.py", ["selftest"]),
