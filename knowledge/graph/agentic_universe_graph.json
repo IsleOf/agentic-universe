@@ -596,6 +596,10 @@
     {
       "date": "2026-10-16",
       "change": "Autonomous run 159. DBLP. concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding (Beyond the Strongest LLM, arXiv:2509.23537): 4 frontier LLMs propose/vote - orchestration matches or exceeds the strongest single model (counterweight to MAST); ablations - revealing authorship drives self-voting (keep authorship hidden), showing ongoing votes amplifies herding into premature consensus (do not surface running vote tallies - a cheap specific protocol rule). +6 edges."
+    },
+    {
+      "date": "2026-10-16",
+      "change": "Autonomous run 160. Consolidation. nourishing_harness_design.md section 3.4 gains a 'Consensus / voting protocol rules' bullet (from run-159's arXiv:2509.23537 ablations): (a) authorship hidden from voters - revealing it drives self-voting; (b) running vote tallies not shown to agents - visible in-progress votes amplify herding into premature consensus; votes revealed only after they close. Both cheap and specific; the same paper shows orchestration beats the strongest single model when the protocol is clean. No graph node/edge change."
     }
   ],
   "nodes": [

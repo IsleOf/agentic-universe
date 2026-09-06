@@ -1,0 +1,26 @@
+{
+  "run": 160,
+  "increment": "consolidation - fold run-159's two voting-protocol rules into nourishing_harness_design.md section 3.4",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 10,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 2,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2509.23537",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2509.23537"
+  ],
+  "trace_file": "runtime\\traces\\loop-160.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}
