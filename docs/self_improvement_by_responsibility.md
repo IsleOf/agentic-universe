@@ -33,7 +33,10 @@ now instantiated **component by component**, not only as a whole (ASG-SI, Self-H
    challenged).
 4. **The improvement procedure itself is the frontier** — every published instance above has a *fixed*
    procedure except MetaSkill-Evolve; `loop_proposer` is fixed too. Making it recursive is the plan's
-   named open item.
+   named open item. **Run 169** surfaced the seam: `loop_proposer.PROPOSER_META` now holds the
+   procedure's own knobs (dimensions checked, mode-concentration trigger, proposal cap), and a recursive
+   loop would put that dict through `verify_loop_edit` on a slower cadence (e.g. every N object-level
+   accepts). Still fixed — but the fixity is now explicit and the knob is load-bearing.
 
 ## What this changes
 

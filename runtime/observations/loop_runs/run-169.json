@@ -1,0 +1,26 @@
+{
+  "run": 169,
+  "increment": "Phase 3 - PROPOSER_META: name the recursive-improvement seam in loop_proposer.py",
+  "ok": true,
+  "harness_manifest_hash": "8273705c19ffc54a",
+  "trace_events": 14,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 4,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [
+    {
+      "id": "arXiv:2607.05297",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2607.05297"
+  ],
+  "trace_file": "runtime\\traces\\loop-169.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed"
+}

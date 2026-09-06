@@ -25,6 +25,12 @@ adapter: it parses the reply leniently, drops malformed proposals against the sa
 bar `heuristic_propose` meets, and returns `[]` on an unparseable reply (the loop
 falls back to `heuristic_propose`). The verify/promote path is unchanged.
 
+`PROPOSER_META` holds the improvement *procedure's* own knobs (which dimensions it
+checks, the mode-concentration trigger, the proposal cap). Per
+`concept_recursive_meta_skill_evolution`, a recursive loop would put PROPOSER_META
+itself through `verify_loop_edit` on a slower cadence. It is fixed today; the dict
+makes the fixity explicit and names the seam.
+
 Pure stdlib.
 """
 from __future__ import annotations
@@ -71,6 +77,23 @@ Return a JSON list of objects:
 Context:
 {context}
 """
+
+
+# --- the improvement PROCEDURE's own tunable knobs ---------------------------
+# concept_recursive_meta_skill_evolution (MetaSkill-Evolve, arXiv:2607.05297) and
+# docs/self_improvement_by_responsibility.md item 4: every published self-improving
+# instance has a FIXED improvement procedure except MetaSkill-Evolve, and this
+# proposer is fixed too. These are the knobs a slower "middle-loop's middle-loop"
+# would evolve — surfaced here so the fixity is explicit and the seam is named.
+# A recursive version would put PROPOSER_META itself through verify_loop_edit on a
+# slower cadence (e.g. every N object-level accepts), with the same held-out gate.
+PROPOSER_META = {
+    "dimensions": ["research quality", "exploration / mode diversity", "harness economy", "safety"],
+    "mode_concentration_trigger": 0.55,   # top task-class share that flags "stuck in one mode"
+    "verification_default": "held-out + re-run",
+    "max_proposals_per_run": 3,
+    "cadence_hint": "object-level: every run; meta-level (this dict): not yet wired",
+}
 
 
 def gather_context():
@@ -134,7 +157,7 @@ def heuristic_propose(context):
 
     # 2. mode diversity: is the loop stuck in one task class?
     top_cls, top_n = max(dist.items(), key=lambda x: x[1]) if dist else (None, 0)
-    if top_cls and top_n / total > 0.55:
+    if top_cls and top_n / total > PROPOSER_META["mode_concentration_trigger"]:
         props.append({
             "component": ["context", "loop_policy"],
             "dimension": "exploration / mode diversity",
@@ -239,7 +262,18 @@ def _selftest():
             p["verification"].startswith(("computable", "held-out")) for p in props),
         "PROPOSER_PROMPT formats with the context": bool(
             PROPOSER_PROMPT.format(context=json.dumps(ctx))),
+        "PROPOSER_META.mode_concentration_trigger is a fraction and load-bearing":
+            0 < PROPOSER_META["mode_concentration_trigger"] < 1,
     }
+    # PROPOSER_META.dimensions must cover every dimension heuristic_propose can emit
+    _emit_dims = set()
+    for _p in (heuristic_propose({**ctx,
+                                  "metrics": {**ctx["metrics"], "verified_citation_fraction": 0.0,
+                                              "validation_pass_rate": 0.5},
+                                  "task_class_distribution": {"x": 9, "y": 1}}) or []):
+        _emit_dims.add(_p["dimension"])
+    checks["PROPOSER_META.dimensions covers what heuristic_propose emits"] = (
+        _emit_dims and _emit_dims <= set(PROPOSER_META["dimensions"]))
 
     # model_propose adapter
     good = {"component": ["context", "loop_policy"], "change": "add X to the rules list",

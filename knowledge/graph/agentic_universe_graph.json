@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-18",
+  "last_updated": "2026-10-19",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -632,6 +632,10 @@
     {
       "date": "2026-10-18",
       "change": "Autonomous run 168. Consolidation. docs/self_improvement_by_responsibility.md - maps a published working self-improving instance onto 5 of the 6 runtime responsibilities from concept_bottleneck_is_the_model_harness_coupling: context=ACE, control=RHO/Self-Harness, action=ToolMaker, state=CER, verification=DeepVerifier (observation deliberately not self-modifying - its legibility is a Phase 3 acceptance criterion). Every instance has a grounded gate. Re-frames the HANDOFF integration step: not 'make the self-improving harness work' but 'connect six independently-validated loops through one trace substrate + one gate discipline'. Linked from self_improving_harness_plan.md. No graph node/edge change."
+    },
+    {
+      "date": "2026-10-19",
+      "change": "Autonomous run 169. Phase 3 - name the recursive-improvement seam. loop_proposer.py gains PROPOSER_META (the improvement procedure's own knobs: dimensions checked, mode_concentration_trigger now load-bearing, max_proposals_per_run, cadence_hint); per concept_recursive_meta_skill_evolution a recursive loop would put PROPOSER_META through verify_loop_edit on a slower cadence. Still fixed today but the fixity is explicit. +2 selftest checks (knob is a fraction; META.dimensions covers what heuristic_propose emits). self_improvement_by_responsibility.md item 4 updated. No graph node/edge change."
     }
   ],
   "nodes": [
