@@ -1124,6 +1124,10 @@
     {
       "date": "2026-10-03",
       "change": "Autonomous run 293. BUILD - tools/epistemic_constitution.py, the owner research direction 53 combined prototype, built after the 7 open-question rigs (286-292) validated the pieces. Deterministic claim ledger + forecast ledger (Brier-scored on resolve) + domain-keyed conditional trust (1 - mean Brier, cold start = None not a global scalar); atomic write + .audit log, the shape of task_ledger.py. Promotion rule: >= 4 resolved forecasts / >= 2 agents / aggregate Brier < 0.18 / replicated / survived_counterexample (last two need a call_model, recorded as flags). 13 selftest checks, selftest_all JOBS -> 34, BUILD SELFTEST GREEN. New node artifact_epistemic_constitution_harness + 7 edges (implements the epistemic-market parent + calibrated_forecasting + conditional_trust concepts, extends pattern_deterministic_task_ledger, supports pattern_grounded_acceptance_only + concept_the_acceptor_not_the_proposer, grounds artifact_probe_epistemic_market_rig). 321 -> 322 nodes, 1281 -> 1288 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-03",
+      "change": "Autonomous run 294. BUILD - tools/fractal_flock.py, the owner research direction 41 combined prototype for the structural-coordination cluster (the analogue of run 293 epistemic_constitution.py for the other prototype the owner asked for). Deterministic coordination substrate (task_ledger.py shape): a shared append-only artifact store (no orchestrator), a bounded-neighbourhood read (last N contributions on the branch), and adaptive fractal spawn/compress (expand a node only on returned unresolved_boundaries, depth/child bounded; compress the subtree to a summary when every child returns). contribute(node, neighbourhood) is the caller callback. 12 selftest checks (fixed an infinite re-compress loop: _maybe_compress now no-ops on a non-open node), selftest_all JOBS -> 35, BUILD SELFTEST GREEN. New node artifact_fractal_flock_harness + 7 edges (implements concept_orchestratorless_flock + concept_fractal_decomposition, grounds artifact_probe_orchestration_value_rig, extends the task ledger, refines concept_trace_compiles_to_per_consumer_views, supports artifact_probe_composed_design_rig, instantiates concept_deterministic_spine_generative_edge). Both combined prototypes (EC + FF) now built. 322 -> 323 nodes, 1288 -> 1295 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -9535,6 +9539,35 @@
       "evidence_links": [
         "tools/epistemic_constitution.py",
         "docs/research/open_questions.md"
+      ]
+    },
+    {
+      "id": "artifact_fractal_flock_harness",
+      "label": "The fractal-flock research harness - shared artifact store + bounded-neighbourhood read + adaptive spawn/compress",
+      "type": "artifact",
+      "status": "in_experiment",
+      "verification_state": "validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:structural_coordination",
+      "confidence": 0.65,
+      "description": "tools/fractal_flock.py (run 294) - the owner research direction 41 (part4) combined prototype for the structural-coordination cluster (folded run 262; flock arm measured run 273). Deterministic coordination substrate (task_ledger.py shape: atomic write + .audit log, no model calls); the generative work is the caller callback contribute(node, neighbourhood). Three mechanisms: (1) SHARED ARTIFACT STORE - a direction string + append-only per-agent contributions, no orchestrator / message bus; (2) BOUNDED-NEIGHBOURHOOD READ - an agent about to contribute sees only the last N contributions on its branch + the direction (Kiro ring topology); (3) ADAPTIVE FRACTAL SPAWN/COMPRESS - expand a node into <= max_children depth-bounded (<= max_depth) children ONLY when the contribution returns unresolved_boundaries; when every child returns, replace the subtree with a one-line summary and shrink the workspace. 12 selftest checks; selftest_all JOBS -> 35. Pairs with artifact_epistemic_constitution_harness (run 293) - the two combined prototypes the owner research asked for.",
+      "tags": [
+        "fractal-flock",
+        "orchestratorless",
+        "bounded-neighbourhood",
+        "adaptive-spawn",
+        "compression",
+        "direction-41",
+        "combined-prototype"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-03-0600.md",
+        "tools/fractal_flock.py",
+        "docs/research/alternative_approaches_part4.md (owner research input)"
+      ],
+      "evidence_links": [
+        "tools/fractal_flock.py",
+        "docs/research/coverage_map.md"
       ]
     }
   ],
@@ -23440,6 +23473,83 @@
       "approach_family": "orchestration_first",
       "confidence": 0.5,
       "description": "The prototype the 7 rigs point at: probe_epistemic_market / _identity_masking / _adversarial_collaboration / _trust_transfer / _dissent_vs_reflection / _trust_weighted_voting each validated one mechanism this module composes."
+    },
+    {
+      "id": "edge_ff_implements_orchestratorless_flock",
+      "source": "artifact_fractal_flock_harness",
+      "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "The concept made runnable: no orchestrator, coordination is a shared append-only artifact store read through a bounded peer neighbourhood."
+    },
+    {
+      "id": "edge_ff_implements_fractal_decomposition",
+      "source": "artifact_fractal_flock_harness",
+      "target": "concept_fractal_decomposition_spawns_recursively_only_at_unresolved_boundaries",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.65,
+      "description": "The spawn rule is exactly this concept: a node expands ONLY on returned unresolved_boundaries, depth- and count-bounded, and the completed subtree is compressed to a summary."
+    },
+    {
+      "id": "edge_ff_grounds_flock_arm",
+      "source": "artifact_fractal_flock_harness",
+      "target": "artifact_probe_orchestration_value_rig",
+      "type": "grounds",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "The prototype the run-273 flock arm points at: stigmergic accretion with bounded neighbourhoods is a viable integration mode; this is a deterministic substrate for running it."
+    },
+    {
+      "id": "edge_ff_extends_task_ledger",
+      "source": "artifact_fractal_flock_harness",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "Same discipline (deterministic, atomic write, audit log) applied to a TREE of contributions with adaptive depth rather than a flat task list."
+    },
+    {
+      "id": "edge_ff_refines_trace_compilation",
+      "source": "artifact_fractal_flock_harness",
+      "target": "concept_trace_compiles_to_per_consumer_views",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "The compress step is per-consumer trace compilation at each recursion boundary: the parent consumes a one-line summary of the child subtree, not its full contribution history."
+    },
+    {
+      "id": "edge_ff_supports_composed_design_rig",
+      "source": "artifact_fractal_flock_harness",
+      "target": "artifact_probe_composed_design_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.45,
+      "description": "probe_composed_design (283): you need short TASKS not just short agents. The fractal spawn keeps every node bounded and problem-shaped, and compresses on return - short tasks by construction."
+    },
+    {
+      "id": "edge_ff_instantiates_spine_edge",
+      "source": "artifact_fractal_flock_harness",
+      "target": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+      "type": "instantiates",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "The module is the deterministic spine (store, spawn rule, compression, audit); contribute() is the generative edge. Agents create freely inside a node; the coordination is not theirs to change."
     }
   ]
 }
