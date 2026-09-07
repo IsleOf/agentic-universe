@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-09",
+  "last_updated": "2026-10-10",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1232,6 +1232,10 @@
     {
       "date": "2026-10-09",
       "change": "Autonomous run 321. docs/audits/README.md - index + coordination model for the per-project audits (runs 317-320): the first-pass/verify-and-fill workflow, and copy-pasteable per-agent instructions (poly-bot Codex/AGY session; poster-studio session; Codex vs Claude Code division via the AGENT_CONTRACT delegation ladder). Answers the owner question about what to tell each agent. No main-graph change (342/1363). Validator VALID."
+    },
+    {
+      "date": "2026-10-10",
+      "change": "Autonomous run 322. Emergence-core literature sweep (negotiation / diversity thread). Folded arXiv:2604.11840 (Diversity Without Fidelity, Apr 2026, VERIFIED): the SAMPLER role (reproduce plausible human behaviour) vs the SOLVER role (best move) - reasoning modes strengthen solvers, not samplers. In a 5-agent 15-turn negotiation: no structured memory => 314/315 authority-decided; reasoning ON => varied moves + concessions + a different path every run BUT 15/15 no-agreement (a move-diversity check would pass it); agents writing their OWN notes => agreement is the norm, the SAME notes supplied => nothing. Vet samplers on the OUTCOME DISTRIBUTION. New node + 4 edges: refines principle_diversity_maintenance (surface vs outcome diversity - a 6th angle on the keystone); supports semantic-compression + creativity-decline (measurement-gap family); informs pattern_experience_bank (self-authored vs supplied working memory). 342 -> 343 nodes, 1363 -> 1367 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -10197,6 +10201,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-08-1800.md"
+      ]
+    },
+    {
+      "id": "concept_surface_move_diversity_can_coexist_with_zero_outcome_diversity_vet_samplers_on_the_outcome_distribution",
+      "label": "Diversity Without Fidelity: varied moves every run can coexist with identical outcomes every time - a move-diversity check passes while the outcome distribution is degenerate; and self-authored working memory produces agreement where identical supplied memory does not",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:diversity_measurement",
+      "confidence": 0.6,
+      "description": "arXiv:2604.11840 (Diversity Without Fidelity, Apr 2026, VERIFIED via arxiv API). Distinguishes the SAMPLER role (reproduce how people plausibly behave - hesitate, concede late, settle for imperfect deals) from the SOLVER role (find the best move); reasoning modes providers ship to strengthen solvers do not help the sampler role. Testbed: 5 agents bargain over a regulation for 15 turns, an authority decides unresolved issues. (1) Agents WITHOUT a structured memory of the negotiation almost never agree - 314/315 runs end with the authority deciding, reasoning on or off. (2) With reasoning ON, one model family negotiates visibly - varied moves, concessions in most runs, a different path every time - yet ends WITHOUT agreement in 15/15 runs. A move-diversity check would pass a model whose ENDINGS never change. (3) When agents write their OWN short running notes, agreement becomes the norm; the SAME notes supplied ready-made change nothing; hand-coded textbook-concession agents agree in most runs. Conclusion: vet simulation models as samplers on the DISTRIBUTION OF OUTCOMES they produce - solver strength is no guide to sampler fidelity, and switching on reasoning leaves it where it was. Currency: Apr 2026, names reasoning modes / model families, so the run counts are generation-specific; the sampler/solver split and the surface-vs-outcome-diversity finding are the durable parts.",
+      "tags": [
+        "diversity",
+        "sampler-vs-solver",
+        "negotiation",
+        "measurement",
+        "self-authored-memory",
+        "outcome-distribution",
+        "verified"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-10-0600.md",
+        "arXiv:2604.11840 (Diversity Without Fidelity: A Solver-Sampler Mismatch in Multi-Agent LLM Negotiation Simulation) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-10-0600.md"
       ]
     }
   ],
@@ -24927,6 +24958,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "The survey roadmap - executable, verifiable, stateful agent systems - is the deterministic-spine / generative-edge split stated as a field direction."
+    },
+    {
+      "id": "edge_diversity_fidelity_refines_diversity_maintenance",
+      "source": "concept_surface_move_diversity_can_coexist_with_zero_outcome_diversity_vet_samplers_on_the_outcome_distribution",
+      "target": "principle_diversity_maintenance",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.6,
+      "description": "Adds a distinction the keystone does not currently name: SURFACE diversity (varied moves / a different path each run) can coexist with ZERO outcome diversity (endings never change). A diversity check on the visible behaviour passes while the distribution that matters is degenerate."
+    },
+    {
+      "id": "edge_diversity_fidelity_supports_semantic_compression",
+      "source": "concept_surface_move_diversity_can_coexist_with_zero_outcome_diversity_vet_samplers_on_the_outcome_distribution",
+      "target": "concept_multi_round_interaction_compresses_semantic_space",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The outcome-space analogue of semantic-space compression: multi-round interaction collapses the distribution of endings to a point even while the move space stays varied."
+    },
+    {
+      "id": "edge_diversity_fidelity_supports_creativity_decline",
+      "source": "concept_surface_move_diversity_can_coexist_with_zero_outcome_diversity_vet_samplers_on_the_outcome_distribution",
+      "target": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.5,
+      "description": "Both are measurement-gap findings: you can be measuring the wrong axis (move variety / within-run novelty) while the load-bearing axis (outcome distribution / usefulness) is flat."
+    },
+    {
+      "id": "edge_diversity_fidelity_informs_experience_bank",
+      "source": "concept_surface_move_diversity_can_coexist_with_zero_outcome_diversity_vet_samplers_on_the_outcome_distribution",
+      "target": "pattern_experience_bank",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.55,
+      "description": "The self-authored-notes result: agents writing their OWN running notes reach agreement; the identical notes supplied ready-made do not. The bank stores supplied structure - self-authorship of working memory may be load-bearing in a way retrieval is not."
     }
   ]
 }

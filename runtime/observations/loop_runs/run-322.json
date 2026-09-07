@@ -1,0 +1,30 @@
+{
+  "run": 322,
+  "increment": "fold arXiv:2604.11840 Diversity Without Fidelity - sampler vs solver; surface move diversity != outcome diversity",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 9,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 1,
+    "artifacts": 2,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "citations": [
+    {
+      "id": "arXiv:2604.11840",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2604.11840"
+  ],
+  "trace_file": "runtime\\traces\\loop-322.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 322 STOP · VALID · graph +1n/+4e · cites 1v/1 · idle-streak 5! · legible 1.00 · verified-frac 0.77 · novelty 1.00"
+}
