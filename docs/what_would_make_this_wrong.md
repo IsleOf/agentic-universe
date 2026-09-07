@@ -1,6 +1,6 @@
 # What Would Make This Wrong
 
-**Date:** 2026-09-12 (autonomous run 25) · last revised run 47 · severity re-rank runs 172, 234 · An adversarial read of the central thesis, from the `challenges` edges.
+**Date:** 2026-09-12 (autonomous run 25) · last revised run 47 · severity re-rank runs 172, 234, 352 · An adversarial read of the central thesis, from the `challenges` edges.
 Current graph state and counts: `docs/graph_state_2026-09.md` (this document's snapshot numbers are historical).
 
 The graph's thesis: *a nourishing harness — active habitat mechanisms, ungated interior, a two-part gate, paired with the orchestration graph — produces more capable and more exploratory agent populations than a constrained one, and the emergence is worth studying.*
@@ -43,6 +43,46 @@ The honest reading: harness-only is enough where the task is **elicitation-shape
 where it is **capability-shaped**. Many of the project's targets (research direction-setting, graph
 engineering, adversarial reading) are elicitation-shaped — but "harness-only gets most of the value" is now
 a bet with a measured cost on the tasks where it doesn't.
+
+## Severity re-rank (run 352)
+
+After the runs 335–351 arc — two self-evolution-risk folds (MLAS `2606.23075`; misevolution
+`2509.26354`), a **built** evolution-aware security layer, two emergence-side probes, and
+large-N self-organization evidence:
+
+- **§2-the-gate weakens further and is now also tamper-resistant by construction.** The
+  acceptance path used to be "provably sound design + five groups' corroboration"; runs
+  338–340 added that the loop **cannot autonomously weaken its own gate** — `exec_guard`
+  gate-the-gate blocks an un-acked pre-commit touching the gate / guard / validator /
+  `runtime/harness/` / proposer-conductor decision logic, and `Conductor.preflight()` halts on
+  drift from the owner-blessed harness manifest. MLAS's "static defenses are structurally
+  inadequate against a compromised lineage" is answered by keeping the gate's *code* editable
+  only out-of-band (the owner's `AU_SELF_DESIGN_ACK`). §2 stays out of the top tier.
+- **Misevolution is a real risk but not a new top-tier section.** `2509.26354` — a
+  self-evolving agent drifts into harm with *no attacker* (safety alignment degrades just
+  from memory accumulation). It reinforces §2c ("the loop's own judgement is exactly what
+  can't be trusted") and the run-175 bounded-memory case, rather than opening a new front.
+  The mitigations are already named: the gate runs every time, memory is outcome-curated and
+  bounded, no Model-pathway evolution (frozen-base bet).
+- **§1's containment story now has sim evidence, still no live test.** `fs_sandbox` (run 331,
+  a capped path-jailed shell with an `escape_report()`) + the `probe_subagent_coordination`
+  fragmentation arm (run 344 — a **cohort monitor** recovers detection where per-instance
+  monitoring collapses under coordination) show the design's containment answer works *in
+  sim*. The gap is unchanged: never run against an agent actually trying. The `--live` path
+  is now one command (run 334).
+- **§4 gets a large-N boost on the emergence-first side.** "Drop the Hierarchy and Roles"
+  (`2603.28990`, run 350) — 25,000 tasks, **5,006 unique roles from 8 agents**, voluntary
+  abstention, shallow hierarchy; a minimal-scaffold + full-autonomy hybrid beats centralized
+  coordination by 14%, sub-linear to 256 agents. This is the strongest evidence yet that
+  self-organization *is* a viable diversity mechanism. Counterweight: ARG/RGA-Designer
+  (`2507.18224` / `2608.20099`, run 347) is another trained-component data point — but on the
+  *topology*, a small graph model, not the agent LLM.
+- **§6 — no change.** The trained-topology folds add to the JIT-Agent/WHALE cluster but stay
+  peripheral (a topology generator is not the agent).
+
+Updated order: **§3 → §1 → §4 → §6 → §2c → §5 → §7** — same as run 234, but §2-the-gate is
+now *tamper-resistant*, not just sound, and §1's containment has moved from "architecturally
+right, never tested" to "architecturally right, sim-validated, never tested live".
 
 ## Current severity ranking (run 172)
 
