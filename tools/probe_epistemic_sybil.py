@@ -152,10 +152,25 @@ def run_arm(arm, n, trials=400, rec=None, reader=None):
     return round(hits / counted, 3) if counted else None
 
 
-def sweep(ns=(1, 2, 4, 8, 16, 32)):
+_LIVE_CORPUS = {
+    "src-a": "Field report A: the disputed count is estimated at 47 units based on the "
+             "northern survey. Margin of error roughly 5.",
+    "src-b": "Field report B (same northern survey, re-analysed): about 47, possibly 48.",
+    "src-c": "Independent audit C: an unrelated satellite pass puts the count near 50.",
+    "src-d": "Ledger D: reconciled total 46 after removing two double-entries.",
+}
+
+
+def _live_reader():
+    from call_model import call_model
+    return model_reader(call_model, _LIVE_CORPUS)
+
+
+def sweep(ns=(1, 2, 4, 8, 16, 32), *, live=False):
+    reader = _live_reader() if live else None
     out = {}
     for arm in ("shared", "independent", "dedup"):
-        out[arm] = {n: run_arm(arm, n) for n in ns}
+        out[arm] = {n: run_arm(arm, n, reader=reader) for n in ns}
     return out
 
 
@@ -208,6 +223,13 @@ def _selftest():
         and mr_shared_1 - mr_shared_16 > 0.25)
     checks["model_reader dedup recovers coverage"] = mr_dedup_16 is not None and mr_dedup_16 >= 0.8
     checks["model_reader unparseable reply -> nan"] = unparse != unparse
+    try:
+        _sl = sweep(ns=(1, 4), live=True)   # AU_MODEL_BACKEND=fake -> offline wiring smoke test
+        checks["sweep(live=True) runs the arms via model_reader without error"] = (
+            "shared" in _sl and set(_sl["shared"]) == {1, 4})
+    except Exception as e:
+        checks["sweep(live=True) runs the arms via model_reader without error"] = False
+        print(f"   (live wiring error: {e})")
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print("\n  coverage by N (should be ~0.95 if aggregation is honest):")
@@ -222,12 +244,16 @@ def _cli(argv=None):
     p = argparse.ArgumentParser(description="Epistemic-Sybil evidence-roots probe rig.")
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("selftest")
-    sub.add_parser("sweep")
+    sw = sub.add_parser("sweep")
+    sw.add_argument("--live", action="store_true",
+                    help="each read is model_reader(call_model, corpus) over a small document "
+                         "set - the probe measures real correlated-error-from-shared-evidence. "
+                         "Respects AU_MODEL_BACKEND.")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
     if args.cmd == "sweep":
-        print(json.dumps(sweep(), indent=2))
+        print(json.dumps(sweep(live=args.live), indent=2))
         return 0
     return 2
 

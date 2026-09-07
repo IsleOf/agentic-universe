@@ -10430,6 +10430,36 @@
       "evidence_links": [
         "tools/research_worker.py"
       ]
+    },
+    {
+      "id": "concept_all_five_v2_probe_adapters_are_live_wired",
+      "label": "All 5 v2.0 probe adapters are --live-wired to call_model - each experiment is one command",
+      "type": "concept",
+      "status": "verified",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.7,
+      "description": "Run 334. The five model-facing adapters that turn a scripted probe rig into a real v2.0 experiment are now all reachable behind a single `--live` CLI flag that routes through call_model (AU_MODEL_BACKEND): model_policy (probe_idle_agent, run 330), model_preference/judge (probe_rho_holdout, run 333), model_relay (probe_subagent_coordination, run 334), model_reader (probe_epistemic_sybil, run 334), model_propose (loop_proposer / phase3 proposer, run 334). Each gained +1 selftest check verifying the live path executes on the fake backend (offline wiring smoke test) without error; the default scripted path is unchanged so rig calibration is untouched. AU_MODEL_BACKEND=fake = wiring test; =cli / registered callable = the real experiment. v2.0 activation is now purely the owner's resource call (spend CLI-agent quota or register an API client), no more code.",
+      "tags": [
+        "v2",
+        "self-rebuild",
+        "call-model",
+        "probe-adapters",
+        "live-wiring",
+        "one-command"
+      ],
+      "derived_from": [
+        "tools/probe_subagent_coordination.py",
+        "tools/probe_epistemic_sybil.py",
+        "tools/loop_proposer.py",
+        "tools/call_model.py"
+      ],
+      "evidence_links": [
+        "tools/probe_subagent_coordination.py",
+        "tools/probe_epistemic_sybil.py",
+        "tools/loop_proposer.py"
+      ]
     }
   ],
   "edges": [
@@ -25467,6 +25497,34 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "probe_rho_holdout sweep(live=True) /  (run 333): the optimiser selects its winner with call_model.judge (a real pairwise preference over its own candidates) instead of the scripted self_preference; external_grade stays the held-out truth. HANDOFF second run to do."
+    },
+    {
+      "id": "edge_call_model_wires_subagent_coordination",
+      "source": "artifact_call_model_seam",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "supports",
+      "description": "call_model drives model_relay behind probe_subagent_coordination dryrun --live (run 334)"
+    },
+    {
+      "id": "edge_call_model_wires_epistemic_sybil",
+      "source": "artifact_call_model_seam",
+      "target": "artifact_probe_epistemic_sybil_rig",
+      "type": "supports",
+      "description": "call_model drives model_reader over a document corpus behind probe_epistemic_sybil sweep --live (run 334)"
+    },
+    {
+      "id": "edge_call_model_wires_loop_proposer",
+      "source": "artifact_call_model_seam",
+      "target": "artifact_phase3_proposer_context",
+      "type": "supports",
+      "description": "call_model drives model_propose behind loop_proposer propose --live, falling back to heuristic_propose (run 334)"
+    },
+    {
+      "id": "edge_five_adapters_milestone_records_call_model",
+      "source": "concept_all_five_v2_probe_adapters_are_live_wired",
+      "target": "artifact_call_model_seam",
+      "type": "records",
+      "description": "the milestone: all five adapters now route through the one seam"
     }
   ]
 }

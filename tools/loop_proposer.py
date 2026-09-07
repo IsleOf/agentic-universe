@@ -291,6 +291,15 @@ def _selftest():
     checks["model_propose model exception -> []"] = mp_boom == []
     checks["model_propose output passes the same bar as heuristic_propose"] = all(
         _valid_proposal(p) for p in mp_ok)
+    try:
+        from call_model import call_model as _cm
+        ctx = gather_context()
+        live_props = model_propose(_cm, ctx) or heuristic_propose(ctx)
+        checks["propose --live wiring: model_propose(call_model) -> a valid proposal list"] = (
+            isinstance(live_props, list) and all(_valid_proposal(p) for p in live_props))
+    except Exception as e:
+        checks["propose --live wiring: model_propose(call_model) -> a valid proposal list"] = False
+        print(f"   (live wiring error: {e})")
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print(f"\n  context keys: {list(ctx)}")
@@ -307,7 +316,11 @@ def _cli(argv=None):
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("selftest")
     sub.add_parser("context")
-    sub.add_parser("propose")
+    pr = sub.add_parser("propose")
+    pr.add_argument("--live", action="store_true",
+                    help="model_propose(call_model, context) instead of heuristic_propose; "
+                         "on an empty/failed model reply it falls back to the heuristic. "
+                         "Respects AU_MODEL_BACKEND.")
     sub.add_parser("prompt")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
@@ -316,7 +329,13 @@ def _cli(argv=None):
         print(json.dumps(gather_context(), indent=2, default=str))
         return 0
     if args.cmd == "propose":
-        print(json.dumps(heuristic_propose(gather_context()), indent=2))
+        ctx = gather_context()
+        if args.live:
+            from call_model import call_model
+            props = model_propose(call_model, ctx) or heuristic_propose(ctx)
+        else:
+            props = heuristic_propose(ctx)
+        print(json.dumps(props, indent=2))
         return 0
     if args.cmd == "prompt":
         print(PROPOSER_PROMPT.format(context=json.dumps(gather_context(), indent=2, default=str)))

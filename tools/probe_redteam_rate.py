@@ -120,7 +120,7 @@ def assess(res):
         a["verdict"] = (
             f"CONFIRMS at these params: net value is an inverted-U in the red-team challenge rate. "
             f"Optimum at r={best_r:.2f} (net {a['best_net']:+.1f}); net at r=0 is {a['net_at_r0']:+.1f} "
-            f"(too many shipped defects), net at r=1 is {a['net_at_r1']:+.1f} (paralysis — throughput → 0). "
+            f"(too many shipped defects), net at r=1 is {a['net_at_r1']:+.1f} (paralysis - throughput -> 0). "
             f"Both endpoints are >20 below the interior optimum: under-challenging ships defects, "
             f"over-challenging (past r~{PARALYSIS_KNEE:.2f}) freezes the system.")
     else:

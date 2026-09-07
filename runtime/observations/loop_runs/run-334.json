@@ -1,0 +1,20 @@
+{
+  "run": 334,
+  "increment": "wire the last 3 probe adapters (model_relay, model_reader, model_propose) to call_model - all 5 v2.0 experiments are now one --live command; fix probe_redteam_rate cp1252 crash",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 7,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-334.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 334 OK · VALID · graph +0 · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.77 · novelty n/a"
+}

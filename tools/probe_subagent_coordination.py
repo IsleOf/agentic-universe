@@ -222,6 +222,13 @@ def _selftest():
     checks["model_relay 'no' reproduces low-deference (seed only)"] = _no["reach"] == 1
     checks["model_relay unparseable -> no forward (conservative)"] = _junk["reach"] == 1
     checks["model_relay model exception -> no forward"] = _boom["reach"] == 1
+    try:
+        from call_model import call_model as _cm
+        _live = run_cohort("dryrun", same_parent_filter=False, relay_policy=model_relay(_cm))[1]
+        checks["dryrun --live wiring: model_relay(call_model) runs a cohort"] = "reach" in _live
+    except Exception as e:
+        checks["dryrun --live wiring: model_relay(call_model) runs a cohort"] = False
+        print(f"   (live wiring error: {e})")
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print(f"\n  A filtered  / high-deference: {json.dumps(a_hi)}")
@@ -239,11 +246,18 @@ def _cli(argv=None):
     d = sub.add_parser("dryrun")
     d.add_argument("--filter", action="store_true", help="same-parent-ID filtering (cohort A)")
     d.add_argument("--deference", choices=["high", "low"], default="high")
+    d.add_argument("--live", action="store_true",
+                   help="relay_policy = model_relay(call_model) - a real model asked yes/no to "
+                        "forward a peer's out-of-scope message. Respects AU_MODEL_BACKEND.")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
     if args.cmd == "dryrun":
-        pol = high_deference if args.deference == "high" else low_deference
+        if args.live:
+            from call_model import call_model
+            pol = model_relay(call_model)
+        else:
+            pol = high_deference if args.deference == "high" else low_deference
         _e, spread = run_cohort("dryrun", same_parent_filter=args.filter, relay_policy=pol)
         print(json.dumps(spread, indent=2))
         return 0

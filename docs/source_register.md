@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 345 nodes, 1373 edges · **Date:** 2026-09-05
+**Graph at generation:** 350 nodes, 1395 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -360,18 +360,21 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - seed graph 2026-09-01 (foundational concept, not a literature fold) — `concept_agent_os_desktop_shell`, `concept_memory_and_learning`, `concept_swarm_decentralized_coordination` +5
 - synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
+- tools/call_model.py — `artifact_call_model_seam`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/epistemic_constitution.py — `artifact_epistemic_constitution_harness`
 - tools/exec_guard.py — `artifact_phase5_exec_guard`
 - tools/experience_bank.py — `artifact_phase2_experience_bank`, `pattern_memory_writes_pass_a_deterministic_risk_gate`
 - tools/fractal_flock.py — `artifact_fractal_flock_harness`
+- tools/fs_sandbox.py — `artifact_fs_sandbox`
 - tools/harness_registry.py — `artifact_phase1_harness_registry`
 - tools/holdout_tasks.py — `artifact_phase3_holdout_set`
 - tools/holdout_verifier2.py — `artifact_phase3_heterogeneous_verifier`
 - tools/improvement_loop.py — `artifact_phase3_improvement_loop`
 - tools/improvement_loop.py paired_eprocess (run 220) - advisory anytime-valid paired commit gate — `concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution`
+- tools/janitor.py — `artifact_janitor`
 - tools/loop_adapter.py — `artifact_loop_adapter_real_trace`
 - tools/loop_metrics.py — `artifact_loop_metrics_phase3_real`
-- tools/loop_proposer.py — `artifact_phase3_proposer_context`
+- tools/loop_proposer.py — `artifact_phase3_proposer_context`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/loop_session.py — `artifact_loop_session_live_recording`
 - tools/phase0_selftest.py — `artifact_phase0_trace_substrate`
 - tools/probe_activation_generalisation.py — `artifact_probe_activation_generalisation_rig`
@@ -380,16 +383,17 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_composed_design.py granularity sweep (run 94) - the intermediate optimum, when it exists, is set by accumulation-cost vs shed-cost — `test_scenario_decomposition_granularity`
 - tools/probe_dissent_vs_reflection.py — `artifact_probe_dissent_vs_reflection_rig`
 - tools/probe_epistemic_market.py — `artifact_probe_epistemic_market_rig`
-- tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`
+- tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/probe_identity_masking.py — `artifact_probe_identity_masking_rig`
 - tools/probe_idle_agent.py — `artifact_probe_idle_agent_rig`
 - tools/probe_orchestration_value.py — `artifact_probe_orchestration_value_rig`
 - tools/probe_orchestration_value.py (run 221) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - tools/probe_redteam_rate.py — `artifact_probe_redteam_rate_rig`
 - tools/probe_rho_holdout.py — `artifact_probe_rho_holdout_rig`
-- tools/probe_subagent_coordination.py — `artifact_probe_subagent_coordination_rig`
+- tools/probe_subagent_coordination.py — `artifact_probe_subagent_coordination_rig`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/probe_trust_transfer.py — `artifact_probe_trust_transfer_rig`
 - tools/probe_trust_weighted_voting.py — `artifact_probe_trust_weighted_voting_rig`
+- tools/research_worker.py — `artifact_research_worker`
 - tools/skill_induction.py — `artifact_phase4_skill_induction`
 - tools/supervisor.py (run 250) — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - tools/task_ledger.py (run 244) — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
@@ -407,6 +411,7 @@ Nodes derived from this repository's own documents and conversation archives.
 
 - `architecture/foundations.md` — `pattern_five_w_message_instrumentation`
 - `architecture/foundations.md: write an executable GREEN/RED predicate before building a loop` — `concept_work_substitution_frontier`
+- `docs/HANDOFF.md` — `artifact_call_model_seam`
 - `docs/auto_sweep_2026-09-06-0000.md` — `concept_incremental_attacks_boil_the_frog`
 - `docs/auto_sweep_2026-09-06-1200.md` — `concept_harness_evolution_subfield`
 - `docs/auto_sweep_2026-09-06-1800.md` — `concept_self_improvement_strength_tracks_the_verification_hierarchy`
@@ -514,9 +519,12 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-10-0600.md` — `concept_agentsociety_large_scale_generative_society`, `concept_surface_move_diversity_can_coexist_with_zero_outcome_diversity_vet_samplers_on_the_outcome_distribution`
 - `docs/auto_sweep_2026-10-10-1200.md` — `concept_llm_x_a_typed_message_bus_for_llm_to_llm_coordination_with_a_measured_policy_strictness_tradeoff`
 - `docs/auto_sweep_2026-10-10-1800.md` — `concept_progrouter_route_the_model_per_step_by_predicted_progress_gain_not_per_query_one_shot`
+- `docs/auto_sweep_2026-10-11-0000.md` — `artifact_janitor`
 - `docs/auto_sweep_2026-10-11-0600.md` — `concept_inference_time_scaling_of_verification`
+- `docs/auto_sweep_2026-10-12-0000.md` — `artifact_call_model_seam`
 - `docs/auto_sweep_2026-10-12-0600.md` — `concept_frontier_models_can_scheme_in_context`
-- `docs/auto_sweep_2026-10-12-1200.md` — `concept_anti_scheming_mitigation_confounded_by_eval_awareness`
+- `docs/auto_sweep_2026-10-12-1200.md` — `artifact_fs_sandbox`, `concept_anti_scheming_mitigation_confounded_by_eval_awareness`
+- `docs/auto_sweep_2026-10-12-1800.md` — `artifact_research_worker`
 - `docs/auto_sweep_2026-10-13-0600.md` — `concept_mast_multi_agent_failure_taxonomy`
 - `docs/auto_sweep_2026-10-13-1200.md` — `concept_memory_poisoning_one_write_persists`
 - `docs/auto_sweep_2026-10-14-0600.md` — `concept_cot_obfuscation_hits_the_message_channel_hardest`

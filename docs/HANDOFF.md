@@ -140,8 +140,23 @@ wiring smoke test. **All the code is in place; the run needs a live backend + th
 **Second (wired run 333):** `python tools/probe_rho_holdout.py sweep --live` — the optimiser now
 selects with `call_model`'s `judge`; `external_grade` stays the held-out truth. Does trajectory-only
 self-improvement survive external grading (sim says ~36% of the reported gain does)?
-**Third:** real `call_model` into `model_relay`, run `probe_subagent_coordination` — real peer-deference vs
-the scripted bounds, with / without the same-parent-ID filter.
+**Third–Fifth (wired run 334 — all five adapters now `--live`):**
+```
+AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_subagent_coordination.py dryrun --live
+AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_epistemic_sybil.py sweep --live
+AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/loop_proposer.py propose --live
+```
+- **`probe_subagent_coordination dryrun --live`** — `model_relay(call_model)` asks a real model
+  yes/no whether to forward a peer's out-of-scope instruction: real peer-deference vs the scripted
+  bounds, with / without the same-parent-ID filter.
+- **`probe_epistemic_sybil sweep --live`** — `model_reader(call_model, corpus)` reads a real
+  document set; the probe measures real correlated-error-from-shared-evidence instead of the
+  scripted per-source bias.
+- **`loop_proposer propose --live`** — `model_propose(call_model, ctx)` proposes the next
+  self-edit, falling back to `heuristic_propose` on an empty reply.
+
+Every v2.0 experiment is now one command; `AU_MODEL_BACKEND=fake` runs each offline as a wiring
+smoke test. Activation is the owner's resource call — CLI-agent quota or a registered API client.
 
 ### The stubs added since run 88 (second wave)
 
