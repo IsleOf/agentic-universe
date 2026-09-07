@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-10",
+  "last_updated": "2026-10-11",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1244,6 +1244,10 @@
     {
       "date": "2026-10-10",
       "change": "Autonomous run 324. Emergence-core sweep (open-ended / routing). Folded arXiv:2608.25992 (ProgRouter, Aug 2026, VERIFIED): cascade routing makes one-shot query-level decisions; ProgRouter routes PER STEP, online, by predicted progress gain (a multi-view progress scorer + a dual-path predictor + adaptive meta-gating), balancing progress gain / time budget / long-term cost. Cuts operating cost vs baselines on HumanEval+/MBPP/MATH-500/ASQA while holding performance. New node + 3 edges: refines concept_model_routing_per_task_class (run 298 - one-shot-per-class -> online-per-step); informs the v2 plan (route the proposer/verifier per step by progress gain) + concept_horizon_gap_outcome_signals_decay (the progress scorer is an instrument for the decaying mid-trajectory signal). 344 -> 345 nodes, 1370 -> 1373 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-11",
+      "change": "Autonomous run 325. Built tools/janitor.py - the v2.5 brick (docs/self_rebuild_v2.md section 6; operationalises concept_trace_compiles_to_per_consumer_views). Reads the ~256 run-*.json summaries and emits 4 per-consumer views: human_monitor (span delta + drift), agent_context (distinct evidence roots = the do-not-re-fold list + re-cited roots), drift_report (novelty + idle streak + the IDLE-STATE reading), bank_staleness. Pure stdlib, advisory - writes views under runtime/observations/views/ (gitignored), never deletes/edits anything. 11 selftest checks; selftest_all JOBS -> 41. Live corpus (67-324): 109 distinct evidence roots, novelty 1.0, idle-streak 0. 1 node + 4 edges. 345 -> 346 nodes. The v2 deterministic spine is now: acceptance_gate (300) + research_brief (302) + loop_conductor (303) + v2_integration (311) + janitor (325)."
     }
   ],
   "nodes": [
@@ -10289,6 +10293,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-10-1800.md"
+      ]
+    },
+    {
+      "id": "artifact_janitor",
+      "label": "janitor.py - compile the run corpus into per-consumer views (v2.5)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "tools/janitor.py (run 325), the v2.5 brick from docs/self_rebuild_v2.md section 6 - operationalises concept_trace_compiles_to_per_consumer_views. Reads the ~256 runtime/observations/loop_runs/run-*.json summaries and emits 4 compact views, each answering one consumer question: human_monitor.md (what changed across the span + drift), agent_context.md (distinct evidence roots seen = the \"already covered, do not re-fold\" list + re-cited roots), drift_report.md (novelty ratio + idle streak with the IDLE-STATE RULE reading), bank_staleness.md (experience_bank.stale entries). Pure stdlib, advisory - writes views under runtime/observations/views/ (gitignored), never deletes or edits a run summary / the graph / a bank entry. 11 selftest checks; selftest_all JOBS -> 41. On the live corpus (runs 67-324): 109 distinct evidence roots, novelty 1.0, idle-streak 0.",
+      "tags": [
+        "janitor",
+        "per-consumer-views",
+        "trace-compilation",
+        "drift",
+        "v2",
+        "self-rebuild"
+      ],
+      "derived_from": [
+        "tools/janitor.py",
+        "docs/auto_sweep_2026-10-11-0000.md"
+      ],
+      "evidence_links": [
+        "tools/janitor.py"
       ]
     }
   ],
@@ -25129,6 +25159,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Long-horizon context accumulation is named as a primary cost driver; the multi-view progress scorer (progress trends + workflow-state quality) is a concrete instrument for the mid-trajectory signal the horizon-gap node says decays."
+    },
+    {
+      "id": "edge_janitor_implements_per_consumer_views",
+      "source": "artifact_janitor",
+      "target": "concept_trace_compiles_to_per_consumer_views",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Compiles the run corpus into per-consumer views - the concept this node states."
+    },
+    {
+      "id": "edge_janitor_implements_v2_plan",
+      "source": "artifact_janitor",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2.5 janitor from section 6 of the plan."
+    },
+    {
+      "id": "edge_janitor_extends_loop_metrics",
+      "source": "artifact_janitor",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.45,
+      "description": "Uses the same novelty / idle-streak signals loop_metrics computes, aggregated across the whole corpus into a standing report."
+    },
+    {
+      "id": "edge_janitor_supports_experience_bank",
+      "source": "artifact_janitor",
+      "target": "pattern_experience_bank",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Surfaces experience_bank.stale() entries as a standing flag rather than an on-demand check."
     }
   ]
 }

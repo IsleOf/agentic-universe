@@ -238,7 +238,7 @@ the Phase 3 gate, not a resource request.
 | **v2.2** | `perplexity-notebooklm` + `research-brief` skills; nightly scout writes deduped briefs | a brief folds through the gate with no human step — **`research_brief.py` built run 302; `perplexity-notebooklm` scaffolded run 304 (driver + parser + brief bridge, stdlib parts selftested); the live selectors + the nightly scheduled wiring remain**|
 | **v2.3** | conductor headless on the 6h task; ledger-driven; supervisor aborts over-budget work | 10 consecutive autonomous runs, all gated, no dropped tasks (`sweep_stale` clean) — **`loop_conductor.py` skeleton built run 303 (pipeline + IDLE-STATE classifier + gate wiring); the real `run_worker` and the scheduled-task body remain**|
 | **v2.4** | CLI executor pool + dissent agent; fan-out only under the finding-11 criterion | a fanned-out run beats the single-agent baseline on a verifiable multi-part task; open question 6 gets a real datapoint |
-| **v2.5** | janitor: per-consumer views, experience-bank GC, drift report | monitoring questions answered from views at <1/10 the tokens of raw trace |
+| **v2.5** | janitor: per-consumer views, experience-bank GC, drift report | monitoring questions answered from views at <1/10 the tokens of raw trace — **built run 325 (`tools/janitor.py`): the 4 views + the drift/idle-streak report + bank-staleness flags, on the real run-67..324 corpus; experience-bank GC stays advisory** |
 
 Each phase is small, reversible (`harness_registry` revert), and its gate is written before
 the phase starts — the same discipline the loop already runs on.

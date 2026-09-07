@@ -59,6 +59,7 @@ JOBS = [
     ("research_brief.py", ["selftest"]),
     ("loop_conductor.py", ["selftest"]),
     ("v2_integration.py", ["selftest"]),
+    ("janitor.py", ["selftest"]),
     ("../skills/perplexity-notebooklm/perplexity_notebooklm.py", ["--selftest"]),
 ]
 

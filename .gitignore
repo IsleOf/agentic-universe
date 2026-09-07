@@ -4,6 +4,8 @@
 runtime/traces/*.jsonl
 runtime/observations/*.jsonl
 runtime/observations/certificates/*.jsonl
+runtime/observations/views/*.md
+!runtime/observations/views/README.md
 runtime/evaluations/*.jsonl
 !runtime/**/README.md
 
