@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-12",
+  "last_updated": "2026-10-13",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1276,6 +1276,10 @@
     {
       "date": "2026-10-12",
       "change": "Autonomous run 332. Built tools/research_worker.py - the run_worker loop_conductor.Conductor dispatches to. AU_MODEL_BACKEND=fake: a no-op patch + neutral scores so conduct() runs end to end offline and accepts a no-op (pipeline smoke test); a live backend: call_model proposes nodes/edges, research_brief validates+dedups, holdout_tasks.score_corpus gives the coverage-regression proxy scores, the model states P(fold helps). 7 selftest checks incl. conduct() end to end with the real acceptance_gate. selftest_all JOBS -> 44. 1 node + 4 edges. 348 -> 349 nodes. loop_conductor.conduct() is now a runnable v2 loop."
+    },
+    {
+      "date": "2026-10-13",
+      "change": "Autonomous run 333. Wired probe_rho_holdout to call_model - sweep(live=False|True),  CLI flag. live=True: the optimiser selects via model_preference(call_model.judge) - a real pairwise preference over its own candidates - instead of the scripted self_preference; external_grade stays the held-out truth. +1 selftest check (sweep(live=True) runs via the judge). AU_MODEL_BACKEND=fake => offline wiring smoke test. This is HANDOFF second run to do (does trajectory-only self-improvement survive external grading - sim says ~36 percent). Default scripted path unchanged. selftest_all 45 GREEN. 1 edge. 349 nodes / 1390 -> 1391 edges."
     }
   ],
   "nodes": [
@@ -25452,6 +25456,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "The v2.3 the-real-run_worker line - the generative edge as a callable, with an offline default."
+    },
+    {
+      "id": "edge_call_model_wires_rho_holdout",
+      "source": "artifact_call_model_seam",
+      "target": "artifact_probe_rho_holdout_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "probe_rho_holdout sweep(live=True) /  (run 333): the optimiser selects its winner with call_model.judge (a real pairwise preference over its own candidates) instead of the scripted self_preference; external_grade stays the held-out truth. HANDOFF second run to do."
     }
   ]
 }

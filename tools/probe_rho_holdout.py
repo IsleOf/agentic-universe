@@ -133,9 +133,19 @@ def run_round(rng, k=12, rec=None, select=None):
             "held_out_gain_of_honest_winner": round(honest_gain, 3)}
 
 
-def sweep(rounds=300):
+def _live_select():
+    """A `select(cands) -> cand` backed by `tools/call_model.py`'s `judge`.
+    AU_MODEL_BACKEND=fake gives a deterministic offline judge (wiring smoke test);
+    cli / a registered callable is the real external grader."""
+    from call_model import judge as _judge
+    return model_preference(lambda a, b: _judge(
+        a, b, criterion="which candidate is the better research contribution"))
+
+
+def sweep(rounds=300, *, live=False):
     rng = random.Random(SEED)
-    rows = [run_round(rng) for _ in range(rounds)]
+    select = _live_select() if live else None
+    rows = [run_round(rng, select=select) for _ in range(rounds)]
     def mean(key):
         return round(statistics.fmean(r[key] for r in rows), 3)
     reported = mean("self_pref_reported_gain")
@@ -195,6 +205,13 @@ def _selftest():
         "less than 60% of the reported gain survives external grading":
             s["fraction_of_reported_gain_that_survives"] < 0.6,
     }
+    try:
+        sl = sweep(rounds=20, live=True)   # AU_MODEL_BACKEND=fake -> offline wiring smoke test
+        checks["sweep(live=True) runs via call_model's judge without error"] = (
+            "held_out_gain_of_self_pref_winner" in sl and sl["rounds"] == 20)
+    except Exception as e:
+        checks["sweep(live=True) runs via call_model's judge without error"] = False
+        print(f"   (live wiring error: {e})")
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print("\n  " + json.dumps(s, indent=2).replace("\n", "\n  "))
@@ -207,12 +224,17 @@ def _cli(argv=None):
     p = argparse.ArgumentParser(description="RHO held-out grading test rig.")
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("selftest")
-    sub.add_parser("sweep")
+    sw = sub.add_parser("sweep")
+    sw.add_argument("--live", action="store_true",
+                    help="the optimiser selects its winner with call_model's judge (a real "
+                         "pairwise preference over its own candidates) instead of the scripted "
+                         "self_preference; external_grade stays the held-out truth. Respects "
+                         "AU_MODEL_BACKEND (fake = wiring smoke test).")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
     if args.cmd == "sweep":
-        print(json.dumps(sweep(), indent=2))
+        print(json.dumps(sweep(live=args.live), indent=2))
         return 0
     return 2
 

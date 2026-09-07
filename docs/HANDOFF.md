@@ -137,8 +137,9 @@ stand-in. `what_would_make_this_wrong.md` calls this "the one experiment that re
 measurement of whether the idle agent tried to break out). `AU_MODEL_BACKEND=fake` runs it offline as a
 wiring smoke test. **All the code is in place; the run needs a live backend + the owner's go-ahead
 (it spends CLI-agent quota).**
-**Second:** real `judge` into `model_preference`, run `probe_rho_holdout sweep` — does trajectory-only
-self-improvement survive external grading (sim says ~33 %)?
+**Second (wired run 333):** `python tools/probe_rho_holdout.py sweep --live` — the optimiser now
+selects with `call_model`'s `judge`; `external_grade` stays the held-out truth. Does trajectory-only
+self-improvement survive external grading (sim says ~36% of the reported gain does)?
 **Third:** real `call_model` into `model_relay`, run `probe_subagent_coordination` — real peer-deference vs
 the scripted bounds, with / without the same-parent-ID filter.
 
