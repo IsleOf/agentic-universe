@@ -2192,12 +2192,12 @@
       "id": "emergent_higher_order_synergy",
       "label": "Higher-order collectives and emergent synergy",
       "type": "emergent_behavior",
-      "status": "speculative",
+      "status": "to_test",
       "verification_state": "needs_empirical_validation",
       "approach_family": "emergent_behaviors",
       "branch_key": "emergent_behaviors:swarm_level",
-      "confidence": 0.45,
-      "description": "With persona assignment and prompts to consider other agents, multi-agent systems show identity-linked differentiation and goal-directed complementarity - measurable as information-theoretic synergy via partial information decomposition of time-delayed mutual information, which distinguishes genuine cross-agent coordination from spurious temporal coupling. Gives the swarm axis a quantitative test that does not depend on reading transcripts.",
+      "confidence": 0.55,
+      "description": "With persona assignment and prompts to consider other agents, multi-agent systems show identity-linked differentiation and goal-directed complementarity - measurable as information-theoretic synergy via partial information decomposition of time-delayed mutual information, which distinguishes genuine cross-agent coordination from spurious temporal coupling. Gives the swarm axis a quantitative test that does not depend on reading transcripts. RIG (run 341, tools/probe_emergent_synergy.py): a stdlib operationalisation - the Rosas dynamical-emergence proxy Psi plus a differentiation metric, over Riedl's 3-arm guessing game. Reproduces the direction in sim (control Psi~0; personas differentiated but Psi~0; metacognition Psi>0). A live run (model_agents adapter) would measure a real model pool. Differentiation != emergence: the rig separates the two axes.",
       "tags": [
         "synergy",
         "collective-intelligence",
@@ -2210,7 +2210,8 @@
         "arXiv:2510.05174 (Emergent Coordination in Multi-Agent Language Models, C. Riedl, ICLR 2026) - VERIFIED"
       ],
       "evidence_links": [
-        "docs/emergence_probe_catalogue.md"
+        "docs/emergence_probe_catalogue.md",
+        "tools/probe_emergent_synergy.py"
       ]
     },
     {
@@ -10603,6 +10604,34 @@
       "evidence_links": [
         "tools/loop_conductor.py",
         "runtime/harness/BLESSED_MANIFEST.json"
+      ]
+    },
+    {
+      "id": "artifact_probe_emergent_synergy_rig",
+      "label": "Emergent-synergy probe: an information-theoretic aggregate-vs-collective test on the action series (Psi + differentiation)",
+      "type": "artifact",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:swarm_level",
+      "confidence": 0.62,
+      "description": "tools/probe_emergent_synergy.py (run 341). Operationalises emergent_higher_order_synergy (arXiv:2510.05174, Riedl, ICLR 2026). Riedl's full measure is partial information decomposition of time-delayed mutual information; this rig uses the tractable practical proxy - the Rosas et al. dynamical-emergence criterion Psi(V) = I(V_{t+1};V_t) - sum_i I(V_{t+1};x_i,t) over the agents' action series (V = coarse-grained group sum), plus a separate `differentiation` metric (spread of per-agent majority-agreement). Riedl's guessing game, 3 arms: CONTROL (one shared feedback-chasing policy), PERSONAS (fixed private per-agent bias), META (personas + cover the blind spot of the agent you can best predict). Selftest result at default params: Psi control +0.005 / personas -0.026 / meta +0.059; differentiation 0.022 / 0.117 / 0.056. Reproduces Riedl's three conditions with DIFFERENTIATION and EMERGENCE as separate axes: personas are identity-differentiated but still predictively just their parts; only metacognition-driven complementary roles cross into Psi>0. 13 selftest checks incl MI-estimator sanity. `model_agents(call_model)` is the live seam (--live / AU_MODEL_BACKEND); pure stdlib (math, random). selftest_all JOBS -> 46.",
+      "tags": [
+        "emergent-synergy",
+        "information-theory",
+        "dynamical-emergence",
+        "psi",
+        "partial-information-decomposition",
+        "swarm-level",
+        "probe-rig",
+        "riedl-2510.05174"
+      ],
+      "derived_from": [
+        "tools/probe_emergent_synergy.py",
+        "https://arxiv.org/abs/2510.05174"
+      ],
+      "evidence_links": [
+        "tools/probe_emergent_synergy.py"
       ]
     }
   ],
@@ -25837,6 +25866,41 @@
       "target": "pattern_recoverability_constrained_evolution",
       "type": "grounds",
       "description": "drift detection + the exact revert chain together make an unintended harness state both visible and reversible"
+    },
+    {
+      "id": "edge_synergy_rig_instantiates_concept",
+      "source": "artifact_probe_emergent_synergy_rig",
+      "target": "emergent_higher_order_synergy",
+      "type": "instantiates",
+      "description": "the rig turns the information-theoretic test into runnable code"
+    },
+    {
+      "id": "edge_synergy_rig_grounds_emergence_first",
+      "source": "artifact_probe_emergent_synergy_rig",
+      "target": "approach_emergence_first",
+      "type": "grounds",
+      "description": "emergence is inducible and measurable by prompt engineering (personas -> differentiation; + metacognition -> synergy) - supports emergence-first as a method, not just a hope"
+    },
+    {
+      "id": "edge_synergy_rig_informs_orchestration_value",
+      "source": "artifact_probe_emergent_synergy_rig",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "informs",
+      "description": "Psi is the transcript-free complement to the value criterion: it distinguishes performance-relevant cross-agent synergy from spurious temporal coupling"
+    },
+    {
+      "id": "edge_synergy_rig_relates_orchestration_rig",
+      "source": "artifact_probe_emergent_synergy_rig",
+      "target": "artifact_probe_orchestration_value_rig",
+      "type": "extends",
+      "description": "same swarm axis, different question: 'does multi-agent help' (value) vs 'is this group a higher-order collective' (information geometry)"
+    },
+    {
+      "id": "edge_synergy_rig_uses_call_model",
+      "source": "artifact_probe_emergent_synergy_rig",
+      "target": "artifact_call_model_seam",
+      "type": "depends_on",
+      "description": "model_agents(call_model) is the --live policy; AU_MODEL_BACKEND=fake is the offline wiring smoke test"
     }
   ]
 }

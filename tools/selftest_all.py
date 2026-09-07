@@ -41,6 +41,7 @@ JOBS = [
     ("probe_activation_generalisation.py", ["selftest"]),
     ("probe_composed_design.py", ["selftest"]),
     ("probe_orchestration_value.py", ["selftest"]),
+    ("probe_emergent_synergy.py", ["selftest"]),
     ("probe_epistemic_market.py", ["selftest"]),
     ("probe_identity_masking.py", ["selftest"]),
     ("probe_adversarial_collaboration.py", ["selftest"]),

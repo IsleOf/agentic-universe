@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 355 nodes, 1419 edges · **Date:** 2026-09-05
+**Graph at generation:** 356 nodes, 1424 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -343,6 +343,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
 - graph reasoning over emergent_authorization_laundering + emergent_stale_belief_propagation + pattern_runtime_adaptive_workflow — `concept_agent_shaped_topology_is_agent_corruptible`
 - hooks/pre-commit — `artifact_phase5_exec_guard`
+- https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
@@ -385,6 +386,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_composed_design.py — `artifact_probe_composed_design_rig`
 - tools/probe_composed_design.py granularity sweep (run 94) - the intermediate optimum, when it exists, is set by accumulation-cost vs shed-cost — `test_scenario_decomposition_granularity`
 - tools/probe_dissent_vs_reflection.py — `artifact_probe_dissent_vs_reflection_rig`
+- tools/probe_emergent_synergy.py — `artifact_probe_emergent_synergy_rig`
 - tools/probe_epistemic_market.py — `artifact_probe_epistemic_market_rig`
 - tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/probe_identity_masking.py — `artifact_probe_identity_masking_rig`
