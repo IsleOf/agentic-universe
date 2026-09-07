@@ -1228,6 +1228,10 @@
     {
       "date": "2026-10-09",
       "change": "Autonomous run 320. Deeper on the poly-bot audit finding - read scripts/ev_hunter_checklist_watchdog.py + checklist_worker_recovery.py. docs/audits/poly-bot/watchdog_ledger_integration.md: the watchdog ALREADY implements ~70% of task_ledger + supervisor (deterministic queue parse, state outside the repo, one-pick-per-tick, blocked-skip, 4h stalled backoff, child-cancellation). The 3 real gaps: (1) no per-item attempt budget -> a stuck item cycles every 4h forever (the ~39-item pile); (2) no active-dispatch deadline -> the task-330 class (19min find + cProfile against the production writer); (3) no failure digest -> the same drift recurs. Each is ~40 lines inside the existing run_tick(), NOT a drop-in file swap (the markdown checklist queue is a feature - human-editable in place). The D-state hang itself is a WSL/9p issue, not a watchdog bug. Gated-path work for the active session. No main-graph change (342/1363). Validator VALID."
+    },
+    {
+      "date": "2026-10-09",
+      "change": "Autonomous run 321. docs/audits/README.md - index + coordination model for the per-project audits (runs 317-320): the first-pass/verify-and-fill workflow, and copy-pasteable per-agent instructions (poly-bot Codex/AGY session; poster-studio session; Codex vs Claude Code division via the AGENT_CONTRACT delegation ladder). Answers the owner question about what to tell each agent. No main-graph change (342/1363). Validator VALID."
     }
   ],
   "nodes": [
