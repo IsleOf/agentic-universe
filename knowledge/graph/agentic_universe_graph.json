@@ -1236,6 +1236,10 @@
     {
       "date": "2026-10-10",
       "change": "Autonomous run 322. Emergence-core literature sweep (negotiation / diversity thread). Folded arXiv:2604.11840 (Diversity Without Fidelity, Apr 2026, VERIFIED): the SAMPLER role (reproduce plausible human behaviour) vs the SOLVER role (best move) - reasoning modes strengthen solvers, not samplers. In a 5-agent 15-turn negotiation: no structured memory => 314/315 authority-decided; reasoning ON => varied moves + concessions + a different path every run BUT 15/15 no-agreement (a move-diversity check would pass it); agents writing their OWN notes => agreement is the norm, the SAME notes supplied => nothing. Vet samplers on the OUTCOME DISTRIBUTION. New node + 4 edges: refines principle_diversity_maintenance (surface vs outcome diversity - a 6th angle on the keystone); supports semantic-compression + creativity-decline (measurement-gap family); informs pattern_experience_bank (self-authored vs supplied working memory). 342 -> 343 nodes, 1363 -> 1367 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-10",
+      "change": "Autonomous run 323. Emergence-core sweep (coordination substrate). Folded arXiv:2605.11376 (LLM-X, May 2026, VERIFIED): a typed message bus + federated-gateway/topic-routing/policy-enforcement substrate for LLM-to-LLM coordination (not tool-centric), with a contract-net typed protocol and the first at-scale eval of LLM multi-agent negotiation (5/9/12 agents, Low/Med/High policy, up to 12h). Policy strictness tradeoff: robustness + fairness up, latency + message volume up; stable under sustained load, bounded latency drift. New node + 3 edges: supports concept_proof_carrying_negotiation (the transport/schema/policy layer under PCN); informs the run-218 orchestration criterion (a 12-agent 12h data point) + concept_agent_communication_is_a_layered_attack_surface. 343 -> 344 nodes, 1367 -> 1370 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -10228,6 +10232,33 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-10-0600.md"
+      ]
+    },
+    {
+      "id": "concept_llm_x_a_typed_message_bus_for_llm_to_llm_coordination_with_a_measured_policy_strictness_tradeoff",
+      "label": "LLM-X: a typed message bus + policy substrate for LLM-to-LLM coordination, with a measured policy-strictness tradeoff (robustness/fairness up, latency + message volume up) and bounded latency drift over 12h",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:coordination_substrate",
+      "confidence": 0.5,
+      "description": "arXiv:2605.11376 (LLM-X, May 2026, VERIFIED via arxiv API). A personal-LLM exchange: a message bus + routing substrate for LLM-to-LLM coordination (not agent-to-API like tool-centric protocols), with guarantees around schema validity and policy enforcement. Three contributions: (1) an architecture - federated gateways, topic-based routing, policy enforcement; (2) a typed message protocol supporting capability negotiation and contract-net-style coordination; (3) the FIRST empirical evaluation of LLM-based multi-agent negotiation AT SCALE - 5 / 9 / 12 agents, Low / Medium / High negotiation policies, short-run (minutes) and long-run (2h, 12h) load. Findings: a clear policy-performance tradeoff - stricter policies improve robustness and fairness but increase latency and message volume; extended runs stay stable under sustained load with bounded latency drift. Currency: May 2026, ~5 months; the architecture pattern (typed bus + policy layer + contract-net) is the durable part, the latency numbers are infra-specific.",
+      "tags": [
+        "coordination-substrate",
+        "message-bus",
+        "contract-net",
+        "policy-enforcement",
+        "at-scale-eval",
+        "negotiation",
+        "verified"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-10-1200.md",
+        "arXiv:2605.11376 (LLM-X: A Scalable Negotiation-Oriented Exchange for Communication Among Personal LLM Agents) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-10-1200.md"
       ]
     }
   ],
@@ -25002,6 +25033,39 @@
       "approach_family": "emergent_behaviors",
       "confidence": 0.55,
       "description": "The self-authored-notes result: agents writing their OWN running notes reach agreement; the identical notes supplied ready-made do not. The bank stores supplied structure - self-authorship of working memory may be load-bearing in a way retrieval is not."
+    },
+    {
+      "id": "edge_llmx_supports_pcn",
+      "source": "concept_llm_x_a_typed_message_bus_for_llm_to_llm_coordination_with_a_measured_policy_strictness_tradeoff",
+      "target": "concept_proof_carrying_negotiation_separates_nl_reasoning_from_deterministic_enforcement",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "confidence": 0.55,
+      "description": "LLM-X is the transport + schema-validity + policy layer PCN-Rec needs under it: a typed message bus that validates every message against a schema and enforces policy is the substrate on which a deterministic verifier recomputes constraints."
+    },
+    {
+      "id": "edge_llmx_informs_orchestration_criterion",
+      "source": "concept_llm_x_a_typed_message_bus_for_llm_to_llm_coordination_with_a_measured_policy_strictness_tradeoff",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "A first at-scale (12-agent, 12h) empirical data point for the when-does-multi-agent-help question - contract-net coordination that stays stable under sustained load, with a measured cost (latency + message volume) for stricter policy."
+    },
+    {
+      "id": "edge_llmx_informs_communication_attack_surface",
+      "source": "concept_llm_x_a_typed_message_bus_for_llm_to_llm_coordination_with_a_measured_policy_strictness_tradeoff",
+      "target": "concept_agent_communication_is_a_layered_attack_surface",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.5,
+      "description": "An LLM-to-LLM bus with policy enforcement is a concrete instance of the layer this node warns about; schema validity at the bus is one of the defences."
     }
   ]
 }

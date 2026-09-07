@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 343 nodes, 1367 edges · **Date:** 2026-09-05
+**Graph at generation:** 344 nodes, 1370 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -105,6 +105,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2604.18005](https://arxiv.org/abs/2604.18005) | Diversity Collapse in Multi-Agent LLM Systems (ACL 2026 Findings) | `emergent_information_cascades`, `pattern_structural_decoupling` |
 | [2604.19827](https://arxiv.org/abs/2604.19827) | (title not recorded) | `concept_ai_native_software_ecosystems_are_complex_adaptive_systems` |
 | [2605.05007](https://arxiv.org/abs/2605.05007) | (title not recorded) | `test_scenario_decomposition_granularity` |
+| [2605.11376](https://arxiv.org/abs/2605.11376) | (title not recorded) | `concept_llm_x_a_typed_message_bus_for_llm_to_llm_coordination_with_a_measured_policy_strictness_tradeoff` |
 | [2605.11936](https://arxiv.org/abs/2605.11936) | From Noise to Diversity: Random Embedding Injection in LLM Reasoning | `pattern_verbalized_sampling` |
 | [2605.18747](https://arxiv.org/abs/2605.18747) | (title not recorded) | `concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five` |
 | [2605.19576](https://arxiv.org/abs/2605.19576) | (title not recorded) | `concept_unmanaged_skill_libraries_silently_drift` |
@@ -510,6 +511,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-08-1800.md` — `concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five`, `concept_horizon_gap_outcome_signals_decay`
 - `docs/auto_sweep_2026-10-09-1800.md` — `concept_spontaneous_behaviour_beats_scripted_for_simulation`
 - `docs/auto_sweep_2026-10-10-0600.md` — `concept_agentsociety_large_scale_generative_society`, `concept_surface_move_diversity_can_coexist_with_zero_outcome_diversity_vet_samplers_on_the_outcome_distribution`
+- `docs/auto_sweep_2026-10-10-1200.md` — `concept_llm_x_a_typed_message_bus_for_llm_to_llm_coordination_with_a_measured_policy_strictness_tradeoff`
 - `docs/auto_sweep_2026-10-11-0600.md` — `concept_inference_time_scaling_of_verification`
 - `docs/auto_sweep_2026-10-12-0600.md` — `concept_frontier_models_can_scheme_in_context`
 - `docs/auto_sweep_2026-10-12-1200.md` — `concept_anti_scheming_mitigation_confounded_by_eval_awareness`
