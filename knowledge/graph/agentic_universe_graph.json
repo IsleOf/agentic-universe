@@ -10545,6 +10545,34 @@
       "evidence_links": [
         "docs/self_rebuild_v2.md"
       ]
+    },
+    {
+      "id": "artifact_gate_the_gate_self_design_ack",
+      "label": "exec_guard 'gate the gate': a self-design edit (acceptance gate / guard / validator / loop policy / SKILL.md / proposer decision-logic) is blocked at pre-commit without AU_SELF_DESIGN_ACK",
+      "type": "component",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.72,
+      "description": "tools/exec_guard.py (run 338). Implements addition (1) of the MLAS coverage map (artifact_v2_mlas_coverage_map, run 337): the autonomous loop must not be able to weaken its own acceptance gate. `_self_design_hits(staged)` flags a commit that stages tools/acceptance_gate.py, tools/exec_guard.py, tools/knowledge_graph.py, tools/selftest_all.py, context/loop_policy.json, SKILL.md, runtime/harness_registry*, or a decision-logic region of tools/loop_proposer.py / tools/loop_conductor.py (a --cached diff matching PROPOSER_META | NOVELTY_FLOOR | PLATEAU_WINDOW | ABC_KINDS | dimensions | run_novelty | idle_run_streak). Such a commit is BLOCKED unless the env var AU_SELF_DESIGN_ACK is set to a non-empty reason - the same bar as a commit off the working branch. The autonomous loop never sets it, so a self-design edit from the loop is blocked and surfaced to the owner; an owner running a manual commit sets it with a reason, which is then recorded as a warning in the guard output. 5 new selftest checks (10 total), all GREEN. Proven live: the run-338 commit that added this code was itself a self-design edit and required the ack.",
+      "tags": [
+        "exec-guard",
+        "gate-the-gate",
+        "self-design",
+        "MLAS",
+        "v2",
+        "self-rebuild",
+        "pre-commit",
+        "owner-ack"
+      ],
+      "derived_from": [
+        "tools/exec_guard.py",
+        "docs/self_rebuild_v2.md"
+      ],
+      "evidence_links": [
+        "tools/exec_guard.py"
+      ]
     }
   ],
   "edges": [
@@ -25722,6 +25750,34 @@
       "target": "artifact_phase5_exec_guard",
       "type": "depends_on",
       "description": "'gate the gate' routes self-design edits through the exec_guard token + owner ack, the same mechanism as a branch-off-main commit"
+    },
+    {
+      "id": "edge_gate_the_gate_implements_mlas_map",
+      "source": "artifact_gate_the_gate_self_design_ack",
+      "target": "artifact_v2_mlas_coverage_map",
+      "type": "implements",
+      "description": "addition (1) 'gate the gate' from section 12, built"
+    },
+    {
+      "id": "edge_gate_the_gate_extends_exec_guard",
+      "source": "artifact_gate_the_gate_self_design_ack",
+      "target": "artifact_phase5_exec_guard",
+      "type": "extends",
+      "description": "adds the self-design-edit block to the Phase 5 pre-commit invariants"
+    },
+    {
+      "id": "edge_gate_the_gate_instantiates_mlas_concept",
+      "source": "artifact_gate_the_gate_self_design_ack",
+      "target": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "type": "instantiates",
+      "description": "a concrete Self-Design x Commit-stage mitigation: the loop cannot self-modify its gate without the change becoming lineage-visible to the owner"
+    },
+    {
+      "id": "edge_gate_the_gate_grounds_exogenous_signal",
+      "source": "artifact_gate_the_gate_self_design_ack",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "grounds",
+      "description": "keeps the acceptance signal exogenous by making its own code un-editable by the loop without an out-of-band owner ack"
     }
   ]
 }

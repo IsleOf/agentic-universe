@@ -16,6 +16,11 @@ commit; the loop cannot talk past it. Invariants:
 - no secrets in any staged file (token shapes, key/secret assignments, PEM, AWS)
 - raw `runtime/**/*.jsonl` is not staged (must stay gitignored, rule 9)
 - the current branch is the working branch, not `main`
+- no self-design edit without owner ack — staging a change to the acceptance
+  gate, this guard, the validator, the selftest manifest, `loop_policy.json`,
+  `SKILL.md`, `harness_registry`, or a decision-logic region of the proposer /
+  conductor is blocked unless `AU_SELF_DESIGN_ACK` is set to a reason (run 338,
+  from the MLAS fold: the loop must not be able to weaken its own gate)
 - (warning only) `docs/auto_sweep_*` was updated if the graph changed
 
 Run as `python tools/exec_guard.py check` from a pre-commit hook. Install the
@@ -50,6 +55,44 @@ _LEAK_PATTERNS = [
 
 WORKING_BRANCH = "proposals/2026-09-01-emergent-behaviour-cluster"
 GRAPH_REL = "knowledge/graph/agentic_universe_graph.json"
+
+# --- "gate the gate" (run 338) -----------------------------------------------
+# MLAS (arXiv:2606.23075, folded run 335): a self-evolving loop must not be able
+# to autonomously weaken its own acceptance gate, execution guard, test manifest,
+# or IDLE-STATE policy. Editing any of these is a *self-design* change - it needs
+# an explicit owner acknowledgement, the same bar as a commit off the working
+# branch. The ack is the env var AU_SELF_DESIGN_ACK set to a non-empty reason at
+# commit time; the autonomous loop never sets it, so a self-design edit from the
+# loop is blocked and surfaced to the owner.
+_SELF_DESIGN_FILES = {
+    "tools/acceptance_gate.py",     # the exogenous acceptance signal
+    "tools/exec_guard.py",          # this guard
+    "tools/knowledge_graph.py",     # the validator the gate leans on
+    "tools/selftest_all.py",        # the build-selftest manifest (JOBS)
+    "context/loop_policy.json",     # the IDLE-STATE rules
+    "SKILL.md",                     # the loop's own execution harness
+}
+_SELF_DESIGN_PREFIXES = ("runtime/harness_registry",)  # the blessed-baseline store
+# targeted: decision-logic regions inside otherwise routinely-edited files
+_SELF_DESIGN_DIFF_FILES = {"tools/loop_proposer.py", "tools/loop_conductor.py"}
+_SELF_DESIGN_DIFF_MARKERS = re.compile(
+    r"PROPOSER_META|NOVELTY_FLOOR|PLATEAU_WINDOW|ABC_KINDS|NON_IDLE_KINDS|"
+    r"mode_concentration_trigger|\bdimensions\b|run_novelty|idle_run_streak")
+
+
+def _self_design_hits(staged):
+    """Staged paths (and diff regions) that constitute a self-design change."""
+    hits = []
+    for f in staged:
+        if f in _SELF_DESIGN_FILES or f.startswith(_SELF_DESIGN_PREFIXES):
+            hits.append(f)
+        elif f in _SELF_DESIGN_DIFF_FILES:
+            diff = _git("diff", "--cached", "--unified=0", "--", f)
+            changed = "\n".join(l for l in diff.splitlines()
+                                if l[:1] in "+-" and l[:3] not in ("---", "+++"))
+            if _SELF_DESIGN_DIFF_MARKERS.search(changed):
+                hits.append(f"{f} (decision-logic region)")
+    return hits
 
 
 def _git(*args):
@@ -103,13 +146,25 @@ def _scan_secrets(files):
     return hits
 
 
-def check(staged=None):
+def check(staged=None, *, self_design_ack=None):
     staged = staged if staged is not None else _staged_files()
+    if self_design_ack is None:
+        import os
+        self_design_ack = os.environ.get("AU_SELF_DESIGN_ACK", "")
     blocks, warnings = [], []
 
     branch = _git("rev-parse", "--abbrev-ref", "HEAD")
     if branch == "main" or branch == "master":
         blocks.append(f"on '{branch}' — the loop commits to {WORKING_BRANCH}, never the default branch")
+
+    sd = _self_design_hits(staged)
+    if sd and not str(self_design_ack).strip():
+        blocks.append(
+            "self-design edit without owner ack: " + ", ".join(sd) +
+            " — editing the acceptance gate / exec guard / test manifest / loop policy is a "
+            "self-modification. Re-commit with AU_SELF_DESIGN_ACK='<reason>' set (owner only).")
+    elif sd:
+        warnings.append(f"self-design edit acked by owner ({self_design_ack!r}): {', '.join(sd)}")
 
     raw_traces = [f for f in staged if f.startswith("runtime/") and f.endswith(".jsonl")]
     if raw_traces:
@@ -130,7 +185,7 @@ def check(staged=None):
             warnings.append("graph changed but no docs/auto_sweep_* or docs/phase* staged")
 
     return {"ok": not blocks, "branch": branch, "graph_touched": graph_touched,
-            "blocks": blocks, "warnings": warnings}
+            "self_design": sd, "blocks": blocks, "warnings": warnings}
 
 
 HOOK = """\
@@ -174,12 +229,29 @@ def _selftest():
         tf.unlink()
     clean = check(staged=["docs/whatever.md"])
 
+    # "gate the gate" (run 338)
+    sd_noack = check(staged=["tools/acceptance_gate.py"], self_design_ack="")
+    sd_ack = check(staged=["tools/acceptance_gate.py"], self_design_ack="owner: tuning PACE alpha")
+    sd_policy = check(staged=["context/loop_policy.json"], self_design_ack="")
+    sd_reg = _self_design_hits(["runtime/harness_registry.json"])
+    sd_clean = check(staged=["docs/x.md", "tools/probe_idle_agent.py"], self_design_ack="")
+
     checks = {
         "raw trace staged -> block": any("raw trace" in b for b in bad["blocks"]),
         "fake secret -> block": any("secret" in b for b in sec["blocks"]),
         "clean doc-only staging -> ok": clean["ok"],
         "real graph currently validates + no orphans": _graph_valid() and not _orphans(),
         "on the working branch": check()["branch"] == WORKING_BRANCH,
+        "self-design edit without ack -> block":
+            any("self-design edit without owner ack" in b for b in sd_noack["blocks"]),
+        "self-design edit WITH ack -> no block, warns instead":
+            not any("self-design" in b for b in sd_ack["blocks"])
+            and any("acked by owner" in w for w in sd_ack["warnings"]),
+        "loop_policy.json is a self-design file": bool(sd_policy["self_design"])
+            and not sd_policy["ok"],
+        "harness_registry* is a self-design prefix": bool(sd_reg),
+        "ordinary probe/doc edit is not a self-design edit":
+            not sd_clean["self_design"],
     }
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
