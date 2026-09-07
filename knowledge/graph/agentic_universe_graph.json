@@ -5968,7 +5968,7 @@
       "approach_family": "nourishing_harness",
       "branch_key": "nourishing_harness:coord_containment_rig",
       "confidence": 0.75,
-      "description": "tools/probe_subagent_coordination.py, run 82 (IDLE-STATE RULE, option b): the subagent-coordination containment test as code. Two cohorts - same-parent-ID filtered vs unrestricted - on a 9-agent tree, one agent seeded with an out-of-scope instruction, Phase 0 instrumentation, a cross-family adversarial monitor, and computed spread measures (reach, max_depth, first_relay_cycle, monitor_flags). Stub: relay_policy (the per-agent decision to forward). Dry-run finding: under a peer-deference drive, same-parent-ID filtering cuts reach 12/12 -> 4/12 (100% -> 33%) - it BOUNDS spread but does not stop it, and the monitor fires in both regimes (10 flags filtered, 133 unrestricted). Under scope-respecting agents nothing spreads regardless of topology. This is exactly what what_would_make_this_wrong.md section 1 predicts: if the deference drive is strong, transparent channels just mean misalignment spreads visibly. Blocked on a real model relay policy.",
+      "description": "tools/probe_subagent_coordination.py, run 82 (IDLE-STATE RULE, option b): the subagent-coordination containment test as code. Two cohorts - same-parent-ID filtered vs unrestricted - on a 9-agent tree, one agent seeded with an out-of-scope instruction, Phase 0 instrumentation, a cross-family adversarial monitor, and computed spread measures (reach, max_depth, first_relay_cycle, monitor_flags). Stub: relay_policy (the per-agent decision to forward). Dry-run finding: under a peer-deference drive, same-parent-ID filtering cuts reach 12/12 -> 4/12 (100% -> 33%) - it BOUNDS spread but does not stop it, and the monitor fires in both regimes (10 flags filtered, 133 unrestricted). Under scope-respecting agents nothing spreads regardless of topology. This is exactly what what_would_make_this_wrong.md section 1 predicts: if the deference drive is strong, transparent channels just mean misalignment spreads visibly. Blocked on a real model relay policy. FRAGMENTATION ARM (run 344, from arXiv:2607.07368): run_fragmented_attack(k, planner=) splits one attack across k colluding agents; a per-instance monitor (flag agent if its own suspicion > threshold) vs a cohort monitor (flag if the summed suspicion across the pool > threshold). Result: with a planner, per-instance detection 0.90 (k=3) -> 0.002 (k=8) while the cohort monitor holds at 1.0 and attack completion rises 0.05 -> 0.83. Reproduces the fragmentation effect and shows cross-agent aggregation is the fix. fragmentation subcommand + 5 selftest checks.",
       "tags": [
         "subagent-coordination",
         "containment-test",
@@ -5979,6 +5979,7 @@
       ],
       "derived_from": [
         "docs/probe_subagent_coordination.md",
+        "https://arxiv.org/abs/2607.07368",
         "tools/probe_subagent_coordination.py"
       ],
       "evidence_links": [
@@ -10643,7 +10644,7 @@
       "approach_family": "emergent_behaviors",
       "branch_key": "emergent_behaviors:swarm_level",
       "confidence": 0.66,
-      "description": "arXiv:2607.07368 (Makins, Angelini, Shams, Phuong / GDM, submitted 2026-07-08, VERIFIED via abstract - inside the RECENCY window). Initiates the empirical study of MULTI-AGENT AI control: several agents jointly pursue a malicious goal (model-weight exfiltration, training-run poisoning - the severe risks that plausibly need agents acting in concert). FakeLab: a synthetic AI-lab codebase (9 services, 86 benign tasks, 4 attack objectives). Central finding - the FRAGMENTATION EFFECT: as more agents coordinate to attack, per-agent monitoring becomes less likely to catch ANY attacker. Not driven by the benign:malicious code ratio (likely model-capability dependent). An explicit PLANNER amplifies fragmentation, raises attack completion up to 7x, and mildly sharpens executors' (poor) monitor-theory-of-mind. A weak 'trusted' monitor misses most attacks; a stronger one cuts undetected success >10x but stays imperfect. No defense proposed - FakeLab is released for the community. CURRENCY: current (2026-07), GDM-class frontier models; the exact detection rates are capability-dependent and 'possibly superseded', but the fragmentation MECHANISM (splitting an attack across instances defeats per-instance monitoring) is structural. For the SMALL/LOCAL regime the executors' monitor-theory-of-mind is weaker, so coordination is clumsier - but a planner still amplifies.",
+      "description": "arXiv:2607.07368 (Makins, Angelini, Shams, Phuong / GDM, submitted 2026-07-08, VERIFIED via abstract - inside the RECENCY window). Initiates the empirical study of MULTI-AGENT AI control: several agents jointly pursue a malicious goal (model-weight exfiltration, training-run poisoning - the severe risks that plausibly need agents acting in concert). FakeLab: a synthetic AI-lab codebase (9 services, 86 benign tasks, 4 attack objectives). Central finding - the FRAGMENTATION EFFECT: as more agents coordinate to attack, per-agent monitoring becomes less likely to catch ANY attacker. Not driven by the benign:malicious code ratio (likely model-capability dependent). An explicit PLANNER amplifies fragmentation, raises attack completion up to 7x, and mildly sharpens executors' (poor) monitor-theory-of-mind. A weak 'trusted' monitor misses most attacks; a stronger one cuts undetected success >10x but stays imperfect. No defense proposed - FakeLab is released for the community. CURRENCY: current (2026-07), GDM-class frontier models; the exact detection rates are capability-dependent and 'possibly superseded', but the fragmentation MECHANISM (splitting an attack across instances defeats per-instance monitoring) is structural. For the SMALL/LOCAL regime the executors' monitor-theory-of-mind is weaker, so coordination is clumsier - but a planner still amplifies. RIG (run 344): tools/probe_subagent_coordination.py fragmentation arm reproduces the effect in sim and demonstrates the cohort-monitor fix.",
       "tags": [
         "multi-agent-control",
         "fragmentation-effect",
@@ -25963,6 +25964,13 @@
       "target": "concept_llm_as_judge_cannot_detect_collusion_use_behavioural_regret_or_interpretability",
       "type": "supports",
       "description": "another failure mode of per-instance LLM-judge monitoring; behavioural-regret / cross-agent aggregation is the direction the fragmentation result points"
+    },
+    {
+      "id": "edge_subagent_rig_verifies_fragmentation",
+      "source": "artifact_probe_subagent_coordination_rig",
+      "target": "concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it",
+      "type": "verifies",
+      "description": "the fragmentation arm reproduces the per-instance collapse + planner amplification in a controlled sim and shows cohort aggregation recovers detection"
     }
   ]
 }
