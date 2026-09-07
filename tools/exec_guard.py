@@ -74,6 +74,7 @@ _SELF_DESIGN_FILES = {
     "tools/exec_guard.py",          # this guard
     "tools/knowledge_graph.py",     # the validator the gate leans on
     "tools/selftest_all.py",        # the build-selftest manifest (JOBS)
+    "tools/harness_registry.py",    # bless / manifest_drift - the conductor preflight leans on it (run 340)
 }
 _SELF_DESIGN_PREFIXES = (
     "runtime/harness/",             # the versioned harness surface: loop_policy /

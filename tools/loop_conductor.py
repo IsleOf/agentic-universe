@@ -31,6 +31,10 @@ sys.path.insert(0, str(ROOT / "tools"))
 from task_ledger import Ledger          # noqa: E402
 from supervisor import Supervisor       # noqa: E402
 import acceptance_gate                  # noqa: E402
+try:
+    from harness_registry import Registry as _HarnessRegistry  # noqa: E402
+except Exception:                       # pragma: no cover - defensive
+    _HarnessRegistry = None
 
 # IDLE-STATE RULE (loop_policy.json, run 80): the increment kinds that count as
 # "genuine work" when the loop is otherwise idle.
@@ -122,7 +126,8 @@ def pick_increment(recent_kinds, *, selftest_green=True, frontier_swept=True,
 class Conductor:
     def __init__(self, *, ledger_path, run_worker, apply_patch, commit_push,
                  graph_path=None, choose_increment=pick_increment,
-                 gate=None, clock=time.time, task_deadline_secs=1800):
+                 gate=None, clock=time.time, task_deadline_secs=1800,
+                 harness_registry=None, require_blessed_manifest=True):
         self.ledger_path = Path(ledger_path)
         self.run_worker = run_worker
         self.apply_patch = apply_patch
@@ -133,6 +138,36 @@ class Conductor:
         self.gate = gate or acceptance_gate.check
         self.clock = clock
         self.task_deadline_secs = task_deadline_secs
+        # MLAS coverage-map addition (3): refuse to run if the live harness has
+        # drifted from the owner-blessed baseline. Active drift (a baseline exists
+        # and the live hash differs) ALWAYS halts. `require_blessed_manifest` only
+        # decides the "never blessed" case: True = halt (be explicit, the default),
+        # False = allow (bootstrap / tests).
+        self.harness_registry = harness_registry or (
+            _HarnessRegistry() if _HarnessRegistry else None)
+        self.require_blessed_manifest = require_blessed_manifest
+
+    def preflight(self):
+        """(ok, reason). Checks the live harness manifest against the blessed
+        baseline before any increment runs. Halt-don't-heal: a mismatch returns
+        (False, ...) and the caller aborts the run - it never re-blesses."""
+        reg = self.harness_registry
+        if reg is None:
+            return True, "no harness registry available - preflight skipped"
+        try:
+            drifted, cur, blessed = reg.manifest_drift()
+        except Exception as e:                    # pragma: no cover - defensive
+            return True, f"manifest_drift raised ({e}) - preflight skipped"
+        if drifted is None:
+            if self.require_blessed_manifest:
+                return (False, f"harness manifest {cur} has never been blessed - "
+                               f"run `python tools/harness_registry.py bless` (owner) first")
+            return True, f"harness manifest {cur} not blessed (allowed by config)"
+        if drifted:
+            return (False, f"harness manifest drift: live {cur} != blessed {blessed} - "
+                           f"halt. An owner re-blesses after an intended harness edit; "
+                           f"the loop never self-heals this.")
+        return True, f"harness manifest {cur} matches the blessed baseline"
 
     def _load_graph(self):
         try:
@@ -142,6 +177,12 @@ class Conductor:
 
     def conduct(self, run_no, *, recent_kinds=(), selftest_green=True, frontier_swept=True,
                 use_corpus=True, runs_dir=None):
+        pf_ok, pf_reason = self.preflight()
+        if not pf_ok:
+            halt_plan = RunPlan(f"preflight halt: {pf_reason}", ())
+            return RunRecord(run_no, halt_plan, False,
+                             reason=f"preflight halt: {pf_reason}")
+
         try:
             plan = self.choose_increment(list(recent_kinds), selftest_green=selftest_green,
                                          frontier_swept=frontier_swept,
@@ -230,7 +271,7 @@ def _selftest():
     def commit_push(run_no, plan, cert):
         committed.append((run_no, cert["decision"]))
 
-    c = Conductor(ledger_path=tmp / "led1.json", run_worker=ok_worker, apply_patch=apply_patch,
+    c = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led1.json", run_worker=ok_worker, apply_patch=apply_patch,
                   commit_push=commit_push, graph_path=graph_path, clock=lambda: 1000.0)
     rec = c.conduct(400, recent_kinds=["build", "fold", "doc"], frontier_swept=False)
     checks["a clean fold run is accepted, applied and committed"] = (
@@ -241,7 +282,7 @@ def _selftest():
     def dead_worker(task, *, hints):
         return False, None, "worker crashed"
     applied.clear()
-    c2 = Conductor(ledger_path=tmp / "led2.json", run_worker=dead_worker, apply_patch=apply_patch,
+    c2 = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led2.json", run_worker=dead_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 2000.0)
     rec2 = c2.conduct(401, recent_kinds=["fold", "fold", "fold"], frontier_swept=False)
     checks["a failed worker yields an unaccepted record"] = (not rec2.accepted and not applied)
@@ -250,7 +291,7 @@ def _selftest():
     # IDLE-STATE: three doc runs + swept frontier -> only a/b/c allowed; a 'fold' is refused
     def fold_worker(task, *, hints):
         return True, {**worker_out, "kind": "fold"}, "done"
-    c3 = Conductor(ledger_path=tmp / "led3.json", run_worker=fold_worker, apply_patch=apply_patch,
+    c3 = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led3.json", run_worker=fold_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 3000.0)
     rec3 = c3.conduct(402, recent_kinds=["doc", "consistency", "doc"], frontier_swept=True,
                       use_corpus=False)
@@ -287,7 +328,7 @@ def _selftest():
     def badpatch_worker(task, *, hints):
         return True, {**worker_out, "patch": bad_patch}, "done"
     applied.clear()
-    c4 = Conductor(ledger_path=tmp / "led4.json", run_worker=badpatch_worker, apply_patch=apply_patch,
+    c4 = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led4.json", run_worker=badpatch_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 4000.0)
     rec4 = c4.conduct(403, recent_kinds=["fold"], frontier_swept=False)
     checks["a structurally broken patch is rejected before the gate"] = (
@@ -298,12 +339,44 @@ def _selftest():
     def regress_worker(task, *, hints):
         return True, {**worker_out, "candidate_scores": worse}, "done"
     applied.clear()
-    c5 = Conductor(ledger_path=tmp / "led5.json", run_worker=regress_worker, apply_patch=apply_patch,
+    c5 = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led5.json", run_worker=regress_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 5000.0)
     rec5 = c5.conduct(404, recent_kinds=["fold"], frontier_swept=False)
     checks["a held-out regression is rejected by the gate, nothing applied"] = (
         not rec5.accepted and rec5.certificate and rec5.certificate["decision"] == "reject"
         and not applied)
+
+    # MLAS addition (3): preflight against the blessed harness manifest
+    if _HarnessRegistry is not None:
+        hreg = _HarnessRegistry(base=tmp / "harness")
+        hreg.set("prompt", "p", "hello")
+        cpf = Conductor(ledger_path=tmp / "ledpf.json", run_worker=ok_worker,
+                        apply_patch=apply_patch, commit_push=commit_push, graph_path=graph_path,
+                        clock=lambda: 6000.0, harness_registry=hreg)
+        rec_unblessed = cpf.conduct(405, recent_kinds=["fold"], frontier_swept=False)
+        checks["preflight: an unblessed manifest halts the run (require=True default)"] = (
+            not rec_unblessed.accepted and "never been blessed" in rec_unblessed.reason)
+        hreg.bless(note="test")
+        applied.clear(); committed.clear()
+        rec_blessed = cpf.conduct(406, recent_kinds=["build", "fold", "doc"], frontier_swept=False)
+        checks["preflight: a blessed matching manifest lets the run proceed"] = (
+            rec_blessed.accepted and committed == [(406, "accept")])
+        hreg.set("prompt", "p", "hello -- drifted")
+        rec_drift = cpf.conduct(407, recent_kinds=["fold"], frontier_swept=False)
+        checks["preflight: manifest drift from the blessed baseline halts the run"] = (
+            not rec_drift.accepted and "drift" in rec_drift.reason)
+        hreg2 = _HarnessRegistry(base=tmp / "harness2")
+        hreg2.set("prompt", "p", "never blessed")
+        ok_pf, _ = Conductor(ledger_path=tmp / "x.json", run_worker=ok_worker,
+                             apply_patch=apply_patch, commit_push=commit_push,
+                             harness_registry=hreg2, require_blessed_manifest=False).preflight()
+        checks["preflight: require_blessed_manifest=False tolerates an unblessed manifest"] = ok_pf
+        drift_still_halts, _ = Conductor(ledger_path=tmp / "y.json", run_worker=ok_worker,
+                                         apply_patch=apply_patch, commit_push=commit_push,
+                                         harness_registry=hreg,
+                                         require_blessed_manifest=False).preflight()
+        checks["preflight: active drift halts even with require_blessed_manifest=False"] = (
+            not drift_still_halts)
 
     import shutil
     shutil.rmtree(tmp, ignore_errors=True)

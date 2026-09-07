@@ -10573,6 +10573,37 @@
       "evidence_links": [
         "tools/exec_guard.py"
       ]
+    },
+    {
+      "id": "artifact_conductor_blessed_manifest_preflight",
+      "label": "Conductor.preflight(): the loop refuses to run if the live harness manifest has drifted from the owner-blessed baseline (halt, never self-heal)",
+      "type": "component",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.7,
+      "description": "Addition (3) of the MLAS coverage map (artifact_v2_mlas_coverage_map, run 337). harness_registry gains bless(note) / blessed() / manifest_drift() and a runtime/harness/BLESSED_MANIFEST.json (committed). loop_conductor.Conductor gains preflight() -> (ok, reason), called at the very top of conduct(): before any increment it compares the live runtime/harness/ manifest hash against the blessed baseline. Active drift (baseline exists, live hash differs) ALWAYS halts the run - an owner re-blesses after an intended harness edit; the loop never self-heals. require_blessed_manifest (default True) decides only the never-blessed case: True = halt and say so, False = allow (bootstrap / hermetic tests; v2_integration and research_worker pass False). The real manifest was blessed at run 340 (0229416691aebcc9). 6 new selftest checks across the two modules, all GREEN; selftest_all JOBS unchanged at 45 runnable (48 lines). CLI: `harness_registry.py drift` (exit 1 on drift) / `harness_registry.py bless --note`.",
+      "tags": [
+        "conductor",
+        "preflight",
+        "blessed-manifest",
+        "harness-drift",
+        "MLAS",
+        "v2",
+        "self-rebuild",
+        "halt-dont-heal",
+        "bootstrap-stage"
+      ],
+      "derived_from": [
+        "tools/loop_conductor.py",
+        "tools/harness_registry.py",
+        "docs/self_rebuild_v2.md"
+      ],
+      "evidence_links": [
+        "tools/loop_conductor.py",
+        "runtime/harness/BLESSED_MANIFEST.json"
+      ]
     }
   ],
   "edges": [
@@ -25778,6 +25809,34 @@
       "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
       "type": "grounds",
       "description": "keeps the acceptance signal exogenous by making its own code un-editable by the loop without an out-of-band owner ack"
+    },
+    {
+      "id": "edge_preflight_implements_mlas_map",
+      "source": "artifact_conductor_blessed_manifest_preflight",
+      "target": "artifact_v2_mlas_coverage_map",
+      "type": "implements",
+      "description": "addition (3) 'startup manifest check', built"
+    },
+    {
+      "id": "edge_preflight_extends_harness_registry",
+      "source": "artifact_conductor_blessed_manifest_preflight",
+      "target": "artifact_phase1_harness_registry",
+      "type": "extends",
+      "description": "adds the blessed-baseline layer (bless / blessed / manifest_drift + BLESSED_MANIFEST.json) on top of the versioned component store"
+    },
+    {
+      "id": "edge_preflight_instantiates_mlas_concept",
+      "source": "artifact_conductor_blessed_manifest_preflight",
+      "target": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "type": "instantiates",
+      "description": "a Bootstrap-stage mitigation: a lineage that starts from a tampered harness is caught before it can produce a single accepted increment"
+    },
+    {
+      "id": "edge_preflight_grounds_recoverability",
+      "source": "artifact_conductor_blessed_manifest_preflight",
+      "target": "pattern_recoverability_constrained_evolution",
+      "type": "grounds",
+      "description": "drift detection + the exact revert chain together make an unintended harness state both visible and reversible"
     }
   ]
 }

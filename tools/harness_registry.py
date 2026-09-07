@@ -163,6 +163,44 @@ class Registry:
         m["manifest_hash"] = _hash(json.dumps(body_hashes, sort_keys=True))
         return m
 
+    # -- blessed baseline (run 340) --
+    # MLAS coverage-map addition (3), docs/self_rebuild_v2.md §12: the conductor
+    # refuses to run if the live harness manifest has drifted from the last
+    # owner-blessed baseline. `bless()` is an owner action - the file lives under
+    # runtime/harness/ so exec_guard's "gate the gate" rule already blocks an
+    # un-acked commit of it.
+    def _blessed_path(self):
+        return self.base / "BLESSED_MANIFEST.json"
+
+    def blessed(self):
+        """The last owner-blessed manifest, or None if never blessed."""
+        p = self._blessed_path()
+        if not p.exists():
+            return None
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            return None
+
+    def bless(self, note=""):
+        """Record the current manifest as the owner-blessed baseline."""
+        m = self.manifest()
+        rec = {"manifest_hash": m["manifest_hash"], "ts": round(time.time(), 3),
+               "note": note, "components": {k: v["hash"] for k, v in m["components"].items()}}
+        self._blessed_path().write_text(
+            json.dumps(rec, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        return rec
+
+    def manifest_drift(self):
+        """(drifted, current_hash, blessed_hash). drifted is True when a baseline
+        exists and the live manifest hash differs from it; False when they match;
+        None when no baseline has ever been blessed (caller decides what that means)."""
+        cur = self.manifest()["manifest_hash"]
+        b = self.blessed()
+        if b is None:
+            return None, cur, None
+        return (cur != b.get("manifest_hash")), cur, b.get("manifest_hash")
+
 
 # --- demo / selftest --------------------------------------------------
 
@@ -203,6 +241,20 @@ def _selftest():
             "manifest has 2 components": len(man["components"]) == 2,
             "manifest hash stable": man["manifest_hash"] == reg.manifest()["manifest_hash"],
         }
+
+        # blessed baseline (run 340)
+        drift_none, cur0, b0 = reg.manifest_drift()
+        blessed_rec = reg.bless(note="selftest baseline")
+        drift_match, cur1, b1 = reg.manifest_drift()
+        reg.set("prompt", "planner_system", reg.get("prompt", "planner_system") + "\nextra line.")
+        drift_yes, cur2, b2 = reg.manifest_drift()
+        checks.update({
+            "no baseline -> manifest_drift returns None": drift_none is None and b0 is None,
+            "bless() records the current hash": blessed_rec["manifest_hash"] == cur0,
+            "after bless, no drift": drift_match is False and cur1 == b1,
+            "editing a component -> drift True": drift_yes is True and cur2 != b2,
+            "blessed baseline persists to a file": reg.blessed()["note"] == "selftest baseline",
+        })
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         print("\n  planner_system history:")
@@ -222,6 +274,8 @@ def _cli(argv=None):
     sub.add_parser("selftest")
     sub.add_parser("list")
     sub.add_parser("manifest")
+    sub.add_parser("drift")
+    bl = sub.add_parser("bless"); bl.add_argument("--note", default="")
     h = sub.add_parser("history"); h.add_argument("kind"); h.add_argument("name")
     d = sub.add_parser("diff"); d.add_argument("kind"); d.add_argument("name")
     rv = sub.add_parser("revert"); rv.add_argument("kind"); rv.add_argument("name")
@@ -235,6 +289,14 @@ def _cli(argv=None):
         print(json.dumps(reg.list(), indent=2))
     elif args.cmd == "manifest":
         print(json.dumps(reg.manifest(), indent=2))
+    elif args.cmd == "drift":
+        drifted, cur, blessed = reg.manifest_drift()
+        print(json.dumps({"drifted": drifted, "current": cur, "blessed": blessed,
+                          "note": (reg.blessed() or {}).get("note")}, indent=2))
+        return 1 if drifted else 0
+    elif args.cmd == "bless":
+        rec = reg.bless(note=args.note)
+        print(f"blessed manifest {rec['manifest_hash']}: {rec['note'] or '(no note)'}")
     elif args.cmd == "history":
         print(json.dumps(reg.history(args.kind, args.name), indent=2, ensure_ascii=False))
     elif args.cmd == "diff":

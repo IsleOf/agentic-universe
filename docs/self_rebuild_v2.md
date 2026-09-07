@@ -286,17 +286,21 @@ every attack from session-bounded to **lineage-persistent**. Mapping the v2 spin
 
 **Three concrete v2 additions this implies** (each small, each gated):
 
-1. **Gate the gate.** A proposal whose patch touches `acceptance_gate.py` thresholds,
-   `loop_proposer` dimensions, `harness_registry`, or the certificate signer is a
-   *self-design* edit — route it through `phase5_exec_guard` (token + owner ack), never the
-   ordinary commit path. ~15 lines in `loop_conductor.pick_increment` / the patch classifier.
+1. **Gate the gate.** ✅ **Built run 338–339** (`artifact_gate_the_gate_self_design_ack`).
+   `exec_guard.check()` blocks a pre-commit that stages `tools/acceptance_gate.py`,
+   `tools/exec_guard.py`, `tools/knowledge_graph.py`, `tools/selftest_all.py`, anything under
+   `runtime/harness/`, or a decision-logic region of the proposer / conductor, unless
+   `AU_SELF_DESIGN_ACK` is set to a reason. The autonomous loop never sets it.
 2. **Externalise the certificate key.** `acceptance_gate` signs with a repo-local secret
    today; a compromised lineage can re-sign. Move the key to the scheduled-task environment
-   (owner-controlled) so a certificate is only *mintable* outside the evolving code.
-3. **Startup manifest check.** The conductor, before its first increment, compares
-   `harness_manifest_hash` against the last owner-blessed baseline in `harness_registry`;
-   mismatch → halt and flag, don't self-heal.
+   (owner-controlled) so a certificate is only *mintable* outside the evolving code. **Not
+   built** — the operational half (where the scheduled task keeps the key) is the owner's.
+3. **Startup manifest check.** ✅ **Built run 340**
+   (`artifact_conductor_blessed_manifest_preflight`). `harness_registry` gains
+   `bless` / `blessed` / `manifest_drift` + a committed `runtime/harness/BLESSED_MANIFEST.json`;
+   `Conductor.preflight()` runs at the top of `conduct()` and halts on drift from the blessed
+   baseline (never self-heals). Real manifest blessed at run 340 (`0229416691aebcc9`).
 
-These are recorded against `artifact_self_rebuild_v2_plan` (constrained by the run-335 node)
-and `artifact_acceptance_gate`. None is built yet — this section is the gate they build
-against, same discipline as §10.
+Recorded against `artifact_self_rebuild_v2_plan` (constrained by the run-335 node),
+`artifact_acceptance_gate`, and `artifact_phase5_exec_guard`. Two of three built; this
+section stays the gate the rest builds against, same discipline as §10.

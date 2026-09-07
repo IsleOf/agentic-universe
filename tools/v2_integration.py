@@ -69,6 +69,7 @@ def run_pipeline(brief, graph, *, baseline_scores, candidate_scores, forecast, t
 
     applied, committed = [], []
     conductor = Conductor(
+        require_blessed_manifest=False,       # hermetic: this test is about the spine composition,
         ledger_path=tmp / "ledger.json",
         run_worker=lambda task, *, hints: (True, {
             "kind": "fold", "patch": patch, "baseline_scores": baseline_scores,

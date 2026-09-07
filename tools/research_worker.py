@@ -171,7 +171,7 @@ def _selftest():
     (tmp / "g.json").write_text(json.dumps(
         {"nodes": [{"id": "x", "label": "x", "type": "concept"}], "edges": []}), encoding="utf-8")
     applied, committed = [], []
-    c = Conductor(ledger_path=tmp / "led.json", run_worker=run_worker,
+    c = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led.json", run_worker=run_worker,
                   apply_patch=applied.append,
                   commit_push=lambda r, p, cert: committed.append((r, cert["decision"])),
                   graph_path=tmp / "g.json", gate=acceptance_gate.check,

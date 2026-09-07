@@ -1,0 +1,11 @@
+{
+  "components": {
+    "context/loop_policy": "8dc20721a197b3a8",
+    "prompt/loop_procedure": "960dff6023d56732",
+    "tool/loop_tools": "7e915a7ded5d2856",
+    "topology/loop_team": "63c1bdc579202032"
+  },
+  "manifest_hash": "0229416691aebcc9",
+  "note": "run 340 baseline: loop_policy/loop_procedure/loop_tools/loop_team as of the v2 spine build (manifest 0229416691aebcc9)",
+  "ts": 1788774887.211
+}
