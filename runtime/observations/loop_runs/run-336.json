@@ -1,0 +1,20 @@
+{
+  "run": 336,
+  "increment": "fold arXiv:2608.23552 Prime Agent (RLM REPL + Continual Harness + A2A subagents + Agents View; membrane separates deterministic execution from model strategy) - convergent evidence for code-as-context / continual-self-refinement",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-336.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 336 OK · VALID · graph +0 · cites 0v/0 · idle-streak 2 · legible 1.00 · verified-frac 0.77 · novelty n/a"
+}

@@ -10488,6 +10488,35 @@
       "evidence_links": [
         "https://arxiv.org/abs/2606.23075"
       ]
+    },
+    {
+      "id": "concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability",
+      "label": "Prime Agent: a low-friction harness 'membrane' standardises execution/recovery/verification/accounting and leaves strategy to the model, so harness failures stop becoming model failures",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "verified",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.66,
+      "description": "arXiv:2608.23552 (Karten, Zhang, Thomas et al. / Prime Intellect, submitted 2026-08-24, VERIFIED via abstract - within the RECENCY window). An open-source long-horizon harness with four load-bearing pieces: (1) a persistent IPython REPL following the Recursive Language Model (RLM) abstraction for programmatic context processing + test-time compute; (2) 'Continual Harness' - histories, memories, skills, prompts, and subagent specifications persist across trajectories; (3) recursive subagents coordinating via direct agent-to-agent communication; (4) 'Agents View' - humans inspect and manage daemon-backed sessions. Thesis: the harness should standardise execution, recovery, verification, and resource accounting while leaving STRATEGY construction to the model - 'a low-friction, expressive membrane [that] prevents harness failures from becoming model failures and pushes measurement toward the model's true maximal underlying capability.' Results: ARC-AGI-3 RHAE Best@1 30% -> 95.5%; matches/exceeds native and popular harnesses on long-context coding, GPU-kernel generation, emulator construction, autonomous nanoGPT speedruns; Factorio shows continuous advancement + parallelised execution. CURRENCY: current (2026-08); the harness/model generation is GPT-5 / Claude-4.x-class. The 30->95.5% jump is a capability-x-harness number and 'possibly superseded' as models move, but the ARCHITECTURAL claim - separate the deterministic membrane from model strategy - is what folds. For the SMALL/LOCAL LLM regime the membrane matters MORE: a weaker model has less headroom to absorb harness friction.",
+      "tags": [
+        "prime-agent",
+        "continual-harness",
+        "RLM",
+        "code-as-context",
+        "membrane",
+        "harness-vs-model-failure",
+        "a2a",
+        "human-inspection",
+        "recency-2026-08",
+        "convergent-evidence"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2608.23552"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2608.23552"
+      ]
     }
   ],
   "edges": [
@@ -25595,6 +25624,48 @@
       "target": "concept_memory_poisoning_one_write_persists",
       "type": "refines",
       "description": "one-write-persists is the Cognitive-Resource-module instance of the same lineage-persistence + amplification mechanism"
+    },
+    {
+      "id": "edge_prime_agent_instantiates_code_as_context",
+      "source": "concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability",
+      "target": "pattern_code_as_context",
+      "type": "instantiates",
+      "description": "the persistent IPython REPL + RLM abstraction is a shipping instance of context-as-a-manipulable-variable"
+    },
+    {
+      "id": "edge_prime_agent_instantiates_continual_self_refinement",
+      "source": "concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability",
+      "target": "pattern_continual_self_refinement",
+      "type": "instantiates",
+      "description": "'Continual Harness' - skills/prompts/subagent specs as persistent editable state across trajectories - is exactly the continual-harness pattern, now with a named open-source implementation"
+    },
+    {
+      "id": "edge_prime_agent_supports_verification_binding_constraint",
+      "source": "concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "supports",
+      "description": "standardising verification + resource accounting in the membrane is the design move that keeps verification cost from bounding what the model can attempt"
+    },
+    {
+      "id": "edge_prime_agent_supports_harness_convergence_2026_09",
+      "source": "concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability",
+      "target": "concept_harness_convergence_2026_09",
+      "type": "supports",
+      "description": "independent team converging on persistent REPL + continual state + A2A subagents + human-inspectable sessions - another data point for the Sept-2026 convergence read"
+    },
+    {
+      "id": "edge_prime_agent_supports_cellular_agent_architecture",
+      "source": "concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability",
+      "target": "concept_cellular_agent_architecture_persistent_cells_with_portable_seeds",
+      "type": "supports",
+      "description": "daemon-backed sessions whose memories/skills/specs travel across trajectories are persistent cells with portable seeds"
+    },
+    {
+      "id": "edge_prime_agent_informs_janitor",
+      "source": "concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability",
+      "target": "artifact_janitor",
+      "type": "informs",
+      "description": "'Agents View' - human inspection + management of daemon sessions - is the same need janitor's human_monitor view serves; Prime Agent makes it interactive/managing, not just read-only"
     }
   ]
 }
