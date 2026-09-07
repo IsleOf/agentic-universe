@@ -1,6 +1,6 @@
 {
   "schema_version": "0.3.0",
-  "last_updated": "2026-10-11",
+  "last_updated": "2026-10-12",
   "posture": "emergence_first_theoretical",
   "posture_note": "Exploratory phase: nodes are admitted on theoretical interest, not on evidence. Status and confidence record how the model hangs together, not what has been tested. See docs/emergence_first_posture.md.",
   "evolution_log": [
@@ -1260,6 +1260,10 @@
     {
       "date": "2026-10-11",
       "change": "Autonomous run 328. Wired janitor.run() into tools/loop_session.LoopSession.__exit__ - after every run summary is written, the per-consumer views regenerate (best-effort, a janitor failure never fails the run). Now the loop is fully self-observing: the next run's loop_conductor.pick_increment reads a corpus (via the janitor) that already includes the just-completed run, so the idle-streak / novelty drift signal is never one run stale. loop_session selftest GREEN; smoke test confirms views regenerate on exit. 1 edge (artifact_janitor supports artifact_loop_conductor). 346 nodes / 1378 -> 1379 edges."
+    },
+    {
+      "date": "2026-10-12",
+      "change": "Autonomous run 329. Built tools/call_model.py - the single model seam. Every probe adapter + loop_conductor.run_worker want call_model(prompt)->str; this makes v2.0 one env var: AU_MODEL_BACKEND = fake (default, offline) | cli (shell to C:/Agents/skills/CLI-AGENT-CONTROL/agentctl.sh) | callable (a registered API client). judge(a,b) built on it for probe_rho_holdout; scripted() test context manager. fake+callable paths pure stdlib no network/subprocess (selftest only touches those); cli path opt-in. Backend errors return \"[...\" strings so fail-safe parsers treat them as garbage. 10 selftest checks; selftest_all JOBS -> 42. 1 node + 3 edges. 346 -> 347 nodes. The last stdlib piece before v2.0."
     }
   ],
   "nodes": [
@@ -10331,6 +10335,33 @@
       ],
       "evidence_links": [
         "tools/janitor.py"
+      ]
+    },
+    {
+      "id": "artifact_call_model_seam",
+      "label": "call_model.py - the single model seam, one env var to activate (v2.0 connective piece)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "tools/call_model.py (run 329). Every probe adapter and loop_conductor.run_worker want the same seam: call_model(prompt:str)->str. This makes v2.0 (\"provision a call_model budget\") ONE env var: AU_MODEL_BACKEND = fake (default, deterministic offline, for tests/dry-runs) | cli (shell to the local CLI-agent pool via C:/Agents/skills/CLI-AGENT-CONTROL/agentctl.sh, AU_MODEL_AGENT picks the agent) | callable (a Python client registered via register()/set_backend()). judge(a,b,criterion)->A|B is built on it for probe_rho_holdout; scripted() is a test context manager. The fake + callable paths are pure stdlib and never touch the network or a subprocess (the selftest only exercises those); the cli path uses subprocess to call an already-installed already-authed local tool and is strictly opt-in. Every backend error returns a \"[...\" string so downstream fail-safe parsers treat it as garbage. 10 selftest checks; selftest_all JOBS -> 42. This is the last stdlib piece before v2.0 - the owner sets one env var (or registers an API client) and the 5 adapters + run_worker light up.",
+      "tags": [
+        "call-model",
+        "seam",
+        "v2",
+        "self-rebuild",
+        "backend-router",
+        "cli-agent-pool"
+      ],
+      "derived_from": [
+        "tools/call_model.py",
+        "docs/HANDOFF.md",
+        "docs/auto_sweep_2026-10-12-0000.md"
+      ],
+      "evidence_links": [
+        "tools/call_model.py"
       ]
     }
   ],
@@ -25237,6 +25268,39 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "LoopSession.__exit__ regenerates the janitor views after every run (run 328), so the next run loop_conductor.pick_increment reads a corpus that includes the just-completed run - the drift signal is never one run stale."
+    },
+    {
+      "id": "edge_call_model_implements_v2_plan",
+      "source": "artifact_call_model_seam",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2.0 seam - the generative-edge entry point the whole plan gates on."
+    },
+    {
+      "id": "edge_call_model_feeds_loop_conductor",
+      "source": "artifact_call_model_seam",
+      "target": "artifact_loop_conductor",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "loop_conductor.run_worker becomes a real worker once call_model routes to a live backend."
+    },
+    {
+      "id": "edge_call_model_resolves_model_integration",
+      "source": "artifact_call_model_seam",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The gate is exogenous; call_model is the proposer/worker side - separating the two is the point."
     }
   ]
 }

@@ -102,6 +102,20 @@ are **swept** for this environment; new work needs the 6-hourly scheduled task.
 Every rig and the Phase 3 proposer have exactly one stub — a function where a model call belongs. The
 interfaces are stable; swapping in a model changes nothing else.
 
+**The seam is now `tools/call_model.py` (run 329) — activation is one env var:**
+
+```
+AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_idle_agent.py sweep
+#   or, for an API client:
+#   from call_model import register, set_backend
+#   register("openai", lambda p: my_openai_client(p));  set_backend("openai")
+```
+
+`call_model(prompt) -> str` routes to the backend; `fake` (default) is offline and deterministic;
+`cli` shells out to the local CLI-agent pool (`C:\Agents\skills\CLI-AGENT-CONTROL\agentctl.sh`) —
+no new API key needed. `judge(a, b)` for `model_preference` is built on it. Every adapter below takes
+`call_model` (or `judge`) exactly as `tools/call_model.py` produces it.
+
 ### The five written adapters (runs 134–140) — first-run task
 
 | adapter | file | pass it |
