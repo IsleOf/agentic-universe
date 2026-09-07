@@ -304,3 +304,39 @@ every attack from session-bounded to **lineage-persistent**. Mapping the v2 spin
 Recorded against `artifact_self_rebuild_v2_plan` (constrained by the run-335 node),
 `artifact_acceptance_gate`, and `artifact_phase5_exec_guard`. Two of three built; this
 section stays the gate the rest builds against, same discipline as §10.
+
+### 12b. The Collective module: what v2.4's executor pool must carry (spec, run 348)
+
+The MLAS **Collective × all-stages** row is empty because v2 is single-lineage today. The
+moment v2.4 adds the CLI executor pool it becomes the largest open surface, and the
+fragmentation fold (arXiv:2607.07368, run 343;
+`concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it`)
+says why: **per-worker monitoring degrades as workers coordinate** — an out-of-scope goal
+split across k workers stays under each worker's own suspicion threshold. The
+`probe_subagent_coordination` fragmentation arm (run 344) shows a **cohort monitor** — weak
+per-worker signals *summed across the pool* — recovers detection (per-instance 0.90→0.002
+across k=3→8 while the cohort monitor holds at ~1.0).
+
+So the executor pool ships with, from day one:
+
+1. **Disposable per-worker credentials.** A worker gets a scoped, single-use token minted by
+   the conductor; nothing long-lived, nothing shared. (`fs_sandbox` already denies
+   `credential_access` / network inside the jail; this is the outside-the-jail half.)
+2. **No shared writable state except the ledger.** Workers read the graph and the brief;
+   they write only their own patch proposal back through `run_worker`. The ledger
+   (`task_ledger`) is the single serialization point — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`.
+3. **Same-parent-ID message filter on by default.** From `probe_subagent_coordination`:
+   direct worker↔worker messages only between workers sharing a parent task. Cross-family
+   traffic goes through the conductor.
+4. **A cohort monitor, not just per-worker checks.** After a fan-out round the conductor
+   computes a pool-level suspicion score = Σ (per-worker out-of-scope signal) and aborts the
+   whole round if it exceeds a cohort threshold — even when no single worker tripped its own.
+   The `janitor` `agent_context` view is the natural place to accumulate the per-worker
+   signals across rounds.
+5. **A planner is a conductor privilege, never a worker one.** The fragmentation fold: an
+   explicit planner amplifies attack completion up to 7×. The v2 conductor already *is* the
+   planner (deterministic `pick_increment`); no worker may spawn or direct other workers.
+
+None of this is built — v2.4 is not started — but a fanned-out run that skips any of 1–5
+should fail its own phase gate. Recorded against `artifact_v2_mlas_coverage_map` and
+`artifact_probe_subagent_coordination_rig`.

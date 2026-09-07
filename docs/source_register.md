@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 359 nodes, 1441 edges · **Date:** 2026-09-05
+**Graph at generation:** 360 nodes, 1446 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -347,7 +347,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2509.26354 — `concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker`
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
-- https://arxiv.org/abs/2607.07368 — `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it`
+- https://arxiv.org/abs/2607.07368 — `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it`, `decision_v2_4_executor_pool_collective_module_spec`
 - https://arxiv.org/abs/2608.20099 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
@@ -587,7 +587,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
-- `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_conductor_blessed_manifest_preflight`, `artifact_gate_the_gate_self_design_ack` +5
+- `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_conductor_blessed_manifest_preflight`, `artifact_gate_the_gate_self_design_ack` +6
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`, `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`

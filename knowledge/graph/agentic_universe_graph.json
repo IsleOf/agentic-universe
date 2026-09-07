@@ -10717,6 +10717,34 @@
         "https://arxiv.org/abs/2507.18224",
         "https://arxiv.org/abs/2608.20099"
       ]
+    },
+    {
+      "id": "decision_v2_4_executor_pool_collective_module_spec",
+      "label": "v2.4 executor-pool spec: disposable per-worker creds, ledger-only shared state, same-parent message filter, a COHORT monitor (not per-worker), planner is a conductor-only privilege",
+      "type": "decision",
+      "status": "active",
+      "verification_state": "unverified",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.55,
+      "description": "docs/self_rebuild_v2.md section 12b (run 348). The MLAS Collective x all-stages row is empty because v2 is single-lineage; v2.4s CLI executor pool makes it the largest surface. From the fragmentation fold (2607.07368, run 343) + the probe_subagent_coordination fragmentation arm (run 344): per-worker monitoring degrades as workers coordinate, a cohort monitor (summed per-worker signals) recovers it. Five requirements a fanned-out run must carry or fail its phase gate: (1) disposable per-worker credentials minted by the conductor; (2) no shared writable state except the task_ledger; (3) same-parent-ID worker-to-worker message filter on by default, cross-family via the conductor; (4) a pool-level cohort monitor that aborts the round on summed suspicion even when no single worker tripped; (5) planner is a conductor privilege, never a worker one (a planner amplifies attack completion up to 7x). None built - v2.4 not started.",
+      "tags": [
+        "v2",
+        "v2.4",
+        "executor-pool",
+        "collective-module",
+        "MLAS",
+        "cohort-monitor",
+        "spec",
+        "fragmentation"
+      ],
+      "derived_from": [
+        "docs/self_rebuild_v2.md",
+        "https://arxiv.org/abs/2607.07368"
+      ],
+      "evidence_links": [
+        "docs/self_rebuild_v2.md"
+      ]
     }
   ],
   "edges": [
@@ -26104,6 +26132,41 @@
       "target": "concept_harness_orchestration_pairing",
       "type": "supports",
       "description": "composition + structure generated jointly from the query is the orchestration layer made an explicit, separable, swappable artefact"
+    },
+    {
+      "id": "edge_v24_spec_refines_mlas_map",
+      "source": "decision_v2_4_executor_pool_collective_module_spec",
+      "target": "artifact_v2_mlas_coverage_map",
+      "type": "refines",
+      "description": "section 12b: the Collective-module design the coverage map flagged as the open gap"
+    },
+    {
+      "id": "edge_v24_spec_instantiates_fragmentation",
+      "source": "decision_v2_4_executor_pool_collective_module_spec",
+      "target": "concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it",
+      "type": "instantiates",
+      "description": "the cohort monitor + planner-is-conductor-only requirements are the fragmentation fold applied to the executor pool"
+    },
+    {
+      "id": "edge_v24_spec_depends_on_subagent_rig",
+      "source": "decision_v2_4_executor_pool_collective_module_spec",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "depends_on",
+      "description": "requirements 3 and 4 come straight from the rigs same-parent filter and fragmentation arm"
+    },
+    {
+      "id": "edge_v24_spec_depends_on_task_ledger",
+      "source": "decision_v2_4_executor_pool_collective_module_spec",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "depends_on",
+      "description": "requirement 2: the ledger is the single serialization point for worker writes"
+    },
+    {
+      "id": "edge_v24_spec_extends_v2_plan",
+      "source": "decision_v2_4_executor_pool_collective_module_spec",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "extends",
+      "description": "adds the v2.4-phase gate for the executor pool"
     }
   ]
 }
