@@ -1256,6 +1256,10 @@
     {
       "date": "2026-10-11",
       "change": "Autonomous run 327. Orientation refresh (IDLE-STATE clause c; no main-graph node/edge change). docs/graph_state_2026-09.md Snapshot run 301 (330/1321, 36 selftests) -> run 327 (346/1378, 41 selftests) + a \"Runs 302-326\" section: the v2 deterministic spine completed as 5 stdlib bricks (research_brief 302, loop_conductor 303 + janitor-wired 326, v2_integration 311, janitor 325, with acceptance_gate 300); four literature threads (harness-engineering / deception / agent-memory-security / negotiation-diversity-routing); the two per-project audits (317-321). docs/PROJECT_STATE.md brought to run 327 - node count, the \"latest session\" block, the half-built list (the spine is complete, the generative edge is entirely v2.0). knowledge/graph/agentic_universe_project_graph.json -> 29 nodes (au__c_v2_spine; au__q_v2_rebuild -> partial), VALID."
+    },
+    {
+      "date": "2026-10-11",
+      "change": "Autonomous run 328. Wired janitor.run() into tools/loop_session.LoopSession.__exit__ - after every run summary is written, the per-consumer views regenerate (best-effort, a janitor failure never fails the run). Now the loop is fully self-observing: the next run's loop_conductor.pick_increment reads a corpus (via the janitor) that already includes the just-completed run, so the idle-streak / novelty drift signal is never one run stale. loop_session selftest GREEN; smoke test confirms views regenerate on exit. 1 edge (artifact_janitor supports artifact_loop_conductor). 346 nodes / 1378 -> 1379 edges."
     }
   ],
   "nodes": [
@@ -25222,6 +25226,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "pick_increment (run 326) consults janitor.drift_report over the real run corpus - an idle streak >= PLATEAU_WINDOW or novelty < 0.34 forces the IDLE-STATE (a)/(b)/(c) clause even when recent_kinds looks active. The classifier was hand-fed; now it is self-driving from the actual history."
+    },
+    {
+      "id": "edge_loop_session_regenerates_janitor_views",
+      "source": "artifact_janitor",
+      "target": "artifact_loop_conductor",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "LoopSession.__exit__ regenerates the janitor views after every run (run 328), so the next run loop_conductor.pick_increment reads a corpus that includes the just-completed run - the drift signal is never one run stale."
     }
   ]
 }

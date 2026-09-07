@@ -154,6 +154,15 @@ class LoopSession:
             summary["status_line"] = None
         (RUN_SUMMARY_DIR / f"run-{self.run_no}.json").write_text(
             json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+        # regenerate the per-consumer views (run 328) so the next run's
+        # loop_conductor.pick_increment reads a corpus that includes this run.
+        # Advisory + best-effort - a janitor failure never fails the run.
+        try:
+            from janitor import run as _janitor_run
+            _janitor_run()
+        except Exception:
+            pass
         return summary
 
 
