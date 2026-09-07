@@ -56,21 +56,64 @@ class RunRecord:
     ledger_summary: dict = field(default_factory=dict)
 
 
-def pick_increment(recent_kinds, *, selftest_green=True, frontier_swept=True):
+NOVELTY_FLOOR = 0.34   # loop_metrics THRESHOLDS["run_novelty"]
+
+
+def _corpus_drift(runs_dir=None):
+    """Read the run corpus via the janitor and return (idle_streak, novelty_ratio).
+    Returns (None, None) if the corpus can't be read - callers fall back to
+    `recent_kinds`."""
+    try:
+        import janitor
+        runs = janitor.load_runs(runs_dir) if runs_dir else janitor.load_runs()
+        if len(runs) < PLATEAU_WINDOW + 1:
+            return None, None
+        rep = janitor.drift_report(runs, window=6)
+        import re
+        idle = re.search(r"idle streak\*\*:\s*(\d+)", rep)
+        nov = re.search(r"novelty ratio\*\*:\s*([\d.]+|None)", rep)
+        idle_v = int(idle.group(1)) if idle else None
+        nov_v = None if (not nov or nov.group(1) == "None") else float(nov.group(1))
+        return idle_v, nov_v
+    except Exception:
+        return None, None
+
+
+def pick_increment(recent_kinds, *, selftest_green=True, frontier_swept=True,
+                   runs_dir=None, use_corpus=True):
     """Deterministic IDLE-STATE gate on what kind of increment this run may be.
-    `recent_kinds` = the kinds of the last few runs, newest last."""
+    `recent_kinds` = the kinds of the last few runs, newest last. When `use_corpus`
+    is set (default) it also consults the janitor's drift report over the real run
+    corpus - an idle streak >= PLATEAU_WINDOW OR a novelty ratio below NOVELTY_FLOOR
+    forces the (a)/(b)/(c) IDLE-STATE clause even if `recent_kinds` looks active."""
     if not selftest_green:
         return RunPlan("selftest is RED - the only valid increment is a fix", ("fix",))
     if not frontier_swept:
         return RunPlan("literature frontier not swept - fold the next item", ("fold", "build"))
+
     tail = tuple(recent_kinds[-PLATEAU_WINDOW:])
     idle_tail = len(tail) >= PLATEAU_WINDOW and all(
         k in ("doc", "consistency", "other") for k in tail)
-    if idle_tail:
+
+    corpus_idle = corpus_nov = None
+    if use_corpus:
+        corpus_idle, corpus_nov = _corpus_drift(runs_dir)
+    plateau_by_corpus = (
+        (corpus_idle is not None and corpus_idle >= PLATEAU_WINDOW)
+        or (corpus_nov is not None and corpus_nov < NOVELTY_FLOOR))
+
+    if idle_tail or plateau_by_corpus:
+        why = []
+        if idle_tail:
+            why.append(f"the last {PLATEAU_WINDOW} runs were doc/hygiene")
+        if corpus_idle is not None and corpus_idle >= PLATEAU_WINDOW:
+            why.append(f"the corpus idle streak is {corpus_idle}")
+        if corpus_nov is not None and corpus_nov < NOVELTY_FLOOR:
+            why.append(f"the corpus novelty ratio is {corpus_nov} (< {NOVELTY_FLOOR})")
         return RunPlan(
-            f"last {PLATEAU_WINDOW} runs were doc/hygiene and the frontier is swept - "
-            f"the IDLE-STATE RULE requires (a) deepen one node via a citation sweep, "
-            f"(b) dry-run a probe, or (c) a genuine consistency/adversarial pass",
+            f"{' and '.join(why)}, and the frontier is swept - the IDLE-STATE RULE "
+            f"requires (a) deepen one node via a citation sweep, (b) dry-run a probe, "
+            f"or (c) a genuine consistency/adversarial pass",
             ABC_KINDS, must_be_abc=True)
     return RunPlan("normal run - highest-value increment, any kind",
                    ABC_KINDS + NON_IDLE_KINDS + ("doc",))
@@ -97,9 +140,16 @@ class Conductor:
         except Exception:
             return {"nodes": [], "edges": []}
 
-    def conduct(self, run_no, *, recent_kinds=(), selftest_green=True, frontier_swept=True):
-        plan = self.choose_increment(list(recent_kinds), selftest_green=selftest_green,
-                                     frontier_swept=frontier_swept)
+    def conduct(self, run_no, *, recent_kinds=(), selftest_green=True, frontier_swept=True,
+                use_corpus=True, runs_dir=None):
+        try:
+            plan = self.choose_increment(list(recent_kinds), selftest_green=selftest_green,
+                                         frontier_swept=frontier_swept,
+                                         use_corpus=use_corpus, runs_dir=runs_dir)
+        except TypeError:
+            # a caller-supplied choose_increment without the corpus kwargs
+            plan = self.choose_increment(list(recent_kinds), selftest_green=selftest_green,
+                                         frontier_swept=frontier_swept)
 
         L = Ledger(self.ledger_path)
         tid = L.add(f"run {run_no}: {plan.reason}", meta={"run_no": run_no,
@@ -202,13 +252,34 @@ def _selftest():
         return True, {**worker_out, "kind": "fold"}, "done"
     c3 = Conductor(ledger_path=tmp / "led3.json", run_worker=fold_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 3000.0)
-    rec3 = c3.conduct(402, recent_kinds=["doc", "consistency", "doc"], frontier_swept=True)
+    rec3 = c3.conduct(402, recent_kinds=["doc", "consistency", "doc"], frontier_swept=True,
+                      use_corpus=False)
     checks["IDLE-STATE: a fold is refused after three doc runs"] = (
         not rec3.accepted and "not allowed" in rec3.reason)
-    plan_idle = pick_increment(["doc", "consistency", "doc"], frontier_swept=True)
+    plan_idle = pick_increment(["doc", "consistency", "doc"], frontier_swept=True, use_corpus=False)
     checks["pick_increment flags must_be_abc on a plateau"] = plan_idle.must_be_abc
     plan_red = pick_increment([], selftest_green=False)
     checks["pick_increment forces a fix when selftest is RED"] = plan_red.allowed_kinds == ("fix",)
+
+    # corpus-driven plateau: an "active"-looking recent_kinds but a low-novelty corpus -> must_be_abc
+    cdir = tmp / "corpus"; cdir.mkdir()
+    for i in range(1, 5):     # 4 folds, all re-citing one root -> novelty 0.0 over the window
+        (cdir / f"run-{i}.json").write_text(json.dumps({
+            "run": i, "increment": f"fold arXiv:2699.0001 again ({i})",
+            "graph_delta": {"nodes": 1, "edges": 1},
+            "distinct_evidence_roots": ["arXiv:2699.0001"]}), encoding="utf-8")
+    for i in range(5, 12):
+        (cdir / f"run-{i}.json").write_text(json.dumps({
+            "run": i, "increment": f"fold arXiv:2699.0001 again ({i})",
+            "graph_delta": {"nodes": 1, "edges": 1},
+            "distinct_evidence_roots": ["arXiv:2699.0001"]}), encoding="utf-8")
+    plan_corpus = pick_increment(["fold", "fold", "build"], frontier_swept=True,
+                                 use_corpus=True, runs_dir=cdir)
+    checks["pick_increment: a low-novelty corpus forces must_be_abc despite active recent_kinds"] = (
+        plan_corpus.must_be_abc and "novelty ratio" in plan_corpus.reason)
+    plan_ok = pick_increment(["fold", "fold", "build"], frontier_swept=True, use_corpus=False)
+    checks["pick_increment: without the corpus, active recent_kinds is a normal run"] = (
+        not plan_ok.must_be_abc)
 
     # a patch that fails check_patch (dangling edge) -> rejected before the gate
     bad_patch = {"proposal_metadata": {}, "add_nodes": [],

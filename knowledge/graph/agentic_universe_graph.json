@@ -1248,6 +1248,10 @@
     {
       "date": "2026-10-11",
       "change": "Autonomous run 325. Built tools/janitor.py - the v2.5 brick (docs/self_rebuild_v2.md section 6; operationalises concept_trace_compiles_to_per_consumer_views). Reads the ~256 run-*.json summaries and emits 4 per-consumer views: human_monitor (span delta + drift), agent_context (distinct evidence roots = the do-not-re-fold list + re-cited roots), drift_report (novelty + idle streak + the IDLE-STATE reading), bank_staleness. Pure stdlib, advisory - writes views under runtime/observations/views/ (gitignored), never deletes/edits anything. 11 selftest checks; selftest_all JOBS -> 41. Live corpus (67-324): 109 distinct evidence roots, novelty 1.0, idle-streak 0. 1 node + 4 edges. 345 -> 346 nodes. The v2 deterministic spine is now: acceptance_gate (300) + research_brief (302) + loop_conductor (303) + v2_integration (311) + janitor (325)."
+    },
+    {
+      "date": "2026-10-11",
+      "change": "Autonomous run 326. Hardened tools/loop_conductor.pick_increment (v2.3): it now consults janitor.drift_report over the REAL run corpus. _corpus_drift() reads idle_streak + novelty_ratio; an idle streak >= PLATEAU_WINDOW (3) OR novelty < 0.34 forces the IDLE-STATE (a)/(b)/(c) clause (must_be_abc) even when recent_kinds looks active - closing the gap where the classifier was hand-fed. conduct() threads use_corpus/runs_dir through (with a TypeError fallback for a custom choose_increment). +2 selftest checks (11). 1 edge: artifact_loop_conductor depends_on artifact_janitor. BUILD SELFTEST target GREEN. 346 nodes / 1377 -> 1378 edges."
     }
   ],
   "nodes": [
@@ -25203,6 +25207,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.5,
       "description": "Surfaces experience_bank.stale() entries as a standing flag rather than an on-demand check."
+    },
+    {
+      "id": "edge_conductor_consults_janitor_drift",
+      "source": "artifact_loop_conductor",
+      "target": "artifact_janitor",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "pick_increment (run 326) consults janitor.drift_report over the real run corpus - an idle streak >= PLATEAU_WINDOW or novelty < 0.34 forces the IDLE-STATE (a)/(b)/(c) clause even when recent_kinds looks active. The classifier was hand-fed; now it is self-driving from the actual history."
     }
   ]
 }
