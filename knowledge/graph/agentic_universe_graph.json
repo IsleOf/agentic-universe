@@ -1750,12 +1750,12 @@
       "id": "emergent_self_organizing_roles",
       "label": "Self-organizing role differentiation",
       "type": "emergent_behavior",
-      "status": "speculative",
-      "verification_state": "needs_empirical_validation",
+      "status": "to_test",
+      "verification_state": "partially_validated",
       "approach_family": "emergent_behaviors",
       "branch_key": "emergent_behaviors:self_organizing_roles",
-      "confidence": 0.35,
-      "description": "Agents given a shared task and minimal scaffolding adopt distinguishable functional roles. Deliberately narrower than emergent_natural_teaming: this node claims differentiation only, not cooperation, so the two can be measured and refuted independently. Roles must be identified from behavioural traces, never from agent self-report.",
+      "confidence": 0.55,
+      "description": "Agents given a shared task and minimal scaffolding adopt distinguishable functional roles. Deliberately narrower than emergent_natural_teaming: this node claims differentiation only, not cooperation, so the two can be measured and refuted independently. Roles must be identified from behavioural traces, never from agent self-report. DEEPENED run 350 with a VERIFIED read of \"Drop the Hierarchy and Roles: How Self-Organizing LLM Agents Outperform Designed Structures\" (arXiv:2603.28990, V. Dochkina, 2026-03-30): a 25,000-task experiment, 8 models, 4-256 agents, 8 coordination protocols. Three spontaneous behaviours: agents invent specialized roles (5,006 unique roles from just 8 agents), voluntarily abstain from tasks outside their competence, and form shallow hierarchies with no external design. The \"Sequential\" hybrid protocol - minimal structural scaffolding (fixed ordering) + full role autonomy - beat centralized coordination by 14% (p<0.001); 44% quality spread between protocols (Cohen d=1.86). Scaled sub-linearly to 256 agents with no quality loss. Open models hit 95% of closed quality at 24x lower cost. CURRENCY: 2026-03, GPT-4/Claude-3.5-class pools; the protocol-comparison numbers are \"possibly superseded\" but the emergence of roles+abstention+shallow-hierarchy under minimal scaffold is the structural finding. Directly serves the SMALL/LOCAL regime (the 24x-cheaper open result).",
       "tags": [
         "emergence",
         "self-organization",
@@ -1764,11 +1764,12 @@
         "multi-agent"
       ],
       "derived_from": [
+        "arXiv:2603.28990 (Drop the Hierarchy and Roles, V. Dochkina, 2026-03-30) - VERIFIED",
+        "arXiv:2603.28990 (self-organizing roles)",
+        "arXiv:2608.26081 (SwarmWorld) - initially identical agents self-organise into differentiated technological societies via physical stigmergy, with cumulative technological evolution and no assigned positions",
         "docs/graph_state_2026-09.md",
         "knowledge/graph/agentic_universe_graph.json",
-        "arXiv:2603.28990 (self-organizing roles)",
-        "zylos.ai emergent behaviour survey",
-        "arXiv:2608.26081 (SwarmWorld) - initially identical agents self-organise into differentiated technological societies via physical stigmergy, with cumulative technological evolution and no assigned positions"
+        "zylos.ai emergent behaviour survey"
       ],
       "evidence_links": [
         "evolution/proposals/2026-09-01_self-organizing-roles-and-shallow-hierarchies.md"
@@ -26174,6 +26175,34 @@
       "target": "artifact_conductor_blessed_manifest_preflight",
       "type": "depends_on",
       "description": "run 349: the composed spine dry-run now also passes through Conductor.preflight() against the real blessed manifest before any increment"
+    },
+    {
+      "id": "edge_self_org_roles_challenges_trained_topology",
+      "source": "emergent_self_organizing_roles",
+      "target": "concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model",
+      "type": "challenges",
+      "description": "designed-topology (ARG/RGA-Designer) vs self-organized: at 25k tasks a minimal-scaffold + full-autonomy hybrid beats centralized design by 14%; the tension is which regime wins where"
+    },
+    {
+      "id": "edge_self_org_roles_grounds_probe_synergy",
+      "source": "emergent_self_organizing_roles",
+      "target": "artifact_probe_emergent_synergy_rig",
+      "type": "grounds",
+      "description": "the probe's meta arm (personas + metacognition -> complementary roles) is the mechanism this paper observes at scale; 5,006 roles from 8 agents is the differentiation axis"
+    },
+    {
+      "id": "edge_self_org_roles_supports_shallow_hierarchy",
+      "source": "emergent_self_organizing_roles",
+      "target": "pattern_shallow_hierarchy",
+      "type": "supports",
+      "description": "shallow hierarchies formed with no external design; the Sequential hybrid = minimal scaffold is the pattern validated"
+    },
+    {
+      "id": "edge_self_org_roles_supports_flock",
+      "source": "emergent_self_organizing_roles",
+      "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "type": "supports",
+      "description": "minimal-scaffold self-organization beating centralized coordination is the flock thesis at 25k-task scale"
     }
   ]
 }

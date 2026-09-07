@@ -1,0 +1,20 @@
+{
+  "run": 350,
+  "increment": "deepen emergent_self_organizing_roles with a VERIFIED read of Drop the Hierarchy and Roles (arXiv:2603.28990) - 25k tasks, 5006 roles from 8 agents, voluntary abstention, shallow hierarchy; the Sequential hybrid beats centralized by 14%; counterweight to the run-347 trained-topology node",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-350.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 350 STOP · VALID · graph +0 · cites 0v/0 · idle-streak 16! · legible 1.00 · verified-frac 0.77 · novelty n/a"
+}
