@@ -1,0 +1,20 @@
+{
+  "run": 342,
+  "increment": "narrow the gate-the-gate rule for selftest_all.py - only a JOB removal is a self-design edit, adding a probe/tool to the manifest is routine and needs no ack; _manifest_shrank diff scan",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-342.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 342 STOP · VALID · graph +0 · cites 0v/0 · idle-streak 8! · legible 1.00 · verified-frac 0.77 · novelty n/a"
+}

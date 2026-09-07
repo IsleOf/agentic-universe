@@ -17,11 +17,13 @@ commit; the loop cannot talk past it. Invariants:
 - raw `runtime/**/*.jsonl` is not staged (must stay gitignored, rule 9)
 - the current branch is the working branch, not `main`
 - no self-design edit without owner ack — staging a change to the acceptance
-  gate, this guard, the validator, the selftest manifest, anything under
-  `runtime/harness/` (loop_policy / loop_procedure / loop_tools / loop_team), or
-  a decision-logic region of the proposer / conductor is blocked unless
-  `AU_SELF_DESIGN_ACK` is set to a reason (run 338, paths fixed run 339; from the
-  MLAS fold: the loop must not be able to weaken its own gate)
+  gate, this guard, the validator, `harness_registry`, anything under
+  `runtime/harness/` (loop_policy / loop_procedure / loop_tools / loop_team), a
+  decision-logic region of the proposer / conductor, or a *removal* of a
+  `selftest_all` JOB line, is blocked unless `AU_SELF_DESIGN_ACK` is set to a
+  reason (run 338, paths fixed run 339, manifest-shrink-only run 342; from the
+  MLAS fold: the loop must not be able to weaken its own gate). Adding a probe /
+  tool to the selftest manifest is routine and needs no ack.
 - (warning only) `docs/auto_sweep_*` was updated if the graph changed
 
 Run as `python tools/exec_guard.py check` from a pre-commit hook. Install the
@@ -73,7 +75,6 @@ _SELF_DESIGN_FILES = {
     "tools/acceptance_gate.py",     # the exogenous acceptance signal (+ its cert signer)
     "tools/exec_guard.py",          # this guard
     "tools/knowledge_graph.py",     # the validator the gate leans on
-    "tools/selftest_all.py",        # the build-selftest manifest (JOBS)
     "tools/harness_registry.py",    # bless / manifest_drift - the conductor preflight leans on it (run 340)
 }
 _SELF_DESIGN_PREFIXES = (
@@ -85,6 +86,19 @@ _SELF_DESIGN_DIFF_FILES = {"tools/loop_proposer.py", "tools/loop_conductor.py"}
 _SELF_DESIGN_DIFF_MARKERS = re.compile(
     r"PROPOSER_META|NOVELTY_FLOOR|PLATEAU_WINDOW|ABC_KINDS|NON_IDLE_KINDS|"
     r"mode_concentration_trigger|\bdimensions\b|run_novelty|idle_run_streak")
+# the selftest manifest: only a JOB *removal* weakens coverage. Adding a job is
+# routine ("new probe" / "new tool") and must not require the owner ack (run 342).
+_MANIFEST_SHRINK_FILES = {"tools/selftest_all.py"}
+_MANIFEST_JOB_LINE = re.compile(r'^\s*\(\s*"[^"]+\.py"')
+
+
+def _manifest_shrank(diff_text):
+    """True iff a unified diff removes a selftest JOB line without re-adding it."""
+    removed = [l[1:] for l in diff_text.splitlines()
+              if l[:1] == "-" and l[:3] != "---" and _MANIFEST_JOB_LINE.match(l[1:])]
+    added = {l[1:] for l in diff_text.splitlines()
+             if l[:1] == "+" and l[:3] != "+++" and _MANIFEST_JOB_LINE.match(l[1:])}
+    return any(r not in added for r in removed)
 
 
 def _self_design_hits(staged):
@@ -99,6 +113,9 @@ def _self_design_hits(staged):
                                 if l[:1] in "+-" and l[:3] not in ("---", "+++"))
             if _SELF_DESIGN_DIFF_MARKERS.search(changed):
                 hits.append(f"{f} (decision-logic region)")
+        elif f in _MANIFEST_SHRINK_FILES:
+            if _manifest_shrank(_git("diff", "--cached", "--unified=0", "--", f)):
+                hits.append(f"{f} (selftest job removed)")
     return hits
 
 
@@ -259,6 +276,13 @@ def _selftest():
         "runtime/harness/ prompt is a self-design edit": bool(sd_reg),
         "ordinary probe/doc edit is not a self-design edit":
             not sd_clean["self_design"],
+        # selftest manifest: removal is guarded, addition is not (run 342)
+        "selftest_all: removing a JOB line -> self-design edit": _manifest_shrank(
+            '-    ("probe_foo.py", ["selftest"]),\n+    ("probe_bar.py", ["selftest"]),'),
+        "selftest_all: only adding JOB lines -> NOT a self-design edit": not _manifest_shrank(
+            '     ("probe_a.py", ["selftest"]),\n+    ("probe_new.py", ["selftest"]),'),
+        "selftest_all: a job line moved (removed + re-added) -> NOT a shrink": not _manifest_shrank(
+            '-    ("probe_x.py", ["selftest"]),\n context\n+    ("probe_x.py", ["selftest"]),'),
     }
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
