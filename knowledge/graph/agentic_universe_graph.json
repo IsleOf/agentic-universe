@@ -1264,6 +1264,10 @@
     {
       "date": "2026-10-12",
       "change": "Autonomous run 329. Built tools/call_model.py - the single model seam. Every probe adapter + loop_conductor.run_worker want call_model(prompt)->str; this makes v2.0 one env var: AU_MODEL_BACKEND = fake (default, offline) | cli (shell to C:/Agents/skills/CLI-AGENT-CONTROL/agentctl.sh) | callable (a registered API client). judge(a,b) built on it for probe_rho_holdout; scripted() test context manager. fake+callable paths pure stdlib no network/subprocess (selftest only touches those); cli path opt-in. Backend errors return \"[...\" strings so fail-safe parsers treat them as garbage. 10 selftest checks; selftest_all JOBS -> 42. 1 node + 3 edges. 346 -> 347 nodes. The last stdlib piece before v2.0."
+    },
+    {
+      "date": "2026-10-12",
+      "change": "Autonomous run 330. Wired probe_idle_agent to the call_model seam: sweep(live=False|True, policy_factory=None). live=True swaps _config_policy for model_policy(call_model, framing=, tools=);  CLI flag; +1 selftest check (sweep(live=True) runs the 3x3x2x2 grid via call_model without error). AU_MODEL_BACKEND=fake => offline wiring smoke test (all idle_noop); AU_MODEL_BACKEND=cli or a registered callable => the real v2.0 run of \"the one experiment that resolves the most\" (concept_habitat_slack). Default path (scripted stand-in) unchanged - the rigs calibration is untouched. selftest_all 42 GREEN. 1 edge. 347 nodes / 1382 -> 1383 edges. The idle-agent probe is now v2.0-ready end to end - it needs a live backend + an fs sandbox, not more code."
     }
   ],
   "nodes": [
@@ -25301,6 +25305,17 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "The gate is exogenous; call_model is the proposer/worker side - separating the two is the point."
+    },
+    {
+      "id": "edge_probe_idle_agent_wired_to_call_model",
+      "source": "artifact_call_model_seam",
+      "target": "artifact_probe_idle_agent_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "probe_idle_agent.sweep(live=True) /  (run 330) drives the 3x3x2x2 grid with model_policy(call_model, ...) instead of the scripted stand-in - AU_MODEL_BACKEND=fake is a wiring smoke test, cli / a registered callable is the v2.0 experiment (what_would_make_this_wrong.md the one experiment that resolves the most)."
     }
   ]
 }

@@ -126,10 +126,15 @@ no new API key needed. `judge(a, b)` for `model_preference` is built on it. Ever
 | `model_reader(call_model, corpus)` | `probe_epistemic_sybil.py` | model reads a real document, first number in the reply is the estimate; unparseable = `nan`, dropped |
 | `model_propose(call_model, context)` | `loop_proposer.py` | hands the model `PROPOSER_PROMPT`, parses the JSON list leniently, `[]` on failure (loop falls back to `heuristic_propose`) |
 
-**First run to do:** pass a real `call_model` into `model_policy` (wire it in `sweep` / `_config_policy`) and
-run `python tools/probe_idle_agent.py sweep`. `what_would_make_this_wrong.md` calls this "the one experiment
-that resolves the most" — does `concept_habitat_slack` hold, is there autotelic behaviour in the gap? Needs
-the model **and** a real filesystem sandbox for the containment arm.
+**First run to do (wiring done, run 329–330):**
+```
+AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_idle_agent.py sweep --live
+```
+`sweep --live` drives the 3×3×2×2 grid with `model_policy(call_model, …)` instead of the scripted
+stand-in. `what_would_make_this_wrong.md` calls this "the one experiment that resolves the most" — does
+`concept_habitat_slack` hold, is there autotelic behaviour in the gap? The only remaining gap is a real
+filesystem sandbox for the containment arm (a throwaway dir + resource caps). `AU_MODEL_BACKEND=fake` runs
+it offline as a wiring smoke test.
 **Second:** real `judge` into `model_preference`, run `probe_rho_holdout sweep` — does trajectory-only
 self-improvement survive external grading (sim says ~33 %)?
 **Third:** real `call_model` into `model_relay`, run `probe_subagent_coordination` — real peer-deference vs

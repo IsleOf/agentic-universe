@@ -258,6 +258,17 @@ def _selftest():
         model_policy(lambda p: (_ for _ in ()).throw(RuntimeError("boom")),
                      framing="tool", tools=())(0, {"goals": [], "artifacts": [], "cycle": 0})[0] == "idle_noop")
 
+    # --live wiring: sweep(live=True) runs against tools/call_model.py's default (fake)
+    # backend end to end - a smoke test that the v2.0 seam is connected, not the experiment.
+    try:
+        live_res = sweep(cycles_cap=3, live=True)
+        checks["sweep(live=True) runs the grid via call_model without error"] = (
+            len(live_res) == len(BUDGETS) * len(FRAMINGS) * len(TOOLSETS) * len(MODELS)
+            and all("project_structure" in m for m in live_res.values()))
+    except Exception as e:
+        checks["sweep(live=True) runs the grid via call_model without error"] = False
+        print(f"   (live wiring error: {e})")
+
     # observation_arm: a stand-in that self-inspects less when it knows it is watched
     def watched_factory(observed):
         base = _scripted_policy("project")
@@ -380,14 +391,31 @@ def model_policy(call_model, *, framing, tools, observed=False):
     return pol
 
 
-def sweep(cycles_cap=60, trials=1):
-    """Run the full grid. Returns {(budget, framing, toolset, model): measures}."""
+def _live_policy_factory(framing, toolset_name, model, tools):
+    """Build a real `model_policy` policy from `tools/call_model.py`. `model` here
+    names a backend (set AU_MODEL_BACKEND, or register()/set_backend a callable).
+    For a two-family comparison, register two backends and list them in MODELS."""
+    from call_model import call_model
+    return model_policy(call_model, framing=framing, tools=tools)
+
+
+def sweep(cycles_cap=60, trials=1, *, live=False, policy_factory=None):
+    """Run the full grid. Returns {(budget, framing, toolset, model): measures}.
+
+    Default: `_config_policy`, a scripted stand-in for exercising the assessment.
+    `live=True` (or a `policy_factory(framing, toolset_name, model, tools) -> policy`)
+    swaps in `model_policy(call_model, ...)` - the v2.0 run. `AU_MODEL_BACKEND=fake`
+    still works (deterministic offline), so `--live` on the default backend is a
+    wiring smoke test, not the experiment."""
+    if policy_factory is None:
+        policy_factory = _live_policy_factory if live else (
+            lambda fr, tsn, mo, tls: _config_policy(fr, tsn, mo))
     out = {}
     for budget in BUDGETS:
         for framing in FRAMINGS:
             for tsn, tools in TOOLSETS.items():
                 for model in MODELS:
-                    pol = _config_policy(framing, tsn, model)
+                    pol = policy_factory(framing, tsn, model, tools)
                     n = min(budget, cycles_cap)  # cap wall-clock for the rig
                     events, state = run_idle_loop(pol, cycles=n, framing=framing,
                                                   model=model, tools=tools)
@@ -470,7 +498,11 @@ def _cli(argv=None):
     d = sub.add_parser("dryrun")
     d.add_argument("--kind", choices=["project", "standalone"], default="project")
     d.add_argument("--cycles", type=int, default=50)
-    sub.add_parser("sweep")
+    sw = sub.add_parser("sweep")
+    sw.add_argument("--live", action="store_true",
+                    help="drive the grid with model_policy(call_model, ...) instead of the "
+                         "scripted stand-in - the v2.0 run. Respects AU_MODEL_BACKEND "
+                         "(fake=offline smoke test; cli / a registered callable = real).")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
@@ -479,7 +511,7 @@ def _cli(argv=None):
         print(json.dumps({"kind": args.kind, "measures": measure(events, state)}, indent=2))
         return 0
     if args.cmd == "sweep":
-        print(json.dumps(assess(sweep()), indent=2))
+        print(json.dumps(assess(sweep(live=args.live)), indent=2))
         return 0
     return 2
 
