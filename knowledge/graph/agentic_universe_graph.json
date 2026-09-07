@@ -10746,6 +10746,33 @@
       "evidence_links": [
         "docs/self_rebuild_v2.md"
       ]
+    },
+    {
+      "id": "concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules",
+      "label": "Given only production + preference-allocation + minimal protocols, agent societies spontaneously reproduce relational authority, labor specialization, and clan-based center-periphery stratification - and these shift with the production structure",
+      "type": "emergent_behavior",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:swarm_level",
+      "confidence": 0.42,
+      "description": "arXiv:2606.23764 (Ji, Chen, Dai et al., 2026-06-22, VERIFIED via abstract). CAREB-MAS: a multi-agent framework grounded in Affect Control Theory + Social Identity Theory + Durkheimian collective affect; agents reason through an emotion-ethics-belief chain with dynamically evolving egocentric identities, while the macro environment specifies ONLY individual production, preference-based allocation, and minimal interaction protocols. Across long-horizon simulations agents spontaneously reproduce five Fei Xiaotong Differential Order phenomena: (1) stable labor specialization, (2) guanxi-based economic ethics, (3) relational decay of cooperation over social distance, (4) emergent RELATIONAL AUTHORITY (authority from relationship, not task competence or provenance), (5) clan-based center-periphery stratification. The patterns shift with production structure - from kin-centered integration toward functional interdependence. No quantitative metrics in the abstract; this is a mechanism / social-simulation result. For this project: (a) more emergence-first evidence - rich social structure from minimal rules; (b) CHALLENGES pattern_provenance_based_authority - in an open agent society authority also accretes relationally, so a provenance-only privilege model misses an emergent channel; (c) relational decay of cooperation is the multi-agent analogue of trust-transfer decay (artifact_probe_trust_transfer_rig). CURRENCY: 2026-06, frontier-class agents; a simulation study so the finding is the mechanism, not a benchmark number - not capability-superseded. SMALL/LOCAL: relational-authority drift is plausibly stronger with weaker instruction-following.",
+      "tags": [
+        "emergent-social-structure",
+        "relational-authority",
+        "stratification",
+        "differential-order",
+        "careb-mas",
+        "minimal-rules",
+        "emergence-first",
+        "recency-2026-06"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2606.23764"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2606.23764"
+      ]
     }
   ],
   "edges": [
@@ -26203,6 +26230,41 @@
       "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
       "type": "supports",
       "description": "minimal-scaffold self-organization beating centralized coordination is the flock thesis at 25k-task scale"
+    },
+    {
+      "id": "edge_relational_authority_supports_emergence_first",
+      "source": "concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules",
+      "target": "approach_emergence_first",
+      "type": "supports",
+      "description": "rich, structure-sensitive social order (5 Differential Order phenomena) from 3 macro rules - emergence-first evidence outside the projects own probes"
+    },
+    {
+      "id": "edge_relational_authority_challenges_provenance_authority",
+      "source": "concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules",
+      "target": "pattern_provenance_based_authority",
+      "type": "challenges",
+      "description": "in an open agent society authority also accretes relationally; a provenance-only privilege model misses an emergent channel that a real deployment would have"
+    },
+    {
+      "id": "edge_relational_authority_refines_social_conventions",
+      "source": "concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules",
+      "target": "emergent_social_conventions",
+      "type": "refines",
+      "description": "conventions plus a stratified authority gradient and relational cooperation decay - a fuller picture of what emerges in a long-horizon society"
+    },
+    {
+      "id": "edge_relational_authority_informs_trust_transfer",
+      "source": "concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules",
+      "target": "artifact_probe_trust_transfer_rig",
+      "type": "informs",
+      "description": "relational decay of cooperation over social distance is the society-scale analogue of similarity-weighted trust transfer decay"
+    },
+    {
+      "id": "edge_relational_authority_grounds_agent_society_surface",
+      "source": "concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules",
+      "target": "pattern_agent_society_surface",
+      "type": "grounds",
+      "description": "if you run agents as a society you also inherit its emergent stratification, not just its convenience"
     }
   ]
 }

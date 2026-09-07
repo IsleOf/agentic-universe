@@ -1,0 +1,20 @@
+{
+  "run": 351,
+  "increment": "fold arXiv:2606.23764 Emergent Relational Order in LLM Agent Societies (CAREB-MAS) - given only production + preference-allocation + minimal protocols, agents reproduce 5 Differential Order phenomena incl emergent relational authority + clan-based stratification; challenges pattern_provenance_based_authority",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-351.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 351 STOP · VALID · graph +0 · cites 0v/0 · idle-streak 17! · legible 1.00 · verified-frac 0.77 · novelty n/a"
+}
