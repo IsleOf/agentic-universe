@@ -1252,6 +1252,10 @@
     {
       "date": "2026-10-11",
       "change": "Autonomous run 326. Hardened tools/loop_conductor.pick_increment (v2.3): it now consults janitor.drift_report over the REAL run corpus. _corpus_drift() reads idle_streak + novelty_ratio; an idle streak >= PLATEAU_WINDOW (3) OR novelty < 0.34 forces the IDLE-STATE (a)/(b)/(c) clause (must_be_abc) even when recent_kinds looks active - closing the gap where the classifier was hand-fed. conduct() threads use_corpus/runs_dir through (with a TypeError fallback for a custom choose_increment). +2 selftest checks (11). 1 edge: artifact_loop_conductor depends_on artifact_janitor. BUILD SELFTEST target GREEN. 346 nodes / 1377 -> 1378 edges."
+    },
+    {
+      "date": "2026-10-11",
+      "change": "Autonomous run 327. Orientation refresh (IDLE-STATE clause c; no main-graph node/edge change). docs/graph_state_2026-09.md Snapshot run 301 (330/1321, 36 selftests) -> run 327 (346/1378, 41 selftests) + a \"Runs 302-326\" section: the v2 deterministic spine completed as 5 stdlib bricks (research_brief 302, loop_conductor 303 + janitor-wired 326, v2_integration 311, janitor 325, with acceptance_gate 300); four literature threads (harness-engineering / deception / agent-memory-security / negotiation-diversity-routing); the two per-project audits (317-321). docs/PROJECT_STATE.md brought to run 327 - node count, the \"latest session\" block, the half-built list (the spine is complete, the generative edge is entirely v2.0). knowledge/graph/agentic_universe_project_graph.json -> 29 nodes (au__c_v2_spine; au__q_v2_rebuild -> partial), VALID."
     }
   ],
   "nodes": [

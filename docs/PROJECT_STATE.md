@@ -2,7 +2,7 @@
 
 **Format:** Agentic Universe handover (`docs/practicing_what_we_preach.md` §3) · **Graph:**
 `knowledge/graph/agentic_universe_project_graph.json` (26 nodes; `python tools/project_graph_scaffold.py
-validate` it) · **Date:** 2026-10-04 (run 301)
+validate` it) · **Date:** 2026-10-11 (run 327)
 
 > A fresh session reads this file and the project graph **first**. This is the compact orientation; the
 > full literature map is `docs/graph_state_2026-09.md`, the build plan is
@@ -12,8 +12,8 @@ validate` it) · **Date:** 2026-10-04 (run 301)
 
 ## What it is
 
-A research repo with two artefacts. **(1)** `knowledge/graph/agentic_universe_graph.json` — 330 nodes /
-1321 edges of VERIFIED-arXiv literature and built artifacts about *emergent agent behaviour* and
+A research repo with two artefacts. **(1)** `knowledge/graph/agentic_universe_graph.json` — 346 nodes /
+1378 edges of VERIFIED-arXiv literature and built artifacts about *emergent agent behaviour* and
 *self-improving agent harnesses*, edited one increment per run. **(2)** the autonomous loop that edits it:
 `tools/loop_session.py` wraps each run, `tools/improvement_loop.py` is the Phase-3 acceptance gate,
 `tools/loop_metrics.py` reads the trace corpus. `docs/` is the orientation layer; the graph JSON is the
@@ -21,33 +21,35 @@ source of truth. Everything in `tools/` is pure Python stdlib, no dependencies, 
 
 ## Current state
 
-**Working:** the loop has run 300 increments; every run validates the graph, passes **36 selftests**
+**Working:** the loop has run 326 increments; every run validates the graph, passes **41 selftests**
 (`python tools/selftest_all.py` → `BUILD SELFTEST: GREEN`), and commits+pushes to
 `proposals/2026-09-01-emergent-behaviour-cluster`. Phases 0–5 of the self-improving-harness plan exist as
 tested code. The acceptor/certificate literature cluster and the harness-evolution subfield are mapped and
-the project is self-audited against them (`docs/harness_anatomy_self_audit.md`).
+the project is self-audited against them.
 
-**Latest session (runs 271–300):** the owner pushed three new research artefacts and asked the project to
-start **rebuilding its own loop**.
-- *Owner research folded:* the **prediction-markets branch** (296 — its loop is `epistemic_constitution.py`'s
-  loop, independently arrived at; names ForecastBench / PredictionMarketBench / PolyBench as the eval
-  targets the forecast ledger lacks; "calibration is not timeliness"). The **agentic-tooling scan** (298,
-  new parts only) — AgentLens process-scoring (23% of passes are lucky retries), StaminaBench (retry is a
-  12× lever), model routing (`2606.22902`), hybrid memory + janitor agents. `docs/HANDOFF.md` refreshed
-  run 88 → 294.
-- *Per-project audit unblocked (297):* `docs/project_audit_kit/` — a drop-in for the sessions auditing
-  poly-bot (`/home/dev/poly-bot`) and poster-studio (`/home/dev/poster-studio`). Separate branch
-  `etsy-agentic-space` scaffolded off `main` (owner request).
-- *The v2 self-rebuild:* `docs/self_rebuild_v2.md` (299) — the loop redesigned on its own graph:
-  deterministic spine (task ledger + supervisor + an exogenous acceptance gate) / generative edge
-  (model-routed proposers + an 8-agent WSL/Windows roster + a Perplexity/NotebookLM browser scout). Run
-  300 built the v2.1 core brick, **`tools/acceptance_gate.py`** — `check()` → a signed replayable
-  certificate (held-out + PACE e-value + process-adjusted flag + forecast Brier); `verify()` replays it.
+**Latest session (runs 296–326):** the owner pushed research artefacts and asked the project to
+**rebuild its own loop**, and to audit poly-bot / poster-studio.
+- *The v2 self-rebuild — deterministic spine complete as tested stdlib:* `docs/self_rebuild_v2.md` (299)
+  is the design. Built: **`acceptance_gate.py`** (300 — `check()` → a signed replayable certificate:
+  held-out + PACE e-value + process-adjusted flag + forecast Brier), **`research_brief.py`** (302 — the
+  typed scout output + a mechanised dedup check), **`loop_conductor.py`** (303 — the headless pipeline;
+  its IDLE-STATE classifier wired to the real run corpus via the janitor at 326), **`v2_integration.py`**
+  (311 — an end-to-end dry-run proving the bricks compose), **`janitor.py`** (325 — compiles the run
+  corpus into per-consumer views). Plus the `perplexity-notebolm` scout scaffold (304).
+- *Owner research folded:* the prediction-markets branch (296), the agentic-tooling scan (298), and —
+  off the SEVerA citation chain and an emergence-side sweep — a harness-engineering cluster
+  (305–307, 316), the deception thread (309–310), agent-memory security (313), and negotiation/diversity/
+  routing (322–324). `docs/HANDOFF.md` refreshed run 88 → 294.
+- *The two per-project audits (317–321):* `docs/audits/poly-bot/` + `docs/audits/poster-studio/` — a
+  validated graph + `PROJECT_STATE` + `question` nodes each, plus a poly-bot watchdog gap analysis and
+  the poster-studio ↔ orchestrator interface on the `etsy-agentic-space` branch. `docs/audits/README.md`
+  is the coordination doc. Closes the owner request open since run 251.
 
-**Half-built / not built:** Phase 6 (the swarm layer) is untouched — the project studies emergence but has
-never run a real swarm. The model-integration step (a real `call_model` bound into the probe adapters) is
-deferred. `acceptance_gate.py` exists but is not yet wired as the loop's commit gate. The v2 plan's other
-skills (`perplexity-notebooklm`, `research-brief`, `loop-conductor`) are unbuilt.
+**Half-built / not built:** Phase 6 (the swarm layer) is untouched. **The v2 deterministic spine is
+complete and self-observing; the generative edge is not built — it is entirely the `call_model` binding
+(v2.0).** The probes still run on synthetic data. `acceptance_gate.py` is not yet the loop's live commit
+gate (that needs the real `run_worker`). The scout's live browser path (Perplexity/NotebookLM selectors)
+needs a profile + iteration.
 
 **Known gaps** (see `docs/what_would_make_this_wrong.md`): the central habitat mechanism
 (`concept_habitat_slack`) is unverified; the gate scores usefulness but nothing scores novelty
@@ -65,8 +67,10 @@ most" — the top-severity gap, `concept_habitat_slack`); the 7 open research qu
 real commit gate; and a real multi-agent run. Every stdlib brick around it is already built. The loop
 cannot bind its own model — this is the human-in-the-loop step.
 
-Until then, autonomous runs keep folding literature, deepening the graph, and building the v2 plan's
-remaining stdlib pieces (the `research-brief` schema, the conductor skeleton).
+Until then, autonomous runs keep folding literature and deepening the graph. The v2 deterministic
+spine is finished (`acceptance_gate` / `research_brief` / `loop_conductor` / `v2_integration` /
+`janitor`, all selftested, the conductor self-observing via the janitor); nothing more of it can be
+built without the model.
 
 ## Hard constraints
 

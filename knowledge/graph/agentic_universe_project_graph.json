@@ -1,7 +1,7 @@
 {
   "project": "agentic-universe",
   "format": "agentic-universe project graph v1",
-  "last_updated": "2026-10-04",
+  "last_updated": "2026-10-11",
   "nodes": [
     {
       "id": "au__root",
@@ -410,15 +410,31 @@
       "id": "au__q_v2_rebuild",
       "label": "v2 self-rebuild: headless multi-agent loop on the exogenous gate",
       "type": "question",
-      "status": "open",
+      "status": "partial",
       "confidence": 0.4,
-      "description": "docs/self_rebuild_v2.md (run 299). 6 gated phases; v2.0 = provision a call_model budget. Blocks: probes, real acceptance gate, real swarm.",
+      "description": "docs/self_rebuild_v2.md (run 299). 6 gated phases; v2.0 = provision a call_model budget. Blocks: probes, real acceptance gate, real swarm. UPDATE (run 327): the deterministic spine is COMPLETE and self-observing (5 bricks, runs 300-326). Only v2.0 (bind call_model into run_worker) + the scheduled-task body + the live browser-scout selectors remain.",
       "derived_from": [
         "docs/self_rebuild_v2.md"
       ],
       "tags": [
         "v2",
         "next"
+      ]
+    },
+    {
+      "id": "au__c_v2_spine",
+      "type": "component",
+      "label": "The v2 deterministic spine - 5 selftested stdlib bricks + the self-observing conductor",
+      "status": "built",
+      "confidence": 0.65,
+      "description": "acceptance_gate (300) + research_brief (302) + loop_conductor (303, IDLE-STATE classifier wired to the janitor at 326) + v2_integration (311, composition proof) + janitor (325). The whole deterministic half of docs/self_rebuild_v2.md as tested code. The generative edge is v2.0.",
+      "derived_from": [
+        "docs/self_rebuild_v2.md"
+      ],
+      "tags": [
+        "v2",
+        "spine",
+        "built"
       ]
     }
   ],
@@ -611,6 +627,20 @@
       "target": "au__q_v2_rebuild",
       "type": "records",
       "description": "First built brick of the v2 plan."
+    },
+    {
+      "id": "au__e_spine_implements_v2",
+      "source": "au__c_v2_spine",
+      "target": "au__q_v2_rebuild",
+      "type": "implements",
+      "description": "The built deterministic half of the v2 plan."
+    },
+    {
+      "id": "au__e_spine_records_root",
+      "source": "au__c_v2_spine",
+      "target": "au__root",
+      "type": "records",
+      "description": "The loop rebuilt on its own research."
     }
   ],
   "evolution_log": [

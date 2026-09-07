@@ -1,21 +1,52 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252, 279, 301.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252, 279, 301, 327.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 301)
+## Snapshot (run 327)
 
-**330 nodes · 1321 edges · 9 approach families · 212 `challenges` edges (~16% of all edges).**
+**346 nodes · 1378 edges · 9 approach families · 215 `challenges` edges (~16% of all edges).**
 
-`verification_state`: 114 needs-validation · **175 partially-validated** · **29 validated** · 5 inconclusive · 7 unset.
+`verification_state`: 114 needs-validation · **187 partially-validated** · **33 validated** · 5 inconclusive · 7 unset.
 (`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature
 nodes sit at `partially_validated`.)
-Families: self_improving_harness 131 · emergent_behaviors 87 · orchestration_first 27 · agent_habitat 27 · nourishing_harness 24 · graph_engineering 22 · rest 12.
-Edge types: supports 448 · challenges 212 · instantiates 199 · refines 199 · informs 78 · depends_on 44 · implements 43 · extends 31 · grounds 22 · verifies 20 · constrains 19 · rest 6.
-Selftests: `python tools/selftest_all.py` → **BUILD SELFTEST: GREEN** (36 jobs).
+Families: self_improving_harness 142 · emergent_behaviors 90 · orchestration_first 28 · agent_habitat 27 · nourishing_harness 25 · graph_engineering 22 · rest 12.
+Edge types: supports 468 · challenges 215 · instantiates 200 · refines 205 · informs 88 · implements 49 · depends_on 48 · extends 34 · verifies 23 · grounds 22 · constrains 20 · rest 6.
+Selftests: `python tools/selftest_all.py` → **BUILD SELFTEST: GREEN** (41 jobs).
+
+**Runs 302–326** — literature folds across four threads + the v2 self-rebuild finished as a
+5-brick deterministic spine + the two per-project audits delivered.
+
+*v2 self-rebuild — deterministic spine complete (302, 303, 311, 325, 326):* `research_brief.py`
+(302, typed scout output + a mechanised dedup check), `loop_conductor.py` (303, the headless
+pipeline; its IDLE-STATE classifier wired to the real run corpus via the janitor at 326),
+`v2_integration.py` (311, an end-to-end dry-run proving the bricks compose), `janitor.py` (325,
+compiles the ~256 run summaries into per-consumer views — `concept_trace_compiles_to_per_consumer_views`).
+With `acceptance_gate.py` (300) that is the whole deterministic half of `docs/self_rebuild_v2.md`
+as tested stdlib. What remains is the generative edge — a `call_model` budget (v2.0).
+
+*Literature (305–324) — four threads:* the **harness-engineering** cluster off the SEVerA
+citation chain (SEVerA `2603.25111` FGGM per-call contracts; Harness-Updating `2605.30621` —
+harness-updating is flat in base capability; From-Prompts-to-Contracts `2607.08028` — only
+code-owned enforcement preserves both safety and utility; AutoHarness `2603.03329`;
+Code-as-Agent-Harness survey `2605.18747` — 5 of its 6 open challenges have a mapped project
+answer). The **deception** thread (KnownLieBench `2608.26372` — knowledge-verify before scoring;
+Among Us `2603.26635` — current deception is mostly equivocation, strategically weak).
+**Agent-memory security** (MRMMIA `2605.27825` — membership inference is a third attack class on
+the retrieve-heavy stance). The **negotiation / diversity / routing** thread on the
+emergence-first side (Diversity Without Fidelity `2604.11840` — surface move-diversity can
+coexist with zero outcome-diversity, a 6th angle on `principle_diversity_maintenance`; LLM-X
+`2605.11376` — a typed LLM-to-LLM bus + the first at-scale negotiation eval; ProgRouter
+`2608.25992` — route per step by predicted progress gain, not one-shot per query).
+
+*The two per-project audits (317–321):* first-pass `docs/audits/poly-bot/` (32-node graph +
+`PROJECT_STATE` + a watchdog gap analysis) and `docs/audits/poster-studio/` (31-node graph +
+`PROJECT_STATE`), each with `question` nodes for the active session; the poster-studio ↔
+orchestrator interface drafted on the `etsy-agentic-space` branch; `docs/audits/README.md` for
+coordination. Closes the owner request open since run 251.
 
 **Runs 280–300** — the owner's three new research pushes folded, then the project turned to
 **rebuilding its own loop**.
