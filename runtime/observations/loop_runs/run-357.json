@@ -1,0 +1,20 @@
+{
+  "run": 357,
+  "increment": "add bounded utility-ranked retrieval to experience_bank.py - for_planning/for_failure now rank by utility_score and cap at top_k=3 (was: every match, unordered); the direct fix for arXiv:2603.29231 (run 356) memory-scaffolds-degrade-long-horizon",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-357.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 357 STOP · VALID · graph +0 · cites 0v/0 · idle-streak 23! · legible 1.00 · verified-frac 0.77 · novelty n/a"
+}

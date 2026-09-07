@@ -5630,7 +5630,7 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:phase2_built",
       "confidence": 0.8,
-      "description": "tools/experience_bank.py, run 64: workflow and step collections kept apart with separate retrieval keys. Every entry stamped with source_manifest; bank.stale(current) returns entries whose harness source changed (emergent_stale_belief_propagation mitigation). Raw source_events retained (concept_compaction_cliff mitigation). condense() dedupes CLAIM events by evidence_roots and entries record distinct_evidence_roots not an agent count (pattern_evidential_ancestry_tracking / concept_epistemic_sybil_collapse mitigation). Token cost rolled up from TOOL_RESULT.token_cost. Selftest GREEN. Not done: retrieval is substring match (needs a real signature); no condensation correctness gate (Phase 3); synthetic traces only.",
+      "description": "tools/experience_bank.py, run 64: workflow and step collections kept apart with separate retrieval keys. Every entry stamped with source_manifest; bank.stale(current) returns entries whose harness source changed (emergent_stale_belief_propagation mitigation). Raw source_events retained (concept_compaction_cliff mitigation). condense() dedupes CLAIM events by evidence_roots and entries record distinct_evidence_roots not an agent count (pattern_evidential_ancestry_tracking / concept_epistemic_sybil_collapse mitigation). Token cost rolled up from TOOL_RESULT.token_cost. Selftest GREEN. Not done: retrieval is substring match (needs a real signature); no condensation correctness gate (Phase 3); synthetic traces only. BOUNDED RETRIEVAL added run 357 (from arXiv:2603.29231, run 356: memory scaffolds universally degrade long-horizon performance): for_planning / for_failure now rank matches by utility_score (recency tiebreak) and cap at top_k=3 by default (pass None for all). Unbounded context-stuffing was the pre-357 behaviour; the cap + the ranking + prune() together are the bounded-curated-retrieval this result and concept_misevolution demand. +5 selftest checks.",
       "tags": [
         "phase-2",
         "experience-bank",
@@ -26524,6 +26524,13 @@
       "target": "artifact_probe_composed_design_rig",
       "type": "informs",
       "description": "the Meltdown Onset Point is a sharper version of the composed-design rigs \"usable horizon\" - the probe could report an MOP-style threshold"
+    },
+    {
+      "id": "edge_experience_bank_answers_reliability_science",
+      "source": "artifact_phase2_experience_bank",
+      "target": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+      "type": "refines",
+      "description": "run 357: the top_k=3 utility-ranked retrieval is the bank's answer to \"memory scaffolds degrade long-horizon performance\" - bounded curated retrieval, not context-stuffing"
     }
   ]
 }

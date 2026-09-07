@@ -176,15 +176,29 @@ class ExperienceBank:
             out.append(json.loads(p.read_text(encoding="utf-8")))
         return out
 
-    def for_planning(self, task_signature):
-        """Workflow-level entries whose retrieval key is a substring match."""
-        return [e for e in self._all("workflow")
-                if task_signature in e["retrieval_key"] or e["retrieval_key"] in task_signature]
+    # `top_k` caps how many entries a retrieval returns. arXiv:2603.29231 (run 356):
+    # memory scaffolds universally degrade long-horizon performance - unbounded
+    # context-stuffing is the mechanism. A bounded, utility-ranked retrieval is
+    # what that result (and concept_misevolution's memory-accumulation drift) asks
+    # for. Ranking: utility_score desc, then most-recent first. None = no cap
+    # (old behaviour, for callers that want to rank themselves).
+    _DEFAULT_TOP_K = 3
 
-    def for_failure(self, error_signature):
-        """Step-level entries matching an error signature."""
-        return [e for e in self._all("step")
-                if error_signature in e["retrieval_key"] or e["retrieval_key"] in error_signature]
+    def _ranked_matches(self, collection, sig, top_k):
+        matches = [e for e in self._all(collection)
+                   if sig in e["retrieval_key"] or e["retrieval_key"] in sig]
+        matches.sort(key=lambda e: (self.utility_score(e), e.get("ts", 0)), reverse=True)
+        return matches if not top_k else matches[:top_k]   # None / 0 -> no cap
+
+    def for_planning(self, task_signature, *, top_k=_DEFAULT_TOP_K):
+        """Workflow-level entries whose retrieval key is a substring match, ranked
+        by empirical utility and capped at `top_k` (default 3; pass None for all)."""
+        return self._ranked_matches("workflow", task_signature, top_k)
+
+    def for_failure(self, error_signature, *, top_k=_DEFAULT_TOP_K):
+        """Step-level entries matching an error signature, ranked by utility and
+        capped at `top_k` (default 3; pass None for all)."""
+        return self._ranked_matches("step", error_signature, top_k)
 
     @staticmethod
     def utility_score(entry):
@@ -479,6 +493,30 @@ def _selftest():
         checks["prune keeps raw source_events on survivors"] = all(
             e.get("source_events") for e in ub._all("workflow"))
         checks["prune is a no-op below keep_n"] = ExperienceBank(base=tmp / "tiny").prune("workflow", 10) == []
+
+        # bounded, utility-ranked retrieval (run 357, from arXiv:2603.29231)
+        rb = ExperienceBank(base=tmp / "rankbank")
+        rmk = lambda k: rb.add("workflow", f"lesson {k}", retrieval_key="shared-sig-" + k,
+                               source_trace="t", source_manifest="m", source_events=[{"seq": 0}],
+                               distinct_evidence_roots=[], note="")
+        r_ids = {c: rmk(c) for c in ("a", "b", "c", "d", "e", "f")}
+        for _ in range(8):
+            rb.record_use("workflow", r_ids["a"]["id"], helped=True)    # best
+        for _ in range(4):
+            rb.record_use("workflow", r_ids["b"]["id"], helped=True)
+        for _ in range(5):
+            rb.record_use("workflow", r_ids["f"]["id"], helped=False)   # worst
+        got = rb.for_planning("shared-sig")
+        checks["for_planning caps at top_k=3 by default"] = len(got) == 3
+        checks["for_planning ranks the proven-useful entry first"] = (
+            got[0]["id"] == r_ids["a"]["id"])
+        checks["for_planning never surfaces the proven-useless entry in the top 3"] = (
+            r_ids["f"]["id"] not in {e["id"] for e in got})
+        checks["for_planning(top_k=None) returns every match"] = (
+            len(rb.for_planning("shared-sig", top_k=None)) == 6)
+        checks["for_failure is likewise capped"] = len(
+            ExperienceBank(base=tmp / "fb").for_failure("x")) == 0  # empty bank, no crash
+
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         print("\n  bank stats:", json.dumps(bank.stats()))
