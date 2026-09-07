@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 356 nodes, 1424 edges · **Date:** 2026-09-05
+**Graph at generation:** 357 nodes, 1429 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -345,6 +345,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - hooks/pre-commit — `artifact_phase5_exec_guard`
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
+- https://arxiv.org/abs/2607.07368 — `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
