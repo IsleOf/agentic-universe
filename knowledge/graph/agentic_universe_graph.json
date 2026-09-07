@@ -10688,6 +10688,35 @@
       "evidence_links": [
         "https://arxiv.org/abs/2509.26354"
       ]
+    },
+    {
+      "id": "concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model",
+      "label": "The multi-agent communication topology can be generated from the task query by a trained autoregressive graph model that picks the agent count, roles, and links jointly - and a compactness reward trims it",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "orchestration_first",
+      "branch_key": "orchestration_first:topology",
+      "confidence": 0.5,
+      "description": "ARG-Designer ('Assemble Your Crew', arXiv:2507.18224, AAAI 2026 Oral, Li et al. - VERIFIED) reframes multi-agent system design as CONDITIONAL AUTOREGRESSIVE GRAPH GENERATION: conditioned on a natural-language task query, one model sequentially decides the number of agents, selects each role from an extensible pool, and lays the communication links - composition and structure designed jointly, from scratch. SOTA on six benchmarks with markedly better token efficiency and extensibility than fixed / search-based topologies. RGA-Designer (arXiv:2608.20099, Suwannapichat et al., 2026-08-20, ICONIP 2026 poster, VERIFIED) adds an RLHF-style reward model that jointly scores task correctness AND structural compactness, cutting token consumption a further 20.5% at equal accuracy. For this project: (1) it is a TRAINED harness component (the topology generator), so it sits with JIT-Agent / WHALE on the challenges-to-emergence-first / no-weight-training fork - but the trained part is a small graph model, not the agent LLM; (2) the compactness reward is `pattern_causal_edge_pruning` learned rather than measured post-hoc; (3) a query-conditioned generated topology is exactly the 'agent-shaped topology' whose corruptibility concept_agent_shaped_topology_is_agent_corruptible warns about - now optimised, which could sharpen the risk. CURRENCY: current (2026-07/08); GPT-4-class agent pools; the token-efficiency numbers are 'possibly superseded' but the autoregressive-generation framing is the contribution. SMALL/LOCAL regime: a tiny trained graph model is cheap to run locally, and topology compactness matters more when each agent call is expensive.",
+      "tags": [
+        "topology-design",
+        "autoregressive-graph-generation",
+        "arg-designer",
+        "rga-designer",
+        "orchestration",
+        "trained-component",
+        "edge-pruning",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2507.18224",
+        "https://arxiv.org/abs/2608.20099"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2507.18224",
+        "https://arxiv.org/abs/2608.20099"
+      ]
     }
   ],
   "edges": [
@@ -26040,6 +26069,41 @@
       "target": "concept_unmanaged_skill_libraries_silently_drift",
       "type": "refines",
       "description": "skill-library drift is the Workflow-pathway instance; misevolution generalises 'unmanaged accumulation degrades' from retrieval quality to safety alignment"
+    },
+    {
+      "id": "edge_topogen_instantiates_pattern_causal_edge_pruning",
+      "source": "concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model",
+      "target": "pattern_causal_edge_pruning",
+      "type": "instantiates",
+      "description": "the compactness reward learns to keep only the load-bearing communication links - edge pruning as a training objective rather than a post-hoc analysis"
+    },
+    {
+      "id": "edge_topogen_challenges_emergence_first",
+      "source": "concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model",
+      "target": "approach_emergence_first",
+      "type": "challenges",
+      "description": "the topology generator is a trained model; another 'trained harness component beats hand-designed' data point alongside JIT-Agent / WHALE - though the trained part is a small graph model, not the agent LLM"
+    },
+    {
+      "id": "edge_topogen_sharpens_agent_shaped_topology_corruptible",
+      "source": "concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model",
+      "target": "concept_agent_shaped_topology_is_agent_corruptible",
+      "type": "refines",
+      "description": "a query-conditioned, reward-optimised topology is the agent-shaped topology taken further: optimisation pressure could make the inherited corruptibility worse, not better"
+    },
+    {
+      "id": "edge_topogen_informs_orchestration_value_criterion",
+      "source": "concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "informs",
+      "description": "an automatic designer that also chooses agent COUNT and roles is a way to only pay the multi-agent cost when the task query implies the a/b/c conditions hold"
+    },
+    {
+      "id": "edge_topogen_supports_harness_orchestration_pairing",
+      "source": "concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model",
+      "target": "concept_harness_orchestration_pairing",
+      "type": "supports",
+      "description": "composition + structure generated jointly from the query is the orchestration layer made an explicit, separable, swappable artefact"
     }
   ]
 }
