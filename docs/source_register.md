@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 344 nodes, 1370 edges · **Date:** 2026-09-05
+**Graph at generation:** 345 nodes, 1373 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -196,6 +196,7 @@ Referenced via research notes; not independently opened. Verify before relying o
 | [2608.25593](https://arxiv.org/abs/2608.25593) | (title not recorded) | `concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension` |
 | [2608.25623](https://arxiv.org/abs/2608.25623) | (title not recorded) | `concept_augmentation_automation_divergence` |
 | [2608.25776](https://arxiv.org/abs/2608.25776) | (title not recorded) | `emergent_mind_viruses` |
+| [2608.25992](https://arxiv.org/abs/2608.25992) | (title not recorded) | `concept_progrouter_route_the_model_per_step_by_predicted_progress_gain_not_per_query_one_shot` |
 | [2608.26081](https://arxiv.org/abs/2608.26081) | (title not recorded) | `emergent_self_organizing_roles` |
 | [2608.26263](https://arxiv.org/abs/2608.26263) | (title not recorded) | `pattern_code_as_context` |
 | [2608.26372](https://arxiv.org/abs/2608.26372) | (title not recorded) | `concept_knownliebench_verify_the_agent_knows_the_entitlement_before_scoring_whether_it_lies_under_a_deployer_incentive` |
@@ -512,6 +513,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-09-1800.md` — `concept_spontaneous_behaviour_beats_scripted_for_simulation`
 - `docs/auto_sweep_2026-10-10-0600.md` — `concept_agentsociety_large_scale_generative_society`, `concept_surface_move_diversity_can_coexist_with_zero_outcome_diversity_vet_samplers_on_the_outcome_distribution`
 - `docs/auto_sweep_2026-10-10-1200.md` — `concept_llm_x_a_typed_message_bus_for_llm_to_llm_coordination_with_a_measured_policy_strictness_tradeoff`
+- `docs/auto_sweep_2026-10-10-1800.md` — `concept_progrouter_route_the_model_per_step_by_predicted_progress_gain_not_per_query_one_shot`
 - `docs/auto_sweep_2026-10-11-0600.md` — `concept_inference_time_scaling_of_verification`
 - `docs/auto_sweep_2026-10-12-0600.md` — `concept_frontier_models_can_scheme_in_context`
 - `docs/auto_sweep_2026-10-12-1200.md` — `concept_anti_scheming_mitigation_confounded_by_eval_awareness`

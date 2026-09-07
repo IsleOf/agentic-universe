@@ -1240,6 +1240,10 @@
     {
       "date": "2026-10-10",
       "change": "Autonomous run 323. Emergence-core sweep (coordination substrate). Folded arXiv:2605.11376 (LLM-X, May 2026, VERIFIED): a typed message bus + federated-gateway/topic-routing/policy-enforcement substrate for LLM-to-LLM coordination (not tool-centric), with a contract-net typed protocol and the first at-scale eval of LLM multi-agent negotiation (5/9/12 agents, Low/Med/High policy, up to 12h). Policy strictness tradeoff: robustness + fairness up, latency + message volume up; stable under sustained load, bounded latency drift. New node + 3 edges: supports concept_proof_carrying_negotiation (the transport/schema/policy layer under PCN); informs the run-218 orchestration criterion (a 12-agent 12h data point) + concept_agent_communication_is_a_layered_attack_surface. 343 -> 344 nodes, 1367 -> 1370 edges. Validator VALID."
+    },
+    {
+      "date": "2026-10-10",
+      "change": "Autonomous run 324. Emergence-core sweep (open-ended / routing). Folded arXiv:2608.25992 (ProgRouter, Aug 2026, VERIFIED): cascade routing makes one-shot query-level decisions; ProgRouter routes PER STEP, online, by predicted progress gain (a multi-view progress scorer + a dual-path predictor + adaptive meta-gating), balancing progress gain / time budget / long-term cost. Cuts operating cost vs baselines on HumanEval+/MBPP/MATH-500/ASQA while holding performance. New node + 3 edges: refines concept_model_routing_per_task_class (run 298 - one-shot-per-class -> online-per-step); informs the v2 plan (route the proposer/verifier per step by progress gain) + concept_horizon_gap_outcome_signals_decay (the progress scorer is an instrument for the decaying mid-trajectory signal). 344 -> 345 nodes, 1370 -> 1373 edges. Validator VALID."
     }
   ],
   "nodes": [
@@ -10259,6 +10263,32 @@
       ],
       "evidence_links": [
         "docs/auto_sweep_2026-10-10-1200.md"
+      ]
+    },
+    {
+      "id": "concept_progrouter_route_the_model_per_step_by_predicted_progress_gain_not_per_query_one_shot",
+      "label": "ProgRouter: route the model PER STEP by predicted progress gain, not one-shot per query - the right LLM at each step depends on task progress, remaining difficulty, and the cost budget",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:harness_anatomy",
+      "confidence": 0.55,
+      "description": "arXiv:2608.25992 (ProgRouter, Aug 2026, VERIFIED via arxiv API). Multi-agent LLM workflows incur substantial cost (repeated invocations + long-horizon context accumulation). Existing cascade routing makes ONE-SHOT, QUERY-LEVEL decisions and cannot adapt to the state-dependent nature of a multi-step workflow, where the right LLM at each step depends on evolving progress, remaining difficulty, and cost-efficiency. ProgRouter is online, progress-guided, STEP-WISE routing: a multi-view task-progress scorer (coarse outcome regimes + fine-grained subtask completion / progress trends / workflow-state quality), then a dual-path progress predictor + an adaptive meta-gating mechanism that estimate the PROGRESS GAIN per candidate routed LLM; the router balances progress gain, time budget, and long-term operating cost. On HumanEval+ / MBPP / MATH-500 / ASQA (agentic code gen, math reasoning, RAG long-form QA) it cuts operating cost vs baselines while holding task performance. Currency: Aug 2026, ~1 month; the cost-reduction numbers are benchmark/harness-specific, the per-step-progress-guided-beats-one-shot-per-query principle is the durable part.",
+      "tags": [
+        "model-routing",
+        "per-step",
+        "progress-guided",
+        "cost-budget",
+        "online",
+        "verified"
+      ],
+      "derived_from": [
+        "docs/auto_sweep_2026-10-10-1800.md",
+        "arXiv:2608.25992 (ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs) - VERIFIED"
+      ],
+      "evidence_links": [
+        "docs/auto_sweep_2026-10-10-1800.md"
       ]
     }
   ],
@@ -25066,6 +25096,39 @@
       "approach_family": "orchestration_first",
       "confidence": 0.5,
       "description": "An LLM-to-LLM bus with policy enforcement is a concrete instance of the layer this node warns about; schema validity at the bus is one of the defences."
+    },
+    {
+      "id": "edge_progrouter_refines_model_routing",
+      "source": "concept_progrouter_route_the_model_per_step_by_predicted_progress_gain_not_per_query_one_shot",
+      "target": "concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.6,
+      "description": "Agent-as-a-Router (run 298) routes per task CLASS, one-shot. ProgRouter sharpens it: route per STEP, online, by predicted progress gain - the right model depends on the evolving workflow state, not just the task class. The C-A-F loop becomes a per-step gate."
+    },
+    {
+      "id": "edge_progrouter_informs_v2_plan",
+      "source": "concept_progrouter_route_the_model_per_step_by_predicted_progress_gain_not_per_query_one_shot",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2 model-routed proposer/verifier should route per step by predicted progress gain: cheap while progress is smooth, escalate when a subtask stalls or workflow-state quality drops - not a fixed cheap-proposes/strong-verifies split."
+    },
+    {
+      "id": "edge_progrouter_informs_horizon_gap",
+      "source": "concept_progrouter_route_the_model_per_step_by_predicted_progress_gain_not_per_query_one_shot",
+      "target": "concept_horizon_gap_outcome_signals_decay",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.5,
+      "description": "Long-horizon context accumulation is named as a primary cost driver; the multi-view progress scorer (progress trends + workflow-state quality) is a concrete instrument for the mid-trajectory signal the horizon-gap node says decays."
     }
   ]
 }
