@@ -10856,6 +10856,35 @@
       "evidence_links": [
         "tools/executor_pool.py"
       ]
+    },
+    {
+      "id": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+      "label": "Reliability (consistent success over repeated long tasks) is a distinct axis from single-attempt capability - measured by RDC/VAF/GDS/MOP; frontier models meltdown ~19% from over-ambition, and memory scaffolds UNIVERSALLY degrade long-horizon performance",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:reliability",
+      "confidence": 0.58,
+      "description": "arXiv:2603.29231 (Khanal, Tao, Zhou, submitted 2026-03-31, VERIFIED via abstract). \"Existing benchmarks measure capability - whether a model succeeds on a single attempt - but production deployments require reliability - consistent success across repeated attempts on tasks of varying duration.\" 10 models, 23,392 episodes, 396 tasks. Four metrics: Reliability Decay Curve (how performance deteriorates with task duration), Variance Amplification Factor (how prediction variance scales with length/complexity), Graceful Degradation Score (declines vs collapses), Meltdown Onset Point (the threshold for catastrophic failure patterns). Findings: SE reliability drops 0.90->0.44 over duration while document processing holds 0.74->0.71 (domain-dependent - maps to elicitation-shaped vs capability-shaped tasks); higher variance correlates with CAPABILITY not instability; ranking order shifts significantly at longer horizons; frontier models show up to 19% MELTDOWN rates from \"ambitious multi-step strategies\"; and MEMORY SCAFFOLDS UNIVERSALLY DEGRADE long-horizon performance across all tested models. For this project: (a) RDC is the measurement for concept_geometric_reliability_decay; (b) the ranking-shift-at-horizon result reinforces concept_self_improvement_evaluation_is_noisy_and_task_order_dependent - the Phase 3 gate should score at the target horizon, not a short proxy; (c) the memory-scaffold result is in direct TENSION with concept_naive_trajectory_accumulation_already_helps and with the experience_bank - the resolution is likely that curated/bounded retrieval helps while naive context-stuffing hurts at long horizons, which is exactly the run-175 retention API + concept_misevolution memory-accumulation degradation; (d) over-ambition meltdown connects to concept_incomplete_task_induces_shutdown_resistance. CURRENCY: 2026-03, GPT-4/Claude-3.5-class; the specific decay numbers are \"possibly superseded\" but reliability-as-a-separate-axis and the four-metric frame are methodological. SMALL/LOCAL: decay and meltdown are expected earlier.",
+      "tags": [
+        "reliability-science",
+        "rdc",
+        "vaf",
+        "gds",
+        "mop",
+        "meltdown",
+        "memory-scaffold-degrades",
+        "long-horizon",
+        "capability-vs-reliability",
+        "recency-2026-03"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2603.29231"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2603.29231"
+      ]
     }
   ],
   "edges": [
@@ -26453,6 +26482,48 @@
       "target": "artifact_call_model_seam",
       "type": "depends_on",
       "description": "run_worker is the v2.0 model seam; the fake worker is the offline stand-in"
+    },
+    {
+      "id": "edge_reliability_science_verifies_geometric_decay",
+      "source": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+      "target": "concept_geometric_reliability_decay",
+      "type": "grounds",
+      "description": "the Reliability Decay Curve is the empirical measurement of the geometric decay the project asserts; SE 0.90->0.44 over duration"
+    },
+    {
+      "id": "edge_reliability_science_supports_noisy_eval",
+      "source": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+      "target": "concept_self_improvement_evaluation_is_noisy_and_task_order_dependent",
+      "type": "supports",
+      "description": "ranking order shifts significantly at longer horizons - a gate scoring on a short proxy will mis-rank"
+    },
+    {
+      "id": "edge_reliability_science_challenges_naive_accumulation",
+      "source": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+      "target": "concept_naive_trajectory_accumulation_already_helps",
+      "type": "challenges",
+      "description": "memory scaffolds universally degrade long-horizon performance across all tested models - naive accumulation helps on short tasks but hurts long ones"
+    },
+    {
+      "id": "edge_reliability_science_constrains_experience_bank",
+      "source": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+      "target": "artifact_phase2_experience_bank",
+      "type": "constrains",
+      "description": "the bank must serve BOUNDED, curated retrieval, not context-stuffing; the run-175 retention API + prune() is the answer this result demands"
+    },
+    {
+      "id": "edge_reliability_science_refines_horizon_gap",
+      "source": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+      "target": "concept_horizon_gap_outcome_signals_decay",
+      "type": "refines",
+      "description": "adds four operational reliability metrics (RDC/VAF/GDS/MOP) to the Horizon Gaps qualitative claim that outcome signals decay with horizon"
+    },
+    {
+      "id": "edge_reliability_science_informs_composed_design_rig",
+      "source": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+      "target": "artifact_probe_composed_design_rig",
+      "type": "informs",
+      "description": "the Meltdown Onset Point is a sharper version of the composed-design rigs \"usable horizon\" - the probe could report an MOP-style threshold"
     }
   ]
 }

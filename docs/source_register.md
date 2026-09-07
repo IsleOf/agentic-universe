@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 364 nodes, 1471 edges · **Date:** 2026-09-05
+**Graph at generation:** 365 nodes, 1477 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -347,6 +347,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2509.26354 — `concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker`
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2510.14548 — `concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model`
+- https://arxiv.org/abs/2603.29231 — `concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance`
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - https://arxiv.org/abs/2606.23764 — `concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules`
 - https://arxiv.org/abs/2607.07368 — `artifact_cohort_monitor`, `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it` +1
