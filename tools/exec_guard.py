@@ -17,10 +17,11 @@ commit; the loop cannot talk past it. Invariants:
 - raw `runtime/**/*.jsonl` is not staged (must stay gitignored, rule 9)
 - the current branch is the working branch, not `main`
 - no self-design edit without owner ack — staging a change to the acceptance
-  gate, this guard, the validator, the selftest manifest, `loop_policy.json`,
-  `SKILL.md`, `harness_registry`, or a decision-logic region of the proposer /
-  conductor is blocked unless `AU_SELF_DESIGN_ACK` is set to a reason (run 338,
-  from the MLAS fold: the loop must not be able to weaken its own gate)
+  gate, this guard, the validator, the selftest manifest, anything under
+  `runtime/harness/` (loop_policy / loop_procedure / loop_tools / loop_team), or
+  a decision-logic region of the proposer / conductor is blocked unless
+  `AU_SELF_DESIGN_ACK` is set to a reason (run 338, paths fixed run 339; from the
+  MLAS fold: the loop must not be able to weaken its own gate)
 - (warning only) `docs/auto_sweep_*` was updated if the graph changed
 
 Run as `python tools/exec_guard.py check` from a pre-commit hook. Install the
@@ -56,7 +57,7 @@ _LEAK_PATTERNS = [
 WORKING_BRANCH = "proposals/2026-09-01-emergent-behaviour-cluster"
 GRAPH_REL = "knowledge/graph/agentic_universe_graph.json"
 
-# --- "gate the gate" (run 338) -----------------------------------------------
+# --- "gate the gate" (run 338, paths fixed run 339) --------------------------
 # MLAS (arXiv:2606.23075, folded run 335): a self-evolving loop must not be able
 # to autonomously weaken its own acceptance gate, execution guard, test manifest,
 # or IDLE-STATE policy. Editing any of these is a *self-design* change - it needs
@@ -64,15 +65,20 @@ GRAPH_REL = "knowledge/graph/agentic_universe_graph.json"
 # branch. The ack is the env var AU_SELF_DESIGN_ACK set to a non-empty reason at
 # commit time; the autonomous loop never sets it, so a self-design edit from the
 # loop is blocked and surfaced to the owner.
+# (The loop's *outermost* harness - the scheduled-task body and the /goal skill -
+#  lives outside this repo and is already off-limits to autonomous edit; what is
+#  in-repo and guarded here is the acceptance path plus the versioned harness
+#  surface under runtime/harness/.)
 _SELF_DESIGN_FILES = {
-    "tools/acceptance_gate.py",     # the exogenous acceptance signal
+    "tools/acceptance_gate.py",     # the exogenous acceptance signal (+ its cert signer)
     "tools/exec_guard.py",          # this guard
     "tools/knowledge_graph.py",     # the validator the gate leans on
     "tools/selftest_all.py",        # the build-selftest manifest (JOBS)
-    "context/loop_policy.json",     # the IDLE-STATE rules
-    "SKILL.md",                     # the loop's own execution harness
 }
-_SELF_DESIGN_PREFIXES = ("runtime/harness_registry",)  # the blessed-baseline store
+_SELF_DESIGN_PREFIXES = (
+    "runtime/harness/",             # the versioned harness surface: loop_policy /
+                                    # loop_procedure / loop_tools / loop_team (+ .history)
+)
 # targeted: decision-logic regions inside otherwise routinely-edited files
 _SELF_DESIGN_DIFF_FILES = {"tools/loop_proposer.py", "tools/loop_conductor.py"}
 _SELF_DESIGN_DIFF_MARKERS = re.compile(
@@ -232,8 +238,8 @@ def _selftest():
     # "gate the gate" (run 338)
     sd_noack = check(staged=["tools/acceptance_gate.py"], self_design_ack="")
     sd_ack = check(staged=["tools/acceptance_gate.py"], self_design_ack="owner: tuning PACE alpha")
-    sd_policy = check(staged=["context/loop_policy.json"], self_design_ack="")
-    sd_reg = _self_design_hits(["runtime/harness_registry.json"])
+    sd_policy = check(staged=["runtime/harness/context/loop_policy.json"], self_design_ack="")
+    sd_reg = _self_design_hits(["runtime/harness/prompt/loop_procedure.txt"])
     sd_clean = check(staged=["docs/x.md", "tools/probe_idle_agent.py"], self_design_ack="")
 
     checks = {
@@ -247,9 +253,9 @@ def _selftest():
         "self-design edit WITH ack -> no block, warns instead":
             not any("self-design" in b for b in sd_ack["blocks"])
             and any("acked by owner" in w for w in sd_ack["warnings"]),
-        "loop_policy.json is a self-design file": bool(sd_policy["self_design"])
+        "runtime/harness/ loop_policy is a self-design edit": bool(sd_policy["self_design"])
             and not sd_policy["ok"],
-        "harness_registry* is a self-design prefix": bool(sd_reg),
+        "runtime/harness/ prompt is a self-design edit": bool(sd_reg),
         "ordinary probe/doc edit is not a self-design edit":
             not sd_clean["self_design"],
     }
