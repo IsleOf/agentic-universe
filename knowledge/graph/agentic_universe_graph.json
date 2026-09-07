@@ -10181,7 +10181,7 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:self_rebuild",
       "confidence": 0.65,
-      "description": "tools/v2_integration.py (run 311). IDLE-STATE clause b - a dry-run of the whole v2 deterministic pipeline on a realistic fold (modelled on the run-309 KnownLieBench fold): a scout brief -> research_brief.validate_brief + check_against_graph (the dedup discipline) -> to_graph_patch -> loop_conductor.Conductor dispatches it via the ledger + supervisor and runs the REAL acceptance_gate.check -> a signed certificate that verify_certificate replays against the patch. 14 selftest checks including the negative paths (a held-out regression is rejected by the real gate and neither applied nor committed). Only the model worker, the git commit and the patch-apply are stubbed. selftest_all JOBS -> 40. Confirms the run-300/302/303 bricks are not just individually GREEN but wire together.",
+      "description": "tools/v2_integration.py (run 311). IDLE-STATE clause b - a dry-run of the whole v2 deterministic pipeline on a realistic fold (modelled on the run-309 KnownLieBench fold): a scout brief -> research_brief.validate_brief + check_against_graph (the dedup discipline) -> to_graph_patch -> loop_conductor.Conductor dispatches it via the ledger + supervisor and runs the REAL acceptance_gate.check -> a signed certificate that verify_certificate replays against the patch. 14 selftest checks including the negative paths (a held-out regression is rejected by the real gate and neither applied nor committed). Only the model worker, the git commit and the patch-apply are stubbed. selftest_all JOBS -> 40. Confirms the run-300/302/303 bricks are not just individually GREEN but wire together. RE-VERIFIED run 349 WITH the run-338/340 security layer active: a fresh Conductor over the REAL blessed harness_registry runs preflight (manifest 0229416691aebcc9 matches the blessed baseline) -> pick_increment -> dispatch -> real acceptance_gate.check -> accept -> certificate minted -> commit hook fires. The full deterministic spine + the evolution-aware security layer compose end to end. v2_integration selftest 14 GREEN.",
       "tags": [
         "v2",
         "self-rebuild",
@@ -26167,6 +26167,13 @@
       "target": "artifact_self_rebuild_v2_plan",
       "type": "extends",
       "description": "adds the v2.4-phase gate for the executor pool"
+    },
+    {
+      "id": "edge_v2_integration_composes_with_preflight",
+      "source": "artifact_v2_integration_dry_run",
+      "target": "artifact_conductor_blessed_manifest_preflight",
+      "type": "depends_on",
+      "description": "run 349: the composed spine dry-run now also passes through Conductor.preflight() against the real blessed manifest before any increment"
     }
   ]
 }
