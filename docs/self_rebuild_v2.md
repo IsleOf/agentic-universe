@@ -341,6 +341,11 @@ So the executor pool ships with, from day one:
    explicit planner amplifies attack completion up to 7×. The v2 conductor already *is* the
    planner (deterministic `pick_increment`); no worker may spawn or direct other workers.
 
-None of this is built — v2.4 is not started — but a fanned-out run that skips any of 1–5
-should fail its own phase gate. Recorded against `artifact_v2_mlas_coverage_map` and
-`artifact_probe_subagent_coordination_rig`.
+✅ **Enforcement skeleton built run 355** — `tools/executor_pool.py`
+(`artifact_executor_pool_skeleton`): `Worker` exposes only `read_context` / `submit_patch` /
+`send`; `ExecutorPool` enforces all five (single-use scoped tokens; `submit_patch` → a
+`task_ledger` task as the only write path; `send` refuses cross-parent traffic; `round_verdict`
+delegates to `cohort_monitor.CohortMonitor`; `assign` is a pool method a `Worker` can't
+reach). Takes a `run_worker` callable — the v2.0 `call_model` seam — with a fake benign worker
+for the 11-check selftest. The model worker and the conductor wiring are what remain.
+Recorded against `artifact_v2_mlas_coverage_map` and `artifact_probe_subagent_coordination_rig`.

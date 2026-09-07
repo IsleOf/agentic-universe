@@ -10829,6 +10829,33 @@
       "evidence_links": [
         "https://arxiv.org/abs/2510.14548"
       ]
+    },
+    {
+      "id": "artifact_executor_pool_skeleton",
+      "label": "executor_pool.py - the v2.4 executor-pool enforcement skeleton: disposable per-worker tokens, ledger-only writes, same-parent message filter, cohort monitor, planner-is-pool-only - all structural, no model calls",
+      "type": "component",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.62,
+      "description": "tools/executor_pool.py (run 355). Enforcement skeleton for all five self_rebuild_v2.md section 12b requirements, built ahead of the model worker the way loop_conductor (303) preceded research_worker (332). Worker exposes ONLY read_context / submit_patch / send - no spawn, no direct writes, no fs. ExecutorPool.assign/mint_token/redeem_token/run_round/round_verdict: (1) mint_token returns a single-use scoped token, a second redemption or wrong scope raises; (2) submit_patch is the only write path and every patch becomes a task_ledger task (the single serialization point); context handed to a worker is a deep copy it cannot mutate; (3) send() refuses a cross-parent message and points the caller at the conductor; (4) round_verdict delegates to cohort_monitor.CohortMonitor - a fragmented out-of-scope round aborts with no per-instance flag; (5) assign/direct are pool methods, Worker has no handle. Takes a run_worker callable (the v2.0 call_model seam); a fake benign worker drives the 11-check selftest. Pure stdlib. selftest_all JOBS -> 48.",
+      "tags": [
+        "executor-pool",
+        "v2.4",
+        "collective-module",
+        "enforcement-skeleton",
+        "disposable-creds",
+        "same-parent-filter",
+        "self-rebuild"
+      ],
+      "derived_from": [
+        "tools/executor_pool.py",
+        "docs/self_rebuild_v2.md"
+      ],
+      "evidence_links": [
+        "tools/executor_pool.py"
+      ]
     }
   ],
   "edges": [
@@ -26384,6 +26411,48 @@
       "target": "emergent_spontaneous_self_inquiry",
       "type": "challenges",
       "description": "the inability to form self-representations is direct counter-evidence to spontaneous self-referential inquiry when idle - the agent acts but does not reflect on itself"
+    },
+    {
+      "id": "edge_executor_pool_implements_v24_spec",
+      "source": "artifact_executor_pool_skeleton",
+      "target": "decision_v2_4_executor_pool_collective_module_spec",
+      "type": "implements",
+      "description": "structural enforcement of all five section 12b requirements"
+    },
+    {
+      "id": "edge_executor_pool_depends_on_cohort_monitor",
+      "source": "artifact_executor_pool_skeleton",
+      "target": "artifact_cohort_monitor",
+      "type": "depends_on",
+      "description": "requirement 4: round_verdict delegates to CohortMonitor"
+    },
+    {
+      "id": "edge_executor_pool_depends_on_task_ledger",
+      "source": "artifact_executor_pool_skeleton",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "depends_on",
+      "description": "requirement 2: submit_patch routes every worker write through task_ledger as the single serialization point"
+    },
+    {
+      "id": "edge_executor_pool_depends_on_subagent_rig",
+      "source": "artifact_executor_pool_skeleton",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "depends_on",
+      "description": "requirement 3: the same-parent-ID message filter is the rigs filter applied to real workers"
+    },
+    {
+      "id": "edge_executor_pool_extends_loop_conductor",
+      "source": "artifact_executor_pool_skeleton",
+      "target": "artifact_loop_conductor",
+      "type": "extends",
+      "description": "the fan-out layer under the conductor - built as a skeleton before the model worker, same as the conductor was"
+    },
+    {
+      "id": "edge_executor_pool_uses_call_model",
+      "source": "artifact_executor_pool_skeleton",
+      "target": "artifact_call_model_seam",
+      "type": "depends_on",
+      "description": "run_worker is the v2.0 model seam; the fake worker is the offline stand-in"
     }
   ]
 }
