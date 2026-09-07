@@ -1224,6 +1224,10 @@
     {
       "date": "2026-10-09",
       "change": "Autonomous run 319. Acted on the run-318 poster-studio audit finding (highest-value gap = the poster-studio <-> etsy-agentic-space interface). On the etsy-agentic-space branch (commit d506b66): contracts/poster_studio_interface.md - what poster-studio exposes today (run_stage.py stages 004/005, factory-create-etsy-draft.js, synthid_final_pass.py, the SVG template engine) + the 4 calls the orchestrator should make (render_design / make_mockups / finalize_images / create_draft) + 6 invariants (stop-at-draft, artifact-on-disk, one-ref-one-prompt, no-customer-data, templates-read-only, no-secrets). pipelines/poster_creative.yml rewritten to concrete poster-studio:: calls. etsy graph: +etsy__c_poster_studio_contract, etsy__q_creative_handoff -> resolved (24n/31e). No main-graph change (342/1363). Validator VALID."
+    },
+    {
+      "date": "2026-10-09",
+      "change": "Autonomous run 320. Deeper on the poly-bot audit finding - read scripts/ev_hunter_checklist_watchdog.py + checklist_worker_recovery.py. docs/audits/poly-bot/watchdog_ledger_integration.md: the watchdog ALREADY implements ~70% of task_ledger + supervisor (deterministic queue parse, state outside the repo, one-pick-per-tick, blocked-skip, 4h stalled backoff, child-cancellation). The 3 real gaps: (1) no per-item attempt budget -> a stuck item cycles every 4h forever (the ~39-item pile); (2) no active-dispatch deadline -> the task-330 class (19min find + cProfile against the production writer); (3) no failure digest -> the same drift recurs. Each is ~40 lines inside the existing run_tick(), NOT a drop-in file swap (the markdown checklist queue is a feature - human-editable in place). The D-state hang itself is a WSL/9p issue, not a watchdog bug. Gated-path work for the active session. No main-graph change (342/1363). Validator VALID."
     }
   ],
   "nodes": [
