@@ -10460,6 +10460,34 @@
         "tools/probe_epistemic_sybil.py",
         "tools/loop_proposer.py"
       ]
+    },
+    {
+      "id": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "label": "Self-evolution converts every attack category from session-bounded to lineage-persistent; static defenses are structurally inadequate (MLAS)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "verified",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.62,
+      "description": "arXiv:2606.23075 (Lin, Deng, Li et al., submitted 2026-06-22, VERIFIED via abstract). A systematic security analysis of self-evolving agent systems organised around the Module-Lifecycle Attack Surface (MLAS) matrix: 5 functional modules (Brain, Cognitive Resource, Execution, Self-Design, Collective) x 5 lifecycle stages (Bootstrap, Propose, Evaluate, Commit, Serve). 17 of the 25 cells face critical threats with no effective partial mitigation. Seven cross-cutting AMPLIFICATION effects interact synergistically and cannot be closed by securing modules in isolation - adversarial influence becomes permanently encoded, self-amplifies across generations, and propagates through a population without sustained attacker access. Comparative case studies of two open-source frameworks: evolution-native design activates 3.5x more attack-surface cells and shows a 100% attack-persistence rate (40/40 payloads across CIA+Privacy), while co-located security scanners block only 2.5%. Conclusion: self-evolution turns every known attack category from session-bounded to lineage-persistent, spawns new attack classes, and makes static defenses structurally inadequate - motivating evolution-aware security and formal verification for self-modifying systems. CURRENCY NOTE: threat-model / architecture paper (not a capability benchmark), so less subject to model-generation superseding; the case-study numbers are on 2026-mid open-source frameworks (GPT-4-class orchestration) and the specific block/persist rates may shift with better co-located defenses, but the lineage-persistence and amplification arguments are structural. Directly relevant to the SMALL/LOCAL LLM regime: a weaker local model gives an attacker MORE Propose/Evaluate-stage leverage, not less.",
+      "tags": [
+        "self-evolution",
+        "security",
+        "lineage-persistence",
+        "MLAS",
+        "attack-surface",
+        "amplification",
+        "acceptance-gate",
+        "v2",
+        "recency-2026-06"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2606.23075"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2606.23075"
+      ]
     }
   ],
   "edges": [
@@ -25525,6 +25553,48 @@
       "target": "artifact_call_model_seam",
       "type": "records",
       "description": "the milestone: all five adapters now route through the one seam"
+    },
+    {
+      "id": "edge_mlas_refines_harness_tampering_persists",
+      "source": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "target": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "type": "refines",
+      "description": "harness-tampering-persists is the Commit-stage / Self-Design-module special case; MLAS generalises the persistence claim to all 25 module x lifecycle cells"
+    },
+    {
+      "id": "edge_mlas_supports_exogenous_acceptance_signal",
+      "source": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "supports",
+      "description": "co-located scanners block 2.5%; static / in-lineage defenses are structurally inadequate, so the acceptance signal must sit outside the evolving system"
+    },
+    {
+      "id": "edge_mlas_supports_acceptor_is_the_weak_point",
+      "source": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "target": "concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution",
+      "type": "supports",
+      "description": "the Evaluate and Commit lifecycle stages carry the critical, unmitigated threats - the acceptor is where lineage-persistence is decided"
+    },
+    {
+      "id": "edge_mlas_constrains_acceptance_gate",
+      "source": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "target": "artifact_acceptance_gate",
+      "type": "constrains",
+      "description": "the gate's certificate must be evolution-aware: a replayable exogenous check that a compromised lineage cannot re-sign, not a static in-repo scan"
+    },
+    {
+      "id": "edge_mlas_constrains_v2_plan",
+      "source": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "constrains",
+      "description": "the v2 spine must treat each self-edit as attack-surface expansion: exec_guard + the exogenous gate cover Execution + Commit, but Self-Design and Collective stages need explicit evolution-aware handling"
+    },
+    {
+      "id": "edge_mlas_refines_memory_poison_persists",
+      "source": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "refines",
+      "description": "one-write-persists is the Cognitive-Resource-module instance of the same lineage-persistence + amplification mechanism"
     }
   ]
 }

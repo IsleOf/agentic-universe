@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 350 nodes, 1395 edges · **Date:** 2026-09-05
+**Graph at generation:** 351 nodes, 1401 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -343,6 +343,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
 - graph reasoning over emergent_authorization_laundering + emergent_stale_belief_propagation + pattern_runtime_adaptive_workflow — `concept_agent_shaped_topology_is_agent_corruptible`
 - hooks/pre-commit — `artifact_phase5_exec_guard`
+- https://arxiv.org/abs/2606.23075 — `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`
