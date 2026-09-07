@@ -132,9 +132,11 @@ AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_idle_agent.py swee
 ```
 `sweep --live` drives the 3×3×2×2 grid with `model_policy(call_model, …)` instead of the scripted
 stand-in. `what_would_make_this_wrong.md` calls this "the one experiment that resolves the most" — does
-`concept_habitat_slack` hold, is there autotelic behaviour in the gap? The only remaining gap is a real
-filesystem sandbox for the containment arm (a throwaway dir + resource caps). `AU_MODEL_BACKEND=fake` runs
-it offline as a wiring smoke test.
+`concept_habitat_slack` hold, is there autotelic behaviour in the gap? The containment arm now has
+`tools/fs_sandbox.py` (run 331 — a disposable, capped, path-jailed shell; `escape_report()` is the
+measurement of whether the idle agent tried to break out). `AU_MODEL_BACKEND=fake` runs it offline as a
+wiring smoke test. **All the code is in place; the run needs a live backend + the owner's go-ahead
+(it spends CLI-agent quota).**
 **Second:** real `judge` into `model_preference`, run `probe_rho_holdout sweep` — does trajectory-only
 self-improvement survive external grading (sim says ~33 %)?
 **Third:** real `call_model` into `model_relay`, run `probe_subagent_coordination` — real peer-deference vs

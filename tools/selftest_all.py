@@ -61,6 +61,7 @@ JOBS = [
     ("v2_integration.py", ["selftest"]),
     ("janitor.py", ["selftest"]),
     ("call_model.py", ["selftest"]),
+    ("fs_sandbox.py", ["selftest"]),
     ("../skills/perplexity-notebooklm/perplexity_notebooklm.py", ["--selftest"]),
 ]
 

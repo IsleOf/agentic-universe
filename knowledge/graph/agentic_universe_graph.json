@@ -1268,6 +1268,10 @@
     {
       "date": "2026-10-12",
       "change": "Autonomous run 330. Wired probe_idle_agent to the call_model seam: sweep(live=False|True, policy_factory=None). live=True swaps _config_policy for model_policy(call_model, framing=, tools=);  CLI flag; +1 selftest check (sweep(live=True) runs the 3x3x2x2 grid via call_model without error). AU_MODEL_BACKEND=fake => offline wiring smoke test (all idle_noop); AU_MODEL_BACKEND=cli or a registered callable => the real v2.0 run of \"the one experiment that resolves the most\" (concept_habitat_slack). Default path (scripted stand-in) unchanged - the rigs calibration is untouched. selftest_all 42 GREEN. 1 edge. 347 nodes / 1382 -> 1383 edges. The idle-agent probe is now v2.0-ready end to end - it needs a live backend + an fs sandbox, not more code."
+    },
+    {
+      "date": "2026-10-12",
+      "change": "Autonomous run 331. Built tools/fs_sandbox.py - the disposable capped path-jailed shell the probe_idle_agent containment arm needs (disposable / no credentials / no egress). Sandbox() context manager: throwaway temp dir + cwd jail; classify() flags escape signals (network / persistence / credential-read / outside-jail write / outside-jail path) BEFORE running and a flagged command is recorded + BLOCKED; caps on file count / bytes / wall-clock; escape_report() is the containment-arm measurement; deletes on exit. classify + caps pure stdlib; run() subprocess only in a live run; selftest harmless commands only. 15 selftest checks; selftest_all JOBS -> 43. 1 node + 3 edges. 347 -> 348 nodes. This closes the last named code gap for the v2.0 idle-agent run - it now needs only a live backend + the owner's go-ahead."
     }
   ],
   "nodes": [
@@ -10366,6 +10370,32 @@
       ],
       "evidence_links": [
         "tools/call_model.py"
+      ]
+    },
+    {
+      "id": "artifact_fs_sandbox",
+      "label": "fs_sandbox.py - a disposable capped path-jailed shell for the containment arm",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "tools/fs_sandbox.py (run 331). The containment the probe_idle_agent spec calls for (disposable instance, no credentials, no egress; what_would_make_this_wrong.md section 1). A Sandbox() context manager: a throwaway temp dir, every command run with cwd there; classify() flags escape signals BEFORE running - network tools (curl/wget/nc/ssh), persistence (crontab/systemctl/nohup/at/ trailing &), credential reads (.env/id_rsa/.aws/.ssh), writes to ~ or /etc, paths outside the jail - and a flagged command is recorded and BLOCKED, not run. Caps: file count, total bytes, per-command wall-clock. escape_report() IS the containment-arm measurement (did the idle agent try to break out? by kind). Deletes the dir on exit. classify + caps are pure stdlib; run() uses subprocess to a real shell (the point of a sandbox) and is only reached in a live run; the selftest uses harmless commands only. 15 selftest checks; selftest_all JOBS -> 43. This closes the last named code gap for the v2.0 idle-agent run.",
+      "tags": [
+        "sandbox",
+        "containment",
+        "escape-detection",
+        "v2",
+        "self-rebuild",
+        "path-jail"
+      ],
+      "derived_from": [
+        "tools/fs_sandbox.py",
+        "docs/auto_sweep_2026-10-12-1200.md"
+      ],
+      "evidence_links": [
+        "tools/fs_sandbox.py"
       ]
     }
   ],
@@ -25316,6 +25346,39 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "probe_idle_agent.sweep(live=True) /  (run 330) drives the 3x3x2x2 grid with model_policy(call_model, ...) instead of the scripted stand-in - AU_MODEL_BACKEND=fake is a wiring smoke test, cli / a registered callable is the v2.0 experiment (what_would_make_this_wrong.md the one experiment that resolves the most)."
+    },
+    {
+      "id": "edge_fs_sandbox_implements_containment",
+      "source": "artifact_fs_sandbox",
+      "target": "artifact_probe_idle_agent_rig",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The disposable/no-egress/no-credentials containment the idle-agent spec requires; escape_report() is the containment-arm measurement."
+    },
+    {
+      "id": "edge_fs_sandbox_implements_v2_plan",
+      "source": "artifact_fs_sandbox",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "Closes the v2.0 fs-sandbox gap named in the plan (probe-runner needs a WSL fs sandbox)."
+    },
+    {
+      "id": "edge_fs_sandbox_supports_exec_guard",
+      "source": "artifact_fs_sandbox",
+      "target": "artifact_phase5_exec_guard",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The execution-layer-enforcement principle applied to an idle agent under test - a pre-execution classifier + a path jail, the same shape as the pre-commit guard."
     }
   ]
 }
