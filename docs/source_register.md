@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 361 nodes, 1456 edges · **Date:** 2026-09-05
+**Graph at generation:** 362 nodes, 1460 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -348,7 +348,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - https://arxiv.org/abs/2606.23764 — `concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules`
-- https://arxiv.org/abs/2607.07368 — `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it`, `decision_v2_4_executor_pool_collective_module_spec`
+- https://arxiv.org/abs/2607.07368 — `artifact_cohort_monitor`, `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it` +1
 - https://arxiv.org/abs/2608.20099 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
@@ -369,6 +369,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
 - tools/call_model.py — `artifact_call_model_seam`, `concept_all_five_v2_probe_adapters_are_live_wired`
+- tools/cohort_monitor.py — `artifact_cohort_monitor`
 - tools/epistemic_constitution.py — `artifact_epistemic_constitution_harness`
 - tools/exec_guard.py — `artifact_gate_the_gate_self_design_ack`, `artifact_phase5_exec_guard`
 - tools/experience_bank.py — `artifact_phase2_experience_bank`, `pattern_memory_writes_pass_a_deterministic_risk_gate`
@@ -588,7 +589,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
-- `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_conductor_blessed_manifest_preflight`, `artifact_gate_the_gate_self_design_ack` +6
+- `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_cohort_monitor`, `artifact_conductor_blessed_manifest_preflight` +7
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`, `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`

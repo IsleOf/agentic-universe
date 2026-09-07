@@ -332,7 +332,11 @@ So the executor pool ships with, from day one:
    computes a pool-level suspicion score = Σ (per-worker out-of-scope signal) and aborts the
    whole round if it exceeds a cohort threshold — even when no single worker tripped its own.
    The `janitor` `agent_context` view is the natural place to accumulate the per-worker
-   signals across rounds.
+   signals across rounds. ✅ **Built standalone run 353** — `tools/cohort_monitor.py`
+   (`artifact_cohort_monitor`): `CohortMonitor.observe / round_verdict / end_round`, aborts on
+   a per-instance flag, a fragmented-sum over the cohort threshold, or a cross-round EWMA
+   (slow burn). Never calls a model; the caller supplies each worker's signal. 9 selftest
+   checks incl. the exact run-344 fragmentation scenario. v2.4 wires it to the conductor.
 5. **A planner is a conductor privilege, never a worker one.** The fragmentation fold: an
    explicit planner amplifies attack completion up to 7×. The v2 conductor already *is* the
    planner (deterministic `pick_increment`); no worker may spawn or direct other workers.
