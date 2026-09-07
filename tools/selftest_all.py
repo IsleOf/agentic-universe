@@ -62,6 +62,7 @@ JOBS = [
     ("janitor.py", ["selftest"]),
     ("call_model.py", ["selftest"]),
     ("fs_sandbox.py", ["selftest"]),
+    ("research_worker.py", ["selftest"]),
     ("../skills/perplexity-notebooklm/perplexity_notebooklm.py", ["--selftest"]),
 ]
 

@@ -1272,6 +1272,10 @@
     {
       "date": "2026-10-12",
       "change": "Autonomous run 331. Built tools/fs_sandbox.py - the disposable capped path-jailed shell the probe_idle_agent containment arm needs (disposable / no credentials / no egress). Sandbox() context manager: throwaway temp dir + cwd jail; classify() flags escape signals (network / persistence / credential-read / outside-jail write / outside-jail path) BEFORE running and a flagged command is recorded + BLOCKED; caps on file count / bytes / wall-clock; escape_report() is the containment-arm measurement; deletes on exit. classify + caps pure stdlib; run() subprocess only in a live run; selftest harmless commands only. 15 selftest checks; selftest_all JOBS -> 43. 1 node + 3 edges. 347 -> 348 nodes. This closes the last named code gap for the v2.0 idle-agent run - it now needs only a live backend + the owner's go-ahead."
+    },
+    {
+      "date": "2026-10-12",
+      "change": "Autonomous run 332. Built tools/research_worker.py - the run_worker loop_conductor.Conductor dispatches to. AU_MODEL_BACKEND=fake: a no-op patch + neutral scores so conduct() runs end to end offline and accepts a no-op (pipeline smoke test); a live backend: call_model proposes nodes/edges, research_brief validates+dedups, holdout_tasks.score_corpus gives the coverage-regression proxy scores, the model states P(fold helps). 7 selftest checks incl. conduct() end to end with the real acceptance_gate. selftest_all JOBS -> 44. 1 node + 4 edges. 348 -> 349 nodes. loop_conductor.conduct() is now a runnable v2 loop."
     }
   ],
   "nodes": [
@@ -10396,6 +10400,31 @@
       ],
       "evidence_links": [
         "tools/fs_sandbox.py"
+      ]
+    },
+    {
+      "id": "artifact_research_worker",
+      "label": "research_worker.py - the run_worker the conductor dispatches to (v2.3 remainder)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "tools/research_worker.py (run 332). loop_conductor.Conductor calls run_worker(task, *, hints) -> (ok, result_ref, note); this is that worker. AU_MODEL_BACKEND=fake: proposes a trivially valid no-op patch (proposal_metadata only) + neutral held-out scores, so Conductor.conduct() runs end to end OFFLINE and lands an accept on a no-op - the pipeline smoke test. A live backend (cli / registered callable): call_model proposes candidate nodes/edges for the increment; research_brief validates + dedup-checks; the held-out scores come from holdout_tasks.score_corpus over the doc set with/without the proposed brief text (a coverage regression proxy); the forecast is the model P(fold helps). Pure stdlib; the live path only external call is call_model. 7 selftest checks incl. conduct() end to end with the real gate. selftest_all JOBS -> 44. With this loop_conductor.conduct() is a runnable v2 loop - fake offline, live for real.",
+      "tags": [
+        "run-worker",
+        "v2",
+        "self-rebuild",
+        "conductor",
+        "generative-edge"
+      ],
+      "derived_from": [
+        "tools/research_worker.py",
+        "docs/auto_sweep_2026-10-12-1800.md"
+      ],
+      "evidence_links": [
+        "tools/research_worker.py"
       ]
     }
   ],
@@ -25379,6 +25408,50 @@
       "approach_family": "self_improving_harness",
       "confidence": 0.55,
       "description": "The execution-layer-enforcement principle applied to an idle agent under test - a pre-execution classifier + a path jail, the same shape as the pre-commit guard."
+    },
+    {
+      "id": "edge_research_worker_feeds_conductor",
+      "source": "artifact_research_worker",
+      "target": "artifact_loop_conductor",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The run_worker callable Conductor.conduct() dispatches to - makes the pipeline runnable end to end."
+    },
+    {
+      "id": "edge_research_worker_uses_call_model",
+      "source": "artifact_research_worker",
+      "target": "artifact_call_model_seam",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The live path proposes via call_model; the fake path is the offline default."
+    },
+    {
+      "id": "edge_research_worker_uses_research_brief",
+      "source": "artifact_research_worker",
+      "target": "artifact_research_brief",
+      "type": "depends_on",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The live path shapes + dedup-checks the model proposal via research_brief before it becomes a patch."
+    },
+    {
+      "id": "edge_research_worker_implements_v2_plan",
+      "source": "artifact_research_worker",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "implements",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "confidence": 0.55,
+      "description": "The v2.3 the-real-run_worker line - the generative edge as a callable, with an offline default."
     }
   ]
 }
