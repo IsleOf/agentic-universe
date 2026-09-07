@@ -10517,6 +10517,34 @@
       "evidence_links": [
         "https://arxiv.org/abs/2608.23552"
       ]
+    },
+    {
+      "id": "artifact_v2_mlas_coverage_map",
+      "label": "v2 spine mapped onto the MLAS matrix - Execution/Commit covered, Self-Design and Collective are the open gaps",
+      "type": "decision",
+      "status": "active",
+      "verification_state": "unverified",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "docs/self_rebuild_v2.md section 12 (run 337). Maps every built v2 brick onto the Module-Lifecycle Attack Surface matrix from arXiv:2606.23075. Execution x Commit (phase5_exec_guard) and Brain/CogResource x Evaluate+Commit (acceptance_gate + certificate replay) are solid. Three named gaps -> three small gated additions: (1) GATE THE GATE - a proposal patching acceptance_gate thresholds, loop_proposer dimensions, harness_registry, or the certificate signer is a self-design edit and must go through exec_guard (token + owner ack), not the ordinary commit path; (2) EXTERNALISE THE CERTIFICATE KEY - move it from a repo-local secret to the owner-controlled scheduled-task env so a compromised lineage cannot re-sign; (3) STARTUP MANIFEST CHECK - the conductor compares harness_manifest_hash against the last owner-blessed baseline before its first increment; mismatch halts, no self-heal. When v2.4 adds the CLI executor pool, each worker is a new Collective surface (disposable creds, no shared writable state but the ledger, same-parent-ID message filter on by default). None built yet - this is the gate they build against.",
+      "tags": [
+        "v2",
+        "self-rebuild",
+        "MLAS",
+        "security",
+        "self-design",
+        "collective",
+        "gate-the-gate",
+        "design-decision"
+      ],
+      "derived_from": [
+        "docs/self_rebuild_v2.md",
+        "https://arxiv.org/abs/2606.23075"
+      ],
+      "evidence_links": [
+        "docs/self_rebuild_v2.md"
+      ]
     }
   ],
   "edges": [
@@ -25666,6 +25694,34 @@
       "target": "artifact_janitor",
       "type": "informs",
       "description": "'Agents View' - human inspection + management of daemon sessions - is the same need janitor's human_monitor view serves; Prime Agent makes it interactive/managing, not just read-only"
+    },
+    {
+      "id": "edge_mlas_map_addresses_run335_node",
+      "source": "artifact_v2_mlas_coverage_map",
+      "target": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "type": "instantiates",
+      "description": "the coverage map is the project applying MLAS to its own spine"
+    },
+    {
+      "id": "edge_mlas_map_refines_v2_plan",
+      "source": "artifact_v2_mlas_coverage_map",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "refines",
+      "description": "adds section 12: the evolution-aware security gates the remaining phases build against"
+    },
+    {
+      "id": "edge_mlas_map_constrains_acceptance_gate",
+      "source": "artifact_v2_mlas_coverage_map",
+      "target": "artifact_acceptance_gate",
+      "type": "constrains",
+      "description": "the certificate signer key must move outside the evolving lineage; a self-design edit to the gate's own thresholds must not pass through the gate it edits"
+    },
+    {
+      "id": "edge_mlas_map_depends_on_exec_guard",
+      "source": "artifact_v2_mlas_coverage_map",
+      "target": "artifact_phase5_exec_guard",
+      "type": "depends_on",
+      "description": "'gate the gate' routes self-design edits through the exec_guard token + owner ack, the same mechanism as a branch-off-main commit"
     }
   ]
 }

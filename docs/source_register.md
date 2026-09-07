@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 352 nodes, 1407 edges · **Date:** 2026-09-05
+**Graph at generation:** 353 nodes, 1411 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -343,7 +343,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
 - graph reasoning over emergent_authorization_laundering + emergent_stale_belief_propagation + pattern_runtime_adaptive_workflow — `concept_agent_shaped_topology_is_agent_corruptible`
 - hooks/pre-commit — `artifact_phase5_exec_guard`
-- https://arxiv.org/abs/2606.23075 — `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
+- https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
@@ -580,7 +580,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_fetch_sweep_2026-09-05.md` — `concept_harness_evolution_subfield`, `concept_verification_is_the_binding_constraint`, `pattern_debate_against_reward_hacking`
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
-- `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_loop_conductor`, `artifact_perplexity_notebooklm_scout` +2
+- `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_loop_conductor`, `artifact_perplexity_notebooklm_scout` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`, `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`

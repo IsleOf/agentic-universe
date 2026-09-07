@@ -264,3 +264,39 @@ provides: the model worker, and (side-effects) the git commit and the patch-appl
 - **If the model budget is too small** to run the probes at all, v2.0 stalls and the project
   stays where v1 is — a well-mapped graph with an unbound model. That is the current state;
   v2 is the plan to leave it.
+
+## 12. Evolution-aware security: the MLAS coverage map (run 337)
+
+arXiv:2606.23075 (folded run 335,
+`concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`)
+organises the self-evolving-agent attack surface as a **Module-Lifecycle Attack Surface
+(MLAS)** matrix: 5 modules (Brain, Cognitive Resource, Execution, Self-Design, Collective)
+× 5 lifecycle stages (Bootstrap, Propose, Evaluate, Commit, Serve). Its finding: 17 of 25
+cells are critically unmitigated, co-located scanners block ~2.5%, and self-evolution turns
+every attack from session-bounded to **lineage-persistent**. Mapping the v2 spine onto it:
+
+| module × stage | v2 coverage today | gap |
+|---|---|---|
+| Execution × Commit | `phase5_exec_guard` — pre-commit hook the loop cannot talk past; branch-restricted | solid |
+| Brain/CogResource × Evaluate+Commit | `acceptance_gate.check` — held-out + PACE e-value + process score + forecast Brier → externally-signed certificate; `verify_certificate` replays | solid for graph folds + tool edits; the certificate signer key must live outside the lineage (currently a repo-local secret — **move to an owner-held key or the scheduled-task env**) |
+| CogResource × Serve | `memory_poisoning_one_write_persists` is known; `experience_bank` ancestry dedup is the partial mitigation | no active write/read quarantine; bank GC is advisory only |
+| **Self-Design × Propose+Commit** | `loop_proposer` proposes *within* a fixed dimension set (`PROPOSER_META.dimensions`); the scheduled-task body and SKILL.md are **explicitly off-limits to autonomous edit** (harness-rewrite ban) | **no gate on a proposal that edits the proposer's own dimension set, the gate's thresholds, or `harness_registry` entries** — these should require the exec_guard token + an owner ack, same as a branch-off-main commit |
+| **Collective × all stages** | single-lineage today; `probe_subagent_coordination` + `fs_sandbox` measure containment but nothing runs a real cohort | **when v2.4 adds the CLI executor pool, each worker is a new Collective-module surface**: workers must get disposable credentials, no shared writable state except the ledger, and the same-parent-ID message filter from `probe_subagent_coordination` on by default |
+| Bootstrap × all | `harness_manifest_hash` in every run record ties the run to a harness state | no verification that the manifest *matches* a known-good baseline at startup — a `janitor`/conductor pre-flight check |
+
+**Three concrete v2 additions this implies** (each small, each gated):
+
+1. **Gate the gate.** A proposal whose patch touches `acceptance_gate.py` thresholds,
+   `loop_proposer` dimensions, `harness_registry`, or the certificate signer is a
+   *self-design* edit — route it through `phase5_exec_guard` (token + owner ack), never the
+   ordinary commit path. ~15 lines in `loop_conductor.pick_increment` / the patch classifier.
+2. **Externalise the certificate key.** `acceptance_gate` signs with a repo-local secret
+   today; a compromised lineage can re-sign. Move the key to the scheduled-task environment
+   (owner-controlled) so a certificate is only *mintable* outside the evolving code.
+3. **Startup manifest check.** The conductor, before its first increment, compares
+   `harness_manifest_hash` against the last owner-blessed baseline in `harness_registry`;
+   mismatch → halt and flag, don't self-heal.
+
+These are recorded against `artifact_self_rebuild_v2_plan` (constrained by the run-335 node)
+and `artifact_acceptance_gate`. None is built yet — this section is the gate they build
+against, same discipline as §10.
