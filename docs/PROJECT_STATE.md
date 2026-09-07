@@ -2,7 +2,7 @@
 
 **Format:** Agentic Universe handover (`docs/practicing_what_we_preach.md` §3) · **Graph:**
 `knowledge/graph/agentic_universe_project_graph.json` (26 nodes; `python tools/project_graph_scaffold.py
-validate` it) · **Date:** 2026-10-11 (run 327)
+validate` it) · **Date:** 2026-10-23 (run 346)
 
 > A fresh session reads this file and the project graph **first**. This is the compact orientation; the
 > full literature map is `docs/graph_state_2026-09.md`, the build plan is
@@ -12,8 +12,8 @@ validate` it) · **Date:** 2026-10-11 (run 327)
 
 ## What it is
 
-A research repo with two artefacts. **(1)** `knowledge/graph/agentic_universe_graph.json` — 346 nodes /
-1378 edges of VERIFIED-arXiv literature and built artifacts about *emergent agent behaviour* and
+A research repo with two artefacts. **(1)** `knowledge/graph/agentic_universe_graph.json` — 358 nodes /
+1436 edges of VERIFIED-arXiv literature and built artifacts about *emergent agent behaviour* and
 *self-improving agent harnesses*, edited one increment per run. **(2)** the autonomous loop that edits it:
 `tools/loop_session.py` wraps each run, `tools/improvement_loop.py` is the Phase-3 acceptance gate,
 `tools/loop_metrics.py` reads the trace corpus. `docs/` is the orientation layer; the graph JSON is the
@@ -21,7 +21,7 @@ source of truth. Everything in `tools/` is pure Python stdlib, no dependencies, 
 
 ## Current state
 
-**Working:** the loop has run 326 increments; every run validates the graph, passes **41 selftests**
+**Working:** the loop has run 345 increments; every run validates the graph, passes **46 selftests**
 (`python tools/selftest_all.py` → `BUILD SELFTEST: GREEN`), and commits+pushes to
 `proposals/2026-09-01-emergent-behaviour-cluster`. Phases 0–5 of the self-improving-harness plan exist as
 tested code. The acceptor/certificate literature cluster and the harness-evolution subfield are mapped and
@@ -45,11 +45,30 @@ the project is self-audited against them.
   the poster-studio ↔ orchestrator interface on the `etsy-agentic-space` branch. `docs/audits/README.md`
   is the coordination doc. Closes the owner request open since run 251.
 
+**Latest session (runs 327–345):** v2.0 wiring finished + an evolution-aware security layer + two
+emergence-side probes.
+- *v2.0 one-command (334):* all five model-facing probe adapters route through `tools/call_model.py`
+  behind a `--live` flag. `AU_MODEL_BACKEND=fake` = offline smoke test, `cli` / registered callable =
+  the real experiment. Activation is purely a resource call now.
+- *Evolution-aware security (335–340, 345):* folded **MLAS** (`2606.23075`) and **misevolution**
+  (`2509.26354`). `self_rebuild_v2.md` §12 maps the spine onto the MLAS matrix; two of three additions
+  built — **"gate the gate"** (`exec_guard` blocks self-design pre-commits unless `AU_SELF_DESIGN_ACK`
+  is set) and the **conductor blessed-manifest preflight** (`harness_registry.bless` / `manifest_drift`
+  + `Conductor.preflight()` halts on harness drift). Addition (2) — externalise the cert signer key —
+  is operational, left for the owner.
+- *Emergence side (341, 343–344):* `tools/probe_emergent_synergy.py` (Rosas Psi + differentiation,
+  reproducing Riedl `2510.05174`) and the fragmentation arm in `probe_subagent_coordination.py`
+  (from `2607.07368` — cross-agent aggregation beats per-instance monitoring).
+- *Harness convergence (336):* folded **Prime Agent** (`2608.23552`).
+
 **Half-built / not built:** Phase 6 (the swarm layer) is untouched. **The v2 deterministic spine is
 complete and self-observing; the generative edge is not built — it is entirely the `call_model` binding
-(v2.0).** The probes still run on synthetic data. `acceptance_gate.py` is not yet the loop's live commit
-gate (that needs the real `run_worker`). The scout's live browser path (Perplexity/NotebookLM selectors)
-needs a profile + iteration.
+(v2.0), which is now one env var (`AU_MODEL_BACKEND=cli` + a CLI-agent, or a registered API client).**
+The probes still run on synthetic data. `acceptance_gate.py` is wired as the conductor's gate
+(`Conductor.gate` defaults to `acceptance_gate.check`) but the conductor is not yet on the 6h task
+(needs the real `run_worker` + a SKILL.md change). The scout's live browser path (Perplexity/NotebookLM
+selectors) needs a profile + iteration. MLAS addition (2) — externalise the certificate signer key — is
+unbuilt (operational).
 
 **Known gaps** (see `docs/what_would_make_this_wrong.md`): the central habitat mechanism
 (`concept_habitat_slack`) is unverified; the gate scores usefulness but nothing scores novelty
@@ -69,8 +88,9 @@ cannot bind its own model — this is the human-in-the-loop step.
 
 Until then, autonomous runs keep folding literature and deepening the graph. The v2 deterministic
 spine is finished (`acceptance_gate` / `research_brief` / `loop_conductor` / `v2_integration` /
-`janitor`, all selftested, the conductor self-observing via the janitor); nothing more of it can be
-built without the model.
+`janitor` + the run-338/340 security layer: `exec_guard` gate-the-gate and `Conductor.preflight()`
+blessed-manifest check), all selftested, the conductor self-observing via the janitor; nothing more
+of it can be built without the model.
 
 ## Hard constraints
 
@@ -78,6 +98,12 @@ built without the model.
   Branches off `main` (`etsy-agentic-space`, `autodesign-etsy`) need `git commit --no-verify` — the
   pre-commit hook runs `tools/exec_guard.py`, which only exists on the proposals branch.
 - Never commit credentials, API keys, cookies, browser profiles, or personal data.
+- **Self-design edits need an owner ack** (run 338): `exec_guard` blocks a pre-commit that stages
+  `tools/{acceptance_gate,exec_guard,knowledge_graph,harness_registry}.py`, anything under
+  `runtime/harness/`, a decision-logic region of the proposer/conductor, or a `selftest_all` JOB
+  *removal* — unless `AU_SELF_DESIGN_ACK="<reason>"` is set. The autonomous loop never sets it; an
+  owner hand-editing those commits with the env var and the guard logs the reason. Ordinary edits
+  (probes, docs, adapter wiring, adding a JOB) are unaffected.
 - The **IDLE-STATE RULE**: when the literature frontier is swept, an increment must be (a) deepen one node
   via a citation sweep, (b) dry-run a probe, or (c) a consistency/adversarial pass — never a README
   refresh. `run_novelty` / `idle_run_streak` enforce it.

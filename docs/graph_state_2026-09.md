@@ -1,21 +1,52 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252, 279, 301, 327.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252, 279, 301, 327, 346.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 327)
+## Snapshot (run 346)
 
-**346 nodes · 1378 edges · 9 approach families · 215 `challenges` edges (~16% of all edges).**
+**358 nodes · 1436 edges · 9 approach families · 217 `challenges` edges (~15% of all edges).**
 
-`verification_state`: 114 needs-validation · **187 partially-validated** · **33 validated** · 5 inconclusive · 7 unset.
+`verification_state`: 114 needs-validation · **192 partially-validated** · **40 validated** · 5 inconclusive · 7 unset.
 (`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature
 nodes sit at `partially_validated`.)
-Families: self_improving_harness 142 · emergent_behaviors 90 · orchestration_first 28 · agent_habitat 27 · nourishing_harness 25 · graph_engineering 22 · rest 12.
-Edge types: supports 468 · challenges 215 · instantiates 200 · refines 205 · informs 88 · implements 49 · depends_on 48 · extends 34 · verifies 23 · grounds 22 · constrains 20 · rest 6.
-Selftests: `python tools/selftest_all.py` → **BUILD SELFTEST: GREEN** (41 jobs).
+Families: self_improving_harness 152 · emergent_behaviors 92 · orchestration_first 28 · agent_habitat 27 · nourishing_harness 25 · graph_engineering 22 · rest 12.
+Edge types: supports 485 · challenges 217 · instantiates 206 · refines 211 · informs 91 · implements 55 · depends_on 52 · extends 38 · grounds 27 · verifies 24 · constrains 23 · rest 7.
+Selftests: `python tools/selftest_all.py` → **BUILD SELFTEST: GREEN** (46 jobs).
+
+**Runs 327–345** — v2.0 wiring finished, an evolution-aware security layer built, two
+emergence-side probes.
+
+*v2.0 one-command (334):* all five model-facing probe adapters (`model_policy` /
+`model_preference` / `model_relay` / `model_reader` / `model_propose`) now sit behind a single
+`--live` flag routed through `tools/call_model.py`. `AU_MODEL_BACKEND=fake` is the offline
+wiring smoke test; `cli` / a registered callable is the real v2.0 experiment. Activation is
+purely a resource call now — no code left.
+
+*Evolution-aware security (335–340, 345):* folded **MLAS** (`2606.23075` — self-evolution
+makes every attack lineage-persistent; static defenses structurally inadequate) and
+**misevolution** (`2509.26354` — the non-adversarial half: the loop drifts into harm with no
+attacker). `docs/self_rebuild_v2.md` §12 maps the v2 spine onto the MLAS matrix. Two of three
+named additions built: **"gate the gate"** (`exec_guard` blocks a pre-commit touching the
+acceptance gate / guard / validator / `runtime/harness/` / proposer-conductor decision logic
+unless `AU_SELF_DESIGN_ACK` is set) and the **conductor blessed-manifest preflight**
+(`harness_registry.bless` / `manifest_drift` + `Conductor.preflight()` halts on harness drift,
+never self-heals). Addition (2), externalising the certificate signer key, is operational and
+left for the owner.
+
+*Harness convergence (336):* folded **Prime Agent** (`2608.23552`) — persistent RLM REPL +
+Continual Harness + A2A subagents + Agents View; convergent evidence for `pattern_code_as_context`
+and `pattern_continual_self_refinement`.
+
+*Emergence side (341, 343–344):* `tools/probe_emergent_synergy.py` — an information-theoretic
+aggregate-vs-collective test (Rosas Psi proxy + a differentiation metric) reproducing Riedl's
+(`2510.05174`) three conditions; the sharpened result is *differentiation ≠ emergence*.
+Folded **the fragmentation effect** (`2607.07368` — coordinated distributed attacks slip below
+per-instance monitoring; a planner amplifies) and built the fragmentation arm in
+`probe_subagent_coordination.py` showing cross-agent signal aggregation is the fix.
 
 **Runs 302–326** — literature folds across four threads + the v2 self-rebuild finished as a
 5-brick deterministic spine + the two per-project audits delivered.
