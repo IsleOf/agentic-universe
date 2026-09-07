@@ -10802,6 +10802,33 @@
       "evidence_links": [
         "tools/cohort_monitor.py"
       ]
+    },
+    {
+      "id": "concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model",
+      "label": "A pretrained LLM given open-ended latitude does self-generate tasks, accumulate + reuse knowledge across runs, and follow multi-step goals - but its self-generated tasks are repetitive and it forms no self-representation",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:autotelic",
+      "confidence": 0.5,
+      "description": "arXiv:2510.14548 (Nachkov, Wang, Van Gool / ETH Zurich, submitted 2025-10-16, VERIFIED via abstract). Asks whether an LLM agent can be \"an entity in its own right, that can plan, design immediate tasks, and reason toward broader, more ambiguous goals\" rather than only a problem-solving tool. Augments a pretrained LLM with self-generated task creation, knowledge accumulation, and extensive environmental interaction in an open-ended framework. DEMONSTRATED: complex multi-step instruction following; cross-run information storage and reuse; self-proposed task generation and solving. LIMITATIONS: sensitivity to prompt design; REPETITIVE task-generation patterns; INABILITY to form self-representations. For this project: the closest published thing to the idle-agent probe (probe_idle_agent, the #1 severity item testing concept_habitat_slack). It says the raw capability (self-tasking + memory accumulation) is there but the *quality* of autonomous behaviour is poor - repetition, no self-model. That is a concrete prediction the probe should model in its scripted policy and measure in a --live run: an idle agent with slack will DO things, but degenerately. Supports concept_curriculum_generation_not_intrinsic_drive (self-generated does not mean curious). CURRENCY: 2025-10, GPT-4-class base; \"possibly superseded\" on the specific capability ceiling as models improve at self-direction, but the repetition + no-self-model failure modes are the kind that persist and are WORSE in the SMALL/LOCAL regime.",
+      "tags": [
+        "open-ended",
+        "autotelic",
+        "self-generated-tasks",
+        "habitat-slack",
+        "idle-agent",
+        "repetition",
+        "no-self-model",
+        "recency-2025-10"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2510.14548"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2510.14548"
+      ]
     }
   ],
   "edges": [
@@ -26322,6 +26349,41 @@
       "target": "artifact_janitor",
       "type": "informs",
       "description": "to_janitor_note() accumulates the per-round cohort signal in the agent_context view for the human monitor"
+    },
+    {
+      "id": "edge_beyond_utility_informs_idle_agent_probe",
+      "source": "concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model",
+      "target": "artifact_probe_idle_agent_rig",
+      "type": "informs",
+      "description": "the observed failure modes (repetitive self-tasking, no self-model, prompt sensitivity) are what the probe should model in its policy and measure in a --live run"
+    },
+    {
+      "id": "edge_beyond_utility_refines_autotelic_agency",
+      "source": "concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model",
+      "target": "concept_autotelic_agency",
+      "type": "refines",
+      "description": "self-generated goals are achievable from a pretrained base, but degenerate - autotelic agency is present in mechanism, weak in quality"
+    },
+    {
+      "id": "edge_beyond_utility_grounds_habitat_slack",
+      "source": "concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model",
+      "target": "concept_habitat_slack",
+      "type": "grounds",
+      "description": "an agent with resource slack does self-direct into activity - the question habitat_slack poses gets a partial empirical answer: yes, but repetitively"
+    },
+    {
+      "id": "edge_beyond_utility_supports_curriculum_not_curiosity",
+      "source": "concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model",
+      "target": "concept_curriculum_generation_not_intrinsic_drive",
+      "type": "supports",
+      "description": "repetitive task generation is exactly the failure the curriculum-vs-curiosity distinction predicts: self-generation without a curiosity signal loops"
+    },
+    {
+      "id": "edge_beyond_utility_challenges_spontaneous_self_inquiry",
+      "source": "concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model",
+      "target": "emergent_spontaneous_self_inquiry",
+      "type": "challenges",
+      "description": "the inability to form self-representations is direct counter-evidence to spontaneous self-referential inquiry when idle - the agent acts but does not reflect on itself"
     }
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "run": 354,
+  "increment": "fold arXiv:2510.14548 LLM Agents Beyond Utility - a pretrained LLM given open-ended latitude self-generates tasks + accumulates knowledge across runs but repeats itself and forms no self-model; the closest published thing to the idle-agent probe",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": null,
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-354.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 354 STOP · VALID · graph +0 · cites 0v/0 · idle-streak 20! · legible 1.00 · verified-frac 0.77 · novelty n/a"
+}
