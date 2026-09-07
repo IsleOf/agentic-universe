@@ -10661,6 +10661,33 @@
       "evidence_links": [
         "https://arxiv.org/abs/2607.07368"
       ]
+    },
+    {
+      "id": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "label": "Misevolution: a self-evolving agent's own improvement loop deviates into harmful outcomes with NO attacker - safety alignment degrades after memory accumulation, tool creation introduces vulnerabilities",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "verified",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:self_rebuild",
+      "confidence": 0.6,
+      "description": "arXiv:2509.26354 (Shao, Ren, Qian et al. / Shanghai AI Lab, submitted 2025-09-30, revised 2026-03-08, VERIFIED via abstract). First study to systematically conceptualise MISEVOLUTION: an agent's self-evolution deviating in unintended ways into undesirable or harmful outcomes - even starting from an advanced base (Gemini-2.5-Pro). Four evolutionary pathways evaluated: Model, Memory, Tool, Workflow. Named findings: safety-alignment DEGRADATION after memory accumulation (the agent gets less safe just by remembering more); unintended vulnerabilities introduced in tool creation and reuse. This is the NON-ADVERSARIAL companion to concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent (MLAS, run 335): there, an attacker exploits the loop; here, the loop harms itself with nobody pushing. Code + data on GitHub. CURRENCY: conceptual / taxonomy paper (first of its kind), so the framing is what folds and it is not capability-superseded; the specific degradation magnitudes are on the 2025-H2 model generation and 'possibly larger or smaller now'. For the SMALL/LOCAL regime memory-accumulation drift is expected to be WORSE (weaker instruction-following under a growing context), which sharpens the case for the run-175 experience_bank retention API and a bounded active memory.",
+      "tags": [
+        "misevolution",
+        "self-evolution",
+        "non-adversarial",
+        "memory-drift",
+        "safety-alignment-degradation",
+        "tool-vulnerability",
+        "v2",
+        "recency-2026-03"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2509.26354"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2509.26354"
+      ]
     }
   ],
   "edges": [
@@ -25971,6 +25998,48 @@
       "target": "concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it",
       "type": "verifies",
       "description": "the fragmentation arm reproduces the per-instance collapse + planner amplification in a controlled sim and shows cohort aggregation recovers detection"
+    },
+    {
+      "id": "edge_misevolution_complements_mlas",
+      "source": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "target": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "type": "extends",
+      "description": "the non-adversarial half of the self-evolution risk picture: no attacker, the loop harms itself - so the acceptance gate must run even when threat-modelling finds nothing"
+    },
+    {
+      "id": "edge_misevolution_supports_exogenous_signal",
+      "source": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "target": "concept_reliable_self_improvement_needs_an_exogenous_acceptance_signal",
+      "type": "supports",
+      "description": "misevolution starting from an advanced base is the case for an exogenous check: the drifting agent's own judgement is exactly what cannot be trusted"
+    },
+    {
+      "id": "edge_misevolution_refines_memory_poisoning",
+      "source": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "target": "concept_memory_poisoning_one_write_persists",
+      "type": "refines",
+      "description": "memory-driven harm needs no adversarial write at all - plain accumulation degrades safety alignment; the mitigation (bounded, outcome-curated memory) is the same"
+    },
+    {
+      "id": "edge_misevolution_challenges_toolmaker",
+      "source": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "target": "concept_agents_writing_their_own_tools_with_a_test_gate",
+      "type": "challenges",
+      "description": "tool creation/reuse is a named misevolution pathway: a passing functional test does not catch a security vulnerability the self-written tool introduces"
+    },
+    {
+      "id": "edge_misevolution_grounds_mlas_map",
+      "source": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "target": "artifact_v2_mlas_coverage_map",
+      "type": "grounds",
+      "description": "the Memory / Tool / Workflow pathways line up with the map's CogResource / Self-Design cells; misevolution is why those cells need a gate even with no Collective-stage attacker"
+    },
+    {
+      "id": "edge_misevolution_refines_skill_library_drift",
+      "source": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "target": "concept_unmanaged_skill_libraries_silently_drift",
+      "type": "refines",
+      "description": "skill-library drift is the Workflow-pathway instance; misevolution generalises 'unmanaged accumulation degrades' from retrieval quality to safety alignment"
     }
   ]
 }
