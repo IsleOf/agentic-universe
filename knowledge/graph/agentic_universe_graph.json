@@ -10941,6 +10941,34 @@
       "evidence_links": [
         "tools/loop_session.py"
       ]
+    },
+    {
+      "id": "concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable",
+      "label": "The Prefrontal Turn (position paper): the marginal lever of agentic capability has moved from pre-training scale to framework-level executive control, and that control must sit physically near the environment because agentic \"dark matter\" data loses meaning in transit",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "agent_habitat",
+      "branch_key": "agent_habitat:edge",
+      "confidence": 0.4,
+      "description": "arXiv:2605.18535 (Tian, Cai, Zhao, Lane, submitted 2026-05-18, VERIFIED via abstract). THREE arguments: (1) the PREFRONTAL TURN - \"the main marginal lever of capability has moved from pre-training scale to framework-level executive control\", and that control must remain physically close to the environment of action to preserve cognitive alignment; (2) the DATA-GEOGRAPHY PARADOX - the \"dark matter\" of agentic data (local file hierarchies, real-time sensor streams, transient OS states) degrades, disappears, or loses meaning once prepared for cloud transmission, cutting the agent off from ground-truth context; (3) the INTERACTION-ALIGNMENT LOOP - the only economically and ecologically sustainable source of agentic refinement data is the high-fidelity implicit preference signal produced by real-time LOCAL interaction. WHAT THIS IS AND IS NOT: a POSITION PAPER. The abstract contains no benchmarks, no model names, no parameter counts, no quantitative comparison. It is an argument, not evidence, and is folded at confidence 0.4 on that basis. It is CONVERGENT FRAMING for the harness-first thesis, which already has empirical support elsewhere (Harness-Bench, AHE); its own contribution is arguments (2) and (3), which bear directly on the local-first setup this project actually runs on. CITATION HYGIENE NOTE (run 362): a web-search summary attributed a headline parity result to this paper - \"WideSeek-R1-4B comparable to 671B DeepSeek-R1, 170x parameter disparity\" - which does NOT appear in the fetched abstract. That number is deliberately EXCLUDED from this node. It is a live instance of the hazard concept_search_time_contamination_inflates_agent_evals names: a plausible quantitative claim surfaced next to a real paper and would have entered the graph unchallenged had the abstract not been fetched. STANDING CAVEAT ON THIS PROJECT'S OWN PRACTICE: many folded nodes carry a currency note asserting something about the SMALL/LOCAL LLM regime. Run 362 went looking for empirical backing for that habit and found a position paper, not evidence. Those notes remain plausible extrapolations, not measured claims, and should be read that way until a small-model benchmark is actually folded.",
+      "tags": [
+        "edge-agents",
+        "prefrontal-turn",
+        "data-geography",
+        "local-first",
+        "position-paper",
+        "no-empirical-data",
+        "small-local-regime",
+        "citation-hygiene",
+        "recency-2026-05"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2605.18535"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2605.18535"
+      ]
     }
   ],
   "edges": [
@@ -26650,6 +26678,41 @@
       "target": "concept_gate_faces_a_pretrained_grader_gamer",
       "type": "challenges",
       "description": "auto-deriving a metric is a tempting fix that would game the project own gate if it derived VERIFIED status; the bound (count yes, quality no) is what keeps the fix honest"
+    },
+    {
+      "id": "edge_prefrontal_turn_supports_harness_coupling",
+      "source": "concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable",
+      "target": "concept_bottleneck_is_the_model_harness_coupling",
+      "type": "supports",
+      "description": "the Prefrontal Turn is this thesis argued from the edge-deployment direction - convergent framing, though an argument rather than new evidence"
+    },
+    {
+      "id": "edge_prefrontal_turn_supports_capability_is_config",
+      "source": "concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable",
+      "target": "concept_capability_is_a_model_harness_config_property",
+      "type": "supports",
+      "description": "same claim, independently arrived at: the marginal lever is executive control, not pre-training scale"
+    },
+    {
+      "id": "edge_prefrontal_turn_informs_experience_bank",
+      "source": "concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable",
+      "target": "pattern_experience_bank",
+      "type": "informs",
+      "description": "the interaction-alignment loop argues local real-time interaction is the only sustainable source of refinement data - which is what the bank is collecting"
+    },
+    {
+      "id": "edge_prefrontal_turn_refines_naive_accumulation",
+      "source": "concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable",
+      "target": "concept_naive_trajectory_accumulation_already_helps",
+      "type": "refines",
+      "description": "names WHERE the accumulated trajectories must come from: high-fidelity local interaction, because the data-geography paradox says the signal degrades in transit"
+    },
+    {
+      "id": "edge_prefrontal_turn_instantiates_search_contamination",
+      "source": "concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable",
+      "target": "concept_search_time_contamination_inflates_agent_evals",
+      "type": "instantiates",
+      "description": "run 362 caught a search summary attaching a parity number to this paper that is not in it; the number was excluded - a live instance of the hazard, caught by fetching the abstract"
     }
   ]
 }
