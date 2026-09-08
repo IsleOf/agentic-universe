@@ -45,15 +45,23 @@ RUNS_DIR = ROOT / "runtime" / "observations" / "loop_runs"
 
 CLASSES = ("fold", "probe", "build", "fix", "consolidate")
 
+# A run that LEADS with consolidation language is a consolidate run even if it then
+# fixed what the look found - run 409 was misclassified `fix` because it fixed two
+# bugs the consolidation pass surfaced, which is the classifier's own action-class
+# blind spot (it could not see a consolidation-that-fixed-something as consolidation).
+_LEADS_CONSOLIDATE = re.compile(
+    r"^\s*.{0,40}\b(standalone consolidation|consolidation pass|consistency (pass|sweep)|"
+    r"red[- ]team pass|a negative result|audit(ed)? (the|whether))", re.I)
+
 # ordered: first match wins, most specific first
 _RULES = [
+    ("consolidate", re.compile(
+        r"\b(consistency (pass|sweep)|adversarial pass|red[- ]team pass|audit(ed)?|"
+        r"negative result|no attack landed|deepened .* node|trust boundary|"
+        r"stopping point|the class does\s?n.?t exist|consolidation pass)", re.I)),
     ("fix", re.compile(
         r"\b(fixed|bug|broken instrument|instrument .* was itself|regression|"
         r"latent bug|overflow|the fix for that|miscalibrat)", re.I)),
-    ("consolidate", re.compile(
-        r"\b(consistency (pass|sweep)|adversarial pass|red[- ]team|audit(ed)?|"
-        r"negative result|no attack landed|deepened .* node|trust boundary|"
-        r"stopping point|the class does\s?n.?t exist)", re.I)),
     ("probe", re.compile(
         r"\b(probe|rig|arm on |sweep (over|the)|drives the real|measured (over|the)|"
         r"selftest checks? green.*probe)", re.I)),
@@ -73,7 +81,12 @@ def classify(rec):
     harness = ff.get("harness") or {}
     cites = rec.get("citations") or []
 
-    # strong structural signals first
+    # a run that LEADS with consolidation language is a consolidate run, even if it
+    # shipped or fixed something the look surfaced (run 409's misclassification)
+    if _LEADS_CONSOLIDATE.match(text):
+        return "consolidate", "leads with consolidation language"
+
+    # strong structural signals next
     if harness.get("new_harness_files"):
         # a genuinely new tool file -> build, unless the text is clearly a probe
         if re.search(r"\bprobe_\w+\.py\b", " ".join(harness["new_harness_files"])):

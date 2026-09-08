@@ -424,8 +424,26 @@ def status_line(local_summary=None, metrics=None):
          if f else "files n/a")((local_summary or {}).get("file_footprint")),
         (f"novelty {nov:.2f}" + ("!" if nov < THRESHOLDS["run_novelty"] else ""))
         if (nov := m.get("run_novelty")) is not None else "novelty n/a",
+        _action_class_glance(),
     ]
-    return " · ".join(parts)
+    return " · ".join(p for p in parts if p)
+
+
+def _action_class_glance():
+    """Run 410: a one-token view of the recent action-class mix, so the loop sees
+    whether it has been folding / probing / building / fixing / consolidating and
+    can make bundle-or-not a choice (run 408). Best-effort - never raises."""
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        from loop_action_class import report as _acr
+        r = _acr(10)
+        dom = r["dominant_class"]
+        tag = f"acts {dom[:4]}{r['dominant_fraction']:.0%}"
+        if r["monoculture_flag"] or r["long_streak_flag"]:
+            tag += "!"
+        return tag
+    except Exception:
+        return ""
 
 
 def _selftest():

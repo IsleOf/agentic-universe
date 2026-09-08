@@ -12507,6 +12507,31 @@
         "tools/relay.py",
         "tools/reputation.py"
       ]
+    },
+    {
+      "id": "concept_the_action_class_classifier_could_not_see_a_consolidation_that_fixed_something_as_consolidation",
+      "label": "loop_action_class classified run 409 - a deliberate standalone consolidation pass - as `fix` because it fixed two bugs the look surfaced; the classifier had its own action-class blind spot. Fixed run 410, plus its mix wired into loop_metrics.status",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.7,
+      "description": "Run 410. loop_action_class (run 408) exists to tell the loop whether it has been choosing context-appropriate ACTION CLASSES. Run 409 was the loop's first deliberate standalone consolidation pass - and the classifier called it `fix`, because a consolidation pass that finds real bugs then fixes them trips the `fixed` keyword before any consolidation signal. The instrument built to catch action-class miscalibration had an action-class blind spot of its own: it could not see consolidation-that-fixed-something as consolidation. The tell was in its OWN first outputs (run 408 report already had consolidate=0 while runs 400 and 402 clearly had consolidation intent) - concept_a_detector_for_a_defect_class_will_commit_that_class, read-your-first-output, again. FIX: a _LEADS_CONSOLIDATE check - a run whose increment OPENS with 'standalone consolidation' / 'consistency sweep' / 'red-team pass' / 'a negative result' is a consolidate run regardless of what it then shipped or fixed - evaluated before the keyword rules and before the new-harness-file structural signal. Re-classifying the recent window: runs 400 and 402 move from probe/fix to consolidate, and the last-16 mix becomes fold 5 / probe 3 / build 4 / fix 0 / consolidate 4 - genuinely varied. ALSO: loop_metrics.status now ends with a one-token action-class glance ('acts fold40%', with '!' on a monoculture or long streak), so the loop sees its own recent mix each run and bundle-or-not becomes a visible choice - the run-408 follow-on, closed.",
+      "tags": [
+        "self-audit",
+        "action-class-calibration",
+        "classifier-blind-spot",
+        "read-your-first-output",
+        "loop-metrics-visibility",
+        "consolidation",
+        "meta"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/loop_action_class.py",
+        "tools/loop_metrics.py"
+      ]
     }
   ],
   "edges": [
@@ -29924,6 +29949,27 @@
       "target": "concept_the_run_400_402_id_normalisation_fixed_gates_and_pheromone_but_missed_relay_and_reputation",
       "type": "verifies",
       "description": "loop_action_class's consolidate-0 finding is what prompted this run; the run itself is the first consolidate increment in the recent window"
+    },
+    {
+      "id": "edge_r410_refines_loop_action_class",
+      "source": "concept_the_action_class_classifier_could_not_see_a_consolidation_that_fixed_something_as_consolidation",
+      "target": "artifact_loop_action_class",
+      "type": "refines",
+      "description": "fixes the classifier's blind spot (a consolidation-that-fixed-something read as fix) and wires its mix into loop_metrics.status"
+    },
+    {
+      "id": "edge_r410_refines_bundle_finding",
+      "source": "concept_the_action_class_classifier_could_not_see_a_consolidation_that_fixed_something_as_consolidation",
+      "target": "concept_the_loop_bundles_consolidation_with_action_and_almost_never_does_a_standalone_look_without_changing_pass",
+      "type": "refines",
+      "description": "run 408's fix was 'make the mix visible so bundle-or-not is a choice'; this is that, plus the correction that the classifier itself was mis-seeing consolidation runs"
+    },
+    {
+      "id": "edge_r410_instantiates_detector_discipline",
+      "source": "concept_the_action_class_classifier_could_not_see_a_consolidation_that_fixed_something_as_consolidation",
+      "target": "concept_a_detector_for_a_defect_class_will_commit_that_class_and_its_own_first_output_is_the_test",
+      "type": "instantiates",
+      "description": "the classifier's consolidate=0 was visible in its very first output and is what surfaced the blind spot - read the detector's own first output as a claim about the detector"
     }
   ]
 }
