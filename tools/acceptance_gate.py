@@ -61,6 +61,28 @@ def _held_out_outcome(baseline_scores, candidate_scores) -> float:
 # --- minimal modification (run 371, from WorldBench's Constrained Task Success) ---
 
 _PATCH_ALLOWED_KEYS = {"proposal_metadata", "add_nodes", "add_edges"}
+
+# touch_surface threshold, DERIVED not invented (run 379).
+# Run 371 added touch_surface and deliberately left it unthresholded: "no principled
+# cap exists and inventing one would be worse than reporting the number." The cap is
+# now measured instead. Walking 59 graph-changing commits and reconstructing each
+# patch's touch surface gives: min 0, median 4, mean 3.3, MAX 6, p99 6 - a strikingly
+# tight distribution. This loop has never produced a patch touching more than six
+# pre-existing nodes.
+#
+# The flag sits at 2x the observed maximum, so it cannot fire on anything resembling
+# normal work and only trips on something genuinely out of family.
+#
+# TWO HONEST LIMITS on that derivation:
+#  1. It describes ONE agent's habits, not a norm. A live research_worker on a real
+#     model backend may legitimately propose wider patches, and the number should be
+#     re-measured rather than inherited if the patch producer changes.
+#  2. A wide patch is UNUSUAL, not INVALID. So this is a FLAG on the certificate, never
+#     a refusal - the run-372 rule that unexpected-but-not-forbidden things are reported
+#     and the judgement is left to the reader. Contrast the destructive-key check above,
+#     which refuses, because an off-contract key IS invalid.
+TOUCH_SURFACE_OBSERVED_MAX = 6      # over 59 measured patches
+TOUCH_SURFACE_FLAG = 2 * TOUCH_SURFACE_OBSERVED_MAX
 _DESTRUCTIVE = ("remove", "delete", "modify", "update", "set_", "overwrite", "replace", "drop")
 # Kept for REPORTING only (run 374). The refusal below is now shape-based: any key
 # outside _PATCH_ALLOWED_KEYS is refused whatever it is called. This list only labels
@@ -90,6 +112,8 @@ def modification_footprint(proposal) -> dict:
     """
     if not isinstance(proposal, dict):
         return {"added_nodes": 0, "added_edges": 0, "touch_surface": 0,
+                "touch_surface_anomalous": False,
+                "touch_surface_flag_at": TOUCH_SURFACE_FLAG,
                 "destructive_keys": [], "unknown_keys": []}
     add_nodes = proposal.get("add_nodes") or []
     add_edges = proposal.get("add_edges") or []
@@ -107,6 +131,9 @@ def modification_footprint(proposal) -> dict:
         "added_nodes": len(add_nodes),
         "added_edges": len(add_edges),
         "touch_surface": len(touched),
+        # flagged, never refused - unusual is not invalid (run 379)
+        "touch_surface_anomalous": len(touched) > TOUCH_SURFACE_FLAG,
+        "touch_surface_flag_at": TOUCH_SURFACE_FLAG,
         "destructive_keys": destructive,
         "unknown_keys": sorted(k for k in extra if k not in destructive),
     }
@@ -311,9 +338,27 @@ def _selftest():
 
     # minimal-modification term (run 371, from WorldBench CTS)
     _fp = cert["modification_footprint"]
+    # superset, not equality: an exact key set breaks on every future field, which is
+    # the same brittleness the run-368 hard-coded line count had (fixed run 371).
     checks["every certificate carries a modification_footprint"] = (
-        set(_fp) == {"added_nodes", "added_edges", "touch_surface",
+        set(_fp) >= {"added_nodes", "added_edges", "touch_surface",
                      "destructive_keys", "unknown_keys"})
+
+    # touch_surface threshold, DERIVED from 59 measured patches (run 379)
+    checks["a normal-width patch is NOT flagged anomalous"] = (
+        not _fp["touch_surface_anomalous"])
+    _wide = {"proposal_metadata": {}, "add_nodes": [{"id": "concept_hub"}],
+             "add_edges": [{"id": f"e{i}", "source": "concept_hub", "target": f"existing_{i}"}
+                           for i in range(30)]}
+    _fw = modification_footprint(_wide)
+    checks["a 30-edge patch IS flagged anomalous"] = (
+        _fw["touch_surface"] == 30 and _fw["touch_surface_anomalous"])
+    checks["the flag threshold is 2x the observed historical max, not a guess"] = (
+        TOUCH_SURFACE_FLAG == 2 * TOUCH_SURFACE_OBSERVED_MAX)
+    _cw = check(_wide, base, cand, fc, cert_dir=tmp, clock=lambda: 1014.0)
+    checks["an anomalous-width patch is FLAGGED, never refused (unusual != invalid)"] = (
+        _cw["decision"] == "accept"
+        and _cw["modification_footprint"]["touch_surface_anomalous"])
 
     _patch = {"proposal_metadata": {}, "add_nodes": [{"id": "concept_new"}],
               "add_edges": [{"id": "e1", "source": "concept_new", "target": "existing_a"},

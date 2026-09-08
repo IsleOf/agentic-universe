@@ -11360,6 +11360,32 @@
       "evidence_links": [
         "tools/probe_governance_lever.py"
       ]
+    },
+    {
+      "id": "concept_derive_a_threshold_from_your_own_history_rather_than_defer_it_or_invent_it",
+      "label": "Run 371 deferred a threshold because inventing one would be worse than reporting the raw number; 59 measured patches later the cap is derived from the loop's own distribution, set at 2x the observed max, and flags rather than refuses",
+      "type": "pattern",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:acceptance",
+      "confidence": 0.72,
+      "description": "Run 379. Run 371 added touch_surface to the gate's modification footprint and explicitly declined to threshold it: 'no principled cap exists and inventing one would be worse than reporting the number.' That was the right call THEN and the wrong resting place - the missing ingredient was data, and the loop was generating it the whole time. MEASURED: walking 59 graph-changing commits and reconstructing each patch's touch surface gives min 0, median 4, mean 3.3, MAX 6, p99 6. A strikingly tight distribution - this loop has never produced a patch touching more than six pre-existing nodes. The flag sits at 12, twice the observed maximum, so it cannot fire on anything resembling normal work. THE GENERAL MOVE: when a threshold would be arbitrary, the answer is usually not 'defer indefinitely' or 'pick a round number' but 'the system has been emitting the distribution all along - go measure it'. Deferring is correct only until the data exists. TWO LIMITS CARRIED IN THE CODE, because a derived number invites more trust than it has earned. (1) It describes ONE agent's habits, not a norm: a live research_worker on a real model backend may legitimately propose wider patches, and the threshold must be re-measured rather than inherited if the patch producer changes. (2) A wide patch is UNUSUAL, not INVALID - so this FLAGS on the certificate and never refuses, following the run-372 rule that unexpected-but-not-forbidden things are reported and the judgement is left to the reader. Contrast the off-contract key check, which does refuse, because an off-contract key really is invalid.",
+      "tags": [
+        "derived-threshold",
+        "measure-dont-guess",
+        "touch-surface",
+        "flag-not-refuse",
+        "acceptance-gate",
+        "deferred-then-closed"
+      ],
+      "derived_from": [
+        "tools/acceptance_gate.py",
+        "git history: 59 graph-changing commits"
+      ],
+      "evidence_links": [
+        "tools/acceptance_gate.py"
+      ]
     }
   ],
   "edges": [
@@ -27496,6 +27522,20 @@
       "target": "concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026",
       "type": "informs",
       "description": "the monitoring result sharpens executable governance: an external rule is only as strong as detection, and a cap with little headroom cannot absorb occasional evasion"
+    },
+    {
+      "id": "edge_derived_threshold_closes_gate_gap",
+      "source": "concept_derive_a_threshold_from_your_own_history_rather_than_defer_it_or_invent_it",
+      "target": "concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed",
+      "type": "refines",
+      "description": "run 371 left touch_surface unthresholded on principle; this closes it with a measured cap rather than an invented one"
+    },
+    {
+      "id": "edge_derived_threshold_grounds_gate",
+      "source": "concept_derive_a_threshold_from_your_own_history_rather_than_defer_it_or_invent_it",
+      "target": "artifact_acceptance_gate",
+      "type": "grounds",
+      "description": "TOUCH_SURFACE_FLAG at 2x the observed historical max, flagged on every certificate"
     }
   ]
 }

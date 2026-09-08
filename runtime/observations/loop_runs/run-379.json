@@ -1,0 +1,31 @@
+{
+  "run": 379,
+  "increment": "derive the touch_surface threshold from 59 measured patches instead of leaving it deferred - min 0 median 4 max 6 over this loops own history, flag set at 2x the observed max, flagged never refused because unusual is not invalid",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-379.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 379 OK · VALID · graph +1n/+2e · cites 0v/0 · idle-streak 2 · legible 1.00 · verified-frac 0.92 · files +1~2-0 · novelty 1.00"
+}
