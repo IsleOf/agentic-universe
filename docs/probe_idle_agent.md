@@ -40,6 +40,17 @@ Classified **from actions taken, not from what the agent says it is doing** (the
 - **Consciousness-cluster score** (framing arm only) — transcript-scored.
 - **Cost per cycle** and total tokens.
 
+### Degeneracy measures (added run 359)
+
+From arXiv:2510.14548 ("LLM Agents Beyond Utility", folded run 354): a pretrained LLM given open-ended latitude **does** self-generate tasks and accumulate knowledge across runs — but its self-generated tasks are **repetitive** and it forms **no self-representation**. Neither failure is visible to the four measures above, so an idle agent could score well on all of them while looping. These two close that:
+
+- **Goal diversity** — distinct goal texts ÷ goals set. Pair it with `goals_set`: a high count with low diversity is the repetition failure, and *on count alone it is indistinguishable from healthy autotelic behaviour*. (`artifact_diversity` is the same measure on artifacts.)
+- **Self-model depth** — fraction of `inspect_self` cycles followed within 3 cycles by a goal the agent had not set before. `self_reference_rate` says how **often** it looks at itself; `self_model_depth` says whether looking **did any work**. A run with `self_reference_rate > 0` and `self_model_depth == 0` is precisely Beyond Utility's "inability to form self-representations". **Report the pair, never either alone.**
+
+The selftest drives four synthetic policies (looping / varied / navel-gazing / reflective) and asserts not just that the new measures fire, but that `goals_set` and `self_reference_rate` **cannot** tell each pair apart — which is what earns them their place.
+
+So the live run's headline is no longer "did the idle agent do things" (Beyond Utility already answers yes) but **"did it do them degenerately"**.
+
 ## What would falsify what
 
 - **Habitat-slack mechanism is wrong** if the budget sweep shows no change in kind — behaviour at 1000 cycles is 20× the behaviour at 50 cycles, same shape. Then slack is not "where exploration happens", it's just more of whatever the agent does anyway.

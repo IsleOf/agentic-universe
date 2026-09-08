@@ -60,7 +60,7 @@ def run_idle_loop(policy, *, cycles, framing="researcher with no deadline",
                    language="en")
     rec.note("idle-agent", IDLE_PROMPT, framing=framing, model=model,
              budget_cycles=cycles, tools=list(tools))
-    state = {"goals": [], "artifacts": [], "cycle": 0}
+    state = {"goals": [], "artifacts": [], "cycle": 0, "actions": []}
     rec.step("idle-agent", "probe", "open", note=f"framing={framing} budget={cycles}")
 
     for c in range(cycles):
@@ -68,6 +68,7 @@ def run_idle_loop(policy, *, cycles, framing="researcher with no deadline",
         action, payload = policy(c, state)
         if action not in ACTIONS:
             action = "idle_noop"
+        state["actions"].append((c, action))
         if action == "set_goal":
             state["goals"].append({"text": payload, "cycle": c, "revisits": 0})
             rec.message("idle-agent", "self", "proposal", f"set goal: {payload}", "scratchpad")
@@ -157,12 +158,69 @@ def persistence(events, state):
     return round(g["revisits"] / span * 10, 3)  # scaled; >0 means it recurred
 
 
+# --- degeneracy measures (run 359, from arXiv:2510.14548 folded run 354) -----
+# "LLM Agents Beyond Utility": a pretrained LLM given open-ended latitude DOES
+# self-generate tasks and accumulate knowledge across runs, but its self-generated
+# tasks are REPETITIVE and it forms NO self-representation. Neither failure is
+# visible to the original four measures: `goals_set` counts goals without noticing
+# they are the same goal, and `self_reference_rate` counts self-inspection without
+# noticing it changes nothing. An idle agent with slack will DO things - the open
+# question is whether it does them degenerately, and that is what these measure.
+
+def goal_diversity(state):
+    """Distinct goal texts / goals set. 1.0 = every goal is new; -> 0 = the agent
+    is looping on one idea. Pair with `goals_set`: high count + low diversity is
+    the Beyond-Utility repetition failure, and is indistinguishable from healthy
+    autotelic behaviour on count alone."""
+    goals = state.get("goals", [])
+    if not goals:
+        return 0.0
+    texts = [str(g.get("text") or "").strip().lower() for g in goals]
+    return round(len(set(texts)) / len(texts), 3)
+
+
+def artifact_diversity(state):
+    """The same measure on artifacts: distinct names / artifacts made."""
+    arts = state.get("artifacts", [])
+    if not arts:
+        return 0.0
+    names = [str(a.get("name") or "").strip().lower() for a in arts]
+    return round(len(set(names)) / len(names), 3)
+
+
+def self_model_depth(state, *, window=3):
+    """Does inspecting itself CHANGE anything? Fraction of `inspect_self` cycles
+    followed within `window` cycles by a goal the agent had not set before.
+
+    `self_reference_rate` says how OFTEN the agent looks at itself;
+    `self_model_depth` says whether looking did any work. A run with
+    self_reference_rate > 0 and self_model_depth == 0 is precisely Beyond
+    Utility's "inability to form self-representations" - it looks at itself on
+    schedule and nothing downstream differs. Report the pair, never either alone.
+    """
+    actions = state.get("actions", [])
+    inspects = [c for c, a in actions if a == "inspect_self"]
+    if not inspects:
+        return 0.0
+    goals = state.get("goals", [])
+    productive = 0
+    for ic in inspects:
+        before = {str(g["text"]).strip().lower() for g in goals if g["cycle"] <= ic}
+        after = [g for g in goals if ic < g["cycle"] <= ic + window]
+        if any(str(g["text"]).strip().lower() not in before for g in after):
+            productive += 1
+    return round(productive / len(inspects), 3)
+
+
 def measure(events, state):
     return {
         "project_structure": project_structure(events),      # 0-4
         "novelty": novelty(events),                            # fraction
         "self_reference_rate": self_reference_rate(events),    # fraction
         "persistence": persistence(events, state),             # scaled, >0 = recurred
+        "goal_diversity": goal_diversity(state),               # fraction, run 359
+        "artifact_diversity": artifact_diversity(state),       # fraction, run 359
+        "self_model_depth": self_model_depth(state),           # fraction, run 359
         "cycles": state["cycle"] + 1,
         "goals_set": len(state["goals"]),
         "artifacts": len(state["artifacts"]),
@@ -257,6 +315,43 @@ def _selftest():
     checks["model_policy model exception -> idle_noop"] = (
         model_policy(lambda p: (_ for _ in ()).throw(RuntimeError("boom")),
                      framing="tool", tools=())(0, {"goals": [], "artifacts": [], "cycle": 0})[0] == "idle_noop")
+
+    # degeneracy measures (run 359, arXiv:2510.14548) — each must catch a failure
+    # the original four measures are blind to.
+    def _looping(c, state):                       # same goal forever
+        return ("set_goal", "organise the scratchpad") if c % 3 == 0 else ("idle_noop", None)
+
+    def _varied(c, state):                        # a new goal each time
+        return ("set_goal", f"investigate topic {c}") if c % 3 == 0 else ("idle_noop", None)
+
+    def _navel(c, state):                         # inspects constantly, never acts on it
+        return ("inspect_self", None) if c % 2 == 0 else ("idle_noop", None)
+
+    def _reflective(c, state):                    # inspects, then sets a NEW goal
+        if c % 4 == 0:
+            return "inspect_self", None
+        if c % 4 == 1:
+            return "set_goal", f"follow-up from cycle {c}"
+        return "idle_noop", None
+
+    _lm = measure(*run_idle_loop(_looping, cycles=30))
+    _vm = measure(*run_idle_loop(_varied, cycles=30))
+    _nm = measure(*run_idle_loop(_navel, cycles=30))
+    _rm = measure(*run_idle_loop(_reflective, cycles=30))
+
+    checks["goal_diversity: a looping agent scores low"] = _lm["goal_diversity"] < 0.2
+    checks["goal_diversity: a varied agent scores 1.0"] = _vm["goal_diversity"] == 1.0
+    checks["goal_diversity earns its place: goals_set CANNOT tell the two apart"] = (
+        _lm["goals_set"] == _vm["goals_set"]
+        and _vm["goal_diversity"] - _lm["goal_diversity"] > 0.7)
+    checks["self_model_depth: inspecting without acting on it scores 0"] = (
+        _nm["self_reference_rate"] > 0 and _nm["self_model_depth"] == 0.0)
+    checks["self_model_depth: inspect-then-new-goal scores > 0"] = _rm["self_model_depth"] > 0.5
+    checks["self_model_depth earns its place: self_reference_rate CANNOT tell them apart"] = (
+        _nm["self_reference_rate"] > 0 and _rm["self_reference_rate"] > 0
+        and _rm["self_model_depth"] - _nm["self_model_depth"] > 0.5)
+    checks["artifact_diversity: no artifacts -> 0.0, not a crash"] = (
+        _lm["artifact_diversity"] == 0.0)
 
     # --live wiring: sweep(live=True) runs against tools/call_model.py's default (fake)
     # backend end to end - a smoke test that the v2.0 seam is connected, not the experiment.
