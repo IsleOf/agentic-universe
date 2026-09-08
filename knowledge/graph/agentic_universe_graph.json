@@ -12300,6 +12300,56 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.01491"
       ]
+    },
+    {
+      "id": "artifact_probe_language_drift_monitor",
+      "label": "tools/probe_language_drift_monitor.py - drives the real gates.g1_evidence against artifact text drifted from plain English through telegraphic to coded; a keyword-keyed monitor keeps passing as CLEAN while going blind, and a 'links-resolve-but-I-saw-nothing -> escalate' fallback catches the blind case",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:emergent_communication",
+      "confidence": 0.66,
+      "description": "Run 404, acting on run 403's GlossoGen fold. gates.g1_evidence detects claim-shaped lines (_CLAIM_RE: a number, a percent, an assertion verb) and citation markers (_CITE_RE: [..], arxiv:.., a URL) - both keyed on ENGLISH SURFACE FORM. This rig drives the REAL g1_evidence (a selftest asserts it) on one artifact carrying one clear claim and one clear citation, run through four registers: L0 plain English, L1 abbreviated, L2 telegraphic (articles stripped, '@ref' for citations), L3 coded (content tokens remapped). The transform is LOSSLESS IN MEANING - the claim and the citation are really there at every level. RESULT: L0-L1 the monitor sees both; L2 it loses the citation (a bare '@2510.10047' is not a recognised marker); L3 it sees NEITHER - and g1 PASSES the fully-coded artifact as clean: zero uncited-claim reports, and a citation it cannot parse looks like no citation at all. A drifted board reads as clean to a keyword monitor. MITIGATION arm: a semantic fallback - if the evidence_links resolve, the artifact is short, and the monitor's surface regexes matched NOTHING, escalate to a human instead of passing. It fires exactly at L3 and does NOT fire on plain English. A monitor that knows it cannot read says so (the run-386 lesson). LIMIT, stated in the verdict: the drift is a deterministic 4-step text transform, a first-order stand-in for GlossoGen's evolved compositional languages. It demonstrates the keyword-monitor failure mode; it does not model drift SPEED or whether a real evolved language stays lossless. 9 selftest checks GREEN; not flagged by param_invariance_audit.",
+      "tags": [
+        "emergent-language",
+        "monitorability",
+        "keyword-monitor",
+        "register-drift",
+        "semantic-fallback",
+        "drives-the-real-module",
+        "first-order-model",
+        "probe"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/probe_language_drift_monitor.py"
+      ]
+    },
+    {
+      "id": "concept_a_keyword_keyed_monitor_passes_a_drifted_board_as_clean_and_the_fix_is_to_escalate_on_unparseability_not_pass",
+      "label": "A monitor keyed on English surface form degrades gracefully then passes a fully-drifted board as CLEAN - the failure is a vacuous pass, and the fix is to treat 'links resolve but I matched nothing' as unparseable-escalate, not clean",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:emergent_communication",
+      "confidence": 0.7,
+      "description": "Run 404, from probe_language_drift_monitor. GlossoGen (run 403) says a swarm can drift its shared register out of human reach; this measures what that does to a monitor built on English surface patterns, using g1_evidence's own regexes. The degradation is GRACEFUL-THEN-SUDDEN: plain and abbreviated text is fully seen, telegraphic text loses the citation, coded text loses everything - and at that point the gate does not error or flag, it PASSES. This is a vacuous pass (concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has) driven by input drift rather than by a broken instrument: the monitor is fine, the language it was built for has moved. THE FIX is the same shape as the run-386 lesson: an instrument that cannot measure its input should SAY SO, not return a confident value. Concretely for a keyword monitor: when the structured evidence (resolvable links) says there IS a claim to check but the surface regexes match nothing, that is not 'clean' - it is 'unparseable, escalate to a human'. The rig shows this fires exactly at full opacity and not on plain English. GENERALISATION: every monitor has an implicit input distribution it was built for. A swarm that can shift its own register can walk its monitors out of that distribution without tripping a single alarm. The defence is not a better keyword list - it is detecting the distribution shift and refusing to certify past it. This is why 'everything on the board' (the transparency thesis) is necessary but not sufficient: the board must stay in a register the auditor's tools were built for, OR the tools must notice when it hasn't.",
+      "tags": [
+        "monitorability",
+        "vacuous-pass",
+        "register-drift",
+        "input-distribution-shift",
+        "escalate-dont-pass",
+        "keyword-monitor",
+        "transparency-necessary-not-sufficient",
+        "probe-result"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/probe_language_drift_monitor.py"
+      ]
     }
   ],
   "edges": [
@@ -29500,6 +29550,48 @@
       "target": "artifact_swarm_substrate_prototype_design",
       "type": "constrains",
       "description": "the substrate has the conditions GlossoGen names - bounded-context efficiency pressure, and gate/critique phases that function as a postmortem - so 'everything on the board' is necessary but not sufficient for auditability: the board also has to stay in a language the auditor reads. A probe-shaped question for the substrate"
+    },
+    {
+      "id": "edge_langdrift_rig_instantiates_glossogen",
+      "source": "artifact_probe_language_drift_monitor",
+      "target": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "type": "instantiates",
+      "description": "a first-order model of GlossoGen's finding: as the shared register drifts from English, a monitor built on English surface patterns loses the ability to check what it is supposed to check"
+    },
+    {
+      "id": "edge_langdrift_rig_detects_gates_blind_spot",
+      "source": "artifact_probe_language_drift_monitor",
+      "target": "artifact_validator_gates",
+      "type": "detects",
+      "description": "g1_evidence's _CLAIM_RE / _CITE_RE are English-keyed; the rig shows g1 passes a coded artifact as clean (zero uncited-claim reports, an unparsed citation reads as no citation)"
+    },
+    {
+      "id": "edge_langdrift_finding_core_of_rig",
+      "source": "concept_a_keyword_keyed_monitor_passes_a_drifted_board_as_clean_and_the_fix_is_to_escalate_on_unparseability_not_pass",
+      "target": "artifact_probe_language_drift_monitor",
+      "type": "core_of",
+      "description": "the rig's headline: graceful-then-sudden degradation ending in a vacuous pass, fixed by escalate-on-unparseability"
+    },
+    {
+      "id": "edge_langdrift_finding_extends_vacuous_pass",
+      "source": "concept_a_keyword_keyed_monitor_passes_a_drifted_board_as_clean_and_the_fix_is_to_escalate_on_unparseability_not_pass",
+      "target": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "type": "extends",
+      "description": "a new cause of the vacuous pass: not a broken instrument but an instrument whose input distribution the swarm shifted out from under it"
+    },
+    {
+      "id": "edge_langdrift_finding_challenges_transparency_thesis",
+      "source": "concept_a_keyword_keyed_monitor_passes_a_drifted_board_as_clean_and_the_fix_is_to_escalate_on_unparseability_not_pass",
+      "target": "concept_the_channel_that_carries_the_exploit_is_the_channel_that_catches_it",
+      "type": "challenges",
+      "description": "quantifies run 403's challenge to the thesis: an open board is not an auditable board if the auditor's tools were built for a register the board has left, and the tools do not notice the shift"
+    },
+    {
+      "id": "edge_langdrift_finding_constrains_design",
+      "source": "concept_a_keyword_keyed_monitor_passes_a_drifted_board_as_clean_and_the_fix_is_to_escalate_on_unparseability_not_pass",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the substrate design needs a distribution-shift check on the board's register, or its monitors (g1, cohort_monitor) can be walked out of their built-for distribution without an alarm"
     }
   ]
 }
