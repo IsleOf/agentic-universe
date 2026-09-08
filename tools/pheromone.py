@@ -72,6 +72,16 @@ Usage:
     pf.board(limit=20)     -> [task_refs ranked by |signal|, freshest first]
     pf.reap()              -> int  (rows deleted; the only privileged operation)
 
+PORTABILITY CLASS (run 413, arXiv:2609.05339): the NUMERIC columns are fixed-schema
+and portable (utility, confidence, half_life_s, ttl_s, created_at). The `evidence`
+JSON blob is MODEL-COUPLED free text - a note one model wrote that another model
+may read differently; in that paper model-compressed notes shifted accuracy
++9.9 / -13.3 pp across a model upgrade. So (1) nothing durable should live only in
+`evidence` - it is disposable, and the clock decay already enforces that; (2)
+`register_health()` reads `evidence` text, so its English-function-word baseline
+must be re-established after a model/writer swap before a `drifting` flag is
+trustworthy.
+
 CLI: annotate / read / board / reap / selftest.  Pure stdlib.
 """
 from __future__ import annotations
@@ -90,6 +100,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PATH = ROOT / "runtime" / "observations" / "pheromone.db"
 
 KNOWN_KINDS = ("utility", "warning", "claim", "bid", "done")
+# numeric columns are fixed-schema/portable; the `evidence` blob is model-coupled
+# free text that does not survive a model swap (run 413, arXiv:2609.05339).
+PORTABILITY_CLASS = {"numeric_columns": "fixed-schema", "evidence": "model-coupled"}
 DEFAULT_HALF_LIFE_S = 3600.0
 DEFAULT_TTL_MULT = 6.0            # ttl defaults to 6 half-lives if not given
 
@@ -532,6 +545,10 @@ def _selftest():
                             for i in range(3)] and p.register_health()["drifting"])(
                 Pheromone(tmp / "reg3.db")))
         pr.close(); pr2.close()
+
+        checks["PORTABILITY_CLASS marks evidence model-coupled, numerics fixed (run 413)"] = (
+            PORTABILITY_CLASS["evidence"] == "model-coupled"
+            and PORTABILITY_CLASS["numeric_columns"] == "fixed-schema")
 
         for key, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {key}")

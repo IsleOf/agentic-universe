@@ -25,9 +25,19 @@ Statuses: `pending -> active -> done` on the happy path; `blocked` (waiting on a
 external thing), `failed` (retries exhausted), `abandoned` (deliberately
 dropped).
 
+PORTABILITY CLASS: FIXED-SCHEMA (run 413, arXiv:2609.05339). Every field is a
+fixed key with a machine-checkable value (id / goal / status / stage / deps / ...);
+nothing here is a model-compressed note. In that paper's controlled study a
+fixed-schema store transferred across a model upgrade with an accuracy change of
++0.0004 +/- 0.0020, versus +9.9 / -13.3 pp for model-compressed notes. So the
+ledger is the place to put anything that must survive a model swap, and the
+`.audit` log is the raw source history the paper says to keep uncompressed for
+repair.
+
 Pure stdlib. Not wired into the loop — it is a reference implementation of the
 pattern for the owner's orchestrations (poly-bot etc.).
 """
+
 from __future__ import annotations
 
 import argparse
@@ -37,6 +47,8 @@ import sys
 import time
 import uuid
 from pathlib import Path
+
+PORTABILITY_CLASS = "fixed-schema"   # survives a model upgrade (arXiv:2609.05339, run 413)
 
 OPEN = ("pending", "active", "blocked")
 CLOSED = ("done", "failed", "abandoned")
@@ -291,6 +303,8 @@ def _selftest():
         legacy = Ledger(tmp / "legacy.json")
         lt = legacy.add("old task")
         del legacy.get(lt)["stage"]
+        checks["PORTABILITY_CLASS declares the ledger fixed-schema (run 413)"] = (
+            PORTABILITY_CLASS == "fixed-schema")
         checks["a task missing the stage key defaults gracefully in next_ready"] = (
             legacy.next_ready()["id"] == lt)
 

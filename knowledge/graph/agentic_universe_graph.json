@@ -12613,6 +12613,30 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.05339"
       ]
+    },
+    {
+      "id": "concept_a_memory_store_should_declare_its_portability_class_in_code_not_leave_it_implicit",
+      "label": "Run 414: task_ledger.py and pheromone.py now carry a PORTABILITY_CLASS constant (fixed-schema vs model-coupled) so a future model migration can tell mechanically which stores are safe to carry and which need a re-baseline or a rebuild",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:memory",
+      "confidence": 0.6,
+      "description": "Run 414, acting on run 413's design refinement. arXiv:2609.05339 showed the portability of an agent memory store across a model upgrade depends entirely on its representation - fixed-schema transfers, model-compressed notes shift +/-10pp, mixed embeddings forfeit most of the gain - and a migration that does not know which is which will silently break the ones that don't transfer. So the substrate's stores now DECLARE their class in code: task_ledger.py has PORTABILITY_CLASS = 'fixed-schema'; pheromone.py has PORTABILITY_CLASS = {'numeric_columns': 'fixed-schema', 'evidence': 'model-coupled'}, plus a docstring paragraph in each explaining the consequence (durable state -> the ledger; pheromone evidence -> disposable, and register_health needs a re-baseline after a writer swap). A selftest in each asserts the constant. This is the smallest form of the paper's 'direction-specific migration testing' recommendation: not a migration harness, but making the classification a fact in the code rather than tribal knowledge, so a future migration run has something to read.",
+      "tags": [
+        "memory",
+        "portability-class",
+        "machine-readable",
+        "model-migration",
+        "small-consolidation",
+        "declare-dont-imply"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/task_ledger.py",
+        "tools/pheromone.py"
+      ]
     }
   ],
   "edges": [
@@ -30177,6 +30201,27 @@
       "target": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
       "type": "refines",
       "description": "both are 'persistent memory is not a passive store': run 401 - memory can misrepresent authorization state; this - memory can silently lose meaning across a model upgrade. A permission written in model-coupled notes can be reinterpreted, not just forged"
+    },
+    {
+      "id": "edge_portability_class_declaration_implements_r413",
+      "source": "concept_a_memory_store_should_declare_its_portability_class_in_code_not_leave_it_implicit",
+      "target": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "type": "implements",
+      "description": "the machine-readable form of run 413's refinement: each store's docstring and a PORTABILITY_CLASS constant say whether it survives a model swap"
+    },
+    {
+      "id": "edge_portability_class_declaration_extends_ledger",
+      "source": "concept_a_memory_store_should_declare_its_portability_class_in_code_not_leave_it_implicit",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "extends",
+      "description": "task_ledger.py declares PORTABILITY_CLASS = 'fixed-schema' - the KG-fixed case that transferred with ~0 accuracy change"
+    },
+    {
+      "id": "edge_portability_class_declaration_extends_pheromone",
+      "source": "concept_a_memory_store_should_declare_its_portability_class_in_code_not_leave_it_implicit",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "extends",
+      "description": "pheromone.py declares its numeric columns fixed-schema and its evidence blob model-coupled, with the register_health re-baseline caveat in the docstring"
     }
   ]
 }
