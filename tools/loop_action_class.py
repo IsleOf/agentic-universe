@@ -43,7 +43,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RUNS_DIR = ROOT / "runtime" / "observations" / "loop_runs"
 
-CLASSES = ("fold", "probe", "build", "fix", "consolidate")
+CLASSES = ("fold", "probe", "build", "fix", "consolidate", "verify")
 
 # A run that LEADS with consolidation language is a consolidate run even if it then
 # fixed what the look found - run 409 was misclassified `fix` because it fixed two
@@ -55,6 +55,13 @@ _LEADS_CONSOLIDATE = re.compile(
 
 # ordered: first match wins, most specific first
 _RULES = [
+    # run 426: a citation upgrade / full-read verification is its own class - it
+    # confirms or corrects an abstract-read node against the full paper. It matches
+    # 'fold' keywords (it cites a paper) so it must be checked first.
+    ("verify", re.compile(
+        r"\b(citation upgrade|full (html |pdf )?read|full-read|verified? .* against the full|"
+        r"abstract-read node|verification_state -> validated|confirmed .* from the full paper)",
+        re.I)),
     ("consolidate", re.compile(
         r"\b(consistency (pass|sweep)|adversarial pass|red[- ]team pass|audit(ed)?|"
         r"negative result|no attack landed|deepened .* node|trust boundary|"
@@ -96,8 +103,9 @@ def classify(rec):
         if rx.search(text):
             # a run that cites a paper AND matches 'fix'/'probe' is usually a fold
             # that then acted; call it by the dominant verb, but a bare citation with
-            # no other signal is a fold
-            if cls != "fold" and cites and re.search(r"\bfold", text, re.I):
+            # no other signal is a fold. `verify` is exempt: a citation upgrade
+            # legitimately mentions the original fold it is upgrading (run 426).
+            if cls not in ("fold", "verify") and cites and re.search(r"\bfold", text, re.I):
                 return "fold", "cited + 'fold' verb"
             return cls, rx.pattern[:40]
     if cites:
@@ -180,6 +188,8 @@ def _selftest():
          "consolidate"),
         (_rec(6, "A negative result: audited the class before fixing it. The class does not exist."),
          "consolidate"),
+        (_rec(7, "Citation upgrade: full HTML read of arXiv:2601.21112 v2; verification_state -> validated"),
+         "verify"),
     ]
     for rec, want in samples:
         got, why = classify(rec)
@@ -191,6 +201,9 @@ def _selftest():
         "Built probe_x rig", "Fixed a latent bug", "Red-team consistency pass",
         "Folded arXiv:3 literature fold"])]
     r = report(records=varied)
+    checks["a citation-upgrade increment classes as verify, not fold"] = (
+        classify(_rec(9, "citation upgrade: full-read of arXiv:1234.5678, confirmed from the "
+                         "full paper; verification_state -> validated"))[0] == "verify")
     checks["a varied window is not flagged as a monoculture"] = not r["monoculture_flag"]
 
     # monoculture threshold behaviour across window sizes

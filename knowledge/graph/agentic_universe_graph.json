@@ -12903,6 +12903,30 @@
         "tools/pheromone.py",
         "tools/gates.py"
       ]
+    },
+    {
+      "id": "concept_a_citation_upgrade_is_its_own_action_class_verify_not_fold",
+      "label": "Run 426: loop_action_class gains a 6th class, `verify` - a citation upgrade / full-read confirmation of an abstract-read node. It was classifying as `fold` (it cites a paper) and even overriding to fold because a citation upgrade mentions the original fold it is upgrading",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.6,
+      "description": "Run 426, prompted by acts fold60% on run 425's status line - which was wrong: run 425 was a citation upgrade (full HTML read of arXiv:2601.21112, verification_state -> validated), not a fresh literature fold. loop_action_class had five classes and no way to see the difference; worse, its 'cited + fold verb -> fold' override fired because a citation upgrade legitimately says 'the node folded via abstract at run 381'. FIX: a 6th class `verify` with its own rule (citation upgrade / full read / verified against the full / verification_state -> validated), checked BEFORE the fold rule, and exempt from the cited-plus-fold-verb override. Re-classifying the recent window: run 425 -> verify, and the last-12 mix becomes fold 5 / probe 1 / build 0 / fix 2 / consolidate 3 / verify 1 - genuinely varied at 42% fold, not the 60% the instrument reported. Same shape as run 410 (the classifier could not see a consolidation-that-fixed-something): an action-class instrument's own blind spots surface in its output and are cheap to fix there.",
+      "tags": [
+        "self-audit",
+        "action-class-calibration",
+        "citation-upgrade",
+        "verify-class",
+        "classifier-blind-spot",
+        "loop-action-class",
+        "run-426"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/loop_action_class.py"
+      ]
     }
   ],
   "edges": [
@@ -30775,6 +30799,20 @@
       "target": "concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident",
       "type": "constrains",
       "description": "the full-read exception (7/8 pairs, not 8/8; a capable monitor on a long complex trajectory preferred CoT+action) bounds runs 382-384's extractor-recall probes: those measured the failure mode of filtering, and this says filtering is not always the right call to begin with - strongest for a small monitor on a long trace"
+    },
+    {
+      "id": "edge_r426_refines_loop_action_class",
+      "source": "concept_a_citation_upgrade_is_its_own_action_class_verify_not_fold",
+      "target": "artifact_loop_action_class",
+      "type": "refines",
+      "description": "adds the `verify` class and exempts it from the fold override, so a citation upgrade is no longer miscounted as a fresh fold"
+    },
+    {
+      "id": "edge_r426_extends_r410_blind_spot",
+      "source": "concept_a_citation_upgrade_is_its_own_action_class_verify_not_fold",
+      "target": "concept_the_action_class_classifier_could_not_see_a_consolidation_that_fixed_something_as_consolidation",
+      "type": "extends",
+      "description": "the same pattern one more time: an action-class instrument's blind spot (it could not see a citation upgrade as distinct from a fold) showed up in its own output and was fixed there"
     }
   ]
 }

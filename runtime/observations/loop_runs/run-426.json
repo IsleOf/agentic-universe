@@ -1,0 +1,41 @@
+{
+  "run": 426,
+  "increment": "acts fold60% on run 425's status line was wrong - run 425 was a citation upgrade (full-read, verification_state -> validated), not a fresh literature fold. loop_action_class had 5 classes and no way to see the difference, and its cited+fold-verb override fired because a citation upgrade mentions the original fold. FIX: a 6th class `verify` with its own rule, checked before fold and exempt from the override. Recent window re-classifies: run 425 -> verify, mix becomes fold 5 / probe 1 / build 0 / fix 2 / consolidate 3 / verify 1 - varied at 42% fold not 60%. Same pattern as run 410. loop_action_class +2 selftest checks. +1 node, +2 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/loop_action_class.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-426.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 426 OK · VALID · graph +1n/+2e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +1~3-0 · novelty 0.60 · acts fold50%"
+}
