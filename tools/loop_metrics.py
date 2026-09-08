@@ -209,6 +209,37 @@ def compute(trace_path=HISTORY_TRACE, live_dir=LIVE_RUNS):
     total_claims = len(claims) + len(live_cites)
     total_verified = len(verified) + len(live_verified)
 
+    # --- corpus provenance (run 366) -------------------------------------
+    # This function reads TWO corpora: a frozen 56-run replay of the early
+    # evolution_log (`loop-history.jsonl`) and the live per-run summaries. Most
+    # metrics were computed over the replay alone, so as the loop passed ~300 live
+    # runs the headline numbers were still describing runs 1-56 - `verified-frac
+    # 0.774` appeared identically in every status line for ~30 runs and nobody
+    # noticed, because a plausible constant looks like a stable system.
+    # The cure is not to delete the history metrics (the replay is a real corpus
+    # with real uses) but to make every metric SAY which corpus it measured, and
+    # to publish live counterparts wherever the run records support one.
+    # Third instance of the same disease as runs 361 and 365: an instrument that
+    # returns a plausible value while measuring something other than what the
+    # reader assumes.
+    live_with_graph = [s for s in live
+                       if (s.get("graph_delta") or {}).get("nodes") is not None
+                       and (s["graph_delta"]["nodes"] or s["graph_delta"]["edges"])]
+    vcf_live = (round(len(live_verified) / len(live_cites), 3) if live_cites else None)
+    gwr_live = (round(len(live_with_graph) / len(live), 3) if live else None)
+
+    PROVENANCE = {
+        "runs": "history", "total_events": "history", "mean_events_per_run": "history",
+        "graph_write_rate": "history", "validation_pass_rate": "history",
+        "distinct_evidence_roots": "history", "evidence_root_reuse": "history",
+        "reused_roots": "history", "trace_legibility": "history",
+        "verified_citation_fraction": "blended (history-dominated)",
+        "live_runs_recorded": "live", "idle_run_streak": "live",
+        "plateau_watch": "live", "run_novelty": "live", "run_novelty_detail": "live",
+        "verified_citation_fraction_live": "live", "graph_write_rate_live": "live",
+        "runs_live": "live", "corpus_provenance": "meta", "history_dominance": "meta",
+    }
+
     return {
         "runs": runs,
         "live_runs_recorded": len(live),
@@ -225,6 +256,15 @@ def compute(trace_path=HISTORY_TRACE, live_dir=LIVE_RUNS):
         "trace_legibility": legibility,
         "run_novelty": novelty["novelty_ratio"] if novelty else None,
         "run_novelty_detail": novelty,
+        # live counterparts (run 366) — the same questions asked of the live corpus
+        "runs_live": len(live),
+        "verified_citation_fraction_live": vcf_live,
+        "graph_write_rate_live": gwr_live,
+        # meta: which corpus each metric measured, and how badly the frozen replay
+        # outweighs the live record. history_dominance > 1 means the headline
+        # history-derived numbers describe a minority of the loop's actual runs.
+        "corpus_provenance": PROVENANCE,
+        "history_dominance": (round(len(live) / runs, 2) if runs else None),
     }
 
 
@@ -497,6 +537,37 @@ def _selftest():
                                                  "run_novelty_detail": {"window": 6, "new_roots": 1,
                                                                         "repeat_roots": 9}}) or [])),
         }
+
+        # --- corpus-provenance guard (run 366) ---------------------------
+        # compute() reads a frozen 56-run replay AND the live run records, and for
+        # ~240 runs most headline metrics silently reported the replay. The
+        # structural cure is that every metric must DECLARE its corpus, so a
+        # future metric cannot be added without saying what it measures.
+        prov = m.get("corpus_provenance") or {}
+        undeclared = [k for k in m if k not in prov]
+        checks["every metric declares its corpus (corpus_provenance covers all keys)"] = (
+            not undeclared)
+        checks["history-dominance is reported, not hidden"] = (
+            m.get("history_dominance") is not None)
+        checks["live counterparts exist for the history-dominated headline metrics"] = all(
+            k in m for k in ("runs_live", "verified_citation_fraction_live",
+                             "graph_write_rate_live"))
+        # A live metric must track the LIVE corpus, not the replay. `m` above was
+        # computed with no live dir, so it is the absent-corpus case; recomputing on
+        # the SAME trace with the real live dir must move the live metrics and leave
+        # the history-derived ones untouched. That is the property whose absence let
+        # the replay masquerade as current for ~240 runs.
+        checks["live metrics read empty when the live corpus is absent"] = (
+            m.get("runs_live") == 0 and m.get("verified_citation_fraction_live") is None)
+        if Path(LIVE_RUNS).exists():
+            _m2 = compute(trace_path=trace, live_dir=LIVE_RUNS)
+            checks["live metrics move with the live corpus while history metrics do not"] = (
+                _m2["runs_live"] > 0
+                and _m2["runs"] == m["runs"]
+                and _m2["trace_legibility"] == m["trace_legibility"])
+        else:
+            checks["live metrics move with the live corpus while history metrics do not"] = True
+
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         print("\n  metrics:", json.dumps({k: v for k, v in m.items() if k != "reused_roots"}))

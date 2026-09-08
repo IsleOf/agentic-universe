@@ -5734,7 +5734,7 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:phase3_real_signal",
       "confidence": 0.75,
-      "description": "tools/loop_metrics.py, run 68: computes real metrics over the loop trace corpus (verified_citation_fraction 0.40, graph_write_rate 0.43, validation_pass_rate 1.00, evidence_root_reuse 0.06). propose_loop_edit() turns a below-threshold metric into a concrete loop-harness edit + falsifiable prediction. Honest split: validation_pass_rate has computable verification (replay + count invalid commits); verified_citation_fraction and any quality metric are BLOCKED on a frozen held-out research-task set that does not exist - the proposer produces a grounded proposal, a human promotes it, the next 10 runs are the deferred verification. Same shape as pattern_grounded_acceptance_only under a missing oracle. Replayed metrics are a floor not a measurement (evolution_log is sparse); live recording fixes it forward.",
+      "description": "tools/loop_metrics.py, run 68: computes real metrics over the loop trace corpus (verified_citation_fraction 0.40, graph_write_rate 0.43, validation_pass_rate 1.00, evidence_root_reuse 0.06). propose_loop_edit() turns a below-threshold metric into a concrete loop-harness edit + falsifiable prediction. Honest split: validation_pass_rate has computable verification (replay + count invalid commits); verified_citation_fraction and any quality metric are BLOCKED on a frozen held-out research-task set that does not exist - the proposer produces a grounded proposal, a human promotes it, the next 10 runs are the deferred verification. Same shape as pattern_grounded_acceptance_only under a missing oracle. Replayed metrics are a floor not a measurement (evolution_log is sparse); live recording fixes it forward. CORPUS-PROVENANCE FIX (run 366). compute() reads TWO corpora - a frozen 56-run replay of the early evolution_log (runtime/traces/loop-history.jsonl) and the live per-run summaries - and most headline metrics were computed over the replay alone. By run 366 the loop had 297 live runs against those 56, a history_dominance of 5.3, so the reported health of the loop described runs 1-56. The tell was in plain sight: 'verified-frac 0.774' appeared IDENTICALLY in every status line for ~30 runs, and a plausible constant reads as a stable system. Divergence once measured: verified_citation_fraction 0.774 (frozen) vs 0.92 (live) - the loop's real verification discipline was BETTER than the number driving propose_loop_edit. No spurious proposal fired, but only by luck: the threshold is 0.6 and both values sit above it. The dangerous direction is the other one - had live verification fallen below 0.6 while the frozen value held at 0.774, the loop would have been blind to a real regression. Fix: added live counterparts (runs_live, verified_citation_fraction_live, graph_write_rate_live), a corpus_provenance map labelling EVERY key history / live / blended / meta, and history_dominance. Guard in the selftest: every metric must declare its corpus, and live metrics must move with the live corpus while history metrics stay put - so a future metric cannot be added without saying what it measures.",
       "tags": [
         "phase-3",
         "real-signal",
@@ -11056,6 +11056,33 @@
       ],
       "evidence_links": [
         "tools/skill_induction.py"
+      ]
+    },
+    {
+      "id": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "label": "Third instrument-decay bug in three runs: a metrics layer reading two corpora reported the frozen one for ~240 runs. The structural cure is not fresher data but making every metric declare its corpus",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:observability",
+      "confidence": 0.7,
+      "description": "Run 366, completing a trilogy found in this project's own loop in three consecutive runs. Run 361: two metrics nobody remembered to populate, so they read empty. Run 365: a classifier with a fallback bucket that widened silently as its vocabulary drifted. Run 366: loop_metrics.compute() reads a frozen 56-run replay AND 297 live run records, and reported the replay for the headline numbers - history_dominance 5.3. ALL THREE share one shape: the instrument returned a PLAUSIBLE VALUE while measuring something other than what the reader assumed. None raised an error. None looked broken. Two were caught only by running the instrument over real data and comparing against known truth; the third by noticing a constant that never moved. THE PROGRESSION OF FIXES matters more than the bugs. Run 361 fixed the values (derive them). Run 365 fixed the failure signal (assert the fallback rate). Run 366 fixes the CONTRACT: every metric declares its corpus (history / live / blended / meta), and the selftest refuses a metric that does not - so the next person adding one cannot omit it. Fresher data would have fixed one instance; a declared contract makes the whole class visible. SPECIFIC NEAR-MISS worth keeping: verified_citation_fraction read 0.774 frozen against 0.92 live. propose_loop_edit gates on it at 0.6, so both sit on the same side and no false proposal fired - by luck, not design. Had the live value dropped below 0.6 while the frozen one held, the loop would have been blind to a real regression in its own citation discipline. A stale instrument is not merely imprecise; it is uninformative in exactly the situation it exists to detect. STANDING QUESTION this leaves open: three instruments in three runs is a base rate, not a coincidence. The remaining un-audited signals are janitor's four views and the acceptance-gate scores; neither has been checked against live data.",
+      "tags": [
+        "instrument-decay",
+        "corpus-provenance",
+        "self-observability",
+        "measurement-validity",
+        "found-in-own-loop",
+        "trilogy",
+        "declared-contract"
+      ],
+      "derived_from": [
+        "tools/loop_metrics.py",
+        "runtime/observations/loop_runs/ (297 live runs vs a 56-run replay)"
+      ],
+      "evidence_links": [
+        "tools/loop_metrics.py"
       ]
     }
   ],
@@ -26892,6 +26919,27 @@
       "target": "concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims",
       "type": "constrains",
       "description": "the task-shape conclusion was computed on the drifted classifier; correcting it moved sweep+build from 53.9% to 76.7%, which is why that node now carries a band rather than a point estimate"
+    },
+    {
+      "id": "edge_corpus_provenance_extends_classifier_drift",
+      "source": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "target": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
+      "type": "extends",
+      "description": "third in the same family, one run later; the classifier hid drift behind a fallback label, the metrics layer hid it behind a frozen corpus"
+    },
+    {
+      "id": "edge_corpus_provenance_extends_selfobs",
+      "source": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "target": "concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric",
+      "type": "extends",
+      "description": "run 361 was an unpopulated field, this is a populated field measuring the wrong corpus - both return a plausible value while measuring nothing the reader wants"
+    },
+    {
+      "id": "edge_corpus_provenance_grounds_loop_metrics",
+      "source": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "target": "artifact_loop_metrics_phase3_real",
+      "type": "grounds",
+      "description": "the run-366 provenance map, live counterparts and selftest contract are this concept applied to the metrics layer that revealed it"
     }
   ]
 }
