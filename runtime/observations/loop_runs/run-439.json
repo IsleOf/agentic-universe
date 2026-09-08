@@ -1,0 +1,41 @@
+{
+  "run": 439,
+  "increment": "Build, integration - wired the ArcticSwarm deferred-consensus flow (runs 437-438) into swarm_demo end to end. New SwarmDemo(defer_consensus=True, default): the research contribution is posted isolated=True and released at the G1 commitment boundary; before G4 a spare non-contributor records a competing hypothesis via pheromone.note_alternative, so the demo's G4 verdict is NOT flagged no_alternative_hypothesis. defer_consensus=False reproduces the old straight-to-board behaviour AND the flag (a clean A/B). The full flow needs k>=4 agents (a spare for the alt note plus the G4 validator) - the same 'gated work needs enough agents' floor as the existing k=2 limit; the happy-path test moved 3 -> 4 agents. +5 swarm_demo selftests. selftest_all GREEN. +1 edge (swarm_demo verifies the ArcticSwarm concept). Both ArcticSwarm gaps are now built AND exercised together.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 1
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/swarm_demo.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-439.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 439 OK · VALID · graph +0n/+1e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.82 · files +1~3-0 · novelty 0.75 · acts prob40%"
+}

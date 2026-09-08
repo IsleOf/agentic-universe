@@ -65,9 +65,15 @@ def _fake_worker(agent_id, stage, task, board):
 
 
 class SwarmDemo:
-    def __init__(self, work_dir, agents, *, contribute=_fake_worker, computable_ok=True):
+    def __init__(self, work_dir, agents, *, contribute=_fake_worker, computable_ok=True,
+                 defer_consensus=True):
         self.dir = Path(work_dir)
         self.dir.mkdir(parents=True, exist_ok=True)
+        # run 439 (ArcticSwarm, arXiv:2609.01870): the research contribution is
+        # posted as a private (isolated) working note and released at the G1
+        # commitment boundary; before G4 a fresh agent records that a competing
+        # hypothesis was considered, so the commit gate is not single-candidate.
+        self.defer_consensus = defer_consensus
         self.ledger = Ledger(self.dir / "ledger.json")
         self.pher = Pheromone(self.dir / "pheromone.db")
         # relay shares the demo's live ledger + pheromone objects — two Ledger
@@ -105,16 +111,25 @@ class SwarmDemo:
             board = self.pher.read(task["id"])
             out = self.contribute(agent, task["stage"], task, board)
 
-            # the contribution lands on the board (stigmergy, not a private channel)
+            stage = task["stage"]
+            # research work is posted ISOLATED (a private working note) and released
+            # at the G1 boundary; every other stage posts straight to the shared board
+            isolate = self.defer_consensus and stage == "research"
             self.pher.annotate(task["id"], "utility", out["utility"], out["confidence"],
-                               agent=agent,
+                               agent=agent, isolated=isolate,
                                evidence={"text": out["text"], "stage": task["stage"],
                                          "evidence": out.get("evidence", [])})
             self.transcript.append({"task": task["id"], "stage": task["stage"],
-                                    "agent": agent, "text": out["text"]})
+                                    "agent": agent, "text": out["text"],
+                                    **({"isolated": True} if isolate else {})})
 
-            stage = task["stage"]
             if stage == "research":
+                # commitment boundary: release the isolated research note to the
+                # shared board so the G1 validator (and the draft stage) can see it
+                if isolate:
+                    n = self.pher.release_isolation(task["id"], agent=agent)
+                    self.transcript.append({"event": "release_isolation",
+                                            "task": task["id"], "agent": agent, "n": n})
                 # G1 by a fresh validator
                 v_agent = self._fresh_validator(task["id"])
                 try:
@@ -134,13 +149,28 @@ class SwarmDemo:
                 self.relay.complete(task["id"], from_agent=agent,
                                     artifact_ref=self.dir.name + "/artifact.md")
                 self.rep.record(agent, "success")
+                # before G4: record that a competing hypothesis was considered, so
+                # the commit gate is not single-candidate (ArcticSwarm). Needs a
+                # non-contributor to spare — and one more left for the G4 validator.
+                if self.defer_consensus:
+                    non_contrib = [a for a in self.agents if a not in
+                                   set(self.pher.read(task["id"])["contributors"])]
+                    if len(non_contrib) >= 2:
+                        alt = self.rep.select(non_contrib)
+                        self.pher.note_alternative(
+                            task["id"], agent=alt,
+                            hypothesis=f"considered an alternative framing of '{goal}'")
+                        self.transcript.append({"event": "note_alternative",
+                                                "task": task["id"], "agent": alt})
                 v_agent = self._fresh_validator(task["id"])
                 try:
                     g4 = g4_release(task["id"], validator_agent=v_agent, pheromone=self.pher,
                                     computable_ok=self.computable_ok, min_quorum=2)
                     self.transcript.append({"gate": "G4", "task": task["id"],
                                             "validator": v_agent, "pass": g4["pass"],
-                                            "quorum": g4["quorum"]})
+                                            "quorum": g4["quorum"],
+                                            "no_alternative_hypothesis":
+                                                g4["no_alternative_hypothesis"]})
                     if g4["pass"]:
                         released = task["id"]
                         break
@@ -191,8 +221,10 @@ def _selftest():
     tmp = Path(tempfile.mkdtemp(prefix="swarmdemo-"))
     checks = {}
     try:
-        # 1. the happy path: 3 agents, fake workers, computable checks pass -> release
-        d = SwarmDemo(tmp / "happy", ["a1", "a2", "a3"], computable_ok=True)
+        # 1. the happy path: 4 agents (the ArcticSwarm deferred-consensus flow needs
+        #    one spare agent for the alternative-hypothesis note + the G4 validator),
+        #    fake workers, computable checks pass -> release
+        d = SwarmDemo(tmp / "happy", ["a1", "a2", "a3", "a4"], computable_ok=True)
         r = d.run("map the auth flow and find the race")
         checks["the pipeline runs end to end and releases an artifact"] = r["released"] is not None
         stages_run = {e["stage"] for e in r["transcript"] if "stage" in e}
@@ -201,6 +233,16 @@ def _selftest():
             e.get("gate") == "G1" and e.get("pass") for e in r["transcript"])
         checks["G4 ran and passed"] = any(
             e.get("gate") == "G4" and e.get("pass") for e in r["transcript"])
+        # run 439: the ArcticSwarm deferred-consensus flow ran end to end
+        checks["the research note was posted isolated then released at the G1 boundary"] = (
+            any(e.get("isolated") for e in r["transcript"] if e.get("stage") == "research")
+            and any(e.get("event") == "release_isolation" and e.get("n", 0) >= 1
+                    for e in r["transcript"]))
+        checks["a competing hypothesis was recorded before G4"] = any(
+            e.get("event") == "note_alternative" for e in r["transcript"])
+        checks["G4's verdict is not flagged no_alternative_hypothesis"] = any(
+            e.get("gate") == "G4" and e.get("no_alternative_hypothesis") is False
+            for e in r["transcript"])
         ok, prob = d.audit_ok()
         checks["the audit trail is clean"] = ok
         # no orchestrator/chief CLASS DEFINITION anywhere in the module (regex so the
@@ -210,6 +252,20 @@ def _selftest():
         checks["no orchestrator/chief class definition in the module"] = not _re.search(
             r"^class \w*(Orchestrator|Chief|Boss|Manager)\b", src, _re.M)
         d.close()
+
+        # 1b. defer_consensus=False: the old straight-to-board behaviour still works,
+        #     and G4 is then correctly flagged no_alternative_hypothesis
+        d1b = SwarmDemo(tmp / "nodefer", ["a1", "a2", "a3", "a4"], computable_ok=True,
+                        defer_consensus=False)
+        r1b = d1b.run("map the auth flow")
+        checks["defer_consensus=False still releases"] = r1b["released"] is not None
+        checks["defer off: no isolation / note_alternative events"] = not any(
+            e.get("event") in ("release_isolation", "note_alternative")
+            for e in r1b["transcript"])
+        checks["defer off: G4 IS flagged no_alternative_hypothesis"] = any(
+            e.get("gate") == "G4" and e.get("no_alternative_hypothesis") is True
+            for e in r1b["transcript"])
+        d1b.close()
 
         # 2. a failing computable check -> G4 does NOT release, but the run still
         #    terminates cleanly (no exception, no infinite loop)
