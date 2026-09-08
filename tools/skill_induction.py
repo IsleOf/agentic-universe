@@ -103,6 +103,42 @@ def classify(note_text):
     return next(c for c in order if (c, best) in hits)
 
 
+# Run 419 (arXiv:2609.05261, Trace2Tower). Flat class labels are the bottleneck that
+# paper names; a skill memory should also carry an ABSTRACTION LEVEL and be
+# CONDITIONED ON OUTCOME. This is the minimal two-axis form: map each task class to
+# one of three levels, and let a caller stamp the outcome from the run record.
+#   idiom      a reusable local move (a code pattern, a check, a fix shape)
+#   procedure  a multi-step routine (fold->probe->fix; classify-before-generalise)
+#   strategy   a run-selection principle (consolidate before a feature run; recency
+#              weighting; the IDLE-STATE RULE)
+SKILL_LEVEL = {
+    "build": "idiom",
+    "citation upgrade": "idiom",
+    "project audit": "procedure",
+    "literature sweep": "procedure",
+    "consistency re-read": "procedure",
+    "consolidation pass": "strategy",
+    "loop policy edit": "strategy",
+    "diversity hold": "strategy",
+}
+SKILL_OUTCOMES = ("landed", "held", "withdrawn", "unknown")
+
+
+def level_of(cls):
+    """Abstraction level for a task class; 'procedure' for anything unmapped."""
+    return SKILL_LEVEL.get(cls, "procedure")
+
+
+def skill_key(note_text, *, outcome="unknown"):
+    """A two-axis skill key: '<level>/<class>@<outcome>'. `outcome` is stamped by the
+    caller from the run record (ok + graph_delta -> landed; a later withdrawal ->
+    withdrawn; held only after the holdout set has re-scored it)."""
+    if outcome not in SKILL_OUTCOMES:
+        raise ValueError(f"outcome must be one of {SKILL_OUTCOMES}")
+    cls = classify(note_text)
+    return f"{level_of(cls)}/{cls}@{outcome}"
+
+
 def _build_corpus_bank(tmp):
     reg = Registry(base=tmp / "harness")
     seed_loop_harness(reg)
@@ -288,6 +324,24 @@ def _selftest():
             checks[f"TASK_CLASSES still fits the run corpus (other={rate:.1%}, cap 15%)"] = rate <= 0.15
         else:
             checks["classifier-drift guard skipped (corpus < 50 runs)"] = True
+
+        # --- run 419: the two-axis skill key (Trace2Tower) ---
+        checks["level_of maps a known class to its abstraction level"] = (
+            level_of("build") == "idiom" and level_of("consolidation pass") == "strategy")
+        checks["level_of defaults an unmapped class to 'procedure'"] = (
+            level_of("brand new class") == "procedure")
+        k1 = skill_key("built tools/relay.py, a selftest_all job", outcome="landed")
+        checks["skill_key is <level>/<class>@<outcome>"] = (
+            k1.count("/") == 1 and k1.endswith("@landed") and k1.startswith("idiom/"))
+        try:
+            skill_key("x", outcome="brilliant")
+            _rej = False
+        except ValueError:
+            _rej = True
+        checks["skill_key rejects an unknown outcome"] = _rej
+        checks["a literature fold keys as a procedure"] = (
+            skill_key("folded arXiv:1234.5678 literature sweep").startswith("procedure/"))
+
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         print(f"\n  workflow entries: {n_workflow}")

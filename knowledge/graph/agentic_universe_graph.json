@@ -12741,6 +12741,30 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.05261"
       ]
+    },
+    {
+      "id": "concept_skill_induction_now_emits_a_two_axis_key_level_slash_class_at_outcome_not_a_flat_class_label",
+      "label": "Run 419: skill_induction gains SKILL_LEVEL (idiom / procedure / strategy), level_of(), and skill_key(note, outcome) -> '<level>/<class>@<outcome>' - the minimal two-axis form of Trace2Tower's abstraction-level + outcome-conditioned skill memory",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:memory",
+      "confidence": 0.6,
+      "description": "Run 419, acting on run 418's Trace2Tower fold. skill_induction.py classified the loop's increments into a FLAT list of TASK_CLASSES - the bottleneck that paper names. Added the minimal two-axis form: SKILL_LEVEL maps each task class to one of three abstraction levels - IDIOM (a reusable local move: a code pattern, a check, a fix shape), PROCEDURE (a multi-step routine: fold->probe->fix, classify-before-generalise), STRATEGY (a run-selection principle: consolidate before a feature run, recency weighting, the IDLE-STATE RULE). level_of(cls) returns the level, defaulting unmapped classes to 'procedure'. skill_key(note, outcome='landed'|'held'|'withdrawn'|'unknown') returns '<level>/<class>@<outcome>' - the caller stamps the outcome from the run record (ok + graph_delta -> landed; a later withdrawal -> withdrawn; held only after the holdout set re-scored it). This does not rebuild the skill tower's spectral decomposition - it makes the KEY two-axis so a future skill store can group by level and filter by outcome, which is the shape Trace2Tower's ALFWorld 87% result rests on. 5 selftest checks GREEN. The unmapped-defaults-to-procedure choice is deliberate: a genuinely new kind of increment is more likely a multi-step routine than a one-move idiom or a standing strategy, and mis-labelling toward the middle level is the least harmful default.",
+      "tags": [
+        "memory",
+        "skill-induction",
+        "two-axis-key",
+        "abstraction-level",
+        "outcome-conditioned",
+        "trace2tower",
+        "minimal-form"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/skill_induction.py"
+      ]
     }
   ],
   "edges": [
@@ -30445,6 +30469,20 @@
       "target": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
       "type": "refines",
       "description": "'contrastive spectral decomposition suppressing failure-prone shortcuts' is a concrete mechanism against the within-run drift toward the exploit that worked before - the exploration->exploitation decline given a memory-level countermeasure"
+    },
+    {
+      "id": "edge_r419_implements_t2t",
+      "source": "concept_skill_induction_now_emits_a_two_axis_key_level_slash_class_at_outcome_not_a_flat_class_label",
+      "target": "concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome",
+      "type": "implements",
+      "description": "the minimal two-axis form: abstraction level (SKILL_LEVEL / level_of) + outcome conditioning (skill_key's @outcome suffix), without the full spectral tower"
+    },
+    {
+      "id": "edge_r419_extends_skill_induction",
+      "source": "concept_skill_induction_now_emits_a_two_axis_key_level_slash_class_at_outcome_not_a_flat_class_label",
+      "target": "pattern_skill_induction",
+      "type": "extends",
+      "description": "skill_induction's flat classify() gains level_of() and skill_key(); the flat class list becomes a level x class x outcome space"
     }
   ]
 }
