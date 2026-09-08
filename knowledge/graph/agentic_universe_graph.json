@@ -12350,6 +12350,32 @@
       "evidence_links": [
         "tools/probe_language_drift_monitor.py"
       ]
+    },
+    {
+      "id": "concept_pheromone_register_health_is_a_cheap_model_free_distribution_shift_detector_on_the_boards_own_language",
+      "label": "pheromone.register_health: over recent annotation text, the fraction carrying an English function word; falls as the board drifts toward a coded register, flags `drifting` at >=20 texts and <0.5 English - the 'notice the shift' half of run 404's fix, no model",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:emergent_communication",
+      "confidence": 0.66,
+      "description": "Run 405, the concrete follow-on to run 404. That run showed a keyword monitor passes a drifted board as clean, and the fix has two halves: escalate on unparseability (in gates, run 404) and NOTICE the shift (here). pheromone.register_health() is the second half: over the most recent N annotations carrying an evidence text/note/message string, the fraction whose text contains at least one of a tiny closed set of English function words (the/a/is/and/...). Pure stdlib, model-free - it is a distribution-shift detector, not a language model. It returns `drifting` True only with >= 20 judgeable texts and an English fraction below 0.5, and it DECLINES TO SCORE (n_texts 0, english_fraction None, drifting False) when nothing carries judgeable text - the run-386 / declare-your-corpus discipline, it does not invent a health number from no data. VERIFIED against the run-404 rig: a board of 22 or 45 coded annotations ('@x9 kk dx qq vv') that g1_evidence passes as clean is flagged `drifting`; a board of plain-English annotations is not; a 3-annotation blip does not trip it. WHAT IT IS NOT: a keyword monitor with extra steps. It does not try to read the annotations - it measures whether the board is still in a register its READERS' tools were built for. A drifting board is a signal to escalate a sample to a human, never an abort. And an adversary who keeps sprinkling function words into otherwise-coded text defeats it - it raises the cost of covert drift, it does not prevent it.",
+      "tags": [
+        "emergent-language",
+        "distribution-shift-detector",
+        "register-health",
+        "model-free",
+        "notice-the-shift",
+        "declines-to-score",
+        "flag-not-abort",
+        "raises-the-cost"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/pheromone.py",
+        "tools/probe_language_drift_monitor.py"
+      ]
     }
   ],
   "edges": [
@@ -29592,6 +29618,41 @@
       "target": "artifact_swarm_substrate_prototype_design",
       "type": "constrains",
       "description": "the substrate design needs a distribution-shift check on the board's register, or its monitors (g1, cohort_monitor) can be walked out of their built-for distribution without an alarm"
+    },
+    {
+      "id": "edge_register_health_implements_r404_fix",
+      "source": "concept_pheromone_register_health_is_a_cheap_model_free_distribution_shift_detector_on_the_boards_own_language",
+      "target": "concept_a_keyword_keyed_monitor_passes_a_drifted_board_as_clean_and_the_fix_is_to_escalate_on_unparseability_not_pass",
+      "type": "implements",
+      "description": "the 'detect the distribution shift and refuse to certify past it' half of run 404's fix: escalate-on-unparseability handles one artifact, register_health watches the whole board"
+    },
+    {
+      "id": "edge_register_health_extends_pheromone",
+      "source": "concept_pheromone_register_health_is_a_cheap_model_free_distribution_shift_detector_on_the_boards_own_language",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "extends",
+      "description": "adds register_health() to the module: a cheap rolling English-function-word fraction over recent annotation text, flagging `drifting` as a distribution shift"
+    },
+    {
+      "id": "edge_register_health_instantiates_glossogen_detector",
+      "source": "concept_pheromone_register_health_is_a_cheap_model_free_distribution_shift_detector_on_the_boards_own_language",
+      "target": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "type": "instantiates",
+      "description": "a first-order detector for GlossoGen's evolved-register scenario: it catches the SYMPTOM (text stops looking like English) without modelling the language"
+    },
+    {
+      "id": "edge_register_health_instantiates_declare_corpus",
+      "source": "concept_pheromone_register_health_is_a_cheap_model_free_distribution_shift_detector_on_the_boards_own_language",
+      "target": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "type": "instantiates",
+      "description": "returns n_texts 0 / english_fraction None / drifting False when nothing is judgeable rather than a fabricated health score"
+    },
+    {
+      "id": "edge_register_health_verified_by_drift_rig",
+      "source": "artifact_probe_language_drift_monitor",
+      "target": "concept_pheromone_register_health_is_a_cheap_model_free_distribution_shift_detector_on_the_boards_own_language",
+      "type": "verifies",
+      "description": "probe_language_drift_monitor's run-405 arm: coded boards of 22 and 45 annotations that g1 passes clean are flagged drifting; plain-English boards are not"
     }
   ]
 }

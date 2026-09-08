@@ -182,6 +182,28 @@ def _selftest():
         "first-order stand-in" in a["verdict"] and "does not model how fast" in a["verdict"])
     checks["the run is deterministic"] = assess()["verdict"] == a["verdict"]
 
+    # run 405: pheromone.register_health is the "notice the shift" half of the fix -
+    # it should flag a board of drifted text even though g1's regexes pass it clean.
+    import shutil as _sh
+    dd = Path(tempfile.mkdtemp(prefix="langdrift-reg-"))
+    try:
+        # a couple of board sizes, above the >=20 judgeable-text floor
+        for n in (22, 45):
+            pf_en = Pheromone(dd / f"en{n}.db")
+            pf_cd = Pheromone(dd / f"cd{n}.db")
+            for i in range(n):
+                pf_en.annotate("t", "utility", 0.3, 0.6, agent=f"a{i}", _id=f"e{n}_{i}",
+                               evidence={"text": drift(_BASE, 0)})
+                pf_cd.annotate("t", "utility", 0.3, 0.6, agent=f"a{i}", _id=f"c{n}_{i}",
+                               evidence={"text": drift(_BASE, 3)})
+            checks[f"n={n}: register_health does not flag a plain-English board"] = (
+                not pf_en.register_health()["drifting"])
+            checks[f"n={n}: register_health DOES flag a coded board that g1 passes clean"] = (
+                pf_cd.register_health()["drifting"])
+            pf_en.close(); pf_cd.close()
+    finally:
+        _sh.rmtree(dd, ignore_errors=True)
+
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     allok = all(checks.values())

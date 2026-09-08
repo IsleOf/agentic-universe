@@ -79,6 +79,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import sqlite3
 import sys
 import time
@@ -286,6 +287,53 @@ class Pheromone:
             "annotations": ann,
         }
 
+    # A tiny closed set of English function words. Their presence is a cheap,
+    # model-free signal that a chunk of text is still in a natural-language register.
+    _EN_FUNCTION_WORDS = frozenset(
+        "the a an is are was were be been to of in on at for and or but not with "
+        "this that it as by from has have had will would can could should".split())
+
+    def register_health(self, *, at=None, sample=200):
+        """Run 405, the 'notice the shift' half of run 404's fix. A cheap,
+        model-free register monitor: over the most recent `sample` annotations
+        carrying an evidence['text'] / ['note'] / ['message'], the fraction whose
+        text contains at least one English function word. It falls as the board's
+        text drifts toward a compressed or coded register (GlossoGen, run 403).
+
+        Returns {n_texts, english_fraction, drifting} or {n_texts: 0, ...} when
+        there is nothing to judge - it does NOT invent a health score from no data
+        (the run-386 lesson). `drifting` is True only with >= 20 texts to judge and
+        an english_fraction below 0.5 - a flag, never an abort."""
+        rows = self._db.execute(
+            "SELECT evidence FROM pheromone ORDER BY created_at DESC LIMIT ?",
+            (sample,)).fetchall()
+        texts = []
+        for (ev,) in rows:
+            if not ev:
+                continue
+            try:
+                d = json.loads(ev)
+            except (ValueError, TypeError):
+                continue
+            for key in ("text", "note", "message"):
+                val = d.get(key) if isinstance(d, dict) else None
+                if isinstance(val, str) and val.strip():
+                    texts.append(val)
+        if not texts:
+            return {"n_texts": 0, "english_fraction": None, "drifting": False,
+                    "note": "no annotation carries judgeable text"}
+        english = sum(
+            1 for t in texts
+            if any(w in self._EN_FUNCTION_WORDS
+                   for w in re.findall(r"[a-zA-Z]+", t.lower())))
+        frac = round(english / len(texts), 3)
+        return {"n_texts": len(texts), "english_fraction": frac,
+                "drifting": bool(len(texts) >= 20 and frac < 0.5),
+                "note": ("the board's text register has drifted well below natural "
+                         "language - a monitor keyed on English surface form may be "
+                         "going blind (run 404); escalate a sample to a human"
+                         if len(texts) >= 20 and frac < 0.5 else "register looks natural")}
+
     def board(self, limit=50, *, at=None):
         """Every task_ref with a live annotation, ranked by |signal| then recency."""
         now = _now() if at is None else at
@@ -458,6 +506,32 @@ def _selftest():
             not any((a.get("evidence") or {}).get("suspicion")
                     for a in ps.read("e", at=1000.0 + 2000.0)["annotations"]))
         ps.close()
+
+        # --- run 405: the register-health monitor ---
+        pr = Pheromone(tmp / "reg.db")
+        checks["register_health declines to score with no judgeable text"] = (
+            pr.register_health()["n_texts"] == 0
+            and pr.register_health()["english_fraction"] is None
+            and not pr.register_health()["drifting"])
+        for i in range(25):
+            pr.annotate("t", "utility", 0.3, 0.6, agent=f"a{i}", _id=f"en{i}",
+                        evidence={"text": "the agent reports a solid result on this task"})
+        checks["a board full of English text is not flagged as drifting"] = (
+            not pr.register_health()["drifting"]
+            and pr.register_health()["english_fraction"] > 0.9)
+        pr2 = Pheromone(tmp / "reg2.db")
+        for i in range(25):
+            pr2.annotate("t", "utility", 0.3, 0.6, agent=f"a{i}", _id=f"cd{i}",
+                         evidence={"text": "@x9 kk dx qq vv @sc @kk9"})
+        checks["a board full of coded text IS flagged as drifting"] = (
+            pr2.register_health()["drifting"]
+            and pr2.register_health()["english_fraction"] < 0.5)
+        checks["drifting needs >= 20 judgeable texts (not a 3-annotation blip)"] = (
+            not (lambda p: [p.annotate("t", "utility", 0.1, 0.5, agent=f"b{i}",
+                                       _id=f"x{i}", evidence={"text": "zz qq xx"})
+                            for i in range(3)] and p.register_health()["drifting"])(
+                Pheromone(tmp / "reg3.db")))
+        pr.close(); pr2.close()
 
         for key, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {key}")
