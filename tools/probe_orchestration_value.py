@@ -50,6 +50,20 @@ the perfect a&b&c MULTI ceiling but ABOVE every vote-synthesis MULTI — so (b)
 should read "deterministic synthesis OR bounded-neighbourhood stigmergic
 accretion", not "deterministic synthesis" alone.
 
+GAMMA arm (run 428) — from arXiv:2602.05289 ("Towards a Science of Collective AI",
+folded run 427). That paper's core methodological demand: a performance gain must
+be split into GENUINE COLLABORATION GAIN vs mere RESOURCE ACCUMULATION (more
+agents = more compute = more samples). Every delta above is MULTI-vs-SINGLE at
+*unmatched* budget — MULTI spends more subtask-attempts (fresh agent per subtask,
+verifiable retries, a vote step that polls K agents). This arm re-runs the
+interesting configs while COUNTING subtask-attempts, then compares MULTI against
+the strongest thing that same budget buys a single agent: best-of-N whole-task
+attempts with an oracle verifier (`run_single_bestof`). Gamma = MULTI success
+minus SINGLE-at-matched-budget success. It also reports the budget a single agent
+would actually need to MATCH MULTI's success — the honest efficiency ratio. A
+positive Gamma at a&b&c means decomposition + verified retry + deterministic
+merge is real collaboration structure, not a sampling trick.
+
 No model call — the finding is about how per-subtask, synthesis, and correlation
 failure probabilities compound. Swap `_subtask_ok` / `_synthesis_ok` for real
 agent runs.
@@ -101,8 +115,21 @@ def _synthesis_ok(rng, n_disagree, *, deterministic):
     return rng.random() >= min(BASE_HERD + SHED_VOTE * n_disagree, 0.97)
 
 
-def run_single(rng):
+def _single_task_ok(rng):
     return all(_subtask_ok(rng, i, accumulating=True, poisoned=False) for i in range(K))
+
+
+def run_single(rng):
+    return _single_task_ok(rng)
+
+
+def run_single_bestof(rng, n):
+    """Budget-matched control for a MULTI config: ONE agent given `n` independent
+    whole-task attempts, oracle-verified — succeeds if ANY attempt succeeds. This
+    is the strongest thing raw budget (more samples) can buy a single agent, so a
+    MULTI win that survives a comparison against this is genuine collaboration
+    gain, not resource accumulation (arXiv:2602.05289)."""
+    return any(_single_task_ok(rng) for _ in range(max(1, int(n))))
 
 
 def run_multi(rng, *, verifiable, deterministic, disjoint):
@@ -143,6 +170,128 @@ def run_flock(rng, *, verifiable, disjoint, neighbourhood=FLOCK_NEIGHBOURHOOD):
             ok = False       # no synthesis step to catch a subtle inconsistency before it lands
         store.append(ok)
     return sum(store) >= K * FLOCK_ACCEPT_FRAC
+
+
+# --------------------------------------------------------------------------- #
+# GAMMA arm (run 428): collaboration gain NET of budget (arXiv:2602.05289)
+# --------------------------------------------------------------------------- #
+SYNTH_COST_DETERMINISTIC = 0   # a computed merge is code, not an LLM call
+SYNTH_COST_VOTE = K            # a vote/consensus step polls one opinion per agent
+GAMMA_CONFIGS = ("a1b1c1", "a1b1c0", "a1b0c1", "a0b1c1")
+
+
+def _multi_trial(rng, *, verifiable, deterministic, disjoint):
+    """One MULTI trial -> (success: bool, cost: int subtask-attempt units).
+
+    Same logic as `run_multi`, instrumented to count what the config spends: one
+    unit per subtask attempt, one more per verifiable retry, plus the synthesis
+    cost (0 for a deterministic merge, K for a vote that polls every agent)."""
+    poisoned_pool = (not disjoint) and (rng.random() < POOL_POISON)
+    results, cost = [], 0
+    for _ in range(K):
+        touches_poison = poisoned_pool and (rng.random() < 0.6)
+        cost += 1
+        ok = _subtask_ok(rng, 0, accumulating=False, poisoned=touches_poison)
+        if not ok and verifiable and not touches_poison:
+            cost += 1
+            ok = _subtask_ok(rng, 0, accumulating=False, poisoned=False)
+        results.append(ok)
+    n_disagree = results.count(False)
+    cost += SYNTH_COST_DETERMINISTIC if deterministic else SYNTH_COST_VOTE
+    if not _synthesis_ok(rng, n_disagree, deterministic=deterministic):
+        return False, cost
+    if deterministic:
+        return all(results), cost
+    return n_disagree <= K // 3, cost
+
+
+def gamma_arm(trials=4000, rec=None):
+    """For each interesting config: MULTI success + mean subtask-attempt cost, the
+    single-agent success at that MATCHED budget, Gamma (the difference), and the
+    budget a single agent would ACTUALLY need to match MULTI."""
+    single_base = sum(_single_task_ok(random.Random(f"{SEED}-gb-{t}"))
+                      for t in range(trials)) / trials
+    out = {"single_base": round(single_base, 3), "K": K,
+           "single_base_cost_units": K, "configs": {}}
+    for key in GAMMA_CONFIGS:
+        a, b, c = bool(int(key[1])), bool(int(key[3])), bool(int(key[5]))
+        succ = 0
+        total_cost = 0
+        for t in range(trials):
+            s, cst = _multi_trial(random.Random(f"{SEED}-gm-{key}-{t}"),
+                                  verifiable=a, deterministic=b, disjoint=c)
+            succ += s
+            total_cost += cst
+        multi = succ / trials
+        mean_cost = total_cost / trials
+        budget_mult = mean_cost / K
+        n_matched = max(1, round(budget_mult))
+        single_matched = sum(
+            run_single_bestof(random.Random(f"{SEED}-gsm-{key}-{t}"), n_matched)
+            for t in range(trials)) / trials
+        gamma = multi - single_matched
+        # the N (whole-task attempts) a single agent actually needs to reach MULTI
+        n_fair, single_fair = n_matched, single_matched
+        CAP = 64
+        while single_fair < multi and n_fair < CAP:
+            n_fair += 1
+            single_fair = sum(
+                run_single_bestof(random.Random(f"{SEED}-gsf-{key}-{n_fair}-{t}"), n_fair)
+                for t in range(trials)) / trials
+        matched = single_fair >= multi
+        eff_ratio = round((n_fair * K) / mean_cost, 2) if matched else None
+        out["configs"][key] = {
+            "verifiable": a, "deterministic": b, "disjoint": c,
+            "multi": round(multi, 3),
+            "mean_cost_units": round(mean_cost, 2),
+            "budget_mult_vs_single": round(budget_mult, 3),
+            "single_at_matched_budget": round(single_matched, 3),
+            "gamma": round(gamma, 3),
+            "single_attempts_to_match": n_fair if matched else f">{CAP}",
+            "single_units_to_match": (n_fair * K) if matched else f">{CAP * K}",
+            "efficiency_ratio": eff_ratio,
+        }
+        if rec:
+            rec.claim("probe", f"gamma {key} = {round(gamma, 3):+}",
+                      [f"sim-gamma-{key}"], layer="swarm")
+    return out
+
+
+def assess_gamma(g):
+    abc = g["configs"]["a1b1c1"]
+    # Gamma survives budget-matching if it stays a meaningful fraction of the raw win
+    survives = abc["gamma"] > 0.10
+    # and the config is budget-EFFICIENT if a single agent needs >= 2x the units to match
+    efficient = (abc["efficiency_ratio"] or 0) >= 2.0
+    if survives and efficient:
+        verdict = (
+            f"COLLABORATION GAIN at these params: a&b&c multi-agent success "
+            f"{abc['multi']:.3f} at {abc['mean_cost_units']:.1f} subtask-attempt units; "
+            f"a single agent at that MATCHED budget reaches only "
+            f"{abc['single_at_matched_budget']:.3f}, so Gamma = {abc['gamma']:+.3f}. To "
+            f"MATCH multi-agent, one agent needs ~{abc['single_units_to_match']} units "
+            f"({abc['efficiency_ratio']}x). The a&b&c win is genuine collaboration "
+            f"structure — decomposition removes context accumulation, verified retry is "
+            f"cheap when subtasks mostly pass — not a sampling trick")
+    elif survives:
+        verdict = (
+            f"MOSTLY COLLABORATION at these params: Gamma = {abc['gamma']:+.3f} survives "
+            f"budget-matching, but the efficiency ratio is only {abc['efficiency_ratio']} — "
+            f"a single agent given the same budget closes much of the gap")
+    else:
+        verdict = (
+            f"MOSTLY BUDGET at these params: the raw a&b&c delta shrinks to Gamma = "
+            f"{abc['gamma']:+.3f} once a single agent gets the same subtask-attempt "
+            f"budget ({abc['budget_mult_vs_single']}x, best-of-{max(1, round(abc['budget_mult_vs_single']))} "
+            f"whole-task). The apparent multi-agent win was largely more samples")
+    return {
+        "abc_gamma": abc["gamma"],
+        "abc_gamma_survives_budget_match": survives,
+        "abc_is_budget_efficient": efficient,
+        "abc_efficiency_ratio": abc["efficiency_ratio"],
+        "abc_budget_mult": abc["budget_mult_vs_single"],
+        "gamma_verdict": verdict,
+    }
 
 
 def sweep(trials=4000, rec=None):
@@ -235,9 +384,11 @@ def _selftest():
     rec = Recorder(run_id="orchestration-value-probe", sink=buf, layer="swarm", language="en")
     rec.step("probe", "orchestration_value", "open")
     res = sweep(trials=2000, rec=rec)
+    g = gamma_arm(trials=2000, rec=rec)
     rec.step("probe", "orchestration_value", "close")
     a = assess(res)
     a["verdict"] = _verdict(a)
+    ag = assess_gamma(g)
     trace = buf.getvalue()
     with tempfile.NamedTemporaryFile("w", suffix=".jsonl", delete=False, encoding="utf-8") as fh:
         fh.write(trace)
@@ -261,12 +412,27 @@ def _selftest():
         "FLOCK: a shared pool still is not strongly helpful": a["flock_shared_pool_not_strong"],
         "verdict names stigmergic accretion as a viable integration mode":
             "stigmergic accretion" in a["verdict"],
+        # GAMMA arm (run 428)
+        "GAMMA: a&b&c cost is strictly above the single-agent baseline (K units)":
+            g["configs"]["a1b1c1"]["mean_cost_units"] >= K,
+        "GAMMA: a&b&c collaboration gain survives budget-matching (Gamma > 0.10)":
+            ag["abc_gamma_survives_budget_match"],
+        "GAMMA: a&b&c is budget-efficient (a single agent needs >= 2x the units)":
+            ag["abc_is_budget_efficient"],
+        "GAMMA: a single agent at the MATCHED budget scores below MULTI":
+            g["configs"]["a1b1c1"]["single_at_matched_budget"] < g["configs"]["a1b1c1"]["multi"],
+        "GAMMA: every config reports a numeric gamma":
+            all(isinstance(v["gamma"], float) for v in g["configs"].values()),
+        "GAMMA: verdict text starts with a recognised class":
+            ag["gamma_verdict"].split()[0] in ("COLLABORATION", "MOSTLY"),
     }
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print(f"\n  single={res['single']}  a1b1c1={res['combos']['a1b1c1']}")
     print(f"  flock a1c1={res['flock']['a1c1']}")
     print(f"  verdict: {a['verdict']}")
+    print(f"  gamma a1b1c1={g['configs']['a1b1c1']}")
+    print(f"  gamma verdict: {ag['gamma_verdict']}")
     allok = all(checks.values())
     print("\nSELFTEST", "GREEN" if allok else "RED")
     return 0 if allok else 1
@@ -279,6 +445,9 @@ def _cli(argv=None):
     sw = sub.add_parser("sweep")
     sw.add_argument("--trials", type=int, default=4000)
     sw.add_argument("--json", action="store_true")
+    gm = sub.add_parser("gamma")
+    gm.add_argument("--trials", type=int, default=4000)
+    gm.add_argument("--json", action="store_true")
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
@@ -291,6 +460,15 @@ def _cli(argv=None):
         else:
             print(json.dumps(res, indent=2))
             print("\n" + a["verdict"])
+        return 0
+    if args.cmd == "gamma":
+        g = gamma_arm(trials=args.trials)
+        ag = assess_gamma(g)
+        if args.json:
+            print(json.dumps({"gamma": g, "assess": ag}, indent=2))
+        else:
+            print(json.dumps(g, indent=2))
+            print("\n" + ag["gamma_verdict"])
         return 0
     return 2
 

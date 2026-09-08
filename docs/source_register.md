@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 442 nodes, 1805 edges · **Date:** 2026-09-05
+**Graph at generation:** 443 nodes, 1809 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -353,7 +353,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2510.10047 — `artifact_swarm_substrate_prototype_design`, `concept_swarmsys_embedding_matched_allocation_with_validate_before_reinforce_is_the_closest_published_orchestratorless_design`
 - https://arxiv.org/abs/2510.14548 — `concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model`
 - https://arxiv.org/abs/2601.21112 — `concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent`, `concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident`, `concept_llm_monitors_often_do_better_with_less_information_and_extract_then_score_beats_scoring_the_whole_trajectory`
-- https://arxiv.org/abs/2602.05289 — `concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy`
+- https://arxiv.org/abs/2602.05289 — `concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy`, `finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative`
 - https://arxiv.org/abs/2603.29231 — `artifact_probe_memory_horizon_rig`, `concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance`
 - https://arxiv.org/abs/2604.21590 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`, `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
 - https://arxiv.org/abs/2605.18535 — `concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable`

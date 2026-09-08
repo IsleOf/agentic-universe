@@ -1,0 +1,48 @@
+{
+  "run": 428,
+  "increment": "Probe run, diversifying the action mix. Built the `gamma` arm on tools/probe_orchestration_value.py - the collaboration-gain-net-of-budget metric from arXiv:2602.05289 (run 427) named as the missing baseline. `_multi_trial` counts subtask-attempt units a config spends (1/attempt, +1/verifiable retry, +0 deterministic merge, +K vote); `run_single_bestof(n)` is the budget-matched control (one oracle-verified agent, n whole-task attempts). Gamma = MULTI - single-at-matched-budget, plus the honest efficiency ratio (units a single agent ACTUALLY needs to match MULTI). RESULTS at rig defaults: a1b1c1 Gamma +0.52, 6.7x efficiency - genuine collaboration structure, not samples. a1b1c0 (shared pool) Gamma +0.05 - was mostly budget. a1b0c1 (vote synthesis) Gamma -0.21 - budget-NEGATIVE, strictly dominated by best-of-2 single. a0b1c1 (decomp+merge, no retry) Gamma +0.22 - still real. Sharpens the run-218 criterion: a vote synthesis is worse than not orchestrating once you price the vote. 6 GAMMA selftest checks. +1 finding node, +4 edges; concept node updated (Gamma GAP closed), confidence 0.72 -> 0.75.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 15,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 0,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/probe_orchestration_value.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2602.05289",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2602.05289"
+  ],
+  "trace_file": "runtime\\traces\\loop-428.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 428 OK · VALID · graph +1n/+4e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +0~3-0 · novelty 0.67 · acts fold50%"
+}

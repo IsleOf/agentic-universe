@@ -12936,8 +12936,8 @@
       "verification_state": "partially_validated",
       "approach_family": "nourishing_harness",
       "branch_key": "nourishing_harness:methodology",
-      "confidence": 0.72,
-      "description": "arXiv:2602.05289 (Jingru Fan, Dewen Liu, Yufan Dang, Huatao Li, Yuheng Wang, Wei Liu, Feiyu Duan, Xuanwen Ding, Shu Yao, Lin Wu, Ruijie Shi, Wai-Shing Leung, Yuan Cheng, Zhongyu Wei, Cheng Yang, Chen Qian, Zhiyuan Liu, Maosong Sun; Tsinghua / ChatDev group; v1 2026-02-05, VERIFIED via abstract). A position paper: LLM multi-agent systems work across many domains but the field relies on EMPIRICAL TRIAL-AND-ERROR with no unified, principled scientific framework. THE BOTTLENECK IS ATTRIBUTION AMBIGUITY, two parts: (1) no STRUCTURED TAXONOMY OF FACTORS, so researchers make unguided adjustments; (2) no UNIFIED METRIC, so a performance gain cannot be attributed to genuine collaboration vs simply MORE BUDGET (more agents = more compute = more samples). THE PROPOSAL. (a) A COLLABORATION GAIN METRIC Gamma as the scientific standard - isolate intrinsic gain from increased budget, so comparisons across configurations are controlled. (b) A FACTOR ATTRIBUTION PARADIGM using Gamma to find the collaboration-driving factors. (c) A MAS FACTOR LIBRARY structuring the design space into CONTROL-LEVEL PRESETS and INFORMATION-LEVEL DYNAMICS. WHY IT LANDS ON THIS PROJECT. The Agentic Universe loop already does much of what the paper asks - falsifiable predictions, probes that isolate one mechanism, verified reads, a structured graph. Two gaps it names precisely: (i) THE Gamma GAP. probe_orchestration_value tests 'when does multi-agent help' and probe_emergent_synergy computes Rosas Psi + differentiation (an information-theoretic genuine-collective-vs-aggregate measure - the project's closest thing to Gamma), but no probe reports a single 'collaboration gain NET OF a single agent given k-times the budget'. That baseline is what makes probe_orchestration_value's verdict rigorous rather than suggestive, and it is a cheap arm to add. (ii) THE TAXONOMY MAP. control-level presets vs information-level dynamics maps onto the swarm substrate: task_ledger stage + relay handoff protocol are control-level presets; the pheromone board signal + reputation are information-level dynamics. The design doc should say which factor each module is, so a change to one is attributed to the right level. CURRENCY: 2026-02-05, a position paper - the specific Gamma formulation is one proposal among possible ones, but 'separate collaboration gain from budget, and taxonomise the factors' is a durable methodological point.",
+      "confidence": 0.75,
+      "description": "arXiv:2602.05289 (Jingru Fan, Dewen Liu, Yufan Dang, Huatao Li, Yuheng Wang, Wei Liu, Feiyu Duan, Xuanwen Ding, Shu Yao, Lin Wu, Ruijie Shi, Wai-Shing Leung, Yuan Cheng, Zhongyu Wei, Cheng Yang, Chen Qian, Zhiyuan Liu, Maosong Sun; Tsinghua / ChatDev group; v1 2026-02-05, VERIFIED via abstract). A position paper: LLM multi-agent systems work across many domains but the field relies on EMPIRICAL TRIAL-AND-ERROR with no unified, principled scientific framework. THE BOTTLENECK IS ATTRIBUTION AMBIGUITY, two parts: (1) no STRUCTURED TAXONOMY OF FACTORS, so researchers make unguided adjustments; (2) no UNIFIED METRIC, so a performance gain cannot be attributed to genuine collaboration vs simply MORE BUDGET (more agents = more compute = more samples). THE PROPOSAL. (a) A COLLABORATION GAIN METRIC Gamma as the scientific standard - isolate intrinsic gain from increased budget, so comparisons across configurations are controlled. (b) A FACTOR ATTRIBUTION PARADIGM using Gamma to find the collaboration-driving factors. (c) A MAS FACTOR LIBRARY structuring the design space into CONTROL-LEVEL PRESETS and INFORMATION-LEVEL DYNAMICS. WHY IT LANDS ON THIS PROJECT. The Agentic Universe loop already does much of what the paper asks - falsifiable predictions, probes that isolate one mechanism, verified reads, a structured graph. Two gaps it names precisely: (i) THE Gamma GAP. probe_orchestration_value tests 'when does multi-agent help' and probe_emergent_synergy computes Rosas Psi + differentiation (an information-theoretic genuine-collective-vs-aggregate measure - the project's closest thing to Gamma), RUN 428 CLOSED THIS: probe_orchestration_value gained a `gamma` arm that counts subtask-attempt units MULTI actually spends and compares it against best-of-N whole-task attempts by ONE oracle-verified agent at the matched budget. Result at the rig's default params: the a&b&c config's win is genuine collaboration gain (Gamma = +0.52; a single agent needs ~6.7x the budget to match it), but a vote-synthesis config is budget-NEGATIVE (Gamma = -0.21 - it costs 2x and loses to best-of-2 single), and decomposition + deterministic merge with no verified retry is still real gain (Gamma = +0.22). (ii) THE TAXONOMY MAP. control-level presets vs information-level dynamics maps onto the swarm substrate: task_ledger stage + relay handoff protocol are control-level presets; the pheromone board signal + reputation are information-level dynamics. The design doc should say which factor each module is, so a change to one is attributed to the right level. CURRENCY: 2026-02-05, a position paper - the specific Gamma formulation is one proposal among possible ones, but 'separate collaboration gain from budget, and taxonomise the factors' is a durable methodological point.",
       "tags": [
         "methodology",
         "collaboration-gain",
@@ -12947,13 +12947,41 @@
         "control-vs-information",
         "science-of-collective-ai",
         "position-paper",
-        "recency-2026-02"
+        "recency-2026-02",
+        "gamma-arm-built"
       ],
       "derived_from": [
         "https://arxiv.org/abs/2602.05289"
       ],
       "evidence_links": [
         "https://arxiv.org/abs/2602.05289"
+      ]
+    },
+    {
+      "id": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "label": "Gamma arm on probe_orchestration_value (run 428): the verifiable+deterministic+disjoint multi-agent win SURVIVES budget-matching (Gamma +0.52, ~6.7x efficiency) - genuine collaboration structure, not more samples. A vote-synthesis config is budget-NEGATIVE (Gamma -0.21): it costs 2x and loses to a single agent given that same budget. Decomposition + deterministic merge alone (no verified retry) is still real gain (Gamma +0.22).",
+      "type": "finding",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:methodology",
+      "confidence": 0.6,
+      "description": "Run 428. Instantiates the collaboration-gain-net-of-budget metric from arXiv:2602.05289 as a runnable arm of tools/probe_orchestration_value.py (`gamma` subcommand + selftest checks). METHOD. `_multi_trial` re-runs the interesting (a,b,c) configs while counting subtask-attempt units: 1 per subtask attempt, +1 per verifiable retry, +0 for a deterministic merge (it is code, not an LLM call), +K for a vote step (one opinion per agent). The budget-matched control is `run_single_bestof(n)`: ONE agent given n independent whole-task attempts, oracle-verified (succeeds if any attempt does) - the strongest thing raw budget buys a single agent. Gamma = MULTI success - single-at-matched-budget success. The arm also searches upward for the N a single agent would ACTUALLY need to match MULTI (the honest efficiency ratio). RESULTS at the rig defaults (P_SUB 0.95, K 8, accumulation penalty 0.012/idx). a1b1c1 (verifiable + deterministic + disjoint): MULTI 0.98 at 8.4 units; single at that matched budget only 0.46; Gamma = +0.52. To MATCH MULTI a single agent needs ~56 units (6.7x) - the win is real collaboration structure: decomposition removes the context-accumulation penalty and verified retry is nearly free when subtasks mostly pass. a1b1c0 (shared evidence pool): the modest raw win collapses to Gamma = +0.05 net of budget - it WAS mostly budget. a1b0c1 (vote synthesis instead of a computed merge): Gamma = -0.21, efficiency 0.98x. The vote step polls K agents (2x the budget) and STILL loses to a single agent given best-of-2 whole-task. Vote synthesis is not merely weak (the run-218 criterion), it is budget-NEGATIVE - strictly dominated by spending the same compute on one agent. a0b1c1 (decomposition + deterministic merge, NO verified retry): Gamma = +0.22, efficiency 2.0x - decomposition + computed merge alone is genuine gain; verified retry sharpens it but is not load-bearing for a positive Gamma. WHAT IT SHARPENS. The run-218 criterion said multi-agent 'helps iff a&b&c'. The Gamma view refines the necessity of (b): a vote synthesis does not just help less, it makes the config worse than not orchestrating at all once you account for what the vote costs. LIMITS. Sim params; the compounding model is the finding, not the absolute Gammas. Swap `_subtask_ok` / `_synthesis_ok` / `_multi_trial` for real agent runs to get a Gamma on a real task. The synthesis-cost model (0 for a merge, K for a vote) is a modelling choice; a vote with multiple discussion rounds would be even more budget-negative.",
+      "tags": [
+        "gamma-metric",
+        "collaboration-gain",
+        "budget-vs-synergy",
+        "orchestration-value",
+        "vote-synthesis-is-budget-negative",
+        "probe",
+        "run-428",
+        "simulation"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2602.05289"
+      ],
+      "evidence_links": [
+        "tools/probe_orchestration_value.py"
       ]
     }
   ],
@@ -30890,6 +30918,34 @@
       "target": "concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer",
       "type": "supports",
       "description": "'LLM markets converge slowly or not at all' is a Gamma-style result: the mechanism does not deliver its collaboration property, and aggregate task score would not have shown it"
+    },
+    {
+      "id": "edge_gamma_arm_instantiates_science_of_collective_ai",
+      "source": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "target": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "type": "instantiates",
+      "description": "the `gamma` arm is a concrete, runnable instance of the collaboration-gain-net-of-budget metric arXiv:2602.05289 proposes as the scientific standard - MULTI success minus a budget-matched single agent, with the honest efficiency ratio reported"
+    },
+    {
+      "id": "edge_gamma_arm_grounds_orchestration_value_rig",
+      "source": "artifact_probe_orchestration_value_rig",
+      "target": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "type": "grounds",
+      "description": "probe_orchestration_value.py produces this finding: its `gamma` subcommand and the six new GAMMA selftest checks compute and assert the result"
+    },
+    {
+      "id": "edge_gamma_arm_refines_multi_agent_criterion",
+      "source": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "refines",
+      "description": "the run-218 criterion says multi-agent helps iff subtasks are verifiable AND synthesis is deterministic AND evidence is disjoint; the Gamma view sharpens (b)'s necessity - a vote synthesis is budget-NEGATIVE (worse than not orchestrating), and (a) verified retry is not load-bearing for a positive Gamma, decomposition + deterministic merge alone is"
+    },
+    {
+      "id": "edge_gamma_arm_supports_synergy_rig",
+      "source": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "target": "artifact_probe_emergent_synergy_rig",
+      "type": "supports",
+      "description": "same measurement intent as probe_emergent_synergy's Rosas Psi + differentiation: separate a genuine collective from an aggregate. The Gamma arm does it in the budget dimension, the synergy rig in the information dimension"
     }
   ]
 }
