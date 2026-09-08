@@ -24,6 +24,30 @@ keyword/heuristic score, a small classifier, or a per-worker LLM-judge verdict).
 
 A slow-burn distributed attack (each round just under the cohort threshold) is
 caught by the cross-round EWMA. Pure stdlib.
+
+HOW TO DERIVE THE PER-WORKER SIGNAL (run 381, arXiv:2601.21112). This module
+deliberately takes the signal as a given, which left the most important choice
+unspecified. The evidence says: EXTRACT, THEN SCORE. An LLM monitor handed a whole
+trajectory often does WORSE than one handed only the relevant excerpts - the
+"less-is-more effect for automated oversight" - and their extract-and-evaluate
+pipeline (one monitor isolates excerpts, a second scores them) beat the next-best
+approach by 16.8 percentage points on BigCodeBench-Sabotage. Longer traces gain
+MORE from filtering, which is exactly the regime a fan-out round is in.
+
+So: do not feed a worker's full transcript to a scorer. Extract first.
+
+THE COST OF THAT ADVICE, which the paper does not address and this comment will
+not hide: the extractor becomes a single point of failure. If it misses the
+out-of-scope behaviour the scorer never sees it, and this monitor then reports
+clean with MORE confidence than an unfiltered one would have. Filtering converts a
+noisy-signal problem into a RECALL problem at the extraction step. Whether the
+16.8-point gain survives an adversary optimising against the EXTRACTOR rather than
+the scorer is unknown.
+
+The cohort aggregation below is itself extract-and-evaluate one level up: each
+worker yields one scalar, and the pool score is computed over those rather than
+over the union of transcripts.
+
 """
 from __future__ import annotations
 

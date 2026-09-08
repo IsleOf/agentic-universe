@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 382 nodes, 1548 edges · **Date:** 2026-09-05
+**Graph at generation:** 385 nodes, 1558 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -336,11 +336,13 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - arXiv 'Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification' via Semantic Scholar citation graph 2026-09-05 (research-fetch skill) - indexed, NOT independently opened — `concept_verification_is_the_binding_constraint`
 - arXiv memory-degradation sweep 2026-09-10: stale-consistent decisions 74-77% (2608.25553), safety-rule retention 10% after five compaction rounds (2608.22752), self-propagating skill contamination 20-42% (EVOMAL, 2608.25776), false-authority propagation to 98.6% execution (2609.01836). The channel degrades in at least four measured ways, none self-correcting — `concept_inheritance_channel`
 - arXiv:2607.31 (AgentS4D): 6,560 sandboxed runs, 68% triggered unsafe signals — `emergent_recognition_execution_gap`
+- audit of tools/*.py, run 380 — `concept_three_salient_instances_are_not_a_class_check_before_generalising_the_fix`
 - callsphere.ai 'Model-Native Harness' — `emergent_model_native_orchestration`
 - case study: 56 chronologically ordered papers from one tensor-network research programme — `pattern_agent_driven_graph_compilation`
 - curriculum learning (Acharya et al. survey, IEEE Access 2025) — `concept_graded_challenge`
 - curvelabs.org 'Norm Engineering' — `emergent_social_conventions`
 - explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
+- git history: 59 graph-changing commits — `concept_derive_a_threshold_from_your_own_history_rather_than_defer_it_or_invent_it`
 - graph reasoning over emergent_authorization_laundering + emergent_stale_belief_propagation + pattern_runtime_adaptive_workflow — `concept_agent_shaped_topology_is_agent_corruptible`
 - hooks/pre-commit — `artifact_phase5_exec_guard`
 - https://arxiv.org/abs/2505.00234 — `artifact_probe_memory_horizon_rig`
@@ -348,6 +350,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2509.26354 — `concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker`
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2510.14548 — `concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model`
+- https://arxiv.org/abs/2601.21112 — `concept_llm_monitors_often_do_better_with_less_information_and_extract_then_score_beats_scoring_the_whole_trajectory`
 - https://arxiv.org/abs/2603.29231 — `artifact_probe_memory_horizon_rig`, `concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance`
 - https://arxiv.org/abs/2604.21590 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`, `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
 - https://arxiv.org/abs/2605.18535 — `concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable`
@@ -383,7 +386,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - seed graph 2026-09-01 (foundational concept, not a literature fold) — `concept_agent_os_desktop_shell`, `concept_memory_and_learning`, `concept_swarm_decentralized_coordination` +5
 - synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
-- tools/acceptance_gate.py — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_replace_a_name_blacklist_with_a_shape_whitelist_to_get_equivariance_for_free`, `concept_the_acceptance_gate_logged_only_its_accepts_so_its_audit_trail_could_not_answer_the_question_it_existed_for`
+- tools/acceptance_gate.py — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_derive_a_threshold_from_your_own_history_rather_than_defer_it_or_invent_it`, `concept_replace_a_name_blacklist_with_a_shape_whitelist_to_get_equivariance_for_free` +1
 - tools/call_model.py — `artifact_call_model_seam`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/cohort_monitor.py — `artifact_cohort_monitor`
 - tools/epistemic_constitution.py — `artifact_epistemic_constitution_harness`
@@ -410,7 +413,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_composed_design.py — `artifact_probe_composed_design_rig`
 - tools/probe_composed_design.py granularity sweep (run 94) - the intermediate optimum, when it exists, is set by accumulation-cost vs shed-cost — `test_scenario_decomposition_granularity`
 - tools/probe_dissent_vs_reflection.py — `artifact_probe_dissent_vs_reflection_rig`
-- tools/probe_emergent_synergy.py — `artifact_probe_emergent_synergy_rig`
+- tools/probe_emergent_synergy.py — `artifact_probe_emergent_synergy_rig`, `concept_three_salient_instances_are_not_a_class_check_before_generalising_the_fix`
 - tools/probe_epistemic_market.py — `artifact_probe_epistemic_market_rig`
 - tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/probe_governance_lever.py — `artifact_probe_governance_lever_rig`
@@ -424,7 +427,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_subagent_coordination.py — `artifact_probe_subagent_coordination_rig`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/probe_trust_transfer.py — `artifact_probe_trust_transfer_rig`
 - tools/probe_trust_weighted_voting.py — `artifact_probe_trust_weighted_voting_rig`
-- tools/research_worker.py — `artifact_research_worker`
+- tools/research_worker.py — `artifact_research_worker`, `concept_three_salient_instances_are_not_a_class_check_before_generalising_the_fix`
 - tools/skill_induction.py — `artifact_phase4_skill_induction`, `concept_a_classifier_that_always_returns_something_hides_its_own_drift`, `concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched`
 - tools/supervisor.py (run 250) — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - tools/task_ledger.py (run 244) — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
