@@ -47,6 +47,7 @@ JOBS = [
     ("pheromone.py", ["selftest"]),
     ("relay.py", ["selftest"]),
     ("reputation.py", ["selftest"]),
+    ("gates.py", ["selftest"]),
     ("executor_pool.py", ["selftest"]),
     ("probe_memory_horizon.py", ["selftest"]),
     ("probe_governance_lever.py", ["selftest"]),

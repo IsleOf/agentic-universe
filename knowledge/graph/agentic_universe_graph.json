@@ -11955,6 +11955,32 @@
         "tools/reputation.py",
         "docs/swarm-substrate-prototype.md"
       ]
+    },
+    {
+      "id": "artifact_validator_gates",
+      "label": "tools/gates.py - G1 (evidence) and G4 (release, quorum-not-veto) as STATELESS functions: verdicts are ordinary pheromone annotations, a contributor can't gate their own artifact, the same validator can't run a gate twice in a row, and a failing computable check blocks release regardless of validator count",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.66,
+      "description": "Run 395, week-1 build list item 5. tools/gates.py, a selftest_all job. The two gates that catch most cascades, on the pipeline edges research->[G1]->draft->...->[G4]->done. No model calls - the fuzzy judgement is the caller's, the gate checks the mechanical, verifiable things and REPORTS the rest. G1 (evidence): HARD FAIL on no evidence links, or an evidence link naming a repo file that does not exist. REPORTED but not blocked: claim-shaped lines (a number, a percent, an arXiv id, an assertion verb) with no nearby citation marker - the gate does not silently block on a regex (concept_verification_completeness_gap: computed checks miss design and convention, so do not pretend the regex is the judgement). G4 (release): quorum, not veto. PASS requires ALL of - computable checks pass; zero LIVE warning annotations on the task; and (this validator) + (prior independent G4 PASS annotations) + (1 if computable_ok) >= min_quorum. A single validator can post a warning to BLOCK but cannot PASS alone; a failing computable check blocks release even with five validator passes. WHY A GATE HERE CANNOT CALCIFY INTO AUTHORITY (the owner's stated concern): (1) STATELESS - reads task_ref + annotations + artifact text, emits a verdict, forgets; no private model of the project for authority to accrete into. (2) SINGLE-USE + ROTATED - _guard() raises GateRefused if the validator contributed to the artifact or ran the same gate on it last time. (3) VERDICTS ARE ORDINARY ANNOTATIONS - a pass is a kind=claim, a fail a kind=warning, both via the same pheromone.annotate any agent uses; a later agent can contradict one and reopen the task. (4) QUORUM NOT VETO at G4. Reputation accrues to AGENTS (reputation.py); a gate is a function agents temporarily compute. 25 selftest checks GREEN including a quorum sweep range(2,12); not flagged by param_invariance_audit.",
+      "tags": [
+        "swarm-substrate",
+        "validator-gates",
+        "stateless",
+        "quorum-not-veto",
+        "rotation",
+        "no-self-review",
+        "verdicts-are-annotations",
+        "week-1-build"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/gates.py",
+        "docs/swarm-substrate-prototype.md"
+      ]
     }
   ],
   "edges": [
@@ -28721,6 +28747,41 @@
       "target": "artifact_reputation_module",
       "type": "constrains",
       "description": "reputation is derived from recorded outcomes, never from an agent's self-report, because a truthful mechanism does not make LLM agents bid or self-report truthfully"
+    },
+    {
+      "id": "edge_gates_implements_substrate_design",
+      "source": "artifact_validator_gates",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "implements",
+      "description": "week-1 build list item 5: G1 (evidence) and G4 (release), stateless, rotated, quorum-not-veto, verdicts written as annotations"
+    },
+    {
+      "id": "edge_gates_depends_on_pheromone",
+      "source": "artifact_validator_gates",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "depends_on",
+      "description": "gate verdicts ARE pheromone annotations (kind=claim on pass, kind=warning on fail), and G4 reads the live warning annotations on the task to decide whether to release"
+    },
+    {
+      "id": "edge_gates_instantiates_ostrom",
+      "source": "artifact_validator_gates",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "instantiates",
+      "description": "graduated institutional checkpoints the population runs, not a central controller: a gate role is single-use and an agent cannot hold it twice running or over its own work"
+    },
+    {
+      "id": "edge_gates_informed_by_reputation",
+      "source": "artifact_reputation_module",
+      "target": "artifact_validator_gates",
+      "type": "informs",
+      "description": "reputation.select() picks which agent runs a gate, weighted by decayed reputation - but no agent holds a gate role twice in a row regardless of reputation"
+    },
+    {
+      "id": "edge_gates_instantiates_completeness_gap",
+      "source": "artifact_validator_gates",
+      "target": "concept_verification_completeness_gap",
+      "type": "instantiates",
+      "description": "G1 reports uncited claim-shaped lines rather than blocking on them, because a regex is not the judgement - computed checks miss design and convention, which is exactly why the fuzzy call stays with a human/agent reader"
     }
   ]
 }
