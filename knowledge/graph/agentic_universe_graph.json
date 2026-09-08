@@ -10951,7 +10951,7 @@
       "approach_family": "agent_habitat",
       "branch_key": "agent_habitat:edge",
       "confidence": 0.4,
-      "description": "arXiv:2605.18535 (Tian, Cai, Zhao, Lane, submitted 2026-05-18, VERIFIED via abstract). THREE arguments: (1) the PREFRONTAL TURN - \"the main marginal lever of capability has moved from pre-training scale to framework-level executive control\", and that control must remain physically close to the environment of action to preserve cognitive alignment; (2) the DATA-GEOGRAPHY PARADOX - the \"dark matter\" of agentic data (local file hierarchies, real-time sensor streams, transient OS states) degrades, disappears, or loses meaning once prepared for cloud transmission, cutting the agent off from ground-truth context; (3) the INTERACTION-ALIGNMENT LOOP - the only economically and ecologically sustainable source of agentic refinement data is the high-fidelity implicit preference signal produced by real-time LOCAL interaction. WHAT THIS IS AND IS NOT: a POSITION PAPER. The abstract contains no benchmarks, no model names, no parameter counts, no quantitative comparison. It is an argument, not evidence, and is folded at confidence 0.4 on that basis. It is CONVERGENT FRAMING for the harness-first thesis, which already has empirical support elsewhere (Harness-Bench, AHE); its own contribution is arguments (2) and (3), which bear directly on the local-first setup this project actually runs on. CITATION HYGIENE NOTE (run 362): a web-search summary attributed a headline parity result to this paper - \"WideSeek-R1-4B comparable to 671B DeepSeek-R1, 170x parameter disparity\" - which does NOT appear in the fetched abstract. That number is deliberately EXCLUDED from this node. It is a live instance of the hazard concept_search_time_contamination_inflates_agent_evals names: a plausible quantitative claim surfaced next to a real paper and would have entered the graph unchallenged had the abstract not been fetched. STANDING CAVEAT ON THIS PROJECT'S OWN PRACTICE: many folded nodes carry a currency note asserting something about the SMALL/LOCAL LLM regime. Run 362 went looking for empirical backing for that habit and found a position paper, not evidence. Those notes remain plausible extrapolations, not measured claims, and should be read that way until a small-model benchmark is actually folded.",
+      "description": "arXiv:2605.18535 (Tian, Cai, Zhao, Lane, submitted 2026-05-18, VERIFIED via abstract). THREE arguments: (1) the PREFRONTAL TURN - \"the main marginal lever of capability has moved from pre-training scale to framework-level executive control\", and that control must remain physically close to the environment of action to preserve cognitive alignment; (2) the DATA-GEOGRAPHY PARADOX - the \"dark matter\" of agentic data (local file hierarchies, real-time sensor streams, transient OS states) degrades, disappears, or loses meaning once prepared for cloud transmission, cutting the agent off from ground-truth context; (3) the INTERACTION-ALIGNMENT LOOP - the only economically and ecologically sustainable source of agentic refinement data is the high-fidelity implicit preference signal produced by real-time LOCAL interaction. WHAT THIS IS AND IS NOT: a POSITION PAPER. The abstract contains no benchmarks, no model names, no parameter counts, no quantitative comparison. It is an argument, not evidence, and is folded at confidence 0.4 on that basis. It is CONVERGENT FRAMING for the harness-first thesis, which already has empirical support elsewhere (Harness-Bench, AHE); its own contribution is arguments (2) and (3), which bear directly on the local-first setup this project actually runs on. CITATION HYGIENE NOTE (run 362): a web-search summary attributed a headline parity result to this paper - \"WideSeek-R1-4B comparable to 671B DeepSeek-R1, 170x parameter disparity\" - which does NOT appear in the fetched abstract. That number is deliberately EXCLUDED from this node. It is a live instance of the hazard concept_search_time_contamination_inflates_agent_evals names: a plausible quantitative claim surfaced next to a real paper and would have entered the graph unchallenged had the abstract not been fetched. STANDING CAVEAT ON THIS PROJECT'S OWN PRACTICE: many folded nodes carry a currency note asserting something about the SMALL/LOCAL LLM regime. Run 362 went looking for empirical backing for that habit and found a position paper, not evidence. Those notes remain plausible extrapolations, not measured claims, and should be read that way until a small-model benchmark is actually folded. GAP UPDATE (run 363): the small/local evidence gap this node declared open is now partly closed by arXiv:2604.21590 (AgenticQwen) - real numbers, and they cut against the no-training fork rather than for it. The currency notes elsewhere in this graph should now be read against that node, not against an absence of evidence.",
       "tags": [
         "edge-agents",
         "prefrontal-turn",
@@ -10968,6 +10968,37 @@
       ],
       "evidence_links": [
         "https://arxiv.org/abs/2605.18535"
+      ]
+    },
+    {
+      "id": "concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct",
+      "label": "AgenticQwen: an agentically-TRAINED 8B reaches ~92% of a 235B model on multi-turn tool use (TAU-2 51.7 vs 56.5) while the vanilla 8B scores 19.3 - the 32-point jump is training, and the residual gap is context length, not reasoning",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:small_models",
+      "confidence": 0.7,
+      "description": "arXiv:2604.21590 (Lyu, Wang, Zheng et al. / Alibaba, submitted 2026-04-23, VERIFIED - abstract AND the HTML results table fetched, because the abstract carries no numbers). AgenticQwen family: an 8B dense model and a 30B-A3B MoE (3B active at inference), trained with multi-round RL combining reasoning RL and agentic RL, driven by DUAL DATA FLYWHEELS - a reasoning flywheel that raises task difficulty by learning from errors, and an agentic flywheel that expands linear workflows into multi-branch behaviour trees. NUMBERS (Table 1, TAU-2 avg / BFCL-V4 multi-turn avg): Qwen3-235B-A22B 56.5 / 52.0; AgenticQwen-30B-A3B 53.7 / 50.2; AgenticQwen-8B 51.7 / 47.4; vanilla Qwen3-8B 19.3 / 23.8. So an agentically-trained 8B reaches ~92% of the 235B model on TAU-2 while the SAME 8B untrained reaches ~34%. On XBench search, 30B-A3B 47.0 vs 235B 48.0. The authors attribute the residual gap to CONTEXT LENGTH - the 8B/30B models support only 40K tokens - not to reasoning capacity. WHY IT MATTERS HERE, and it cuts against this project: this closes the small/local evidence gap that run 362 declared open, and the answer is uncomfortable for the emergence-first / no-weight-training fork. A 32.4-point TAU-2 jump on a FIXED model size came from training, in exactly the regime this project targets. It does NOT show a harness cannot close the same gap - the paper never tests vanilla-8B-plus-a-strong-harness, so the comparison the project actually cares about is absent - but it does show harness-only would be starting from 19.3 with a long way to go. Third and sharpest member of the trained-beats-frozen cluster with JIT-Agent and WHALE. The CONSTRUCTIVE reading: the residual bottleneck is context length, which is a harness variable, not a weights variable. For a 40K-context local model, bounded curated retrieval (artifact_probe_memory_horizon_rig, run 360; experience_bank top_k, run 357) stops being an optimisation and becomes the lever on the binding constraint. CURRENCY: 2026-04, Qwen3 generation; the absolute numbers will move, the vanilla-vs-trained GAP at fixed size is the durable finding.",
+      "tags": [
+        "small-models",
+        "agentic-rl",
+        "agenticqwen",
+        "tool-use",
+        "tau-2",
+        "bfcl",
+        "trained-beats-frozen",
+        "context-length-bottleneck",
+        "local-regime",
+        "recency-2026-04",
+        "closes-a-declared-gap"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2604.21590",
+        "https://arxiv.org/html/2604.21590v1"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2604.21590"
       ]
     }
   ],
@@ -26713,6 +26744,48 @@
       "target": "concept_search_time_contamination_inflates_agent_evals",
       "type": "instantiates",
       "description": "run 362 caught a search summary attaching a parity number to this paper that is not in it; the number was excluded - a live instance of the hazard, caught by fetching the abstract"
+    },
+    {
+      "id": "edge_agenticqwen_challenges_emergence_first",
+      "source": "concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct",
+      "target": "approach_emergence_first",
+      "type": "challenges",
+      "description": "a 32.4-point TAU-2 jump at FIXED 8B size from agentic training, in this project's own regime; harness-only would start from 19.3. The paper never tests vanilla-8B-plus-a-strong-harness, so it does not refute the fork - but it is the sharpest small-model data point against it so far"
+    },
+    {
+      "id": "edge_agenticqwen_supports_whale",
+      "source": "concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct",
+      "target": "concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model",
+      "type": "supports",
+      "description": "the same finding on the same small-model regime: what the frozen model does not have, the harness cannot fully supply"
+    },
+    {
+      "id": "edge_agenticqwen_extends_jit_agent",
+      "source": "concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct",
+      "target": "concept_jit_agent_harness_intelligence_is_a_trainable_transferable_compounding_dimension",
+      "type": "extends",
+      "description": "third member of the trained-beats-frozen cluster, and the one closest to the local deployment this project runs on"
+    },
+    {
+      "id": "edge_agenticqwen_refines_prefrontal_turn",
+      "source": "concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct",
+      "target": "concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable",
+      "type": "refines",
+      "description": "supplies the evidence the position paper lacked, and partly contradicts its framing: the marginal lever here was training, not executive control"
+    },
+    {
+      "id": "edge_agenticqwen_informs_memory_horizon_rig",
+      "source": "concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct",
+      "target": "artifact_probe_memory_horizon_rig",
+      "type": "informs",
+      "description": "the residual small-model gap is attributed to a 40K context limit - so bounded curated retrieval is the lever on the binding constraint, not a nicety"
+    },
+    {
+      "id": "edge_agenticqwen_supports_compaction_cliff",
+      "source": "concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct",
+      "target": "concept_compaction_cliff",
+      "type": "supports",
+      "description": "context length named as the limiting factor for capable small agents, which is where the compaction cliff bites hardest"
     }
   ]
 }
