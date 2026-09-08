@@ -63,6 +63,9 @@ Schema (one table, `pheromone`):
   evidence     text        optional json: links to artifacts / prior annotations
   supersedes   text        optional uuid: replaces an earlier annotation by the
                            same agent on the same task_ref
+  isolated     int         run 437 (ArcticSwarm, arXiv:2609.01870): 1 = a private
+                           working note, visible only to its own author until
+                           release_isolation() commits it to the shared board
 
 Usage:
     pf = Pheromone(path)
@@ -154,22 +157,35 @@ class Pheromone:
                 half_life_s REAL NOT NULL,
                 ttl_s       REAL NOT NULL,
                 evidence    TEXT,
-                supersedes  TEXT
+                supersedes  TEXT,
+                isolated    INTEGER NOT NULL DEFAULT 0
             );
             CREATE INDEX IF NOT EXISTS pher_task ON pheromone(task_ref);
             CREATE INDEX IF NOT EXISTS pher_created ON pheromone(created_at);
             """
         )
+        # run 437 (arXiv:2609.01870, ArcticSwarm gated isolation): migrate a DB
+        # created before the `isolated` column existed.
+        cols = {r["name"] for r in self._db.execute("PRAGMA table_info(pheromone)")}
+        if "isolated" not in cols:
+            self._db.execute(
+                "ALTER TABLE pheromone ADD COLUMN isolated INTEGER NOT NULL DEFAULT 0")
         self._db.commit()
 
     # -- write: the only mutation, monotonic (append + supersede) ---------------
     def annotate(self, task_ref, kind, utility, confidence, *, agent,
                  half_life_s=DEFAULT_HALF_LIFE_S, ttl_s=None, evidence=None,
-                 supersedes=None, _id=None, _at=None):
+                 supersedes=None, isolated=False, _id=None, _at=None):
         """Write one annotation. Returns its id. Idempotent on id.
 
         `kind` outside KNOWN_KINDS is stored, not rejected — an unknown kind is a
         judgement for the reader, not for this function (the run-365 rule).
+
+        `isolated=True` (run 437, ArcticSwarm gated isolation): the row is a PRIVATE
+        working note. `read(task_ref, reader=X)` shows an isolated row only to its
+        own author; `read` with no `reader` (a gate, the board) never shows it.
+        `release_isolation(task_ref, agent)` commits an agent's isolated rows to the
+        shared board at a commitment boundary.
         """
         if not task_ref or not agent:
             raise ValueError("task_ref and agent are required")
@@ -185,12 +201,27 @@ class Pheromone:
         self._db.execute(
             "INSERT OR REPLACE INTO pheromone "
             "(id, task_ref, kind, agent, utility, confidence, created_at, "
-            " half_life_s, ttl_s, evidence, supersedes) "
-            "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-            (aid, task_ref, str(kind), str(agent), u, c, at, hl, ttl, ev, supersedes),
+            " half_life_s, ttl_s, evidence, supersedes, isolated) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+            (aid, task_ref, str(kind), str(agent), u, c, at, hl, ttl, ev, supersedes,
+             1 if isolated else 0),
         )
         self._db.commit()
         return aid
+
+    def release_isolation(self, task_ref, *, agent, _at=None):
+        """Commit `agent`'s isolated working notes on `task_ref` to the shared board
+        — the ArcticSwarm commitment boundary. Author-bounded (an agent releases
+        only its own). Returns the number of rows released. Monotonic: isolated ->
+        visible, never back."""
+        rows = self._db.execute(
+            "SELECT id, agent FROM pheromone WHERE task_ref = ? AND isolated = 1",
+            (task_ref,)).fetchall()
+        mine = [r["id"] for r in rows if _norm_agent(r["agent"]) == _norm_agent(agent)]
+        for rid in mine:
+            self._db.execute("UPDATE pheromone SET isolated = 0 WHERE id = ?", (rid,))
+        self._db.commit()
+        return len(mine)
 
     def warn(self, task_ref, *, agent, strength=0.5, confidence=0.4, names_cohort=None,
              ttl_s=1800.0, note=None, _at=None, _id=None):
@@ -242,7 +273,7 @@ class Pheromone:
 
     def open_asks(self, task_ref, *, at=None):
         """Live `kind=ask` annotations whose gap has not been answered."""
-        live, _ = self._live_rows(task_ref, at=at)
+        live, _, _ = self._live_rows(task_ref, at=at)
         asks = [r for r, _ in live if r["kind"] == "ask"]
         answered_ids = {json.loads(r["evidence"] or "{}").get("answers")
                         for r in asks if r["evidence"]}
@@ -253,7 +284,7 @@ class Pheromone:
                 and r["id"] not in answered_ids]
 
     # -- read: no lock, no turn, no permission check ---------------------------
-    def _live_rows(self, task_ref, *, at=None):
+    def _live_rows(self, task_ref, *, at=None, reader=None):
         now = _now() if at is None else at
         rows = self._db.execute(
             "SELECT * FROM pheromone WHERE task_ref = ?", (task_ref,)
@@ -267,15 +298,21 @@ class Pheromone:
             if r["supersedes"] and r["supersedes"] in by_id
             and _norm_agent(by_id[r["supersedes"]]["agent"]) == _norm_agent(r["agent"])
         }
-        live = []
+        norm_reader = _norm_agent(reader) if reader is not None else None
+        live, isolated_withheld = [], 0
         for r in rows:
             age = now - r["created_at"]
             if age > r["ttl_s"]:
                 continue
             if r["id"] in superseded:
                 continue
+            # run 437: an isolated row is visible only to its own author; a read
+            # with no reader (a gate, the board) never sees one.
+            if r["isolated"] and _norm_agent(r["agent"]) != norm_reader:
+                isolated_withheld += 1
+                continue
             live.append((r, age))
-        return live, now
+        return live, now, isolated_withheld
 
     @staticmethod
     def _effective(row, age):
@@ -284,8 +321,14 @@ class Pheromone:
         a = max(0.0, age)
         return row["utility"] * row["confidence"] * (0.5 ** (a / row["half_life_s"]))
 
-    def read(self, task_ref, *, at=None):
+    def read(self, task_ref, *, at=None, reader=None):
         """The aggregate an agent consults to decide whether to act on `task_ref`.
+
+        `reader` (run 437): the id of the agent doing the read. Isolated working
+        notes (`annotate(..., isolated=True)`) by OTHER agents are withheld and
+        counted in `isolated_withheld`; the reader's own isolated notes are
+        included. With `reader=None` (a gate, the board), every isolated note is
+        withheld — a checkpoint sees only committed findings.
 
         `signal_raw` is the honest confidence-weighted, time-decayed SUM — it grows
         with the number of contributors and is never deflated for correlation.
@@ -297,7 +340,7 @@ class Pheromone:
         like 0.7 should have been. Compare |signal_raw| against it; do not invent
         your own constant.
         """
-        live, now = self._live_rows(task_ref, at=at)
+        live, now, isolated_withheld = self._live_rows(task_ref, at=at, reader=reader)
         # `contributors` is normalised (run 400): it is the security-relevant view
         # used by gate rotation and no-self-review, so 'Alice' and 'alice ' must
         # collapse to one. `n_contributors` counts these canonical ids.
@@ -327,6 +370,7 @@ class Pheromone:
             "n_contributors": k,
             "contributors": contributors,
             "n_live_annotations": len(live),
+            "isolated_withheld": isolated_withheld,
             "corr_estimate": self.assumed_corr,
             "design_effect": round(design_effect, 3),
             "noise_band": noise_band,
@@ -604,6 +648,49 @@ def _selftest():
             len(pa.open_asks("t")) == 1)
         checks["'ask' is a known kind"] = "ask" in KNOWN_KINDS
         pa.close()
+
+        # run 437: gated isolation (ArcticSwarm, arXiv:2609.01870)
+        pi = Pheromone(tmp / "iso.db")
+        pi.annotate("T", "utility", 0.7, 0.9, agent="alice", _at=1000.0)          # shared
+        pi.annotate("T", "utility", 0.9, 0.9, agent="bob", isolated=True, _at=1001.0)  # bob private
+        pi.annotate("T", "utility", 0.4, 0.8, agent="alice", isolated=True, _at=1002.0)  # alice private
+        v_gate = pi.read("T", at=1003.0)                       # no reader = a gate
+        checks["a gate read (reader=None) sees only committed rows"] = (
+            v_gate["n_live_annotations"] == 1 and v_gate["isolated_withheld"] == 2)
+        v_bob = pi.read("T", at=1003.0, reader="bob")
+        checks["reader=bob sees the shared row + bob's own isolated note, not alice's"] = (
+            v_bob["n_live_annotations"] == 2 and v_bob["isolated_withheld"] == 1
+            and "bob" in v_bob["contributors"])
+        v_bob_case = pi.read("T", at=1003.0, reader="  BOB ")
+        checks["reader match is id-normalised"] = (
+            v_bob_case["n_live_annotations"] == 2)
+        n_rel = pi.release_isolation("T", agent="bob", _at=1004.0)
+        checks["release_isolation commits exactly the author's isolated rows"] = (n_rel == 1)
+        v_after = pi.read("T", at=1005.0)                      # gate again
+        checks["after release the gate sees bob's row, still not alice's"] = (
+            v_after["n_live_annotations"] == 2 and v_after["isolated_withheld"] == 1)
+        checks["release_isolation is author-bounded (bob cannot release alice's)"] = (
+            pi.release_isolation("T", agent="bob", _at=1006.0) == 0
+            and pi.read("T", at=1006.0)["isolated_withheld"] == 1)
+        checks["a non-isolated annotate still behaves exactly as before"] = (
+            pi.read("T", at=1005.0, reader="alice")["n_live_annotations"] == 3)
+        pi.close()
+        # a DB created before the isolated column migrates cleanly
+        legacy = Pheromone(tmp / "legacy.db")
+        legacy._db.execute("DROP TABLE pheromone")
+        legacy._db.execute(
+            "CREATE TABLE pheromone (id TEXT PRIMARY KEY, task_ref TEXT NOT NULL, "
+            "kind TEXT NOT NULL, agent TEXT NOT NULL, utility REAL NOT NULL, "
+            "confidence REAL NOT NULL, created_at REAL NOT NULL, half_life_s REAL NOT NULL, "
+            "ttl_s REAL NOT NULL, evidence TEXT, supersedes TEXT)")
+        legacy._db.commit()
+        legacy.close()
+        migrated = Pheromone(tmp / "legacy.db")
+        migrated.annotate("x", "utility", 0.5, 0.8, agent="a", isolated=True)
+        checks["a pre-run-437 DB gains the isolated column and works"] = (
+            migrated.read("x", reader="a")["n_live_annotations"] == 1
+            and migrated.read("x")["isolated_withheld"] == 1)
+        migrated.close()
 
         for key, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {key}")

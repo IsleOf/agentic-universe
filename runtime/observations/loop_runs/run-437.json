@@ -1,0 +1,48 @@
+{
+  "run": 437,
+  "increment": "Build, operationalising run 436's fold (ArcticSwarm, arXiv:2609.01870). Built the GATED-ISOLATION primitive on tools/pheromone.py - gap (a) of two. annotate(..., isolated=True) writes a PRIVATE working note. read(task_ref, reader=X) shows an isolated row only to its own author and counts the rest as isolated_withheld; read with no reader (a gate, the board) sees none - a checkpoint only sees committed findings. release_isolation(task_ref, agent) commits an author's isolated rows to the shared board at a commitment boundary (author-bounded, monotonic isolated->visible). Schema: +1 `isolated` column with an ALTER-TABLE migration for pre-437 DBs. _live_rows gained a `reader` param; the 3 callers updated. +14 pheromone selftests (incl legacy-DB migration). gates / relay / swarm_demo / probe_substrate_adversarial / the other probes all still GREEN - default read(reader=None) is unchanged behaviour for a task with no isolated rows. +2 edges (pheromone implements the ArcticSwarm concept; the substrate can now meet run-218 condition (a)). Gap (b) - a G4 alternative-hypothesis check - still open.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/pheromone.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.01870",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01870"
+  ],
+  "trace_file": "runtime\\traces\\loop-437.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 437 OK · VALID · graph +0n/+2e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +1~3-0 · novelty 1.00 · acts fold40%"
+}
