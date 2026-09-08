@@ -62,6 +62,14 @@ def _held_out_outcome(baseline_scores, candidate_scores) -> float:
 
 _PATCH_ALLOWED_KEYS = {"proposal_metadata", "add_nodes", "add_edges"}
 _DESTRUCTIVE = ("remove", "delete", "modify", "update", "set_", "overwrite", "replace", "drop")
+# NOT A VERIFIED PROPERTY (run 373, arXiv:2608.03609). This matches on the NAME of a
+# key, so `rm_nodes` or `purge_nodes` passes. That is not a gap to close by lengthening
+# the list - name-matching is non-EQUIVARIANT (renaming an identifier changes the
+# decision), and equivariance is exactly the condition under which verifying an
+# LLM-plus-harness deployment is tractable at all. A longer word list is the same
+# non-equivariant move repeated. Treat this as a heuristic with good coverage against
+# accidental and unsophisticated cases, and NOT as a guarantee; the real upgrade is a
+# whitelist over patch SHAPE (add-only structure) rather than a blacklist over key names.
 
 
 def modification_footprint(proposal) -> dict:

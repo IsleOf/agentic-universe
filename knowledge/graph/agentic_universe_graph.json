@@ -11249,6 +11249,34 @@
       "evidence_links": [
         "tools/acceptance_gate.py"
       ]
+    },
+    {
+      "id": "concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate",
+      "label": "STEADs: verifying an LLM-plus-tool-harness against FO-CTL is undecidable in general and PSPACE-complete only under a finite domain plus EQUIVARIANCE - renaming an identifier must rename the tool calls - which LLM agents violate",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:verification",
+      "confidence": 0.68,
+      "description": "arXiv:2608.03609 (Mercado & Lomuscio / Imperial, submitted 2026-08-04, VERIFIED via abstract). The rigorous answer to the call MLAS made and this graph recorded without chasing: what does formal verification of a self-modifying agentic system actually cost? FORMALISM: a STEAD - Stateful Tool-Enabled Agentic Deployment - is a single LLM plus a TOOL ORCHESTRATION HARNESS acting over relational operational data. That is precisely this project's own shape, which makes the results directly applicable rather than analogous. Specifications are First-Order Computation Tree Logic (FO-CTL) over workflow execution and data evolution, i.e. business-level requirements, not interface-level output constraints - the authors' explicit criticism of prior work is that it 'mainly constrains or analyses behaviour at the agent's interface level'. RESULTS, and they are sobering: verification is UNDECIDABLE in general. Under a finite-domain restriction plus a sufficient condition it becomes PSPACE-complete. The key condition is EQUIVARIANCE - renaming opaque identifiers in the data must correspondingly rename the selected tool calls. LLM-DRIVEN AGENTS CAN VIOLATE THIS: the model responds to the surface FORM of an identifier, not only its structural role. The authors give a canonical deployment wrapper that enforces equivariance for an arbitrary base agent while preserving already-equivariant behaviour - and computing the canonical representations it needs is GRAPH-ISOMORPHISM-HARD. Illustrated on a case-management workflow; no quantitative results (the contribution is the formalism and the complexity landscape). WHAT THIS COSTS THIS PROJECT'S OWN CLAIMS. The equivariance condition is a sharp test and several of this project's guards fail it, because they match on NAMES rather than roles: exec_guard's self-design perimeter is a literal path list plus keyword regexes, and the run-371 destructive-key refusal matches substrings ('remove', 'delete', 'modify', ...) - so a patch key spelled `rm_nodes` or `purge_nodes` slips past a check written two runs ago. That is not a bug to patch by lengthening the word list, which is the non-equivariant move again; it is the reason a name-based guard cannot carry a formal guarantee. The honest reading is that this project's guards are heuristics with good coverage, not verified properties, and this paper says what upgrading them would actually require.",
+      "tags": [
+        "formal-verification",
+        "stead",
+        "fo-ctl",
+        "equivariance",
+        "undecidable",
+        "pspace-complete",
+        "graph-isomorphism-hard",
+        "name-based-guards",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2608.03609"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2608.03609"
+      ]
     }
   ],
   "edges": [
@@ -27273,6 +27301,41 @@
       "target": "artifact_loop_session_live_recording",
       "type": "grounds",
       "description": "run 372: _file_footprint_vs_head + the status-line rendering are where the repository half of the minimal-modification term actually lives"
+    },
+    {
+      "id": "edge_stead_answers_mlas_call",
+      "source": "concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate",
+      "target": "concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent",
+      "type": "refines",
+      "description": "MLAS called for formal verification of self-modifying systems and this prices it: undecidable in general, PSPACE-complete only under a finite domain plus equivariance, with a GI-hard construction needed to enforce the condition"
+    },
+    {
+      "id": "edge_stead_extends_severa",
+      "source": "concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate",
+      "target": "concept_severa_wraps_every_generative_call_in_a_formal_output_contract_with_a_verified_fallback",
+      "type": "extends",
+      "description": "SEVerA wraps each generative CALL in an output contract - interface level, which is exactly the scope this paper argues is insufficient; STEADs verify the deployment's workflow and data evolution instead"
+    },
+    {
+      "id": "edge_stead_supports_context_assembly_cpe",
+      "source": "concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate",
+      "target": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "type": "supports",
+      "description": "both turn on surface form carrying weight it should not: there the assembled context's role labels, here the spelling of an opaque identifier changing which tool gets called"
+    },
+    {
+      "id": "edge_stead_challenges_exec_guard",
+      "source": "concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate",
+      "target": "artifact_phase5_exec_guard",
+      "type": "challenges",
+      "description": "the self-design perimeter is a literal path list plus keyword regexes - a name-based, non-equivariant guard, which by this paper's condition cannot carry a formal guarantee however long the word list gets"
+    },
+    {
+      "id": "edge_stead_challenges_gate_footprint",
+      "source": "concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate",
+      "target": "concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed",
+      "type": "challenges",
+      "description": "the run-371 destructive-key refusal matches substrings, so `rm_nodes` or `purge_nodes` passes; lengthening the list is the non-equivariant move repeated, not a fix"
     }
   ]
 }

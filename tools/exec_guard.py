@@ -71,6 +71,13 @@ GRAPH_REL = "knowledge/graph/agentic_universe_graph.json"
 #  lives outside this repo and is already off-limits to autonomous edit; what is
 #  in-repo and guarded here is the acceptance path plus the versioned harness
 #  surface under runtime/harness/.)
+# SCOPE OF THIS GUARANTEE (run 373, arXiv:2608.03609): this perimeter is a literal path
+# list plus keyword regexes - a NAME-based, non-equivariant check. Renaming or relocating
+# a guarded file changes the decision, and the paper's equivariance condition is precisely
+# what verification of an LLM-plus-harness deployment requires to be tractable. So this is
+# a heuristic perimeter with good coverage, not a verified property, and it should not be
+# cited as one. It stops the accidental and the unsophisticated; it does not stop an agent
+# that renames its way around the list.
 _SELF_DESIGN_FILES = {
     "tools/acceptance_gate.py",     # the exogenous acceptance signal (+ its cert signer)
     "tools/exec_guard.py",          # this guard
