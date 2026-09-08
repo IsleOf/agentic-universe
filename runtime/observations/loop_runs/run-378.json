@@ -1,0 +1,31 @@
+{
+  "run": 378,
+  "increment": "deliver the cross-check the owner originally asked for - six architecture-change suggestions for poly-bot against its refreshed graph, each citing the folded finding it rests on plus a falsifiable prediction, with one item left unaddressed because no credible remedy exists",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 0
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 1,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-378.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 378 OK · VALID · graph +0n/+0e · cites 0v/0 · idle-streak 1 · legible 1.00 · verified-frac 0.92 · files +1~1-0 · novelty 1.00"
+}

@@ -28,6 +28,12 @@ closely. Working tree, **not yet committed** (408 insertions / 264 deletions acr
 - **Four new `component` nodes** covering the drift the brief named: model-routing provenance,
   the AGY host loop, VPS Drive offload, rotating generated checklist lanes.
 
+**Cross-check delivered (run 378):** `poly-bot/architecture_suggestions.md` — six scoped
+suggestions against the refreshed graph, each citing the folded finding it rests on and a
+falsifiable prediction, plus one item deliberately left unaddressed because no credible remedy
+exists. This is the step `docs/project_audit_kit/README.md` describes as what the loop does once
+a project graph exists.
+
 **Open action for the owner:** the work is in poly-bot's working tree only. The Agentic
 Universe loop does not commit into other repos (see Workflow below), so that session or the
 owner needs to commit and push it, or it is lost.
