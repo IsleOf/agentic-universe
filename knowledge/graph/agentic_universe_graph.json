@@ -13014,6 +13014,38 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.02925"
       ]
+    },
+    {
+      "id": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+      "label": "Tempting the Agent (Gatta, Naviglio, Tarantelli, arXiv:2609.02992, 2026-09-02): reputation disciplines an AI agent only when abandoning an identity is costly. An agent deviates ('milks' reputation then resets) when extracted value minus reset cost > 0; Prop 4.8 - HIGH reputation can INCREASE the temptation because the immediately extractable value grows faster than the preservation benefit. Fixes: bind identity to a verifiable principal (stake / collateral / KYC) to raise reset cost; detection-coupled slashing; calibrate decay (fast fights whitewashing, slow preserves honest incentives). The swarm substrate makes reset FREE (unauthenticated agent field), so its reputation is in the regime the paper proves fails.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:trust",
+      "confidence": 0.74,
+      "description": "arXiv:2609.02992 (Federico Gatta, Manuel Naviglio, Francesco Tarantelli; v1 2026-09-02; VERIFIED via abstract + HTML model/results). A dynamic economic model of reputation as CAPITAL when identities are cheap to abandon and recreate. THE MODEL. Each period an agent chooses: operate honestly (build reputation, attract future business) or opportunistically EXTRACT - cash in accumulated reputation with a bad delivery, then reset to a penalised fresh identity. A temptation function Delta(F,M) compares deviation value to honest continuation; the agent deviates when extracted value minus reset costs >= 0. RESULTS (plain terms). Prop 4.1: a unique value function exists - better reputation always raises agent worth, so reputation IS economic capital. Prop 4.4: a full identity RESET (destroying all prior reputation) disciplines better than continuing under a degraded identity - the agent keeps less future value - BUT only when the reset itself is costly. Prop 4.8: accumulated reputation can INCREASE deviation temptation, because the immediately extractable value grows faster than the future-preservation benefit. A high-reputation agent routed the most work has the most to gain from one bad batch then a reset. Corollary 5.3 (small-update limit): explicit thresholds separate 'continue honestly' from 'deviate and reset' as functions of identity-reset cost kappa_R, reputation decay rho, demand sensitivity, and staking kappa_S. Stronger staking deters deviation but also lowers the agent's optimal quality (opportunity-cost perversity). POLICY. (1) bind on-chain identity to a verifiable principal (KYC / collateral) to raise kappa_R; (2) detection-coupled slashing - penalty proportional to DETECTED misconduct, not volume; (3) calibrate decay - fast rho fights whitewashing, slow rho preserves honest incentives (needs robust validation); (4) balance the staking burden; (5) reputation ALONE fails when reset is cheap - pair it with staking / attestations / escrow. Named infra: ERC-8004 / ERC-8183 / x402. WHY IT LANDS HERE. tools/reputation.py is Beta-Bernoulli + a UCB exploration bonus + 14-day exponential decay toward the (1,1) seed. Three exact hits: (i) The substrate makes reset FREE. pheromone.annotate's `agent` field is caller-supplied and unverified (the whole trust boundary). kappa_R ~ 0, so by Corollary 5.3 the substrate sits on the wrong side of every honesty threshold: a fresh sock-puppet gets a 0.5 prior + the full exploration bonus, near-indistinguishable from a decayed veteran. (ii) The exploration bonus IS the whitewashing subsidy the paper models - it exists for a good non-calcification reason (run: reputation stays non-calcifying only with UCB + decay) but it also pays the reset agent. The two goals are in direct tension and the substrate never priced it. (iii) Prop 4.8 is unhandled: the 'personal assistant' role that is supposed to emerge from performance data (swarm task deliverable 4) is precisely the high-reputation agent with the most extractable value and no slash that a reset cannot erase. reputation.record(aid, outcome) lowers a score on a bad outcome but there is no slash proportional to detected misconduct and a reset wipes it. executor_pool's mint_token / redeem_token (capability tokens) are the 'bind to a principal' direction but are not wired into reputation identity. The 14-day decay is rho chosen with no analysis of this tradeoff. CURRENCY: 2026-09-02, within the recency window. Small/local-model relevance: a fleet of local models on one box has NO external identity cost at all - reset is `use a different string` - so kappa_R = 0 exactly, the worst case of the model. The paper's fix (bind to a verifiable principal) needs an identity registry the loop has flagged as owner-gated.",
+      "tags": [
+        "reputation",
+        "identity-reset",
+        "whitewashing",
+        "sybil",
+        "trust-boundary",
+        "staking",
+        "reputation-decay",
+        "mechanism-design",
+        "swarm-substrate",
+        "recency-2026-09",
+        "small-model-regime",
+        "personal-assistant-role"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.02992"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.02992",
+        "tools/reputation.py"
+      ]
     }
   ],
   "edges": [
@@ -31033,6 +31065,55 @@
       "target": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
       "type": "implements",
       "description": "run 431: G1 records evidence links, G4 reports single_evidence_domain when the task's whole evidence basis is one fault root - the DAQC kappa_hat_E idea at the resolution the substrate supports (a ceiling on kappa_E, REPORT not block)"
+    },
+    {
+      "id": "edge_temptation_constrains_reputation_module",
+      "source": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+      "target": "artifact_reputation_module",
+      "type": "constrains",
+      "description": "reputation.py's free identity (unauthenticated agent field) + UCB exploration bonus put it in the regime Corollary 5.3 proves fails: a reset agent gets a 0.5 prior plus the full bonus for near-zero cost. A slash a reset cannot erase, or an identity bound to a capability token, is the fix"
+    },
+    {
+      "id": "edge_temptation_refines_noncalcification",
+      "source": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+      "target": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
+      "type": "refines",
+      "description": "the UCB exploration bonus keeps reputation non-calcifying (an idle incumbent slides back to the mean) but the SAME bonus subsidises a whitewashing reset - the non-calcification design and Sybil-resistance are in direct tension the module never priced"
+    },
+    {
+      "id": "edge_temptation_grounds_trust_boundary",
+      "source": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+      "target": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "type": "supports",
+      "description": "the trust-boundary node says every identity-keyed guard is only as strong as 'fleet agents don't impersonate each other'; this gives the economic version - with reset cost kappa_R ~ 0 an agent is provably tempted to milk-and-reset, not just able to"
+    },
+    {
+      "id": "edge_temptation_challenges_developmental",
+      "source": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+      "target": "concept_developmental_harness_affordances_unlock_on_demonstrated_reliability",
+      "type": "challenges",
+      "description": "'affordances unlock on demonstrated reliability' assumes the identity that demonstrated reliability is the one still holding the affordance. Prop 4.8: the more an identity has unlocked, the more it gains from one bad use then a reset - developmental unlocking needs a costly identity to be safe"
+    },
+    {
+      "id": "edge_temptation_parallels_efd",
+      "source": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+      "target": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "type": "supports",
+      "description": "both are 'the substrate's trust layer is unauthenticated so a structural guarantee is missing': EFD needs evidence-lineage capture for a real epistemic cut, this needs identity binding for reputation to discipline. Same owner-gated prerequisite"
+    },
+    {
+      "id": "edge_temptation_extends_id_normalisation",
+      "source": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+      "target": "concept_the_run_400_402_id_normalisation_fixed_gates_and_pheromone_but_missed_relay_and_reputation",
+      "type": "extends",
+      "description": "run 400-402 normalised the agent id string so 'Alice' and 'alice ' are one agent; this is the next layer - even a perfectly normalised id is free to abandon, so normalisation closes typo-Sybil but not economic-Sybil"
+    },
+    {
+      "id": "edge_temptation_supports_markets_dont_converge",
+      "source": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+      "target": "concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer",
+      "type": "supports",
+      "description": "'a mechanism's human properties do not transfer to LLM-agent markets' - reputation is another such mechanism: it disciplines humans (identity is costly) but not agents whose identity is a string, unless reset is made costly by design"
     }
   ]
 }

@@ -1,0 +1,46 @@
+{
+  "run": 432,
+  "increment": "Literature, fresh axis (trust / identity economics). Folded arXiv:2609.02992 (Tempting the Agent: The Economics of Reputation without Persistent Identity; Gatta, Naviglio, Tarantelli; 2026-09-02). A dynamic model: reputation disciplines an agent only when abandoning an identity is costly. The agent deviates (milk reputation, then reset to a penalised fresh identity) when extracted value minus reset cost >= 0. Prop 4.4: a full reset disciplines better than a degraded identity - IF reset is costly. Prop 4.8: HIGH reputation can INCREASE temptation (extractable value grows faster than the preservation benefit). Corollary 5.3: explicit honesty thresholds in kappa_R (reset cost), rho (decay), staking. Fixes: bind identity to a verifiable principal, detection-coupled slashing, calibrate decay. LANDS ON tools/reputation.py: the substrate makes reset FREE (unauthenticated agent field => kappa_R ~ 0), so it sits on the wrong side of every threshold; the UCB exploration bonus that keeps reputation non-calcifying ALSO subsidises a whitewashing reset (unpriced tension); Prop 4.8 = the emergent 'personal assistant' role is the high-value target with no slash a reset can't erase. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.02992",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.02992"
+  ],
+  "trace_file": "runtime\\traces\\loop-432.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 432 OK · VALID · graph +1n/+7e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +1~2-0 · novelty 0.75 · acts fold30%"
+}
