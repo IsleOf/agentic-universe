@@ -108,11 +108,32 @@ def check(proposal, baseline_scores, candidate_scores, forecast, *,
         json.dumps({k: cert[k] for k in cert if k != "certificate_hash"},
                    sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
 
-    if decision.startswith("accept"):
-        d = Path(cert_dir) if cert_dir else CERT_DIR
-        d.mkdir(parents=True, exist_ok=True)
-        with (d / "gate_certificates.jsonl").open("a", encoding="utf-8") as fh:
-            fh.write(json.dumps(cert, sort_keys=True) + "\n")
+    # Log EVERY adjudication, not only the accepts (run 368).
+    #
+    # This previously read `if decision.startswith("accept")`, so the gate's
+    # append-only record held only the cases where it said yes: 183 entries, 183
+    # accepts, 0 rejections. The one question you would ask this log - "is the gate
+    # still rejecting things, or has it degraded into always-accept?" - was the one
+    # question it could not answer, and a 100% accept rate *looked* like evidence
+    # the gate worked. That is exactly the self-p-hacking failure
+    # concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution
+    # names, and the always-pass collapse of
+    # concept_a_self_evolved_evaluator_cannot_be_validated_by_task_score - reached
+    # here not by a gamed metric but by a biased audit trail.
+    #
+    # `provenance` marks whether this went to the default production log or to a
+    # caller-supplied directory: the 183 existing entries were all written by
+    # downstream selftests (loop_conductor / v2_integration / research_worker call
+    # check() without a cert_dir), and nothing distinguished them from real
+    # adjudications.
+    d = Path(cert_dir) if cert_dir else CERT_DIR
+    cert["provenance"] = "explicit_dir" if cert_dir else "default_log"
+    cert["certificate_hash"] = hashlib.sha256(
+        json.dumps({k: cert[k] for k in cert if k != "certificate_hash"},
+                   sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+    d.mkdir(parents=True, exist_ok=True)
+    with (d / "gate_certificates.jsonl").open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(cert, sort_keys=True) + "\n")
     return cert
 
 
@@ -163,13 +184,22 @@ def _selftest():
     checks["verify_certificate catches a swapped proposal"] = not verify_certificate(
         cert, {"kind": "context", "name": "other"})["ok"]
 
-    # a regressing edit is rejected and NOT written
+    # a regressing edit is rejected AND recorded (run 368)
+    # This check previously asserted "a rejected edit is not appended" - the
+    # survivorship bias was encoded as a requirement, which is why 183 accepts and
+    # 0 rejections never looked wrong. A gate you cannot audit for rejections is a
+    # gate you cannot distinguish from always-accept.
     worse = {f"t{i}": (1.0 if i < 5 else 0.0) for i in range(17)}
     cert_r = check(good_edit, base, worse, fc, repaired=False, edit=good_edit, cert_dir=tmp,
                    clock=lambda: 1001.0)
     checks["a regressing edit is rejected"] = cert_r["decision"] == "reject"
-    checks["a rejected edit is not appended"] = (
-        (tmp / "gate_certificates.jsonl").read_text().count("\n") == 1)
+    checks["a rejected edit IS appended (the log must be auditable for rejections)"] = (
+        (tmp / "gate_certificates.jsonl").read_text().count("\n") == 2)
+    checks["the logged rejection carries decision=reject"] = (
+        json.loads((tmp / "gate_certificates.jsonl").read_text()
+                   .splitlines()[-1])["decision"] == "reject")
+    checks["certificates record their provenance (default log vs explicit dir)"] = (
+        cert_r.get("provenance") == "explicit_dir")
 
     # a repair-dependent accept is downgraded to conditional (process-adjusted)
     cert_c = check(good_edit, base, cand, fc, repaired=True, edit=good_edit, cert_dir=tmp,

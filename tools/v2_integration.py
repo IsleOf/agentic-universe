@@ -77,7 +77,8 @@ def run_pipeline(brief, graph, *, baseline_scores, candidate_scores, forecast, t
         apply_patch=applied.append,
         commit_push=lambda run_no, plan, cert: committed.append((run_no, cert["decision"])),
         graph_path=graph_path,
-        gate=acceptance_gate.check,          # the REAL gate
+        # the REAL gate, with selftest certs kept out of the production log (run 368)
+        gate=lambda *a, **k: acceptance_gate.check(*a, cert_dir=tmp, **k),
         clock=lambda: 1_000_000.0,
     )
     rec = conductor.conduct(999, recent_kinds=["fold", "build", "consistency"],

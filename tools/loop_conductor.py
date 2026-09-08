@@ -246,6 +246,9 @@ def _selftest():
     tmp = Path(tempfile.mkdtemp(prefix="conductor-"))
     checks = {}
 
+    def _tmpgate(*a, **k):          # run 368: selftest certs -> tmp, not the production log
+        return acceptance_gate.check(*a, cert_dir=tmp, **k)
+
     graph_path = tmp / "g.json"
     graph_path.write_text(json.dumps({
         "nodes": [{"id": "concept_anchor", "label": "anchor", "type": "concept"}],
@@ -271,7 +274,7 @@ def _selftest():
     def commit_push(run_no, plan, cert):
         committed.append((run_no, cert["decision"]))
 
-    c = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led1.json", run_worker=ok_worker, apply_patch=apply_patch,
+    c = Conductor(require_blessed_manifest=False, gate=_tmpgate, ledger_path=tmp / "led1.json", run_worker=ok_worker, apply_patch=apply_patch,
                   commit_push=commit_push, graph_path=graph_path, clock=lambda: 1000.0)
     rec = c.conduct(400, recent_kinds=["build", "fold", "doc"], frontier_swept=False)
     checks["a clean fold run is accepted, applied and committed"] = (
@@ -282,7 +285,7 @@ def _selftest():
     def dead_worker(task, *, hints):
         return False, None, "worker crashed"
     applied.clear()
-    c2 = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led2.json", run_worker=dead_worker, apply_patch=apply_patch,
+    c2 = Conductor(require_blessed_manifest=False, gate=_tmpgate, ledger_path=tmp / "led2.json", run_worker=dead_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 2000.0)
     rec2 = c2.conduct(401, recent_kinds=["fold", "fold", "fold"], frontier_swept=False)
     checks["a failed worker yields an unaccepted record"] = (not rec2.accepted and not applied)
@@ -291,7 +294,7 @@ def _selftest():
     # IDLE-STATE: three doc runs + swept frontier -> only a/b/c allowed; a 'fold' is refused
     def fold_worker(task, *, hints):
         return True, {**worker_out, "kind": "fold"}, "done"
-    c3 = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led3.json", run_worker=fold_worker, apply_patch=apply_patch,
+    c3 = Conductor(require_blessed_manifest=False, gate=_tmpgate, ledger_path=tmp / "led3.json", run_worker=fold_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 3000.0)
     rec3 = c3.conduct(402, recent_kinds=["doc", "consistency", "doc"], frontier_swept=True,
                       use_corpus=False)
@@ -328,7 +331,7 @@ def _selftest():
     def badpatch_worker(task, *, hints):
         return True, {**worker_out, "patch": bad_patch}, "done"
     applied.clear()
-    c4 = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led4.json", run_worker=badpatch_worker, apply_patch=apply_patch,
+    c4 = Conductor(require_blessed_manifest=False, gate=_tmpgate, ledger_path=tmp / "led4.json", run_worker=badpatch_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 4000.0)
     rec4 = c4.conduct(403, recent_kinds=["fold"], frontier_swept=False)
     checks["a structurally broken patch is rejected before the gate"] = (
@@ -339,7 +342,7 @@ def _selftest():
     def regress_worker(task, *, hints):
         return True, {**worker_out, "candidate_scores": worse}, "done"
     applied.clear()
-    c5 = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led5.json", run_worker=regress_worker, apply_patch=apply_patch,
+    c5 = Conductor(require_blessed_manifest=False, gate=_tmpgate, ledger_path=tmp / "led5.json", run_worker=regress_worker, apply_patch=apply_patch,
                    commit_push=commit_push, graph_path=graph_path, clock=lambda: 5000.0)
     rec5 = c5.conduct(404, recent_kinds=["fold"], frontier_swept=False)
     checks["a held-out regression is rejected by the gate, nothing applied"] = (
@@ -350,7 +353,7 @@ def _selftest():
     if _HarnessRegistry is not None:
         hreg = _HarnessRegistry(base=tmp / "harness")
         hreg.set("prompt", "p", "hello")
-        cpf = Conductor(ledger_path=tmp / "ledpf.json", run_worker=ok_worker,
+        cpf = Conductor(gate=_tmpgate, ledger_path=tmp / "ledpf.json", run_worker=ok_worker,
                         apply_patch=apply_patch, commit_push=commit_push, graph_path=graph_path,
                         clock=lambda: 6000.0, harness_registry=hreg)
         rec_unblessed = cpf.conduct(405, recent_kinds=["fold"], frontier_swept=False)

@@ -174,7 +174,7 @@ def _selftest():
     c = Conductor(require_blessed_manifest=False, ledger_path=tmp / "led.json", run_worker=run_worker,
                   apply_patch=applied.append,
                   commit_push=lambda r, p, cert: committed.append((r, cert["decision"])),
-                  graph_path=tmp / "g.json", gate=acceptance_gate.check,
+                  graph_path=tmp / "g.json", gate=lambda *a, **k: acceptance_gate.check(*a, cert_dir=tmp, **k),  # run 368: keep selftest certs out of the production log
                   clock=lambda: 1e6)
     rec = c.conduct(500, recent_kinds=["fold", "build", "doc"], frontier_swept=True,
                     use_corpus=False)
