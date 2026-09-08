@@ -1,0 +1,46 @@
+{
+  "run": 436,
+  "increment": "Literature, fresh axis (premature convergence in research swarms) - switching off the substrate-trust thread after runs 428-435. Folded arXiv:2609.01870 (ArcticSwarm: Deferring Early Consensus in Long-Horizon Multi-Agent Research; Yoon, Liu, Wang et al.; 2026-09-01). A working research swarm that treats PREMATURE CONVERGENCE as the primary failure (candidate fixation: once the swarm picks a wrong candidate, loose-constraint verification amplifies it - 26.8% accuracy with zero alternative-hypothesis tasks vs 91.4% with >=1). Three mechanisms: gated isolation (per-task isolated exploration, +3.8pp), an asynchronous structured bulletin board (not real-time DM), staged review at commitment boundaries (self-check / board audit / commit gate; the three gates +6.3pp). BrowseComp-Plus, Qwen 3.5-27B, 82.6%. INDEPENDENTLY built the swarm substrate's design: the pheromone board IS an async bulletin board, G1/G4 ARE staged review at boundaries. TWO GAPS: pheromone.read() has no isolation mode (every agent sees every peer annotation immediately - the anti-pattern); G4 doesn't require an alternative-hypothesis task ran (the highest-value check). +1 node, +8 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 8
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.01870",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.01870"
+  ],
+  "trace_file": "runtime\\traces\\loop-436.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 436 OK · VALID · graph +1n/+8e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +1~2-0 · novelty 1.00 · acts fold30%"
+}
