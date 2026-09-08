@@ -1,0 +1,51 @@
+{
+  "run": 413,
+  "increment": "Folded arXiv:2609.05339 (Does Your Agent's Memory Survive a Model Upgrade?; Goyal, Ray; 2026-09-04). Two open-weight models <10B (this project's SMALL/LOCAL regime), 48 synthetic histories, exact scoring. Four memory representations across a model swap: KG-FIXED transfers reliably (+0.0004 +/- 0.0020 accuracy change); model-compressed NOTES shift +9.91 / -13.28 pp asymmetrically by migration direction; RAG with a 50/50 mixed embedding index captures only 4.96 of the 11.90-pt re-embed gain; store-only NOTES repair fails ALL 48 cases while retaining raw history repairs 34/48. 80% of the NOTES deficit is lost at initial construction, 81% of the RAG deficit is retrieval failure. WHY IT LANDS: task_ledger.py is the KG-fixed case (upgrade-robust); pheromone.py evidence text is the NOTES case (model-coupled, not portable) and register_health reads it so it inherits the coupling and needs a re-baseline after a writer swap; the design doc's week-3 vector column is the RAG case (strict embedding isolation, never a mixed index); 'retain raw history for repair' validates fractal_flock's append-only store and the .audit logs. DESIGN REFINEMENT recorded: durable state -> ledger fixed schema; pheromone evidence -> disposable; audit logs -> uncompressed repair path. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.05339",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.05339",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.05339",
+    "src:https://arxiv.org/abs/2609.05339"
+  ],
+  "trace_file": "runtime\\traces\\loop-413.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 413 OK · VALID · graph +1n/+7e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.85 · files +1~2-0 · novelty 0.80 · acts fold40%"
+}

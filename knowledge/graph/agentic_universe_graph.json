@@ -12584,6 +12584,35 @@
       "evidence_links": [
         "tools/probe_swap_cost.py"
       ]
+    },
+    {
+      "id": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "label": "Across a small-model upgrade: fixed-schema KG memory transfers with ~0 accuracy change, model-compressed NOTES shift +9.9 / -13.3 pp asymmetrically by direction, 50/50 mixed embeddings forfeit most of the re-embed gain, and store-only NOTES repair fails all 48 cases while retaining raw history repairs 34/48",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:memory",
+      "confidence": 0.76,
+      "description": "arXiv:2609.05339 (Ankit Goyal, Jaideep Ray; v1 2026-09-04, VERIFIED via abstract). 'Model upgrades are routine; memory migrations are not.' A controlled study of memory PORTABILITY across a model swap, with two open-weight models under 10B parameters (directly in this project's SMALL/LOCAL regime), 48 synthetic histories, randomized answer codes, exact scoring. Four memory representations of the same history: LC-RAW (verbatim long context), RAG (chunked retrieval), NOTES (model-compressed natural-language notes), KG-FIXED (normalised into a fixed-schema knowledge graph). MEASUREMENTS. (1) KG-FIXED transfers reliably: accuracy changes by +0.0004 +/- 0.0020 after a writer swap. (2) NOTES are highly MODEL-COUPLED and DIRECTION-ASYMMETRIC: accuracy shifts +9.91 or -13.28 pp depending on which way the migration goes. (3) RAG with a 50/50 mixed embedding index captures only 4.96 of the 11.90-pt gain from a full re-embed - partial migrations forfeit most of the value. (4) DIAGNOSTIC DECOMPOSITION: 80% (0.467 +/- 0.014) of the NOTES deficit is information lost during INITIAL CONSTRUCTION; 81% (0.364 +/- 0.012) of the RAG deficit is RETRIEVAL failure. (5) Store-only repair of NOTES fails to reach a 90% recovery target in ALL 48 cases; retaining the RAW SOURCE HISTORY enables recovery in 34/48 for one direction. RECOMMENDATIONS: direction-specific migration testing, strict embedding-space isolation, retention of source histories for repair. WHY IT LANDS ON THE SUBSTRATE. task_ledger.py is fixed-schema (id/goal/status/stage/deps) - the KG-fixed case, upgrade-robust. pheromone.py annotations carry `evidence` as free-text JSON - the NOTES case, model-coupled and not portable, and pheromone.register_health() (run 405) reads exactly that free text so it inherits the coupling. The design doc's week-3 'add a vector column' is the RAG case - the paper says strict embedding-space isolation or a full re-embed, never a mixed index. And 'retain the raw source history for repair' validates fractal_flock's append-only artifact store and task_ledger's .audit log - those ARE the repair source, and should never be compressed away. DESIGN REFINEMENT: put anything that must survive a model swap in the ledger's fixed schema; treat pheromone evidence text as disposable (it decays anyway - correct); keep the audit logs uncompressed as the repair path. CURRENCY: 2026-09-04, small open-weight models; the KG-vs-NOTES portability gap is structural, the specific pp numbers are model-pair-dependent.",
+      "tags": [
+        "memory",
+        "model-upgrade",
+        "portability",
+        "fixed-schema",
+        "model-coupled-notes",
+        "embedding-space-isolation",
+        "retain-raw-history",
+        "small-model-regime",
+        "direction-asymmetric",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.05339"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.05339"
+      ]
     }
   ],
   "edges": [
@@ -30099,6 +30128,55 @@
       "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
       "type": "supports",
       "description": "'coordinate through a shared store, not a central planner or a message bus' - the store is what makes an agent swap structurally free; a message-coordinated team has to re-establish the channel"
+    },
+    {
+      "id": "edge_memory_portability_supports_ledger",
+      "source": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "supports",
+      "description": "the fixed-schema task ledger is the KG-fixed case: it transfers across a model upgrade with ~0 accuracy change, where model-compressed notes shift +9.9 / -13.3 pp"
+    },
+    {
+      "id": "edge_memory_portability_constrains_pheromone",
+      "source": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "constrains",
+      "description": "pheromone annotations' free-text `evidence` JSON is the NOTES case - model-coupled and not portable across a model swap. The fact that annotations DECAY on a clock limits the blast radius, which is the right instinct, but nothing durable should live only there"
+    },
+    {
+      "id": "edge_memory_portability_constrains_register_health",
+      "source": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "target": "concept_pheromone_register_health_is_a_cheap_model_free_distribution_shift_detector_on_the_boards_own_language",
+      "type": "constrains",
+      "description": "register_health reads annotation free text to judge the board's register; that text is model-coupled, so a model upgrade could move the English-function-word fraction without the board actually drifting - the detector needs a re-baseline after a writer swap"
+    },
+    {
+      "id": "edge_memory_portability_refines_evoharness",
+      "source": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "target": "concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation",
+      "type": "refines",
+      "description": "EVOHARNESSBENCH found harness expansion degrades retention; this is the MEMORY-REPRESENTATION axis of the same problem - a model swap with the memory store unchanged still forgets, and how much depends entirely on the representation"
+    },
+    {
+      "id": "edge_memory_portability_grounds_flock",
+      "source": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "target": "artifact_fractal_flock_harness",
+      "type": "grounds",
+      "description": "the paper's 'retain the raw source history for repair' recommendation is what fractal_flock's append-only artifact store already is; the finding says never compress it away - store-only repair of compressed notes failed all 48 cases"
+    },
+    {
+      "id": "edge_memory_portability_constrains_design",
+      "source": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "design refinement: anything that must survive a model swap goes in the ledger's fixed schema; pheromone evidence text is disposable; the audit logs stay uncompressed as the repair path; and week-3's vector column needs strict embedding-space isolation, never a mixed index"
+    },
+    {
+      "id": "edge_memory_portability_compounds_authz_laundering",
+      "source": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "target": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "type": "refines",
+      "description": "both are 'persistent memory is not a passive store': run 401 - memory can misrepresent authorization state; this - memory can silently lose meaning across a model upgrade. A permission written in model-coupled notes can be reinterpreted, not just forged"
     }
   ]
 }
