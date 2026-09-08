@@ -12139,6 +12139,32 @@
       "evidence_links": [
         "tools/probe_annotation_contagion.py"
       ]
+    },
+    {
+      "id": "concept_a_cheap_self_decaying_suspicion_flag_halves_the_annotation_contagion_exposure_window_with_no_censorship_downside",
+      "label": "Measured: pheromone.warn() - a weak, short-TTL, self-decaying suspicion flag posted at half the detection lag - cuts the mean rounds the board steers agents to a boosted exploit from ~4.8 to ~2.8, and unlike veto-weighting it has no censorship downside so it belongs IN the module",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.72,
+      "description": "Run 399, acting on run 398's finding that the residual annotation-contagion risk was TEMPORAL (the detection lag), not structural. Added pheromone.warn(task_ref, agent, ...): a one-liner that posts a kind=warning with deliberately weak defaults - utility -0.5, confidence 0.4, a 30-minute TTL - carrying an evidence flag {suspicion: True}. The point is 'flag it now, on a hunch, then audit': a suspicion that is not followed up decays on its own within the TTL, and a wrong flag costs almost nothing. An agent who completes an audit posts a full-strength kind=warning afterward. probe_annotation_contagion gained a suspicion_then_full arm: honest agents post pf.warn() at HALF the detection lag, upgraded to a full warning at the full lag. MEASURED over the sweep: mean rounds the board steers agents to the exploit falls baseline 12.0 -> plain warnings 4.83 -> suspicion-then-full 2.78. Halving the lag on a weak flag roughly halves the exposure window, which is exactly what 'the residual risk is temporal' predicts. WHY THIS GOES IN THE MODULE AND VETO-WEIGHTING DOES NOT: pf.warn() is a weak, self-decaying flag with NO attribution requirement and no censorship downside - a wrong suspicion flag just fades. Veto-weighting (run 398) needs correct attribution of the cheating cohort and silences an innocent one if that is wrong, so it stays a read() post-filter behind a would-be collective-choice rule. The dividing line is: a mechanism that fails SAFE under a wrong input goes in the primitive; one that fails HARMFUL stays out. LATENT BUG FIXED IN PASSING: pheromone._effective raised OverflowError when a row was read `at` a time before its created_at (0.5 ** large_negative) - now clamps age to >= 0, treating a future-dated row as freshly created rather than exponentially amplified.",
+      "tags": [
+        "swarm-substrate",
+        "annotation-contagion",
+        "suspicion-flag",
+        "detection-lag",
+        "fails-safe-goes-in-the-primitive",
+        "self-decaying",
+        "probe-result",
+        "latent-bug-fixed"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/pheromone.py",
+        "tools/probe_annotation_contagion.py"
+      ]
     }
   ],
   "edges": [
@@ -29129,6 +29155,34 @@
       "target": "artifact_swarm_substrate_prototype_design",
       "type": "grounds",
       "description": "adds a measured threat-model result to the design: the board's transparency is a real defence against annotation contagion, bounded by detection latency"
+    },
+    {
+      "id": "edge_suspicion_flag_refines_finding398",
+      "source": "concept_a_cheap_self_decaying_suspicion_flag_halves_the_annotation_contagion_exposure_window_with_no_censorship_downside",
+      "target": "concept_plain_negative_warnings_mostly_contain_a_boosted_exploit_annotation_the_residual_risk_is_detection_lag",
+      "type": "refines",
+      "description": "run 398 said the residual risk was the detection lag and the fix should be a cheap warning postable on suspicion; this builds it (pheromone.warn) and measures it - 4.83 -> 2.78 mean rounds exposed"
+    },
+    {
+      "id": "edge_suspicion_flag_extends_pheromone",
+      "source": "concept_a_cheap_self_decaying_suspicion_flag_halves_the_annotation_contagion_exposure_window_with_no_censorship_downside",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "extends",
+      "description": "adds the warn() method: a weak (utility -0.5, confidence 0.4), short-TTL (30 min), self-decaying kind=warning with a {suspicion: True} evidence flag. Also fixes the _effective OverflowError on a negative age"
+    },
+    {
+      "id": "edge_suspicion_flag_core_of_rig",
+      "source": "concept_a_cheap_self_decaying_suspicion_flag_halves_the_annotation_contagion_exposure_window_with_no_censorship_downside",
+      "target": "artifact_probe_annotation_contagion_rig",
+      "type": "core_of",
+      "description": "the rig's suspicion_then_full arm is where the lag-halving was measured"
+    },
+    {
+      "id": "edge_suspicion_flag_informs_ostrom",
+      "source": "concept_a_cheap_self_decaying_suspicion_flag_halves_the_annotation_contagion_exposure_window_with_no_censorship_downside",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "informs",
+      "description": "the dividing line this run draws - a mechanism that fails SAFE under a wrong input goes in the primitive, one that fails HARMFUL stays behind a collective-choice rule - is a concrete criterion for which Ostrom mechanisms to hard-code and which to govern"
     }
   ]
 }

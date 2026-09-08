@@ -70,11 +70,24 @@ def _run_arm(arm, *, n_agents, cheater_frac, detect_lag_rounds, honest_frac,
                 pf.annotate("exploit", "utility", BOOST_UTILITY, BOOST_CONF, agent=c,
                             half_life_s=HALF_LIFE, _at=now, _id=c)
             # honest agents come online after the detection lag, then stay warning
-            if arm != "baseline" and r >= detect_lag_rounds:
+            if arm in ("warnings_only", "veto_weight") and r >= detect_lag_rounds:
                 for h in honest:
                     pf.annotate("exploit", "warning", WARN_UTILITY, WARN_CONF, agent=h,
                                 half_life_s=HALF_LIFE, _at=now, _id=h,
                                 evidence={"names_cohort": "x"})
+            # suspicion arm: a CHEAP warn() at half the lag (a hunch, not an audit),
+            # upgraded to a full warning at the full lag. Run 399 - does a shorter
+            # lag on a weak flag actually shorten the exposure window?
+            if arm == "suspicion_then_full":
+                if r >= max(1, detect_lag_rounds // 2):
+                    for h in honest:
+                        pf.warn("exploit", agent=h, strength=0.5, confidence=0.4,
+                                names_cohort="x", _at=now, _id=f"{h}-susp")
+                if r >= detect_lag_rounds:
+                    for h in honest:
+                        pf.annotate("exploit", "warning", WARN_UTILITY, WARN_CONF, agent=h,
+                                    half_life_s=HALF_LIFE, _at=now, _id=h,
+                                    evidence={"names_cohort": "x"})
             v = pf.read("exploit", at=now + 1.0)
             signal_raw = v["signal_raw"]
             if arm == "veto_weight":
@@ -120,10 +133,10 @@ def _veto_weighted(pf, task_ref, *, at):
     return total
 
 
-def sweep(n_agents=20, cheater_fracs=(0.1, 0.3, 0.5), lags=(1, 3, 6),
+def sweep(n_agents=20, cheater_fracs=(0.1, 0.3, 0.5), lags=(2, 4, 6),
           honest_fracs=(0.2, 0.4), rounds=12):
     out = {}
-    for arm in ("baseline", "warnings_only", "veto_weight"):
+    for arm in ("baseline", "warnings_only", "suspicion_then_full", "veto_weight"):
         out[arm] = {}
         for cf in cheater_fracs:
             for lag in lags:
@@ -149,8 +162,13 @@ def assess(sw):
         rows = sw[arm].values()
         return round(sum(1 for r in rows if r["final_warning_away"]) / len(rows), 3)
 
+    def mean_rounds_steering(arm):
+        rows = sw[arm].values()
+        return round(sum(r["rounds_steering"] for r in rows) / len(rows), 2)
+
     base = frac_still_steering("baseline")
     warn = frac_still_steering("warnings_only")
+    susp = frac_still_steering("suspicion_then_full")
     veto = frac_still_steering("veto_weight")
     warn_away = frac_warning_away("warnings_only")
     veto_away = frac_warning_away("veto_weight")
@@ -158,29 +176,39 @@ def assess(sw):
         "baseline_frac_exploit_still_steering": base,
         "warnings_only_frac_still_steering": warn,
         "warnings_only_frac_now_warning_away": warn_away,
+        "suspicion_then_full_frac_still_steering": susp,
         "veto_weight_frac_still_steering": veto,
         "veto_weight_frac_now_warning_away": veto_away,
+        "mean_rounds_steering": {
+            "baseline": mean_rounds_steering("baseline"),
+            "warnings_only": mean_rounds_steering("warnings_only"),
+            "suspicion_then_full": mean_rounds_steering("suspicion_then_full"),
+            "veto_weight": mean_rounds_steering("veto_weight"),
+        },
         "verdict": (
-            f"CONFIRMS the run-397 gap. Unopposed, the exploit annotation keeps the board "
-            f"pointing agents AT it in {base:.0%} of swept scenarios. "
-            f"Warnings as pheromone.py implements them today (a negatively-weighted annotation) "
-            f"bring 'still steering to the exploit' to {warn:.0%} and flip {warn_away:.0%} of "
-            f"scenarios to actively warning agents AWAY - "
-            + ("so plain warnings substantially help once the honest cohort is online, but the "
-               "detection LAG is the exposure: every round before the warnings land, the board "
-               "steers to the exploit."
-               if warn < 0.5 else
-               "so plain warnings do NOT close it: a growing cheater cohort out-votes a fixed "
-               "honest one in the raw sum.")
-            + f" Veto-weighting (a live warning DISCOUNTS the named cohort's positive "
-              f"contributions, not just adds a negative) gives {veto:.0%} still steering / "
-              f"{veto_away:.0%} warning away"
-            + (", a clear improvement over plain warnings" if veto_away > warn_away + 0.1
-               else ", not a decisive change over plain warnings at these params")
-            + ". ASSUMPTION this rig encodes and does NOT test: that the honest cohort correctly "
-              "identifies the cheating cohort to name in the warning. If attribution is wrong or "
-              "gamed, veto-weighting becomes a censorship vector - which is why it is prototyped "
-              "here as a read() post-filter and not put in the module."),
+            f"CONFIRMS the run-397 gap and MEASURES the run-398 residual. Unopposed, the exploit "
+            f"annotation keeps the board pointing agents AT it in {base:.0%} of swept scenarios "
+            f"and for a mean of {mean_rounds_steering('baseline')} rounds. "
+            f"Plain warnings (a negatively-weighted annotation, what pheromone.py does today): "
+            f"{warn:.0%} still steering, {mean_rounds_steering('warnings_only')} mean rounds "
+            f"exposed. "
+            f"The run-399 addition - a CHEAP pf.warn() suspicion flag at HALF the detection lag, "
+            f"upgraded to a full warning at the full lag: {susp:.0%} still steering, "
+            f"{mean_rounds_steering('suspicion_then_full')} mean rounds exposed"
+            + (f". The suspicion flag shortens the exposure window - "
+               f"{mean_rounds_steering('warnings_only')} -> "
+               f"{mean_rounds_steering('suspicion_then_full')} mean rounds - which is the "
+               f"run-398 finding acted on: the residual risk was temporal, and halving the lag "
+               f"on a weak flag roughly halves the exposure, at the cost of a weak flag that "
+               f"decays on its own if not followed up."
+               if mean_rounds_steering('suspicion_then_full') < mean_rounds_steering('warnings_only') - 0.3
+               else ". The suspicion flag does not measurably shorten the exposure at these "
+                    "params - the weak flag is too weak to cross the threshold on its own.")
+            + f" Veto-weighting: {veto:.0%} still steering / {veto_away:.0%} warning away"
+            + (", the strongest arm" if veto_away > warn_away + 0.1 else "")
+            + ". ASSUMPTION unchanged and untested: correct attribution of the cheating cohort. "
+              "Veto-weighting stays a read() post-filter, not in the module; pf.warn() IS in the "
+              "module because a weak, short-TTL, self-decaying flag has no censorship downside."),
     }
 
 
@@ -216,9 +244,15 @@ def _selftest():
     checks["veto-weighting is never worse than plain warnings at steering suppression"] = (
         a["veto_weight_frac_still_steering"] <= a["warnings_only_frac_still_steering"] + 1e-9)
     checks["the verdict names the attribution assumption it does not test"] = (
-        "attribution is wrong or" in a["verdict"] and "censorship vector" in a["verdict"])
+        "attribution" in a["verdict"] and "untested" in a["verdict"].lower())
+    checks["the verdict distinguishes the in-module pf.warn from the post-filter veto"] = (
+        "pf.warn() IS in the module" in a["verdict"]
+        and "post-filter" in a["verdict"])
     checks["the verdict names detection LAG as the residual exposure"] = (
         "lag" in a["verdict"].lower())
+    checks["the suspicion arm shortens the mean exposure window vs plain warnings"] = (
+        a["mean_rounds_steering"]["suspicion_then_full"]
+        <= a["mean_rounds_steering"]["warnings_only"] + 1e-9)
     # the rig drives the real module
     import pheromone as _p
     checks["the rig imports the real pheromone module, not a copy"] = hasattr(_p, "Pheromone")

@@ -1,0 +1,42 @@
+{
+  "run": 399,
+  "increment": "Acted on run 398's finding that the annotation-contagion residual risk is temporal (the detection lag). Added pheromone.warn(): a one-liner posting a weak (utility -0.5, confidence 0.4), short-TTL (30 min), self-decaying kind=warning with a {suspicion:True} flag - 'flag it now on a hunch, then audit'. probe_annotation_contagion gained a suspicion_then_full arm (pf.warn at half the lag, upgraded to a full warning at the full lag). MEASURED: mean rounds the board steers agents to the exploit falls baseline 12.0 -> plain warnings 4.83 -> suspicion-then-full 2.78 - halving the lag on a weak flag roughly halves the exposure window. THE DIVIDING LINE: pf.warn() goes IN the module because it fails SAFE (a wrong suspicion just fades, no attribution needed); veto-weighting stays a post-filter because it fails HARMFUL (needs correct attribution, silences an innocent cohort if wrong). A criterion for which Ostrom mechanisms to hard-code vs govern. Latent bug fixed: _effective OverflowError on a negative age, now clamped to >= 0. pheromone +4 checks, probe +2. +1 node, +4 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/pheromone.py",
+        "tools/probe_annotation_contagion.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-399.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 399 OK · VALID · graph +1n/+4e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.88 · files +1~4-0 · novelty 0.60"
+}

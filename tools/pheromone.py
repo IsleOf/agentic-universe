@@ -156,6 +156,28 @@ class Pheromone:
         self._db.commit()
         return aid
 
+    def warn(self, task_ref, *, agent, strength=0.5, confidence=0.4, names_cohort=None,
+             ttl_s=1800.0, note=None, _at=None, _id=None):
+        """Post a cheap SUSPICION warning — the low-friction counterpart to a full
+        audit. Run 398 (probe_annotation_contagion) measured that the residual risk
+        from a boosted-exploit annotation is the DETECTION LAG: every round before
+        the honest cohort posts, the board steers agents wrong. This method exists to
+        make "flag it now, on suspicion, then audit" a one-liner:
+
+            pf.warn("exploit-task", agent="h3", note="proof skips a lemma?")
+
+        Defaults are deliberately weak — confidence 0.4, a 30-minute TTL — so a
+        suspicion that is not followed up decays on its own and a wrong flag costs
+        little. An agent who then completes an audit posts a full-strength
+        kind=warning (higher confidence, longer TTL) that supersedes nothing but
+        carries the evidence.
+        """
+        return self.annotate(
+            task_ref, "warning", utility=-abs(strength), confidence=confidence,
+            agent=agent, half_life_s=min(ttl_s / 2, DEFAULT_HALF_LIFE_S), ttl_s=ttl_s,
+            evidence={"suspicion": True, "note": note, "names_cohort": names_cohort},
+            _at=_at, _id=_id)
+
     # -- read: no lock, no turn, no permission check ---------------------------
     def _live_rows(self, task_ref, *, at=None):
         now = _now() if at is None else at
@@ -176,7 +198,10 @@ class Pheromone:
 
     @staticmethod
     def _effective(row, age):
-        return row["utility"] * row["confidence"] * (0.5 ** (age / row["half_life_s"]))
+        # a row read `at` a time before it was written (clock skew, or a test) is
+        # treated as freshly created, not exponentially amplified.
+        a = max(0.0, age)
+        return row["utility"] * row["confidence"] * (0.5 ** (a / row["half_life_s"]))
 
     def read(self, task_ref, *, at=None):
         """The aggregate an agent consults to decide whether to act on `task_ref`.
@@ -382,6 +407,26 @@ def _selftest():
             pf.read("nonexistent")["suggested_threshold"] is None)
 
         pf.close()
+
+        # --- run 399: the cheap suspicion warning ---
+        ps = Pheromone(tmp / "warn.db")
+        ps.annotate("e", "utility", 0.8, 0.9, agent="cheat1", _at=1000.0)
+        ps.annotate("e", "utility", 0.8, 0.9, agent="cheat2", _at=1000.0)
+        before = ps.read("e", at=1001.0)["signal_raw"]
+        wid = ps.warn("e", agent="h1", note="lemma skipped?", names_cohort="cheat", _at=1000.0)
+        after = ps.read("e", at=1001.0)["signal_raw"]
+        checks["warn() pulls the aggregate down"] = after < before
+        checks["a suspicion warning is a kind=warning with the suspicion flag"] = any(
+            a["kind"] == "warning" and a["evidence"].get("suspicion")
+            for a in ps.read("e", at=1001.0)["annotations"])
+        checks["a suspicion warning is weak by default (low confidence)"] = (
+            [a for a in ps.read("e", at=1001.0)["annotations"]
+             if a["id"] == wid][0]["confidence"] < 0.5)
+        checks["an un-followed-up suspicion warning decays out within its TTL"] = (
+            not any((a.get("evidence") or {}).get("suspicion")
+                    for a in ps.read("e", at=1000.0 + 2000.0)["annotations"]))
+        ps.close()
+
         for key, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {key}")
         allok = all(checks.values())
