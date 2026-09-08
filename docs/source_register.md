@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 379 nodes, 1537 edges · **Date:** 2026-09-05
+**Graph at generation:** 381 nodes, 1545 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -354,7 +354,8 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - https://arxiv.org/abs/2606.23764 — `concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules`
 - https://arxiv.org/abs/2607.07368 — `artifact_cohort_monitor`, `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it` +1
-- https://arxiv.org/abs/2608.03609 — `concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate`
+- https://arxiv.org/abs/2608.03609 — `concept_replace_a_name_blacklist_with_a_shape_whitelist_to_get_equivariance_for_free`, `concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate`
+- https://arxiv.org/abs/2608.07280 — `concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes`
 - https://arxiv.org/abs/2608.20099 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
 - https://arxiv.org/abs/2609.01056 — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation`
@@ -382,7 +383,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - seed graph 2026-09-01 (foundational concept, not a literature fold) — `concept_agent_os_desktop_shell`, `concept_memory_and_learning`, `concept_swarm_decentralized_coordination` +5
 - synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
-- tools/acceptance_gate.py — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_the_acceptance_gate_logged_only_its_accepts_so_its_audit_trail_could_not_answer_the_question_it_existed_for`
+- tools/acceptance_gate.py — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_replace_a_name_blacklist_with_a_shape_whitelist_to_get_equivariance_for_free`, `concept_the_acceptance_gate_logged_only_its_accepts_so_its_audit_trail_could_not_answer_the_question_it_existed_for`
 - tools/call_model.py — `artifact_call_model_seam`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/cohort_monitor.py — `artifact_cohort_monitor`
 - tools/epistemic_constitution.py — `artifact_epistemic_constitution_harness`

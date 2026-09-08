@@ -11303,6 +11303,34 @@
       "evidence_links": [
         "tools/acceptance_gate.py"
       ]
+    },
+    {
+      "id": "concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes",
+      "label": "MARP: learn a shared reward model from episode-level evaluations of COLLECTIVE outcomes, and the same framework steers agents to sustainability, equality or peace by changing only the high-level metric - emergence as a target of regulation, not only of study",
+      "type": "concept",
+      "status": "speculative",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:governance",
+      "confidence": 0.45,
+      "description": "arXiv:2608.07280 (Caftory, Zemach, Butman, Friedman, submitted 2026-08-07, VERIFIED via abstract). MARP - Multi-Agent Reward Prediction - extends preference-based reward modelling to multi-agent RL: instead of handcrafted per-agent rewards, it learns a SHARED reward model from EPISODE-LEVEL evaluations of collective outcomes, letting decentralised agents align with global social objectives. Studied in the Harvest Game, the canonical sequential social dilemma over a common-pool resource. Headline result: by modifying ONLY the high-level evaluation metric, the same framework aligns behaviour with sustainability, equality, or peace - and with composites of individual and group-level objectives - within one training regime. The learned reward model 'captures subtle environmental structure without explicit programming'. READ THE TITLE CAREFULLY. 'Why Study Emergent Behavior When You Can Regulate It?' is a rhetorical hook and the paper's actual claim is narrower and weaker: not that emergence should not be studied, but that it can be treated as a TARGET OF REGULATION as well as a phenomenon to analyse. Folding the title rather than the abstract would have manufactured a much sharper challenge to this project than the work supports. Third member of a pattern worth naming alongside the two run-362 / run-370 search-summary fabrications: the failure mode is not only invented facts, it is also SOURCE FRAMING that overstates - and a title is the part most optimised for attention. The authors' own limitation, carried verbatim in spirit: 'the present empirical validation is limited to a single environment, and we therefore present MARP as a proof of concept within the studied domain.' Confidence set accordingly. WHERE IT LANDS HERE. It presses on emergence-first's second half - the project observes emergence and declines to shape it, and MARP shapes it toward specified collective outcomes with a learned model. But the mechanism is RL over agent weights, which is the fork this project has already declined for separate reasons, so the pressure is on the NO-TRAINING fork more than on emergence-first proper. It is also in genuine tension with concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering: MARP is preference engineering, lifted to the collective level, and it reports working. Recorded as a challenge rather than resolved.",
+      "tags": [
+        "marp",
+        "reward-modelling",
+        "social-dilemma",
+        "harvest-game",
+        "composite-objectives",
+        "emergence-as-target",
+        "single-environment",
+        "title-overstates",
+        "recency-2026-08"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2608.07280"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2608.07280"
+      ]
     }
   ],
   "edges": [
@@ -27383,6 +27411,41 @@
       "target": "concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed",
       "type": "refines",
       "description": "run 371 opened the minimal-modification term with a name blacklist; this makes the same term equivariant"
+    },
+    {
+      "id": "edge_marp_challenges_emergence_first",
+      "source": "concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes",
+      "target": "approach_emergence_first",
+      "type": "challenges",
+      "description": "presses on the half of emergence-first that declines to SHAPE what emerges - though the mechanism is RL over weights, so the pressure lands mostly on the no-training fork"
+    },
+    {
+      "id": "edge_marp_challenges_mechanism_design",
+      "source": "concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes",
+      "target": "concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering",
+      "type": "challenges",
+      "description": "that node holds governance should be mechanism design in institution-space rather than preference engineering; MARP is preference engineering lifted to the collective level and reports working. Recorded as a tension, not resolved"
+    },
+    {
+      "id": "edge_marp_supports_executable_governance",
+      "source": "concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes",
+      "target": "concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026",
+      "type": "supports",
+      "description": "same direction as executable-over-constitutional governance: the objective is a computed evaluation metric the system optimises against, not a prompt-level exhortation"
+    },
+    {
+      "id": "edge_marp_supports_whale",
+      "source": "concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes",
+      "target": "concept_whale_harness_only_optimization_is_bottlenecked_by_the_frozen_model",
+      "type": "supports",
+      "description": "another result whose lever is weight training rather than harness configuration"
+    },
+    {
+      "id": "edge_marp_refines_social_conventions",
+      "source": "concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes",
+      "target": "emergent_social_conventions",
+      "type": "refines",
+      "description": "conventions emerge from interaction; this says the convention that emerges can be selected by choosing the collective metric the reward model is fit to"
     }
   ]
 }
