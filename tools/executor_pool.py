@@ -253,6 +253,41 @@ def _selftest():
 
     import shutil
     shutil.rmtree(tmp, ignore_errors=True)
+    # -- run 387: pool size, swept. Found by param_invariance_audit, which flagged this
+    # selftest as exercising range() at exactly one value (3). Run 386 had already shown
+    # by hand that an all-benign 50-worker round is refused by the default monitor; the
+    # tests could not see it because they never built a pool bigger than three.
+    sweep_dir = Path(tempfile.mkdtemp(prefix="execpool-sweep-"))
+    _sweep_n = [0]
+
+    def _benign_round(k, monitor=None):
+        _sweep_n[0] += 1
+        pool = ExecutorPool(ledger_path=sweep_dir / f"s{_sweep_n[0]}.json",
+                            run_worker=_fake_worker, context={"brief": "b"},
+                            cohort_monitor=monitor)
+        ids = [f"s{i}" for i in range(k)]
+        for i in ids:
+            pool.assign(i, parent_task="A")
+        return pool.run_round(ids)
+
+    checks["pool size 3: benign round accepted (the size this was written at)"] = (
+        _benign_round(3)["accept_round"])
+    checks["REGRESSION: at k=50 the DEFAULT monitor refuses an all-benign round"] = (
+        not _benign_round(50)["accept_round"])
+    checks["...and that refusal is labelled unreliable_monitor, not evidence"] = (
+        _benign_round(50)["decision_basis"] == "unreliable_monitor")
+    checks["...and carries a caveat naming the pool size"] = (
+        "INDETERMINATE" in _benign_round(50).get("accept_round_caveat", ""))
+
+    # a monitor told the truth about this pool's signal level and allowed to scale
+    def _honest(): 
+        return CohortMonitor(benign_signal_mean=0.02, adaptive_threshold=True)
+
+    for k in (3, 20, 50, 100):
+        v = _benign_round(k, monitor=_honest())
+        checks[f"honestly-configured monitor: benign round accepted at k={k}"] = (
+            v["accept_round"] and v["decision_basis"] == "evidence")
+
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     allok = all(checks.values())

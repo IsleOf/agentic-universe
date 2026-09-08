@@ -11630,6 +11630,53 @@
         "tools/cohort_monitor.py",
         "tools/executor_pool.py"
       ]
+    },
+    {
+      "id": "artifact_param_invariance_audit",
+      "label": "param_invariance_audit: a static scan for selftests that exercise a behavioural size parameter at exactly one value - the detection method behind runs 385-386, made cheap and repeatable",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:self_audit",
+      "confidence": 0.8,
+      "description": "Run 387. tools/param_invariance_audit.py, registered as job 51 in selftest_all. Runs 385 and 386 produced four defects in two components and every one was found the same way: by varying a parameter the selftest had held fixed. cohort_monitor's abort threshold was an absolute constant against a sum growing with pool size, and run 353 had selftested it at range(6) - every check passing, at one pool size, forever. Four defects and one detection method is a method rather than an anecdote, so this makes it cheap to run across the whole suite instead of one component at a time. WHAT IT DOES: parses each module's selftest region and collects the integer literals fed to size-like constructs - range(N), size-named keyword arguments, and for-loops over literal collections. A parameter appearing at exactly ONE value is a candidate: the tests cannot distinguish a property that holds from one that merely holds AT THAT VALUE. TWO DESIGN DECISIONS THAT CAME FROM ITS OWN FIRST OUTPUT, both instances of the pattern it exists to find. (1) PRECISION vs BEHAVIOURAL parameters. The first version put 'trials' in its size vocabulary, so 9 of its 15 rows were fixed Monte Carlo trial counts - a parameter that moves only the VARIANCE of an estimate, never the behaviour under test. The real hits were buried under noise from a vocabulary that did not separate parameters a result depends on from parameters it does not. Precision names are now tracked under a '~' prefix and never ranked. (2) SWEEPS EXPRESSED AS LOOPS. The first version could only see literal ints inside range() and kwargs, so it went on flagging executor_pool at range()=3 IMMEDIATELY AFTER run 387 swept that module over four pool sizes with 'for k in (3, 20, 50, 100)'. The tool was measuring something other than what the code does - precisely the defect class it was written to detect, committed by the detector, within one run. WHAT IT IS NOT, and the tool says so in its own docstring with a selftest asserting that it does: a HEURISTIC SURFACE SCAN, not a proof. A single-valued parameter is NOT a bug - a closed experimental design SHOULD pin its arm count, which run 380 established when it audited three salient instances and found the class did not exist. A swept parameter is NOT safe - sweeping k over {6, 8} would not have caught a ceiling at k=20. And the vocabulary is name-based, hence non-equivariant: renaming k to q hides it, the same limitation exec_guard's perimeter carries, for the same reason - there is no shape to whitelist, only a vocabulary. It reports candidates for inspection; the judgement stays manual. FIRST REAL OUTPUT: 7 modules with an unswept behavioural size parameter, top hit executor_pool at range()=3 - the module run 386 had already shown by hand refuses an all-benign 50-worker round, whose selftest had still never built a pool larger than three. The tool pointed at exactly the place a manual audit had had to find.",
+      "tags": [
+        "self-audit",
+        "selftest-coverage",
+        "parameter-sweep",
+        "instrument-decay",
+        "heuristic-not-proof",
+        "non-equivariant",
+        "tooling"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/param_invariance_audit.py"
+      ]
+    },
+    {
+      "id": "concept_a_detector_for_a_defect_class_will_commit_that_class_and_its_own_first_output_is_the_test",
+      "label": "A detector built for a defect class commits that class - twice here, within one run. Its own first output, read honestly, is the cheapest test of it",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:self_audit",
+      "confidence": 0.82,
+      "description": "Run 387. Building param_invariance_audit - a tool to find selftests that fix a parameter the behaviour depends on - produced two instances of exactly that defect, in the tool itself, before it had been used in anger. (a) Its size vocabulary included 'trials', a Monte Carlo precision parameter that changes only the variance of an estimate. Nine of fifteen rows in its first report were therefore noise, burying the real candidates: the tool did not distinguish the parameters a result depends on from the ones it does not, which is the same failure it was written to detect. (b) It could not see a sweep written as 'for k in (3, 20, 50, 100)', only literal ints in range() and kwargs. So it kept flagging executor_pool at range()=3 immediately after that module had been swept over four pool sizes - the detector measuring something other than what the code does, which is verbatim the run-386 defect. WHY THIS IS A NODE AND NOT A CHANGELOG. The generalisation is not 'be careful'. It is that a detector for a defect class is written by someone currently holding that class's assumptions in their head, which is the worst possible position from which to avoid it - and that this is CHEAP TO CATCH, because the detector produces output over a corpus you already understand. Both defects were visible in the first report, in seconds: nine identical-looking trials rows, and a module flagged that had just been fixed. SO THE PRACTICE: run a new detector over the corpus you know best and read the output as a claim about the detector, not about the corpus. A row you know is wrong is worth more than ten you cannot check. RELATION TO RUN 380, which is the converse and keeps this honest: there, three salient instances FELT like a class and the audit found no class, at the cost of one grep. Here the class was real and the detector for it was defective. The common discipline is that the cheap check comes before the confident claim, in both directions.",
+      "tags": [
+        "self-audit",
+        "instrument-decay",
+        "detector-design",
+        "tooling",
+        "read-your-own-first-output",
+        "meta"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/param_invariance_audit.py"
+      ]
     }
   ],
   "edges": [
@@ -28032,6 +28079,55 @@
       "target": "decision_v2_4_executor_pool_collective_module_spec",
       "type": "constrains",
       "description": "the pool inherits the monitor's calibrated range: with the default monitor an all-benign 50-worker round is refused. It still refuses - safe side - but now reports decision_basis 'unreliable_monitor' instead of presenting it as a detection"
+    },
+    {
+      "id": "edge_param_audit_instantiates_recursive_defect",
+      "source": "artifact_param_invariance_audit",
+      "target": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "type": "instantiates",
+      "description": "turns that run's detection method into a repeatable scan: every one of its four defects was found by varying a parameter a selftest held fixed"
+    },
+    {
+      "id": "edge_param_audit_detects_ceiling",
+      "source": "artifact_param_invariance_audit",
+      "target": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "type": "detects",
+      "description": "the defect this tool is calibrated against - run 353 selftested the cohort monitor at range(6) and the ceiling at k=20 was invisible to every check"
+    },
+    {
+      "id": "edge_param_audit_constrains_executor_pool",
+      "source": "artifact_param_invariance_audit",
+      "target": "decision_v2_4_executor_pool_collective_module_spec",
+      "type": "constrains",
+      "description": "first real hit: this spec's selftest exercised range() at exactly one value (3) while run 386 had shown by hand that an all-benign 50-worker round is refused. Run 387 swept it over 3/20/50/100 with a REGRESSION pin on the k=50 refusal"
+    },
+    {
+      "id": "edge_param_audit_refines_not_a_class",
+      "source": "artifact_param_invariance_audit",
+      "target": "concept_three_salient_instances_are_not_a_class_check_before_generalising_the_fix",
+      "type": "refines",
+      "description": "the counterweight this tool needs and states in its own docstring: a single-valued parameter is not a bug, a closed experimental design should pin its arm count, and the tool reports candidates rather than findings precisely because that run showed a felt pattern can be no pattern"
+    },
+    {
+      "id": "edge_detector_commits_class_core_of_param_audit",
+      "source": "concept_a_detector_for_a_defect_class_will_commit_that_class_and_its_own_first_output_is_the_test",
+      "target": "artifact_param_invariance_audit",
+      "type": "core_of",
+      "description": "both instances were found in this tool's own first two reports"
+    },
+    {
+      "id": "edge_detector_commits_class_extends_recursive_defect",
+      "source": "concept_a_detector_for_a_defect_class_will_commit_that_class_and_its_own_first_output_is_the_test",
+      "target": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "type": "extends",
+      "description": "same shape one level up. There the fix for a defect carried the defect; here the DETECTOR for a defect class carried the class, twice, before first use"
+    },
+    {
+      "id": "edge_detector_commits_class_supports_instance_class",
+      "source": "concept_a_detector_for_a_defect_class_will_commit_that_class_and_its_own_first_output_is_the_test",
+      "target": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "type": "supports",
+      "description": "the reason a detector inherits the class is that its author holds the class's assumptions while writing it - so building the detector does not, by itself, move anyone from the instance to the class"
     }
   ]
 }
