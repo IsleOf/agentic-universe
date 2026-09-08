@@ -1,0 +1,41 @@
+{
+  "run": 429,
+  "increment": "Fix, surfaced by run 428. `loop_action_class` had two miscalibrations that inflated the apparent `fold` monoculture: (1) the 'cited + fold verb -> fold' override matched the bare token 'fold' ANYWHERE in the increment, including the habitual status-line phrase `acts foldNN%` - so run 428 (a probe) classed as fold twice until reworded. Narrowed it to a real fold VERB (`_FOLD_VERB`: folded / folding / fold(ed|ing) arxiv / literature fold / fold the paper). (2) `_LEADS_CONSOLIDATE` did not recognise 'a deliberate consolidate' as a consolidation lead (only 'consolidation pass'), and its window was 40 chars; widened to 60 and added 'deliberate consolidat(e|ion)' + 'synthesis pass/run'. Effect: run 421 (a deliberate world-model consolidation) reclassifies fold -> consolidate; run 428 fold -> probe. Last-10 mix: consolidate 4, fold 3, verify 2, probe 1 - previously two of those were mislabelled fold. +2 selftest checks. No graph change.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 0
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 1,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/loop_action_class.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-429.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 429 OK · VALID · graph +0n/+0e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +1~1-0 · novelty 0.50 · acts cons40%"
+}

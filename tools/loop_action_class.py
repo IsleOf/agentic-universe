@@ -45,13 +45,22 @@ RUNS_DIR = ROOT / "runtime" / "observations" / "loop_runs"
 
 CLASSES = ("fold", "probe", "build", "fix", "consolidate", "verify")
 
+# The "cited + fold verb -> fold" override (below) once matched the bare token
+# "fold" ANYWHERE in the increment, including the habitual status-line phrase
+# `acts foldNN%` - so run 428 (a probe) was classed `fold` twice until its prose
+# was reworded. The override must key on an actual fold VERB next to the citation,
+# not the token. `folded`/`folding`, or `fold(ed/ing)? arxiv`, or "literature fold".
+_FOLD_VERB = re.compile(r"\bfolded\b|\bfolding\b|\bfold(?:ed|ing)?\s+arxiv|"
+                        r"\bliterature fold\b|\bfold(?:ed|ing)?\s+the paper\b", re.I)
+
 # A run that LEADS with consolidation language is a consolidate run even if it then
 # fixed what the look found - run 409 was misclassified `fix` because it fixed two
 # bugs the consolidation pass surfaced, which is the classifier's own action-class
 # blind spot (it could not see a consolidation-that-fixed-something as consolidation).
 _LEADS_CONSOLIDATE = re.compile(
-    r"^\s*.{0,40}\b(standalone consolidation|consolidation pass|consistency (pass|sweep)|"
-    r"red[- ]team pass|a negative result|audit(ed)? (the|whether))", re.I)
+    r"^\s*.{0,60}\b(standalone consolidation|consolidation pass|consistency (pass|sweep)|"
+    r"red[- ]team pass|a negative result|audit(ed)? (the|whether)|"
+    r"deliberate consolidat(e|ion)|synthesis (pass|run))", re.I)
 
 # ordered: first match wins, most specific first
 _RULES = [
@@ -105,7 +114,7 @@ def classify(rec):
             # that then acted; call it by the dominant verb, but a bare citation with
             # no other signal is a fold. `verify` is exempt: a citation upgrade
             # legitimately mentions the original fold it is upgrading (run 426).
-            if cls not in ("fold", "verify") and cites and re.search(r"\bfold", text, re.I):
+            if cls not in ("fold", "verify") and cites and _FOLD_VERB.search(text):
                 return "fold", "cited + 'fold' verb"
             return cls, rx.pattern[:40]
     if cites:
@@ -188,12 +197,29 @@ def _selftest():
          "consolidate"),
         (_rec(6, "A negative result: audited the class before fixing it. The class does not exist."),
          "consolidate"),
+        (_rec(8, "Run 420's follow-on, a deliberate consolidate. Wrote docs/x.md, the loop's "
+                 "world model, per BCO (arXiv:2609.01861). Fixed a stale claim it found.",
+              citations=["x"]), "consolidate"),
         (_rec(7, "Citation upgrade: full HTML read of arXiv:2601.21112 v2; verification_state -> validated"),
          "verify"),
     ]
     for rec, want in samples:
         got, why = classify(rec)
         checks[f"classify: {rec['increment'][:45]!r} -> {want}"] = got == want
+
+    # run 428: a cited PROBE whose prose carries the status-line token "fold" (as in
+    # `acts fold50%`) but no fold VERB must stay `probe`, not be dragged to `fold`
+    probe_with_fold_token = _rec(
+        428, "Probe run, diversifying the action mix (acts fold50%). Built the gamma "
+             "arm on tools/probe_orchestration_value.py, the metric from arXiv:2602.05289",
+        citations=["https://arxiv.org/abs/2602.05289"])
+    checks["a cited probe mentioning 'acts fold50%' but no fold verb -> probe"] = (
+        classify(probe_with_fold_token)[0] == "probe")
+    # but a cited run that actually says "folded arXiv:..." after matching another rule
+    # is still a fold-that-acted
+    checks["a cited run that says 'folded arXiv' -> fold even if it also probed"] = (
+        classify(_rec(9, "Folded arXiv:1234.5678; then built a probe rig to test it",
+                      citations=["x"]))[0] == "fold")
 
     # a build thread of 3 is NOT a monoculture at n>=6 with variety around it
     varied = [_rec(i, t) for i, t in enumerate([
