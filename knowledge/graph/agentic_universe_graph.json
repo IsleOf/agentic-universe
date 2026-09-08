@@ -11981,6 +11981,55 @@
         "tools/gates.py",
         "docs/swarm-substrate-prototype.md"
       ]
+    },
+    {
+      "id": "artifact_swarm_demo_acceptance_test",
+      "label": "tools/swarm_demo.py - a runnable research->draft->critique->final pipeline where every coordination decision goes through the ledger + board + relay + reputation + gates and nothing through an orchestrator object; the run() loop holds no decision state",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.7,
+      "description": "Run 396, week-1 build list item 6 - the last one, and the acceptance test for the whole week-1 substrate. tools/swarm_demo.py, a selftest_all job. run(goal) is a `while` loop that reads ledger.next_ready() (by stage), asks reputation.select() who should take it (excluding the task's own contributors, so gates stay valid and work gets fresh eyes), lets that agent contribute(), drops the contribution on the pheromone board (stigmergy, not a private channel), runs G1 after research and G4 before done, and relays to the next stage. The loop holds NO decision state - it is the deterministic substrate, the same shape as fractal_flock.run(). A regex check in the selftest asserts there is no Orchestrator / Chief / Boss / Manager CLASS in the module. contribute() is the caller's generative work; the demo ships a _fake_worker (no model calls) that writes a per-stage stub and emits an evidence list at the research stage so G1 has something to check. WHAT THE SELFTEST VERIFIES (20 checks GREEN): the happy path runs end to end and releases an artifact with every stage run, G1 and G4 both passing, and a clean audit trail; a failing computable check blocks release but the run still terminates cleanly; a gate validator is never a contributor to the task it gates; more than one distinct agent does the work; and a pool-size sweep range(3,10) all release. THE FINDING: a gated pipeline with a no-self-review rule needs >= 3 agents. At k=2, by the final stage both agents have contributed, so no non-author validator is left for G4; the run fails CLEANLY (GateRefused in the transcript, no exception, no hang). The design doc's '2-15 agents' is really '3-15' once gates are in play - recorded, not papered over.",
+      "tags": [
+        "swarm-substrate",
+        "acceptance-test",
+        "integration",
+        "no-orchestrator-object",
+        "runnable",
+        "no-model-calls",
+        "week-1-build",
+        "three-agent-floor"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/swarm_demo.py",
+        "docs/swarm-substrate-prototype.md"
+      ]
+    },
+    {
+      "id": "concept_a_gated_pipeline_with_no_self_review_needs_at_least_three_agents",
+      "label": "A pipeline whose gates cannot be run by a contributor needs >= 3 agents: at k=2, by the final gate both agents have authored something, so no valid validator is left and the run stalls cleanly rather than releasing",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.8,
+      "description": "Run 396, found running swarm_demo across a pool-size sweep. The gate design (run 395) refuses a validator who contributed to the artifact - the no-self-review rule that keeps gates honest. Combined with a 4-stage pipeline, this sets a hard floor: with 2 agents, by the time an artifact reaches G4 both agents have contributed to some stage of it, so reputation.select() over non-contributors returns nothing and the gate raises GateRefused. This is not a bug in the substrate - it is the no-self-review rule doing its job, and the run terminates cleanly (a GateRefused entry in the transcript, no exception, no infinite loop) rather than silently releasing an unreviewed artifact or hanging. The consequence for the swarm-substrate design: the stated range '2-15 agents' is '3-15' for GATED work. A 2-agent fleet can still coordinate through the board and the ledger for ungated tasks; it just cannot run a pipeline whose gates exclude authors. GENERAL SHAPE: any quorum or rotation rule imposes a minimum population, and that minimum is (rule's exclusion count) + (rule's required count). Worth stating whenever a 'works with N agents' claim is made about a system that also has gates.",
+      "tags": [
+        "swarm-substrate",
+        "gate-rotation",
+        "minimum-population",
+        "no-self-review",
+        "clean-failure",
+        "design-constraint"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/swarm_demo.py"
+      ]
     }
   ],
   "edges": [
@@ -28782,6 +28831,76 @@
       "target": "concept_verification_completeness_gap",
       "type": "instantiates",
       "description": "G1 reports uncited claim-shaped lines rather than blocking on them, because a regex is not the judgement - computed checks miss design and convention, which is exactly why the fuzzy call stays with a human/agent reader"
+    },
+    {
+      "id": "edge_swarm_demo_verifies_substrate_design",
+      "source": "artifact_swarm_demo_acceptance_test",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "verifies",
+      "description": "the acceptance test for the whole week-1 build: if the pipeline runs end to end through the ledger + board + relay + reputation + gates and releases a clean artifact with no orchestrator object, the substrate works"
+    },
+    {
+      "id": "edge_swarm_demo_depends_on_pheromone",
+      "source": "artifact_swarm_demo_acceptance_test",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "depends_on",
+      "description": "every contribution and every gate verdict lands on the board; the loop reads the board to pick fresh agents"
+    },
+    {
+      "id": "edge_swarm_demo_depends_on_sequential",
+      "source": "artifact_swarm_demo_acceptance_test",
+      "target": "concept_the_sequential_protocol_is_a_stage_column_plus_dependency_threading_not_a_turn_taking_loop",
+      "type": "depends_on",
+      "description": "next_ready() by stage is the loop's only source of what-to-do-next"
+    },
+    {
+      "id": "edge_swarm_demo_depends_on_relay",
+      "source": "artifact_swarm_demo_acceptance_test",
+      "target": "artifact_relay_handoff_with_anti_ping_pong_guard",
+      "type": "depends_on",
+      "description": "relay.handoff() threads each stage to the next and relay.complete() closes the pipeline"
+    },
+    {
+      "id": "edge_swarm_demo_depends_on_reputation",
+      "source": "artifact_swarm_demo_acceptance_test",
+      "target": "artifact_reputation_module",
+      "type": "depends_on",
+      "description": "reputation.select() over non-contributors picks who takes each task and who validates"
+    },
+    {
+      "id": "edge_swarm_demo_depends_on_gates",
+      "source": "artifact_swarm_demo_acceptance_test",
+      "target": "artifact_validator_gates",
+      "type": "depends_on",
+      "description": "G1 after research, G4 before done; a failing computable check blocks release and the demo shows the run still terminating"
+    },
+    {
+      "id": "edge_swarm_demo_instantiates_flock",
+      "source": "artifact_swarm_demo_acceptance_test",
+      "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "type": "instantiates",
+      "description": "a working orchestrator-less flock: independent agents coordinating through a shared store with roles emerging per stage, one agent failing costs one contribution not the run"
+    },
+    {
+      "id": "edge_three_agent_floor_core_of_swarm_demo",
+      "source": "concept_a_gated_pipeline_with_no_self_review_needs_at_least_three_agents",
+      "target": "artifact_swarm_demo_acceptance_test",
+      "type": "core_of",
+      "description": "the pool-size sweep is where the floor was found: k=2 does not release, k>=3 does"
+    },
+    {
+      "id": "edge_three_agent_floor_constrains_substrate_design",
+      "source": "concept_a_gated_pipeline_with_no_self_review_needs_at_least_three_agents",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the design's stated '2-15 agents' is '3-15' for gated pipelines; a 2-agent fleet can coordinate for ungated work only"
+    },
+    {
+      "id": "edge_three_agent_floor_refines_gates",
+      "source": "concept_a_gated_pipeline_with_no_self_review_needs_at_least_three_agents",
+      "target": "artifact_validator_gates",
+      "type": "refines",
+      "description": "the no-self-review rule (a validator may not have contributed) imposes a minimum population of (exclusion count + required count); at 2 agents G4 has no valid validator"
     }
   ]
 }

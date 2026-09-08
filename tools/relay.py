@@ -60,13 +60,19 @@ class RelayRefused(RuntimeError):
 
 
 class Relay:
-    def __init__(self, *, ledger_path, pheromone_path, window=DEFAULT_WINDOW,
-                 min_unique=DEFAULT_MIN_UNIQUE):
-        self.ledger = Ledger(ledger_path)
-        self.pher = Pheromone(pheromone_path)
+    def __init__(self, *, ledger_path=None, pheromone_path=None, ledger=None,
+                 pheromone=None, window=DEFAULT_WINDOW, min_unique=DEFAULT_MIN_UNIQUE):
+        # Accept either paths (stand-alone use) or live objects (shared with a
+        # caller like swarm_demo). Two Ledger objects on one file do NOT share
+        # in-memory state, so a caller that also mutates the ledger must pass its
+        # own instance here.
+        self.ledger = ledger if ledger is not None else Ledger(ledger_path)
+        self.pher = pheromone if pheromone is not None else Pheromone(pheromone_path)
+        self._owns_pher = pheromone is None
         self.window = window
         self.min_unique = min_unique
-        self._state_path = Path(ledger_path).with_suffix(".relay.json")
+        base = ledger_path or getattr(self.ledger, "path", "relay")
+        self._state_path = Path(base).with_suffix(".relay.json")
         self._hist = self._load_hist()
 
     # -- handoff history (deterministic, survives restart) --------------------
@@ -170,7 +176,8 @@ class Relay:
         return self._hist["handoffs"][-limit:]
 
     def close(self):
-        self.pher.close()
+        if self._owns_pher:
+            self.pher.close()
 
 
 # --------------------------------------------------------------------------- #

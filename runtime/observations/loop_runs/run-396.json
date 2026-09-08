@@ -1,0 +1,45 @@
+{
+  "run": 396,
+  "increment": "Week-1 build list item 6, the last: tools/swarm_demo.py - the acceptance test for the whole substrate. run(goal) is a while loop: next_ready() by stage -> reputation.select() over non-contributors -> contribute() -> annotate the board -> G1 after research / G4 before done -> relay.handoff(). The loop holds NO decision state (a selftest regex asserts no Orchestrator/Chief/Boss/Manager class). _fake_worker, no model calls. 20 selftest checks GREEN: happy-path end-to-end release with every stage + G1 + G4 passing + clean audit; failing computable check blocks release but the run terminates; validators never contributors; a range(3,10) pool sweep all release. FINDING: a gated pipeline with a no-self-review rule needs >= 3 agents - at k=2 both agents have contributed by G4 so no valid validator is left, and the run fails CLEANLY (GateRefused in the transcript, no exception, no hang). The design's '2-15 agents' is '3-15' for gated work. General shape: a quorum/rotation rule imposes a minimum population of (exclusion count + required count). The week-1 substrate is complete: pheromone (390) + ledger stage (392) + relay (393) + reputation (394) + gates (395) + swarm_demo (396), plus the run-391 instrument fix. +2 nodes, +10 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 10
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/relay.py",
+        "tools/selftest_all.py",
+        "tools/swarm_demo.py"
+      ],
+      "n_paths": 3,
+      "new_harness_files": [
+        "tools/swarm_demo.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-396.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 396 OK · VALID · graph +2n/+10e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.88 · files +2~4-0 · novelty 0.33!"
+}

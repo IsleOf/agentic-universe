@@ -48,6 +48,7 @@ JOBS = [
     ("relay.py", ["selftest"]),
     ("reputation.py", ["selftest"]),
     ("gates.py", ["selftest"]),
+    ("swarm_demo.py", ["selftest"]),
     ("executor_pool.py", ["selftest"]),
     ("probe_memory_horizon.py", ["selftest"]),
     ("probe_governance_lever.py", ["selftest"]),
