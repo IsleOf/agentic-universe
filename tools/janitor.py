@@ -183,7 +183,13 @@ def stale_bank_flags() -> str:
                     "entries, so a staleness check is vacuous. This is not a clean bill of "
                     "health: Phase 2 condensation is not running, and `experience_bank`'s "
                     "retrieval work (bounded `top_k`, run 357) is currently unexercised.\n")
-        stale = bank.stale(Registry().manifest())
+        # `stale()` compares against the manifest HASH, not the manifest dict.
+        # Passing the dict made every entry compare unequal, so the view would have
+        # reported 100% stale forever. Latent since the view was written and invisible
+        # while the bank was empty (run 367's vacuous pass) - the first real entry,
+        # condensed by the run-369 wiring, exposed it immediately. Every other caller
+        # in the codebase already passes the hash.
+        stale = bank.stale(Registry().manifest()["manifest_hash"])
         if not stale:
             return (f"# Experience-bank staleness\n\nNone — all "
                     f"{sum(stats.values())} entries carry a current manifest.\n")
@@ -262,6 +268,13 @@ def _selftest():
         checks[f"_KIND_HINTS still fits the run corpus (other={rate:.1%}, cap 15%)"] = rate <= 0.15
     else:
         checks["classifier-drift guard skipped (corpus < 50 runs)"] = True
+
+    # Regression guard (run 369): stale() takes the manifest HASH. Passing the dict
+    # made every entry compare unequal, so a populated bank would have reported 100%
+    # stale. Invisible while the bank was empty; caught by the first real entry.
+    _flags_live = stale_bank_flags()
+    checks["a freshly-condensed entry is not reported stale"] = (
+        "EMPTY" in _flags_live or "carry a current manifest" in _flags_live)
 
     # Vacuity guard: an empty subject must not render as a clean bill of health.
     _flags = stale_bank_flags()

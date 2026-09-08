@@ -5630,7 +5630,7 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:phase2_built",
       "confidence": 0.8,
-      "description": "tools/experience_bank.py, run 64: workflow and step collections kept apart with separate retrieval keys. Every entry stamped with source_manifest; bank.stale(current) returns entries whose harness source changed (emergent_stale_belief_propagation mitigation). Raw source_events retained (concept_compaction_cliff mitigation). condense() dedupes CLAIM events by evidence_roots and entries record distinct_evidence_roots not an agent count (pattern_evidential_ancestry_tracking / concept_epistemic_sybil_collapse mitigation). Token cost rolled up from TOOL_RESULT.token_cost. Selftest GREEN. Not done: retrieval is substring match (needs a real signature); no condensation correctness gate (Phase 3); synthetic traces only. BOUNDED RETRIEVAL added run 357 (from arXiv:2603.29231, run 356: memory scaffolds universally degrade long-horizon performance): for_planning / for_failure now rank matches by utility_score (recency tiebreak) and cap at top_k=3 by default (pass None for all). Unbounded context-stuffing was the pre-357 behaviour; the cap + the ranking + prune() together are the bounded-curated-retrieval this result and concept_misevolution demand. +5 selftest checks.",
+      "description": "tools/experience_bank.py, run 64: workflow and step collections kept apart with separate retrieval keys. Every entry stamped with source_manifest; bank.stale(current) returns entries whose harness source changed (emergent_stale_belief_propagation mitigation). Raw source_events retained (concept_compaction_cliff mitigation). condense() dedupes CLAIM events by evidence_roots and entries record distinct_evidence_roots not an agent count (pattern_evidential_ancestry_tracking / concept_epistemic_sybil_collapse mitigation). Token cost rolled up from TOOL_RESULT.token_cost. Selftest GREEN. Not done: retrieval is substring match (needs a real signature); no condensation correctness gate (Phase 3); synthetic traces only. BOUNDED RETRIEVAL added run 357 (from arXiv:2603.29231, run 356: memory scaffolds universally degrade long-horizon performance): for_planning / for_failure now rank matches by utility_score (recency tiebreak) and cap at top_k=3 by default (pass None for all). Unbounded context-stuffing was the pre-357 behaviour; the cap + the ranking + prune() together are the bounded-curated-retrieval this result and concept_misevolution demand. +5 selftest checks. WIRED AT LAST (run 369). Built around run 64, selftested against a synthetic corpus, and never called on real data - the bank held 0 entries across 368 runs while janitor's staleness view reported it healthy (run 367). LoopSession._write_summary now calls condense() on the run's own trace, after rec.close() so the file is flushed, followed by prune(keep_n=200, grace=10) on both collections. Bounded by construction per concept_unmanaged_skill_libraries_silently_drift and the run-360 memory-horizon rig; prune is a no-op below keep_n so the cost is negligible. The bank directory is gitignored with a committed README (operating rule 9) - it is derived runtime state, regenerable from the traces. HONEST SCOPE: WRITE-ONLY today. Nothing in the live loop retrieves from the bank - the bounded top_k path (run 357) exists and is selftested but has no live caller. This makes Phase 2 real and is the prerequisite for retrieval; it does not close the loop.",
       "tags": [
         "phase-2",
         "experience-bank",
@@ -11166,6 +11166,32 @@
       ],
       "evidence_links": [
         "tools/acceptance_gate.py"
+      ]
+    },
+    {
+      "id": "concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere",
+      "label": "Wiring Phase 2 into the live loop re-created, one run later, the exact test-writes-to-production mixing that run 368 had just fixed for the certificate log - a new write path inherits the bug class unless the separation is built in with it",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:observability",
+      "confidence": 0.72,
+      "description": "Run 369. Run 368 found downstream selftests appending to the production certificate log and fixed it by binding a tmp cert_dir. Run 369 then wired experience_bank.condense into LoopSession._write_summary - and the FIRST selftest run wrote 4 workflow entries into the production bank. The identical bug, in a new write path, one run after the lesson. It was caught only because run 368 had just made the failure mode salient enough to look for, which is the useful part: the general form of concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched is that a fix is scoped to existing call sites, and a NEW call site added afterwards starts outside that scope. The rule this yields: any component that writes to a shared production artifact must take a destination override in its constructor, and its tests must be required to pass one - not merely permitted to. LoopSession gained bank_base for exactly this, and two selftest checks now assert both halves: condense populates a TMP bank from a real trace, and the PRODUCTION bank stays empty across the whole build. Verified end to end: selftest_all leaves the bank at 0/0 and the certificate log at 183 lines. Corollary worth keeping: the cost of the run-361..368 audit was not the eight fixes, it was learning which failure modes to look for. The audit paid for itself within one run of finishing. TWO FURTHER BUGS THE FIRST REAL ENTRY EXPOSED, both invisible while the bank was empty. (a) janitor.stale_bank_flags passed Registry().manifest() - the whole dict - where ExperienceBank.stale() compares against the manifest HASH, so a populated bank would have reported 100% stale forever; every other caller in the codebase already passed the hash. (b) The new selftest guard asserted 'the production bank is empty' when the real invariant is 'the selftest added nothing to it' - it went RED the moment run 369's own record landed a legitimate entry. Both are the same conflation the whole runs-361..369 audit keeps surfacing: a check that passes for the wrong reason until its subject exists. Populating an empty store is therefore not just wiring - it is the first real test every consumer of that store has ever had.",
+      "tags": [
+        "test-production-separation",
+        "new-call-site",
+        "instrument-decay",
+        "phase-2",
+        "found-in-own-loop",
+        "destination-override"
+      ],
+      "derived_from": [
+        "tools/loop_session.py",
+        "tools/experience_bank.py"
+      ],
+      "evidence_links": [
+        "tools/loop_session.py"
       ]
     }
   ],
@@ -27093,6 +27119,48 @@
       "target": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
       "type": "extends",
       "description": "run 367 found a check passing on an absent subject; this is a log affirming a gate by recording only the cases where it said yes"
+    },
+    {
+      "id": "edge_wiring_mixing_extends_incomplete_fix",
+      "source": "concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere",
+      "target": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "type": "extends",
+      "description": "the general form: a fix is scoped to existing call sites; a new one added afterwards starts outside that scope"
+    },
+    {
+      "id": "edge_wiring_mixing_resolves_vacuous_pass",
+      "source": "concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere",
+      "target": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "type": "refines",
+      "description": "run 367 found the empty bank reported as healthy; this is the wiring that gives that view a real subject, and the mixing bug it nearly introduced"
+    },
+    {
+      "id": "edge_phase2_wiring_grounds_bank",
+      "source": "concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere",
+      "target": "artifact_phase2_experience_bank",
+      "type": "grounds",
+      "description": "condense + prune in LoopSession._write_summary, with a bank_base override so tests cannot write to the production store"
+    },
+    {
+      "id": "edge_phase2_wiring_depends_on_drift_bound",
+      "source": "concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere",
+      "target": "concept_unmanaged_skill_libraries_silently_drift",
+      "type": "depends_on",
+      "description": "the wiring ships with prune(keep_n=200) precisely because unbounded accumulation degrades retrieval"
+    },
+    {
+      "id": "edge_phase2_wiring_depends_on_horizon_rig",
+      "source": "concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere",
+      "target": "artifact_probe_memory_horizon_rig",
+      "type": "depends_on",
+      "description": "the run-360 rig is why the bound is part of the wiring rather than a later addition"
+    },
+    {
+      "id": "edge_phase2_wiring_grounds_loop_session",
+      "source": "concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere",
+      "target": "artifact_loop_session_live_recording",
+      "type": "grounds",
+      "description": "the condense/prune call and the bank_base override both live in _write_summary"
     }
   ]
 }

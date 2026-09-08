@@ -40,7 +40,11 @@ RUN_SUMMARY_DIR = ROOT / "runtime" / "observations" / "loop_runs"
 
 class LoopSession:
     def __init__(self, run_no, increment, *, language="en", trace_dir=None,
-                 registry_base=None):
+                 registry_base=None, bank_base=None):
+        # bank_base (run 369): tests MUST pass a tmp dir. Run 368 found selftests
+        # writing into the production certificate log; wiring Phase 2 one run later
+        # re-created the same mixing until this override existed.
+        self._bank_base = bank_base
         self.run_no = run_no
         self.increment = increment
         self.step_id = f"run-{run_no}"
@@ -243,17 +247,46 @@ class LoopSession:
             _janitor_run()
         except Exception:
             pass
+
+        # Phase 2 condensation (run 369). Built at run ~64, selftested against a
+        # synthetic corpus, and never called on real data - so the experience bank
+        # held 0 entries across 368 runs while janitor's staleness view reported it
+        # healthy (run 367 found the vacuous pass). This is the wiring that was
+        # missing, and it runs AFTER rec.close() so the trace file is flushed.
+        #
+        # BOUNDED BY CONSTRUCTION: prune() follows every condense, per
+        # concept_unmanaged_skill_libraries_silently_drift (unbounded accumulation
+        # degrades retrieval) and the run-360 memory-horizon rig (unbounded
+        # retrieval is worse than none past a crossover). prune is a no-op below
+        # keep_n, so this is cheap on every run.
+        #
+        # HONEST SCOPE: this is WRITE-ONLY today. Nothing in the live loop retrieves
+        # from the bank yet - the bounded top_k path (run 357) exists and is
+        # selftested but has no live caller. Populating the bank makes Phase 2 real
+        # and is the prerequisite for retrieval; it does not by itself close the loop.
+        try:
+            if path and Path(path).exists():
+                from experience_bank import ExperienceBank, condense
+                _bank = (ExperienceBank(base=self._bank_base) if self._bank_base
+                         else ExperienceBank())
+                condense(path, _bank)
+                for _coll in ("workflow", "step"):
+                    _bank.prune(_coll, keep_n=200, grace=10)
+        except Exception:
+            pass
         return summary
 
 
 def _selftest():
     import shutil
     import tempfile
+    from experience_bank import ExperienceBank as _EB0
+    _prod_bank_before = sum(_EB0().stats().values())
     tmp = Path(tempfile.mkdtemp(prefix="loop-session-"))
     try:
         s = LoopSession(run_no=999, increment="selftest run",
                         trace_dir=str(tmp / "traces"),
-                        registry_base=str(tmp / "harness"))
+                        registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"))
         with s:
             s.cite("2609.03035", verified=True, purpose="probe survives eval awareness")
             s.cite("2601.99999", verified=False)
@@ -281,7 +314,7 @@ def _selftest():
         # depend on the agent remembering to call cite().
         s2 = LoopSession(run_no=998,
                          increment="fold arXiv:2606.23075 MLAS and 2509.26354 misevolution",
-                         trace_dir=str(tmp / "traces2"), registry_base=str(tmp / "harness"))
+                         trace_dir=str(tmp / "traces2"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"))
         with s2:
             pass
         a = json.loads((RUN_SUMMARY_DIR / "run-998.json").read_text(encoding="utf-8"))
@@ -295,7 +328,7 @@ def _selftest():
 
         # an explicit verified cite must win over the auto-extractor, not duplicate
         s3 = LoopSession(run_no=997, increment="fold arXiv:2606.23075 MLAS",
-                         trace_dir=str(tmp / "traces3"), registry_base=str(tmp / "harness"))
+                         trace_dir=str(tmp / "traces3"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"))
         with s3:
             s3.cite("2606.23075", verified=True, purpose="abstract fetched and checked")
         b = json.loads((RUN_SUMMARY_DIR / "run-997.json").read_text(encoding="utf-8"))
@@ -309,10 +342,21 @@ def _selftest():
 
         # an explicit graph_write() must win over the auto-derivation
         s4 = LoopSession(run_no=996, increment="explicit graph write",
-                         trace_dir=str(tmp / "traces4"), registry_base=str(tmp / "harness"))
+                         trace_dir=str(tmp / "traces4"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"))
         with s4:
             s4.graph_write(nodes=(10, 12), edges=(40, 45))
         c = json.loads((RUN_SUMMARY_DIR / "run-996.json").read_text(encoding="utf-8"))
+        # Phase 2 wiring + test/production separation (run 369)
+        from experience_bank import ExperienceBank as _EB
+        checks["condense populates the bank from a real run trace"] = (
+            sum(_EB(base=str(tmp / "bank")).stats().values()) > 0)
+        # The invariant is "the selftest added nothing to the production bank",
+        # NOT "the production bank is empty" - it legitimately fills from real runs.
+        # The first version asserted emptiness and went RED the moment run 369's own
+        # record landed a real entry, which is the same conflation the audit keeps
+        # finding: a check that passes for the wrong reason until the subject exists.
+        checks["selftests add nothing to the production bank"] = (
+            sum(_EB().stats().values()) == _prod_bank_before)
         checks["an explicit graph_write survives the auto-derivation"] = (
             c["graph_delta"] == {"nodes": 2, "edges": 5})
         (RUN_SUMMARY_DIR / "run-996.json").unlink()
