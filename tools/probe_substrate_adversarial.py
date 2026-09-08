@@ -30,6 +30,8 @@ from task_ledger import Ledger  # noqa: E402
 from pheromone import Pheromone  # noqa: E402
 from relay import Relay, RelayRefused  # noqa: E402
 from reputation import Reputation  # noqa: E402
+
+_DAY = 86400.0
 from gates import g1_evidence, g4_release, GateRefused  # noqa: E402
 
 
@@ -314,6 +316,49 @@ def attack_boost_own_reputation_via_self_annotation():
             "severity": "high" if abs(score_after_spam - fresh_score) > 1e-9 else "n/a"}
 
 
+def attack_milk_reputation_then_reset_identity():
+    """An agent builds reputation, is selected, delivers a bad batch (gets slashed),
+    then re-enters under a FRESH id to shed the slash. Economic-Sybil
+    (arXiv:2609.02992): the substrate authenticates no writes, so a reset costs
+    nothing. Run 433 added two half-measures: `slash()` makes milking under the
+    SAME id unprofitable (forcing the reset to be VISIBLE), and `whitewash_risk()`
+    REPORTS the fresh identity as thin-evidence-but-competitive. Neither closes the
+    gap - a new id string sheds both."""
+    d = _wd()
+    R = Reputation(d / "r.json")
+    b = 1_000_000.0
+    for _ in range(20):
+        R.record("milker", "success", _at=b)
+    for _ in range(6):
+        R.record("rival", "success", _at=b)                # a genuine alternative
+    picked_before = R.select(["milker", "rival"], at=b + _DAY)
+    for _ in range(3):
+        R.record("milker", "failure", _at=b + 2 * _DAY)    # the bad batch
+    R.slash("milker", 0.9, reason="delivered a bad batch", _at=b + 2 * _DAY)
+    picked_after_slash = R.select(["milker", "rival"], at=b + 3 * _DAY)
+    # reset: a fresh id, re-entering a pool where it is again the marginal choice
+    reset_pick = R.select(["milker_v2", "newcomer_a", "newcomer_b"], at=b + 3 * _DAY)
+    slash_follows = R.slash_penalty("milker_v2", at=b + 3 * _DAY) > 0.0
+    risk = R.whitewash_risk("milker_v2",
+                            candidates=["milker_v2", "newcomer_a", "newcomer_b"],
+                            at=b + 3 * _DAY)
+    slash_bit_under_real_id = picked_before == "milker" and picked_after_slash == "rival"
+    landed = reset_pick == "milker_v2" and not slash_follows
+    return {"attack": "milk reputation then reset identity to shed the slash",
+            "landed": landed,
+            "slash_bit_under_real_id": slash_bit_under_real_id,
+            "slash_follows_reset": slash_follows,
+            "reset_id_flagged_whitewash_risk": risk["whitewash_risk"],
+            "detail": (f"slash bit under the real id (picked 'milker' before the bad batch, "
+                       f"'{picked_after_slash}' after): {slash_bit_under_real_id}. "
+                       f"A fresh id sheds the slash (slash_follows_reset={slash_follows}) and "
+                       f"is re-selected; whitewash_risk on the reset id: "
+                       f"{risk['whitewash_risk']} - a REPORT, not a block. "
+                       f"Economic-Sybil: needs identity bound to a verifiable principal"
+                       if landed else "the reset identity was not re-selected here"),
+            "severity": "known-limit"}
+
+
 ATTACKS = [
     attack_self_review_via_whitespace_case,
     attack_self_review_via_fresh_sock_puppet,
@@ -327,6 +372,7 @@ ATTACKS = [
     attack_collusion_ring_meets_the_quorum,
     attack_reputation_tiebreak_gaming,
     attack_boost_own_reputation_via_self_annotation,
+    attack_milk_reputation_then_reset_identity,
 ]
 
 # attacks that CANNOT be closed inside the substrate (they need identity
@@ -339,6 +385,7 @@ _KNOWN_LIMITS = {
     "launder a fake G4 pass via a fresh sock-puppet id",
     "impersonate another agent via the unauthenticated `agent` field",
     "a collusion ring meets the G4 quorum",
+    "milk reputation then reset identity to shed the slash",
 }
 
 
@@ -402,6 +449,15 @@ def _selftest():
     checks["the fresh-sock-puppet Sybil attack is recorded as a known limit, not a regression"] = (
         by_name["self-review via a fresh sock-puppet id"]["landed"]
         and out["n_landed_unexpected"] == 0)
+    # run 434: identity-reset milking - slash bites under the real id, a fresh id sheds it
+    milk = by_name["milk reputation then reset identity to shed the slash"]
+    checks["milk-then-reset lands as a known limit (economic-Sybil), not a regression"] = (
+        milk["landed"] and milk["attack"] in _KNOWN_LIMITS
+        and out["n_landed_unexpected"] == 0)
+    checks["...the slash bit under the real id (deselected the milker) before the reset"] = (
+        milk["slash_bit_under_real_id"] and not milk["slash_follows_reset"])
+    checks["...and whitewash_risk flags the reset identity (the report fires)"] = (
+        milk["reset_id_flagged_whitewash_risk"])
     checks["the run is deterministic"] = run_all()["verdict"] == out["verdict"]
     checks["with no unexpected landings the verdict says the closable attacks are closed"] = (
         out["n_landed_unexpected"] == 0
