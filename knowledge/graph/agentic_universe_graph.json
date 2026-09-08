@@ -12432,6 +12432,55 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.00949"
       ]
+    },
+    {
+      "id": "artifact_loop_action_class",
+      "label": "tools/loop_action_class.py - classifies the loop's recent increments into fold/probe/build/fix/consolidate, reports the mix, and flags a monoculture (one class >=70% over >=6 runs, or >=4 identical in a row) - the loop's own action-class calibration check",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.62,
+      "description": "Run 408, acting on run 407's fold of arXiv:2609.00949. That paper: aggregate accuracy hides action-class miscalibration (a model that always TOOL_CALLs when it should sometimes ASK/REFUSE/CONFIRM). The loop has the same shape - the IDLE-STATE RULE plus normal work give it a small action space, and skill_induction / loop_metrics CLASSIFY each increment but nothing scores whether the CLASS was appropriate. tools/loop_action_class.py, a selftest_all job. Reads the last N loop_runs/run-*.json, classifies each increment into fold (folded literature) / probe (built or extended a rig) / build (shipped a new capability) / fix (bug or broken instrument) / consolidate (consistency pass, red-team, audit, negative result, deepening without new input). Structural signals first (a new probe_*.py file -> probe, a new harness file -> build), then an ordered keyword ruleset over the increment text. Reports the distribution, the dominant fraction, the longest same-class streak, and two flags: monoculture (one class >= 70% over >= 6 runs) and long_streak (>= 4 in a row). HEURISTIC AND SAYS SO, like param_invariance_audit: it reports a distribution and a flag, the judgement stays manual. A monoculture flag is not 'the loop is broken' - runs 403-405 were a deliberate 3-run build/probe thread on one topic and that was correct. The tool's own note names that exception. FIRST OUTPUT over runs 394-407: fold 5, probe 4, build 3, fix 2, CONSOLIDATE 0. No monoculture flag (mix is varied), but the zero is a real signal: the loop does almost no PURE consolidation - runs 400 and 402 had consolidation intent (a red-team pass, a consistency sweep) but each also shipped a rig or fixed a bug and classified as probe/fix. The loop BUNDLES consolidation with action rather than doing a standalone look-without-changing pass. That is itself an action-class calibration observation.",
+      "tags": [
+        "self-audit",
+        "action-class-calibration",
+        "loop-increment-choice",
+        "monoculture",
+        "heuristic-not-proof",
+        "consolidate-zero",
+        "meta-instrument",
+        "tooling"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/loop_action_class.py"
+      ]
+    },
+    {
+      "id": "concept_the_loop_bundles_consolidation_with_action_and_almost_never_does_a_standalone_look_without_changing_pass",
+      "label": "Measured over runs 394-407: the loop did ZERO pure consolidation increments - every consistency-pass / red-team intent was bundled with shipping a rig or fixing a bug, so it never just looked without changing something",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.62,
+      "description": "Run 408, from loop_action_class's first output. Across runs 394-407: fold 5, probe 4, build 3, fix 2, consolidate 0. The loop is NOT in a monoculture (the fold/probe/build/fix mix is varied) but it has a structural bias: it does not do a STANDALONE consolidation pass. Runs 380 (a negative result, 'the class does not exist') and the pre-394 audits were closer to pure consolidation; runs 400 and 402 HAD consolidation intent - a red-team pass over the substrate, a consistency sweep for other authorization-as-annotation uses - but each also shipped a new probe or fixed a bug in the same run and got classified probe / fix. The bias is understandable: bundling feels efficient, and a run that only looks produces no graph delta, which the loop's own metrics reward less. But run 407's lesson is that the wrong ACTION CLASS is a failure aggregate metrics do not catch, and 'always couple looking with changing' is exactly that kind of bias - it means the loop rarely gets a clean read on its own state before acting on it. WHAT WOULD ADDRESS IT: not forcing consolidation runs on a schedule (that is its own miscalibration) but making loop_action_class's mix visible in the run summary, so the choice to bundle-or-not is a choice each run rather than a default.",
+      "tags": [
+        "self-audit",
+        "action-class-bias",
+        "consolidation",
+        "bundling",
+        "look-without-changing",
+        "metric-rewards-delta",
+        "measured"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/loop_action_class.py"
+      ]
     }
   ],
   "edges": [
@@ -29779,6 +29828,48 @@
       "target": "concept_llm_monitors_often_do_better_with_less_information_and_extract_then_score_beats_scoring_the_whole_trajectory",
       "type": "refines",
       "description": "the extract-then-score monitor and the state grader share a blind spot: both score the action taken and neither asks whether a different class of action was the right one"
+    },
+    {
+      "id": "edge_loop_action_class_implements_r407",
+      "source": "artifact_loop_action_class",
+      "target": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "type": "implements",
+      "description": "the first-order action-class check for the loop's own increments: reports the fold/probe/build/fix/consolidate mix and flags a monoculture, the loop analogue of the paper's action-class diagnostic for a tool-calling model"
+    },
+    {
+      "id": "edge_loop_action_class_complements_skill_induction",
+      "source": "artifact_loop_action_class",
+      "target": "pattern_skill_induction",
+      "type": "extends",
+      "description": "skill_induction classifies increments into task classes for skill mining; this classifies them into ACTION classes and scores whether the mix has been context-appropriate - classification vs calibration"
+    },
+    {
+      "id": "edge_loop_action_class_sibling_of_param_audit",
+      "source": "artifact_loop_action_class",
+      "target": "artifact_param_invariance_audit",
+      "type": "informs",
+      "description": "a second heuristic meta-instrument in the same style: reports a distribution and a flag, states it is not a proof, leaves the judgement manual"
+    },
+    {
+      "id": "edge_loop_action_class_instantiates_detector_discipline",
+      "source": "artifact_loop_action_class",
+      "target": "concept_a_detector_for_a_defect_class_will_commit_that_class_and_its_own_first_output_is_the_test",
+      "type": "instantiates",
+      "description": "read the detector's own first output as a claim about the loop: the consolidate-0 result was visible in the very first report and is recorded as a finding, not hidden"
+    },
+    {
+      "id": "edge_bundling_finding_core_of_loop_action_class",
+      "source": "concept_the_loop_bundles_consolidation_with_action_and_almost_never_does_a_standalone_look_without_changing_pass",
+      "target": "artifact_loop_action_class",
+      "type": "core_of",
+      "description": "the tool's first output: consolidate 0 over 14 runs, because red-team and consistency intent kept getting bundled with shipping or fixing"
+    },
+    {
+      "id": "edge_bundling_finding_extends_r407",
+      "source": "concept_the_loop_bundles_consolidation_with_action_and_almost_never_does_a_standalone_look_without_changing_pass",
+      "target": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "type": "extends",
+      "description": "'always couple looking with changing' is an action-class bias aggregate metrics do not catch - the loop rarely gets a clean read on its own state before acting on it"
     }
   ]
 }

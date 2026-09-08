@@ -44,6 +44,7 @@ JOBS = [
     ("probe_emergent_synergy.py", ["selftest"]),
     ("cohort_monitor.py", ["selftest"]),
     ("param_invariance_audit.py", ["selftest"]),
+    ("loop_action_class.py", ["selftest"]),
     ("pheromone.py", ["selftest"]),
     ("relay.py", ["selftest"]),
     ("reputation.py", ["selftest"]),

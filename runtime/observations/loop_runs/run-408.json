@@ -1,0 +1,44 @@
+{
+  "run": 408,
+  "increment": "Acting on run 407: built tools/loop_action_class.py, a selftest_all job giving the loop an ACTION-CLASS view of its own increments (fold / probe / build / fix / consolidate). Structural signals first, then an ordered keyword ruleset; reports the mix, the dominant fraction, the longest same-class streak, and flags monoculture (>=70% one class over >=6 runs) and long-streak (>=4 in a row). Heuristic and says so, like param_invariance_audit. FIRST OUTPUT over runs 394-407: fold 5, probe 4, build 3, fix 2, CONSOLIDATE 0 - no monoculture (varied mix) but the zero is real: runs 400 and 402 had consolidation intent (red-team, consistency sweep) but each also shipped a rig or fixed a bug and classified probe/fix. THE LOOP BUNDLES CONSOLIDATION WITH ACTION and almost never does a standalone look-without-changing pass - understandable (bundling feels efficient, a pure look produces no graph delta the metrics reward) but it means the loop rarely gets a clean read on its own state before acting. Fix (stated not forced): make the mix visible in the run summary so bundle-or-not is a choice. ~15 selftest checks GREEN; not flagged by param_invariance_audit. +2 nodes, +6 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/loop_action_class.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/loop_action_class.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-408.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 408 OK · VALID · graph +2n/+6e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.86 · files +2~3-0 · novelty 1.00"
+}
