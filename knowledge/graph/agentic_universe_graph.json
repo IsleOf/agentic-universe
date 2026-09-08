@@ -12165,6 +12165,57 @@
         "tools/pheromone.py",
         "tools/probe_annotation_contagion.py"
       ]
+    },
+    {
+      "id": "artifact_probe_substrate_adversarial_redteam",
+      "label": "tools/probe_substrate_adversarial.py - a red-team pass over the week-1 swarm substrate: 7 attacks against the real modules, separating what the substrate closed from what needs identity infrastructure",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.72,
+      "description": "Run 400. A consistency/adversarial pass over the eight new swarm-substrate modules (runs 390-399), driving the REAL gates / relay / pheromone / reputation / task_ledger. SEVEN ATTACKS, each classified landed | blocked, and landed split into 'should have been blocked' vs 'known limitation'. TWO REAL BUGS FOUND AND FIXED THIS RUN: (1) SELF-REVIEW VIA WHITESPACE/CASE. An author contributing as 'alice' could gate their own artifact as 'alice ' / 'Alice' / 'alice\\t' - the no-self-review guard did exact set membership. Fixed: pheromone._norm_agent (strip + casefold) applied to `contributors` and everywhere gates.py compares author identity. (2) CROSS-AUTHOR SUPERSEDE. A cheater could pass a whistleblower's warning id as `supersedes` and suppress it - `_live_rows` honoured any supersede link regardless of author. This directly undermines the run-397 transparency thesis (a suppressed warning is an invisible one). Fixed: a supersede link is honoured ONLY when the superseding row and the superseded row share a normalised author. `supersedes` means 'I changed MY mind', never 'I delete yours'. THREE KNOWN LIMITATIONS, recorded not fixed: a fresh sock-puppet id gating its author's work, and ping-pong via rotating sock puppets - both need identity infrastructure the substrate deliberately does not have (the Sybil problem); and a direct kind=done annotation making the board look finished while the ledger task is open - mitigated because pattern_deterministic_task_ledger... makes the LEDGER the completion source of truth and every real consumer checks it, but a naive board reader is misled. TWO ATTACKS BLOCKED BY DESIGN, confirmed: reputation is decoupled from the board (spamming positive self-annotations buys zero selection score), and the reputation tie-break, while lexical on id, is not exploitable to force a NON-tied outcome. 9 selftest checks GREEN; not flagged by param_invariance_audit.",
+      "tags": [
+        "swarm-substrate",
+        "red-team",
+        "adversarial-pass",
+        "self-review",
+        "supersede",
+        "sybil-limitation",
+        "drives-the-real-modules",
+        "two-bugs-fixed"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/probe_substrate_adversarial.py"
+      ]
+    },
+    {
+      "id": "concept_the_no_self_review_and_no_delete_your_warning_guards_needed_author_normalisation_to_actually_hold",
+      "label": "The substrate's two identity-dependent guards - no-self-review and supersedes-is-mine-only - were both bypassable until run 400 normalised the author id and added a same-author check; below that, everything reduces to the Sybil problem the substrate cannot solve alone",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.78,
+      "description": "Run 400, from the red-team pass. The week-1 substrate has exactly two guards that turn on 'is agent X the same as agent Y': gate rotation / no-self-review (gates.py), and supersedes ('I changed my mind', pheromone.py). Both were written assuming string equality of agent ids is identity equality. It is not:   - 'alice' vs 'alice ' vs 'Alice' - the SAME principal, and both guards let the     variant through. Fixed by normalising (strip + casefold) at every author     comparison. This is cheap and complete for the whitespace/case class.   - 'alice' vs 'alice2' - a DIFFERENT id for the same principal. No normalisation     catches this; it is the Sybil problem, and the substrate has no identity registry. So the honest security boundary is: the substrate's identity-dependent guards hold against sloppy or accidental id variation, and DO NOT hold against a deliberate sock-puppet. Anything relying on 'this agent is distinct from that one' - quorum counts, the anti-ping-pong window, no-self-review - inherits that boundary. The cross-author supersede bug was worse than a guard gap: it let a cheater DELETE a whistleblower's warning, which is the run-397 transparency thesis failing silently. Now a supersede link is inert unless both rows share a normalised author. GENERAL SHAPE: a guard keyed on identity is only as strong as the identity model under it. State the identity model explicitly (here: 'normalised string ids, no registry, Sybil-vulnerable') so the guarantees the guard actually provides are legible.",
+      "tags": [
+        "swarm-substrate",
+        "identity",
+        "author-normalisation",
+        "sybil-boundary",
+        "no-self-review",
+        "supersede",
+        "guard-is-only-as-strong-as-its-identity-model"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/pheromone.py",
+        "tools/gates.py",
+        "tools/probe_substrate_adversarial.py"
+      ]
     }
   ],
   "edges": [
@@ -29183,6 +29234,55 @@
       "target": "pattern_ostrom_swarm_governance",
       "type": "informs",
       "description": "the dividing line this run draws - a mechanism that fails SAFE under a wrong input goes in the primitive, one that fails HARMFUL stays behind a collective-choice rule - is a concrete criterion for which Ostrom mechanisms to hard-code and which to govern"
+    },
+    {
+      "id": "edge_redteam_verifies_design",
+      "source": "artifact_probe_substrate_adversarial_redteam",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "verifies",
+      "description": "a red-team pass over the whole week-1 substrate: every attack that can be closed inside the substrate is closed, the rest are documented Sybil-class limitations"
+    },
+    {
+      "id": "edge_redteam_detects_pheromone_supersede_bug",
+      "source": "artifact_probe_substrate_adversarial_redteam",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "detects",
+      "description": "found the cross-author supersede bug: a cheater could pass a whistleblower's warning id as `supersedes` and suppress it. Fixed same run - supersede honoured only within one author"
+    },
+    {
+      "id": "edge_redteam_detects_gates_self_review_bug",
+      "source": "artifact_probe_substrate_adversarial_redteam",
+      "target": "artifact_validator_gates",
+      "type": "detects",
+      "description": "found whitespace/case self-review: 'alice' contributing then 'Alice' gating. Fixed same run via author normalisation"
+    },
+    {
+      "id": "edge_redteam_constrains_demo",
+      "source": "artifact_probe_substrate_adversarial_redteam",
+      "target": "artifact_swarm_demo_acceptance_test",
+      "type": "constrains",
+      "description": "swarm_demo's fresh-eyes rule and the k>=3 floor both rest on distinct-agent identity, which the red-team shows holds against accidental variation and not against sock puppets"
+    },
+    {
+      "id": "edge_identity_finding_core_of_redteam",
+      "source": "concept_the_no_self_review_and_no_delete_your_warning_guards_needed_author_normalisation_to_actually_hold",
+      "target": "artifact_probe_substrate_adversarial_redteam",
+      "type": "core_of",
+      "description": "the pass's headline: two identity-dependent guards needed author normalisation to hold, and below that everything is the Sybil problem"
+    },
+    {
+      "id": "edge_identity_finding_refines_sybil",
+      "source": "concept_the_no_self_review_and_no_delete_your_warning_guards_needed_author_normalisation_to_actually_hold",
+      "target": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "type": "refines",
+      "description": "the Sybil problem localised to this substrate's guards: quorum counts, the ping-pong window, and no-self-review all inherit a 'normalised string ids, no registry' identity model and its sock-puppet vulnerability"
+    },
+    {
+      "id": "edge_identity_finding_grounds_transparency_thesis",
+      "source": "concept_the_no_self_review_and_no_delete_your_warning_guards_needed_author_normalisation_to_actually_hold",
+      "target": "concept_the_channel_that_carries_the_exploit_is_the_channel_that_catches_it",
+      "type": "grounds",
+      "description": "the cross-author supersede bug was the transparency thesis failing silently - a whistleblower's warning could be deleted by the cheater it named. The fix (supersede is within-author only) is what makes 'the channel that catches the exploit' actually hold"
     }
   ]
 }

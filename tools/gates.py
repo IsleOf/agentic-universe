@@ -63,27 +63,35 @@ class GateRefused(RuntimeError):
     """The rotation / self-review rules will not let this agent gate this task."""
 
 
+def _norm(aid):
+    """Canonical agent id — must match pheromone._norm_agent. Run 400: 'Alice' and
+    'alice ' were four different agents to the no-self-review guard."""
+    return str(aid).strip().casefold()
+
+
 def _contributors(task_ref, pheromone):
-    return set(pheromone.read(task_ref)["contributors"])
+    # pheromone.read()["contributors"] is already normalised, but normalise again
+    # so this function is correct regardless of the caller.
+    return {_norm(a) for a in pheromone.read(task_ref)["contributors"]}
 
 
 def _last_gate_validator(task_ref, pheromone, gate):
     """The agent who ran `gate` on this task most recently, from the annotation
-    trail — or None."""
+    trail — or None. Returns the NORMALISED id."""
     anns = pheromone.read(task_ref)["annotations"]
     hits = [a for a in anns
             if a["kind"] in ("claim", "warning")
             and isinstance(a.get("evidence"), dict)
             and a["evidence"].get("gate") == gate]
-    return hits[-1]["agent"] if hits else None
+    return _norm(hits[-1]["agent"]) if hits else None
 
 
 def _guard(task_ref, validator_agent, pheromone, gate):
-    if validator_agent in _contributors(task_ref, pheromone):
+    if _norm(validator_agent) in _contributors(task_ref, pheromone):
         raise GateRefused(
             f"{validator_agent!r} contributed to {task_ref} and may not gate it")
     prev = _last_gate_validator(task_ref, pheromone, gate)
-    if prev == validator_agent:
+    if prev == _norm(validator_agent):
         raise GateRefused(
             f"{validator_agent!r} ran {gate} on {task_ref} last time; rotate to another agent")
 
@@ -157,10 +165,10 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
 
     v = pheromone.read(task_ref)
     live_warnings = [a for a in v["annotations"] if a["kind"] == "warning"]
-    prior_g4_pass = {a["agent"] for a in v["annotations"]
+    prior_g4_pass = {_norm(a["agent"]) for a in v["annotations"]
                      if a["kind"] == "claim" and isinstance(a.get("evidence"), dict)
                      and a["evidence"].get("gate") == "G4" and a["evidence"].get("pass")}
-    prior_g4_pass.discard(validator_agent)
+    prior_g4_pass.discard(_norm(validator_agent))
 
     voters = 1 + len(prior_g4_pass) + (1 if computable_ok else 0)
     passed = True

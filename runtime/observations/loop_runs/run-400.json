@@ -1,0 +1,46 @@
+{
+  "run": 400,
+  "increment": "Red-team pass over the eight week-1 swarm-substrate modules as a set. probe_substrate_adversarial.py: 7 attacks against the real modules, split landed vs blocked and landed into should-have-been-blocked vs known-limitation. TWO REAL BUGS FOUND AND FIXED: (1) self-review via whitespace/case - an author as 'alice' could gate their own work as 'Alice'/'alice ' (exact set membership); fixed with pheromone._norm_agent (strip+casefold) everywhere gates.py compares identity. (2) [HIGH] cross-author supersede - a cheater could pass a whistleblower's warning id as `supersedes` and suppress it, which is the run-397 transparency thesis failing silently; fixed - a supersede link is honoured only within one normalised author. THREE KNOWN LIMITS recorded: fresh sock-puppet ids (Sybil), ping-pong via sock puppets (Sybil), a direct kind=done making the board look finished (mitigated by ledger-is-truth). TWO blocked by design confirmed: reputation decoupled from the board, tie-break not exploitable. FINDING: a guard keyed on identity is only as strong as its identity model; the substrate's is 'normalised string ids, no registry, Sybil-vulnerable' and everything downstream (quorum, ping-pong window, k>=3 floor) inherits that boundary. 9 selftest checks GREEN. +2 nodes, +7 edges. Run 400.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 5,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/gates.py",
+        "tools/pheromone.py",
+        "tools/probe_substrate_adversarial.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 4,
+      "new_harness_files": [
+        "tools/probe_substrate_adversarial.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-400.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 400 OK · VALID · graph +2n/+7e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.88 · files +2~5-0 · novelty 0.50"
+}

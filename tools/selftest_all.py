@@ -50,6 +50,7 @@ JOBS = [
     ("gates.py", ["selftest"]),
     ("swarm_demo.py", ["selftest"]),
     ("probe_annotation_contagion.py", ["selftest"]),
+    ("probe_substrate_adversarial.py", ["selftest"]),
     ("executor_pool.py", ["selftest"]),
     ("probe_memory_horizon.py", ["selftest"]),
     ("probe_governance_lever.py", ["selftest"]),

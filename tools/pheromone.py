@@ -91,6 +91,14 @@ def _now():
     return round(time.time(), 3)
 
 
+def _norm_agent(aid):
+    """Canonical agent id: trimmed and casefolded. Run 400's red-team pass found
+    'alice', 'alice ', 'Alice' and 'alice\\t' were treated as four different agents,
+    letting an author gate their own artifact under a variant id. Normalising at
+    every author comparison closes that without a global identity registry."""
+    return str(aid).strip().casefold()
+
+
 class Pheromone:
     def __init__(self, path=DEFAULT_PATH, *, benign_mean=_BENIGN_MEAN,
                  benign_sd=_BENIGN_SD, assumed_corr=_DEFAULT_CORR):
@@ -184,8 +192,15 @@ class Pheromone:
         rows = self._db.execute(
             "SELECT * FROM pheromone WHERE task_ref = ?", (task_ref,)
         ).fetchall()
-        # honour `supersedes`: an id that is superseded by a live row is dropped
-        superseded = {r["supersedes"] for r in rows if r["supersedes"]}
+        by_id = {r["id"]: r for r in rows}
+        # honour `supersedes` ONLY within one author. Run 400's red-team pass found
+        # a cheater could pass a whistleblower's warning id as `supersedes` and
+        # suppress it - `supersedes` is "I changed MY mind", never "I delete yours".
+        superseded = {
+            r["supersedes"] for r in rows
+            if r["supersedes"] and r["supersedes"] in by_id
+            and _norm_agent(by_id[r["supersedes"]]["agent"]) == _norm_agent(r["agent"])
+        }
         live = []
         for r in rows:
             age = now - r["created_at"]
@@ -217,7 +232,10 @@ class Pheromone:
         your own constant.
         """
         live, now = self._live_rows(task_ref, at=at)
-        contributors = sorted({r["agent"] for r, _ in live})
+        # `contributors` is normalised (run 400): it is the security-relevant view
+        # used by gate rotation and no-self-review, so 'Alice' and 'alice ' must
+        # collapse to one. `n_contributors` counts these canonical ids.
+        contributors = sorted({_norm_agent(r["agent"]) for r, _ in live})
         k = len(contributors)
         signal_raw = sum(self._effective(r, age) for r, age in live)
         signal = max(-1.0, min(1.0, signal_raw))
