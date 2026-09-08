@@ -53,6 +53,7 @@ JOBS = [
     ("probe_annotation_contagion.py", ["selftest"]),
     ("probe_substrate_adversarial.py", ["selftest"]),
     ("probe_language_drift_monitor.py", ["selftest"]),
+    ("probe_swap_cost.py", ["selftest"]),
     ("executor_pool.py", ["selftest"]),
     ("probe_memory_horizon.py", ["selftest"]),
     ("probe_governance_lever.py", ["selftest"]),

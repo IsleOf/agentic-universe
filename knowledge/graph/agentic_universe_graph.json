@@ -12559,6 +12559,31 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.05279"
       ]
+    },
+    {
+      "id": "artifact_probe_swap_cost",
+      "label": "tools/probe_swap_cost.py - forces an agent rotation mid-pipeline in swarm_demo and counts the substrate's coordination footprint: ZERO change (ledger tasks, annotations, handoffs identical) - no STRUCTURAL swap penalty, because coordination state is external",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:role_transience",
+      "confidence": 0.6,
+      "description": "Run 412, acting on run 411's fold of arXiv:2609.05279 (swapping a role-matched agent costs 16-63% more communication-per-progress from private convention interference). This repo's substrate has no private channel - the board and the ledger hold all coordination state - so the HYPOTHESIS was no structural swap penalty. The rig drives the REAL modules via swarm_demo: matched pipelines, one with a forced agent rotation at the draft stage, one without, counting ledger tasks / annotations / handoffs. RESULT: the forced swap changes the footprint by EXACTLY ZERO at k=4 and k=8. A handoff costs the same regardless of who picks it up, because the coordination state is external, not in either agent's head. WHAT IT CANNOT SHOW, in the verdict: fake workers make no model calls, so there is no model-level convention to interfere with. This establishes the WEAKER STRUCTURAL HALF - if a board swap penalty exists for real agents it is not coming from the substrate's machinery - which is the argument for why externalising coordination state MIGHT make rotation cheaper, not proof that it does. That is a live-model question. 7 selftest checks GREEN incl one asserting the verdict says MIGHT not proof; not flagged by param_invariance_audit.",
+      "tags": [
+        "role-transience",
+        "swap-penalty",
+        "stigmergy",
+        "structural-vs-model",
+        "drives-the-real-module",
+        "no-structural-penalty",
+        "honest-limit",
+        "probe"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/probe_swap_cost.py"
+      ]
     }
   ],
   "edges": [
@@ -30046,6 +30071,34 @@
       "target": "artifact_swarm_substrate_prototype_design",
       "type": "constrains",
       "description": "the design doc's 'roles are transient, not sticky' (5.4) needs a caveat: rotate for safety where safety needs it, let stable working pairs persist elsewhere, and budget the stayer's re-coordination cost"
+    },
+    {
+      "id": "edge_swap_cost_verifies_interchangeability_structurally",
+      "source": "artifact_probe_swap_cost",
+      "target": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "type": "refines",
+      "description": "tests the substrate half of the paper's finding: the 16-63% penalty is private convention interference, and this shows the stigmergic substrate adds zero structural overhead for a rotation - the model-level penalty question stays open"
+    },
+    {
+      "id": "edge_swap_cost_core_of_demo",
+      "source": "artifact_probe_swap_cost",
+      "target": "artifact_swarm_demo_acceptance_test",
+      "type": "core_of",
+      "description": "the rig instruments swarm_demo's own pipeline, forcing the fresh-eyes rotation and counting the substrate footprint"
+    },
+    {
+      "id": "edge_swap_cost_supports_stigmergy",
+      "source": "artifact_probe_swap_cost",
+      "target": "emergent_stigmergic_coordination",
+      "type": "supports",
+      "description": "the mechanism behind zero structural swap cost: coordination via traces in the environment means a newcomer reads the same board the incumbent did, with no handover of private state"
+    },
+    {
+      "id": "edge_swap_cost_supports_flock",
+      "source": "artifact_probe_swap_cost",
+      "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "type": "supports",
+      "description": "'coordinate through a shared store, not a central planner or a message bus' - the store is what makes an agent swap structurally free; a message-coordinated team has to re-establish the channel"
     }
   ]
 }

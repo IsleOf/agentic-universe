@@ -1,0 +1,51 @@
+{
+  "run": 412,
+  "increment": "Built probe_swap_cost.py - run 411's next item. Tests whether the stigmergic substrate blunts arXiv:2609.05279's 16-63% agent-swap penalty. Drives the REAL modules via swarm_demo: matched pipelines, one with a forced agent rotation at the draft stage, one without, counting ledger tasks / annotations / handoffs. RESULT: the forced swap changes the substrate's coordination footprint by EXACTLY ZERO at k=4 and k=8. A handoff costs the same regardless of who picks it up because coordination state is external, not in either agent's head. WHAT IT CANNOT SHOW (in the verdict): fake workers make no model calls, so there is no model-level convention to interfere with - this is the weaker STRUCTURAL half: if a board swap penalty exists for real agents it is not coming from the substrate's machinery, which is the argument for why externalising coordination state MIGHT make rotation cheaper, not proof that it does. That is a live-model / owner-gated question. 7 selftest checks GREEN; not flagged by param_invariance_audit. +1 node, +4 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/probe_swap_cost.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/probe_swap_cost.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.05279",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.05279"
+  ],
+  "trace_file": "runtime\\traces\\loop-412.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 412 OK · VALID · graph +1n/+4e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.86 · files +2~3-0 · novelty 1.00 · acts fold40%"
+}
