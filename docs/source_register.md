@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 447 nodes, 1846 edges · **Date:** 2026-09-05
+**Graph at generation:** 448 nodes, 1849 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -635,7 +635,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
 - `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_cohort_monitor`, `artifact_conductor_blessed_manifest_preflight` +8
-- `docs/swarm-substrate-prototype.md` — `concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding`
+- `docs/swarm-substrate-prototype.md` — `concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity`, `concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding`
 - `docs/what_would_make_this_wrong.md` — `concept_a_classifier_that_always_returns_something_hides_its_own_drift`, `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`

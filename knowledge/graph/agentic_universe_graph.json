@@ -13106,6 +13106,34 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.01870"
       ]
+    },
+    {
+      "id": "concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
+      "label": "Design doc section 8 (runs 424-439): the swarm substrate emits SIX advisory signals - n_uncited_claims, n_open_clarifications (G1); quorum_homogeneous, single_evidence_domain, no_alternative_hypothesis (G4); isolated_withheld (every read). None blocks. All are advisory for ONE reason - acting on any means acting on an agent identity the substrate cannot authenticate. Each has a natural blocking form under capability-token binding (section 7).",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:swarm",
+      "confidence": 0.75,
+      "description": "Run 440, a consolidation pass. docs/swarm-substrate-prototype.md section 8 catalogues the six REPORT-not-block signals the substrate accumulated over runs 424-439 and states the throughline. THE SIX. n_uncited_claims (G1, run 396) - a claim-shaped line with no citation marker. n_open_clarifications (G1, run 424, arXiv:2609.05258) - unanswered pheromone.ask requests. quorum_homogeneous (G4, run 417, arXiv:2609.05227) - a lazy copy-paste validator ring. single_evidence_domain (G4, run 431, arXiv:2609.02925) - the evidence basis is <= 1 fault root, so kappa_E = 1. no_alternative_hypothesis (G4, run 438, arXiv:2609.01870) - no competing candidate was explored (91.4 -> 26.8 accuracy). isolated_withheld (every read, run 437) - peer working notes hidden because still isolated. THE THROUGHLINE. Read as a stack: a G4 pass carrying single_evidence_domain + no_alternative_hypothesis + quorum_homogeneous is procedurally fine and epistemically thin - one source, one hypothesis, a possibly-coordinated quorum, the exact shape candidate fixation and epistemic-Sybil warn about. The substrate now surfaces it instead of passing silently. Every signal is advisory because acting on it means acting on an agent identity (refuse a validator, discount a contributor, hold a release); under section 7's capability-token binding each gets a blocking form. swarm_demo's defer_consensus flag is the built-in A/B.",
+      "tags": [
+        "swarm-substrate",
+        "report-not-block",
+        "gate-signals",
+        "advisory",
+        "capability-token",
+        "consolidation",
+        "run-440",
+        "design-doc-section-8"
+      ],
+      "derived_from": [
+        "docs/swarm-substrate-prototype.md"
+      ],
+      "evidence_links": [
+        "docs/swarm-substrate-prototype.md",
+        "tools/gates.py"
+      ]
     }
   ],
   "edges": [
@@ -31328,6 +31356,27 @@
       "target": "concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains",
       "type": "verifies",
       "description": "run 439: swarm_demo runs isolated research -> release at G1 -> note_alternative -> G4 end to end and asserts the flow (isolated-then-released, a competing hypothesis recorded, G4 not flagged no_alternative_hypothesis; defer off flips all three) - an executable check that the ArcticSwarm pattern composes on the substrate"
+    },
+    {
+      "id": "edge_design_records_section_8_signal_catalogue",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
+      "type": "records",
+      "description": "docs/swarm-substrate-prototype.md section 8 (run 440) catalogues the six signals"
+    },
+    {
+      "id": "edge_section_8_refines_capability_token_node",
+      "source": "concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
+      "target": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+      "type": "refines",
+      "description": "section 7 said the mitigations are REPORT-not-block because identity is unauthenticated; section 8 enumerates all six and gives each a concrete blocking form under token binding"
+    },
+    {
+      "id": "edge_section_8_records_gate_signal_surface",
+      "source": "concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
+      "target": "artifact_validator_gates",
+      "type": "grounds",
+      "description": "five of the six signals are fields on the G1 / G4 verdict dicts in tools/gates.py; section 8 is their reference"
     }
   ]
 }

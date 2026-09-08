@@ -556,6 +556,41 @@ substrate's trust model and is **owner-gated**.
 
 ---
 
+## 8. The REPORT-not-block signal catalogue (runs 424–439)
+
+The substrate now emits **six advisory signals** — five in the gate verdicts, one on every
+`pheromone.read`. None blocks; each names a condition a reader should weigh. They are advisory
+*by design* (§7): the substrate cannot enforce on identity it cannot authenticate.
+
+| signal | where | fires when | source |
+|---|---|---|---|
+| `n_uncited_claims` | G1 verdict | a claim-shaped line in the artifact has no nearby citation marker | run 396 |
+| `n_open_clarifications` | G1 verdict | the task has unanswered `pheromone.ask()` requests — drafting risks a silent assumption | run 424, arXiv:2609.05258 |
+| `quorum_homogeneous` | G4 verdict | ≥ 3 prior G4 passes share one confidence (2 dp) and give no distinct reason — a lazy copy-paste ring | run 417, arXiv:2609.05227 |
+| `single_evidence_domain` | G4 verdict | the task's whole evidence basis is ≤ 1 distinct fault root — a quorum on it has `κ_E = 1` | run 431, arXiv:2609.02925 |
+| `no_alternative_hypothesis` | G4 verdict | no `pheromone.note_alternative()` was recorded — single-candidate search fixates (91.4 % → 26.8 %) | run 438, arXiv:2609.01870 |
+| `isolated_withheld` | every `read()` | count of peer working notes hidden from this reader because they are still isolated | run 437, arXiv:2609.01870 |
+
+**How to read a stack of these.** A G4 verdict that passes quorum but carries
+`single_evidence_domain` + `no_alternative_hypothesis` + `quorum_homogeneous` describes a release
+that is *procedurally* fine and *epistemically* thin: one source, one hypothesis, a
+possibly-coordinated quorum. That is exactly the shape ArcticSwarm's candidate fixation and the
+epistemic-Sybil results warn about — the substrate now surfaces it rather than passing silently.
+
+**What makes any of them a block.** Every one is advisory because acting on it means acting on an
+agent identity — refusing a validator, discounting a contributor, holding a release. Under §7's
+capability-token binding the `agent` field becomes trustworthy and each signal has a natural
+blocking form: refuse the quorum when `κ_E = 1` and the validators are distinct principals; hold
+the release until an alternative-hypothesis task run by a *different* principal exists; drop a
+homogeneous ring's votes. Until then they are reports, and that is the correct posture.
+
+**The `swarm_demo` acceptance test** exercises the full deferred-consensus path with
+`defer_consensus=True` (default): isolated research → `release_isolation` at the G1 boundary →
+`note_alternative` before G4 → a G4 verdict with `no_alternative_hypothesis = False`. Setting
+`defer_consensus=False` flips all of it back, as a built-in A/B.
+
+---
+
 ## Sources
 
 - Strands Agents — Swarm Multi-Agent Pattern: <https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/>
@@ -588,5 +623,11 @@ substrate's trust model and is **owner-gated**.
 - The Illusion of Independent Quorums: Epistemic Fault Domains and Correlated Cognitive Failures in Agentic Quorums (He, Yu, OpenKedge, arXiv:2609.02925) — the structural epistemic cut κ_E; DAQC
 - Tempting the Agent: The Economics of Reputation without Persistent Identity in AI Agent Markets (Gatta, Naviglio, Tarantelli, arXiv:2609.02992) — reputation disciplines only a costly identity
 - In-repo: `tools/probe_orchestration_value.py` (the `gamma` arm), `tools/gates.py` (`single_evidence_domain`), `tools/reputation.py` (`slash` / `whitewash_risk`), `tools/probe_substrate_adversarial.py` (the identity-reset attack)
+
+### Sources folded into §8 (the signal catalogue)
+
+- ArcticSwarm: Deferring Early Consensus in Long-Horizon Multi-Agent Research (Yoon et al., arXiv:2609.01870) — gated isolation, the mandatory alternative-hypothesis task
+- Ask Before You Optimize (arXiv:2609.05258, run 424), CABAL (arXiv:2609.05227, run 417), The Illusion of Independent Quorums (arXiv:2609.02925, run 431)
+- In-repo: `tools/gates.py` (G1/G4 signal fields), `tools/pheromone.py` (`isolated` / `note_alternative` / `isolated_withheld`), `tools/swarm_demo.py` (`defer_consensus`)
 
 *This document is the design; the `docs/auto_sweep_2026-11-*` files are the run-by-run detail.*
