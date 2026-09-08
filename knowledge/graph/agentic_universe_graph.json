@@ -13047,6 +13047,33 @@
         "https://arxiv.org/abs/2609.02992",
         "tools/reputation.py"
       ]
+    },
+    {
+      "id": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+      "label": "Design doc section 7 (runs 428-434): the swarm substrate's four residual weaknesses - a budget-inflated collaboration verdict, a kappa_E=1 quorum, a free-to-reset reputation, a spoofable agent field - are ONE gap: the `agent` field is an unauthenticated string. All three ship-able mitigations are REPORT-not-block for the same reason. The blocking version of each needs the SAME thing: the agent field bound to a capability token (executor_pool has mint_token / redeem_token). ~1 day migration, owner-gated.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:trust",
+      "confidence": 0.72,
+      "description": "Run 435, a consolidation pass. docs/swarm-substrate-prototype.md section 7 folds the runs 428-434 identity thread into one owner-facing recommendation. THE FOUR FINDINGS. (7.1) run 428: probe_orchestration_value's `gamma` arm - a vote synthesis is budget-NEGATIVE (Gamma -0.21), an independent reason not to make a quorum the integration mechanism. (7.2) runs 430-431 (arXiv:2609.02925): a shared-evidence quorum has structural epistemic cut kappa_E=1; the substrate reads one board so its G4 quorum IS that. Shipped: G4 REPORTS single_evidence_domain (the kappa_E ceiling). (7.3) runs 432-434 (arXiv:2609.02992): reputation disciplines only a costly identity; reset is free. Shipped: reputation.slash (a penalty record() can't lift) + whitewash_risk (a REPORT). Verified by the identity-reset attack. THE CONVERGENCE. All three mitigations - single_evidence_domain, whitewash_risk, the run-417 quorum_homogeneous - are advisory because the substrate cannot act on identity it cannot trust. The blocking version of each needs the agent field bound to a capability token: pheromone.annotate / reputation.record take an optional token; in closed mode a tokenless write is refused; the token's principal becomes the identity key for rotation / no-self-review / ping-pong / reputation; a reset costs a fresh token the pool can rate-limit or price (kappa_R > 0 by construction). MIGRATION COST: every selftest that annotates as a bare id needs a test-mode mint; swarm_demo needs the pool in the loop - ~1 day across pheromone, reputation, gates, relay, swarm_demo. NOT FIXED: an operator minting many puppet tokens (the Sybil floor - needs an external IdP, out of scope for a single-operator fleet). This is the loop's recommendation; the migration is a self-design change to the substrate trust model and is OWNER-GATED.",
+      "tags": [
+        "swarm-substrate",
+        "trust-boundary",
+        "capability-token",
+        "identity-binding",
+        "consolidation",
+        "owner-gated",
+        "run-435",
+        "design-doc-section-7"
+      ],
+      "derived_from": [
+        "docs/swarm-substrate-prototype.md"
+      ],
+      "evidence_links": [
+        "docs/swarm-substrate-prototype.md"
+      ]
     }
   ],
   "edges": [
@@ -31143,6 +31170,41 @@
       "target": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
       "type": "supports",
       "description": "the identity-reset attack is another concrete landing on 'the substrate authenticates no writes' - the reset agent is a new unverified `agent` string, and nothing in the substrate can tell it apart from a genuine newcomer"
+    },
+    {
+      "id": "edge_design_records_section_7_identity_gap",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+      "type": "records",
+      "description": "docs/swarm-substrate-prototype.md section 7 (run 435) is where this consolidation lives"
+    },
+    {
+      "id": "edge_section_7_refines_trust_boundary",
+      "source": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+      "target": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "type": "refines",
+      "description": "the trust-boundary node says the agent field is the whole boundary; section 7 adds that the four separate-looking residual gaps are all THIS gap, and names one fix (capability-token binding) that turns every REPORT into a possible block"
+    },
+    {
+      "id": "edge_section_7_informs_pool_decision",
+      "source": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+      "target": "decision_v2_4_executor_pool_collective_module_spec",
+      "type": "informs",
+      "description": "the capability-token migration would consume executor_pool's mint_token / redeem_token as the substrate's identity layer - a concrete demand on that module spec"
+    },
+    {
+      "id": "edge_efd_supports_trust_boundary",
+      "source": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "target": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "type": "supports",
+      "description": "the kappa_E=1 quorum is another face of the unauthenticated-identity gap: without per-validator evidence lineage (which needs trusted identity to attribute) the substrate cannot compute a real epistemic cut"
+    },
+    {
+      "id": "edge_gamma_finding_informs_section_7",
+      "source": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "target": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+      "type": "supports",
+      "description": "run 428's budget-negative vote-synthesis result is section 7.1 - the collaboration-gain half of the argument that the substrate should not lean on a quorum"
     }
   ]
 }

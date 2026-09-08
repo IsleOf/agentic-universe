@@ -1,0 +1,39 @@
+{
+  "run": 435,
+  "increment": "Consolidation pass (the loop under-does standalone synthesis; last five runs were all substrate-identity work). Added section 7 to docs/swarm-substrate-prototype.md: 'The identity gap and the capability-token decision (runs 428-434)'. Consolidates four findings - a budget-inflated collaboration verdict (run 428 gamma arm; a vote synthesis is budget-NEGATIVE), a kappa_E=1 shared-evidence quorum (runs 430-431; G4 REPORTS single_evidence_domain), a free-to-reset reputation (runs 432-433; slash + whitewash_risk), verified by the identity-reset attack (run 434) - into ONE conclusion: all four are the unauthenticated `agent` field, all three shipped mitigations are REPORT-not-block for that reason, and the blocking version of each needs the same fix (bind the agent field to a capability token; executor_pool has mint_token/redeem_token; ~1 day migration; owner-gated). +1 node, +5 edges. No code change.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 5
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-435.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 435 OK · VALID · graph +1n/+5e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +1~3-0 · novelty 1.00 · acts fold30%"
+}

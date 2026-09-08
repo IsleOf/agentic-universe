@@ -490,6 +490,72 @@ had stopped at the two modules in front of it.
 
 ---
 
+## 7. The identity gap and the capability-token decision (runs 428–434)
+
+Five runs converged on one conclusion the design must now state plainly: **every remaining
+substrate weakness is the same weakness** — the `agent` field is an unauthenticated string, so
+identity is free to create and free to abandon. The four findings, and the half-measures shipped
+against each:
+
+### 7.1 Collaboration gain, net of budget (run 428, arXiv:2602.05289)
+`probe_orchestration_value` gained a `gamma` arm: it counts the subtask-attempt budget a MULTI
+config spends and compares it against a single agent given that same budget (best-of-N,
+oracle-verified). At the rig's params the verifiable + deterministic + disjoint config's win is
+**genuine collaboration gain** (Γ = +0.52; a single agent needs ~6.7× the budget to match it),
+but a **vote synthesis is budget-*negative*** (Γ = −0.21 — it costs 2× and loses to best-of-2
+single). This is a second, independent reason (alongside 7.2) not to make a quorum/vote the
+substrate's integration mechanism.
+
+### 7.2 A shared-evidence quorum has a structural epistemic cut of 1 (runs 430–431, arXiv:2609.02925)
+Distinct validators who read the same thing are not independent. A quorum's real resilience is
+`κ_E` — the minimum number of fault roots whose failure reaches a decisive coalition — not the
+vote count; in the paper's experiments 1→7 reviewers on shared evidence all held ~96–100%
+unsafe-commit rates. The substrate captures no per-validator evidence lineage — every agent reads
+the same board — so its G4 quorum is structurally `κ_E = 1`.
+**Shipped (run 431):** G1 records the artifact's evidence links; G4 computes
+`evidence_basis_width` (distinct fault roots) and **REPORTS `single_evidence_domain`** when the
+whole basis is one source. This is the `κ_E` *ceiling* (`κ_E ≤ basis width`), not a true
+per-validator `κ_E` — a REPORT, never a block.
+
+### 7.3 Reputation only disciplines a costly identity (runs 432–434, arXiv:2609.02992)
+"Tempting the Agent": an agent milks reputation and resets when *extracted value − reset cost ≥
+0*, and higher reputation can *increase* the temptation (Prop 4.8). The substrate makes reset
+free, so `reputation.py` sits on the wrong side of every honesty threshold, and the UCB
+exploration bonus that keeps reputation non-calcifying is the same bonus that subsidises a
+whitewashing reset.
+**Shipped (run 433):** `reputation.slash(aid, severity)` — a penalty `record("success")` cannot
+lift, decaying on a 60-day half-life; `reputation.whitewash_risk(aid, candidates)` — a REPORT
+flagging a thin-evidence agent that is still competitive.
+**Verified (run 434):** `probe_substrate_adversarial`'s identity-reset attack confirms the slash
+bites under the real id (the milker is deselected) and a fresh id sheds it — lands as a *known
+limit*, `n_landed_unexpected` stays 0.
+
+### 7.4 The one owner decision these tee up
+All three REPORT-not-block half-measures (`single_evidence_domain`, `whitewash_risk`,
+`quorum_homogeneous`) are advisory *because the substrate cannot act on identity it cannot
+trust*. The blocking version of each needs the same thing: **the `agent` field bound to a
+capability token**. `executor_pool` already has `mint_token` / `redeem_token` (single-use,
+scoped). A concrete sketch:
+
+- `pheromone.annotate(..., token=?)` and `reputation.record(..., token=?)` take an optional
+  token; when the substrate is run in *closed* mode, a write without a valid token is refused.
+- The token's issued-to principal becomes the true identity key for rotation, no-self-review,
+  the ping-pong window, and the reputation ledger — replacing the raw string.
+- A reset then costs a fresh token from the pool, which the pool can rate-limit, price, or
+  refuse — `κ_R > 0` by construction, and a `slash` can attach to the principal, not the string.
+- **What breaks:** every selftest that annotates as a bare id (`"alice"`, `"v1"`, …) needs a
+  test-mode token mint, and `swarm_demo` needs the pool in the loop. This is a real but bounded
+  migration — call it a day of work across `pheromone`, `reputation`, `gates`, `relay`,
+  `swarm_demo`, and their selftests.
+- **What it does *not* fix:** an operator who mints many tokens for their own puppets. That is
+  the Sybil floor; it needs an external identity provider and is out of scope for a
+  single-operator fleet.
+
+This section is the loop's recommendation; the migration itself is a self-design change to the
+substrate's trust model and is **owner-gated**.
+
+---
+
 ## Sources
 
 - Strands Agents — Swarm Multi-Agent Pattern: <https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/>
@@ -515,5 +581,12 @@ had stopped at the two modules in front of it.
 - Calibration is the Bottleneck: An Action-Class Diagnostic of Multi-Turn Tool-Calling (Zhao et al., arXiv:2609.00949) — aggregate metrics mask action-class miscalibration
 - Competitive Market Behavior of LLMs (Struski et al., arXiv:2609.02580) — LLM markets converge slowly or not at all
 - In-repo probe rigs: `tools/probe_annotation_contagion.py`, `tools/probe_language_drift_monitor.py`, `tools/probe_substrate_adversarial.py`, `tools/probe_swap_cost.py`; the six built modules and their `selftest_all` jobs
+
+### Sources folded into §7 (the identity-gap thread)
+
+- Towards a Science of Collective AI: LLM-based Multi-Agent Systems Need a Transition from Blind Trial-and-Error to Rigorous Science (Fan et al., Tsinghua / ChatDev, arXiv:2602.05289) — the collaboration-gain metric Γ net of budget
+- The Illusion of Independent Quorums: Epistemic Fault Domains and Correlated Cognitive Failures in Agentic Quorums (He, Yu, OpenKedge, arXiv:2609.02925) — the structural epistemic cut κ_E; DAQC
+- Tempting the Agent: The Economics of Reputation without Persistent Identity in AI Agent Markets (Gatta, Naviglio, Tarantelli, arXiv:2609.02992) — reputation disciplines only a costly identity
+- In-repo: `tools/probe_orchestration_value.py` (the `gamma` arm), `tools/gates.py` (`single_evidence_domain`), `tools/reputation.py` (`slash` / `whitewash_risk`), `tools/probe_substrate_adversarial.py` (the identity-reset attack)
 
 *This document is the design; the `docs/auto_sweep_2026-11-*` files are the run-by-run detail.*
