@@ -12532,6 +12532,33 @@
         "tools/loop_action_class.py",
         "tools/loop_metrics.py"
       ]
+    },
+    {
+      "id": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "label": "Trading role-matched LLM agents between independently-formed teams costs little task score but raises communication-per-progress by 16-63%; a swapped agent can be MORE expensive than an inexperienced one (convention interference), and the incumbent who STAYED bears most of the extra cost",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:role_transience",
+      "confidence": 0.74,
+      "description": "arXiv:2609.05279 (Jianxin Gao, Tianyi Yu, Linna Deng, Runze Li, Zining Wang; v1 2026-09-04, VERIFIED via abstract). Tests the production assumption that an agent filling a role is interchangeable with any other agent that can do the job. SETUP: eight teams per setting formed independently from ONE base model on the same tasks, each agent keeping a private notebook across ten formation episodes; then role-matched agents are TRADED between teams and held-out performance measured, against a PLACEBO that reproduces the disruption of a roster change without changing who occupies the seat. FINDINGS. (1) A swap costs LITTLE IN TASK SCORE but raises the communication a team spends per unit of progress by 16 TO 63 PERCENT. (2) In Hanabi a swapped agent is MORE EXPENSIVE than an inexperienced one - consistent with active INTERFERENCE from conventions learned with its former partner, not mere inexperience. (3) In Collab-Overcooked, when the AGENDA-SETTER is replaced, most of the extra communication comes from the agent that STAYED - the incumbent pays the adaptation cost. (4) The swap penalty moves alongside HOW FAR INDEPENDENTLY FORMED TEAMS DRIFT APART: greedy decoding lowers both; doubling formation history raises both. RECOMMENDATION: in these settings agents are more fungible in task OUTCOME than in coordination EFFICIENCY; prioritise coordination efficiency over raw capability in roster management, and team stability yields efficiency gains. WHY IT LANDS ON THE SWARM SUBSTRATE. The design's core stance is roles are transient computational functions, released when the task ends (design doc 5.4), and swarm_demo's FRESH-EYES RULE deliberately rotates agents per stage and per gate. This paper says that rotation is NOT free: 16-63% more coordination overhead, growing with how long the role was held. The substrate's rotation buys AUDIT VALIDITY (no self-review) and the paper's cost is COMMUNICATION OVERHEAD not correctness - so this is a measured tradeoff to record, not a refutation. But it says: rotate for safety where safety needs it (the gates), and let stable working pairs persist elsewhere; and expect the STAYER, not the newcomer, to carry the re-coordination cost when the personal-assistant role churns (concept_reputation_selection_stays_non_calcifying).",
+      "tags": [
+        "role-transience",
+        "interchangeability",
+        "coordination-efficiency",
+        "convention-interference",
+        "swap-penalty",
+        "incumbent-pays",
+        "team-stability",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.05279"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.05279"
+      ]
     }
   ],
   "edges": [
@@ -29970,6 +29997,55 @@
       "target": "concept_a_detector_for_a_defect_class_will_commit_that_class_and_its_own_first_output_is_the_test",
       "type": "instantiates",
       "description": "the classifier's consolidate=0 was visible in its very first output and is what surfaced the blind spot - read the detector's own first output as a claim about the detector"
+    },
+    {
+      "id": "edge_interchangeability_challenges_demo_fresh_eyes",
+      "source": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "target": "artifact_swarm_demo_acceptance_test",
+      "type": "challenges",
+      "description": "swarm_demo's fresh-eyes rule rotates agents per stage and per gate on the assumption rotation is roughly free; this measures a 16-63% coordination-efficiency cost that grows with role tenure - the rule still buys audit validity, but not for free"
+    },
+    {
+      "id": "edge_interchangeability_refines_roles",
+      "source": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "target": "emergent_self_organizing_roles",
+      "type": "refines",
+      "description": "roles as transient computational functions have a measured cost: the transience itself raises communication-per-progress, and longer-held roles cost more to vacate"
+    },
+    {
+      "id": "edge_interchangeability_constrains_noncalc",
+      "source": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "target": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
+      "type": "constrains",
+      "description": "the decayed 'personal assistant is a standing wave' design churns the agenda-setter role; this says when the agenda-setter is swapped the INCUMBENT who stayed pays most of the re-coordination cost - the churn is not free and the cost lands off-target"
+    },
+    {
+      "id": "edge_interchangeability_constrains_reputation_module",
+      "source": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "target": "artifact_reputation_module",
+      "type": "constrains",
+      "description": "reputation.select() swaps agents freely across tasks by score; a coordination-efficiency term (or a stickiness bonus for a working pair) would price the swap the paper measures"
+    },
+    {
+      "id": "edge_interchangeability_compounds_floor3",
+      "source": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "target": "concept_a_gated_pipeline_with_no_self_review_needs_at_least_three_agents",
+      "type": "refines",
+      "description": "the k>=3 floor for gated pipelines already requires rotation capacity; this adds that each rotation past the safety minimum costs coordination efficiency, so 'more agents' is not a pure win"
+    },
+    {
+      "id": "edge_interchangeability_grounds_conventions",
+      "source": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "target": "emergent_social_conventions",
+      "type": "grounds",
+      "description": "emergent social conventions are usually framed as a capability; here they are also a LIABILITY on transfer - a convention learned with a former partner actively interferes with the new team's patterns (Hanabi: swapped > inexperienced)"
+    },
+    {
+      "id": "edge_interchangeability_constrains_design",
+      "source": "concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the design doc's 'roles are transient, not sticky' (5.4) needs a caveat: rotate for safety where safety needs it, let stable working pairs persist elsewhere, and budget the stayer's re-coordination cost"
     }
   ]
 }

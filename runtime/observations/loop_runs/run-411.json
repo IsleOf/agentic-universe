@@ -1,0 +1,51 @@
+{
+  "run": 411,
+  "increment": "Folded arXiv:2609.05279 (Testing Interchangeability in LLM Agent Teams; Gao et al.; 2026-09-04). Eight teams formed independently from one base model, agents keep private notebooks over 10 episodes, then role-matched agents traded between teams vs a placebo. FINDINGS: a swap costs little task score but raises communication-per-progress by 16-63%; in Hanabi a swapped agent is MORE expensive than an inexperienced one (convention interference from the former partner); in Collab-Overcooked when the agenda-setter is swapped, most extra communication comes from the agent that STAYED; the penalty tracks how far independently-formed teams drift apart. WHY IT LANDS: swarm_demo's fresh-eyes rule and the design's 'roles are transient' stance assume rotation is free - this prices it. The substrate's rotation buys AUDIT VALIDITY and the cost is COMMUNICATION OVERHEAD not correctness, so it is a measured tradeoff not a refutation: rotate for safety where safety needs it (the gates), let stable pairs persist elsewhere, and budget the STAYER's re-coordination cost when the personal-assistant role churns. Reframes emergent_social_conventions: a capability that is also a liability on transfer. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.05279",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.05279",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.05279",
+    "src:https://arxiv.org/abs/2609.05279"
+  ],
+  "trace_file": "runtime\\traces\\loop-411.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 411 OK · VALID · graph +1n/+7e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.86 · files +1~2-0 · novelty 1.00 · acts fold40%"
+}
