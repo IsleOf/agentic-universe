@@ -11733,6 +11733,93 @@
         "tools/improvement_loop.py",
         "runtime/observations/certificates/gate_certificates.jsonl"
       ]
+    },
+    {
+      "id": "concept_swarmsys_embedding_matched_allocation_with_validate_before_reinforce_is_the_closest_published_orchestratorless_design",
+      "label": "SwarmSys: orchestrator-less allocation by agent/event embedding match (cosine e-greedy), pheromone = reinforcement of matches that pass a Validator, evaporation left implicit - the closest published match to the flock design, at ~6x CoT cost",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.66,
+      "description": "arXiv:2510.10047 (Ruohao Li, Hongjun Liu, Leyi Zhao, Zisu Li, Jiawei Li, Jiajun Jiang, Linning Xu, Chen Zhao, Mingming Fan, Chen Liang; v1 2026-10-11, VERIFIED via abstract + HTML). A closed-loop distributed multi-agent reasoning framework with NO central orchestrator. Three soft roles - Explorers, Workers, Validators - cycling explore/exploit/validate. MECHANISM, which is the reason to fold it. (1) Agent profiles carry a competence embedding (declared abilities + performance history) and an availability embedding (workload/readiness); event profiles carry task text, dependency structure, progress log and a semantic embedding. (2) Allocation is a PULL match, not a handoff: normalized cosine compatibility Cnorm(i,j) = 0.5*(cos(v_agent, v_event)+1), e-greedy with e_i = 0.15 + (0.5 - mean_similarity_i)*0.2, exploration sampled proportional to similarity and exploitation sigmoid-weighted by a sharpness gamma. (3) PHEROMONE = 'each validated contribution reinforces the compatibility between an agent and an event, updating embeddings'; idle or invalid matches 'gradually decline in competitiveness as other profiles evolve, mimicking pheromone evaporation WITHOUT EXPLICIT DECAY'. RESULTS: GaoKao 76.2 vs GPTSwarm 65.5 (+10.7), SciCode Pass@Sub 45.2 vs CoT-SC 28.7 (+11.9), DeepResearch 42.5 vs Grok 40.2 (+2.3). Ablations at 4/8/14/20/32 agents; an 8-agent config is >= 1 Explorer, 6 Workers, 1 Validator. COST: $0.071/question at 8 agents vs $0.012 for a single GPT-4o CoT call (~6x). LIMITATIONS (stated): communication overhead grows with agent count and hurts latency-sensitive use; text-embedding profiling is not a learnable mechanism; reasoning and research tasks only, not embodied. NO PUBLIC REFERENCE IMPLEMENTATION as of 2026-09 - it is a paper, not a codebase. RELATION TO THIS PROJECT: it is the published cousin of concept_orchestratorless_flock... and artifact_fractal_flock_harness, and the validate-before-reinforce rule is exactly the gate placement the swarm-substrate design adopts. The 'no explicit decay' choice is treated here as a defect to fix, not a feature to copy: a 2-15 agent fleet can sit idle, so evaporation must be an explicit clock (exponential half-life + hard TTL), the same lesson runs 385-386 taught about pool-size-dependent thresholds. CURRENCY: 2025-10 work, GPT-4o / Grok generation; the coordination-scaling claim ('coordination scaling may rival model scaling') is a hypothesis, not a measured law.",
+      "tags": [
+        "swarm",
+        "orchestratorless",
+        "stigmergy",
+        "embedding-matching",
+        "pheromone",
+        "explorer-worker-validator",
+        "no-public-code",
+        "recency-2025-10",
+        "swarm-substrate"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2510.10047"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2510.10047",
+        "https://arxiv.org/html/2510.10047v1"
+      ]
+    },
+    {
+      "id": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
+      "label": "A trust score only avoids becoming permanent authority if it has a UCB exploration bonus AND exponential recency decay toward the seed prior - so an idle incumbent slides back to the mean and a 'personal assistant' role is a standing wave, not an appointment",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.6,
+      "description": "Run 389, synthesised for the swarm-substrate design from arXiv:2509.05764 (DRF: LLM-Agent Dynamic Reputation Filtering, VERIFIED via abstract) plus the project's own pattern_market_as_orchestrator and emergent_reputation_and_trust_dynamics. DRF's stack, adopted here: agent = a bandit arm; UCB (Upper Confidence Bound) selection balances an agent's historical performance against uncertainty about it; ELO-style rating adjustments on task outcome; a TEMPORAL DECAY component weights recency so stale performance does not dominate current selection. THE DESIGN: per agent keep Beta-Bernoulli (successes, failures) seeded (1,1); reputation = posterior mean; selection score = reputation + c*uncertainty + embedding_match - load_penalty, c ~ 0.5; update successes/failures on a gate verdict; ELO (K=24, seed 1000) for head-to-head critique/judgement pairs. THE ANTI-CALCIFICATION CORE is the decay, applied on every READ: shrink = 0.5**(idle_days / HALF_LIFE), HALF_LIFE ~ 14d; successes_eff = 1 + (successes-1)*shrink, likewise failures and ELO toward their seeds. An agent that stops contributing slides back toward the mean; the 'personal assistant' role (the agent the human talks to, the agent that gets meta-coordination work) is ALWAYS the current argmax of the selection score, recomputed per interaction - a standing wave, not an appointment, superseded the moment another agent's decayed reputation is higher. ABSTENTION IS NOT PUNISHED - an agent declining a task in its stated incompetence zone gets no failure increment, because emergent_self_organizing_roles found voluntary abstention was one of the valuable spontaneous behaviours. CAUTION carried from concept_mechanism_incentive_compat_does_not_transfer: keep the reputation EMPIRICAL (derived from outcomes) not DECLARED (from agent self-report), because a truthful mechanism does not make LLM agents self-report truthfully. And from the Sybil node (arXiv:2609.01873): agents sharing a base model produce correlated outcomes, so N reputations are not N independent signals - a quorum of 'independent' validators should prefer different base models.",
+      "tags": [
+        "reputation",
+        "trust",
+        "ucb-bandit",
+        "elo",
+        "recency-decay",
+        "non-calcifying",
+        "personal-assistant-emerges",
+        "swarm-substrate",
+        "recency-2025-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2509.05764"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2509.05764"
+      ]
+    },
+    {
+      "id": "artifact_swarm_substrate_prototype_design",
+      "label": "docs/swarm-substrate-prototype.md - a week-1 build list for a 2-15 agent non-hierarchical fleet: pheromone annotation layer + extended task ledger + ported Strands handoff + reputation module + two gates, all coordinating through files, no orchestrator object",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.55,
+      "description": "Run 389, owner request ('Prototype substrate for non-hierarchical agent swarm'). Two docs: docs/agent-fleets-and-swarm-substrate.md (the owner's landscape synthesis, committed with an editorial note that its [cite:NN] markers are unresolved) and docs/swarm-substrate-prototype.md (the concrete companion, this artifact). CORE DECISION: do not adopt a framework as the substrate. Strands Agents Swarm (Apache-2.0, the reference to READ - portable handoff_to_agent / complete_swarm_task contract, SharedContext model, repetitive-handoff anti-ping-pong window; gap: no validator gates, no annotation decay, no persistence), SwarmSys (paper only, best mechanism match, ~6x CoT cost), and Ruflo (MIT, ~40k stars, but default topology is a Queen-led hierarchy - the thing being rejected) each couple the substrate to a philosophy the project either has a better version of (fractal_flock) or rejects. BUILD instead on the repo's own task_ledger.py (deterministic next_ready) + fractal_flock.py (shared artifact store, bounded-neighbourhood read), plus a new SQLite pheromone-annotation layer. PHEROMONE SCHEMA: 7 load-bearing fields (task_ref, kind in {utility,warning,claim,bid,done}, agent, utility in [-1,1], confidence in [0,1], created_at, half_life_s, ttl_s) with effective_utility = utility*confidence*0.5**(age/half_life) and hard expiry at age>ttl. Aggregation is the confidence-weighted decayed sum; the threshold on that sum must scale with n_contributors (the run-385 ceiling lesson) and correlation widens its noise band rather than deflating it (the run-386 / Sybil lesson). GATES: on the edges of research->draft->critique->finalize, not the nodes. Stateless, single-use per task, rotated (no agent holds consecutive gate roles; an author never gates their own artifact), quorum-not-veto at G4, and every gate verdict is itself an annotation another agent can contradict. Week 1 builds only G1 (evidence) and G4 (release). WEEK-1 BILL OF MATERIALS: tools/pheromone.py, extend task_ledger.py with a stage column, tools/relay.py (ported handoff), tools/reputation.py (Beta-Bernoulli + UCB + 14-day decay), tools/gates.py (G1+G4), tools/swarm_demo.py (3-agent acceptance test), register all in selftest_all. DEFER: embeddings/vector match, ELO, VCG market payments, parallel stages, TUI, auto-execute tier. THE ONE STRUCTURAL COMMITMENT: coordination state lives in append-only files + a DB any agent can read, decays on a clock, is reaped by an unprivileged process - never in an orchestrator agent's context. That is the line that keeps roles transient, and it is the line task_ledger.py and fractal_flock.py already drew.",
+      "tags": [
+        "swarm-substrate",
+        "owner-request",
+        "pheromone-annotation",
+        "validator-gates",
+        "reputation",
+        "week-1-build-list",
+        "non-hierarchical",
+        "design-doc"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2510.10047",
+        "https://arxiv.org/abs/2509.05764",
+        "https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/"
+      ],
+      "evidence_links": [
+        "docs/swarm-substrate-prototype.md",
+        "docs/agent-fleets-and-swarm-substrate.md"
+      ]
     }
   ],
   "edges": [
@@ -28226,6 +28313,104 @@
       "target": "pattern_skill_induction",
       "type": "constrains",
       "description": "skill induction is the paper's SKILLS axis running unattended in this project: every induced skill is a harness expansion whose retention cost is currently unmeasured"
+    },
+    {
+      "id": "edge_swarmsys_supports_flock_concept",
+      "source": "concept_swarmsys_embedding_matched_allocation_with_validate_before_reinforce_is_the_closest_published_orchestratorless_design",
+      "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "type": "supports",
+      "description": "the published cousin: an allocation model with no central orchestrator, coordination via reinforced agent/event matches in shared profile state - the flock's 'coordinate through a shared store, not a message bus' claim, demonstrated on GaoKao/SciCode/DeepResearch"
+    },
+    {
+      "id": "edge_swarmsys_informs_flock_artifact",
+      "source": "concept_swarmsys_embedding_matched_allocation_with_validate_before_reinforce_is_the_closest_published_orchestratorless_design",
+      "target": "artifact_fractal_flock_harness",
+      "type": "informs",
+      "description": "fractal_flock could gain SwarmSys's embedding-matched pull allocation as a later arm - agents matched to open boundary nodes by competence embedding rather than taking the next one on their branch"
+    },
+    {
+      "id": "edge_swarmsys_refines_stigmergy",
+      "source": "concept_swarmsys_embedding_matched_allocation_with_validate_before_reinforce_is_the_closest_published_orchestratorless_design",
+      "target": "emergent_stigmergic_coordination",
+      "type": "refines",
+      "description": "makes the stigmergic mechanism concrete: the 'trace left in the environment' is a reinforced compatibility weight between an agent profile and an event profile, updated only after a Validator passes the contribution"
+    },
+    {
+      "id": "edge_substrate_design_extends_flock_artifact",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "artifact_fractal_flock_harness",
+      "type": "extends",
+      "description": "the week-1 build reuses fractal_flock's shared artifact store and bounded-neighbourhood read as the blackboard, adding a SQLite pheromone-annotation layer and a reputation module on top"
+    },
+    {
+      "id": "edge_substrate_design_extends_ledger",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "extends",
+      "description": "the task queue is task_ledger.py with a stage column (research/draft/critique/final) and a claim field; next_ready() stays the deterministic Sequential-protocol driver"
+    },
+    {
+      "id": "edge_substrate_design_instantiates_roles",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "emergent_self_organizing_roles",
+      "type": "instantiates",
+      "description": "the design's 'roles are transient computational functions, released when the task ends' and 'abstention is not punished' come straight from this node's VERIFIED read of Drop the Hierarchy and Roles (5,006 unique roles from 8 agents; Sequential protocol wins)"
+    },
+    {
+      "id": "edge_substrate_design_informs_market",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "pattern_market_as_orchestrator",
+      "type": "informs",
+      "description": "reputation-weighted selection is the week-1 mechanism; the VCG market layer is the clean later swap the design names as a defer-item, reusing the same reputation surface"
+    },
+    {
+      "id": "edge_reputation_design_grounds_rep_dynamics",
+      "source": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
+      "target": "emergent_reputation_and_trust_dynamics",
+      "type": "grounds",
+      "description": "turns 'repeated interaction produces reputation signals' into a concrete update+decay rule: Beta-Bernoulli counts, UCB selection bonus, 14-day exponential decay toward the (1,1) seed"
+    },
+    {
+      "id": "edge_reputation_design_core_of_substrate_design",
+      "source": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "core_of",
+      "description": "the anti-calcification mechanism is the reputation module: without recency decay the 'personal assistant' role calcifies into the appointment the request forbids"
+    },
+    {
+      "id": "edge_reputation_design_constrained_by_mechanism_transfer",
+      "source": "concept_mechanism_incentive_compat_does_not_transfer",
+      "target": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
+      "type": "constrains",
+      "description": "keep the reputation empirical (from gate outcomes) not declared (from agent self-report), because a truthful mechanism does not make LLM agents self-report truthfully"
+    },
+    {
+      "id": "edge_reputation_design_constrained_by_sybil",
+      "source": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "target": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
+      "type": "constrains",
+      "description": "agents sharing a base model produce correlated outcomes, so N reputations are not N independent signals; a validator quorum should prefer distinct base models"
+    },
+    {
+      "id": "edge_substrate_design_informs_ostrom",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "informs",
+      "description": "the rotated, quorum-not-veto, self-contradictable gate design is graduated institutional control run by the population - the Ostrom-commons stance applied to validator checkpoints rather than to sanctioning"
+    },
+    {
+      "id": "edge_substrate_design_informs_cohort_monitor",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "artifact_cohort_monitor",
+      "type": "informs",
+      "description": "the pheromone aggregate is another pool-sized sum: cohort_monitor should read the annotations as its per-worker signal, and its run-385/386 threshold and correlation lessons apply directly"
+    },
+    {
+      "id": "edge_substrate_design_instantiates_ceiling_lesson",
+      "source": "artifact_swarm_substrate_prototype_design",
+      "target": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "type": "instantiates",
+      "description": "the schema's aggregation section carries the fix forward: the threshold on the confidence-weighted decayed sum scales with n_contributors rather than being an absolute constant"
     }
   ]
 }

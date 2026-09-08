@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 396 nodes, 1599 edges · **Date:** 2026-09-05
+**Graph at generation:** 399 nodes, 1613 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -347,8 +347,10 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - hooks/pre-commit — `artifact_phase5_exec_guard`
 - https://arxiv.org/abs/2505.00234 — `artifact_probe_memory_horizon_rig`
 - https://arxiv.org/abs/2507.18224 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
+- https://arxiv.org/abs/2509.05764 — `artifact_swarm_substrate_prototype_design`, `concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior`
 - https://arxiv.org/abs/2509.26354 — `concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker`
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
+- https://arxiv.org/abs/2510.10047 — `artifact_swarm_substrate_prototype_design`, `concept_swarmsys_embedding_matched_allocation_with_validate_before_reinforce_is_the_closest_published_orchestratorless_design`
 - https://arxiv.org/abs/2510.14548 — `concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model`
 - https://arxiv.org/abs/2601.21112 — `concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent`, `concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident`, `concept_llm_monitors_often_do_better_with_less_information_and_extract_then_score_beats_scoring_the_whole_trajectory`
 - https://arxiv.org/abs/2603.29231 — `artifact_probe_memory_horizon_rig`, `concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance`
@@ -366,6 +368,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.03422 — `concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it`
 - https://arxiv.org/abs/2609.04280 — `concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation`, `concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion`
 - https://arxiv.org/html/2604.21590v1 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`
+- https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/ — `artifact_swarm_substrate_prototype_design`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`

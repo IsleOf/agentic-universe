@@ -1,0 +1,61 @@
+{
+  "run": 389,
+  "increment": "Owner request mid-loop: prototype substrate for a non-hierarchical 2-15 agent swarm, rejecting a hard-coded Chief-of-Staff. Delivered docs/agent-fleets-and-swarm-substrate.md (owner's landscape synthesis, committed with an editorial note that its [cite:NN] markers are unresolved) and docs/swarm-substrate-prototype.md (the concrete companion: substrate comparison, pheromone schema, gate design, trust-scoring, week-1 build list). Folded arXiv:2510.10047 (SwarmSys - orchestrator-less allocation by embedding match, pheromone = validate-before-reinforce, evaporation implicit, ~6x CoT cost, no public code) and arXiv:2509.05764 (DRF - UCB bandit + ELO + temporal decay for agent selection). RECOMMENDATION: adopt no framework - Strands Swarm (Apache-2.0, the reference to read), SwarmSys (paper only), Ruflo (MIT but Queen-led hierarchy by default) each couple the substrate to a philosophy the project has a better version of (fractal_flock) or rejects. Build on task_ledger.py + fractal_flock.py + a new SQLite pheromone layer. Pheromone aggregation carries the run-385 pool-size-ceiling fix and the run-386/Sybil correlation fix forward before they can bite. Gates rotate, are stateless and quorum-not-veto so they cannot calcify. Reputation decays 14-day toward the seed so the 'personal assistant' role is a standing wave. +3 nodes, +14 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 8,
+  "trace_valid": true,
+  "counts": {
+    "claims": 4,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 3,
+    "edges": 14
+  },
+  "file_footprint": {
+    "added": 3,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": true,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2510.10047",
+      "verified": true
+    },
+    {
+      "id": "src:https://arxiv.org/abs/2509.05764",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2510.10047",
+      "verified": false
+    },
+    {
+      "id": "arXiv:2509.05764",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2509.05764",
+    "arXiv:2510.10047",
+    "src:https://arxiv.org/abs/2509.05764",
+    "src:https://arxiv.org/abs/2510.10047"
+  ],
+  "trace_file": "runtime\\traces\\loop-389.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 389 OK · VALID · graph +3n/+14e · cites 2v/4 · idle-streak 0 · legible 1.00 · verified-frac 0.90 · files +3~2-0 · novelty 0.44"
+}

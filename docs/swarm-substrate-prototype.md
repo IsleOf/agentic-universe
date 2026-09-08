@@ -1,0 +1,409 @@
+# Swarm Substrate Prototype — Implementation Comparison and Week-1 Build List
+
+> Companion to [`agent-fleets-and-swarm-substrate.md`](agent-fleets-and-swarm-substrate.md).
+> That file is the landscape synthesis; this one is the concrete build decision: three candidate
+> substrates compared on the dimensions that matter for a 2–15 agent non-hierarchical fleet, a
+> pheromone-annotation schema, a validator-checkpoint design, a trust-scoring mechanism, and a
+> minimal architecture split into *build week 1* vs *defer*.
+>
+> **Framing constraint (from the request):** we are rejecting a hard-coded Chief-of-Staff
+> orchestrator. Coordination comes from a shared substrate (queue + store + annotation layer) and
+> a light Sequential-style protocol. Roles are transient. A "personal assistant" role is allowed
+> to *emerge* from performance data but must not calcify.
+>
+> **What this repo already has**, and the comparison must be read against it:
+> [`tools/task_ledger.py`](../tools/task_ledger.py) (run 244) — a deterministic file-backed task
+> ledger with a deterministic `next_ready()` and `sweep_stale()`;
+> [`tools/fractal_flock.py`](../tools/fractal_flock.py) (run 294) — a shared artifact store with
+> bounded-neighbourhood reads and adaptive spawn/compress, *no model calls*;
+> [`tools/cohort_monitor.py`](../tools/cohort_monitor.py) and
+> [`tools/executor_pool.py`](../tools/executor_pool.py) (runs 353–388) — a cross-agent monitor
+> and a disposable-credential worker pool. The graph nodes
+> `concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner`,
+> `pattern_market_as_orchestrator`, `pattern_ostrom_swarm_governance`,
+> `emergent_self_organizing_roles`, and `emergent_reputation_and_trust_dynamics` are the prior
+> art *inside* the project.
+
+---
+
+## TL;DR
+
+- **Don't adopt a framework as the substrate.** Strands Swarm, SwarmSys, and Ruflo each solve a
+  different problem than the one posed, and each brings coupling that fights the "minimal upfront
+  structure" goal. **Borrow patterns, build the substrate on `task_ledger.py` + `fractal_flock.py`.**
+- **Strands Agents Swarm** is the closest usable reference and the one to *read* — its handoff
+  tools, shared-context model, and anti-ping-pong safety are directly portable, Apache-2.0, and
+  low-friction. Its gap is exactly ours to fill: no validator gates, no annotation decay, no
+  cross-run persistence.
+- **SwarmSys** is a paper with no code (as of 2026-09). Its *mechanism* — embedding-matched task
+  allocation with pheromone-as-reinforcement and an Explorer/Worker/Validator cycle — is the best
+  published match for what we want, and worth reimplementing in miniature. Its cost (~6× a single
+  CoT call at 8 agents) and its "no explicit decay" choice are cautions.
+- **Ruflo** is large, MIT, and Claude-Code-native, but its default topology is a **Queen-led
+  hierarchy** with consensus protocols bolted on — the thing we are explicitly rejecting. Mesh
+  mode exists but is not the grain of the tool. High surface area, heavy coupling.
+- **Pheromone schema:** a 7-field annotation row (`utility`, `confidence`, `ttl`, `half_life`,
+  `agent`, `task_ref`, `created_at`) with a computed `effective_utility` that decays
+  exponentially and hard-expires. SQLite for week 1; a vector column is a week-3 add.
+- **Validators:** gates sit *between stages*, are *stateless*, *quorum-rotated*, and *logged
+  adversarially* — the design that stops a gate becoming a permanent authority is that no agent
+  holds the gate role twice in a row and every gate verdict is itself checkable.
+- **Trust scoring:** per-agent Beta-Bernoulli reputation + UCB selection bonus + exponential
+  recency decay, ELO-style pairwise updates for head-to-head critique tasks. Prior art: DRF
+  (arXiv:2509.05764), AgentLance/VCG (already in the graph), classic UCB1 / Thompson / TrueSkill.
+
+---
+
+## 1. Substrate comparison
+
+### 1.1 The three candidates on the requested dimensions
+
+| Dimension | **Strands Agents Swarm** (AWS) | **SwarmSys** (arXiv:2510.10047) | **Ruflo** (`ruvnet/ruflo`) |
+|---|---|---|---|
+| **Status** | Production OSS, Python + TypeScript, [docs](https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/) | Research paper, **no public code** as of 2026-09 ([arXiv](https://arxiv.org/abs/2510.10047), [HF](https://huggingface.co/papers/2510.10047)) | Production OSS, ~40k★, Claude-Code-native ([GitHub](https://github.com/ruvnet/ruflo)) |
+| **Setup complexity** | **Low.** `pip install strands-agents`; construct `Agent` objects; `Swarm([...], entry_point=...)`; call it. One file. | **High.** Reimplement from the paper: embeddings, ε-greedy matcher, EWV cycle, profile store. | **Medium but heavy.** `npx ruflo@latest init` then "use Claude Code normally"; a hooks system auto-routes in the background. Large surface (100+ agents, plugins, AgentDB). |
+| **Shared-memory model** | Python: mutable `SharedContext` — a key-value dict that **accumulates** across agents (original task, agent history, contributed knowledge, agent roster). TypeScript: **immutable** JSON context passed in each handoff. In-process; no persistence primitive in the swarm object. | Two embedding-backed profile stores: **agent profiles** (competence embedding from declared abilities + performance history; availability embedding from workload) and **event profiles** (task text, dependency structure, progress log, participants, semantic embedding). This *is* the shared state — agents match against it, not message each other. | **AgentDB + HNSW vector index** ("ruflo-rag-memory"), hybrid graph-hop + diversity ranking; `ruflo-rvf` plugin persists/restores agent memory across sessions. Benchmarked ~1.9× faster than brute-force at N=20k. |
+| **Handoff mechanism** | Built-in tools auto-attached to every agent: `handoff_to_agent(name, message, context)` and `complete_swarm_task(...)` (Python); structured-output `{agentId, message, context}` routing (TypeScript). The framework tracks history and enforces limits. | No explicit handoff. Allocation is **pull-style**: the ε-greedy matcher assigns an agent to an "event" by `Cnorm(i,j) = ½(cos(v_agent, v_event)+1)`, exploration ∝ similarity, exploitation via sigmoid weighting. Agents cycle Explore → Work → Validate. | Hooks-driven auto-routing. Topology is **Queen-led hierarchy** by default with **Raft / Byzantine / Gossip** consensus; mesh topology is available but not the default grain. SONA re-weights routing by observed success rate. |
+| **Validator / gate support** | **None in the Swarm pattern.** Timeouts, step caps, and repetitive-handoff detection only. (Cedar authz, HITL, and steering exist elsewhere in the Strands SDK, not swarm-scoped.) | **First-class.** "Validator" is one of the three roles; a contribution is only reinforced *after* validation. Validation gates the pheromone update. | Security guardrails (AIDefence: prompt-injection blocking, PII detection) — **not** artifact-quality gates. Consensus protocols provide agreement, not correctness checking. |
+| **Decay / TTL for annotations** | **None.** Shared context grows monotonically within a run and is discarded at the end. | **Implicit only.** "Idle or invalid matches receive no reinforcement and gradually decline in competitiveness as other profiles evolve — mimicking pheromone evaporation *without explicit decay*." No half-life, no TTL. The paper flags this as a limitation direction. | **Not documented.** No stated expiry, decay schedule, or pruning policy for AgentDB rows. |
+| **License / cost** | **Apache-2.0.** Cost = model inference only. | N/A (no code). Reported cost: **$0.071 / question at 8 agents** on exam tasks — ~6× a single GPT-4o CoT call ($0.012). Comm overhead grows with agent count. | **MIT.** Free OSS core; hosted demos free with no API key; enterprise support is a paid add-on but optional. |
+| **Fit to "no hard-coded Chief-of-Staff"** | **Good.** Genuinely peer-to-peer within a run; `entry_point` is a starting agent, not a boss. | **Best.** No orchestrator at all — allocation is emergent from embedding match + reinforcement. | **Poor by default.** "Queen-led hierarchy" is the built-in model. Achieving non-hierarchical operation means fighting the tool's grain. |
+| **Fit to 2–15 agents** | Good — examples run 3–6 agents; no scaling machinery needed. | Overkill at the low end — ablations start at 4 and the value shows at 8–32; embedding infra is fixed cost. | Overkill — designed for 100+; the coordination machinery (consensus, SONA) is dead weight at N≤15. |
+
+### 1.2 What each is actually good for
+
+- **Strands Swarm** — the reference implementation to read before writing our own. Its
+  `handoff_to_agent` / `complete_swarm_task` contract, its "every agent sees the full shared
+  context" model, and its `repetitive_handoff_detection_window` / `repetitive_handoff_min_unique_agents`
+  anti-ping-pong heuristic are all directly portable and battle-tested. Adopt the *shapes*, not
+  the dependency.
+- **SwarmSys** — the mechanism blueprint. Embedding-matched allocation + validate-before-reinforce
+  + an explicit explore/exploit/validate cycle is exactly the "pheromone field" the request asks
+  for, and it is the only one of the three with *no* central coordinator. Reimplement a miniature
+  version (see §5). Treat "no explicit decay" as a bug to fix, not a feature to copy.
+- **Ruflo** — a source of ideas on memory (AgentDB + HNSW, cross-session recall) and on
+  topology-by-success-rate (SONA). Not a substrate to build on for this goal: the hierarchy is
+  load-bearing and the surface area is enormous.
+
+### 1.3 Recommendation
+
+**Build the substrate in-repo, borrowing:**
+
+- the **file-ledger discipline** already in [`task_ledger.py`](../tools/task_ledger.py)
+  (atomic write, append-only audit, deterministic `next_ready()`) — this is the queue;
+- the **shared-artifact-store + bounded-neighbourhood-read** already in
+  [`fractal_flock.py`](../tools/fractal_flock.py) — this is the blackboard;
+- **Strands's handoff/complete tool contract and anti-ping-pong window** — ported, ~40 lines;
+- **SwarmSys's validate-before-reinforce rule and embedding match** — reimplemented small;
+- **DRF's UCB + ELO + recency-decay reputation** — for the trust layer (§4).
+
+Rationale: every candidate framework couples the substrate to a coordination philosophy we
+either already have a better version of (`fractal_flock`) or explicitly reject (Ruflo's queen).
+The parts worth taking are small, well-specified, and permissively licensed.
+
+---
+
+## 2. Pheromone annotation schema
+
+A **pheromone annotation** is a small row any agent can write and any agent can read, with no
+central coordinator, that says *"this artifact / task / direction is worth N to me, I'm M
+confident, and this opinion should fade."*
+
+### 2.1 Fields
+
+| Field | Type | Meaning | Notes |
+|---|---|---|---|
+| `id` | text (uuid) | annotation identity | client-generated; writes are idempotent on `id` |
+| `task_ref` | text | the task, artifact node, or direction this annotation is *about* | foreign key into the task ledger / artifact graph |
+| `kind` | text | `utility` \| `warning` \| `claim` \| `bid` \| `done` | small closed vocabulary; unknown kinds are stored and surfaced, never dropped (the run-365 rule) |
+| `agent` | text | the contributing agent's id | never trusted as authority — see §4; used for decay-per-agent and free-rider detection |
+| `utility` | real, `[-1, 1]` | signed value estimate: how much acting here helps (or, negative, hurts) | the "pheromone strength" |
+| `confidence` | real, `[0, 1]` | the agent's self-assessed reliability of this estimate | multiplies utility in aggregation; **not** derived from the text (would inflate) |
+| `created_at` | real (epoch s) | write time | the only clock the decay math needs |
+| `half_life_s` | real | seconds for `effective_utility` to halve | default 3600; agents may set shorter for volatile signals |
+| `ttl_s` | real | hard expiry: the row is ignored (and later reaped) once `age > ttl_s` | default `6 * half_life_s` |
+| `evidence` | text (json) | optional: links to artifacts, prior annotations, tool outputs | provenance for the validator layer (§3) |
+| `supersedes` | text (uuid, nullable) | this annotation replaces an earlier one by the same agent on the same `task_ref` | keeps the field append-only while letting an agent change its mind |
+
+### 2.2 Decay — the part the frameworks get wrong
+
+SwarmSys leaves evaporation implicit ("other profiles evolve"); that only works when the
+population is churning fast. For a 2–15 agent fleet that can sit idle, decay must be **explicit
+and time-based**:
+
+```
+age              = now - created_at
+effective_utility = utility * confidence * 0.5 ** (age / half_life_s)      if age <= ttl_s
+                  = 0  (and row is reap-eligible)                          if age  > ttl_s
+```
+
+Aggregation over a `task_ref` is the **confidence-weighted, decayed sum**, clipped:
+
+```
+signal(task_ref) = clip( Σ_a effective_utility(a) , -1, 1 )     over live annotations a
+```
+
+Two guardrails, both learned the hard way in this repo's own monitor work (runs 385–386):
+
+1. **The aggregate's threshold must scale with the number of contributors.** A fixed "act if
+   `signal > 0.7`" line silently becomes "act if ≥4 mildly-positive agents" as the fleet grows.
+   Carry `n_contributors` and compare against `k*mean + z*sd*sqrt(n)`, not a constant. (See
+   `concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling...`.)
+2. **Correlated agents are not independent votes.** If several agents share a base model their
+   annotations correlate (~0.7, per arXiv:2609.01873). Correlation widens the *noise band* on
+   `signal`, it does not reduce the sum. Track it; don't deflate the score with it.
+
+### 2.3 Storage
+
+**Week 1: SQLite.** One table, the schema above, plus:
+
+```sql
+CREATE INDEX pher_task ON pheromone(task_ref);
+CREATE INDEX pher_live ON pheromone(created_at);   -- for the reaper
+```
+
+Reads are `SELECT ... WHERE task_ref = ? AND (? - created_at) < ttl_s`. Writes are
+`INSERT OR REPLACE ON id`. A background **reaper** (`DELETE WHERE ? - created_at > ttl_s`) runs
+every N minutes — this is the only privileged process and it does nothing but garbage-collect.
+Concurrency: SQLite WAL mode handles 2–15 writers fine; if it ever doesn't, the same schema drops
+into Redis (hash per `task_ref`, `EXPIRE` for TTL) or Postgres unchanged.
+
+**Week 3+: add a vector column.** `embedding BLOB` on the artifact/direction rows (not the
+annotations), for SwarmSys-style "which agent's competence embedding best matches this open
+task." Local model (`bge-small`, `all-MiniLM`) or a hosted embedding endpoint; `sqlite-vec` or a
+small FAISS/Chroma index. This is what turns "agents read the board" into "agents are *matched* to
+work" — but it is an optimization, not a week-1 need.
+
+### 2.4 Read/write contract (no coordinator)
+
+```
+substrate.annotate(task_ref, kind, utility, confidence, *, agent,
+                    half_life_s=3600, ttl_s=None, evidence=None, supersedes=None) -> id
+substrate.read(task_ref) -> {"signal": float, "n_contributors": int,
+                             "annotations": [<live rows, decayed>], "corr_estimate": float}
+substrate.board(limit=50) -> [<task_refs ranked by |signal|, freshest first>]
+```
+
+Any agent calls any of these at any time. There is no lock, no turn, no permission check on
+*read*. `annotate` is the only mutation and it is monotonic (append + supersede, never
+in-place edit).
+
+---
+
+## 3. Validator / judge checkpoint design
+
+### 3.1 Where the gates sit
+
+For the canonical pipeline **research → draft → critique → finalize**, gates sit **on the edges,
+not the nodes**:
+
+```
+  research ──[G1: evidence gate]──▶ draft ──[G2: claim gate]──▶ critique ──[G3: resolution gate]──▶ finalize ──[G4: release gate]──▶ done
+```
+
+| Gate | Fires when | Checks | Pass / fail action |
+|---|---|---|---|
+| **G1 evidence** | a research artifact is posted | every claim in the artifact has ≥1 `evidence` link; links resolve; no fabricated citations | fail → annotation `kind=warning` on the artifact, task returns to `pending` with the gate's notes |
+| **G2 claim** | a draft cites research artifacts | draft claims are entailed by (not just adjacent to) the cited research; numbers match | fail → draft bounced to its author with diffs |
+| **G3 resolution** | critique round completes | every critique point is either addressed in a revision or explicitly rebutted with reasoning; no silent drops | fail → back to critique; after 2 failures, escalate to human |
+| **G4 release** | artifact proposed as final | computable checks pass (tests, schema, link-check); ≥2 independent validators agree; no unresolved `warning` annotations on the task | fail → stays `pending`; **never auto-releases** anything outward-facing |
+
+This mirrors the loop's own `holdout_verifier2` + `improvement_loop.verify_loop_edit` design
+(two independent scorers, conservative on disagreement) and the "insert lightweight validator
+gates between stages to keep error growth linear" principle from the swarm-practice literature.
+
+### 3.2 What stops a gate becoming a permanent authority
+
+The failure mode the request names — a validator calcifying into a de-facto boss — is real. Four
+mechanisms, all cheap:
+
+1. **The gate role rotates and is single-use per task.** `validator-for-task-42-G3` is a role an
+   agent holds for exactly one adjudication. The trust layer (§4) picks *which* agent, weighted
+   by reputation, but **no agent may hold consecutive gate roles on the same task**, and an agent
+   that authored an artifact can never gate it.
+2. **Gate verdicts are themselves annotations, and themselves checkable.** A `G4` verdict is a
+   `kind=claim` annotation with `evidence`. A later agent (or a human) can post a
+   `kind=warning` that contradicts it, which reopens the task. The gate has no special write
+   permission — it writes the same rows everyone writes.
+3. **Quorum, not veto.** G4 needs *≥2 independent* validators (different base model where
+   possible — arXiv:2609.03422 shows same-family agreement is nearly free and nearly
+   meaningless). A single validator can *flag* but not *block*.
+4. **Gates are stateless.** A gate reads the task + its annotations, emits a verdict, and
+   forgets. It accumulates no private model of the project, so there is nothing for authority to
+   accrete *into*. Reputation accrues to agents (§4); gates are a function those agents
+   temporarily compute.
+
+### 3.3 Throughput vs error-catching at low N
+
+With 2–15 agents, pulling 2 for a quorum gate is 13–100% of the fleet. Tuning:
+
+- **G1/G2/G3 are single-validator** (flag-only, cheap, frequent). **Only G4 needs quorum.**
+- G4 quorum can be **1 agent + 1 computable check** when no second independent model is available
+  — the computable check is the "independent" verifier.
+- A task with **zero live `warning` annotations and passing computable checks** can **skip G1–G3**
+  and go straight to a G4 quorum. Gates are a tax on *contested* work, not all work.
+
+---
+
+## 4. Trust / utility scoring — letting a "personal assistant" emerge without calcifying
+
+### 4.1 The mechanism
+
+Per agent `a`, maintain:
+
+```
+successes_a, failures_a         Beta-Bernoulli counts, seeded (1, 1)
+reputation_a = successes_a / (successes_a + failures_a)          posterior mean
+uncertainty_a = sqrt( reputation_a (1-reputation_a) / (successes_a + failures_a) )
+elo_a                            ELO rating, seeded 1000, for head-to-head critique/judgement tasks
+last_active_a                    epoch seconds
+```
+
+**Selection** (which agent gets offered a task, or a gate role) uses a **UCB bonus**:
+
+```
+score_a(task) = reputation_a
+              + c * uncertainty_a                       # exploration: try under-sampled agents
+              + match(competence_embed_a, task_embed)   # SwarmSys-style fit, once §2.3 lands
+              - load_penalty_a                          # current open tasks
+```
+
+Offer the task to the top-scoring *available* agent; ties broken randomly. `c ≈ 0.5` — high
+enough that a new agent gets real chances before its reputation is trusted.
+
+**Update after outcome** (gate verdict or downstream acceptance):
+
+```
+on success:  successes_a += 1
+on failure:  failures_a  += 1
+on abstention (agent declined a task in its stated incompetence zone):  no change   # abstention is not punished — it is the behaviour "Drop the Hierarchy" found valuable
+```
+
+For **head-to-head** tasks (agent X's critique vs agent Y's draft, or two validators disagreeing),
+apply an **ELO update** on the pair:
+
+```
+expected_X = 1 / (1 + 10 ** ((elo_Y - elo_X) / 400))
+elo_X += K * (outcome_X - expected_X)         K = 24
+elo_Y += K * ((1 - outcome_X) - (1 - expected_X))
+```
+
+### 4.2 Decay — the anti-calcification core
+
+Every reputation read applies **exponential recency decay** toward the prior:
+
+```
+age_days           = (now - last_active_a) / 86400
+shrink             = 0.5 ** (age_days / REP_HALF_LIFE_DAYS)     # REP_HALF_LIFE_DAYS ≈ 14
+successes_eff      = 1 + (successes_a - 1) * shrink             # decays toward the (1,1) seed
+failures_eff       = 1 + (failures_a  - 1) * shrink
+elo_eff            = 1000 + (elo_a - 1000) * shrink
+```
+
+Consequences, all intended:
+
+- An agent that stops contributing **slides back toward the mean** — no permanent incumbency.
+- The "personal assistant" role (the agent the human talks to, the agent that gets meta-coordination
+  tasks) is **always the current argmax of `score_a(assistant_task)`**, recomputed per
+  interaction. It is a standing wave, not an appointment. A better agent overtakes it the moment
+  its decayed reputation is higher.
+- A burst of luck decays away in ~2 weeks unless sustained.
+- **Free-rider / sybil detection:** an agent whose annotations are frequently contradicted by
+  gates (`kind=warning` posted against its `kind=claim`) accrues `failures`; an agent that only
+  ever posts low-confidence me-too annotations shows high volume but near-zero
+  `successes - failures` and never wins selection.
+
+### 4.3 Prior art
+
+| Source | What to take |
+|---|---|
+| **DRF — LLM-Agent Dynamic Reputation Filtering** ([arXiv:2509.05764](https://arxiv.org/abs/2509.05764)) | The exact stack proposed here: UCB bandit for agent selection (agent = arm), ELO-style reputation updates on task outcome, temporal decay weighting recency. Closest published match. |
+| **AgentLance / market-as-orchestrator** (in-graph: `pattern_market_as_orchestrator`, arXiv:2608.23867) | Agents bid with private cost estimates; allocator picks by bid + *public reputation*; VCG-style payment makes honest cost-reporting dominant. The reputation surface is reusable; the VCG layer is a defer-item. |
+| **Multi-agent conversational bandit** ([arXiv:2501.01849](https://arxiv.org/abs/2501.01849)) | Treating each candidate output as a bandit arm for online selection — the pattern for choosing *among drafts*, not just among agents. |
+| **Self-Resource Allocation in Multi-Agent LLM Systems** ([arXiv:2504.02051](https://arxiv.org/abs/2504.02051)) | Evidence on when agents can allocate work among themselves vs when a mechanism is needed. |
+| **Classic** — UCB1 (Auer 2002), Thompson sampling, TrueSkill / Glicko | Bounded-regret selection; TrueSkill if per-task uncertainty needs to be first-class rather than derived. |
+| In-graph: `emergent_reputation_and_trust_dynamics`, `concept_mechanism_incentive_compat_does_not_transfer` | The caution: a truthful *mechanism* does not make LLM agents *bid* truthfully. Keep the reputation empirical (outcomes), not declared. |
+
+---
+
+## 5. Minimal viable starting architecture
+
+### 5.1 Bill of materials
+
+| Component | Build week 1 | Defer | Rationale |
+|---|---|---|---|
+| **Task queue** | Extend [`task_ledger.py`](../tools/task_ledger.py): add `claim_by`, `stage` (research/draft/critique/final), keep deterministic `next_ready()` and `sweep_stale()` | Priority scheduling, dependency DAG visualisation | The ledger already solves dropped-tasks; only needs a `stage` column and a claim field |
+| **Shared blackboard** | Reuse [`fractal_flock.py`](../tools/fractal_flock.py)'s artifact store + bounded-neighbourhood read | Fractal spawn/compress (already built, wire later) | Bounded reads keep per-agent context flat as the fleet grows |
+| **Pheromone annotation layer** | New `tools/pheromone.py` — SQLite table from §2.1, `annotate()` / `read()` / `board()`, exponential decay + hard TTL, background reaper | Vector/embedding column (§2.3), correlation-aware noise band | ~150 lines stdlib + sqlite3; this is the "field" the swarm coordinates through |
+| **Handoff / turn protocol** | Port Strands's `handoff_to_agent` + `complete_task` contract and the repetitive-handoff window into a `tools/relay.py`; Sequential order = ledger's `next_ready()` | Structured-output routing, parallel stages | Sequential-with-shared-context is the protocol "Drop the Hierarchy" found beats both extremes |
+| **Validator gates** | G1 + G4 only (evidence gate, release gate). Single-validator G1; G4 = 1 agent + computable checks. Verdicts are annotations. | G2, G3, cross-family quorum, escalation ladder | Two gates catch most cascades; add the middle gates when contested work appears |
+| **Trust / reputation** | `tools/reputation.py` — Beta-Bernoulli counts + UCB selection score + exponential recency decay. Outcome hook from G4. | ELO head-to-head, embedding match term, VCG payments, sybil clustering | Selection + decay is the anti-calcification core; ELO matters only once head-to-head tasks exist |
+| **Human interface** | A `board` CLI: `python -m tools.pheromone board` + `task_ledger` status view. Status per agent: `working/blocked/done/idle` from claim + heartbeat | Herdr-style TUI, NotchAgent-style ambient display, notifications | Situational awareness without micromanagement; the CLI is enough to start |
+| **Autonomy ladder** | Draft-only by default; agents may write to `runtime/` and `docs/` but **not** commit, push, or call external services | Auto-execute tier for low-risk local writes; per-agent scoped credentials (extend `executor_pool.py`) | Matches the repo's existing "one outer gate" stance; nothing outward-facing without human approval |
+| **Monitor** | Wire [`cohort_monitor.py`](../tools/cohort_monitor.py) to read pheromone annotations as the per-worker signal | Extractor/EaE pipeline, adaptive threshold tuning | The pool-size and correlation lessons from runs 385–388 already apply here |
+
+### 5.2 Week-1 build list (concrete, ordered)
+
+1. **`tools/pheromone.py`** — SQLite annotation store. Schema from §2.1. Functions:
+   `annotate()`, `read(task_ref)`, `board(limit)`, `_reap()`. Decay + TTL from §2.2. `selftest`
+   subcommand with a pool-size sweep (`range(2, 16)`) and a decay-over-time check. **~150 lines,
+   pure stdlib.**
+2. **Extend `tools/task_ledger.py`** — add `stage` (`research|draft|critique|final|done`) and
+   `claim_by`; `next_ready()` returns the oldest `pending` task whose deps are `done`, preferring
+   earlier stages. Keep the atomic-write + audit-log discipline. Add `sweep_stale` heartbeat.
+3. **`tools/relay.py`** — port the Strands handoff contract: `handoff(to_hint, message,
+   context)` writes a `kind=done` annotation + a new ledger task; `complete(task_ref, artifact)`
+   closes it. Repetitive-handoff guard: refuse a handoff that would make the last
+   `window=6` handoffs use `< 3` unique agents.
+4. **`tools/reputation.py`** — Beta-Bernoulli `(successes, failures)` per agent in a JSON file;
+   `score(agent, task)` = reputation + `0.5 * uncertainty` − `load_penalty`; `record(agent,
+   outcome)`; exponential recency decay (`half_life = 14 days`) applied on every read. `selftest`
+   asserts a stale agent decays toward the mean and a new agent gets exploration priority.
+5. **`tools/gates.py`** — `g1_evidence(artifact)` (every claim has a resolving `evidence` link)
+   and `g4_release(task_ref)` (computable checks pass + ≥1 validator annotation + zero live
+   `warning`s). Verdicts written via `pheromone.annotate(kind="claim"|"warning")`. No special
+   permissions.
+6. **`tools/swarm_demo.py`** — a runnable 3-agent loop over the substrate using the existing
+   `_fake_worker` pattern from `executor_pool.py`: research → draft → G1 → critique → G4 →
+   done, all coordination through the pheromone board and the ledger, no orchestrator object.
+   This is the acceptance test for week 1.
+7. **Register all five in `tools/selftest_all.py`** — and note in the run summary that this is
+   harness expansion (the `_harness_delta` instrument from run 388 will flag it as
+   `unevaluated_expansion` until it's scored against the holdout set — that flag is correct and
+   the owner-gated wiring is the follow-up).
+
+### 5.3 What week 1 deliberately does *not* build
+
+- No embeddings / vector matching — the board is read linearly by 2–15 agents; that is fine.
+- No ELO — no head-to-head tasks yet.
+- No VCG / market payments — reputation-weighted selection is enough to start; the market layer
+  (`pattern_market_as_orchestrator`) is a clean later swap.
+- No parallel stages — Sequential first, because it is the protocol with the evidence behind it
+  and because it makes the gates trivial to place.
+- No TUI — the `board` CLI plus `task_ledger` status is the whole human interface for now.
+- No auto-execute tier — draft-only, human commits.
+
+### 5.4 The one structural commitment
+
+Everything above is swappable *except* this: **coordination state lives in files and a database
+that any agent can read and only append to, decays on a clock, and is reaped by an unprivileged
+process — never in an orchestrator agent's context.** That is the line that keeps roles
+transient. It is also, not coincidentally, the line this repo already drew with `task_ledger.py`
+and `fractal_flock.py`.
+
+---
+
+## Sources
+
+- Strands Agents — Swarm Multi-Agent Pattern: <https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/>
+- Strands Agents — SDK / API (multiagent.swarm): <https://strandsagents.com/docs/api/python/strands.multiagent.swarm/>
+- Strands Agents — introduction & Apache-2.0 license: <https://aws.amazon.com/blogs/opensource/introducing-strands-agents-an-open-source-ai-agents-sdk/>
+- Strands Agents — multi-agent collaboration patterns (AWS ML blog): <https://aws.amazon.com/blogs/machine-learning/multi-agent-collaboration-patterns-with-strands-agents-and-amazon-nova/>
+- SwarmSys: Decentralized Swarm-Inspired Agents for Scalable and Adaptive Reasoning (Li et al., arXiv:2510.10047): <https://arxiv.org/abs/2510.10047> · HTML: <https://arxiv.org/html/2510.10047v1> · <https://huggingface.co/papers/2510.10047>
+- Ruflo (`ruvnet/ruflo`), MIT: <https://github.com/ruvnet/ruflo> · User guide: <https://github.com/ruvnet/ruflo/blob/main/docs/USERGUIDE.md> · <https://www.sitepoint.com/deploying-multiagent-swarms-with-ruflo-beyond-singleprompt-coding/>
+- DRF: LLM-Agent Dynamic Reputation Filtering Framework (arXiv:2509.05764): <https://arxiv.org/abs/2509.05764>
+- A Multi-Agent Conversational Bandit Approach to Online Evaluation and Selection of User-Aligned LLM Responses (arXiv:2501.01849): <https://arxiv.org/html/2501.01849>
+- Self-Resource Allocation in Multi-Agent LLM Systems (arXiv:2504.02051): <https://arxiv.org/pdf/2504.02051>
+- "Drop the Hierarchy and Roles: How Self-Organizing LLM Agents Outperform Designed Structures" (Dochkina, arXiv:2603.28990) — via in-repo graph node `emergent_self_organizing_roles` (VERIFIED read, run 350)
+- Epistemic Sybil Resistance (arXiv:2609.01873) and Inferred Generative-Process Diversity (arXiv:2609.03422) — in-repo, runs 384; correlated-agent and surface-similarity cautions
+- In-repo prior art: [`tools/task_ledger.py`](../tools/task_ledger.py), [`tools/fractal_flock.py`](../tools/fractal_flock.py), [`tools/cohort_monitor.py`](../tools/cohort_monitor.py), [`tools/executor_pool.py`](../tools/executor_pool.py); graph nodes `concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner`, `pattern_market_as_orchestrator`, `pattern_ostrom_swarm_governance`, `emergent_reputation_and_trust_dynamics`, `emergent_stigmergic_coordination`
