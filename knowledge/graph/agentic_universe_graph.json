@@ -12404,6 +12404,34 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.02580"
       ]
+    },
+    {
+      "id": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "label": "Multi-turn tool-calling: aggregate accuracy hides ACTION-CLASS MISCALIBRATION (choosing TOOL_CALL when the right move was ASK/REFUSE/CONFIRM). Acc <= GAR is a self-revealing bound; Acc > GAR exposes the state grader masking it. Context perturbations reshape calibration by +11.5 / -21.0 pp across families",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.72,
+      "description": "arXiv:2609.00949 (Kangjia Zhao, Jiajun Li, Haozhan Shen, Wei Chow, Linfeng Li, Hang Song, Lingdong Kong, Chen Zhi, Tiancheng Zhao, Songhua Liu, Jianwei Yin; v1 2026-09-01, VERIFIED via abstract). On public tool-calling benchmarks open-weight models now match or beat frontier models on AGGREGATE ACCURACY - a metric that averages over many multi-turn situations and hides whether progress is balanced. THE DIAGNOSTIC. Decompose multi-turn failure into two ORTHOGONAL modes: (1) ACTION-CLASS MISCALIBRATION - choosing the wrong KIND of action over a four-class space (TOOL_CALL / ASK / REFUSE / CONFIRM); (2) ACTION-EXECUTION FAILURE - right kind, wrong details. A self-revealing upper bound Acc <= GAR (Gold Action Recall): Acc > GAR is a BOUND VIOLATION that exposes the state grader MASKING miscalibration; GAR >> Acc localises execution failure inside TOOL_CALL. FINDINGS on a panel of tool-calling models across multi-turn benchmarks: action-class miscalibration is a SUBSTANTIAL failure mode the state grader cannot see; it inflates the standing of HEAVILY TOOL-TRAINED families (they TOOL_CALL when they should ASK/REFUSE/CONFIRM), which the diagnostic separates from families with context-appropriate action choice. Calibration is reshapable by CONTEXT-ONLY perturbations but HETEROGENEOUSLY: one perturbation moves accuracy +11.5 pp for one family and -21.0 pp for another on the SAME scenario, and the effect depends on the perturbation mechanism. RECOMMENDATION: supplement aggregate accuracy with action-class diagnostics that show what the model actually does in each scenario. WHY IT LANDS HERE. (a) 'Aggregate accuracy masks the failure mode' IS the vacuous-pass shape (concept_a_vacuous_pass...): a metric that looks fine because it never checks the thing that broke. (b) It is the same 'decompose, don't average' methodology as concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery. (c) THE LOOP'S OWN INCREMENT CHOICE IS AN ACTION-CLASS PROBLEM: the IDLE-STATE RULE gives it a small action space (fold literature / dry-run a probe / consistency pass) plus build / fix-a-bug, and skill_induction + loop_metrics CLASSIFY the increment but nothing scores whether the CLASS was appropriate for the frontier state. holdout_tasks produces an aggregate; it would not catch the loop systematically folding when it should be consolidating. CURRENCY: 2026-09-01; the specific pp numbers are model-panel-dependent, the aggregate-masks-class-choice structure is not.",
+      "tags": [
+        "verification",
+        "action-class-calibration",
+        "aggregate-metric-masks-failure",
+        "gold-action-recall",
+        "tool-call-ask-refuse-confirm",
+        "decompose-dont-average",
+        "state-grader-masking",
+        "loop-increment-choice",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.00949"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.00949"
+      ]
     }
   ],
   "edges": [
@@ -29709,6 +29737,48 @@
       "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
       "type": "constrains",
       "description": "an epistemic market organised around claims and forecasts still relies on a clearing mechanism; if LLM agents do not converge in a plain double auction, a claims market needs to show its own clearing converges rather than assume it"
+    },
+    {
+      "id": "edge_action_class_extends_vacuous_pass",
+      "source": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "target": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "type": "extends",
+      "description": "aggregate accuracy is a vacuous-pass-shaped metric: it looks healthy because it never checks whether the model chose the right CLASS of action, only whether the action it chose was executed right"
+    },
+    {
+      "id": "edge_action_class_refines_cascade_diagnostic",
+      "source": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "target": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "type": "refines",
+      "description": "same 'decompose the failure into orthogonal modes rather than average over them' move, applied to single-agent multi-turn tool use: action-class miscalibration vs action-execution failure, with a self-revealing Acc <= GAR bound"
+    },
+    {
+      "id": "edge_action_class_supports_verification_hierarchy",
+      "source": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "supports",
+      "description": "another instance of a grader that substitutes for judgement and misses what matters: the state grader cannot see action-class miscalibration, so heavily tool-trained families get inflated standing"
+    },
+    {
+      "id": "edge_action_class_constrains_holdout",
+      "source": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "target": "artifact_phase3_holdout_set",
+      "type": "constrains",
+      "description": "holdout_tasks.score_fold produces an aggregate research-quality number; it would not catch the loop systematically choosing the wrong CLASS of increment (folding when it should consolidate) - the loop needs an action-class view of its own increments"
+    },
+    {
+      "id": "edge_action_class_constrains_skill_induction",
+      "source": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "target": "pattern_skill_induction",
+      "type": "constrains",
+      "description": "skill_induction classifies increments into task classes but does not score whether the class was APPROPRIATE for the frontier state - classification is not calibration"
+    },
+    {
+      "id": "edge_action_class_compounds_lessismore",
+      "source": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "target": "concept_llm_monitors_often_do_better_with_less_information_and_extract_then_score_beats_scoring_the_whole_trajectory",
+      "type": "refines",
+      "description": "the extract-then-score monitor and the state grader share a blind spot: both score the action taken and neither asks whether a different class of action was the right one"
     }
   ]
 }

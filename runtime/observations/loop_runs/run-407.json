@@ -1,0 +1,51 @@
+{
+  "run": 407,
+  "increment": "Folded arXiv:2609.00949 (Calibration is the Bottleneck: An Action-Class Diagnostic of Multi-Turn Tool-Calling; Zhao et al.; 2026-09-01). Aggregate accuracy hides ACTION-CLASS MISCALIBRATION - choosing TOOL_CALL when the right move was ASK/REFUSE/CONFIRM. Acc <= GAR (Gold Action Recall) is a self-revealing bound; Acc > GAR exposes the state grader masking miscalibration. Heavily tool-trained families get inflated standing. Context-only perturbations reshape calibration by +11.5 / -21.0 pp across families on the SAME scenario. WHY IT LANDS: (a) 'aggregate accuracy masks the failure mode' IS the vacuous-pass shape; (b) same decompose-don't-average methodology as the cascade-radius orchestration diagnostic; (c) THE LOOP'S OWN INCREMENT CHOICE IS AN ACTION-CLASS PROBLEM - the IDLE-STATE RULE is a small action space (fold/probe/consistency-pass) plus build/fix, skill_induction classifies increments but nothing scores whether the CLASS was appropriate for the frontier state; holdout_tasks produces an aggregate that would not catch the loop folding when it should consolidate. +1 node, +6 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.00949",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.00949",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.00949",
+    "src:https://arxiv.org/abs/2609.00949"
+  ],
+  "trace_file": "runtime\\traces\\loop-407.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 407 OK · VALID · graph +1n/+6e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.87 · files +1~2-0 · novelty 1.00"
+}

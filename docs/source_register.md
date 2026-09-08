@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 421 nodes, 1715 edges · **Date:** 2026-09-05
+**Graph at generation:** 422 nodes, 1721 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -363,6 +363,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2608.07280 — `artifact_probe_governance_lever_rig`, `concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes`
 - https://arxiv.org/abs/2608.20099 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
+- https://arxiv.org/abs/2609.00949 — `concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it`
 - https://arxiv.org/abs/2609.01056 — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation`
 - https://arxiv.org/abs/2609.01491 — `concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged`
 - https://arxiv.org/abs/2609.01836 — `concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering`
