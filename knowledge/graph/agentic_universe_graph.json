@@ -11820,6 +11820,33 @@
         "docs/swarm-substrate-prototype.md",
         "docs/agent-fleets-and-swarm-substrate.md"
       ]
+    },
+    {
+      "id": "artifact_pheromone_annotation_layer",
+      "label": "tools/pheromone.py - a SQLite stigmergic annotation store: any agent appends signed utility+confidence rows on a task_ref, they decay on an explicit clock and hard-expire, and read() returns an aggregate with a threshold that SCALES WITH n_contributors",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.7,
+      "description": "Run 390, item 1 on the week-1 build list in artifact_swarm_substrate_prototype_design. tools/pheromone.py, registered as a selftest_all job. Pure stdlib (sqlite3), no model calls - the same discipline as task_ledger.py / fractal_flock.py. WHAT IT IS: one SQLite table. Any agent calls annotate(task_ref, kind, utility, confidence, agent=..., half_life_s=..., ttl_s=...) - the only mutation, monotonic (append + an optional `supersedes` pointer so an agent revises its own opinion without an in-place edit). Any agent calls read(task_ref) with no lock, no turn, no permission check. reap() is the one privileged operation and it only garbage-collects expired rows. THREE THINGS IT GETS RIGHT THAT THE FRAMEWORKS DO NOT: (1) DECAY IS AN EXPLICIT CLOCK. effective_utility = utility * confidence * 0.5**(age/half_life_s); the row is invisible to read() and reap-eligible once age > ttl_s (default 6 half-lives). SwarmSys leaves evaporation implicit ('other profiles evolve'), which only works when the population churns; a 2-15 agent fleet can sit idle. (2) THE AGGREGATE THRESHOLD SCALES WITH THE CONTRIBUTOR COUNT. read() returns signal_raw (the honest confidence-weighted decayed SUM, grows with k), signal (that clipped to [-1,1] for display/ranking), and suggested_threshold = k*benign_mean + 3*benign_sd*sqrt(k*design_effect). `actionable` compares |signal_raw| to that, never to a bare constant. This is concept_an_absolute_threshold_on_a_pool_sized_sum... applied to a NEW component at birth rather than retrofitted after it aborted on benign noise (runs 385-386). A pool-size sweep over range(2,16) is in the selftest, so param_invariance_audit does NOT flag it - the first component built after run 387 to pass that audit by construction. (3) CORRELATION WIDENS THE NULL, IT DOES NOT DEFLATE THE SIGNAL. design_effect = 1 + (k-1)*rho with rho defaulting to 0.7 (arXiv:2609.01873, shared base model); this inflates noise_band and suggested_threshold but signal_raw is the undeflated sum - the run-386 lesson that k workers doing DIFFERENT things are distinct observations, not replicates. STIGMERGY BOOTSTRAP: one strong, confident marker IS actionable - that is how a trail starts. 'Actionable' means worth an agent's attention, not 'execute an irreversible action', which is gated separately (the quorum gates and the autonomy ladder in the design doc). A single weak, low-confidence marker sits below the k=1 noise floor. UNKNOWN KINDS are stored and surfaced under `unknown_kinds`, never dropped (the run-365 rule). 23 selftest checks GREEN including the full range(2,16) sweep, the decay-over-one-half-life check, the hard-TTL + reap check, the correlation-vs-signal separation, and read() declining to invent a threshold for an empty task_ref.",
+      "tags": [
+        "swarm-substrate",
+        "stigmergy",
+        "pheromone-annotation",
+        "sqlite",
+        "decay-ttl",
+        "pool-size-scaled-threshold",
+        "no-model-calls",
+        "week-1-build",
+        "passes-param-audit-by-construction"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/pheromone.py",
+        "docs/swarm-substrate-prototype.md"
+      ]
     }
   ],
   "edges": [
@@ -28411,6 +28438,55 @@
       "target": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
       "type": "instantiates",
       "description": "the schema's aggregation section carries the fix forward: the threshold on the confidence-weighted decayed sum scales with n_contributors rather than being an absolute constant"
+    },
+    {
+      "id": "edge_pheromone_implements_substrate_design",
+      "source": "artifact_pheromone_annotation_layer",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "implements",
+      "description": "item 1 on the week-1 build list: the SQLite pheromone-annotation layer with the 7-field schema, exponential decay + hard TTL, and the contributor-scaled aggregate threshold specified in the design doc's section 2"
+    },
+    {
+      "id": "edge_pheromone_instantiates_ceiling_lesson",
+      "source": "artifact_pheromone_annotation_layer",
+      "target": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "type": "instantiates",
+      "description": "the aggregate threshold is k*mean + z*sd*sqrt(k*design_effect), not an absolute constant - the run-385 defect fixed in a component at birth, with a range(2,16) sweep in the selftest so it cannot regress silently"
+    },
+    {
+      "id": "edge_pheromone_verified_by_param_audit",
+      "source": "artifact_param_invariance_audit",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "verifies",
+      "description": "pheromone.py is the first component added after run 387 that param_invariance_audit does NOT flag: its selftest sweeps the contributor count over range(2,16), so no size-like parameter is exercised at a single value"
+    },
+    {
+      "id": "edge_pheromone_implements_stigmergy",
+      "source": "artifact_pheromone_annotation_layer",
+      "target": "emergent_stigmergic_coordination",
+      "type": "implements",
+      "description": "a concrete stigmergic substrate: agents coordinate by appending and reading decaying traces on a task_ref, never by messaging each other; reap() is the only privileged process and it only garbage-collects"
+    },
+    {
+      "id": "edge_pheromone_implements_swarmsys_field",
+      "source": "artifact_pheromone_annotation_layer",
+      "target": "concept_swarmsys_embedding_matched_allocation_with_validate_before_reinforce_is_the_closest_published_orchestratorless_design",
+      "type": "implements",
+      "description": "the SwarmSys pheromone field made explicit and time-decayed: where SwarmSys reinforces an agent/event compatibility weight after validation with evaporation left implicit, this is a per-task_ref decaying utility aggregate any agent can write and read"
+    },
+    {
+      "id": "edge_pheromone_instantiates_sybil",
+      "source": "artifact_pheromone_annotation_layer",
+      "target": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "type": "instantiates",
+      "description": "read()'s design_effect = 1 + (k-1)*0.7 applies the shared-base-model correlation figure to widen the noise band on the aggregate, while leaving signal_raw undeflated"
+    },
+    {
+      "id": "edge_pheromone_extends_flock",
+      "source": "artifact_pheromone_annotation_layer",
+      "target": "artifact_fractal_flock_harness",
+      "type": "extends",
+      "description": "the annotation layer sits on top of fractal_flock's shared artifact store - the blackboard holds the artifacts, the pheromone table holds the decaying opinions about them"
     }
   ]
 }

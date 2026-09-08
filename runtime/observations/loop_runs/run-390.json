@@ -1,0 +1,44 @@
+{
+  "run": 390,
+  "increment": "Built tools/pheromone.py - week-1 build list item 1 from run 389's swarm-substrate design. A SQLite stigmergic annotation store: any agent appends signed utility+confidence rows on a task_ref (the only mutation, monotonic, append + supersedes pointer), any agent reads with no lock/turn/permission, reap() is the one privileged op and only garbage-collects. THREE THINGS THE FRAMEWORKS MISS: (1) decay is an explicit clock - effective_utility = utility*confidence*0.5**(age/half_life), hard-expire at age>ttl - not SwarmSys's implicit 'other profiles evolve'; (2) the aggregate threshold SCALES WITH n_contributors - suggested_threshold = k*mean + 3*sd*sqrt(k*design_effect), compared against |signal_raw| not a constant - the run-385 ceiling defect fixed at birth, with a range(2,16) sweep in the selftest so param_invariance_audit does NOT flag it (first component built after run 387 to pass that audit by construction); (3) correlation widens the noise band via design_effect = 1+(k-1)*0.7 but leaves signal_raw undeflated (run-386 / Sybil). Design call: one strong confident marker IS actionable - stigmergy bootstraps, and 'actionable' means worth attention not execute-irreversibly. 23 selftest checks GREEN. Harness expansion - run 388's _harness_delta will flag unevaluated_expansion, correctly. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/pheromone.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/pheromone.py"
+      ],
+      "retention_evaluated": true,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-390.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 390 OK · VALID · graph +1n/+7e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.89 · files +2~3-0 · novelty 0.73"
+}

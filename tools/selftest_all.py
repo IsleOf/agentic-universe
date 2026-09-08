@@ -44,6 +44,7 @@ JOBS = [
     ("probe_emergent_synergy.py", ["selftest"]),
     ("cohort_monitor.py", ["selftest"]),
     ("param_invariance_audit.py", ["selftest"]),
+    ("pheromone.py", ["selftest"]),
     ("executor_pool.py", ["selftest"]),
     ("probe_memory_horizon.py", ["selftest"]),
     ("probe_governance_lever.py", ["selftest"]),
