@@ -1,0 +1,44 @@
+{
+  "run": 398,
+  "increment": "Built probe_annotation_contagion.py - the probe run 397 named. Drives the REAL pheromone.py board (a selftest asserts it's not a copy): a growing cheater cohort boosts an 'exploit' task_ref, an honest cohort posts kind=warning after a detection lag. Three arms: baseline / warnings_only (what pheromone.py does today) / veto_weight (a proposed read() post-filter that discounts an accused cohort's positives). RESULT: baseline keeps the board steering to the exploit in 100% of swept scenarios; plain warnings bring that to ~17% and flip ~17% to warning agents AWAY - the gap is real but SMALLER than run 397's note guessed. The residual risk is TEMPORAL (the detection lag), not structural - so the fix is a cheaper kind=warning postable on suspicion, not a new aggregation rule. Veto-weighting is stronger (~0% / ~83%) but needs correct attribution and becomes a censorship vector if gamed - the Ostrom trade-off in miniature, so it stays a post-filter and is NOT merged into pheromone.py. ~12 selftest checks GREEN at n=8/12/20; not flagged by param_invariance_audit. +2 nodes, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/probe_annotation_contagion.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/probe_annotation_contagion.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-398.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 398 OK · VALID · graph +2n/+7e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.88 · files +2~3-0 · novelty 0.60"
+}

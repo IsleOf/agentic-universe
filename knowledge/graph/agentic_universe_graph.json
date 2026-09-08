@@ -12086,6 +12086,59 @@
         "tools/relay.py",
         "tools/gates.py"
       ]
+    },
+    {
+      "id": "artifact_probe_annotation_contagion_rig",
+      "label": "tools/probe_annotation_contagion.py - drives the REAL pheromone.py board: a growing cheater cohort boosts an exploit task_ref, an honest cohort posts kind=warning after a detection lag; measures whether the board keeps steering agents to the exploit",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.68,
+      "description": "Run 398, the probe run 397 named. Tests the gap arXiv:2609.04170 exposed in this repo's substrate: gates.py catches bad ARTIFACTS at G1/G4, but the pheromone board also carries kind=utility annotations that STEER WHERE AGENTS WORK, and nothing there stops the 100-agent math swarm's contagion one level down. The rig imports and drives the real pheromone.Pheromone (a selftest check asserts it is not a copy). A cheater cohort that grows linearly to full size over the run boosts an 'exploit' task_ref (kind=utility, 0.8/0.9); an honest cohort posts kind=warning (-0.7/0.9) after a detection lag. THREE ARMS: baseline (no warnings); warnings_only (what pheromone.py does today - a warning is a negatively-weighted annotation); veto_weight (a proposed mitigation, evaluated as a read() POST-FILTER so it can be judged before touching the module: a live warning that names a cohort DISCOUNTS that cohort's positive contributions by (1 - warn_confidence), not just adds a negative term). SWEEP over cheater fraction, detection lag, honest cohort size, at n_agents 8/12/20. RESULT (12 selftest checks GREEN, not flagged by param_invariance_audit): baseline keeps the board steering to the exploit in 100% of swept scenarios. Plain warnings bring 'still steering' to ~17% and flip ~17% to actively warning agents AWAY - so plain warnings SUBSTANTIALLY HELP once the honest cohort is online, better than run 397's note predicted. The residual exposure is the DETECTION LAG: every round before the warnings land, the board steers to the exploit. Veto-weighting gives ~0% still steering / ~83% warning away - a clear improvement - BUT it depends on the honest cohort correctly attributing the cheating cohort, and if attribution is wrong or gamed it becomes a CENSORSHIP VECTOR. That is why it stays a post-filter in the rig and is not put in pheromone.py.",
+      "tags": [
+        "swarm-substrate",
+        "probe",
+        "annotation-contagion",
+        "drives-the-real-module",
+        "exploit-propagation",
+        "veto-weighting",
+        "detection-lag",
+        "censorship-risk",
+        "recency-2026-09"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/probe_annotation_contagion.py",
+        "https://arxiv.org/abs/2609.04170"
+      ]
+    },
+    {
+      "id": "concept_plain_negative_warnings_mostly_contain_a_boosted_exploit_annotation_the_residual_risk_is_detection_lag",
+      "label": "Measured: pheromone.py's plain kind=warning annotations contain a boosted-exploit signal in ~83% of swept scenarios once the honest cohort is online; the residual exposure is the detection lag, and the stronger veto-weight fix trades that for a censorship-vector risk",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.7,
+      "description": "Run 398, from probe_annotation_contagion driving the real pheromone.py. The run-397 gap was real but SMALLER than the sweep doc guessed. Run 397 wrote 'warnings help but do not close it'; the measurement says plain warnings-as-negatively-weighted-annotations take 'board still steering agents to the exploit' from 100% (unopposed) to ~17% of swept scenarios, and actively flip ~17% to warning agents away. The honest cohort out-weighs a growing cheater cohort in the raw sum more often than expected, because a warning at confidence 0.9 and utility -0.7 is a strong term. THE RESIDUAL RISK IS TEMPORAL, not structural: the DETECTION LAG. In every round before the honest cohort notices and posts, the board points at the exploit and agents that consult it in that window are steered wrong. So the mitigation that matters is not a different aggregation rule but a SHORTER LAG - which points back at the gates (a kind=warning is cheap; an agent should be able to post one on suspicion, not only after a full audit). VETO-WEIGHTING (discount the accused cohort's positives, don't just add a negative) is measurably stronger - ~0% still steering, ~83% warning away - but it introduces a new failure mode the plain rule does not have: it requires correct ATTRIBUTION of who the cheaters are, and a wrong or adversarial attribution silences an innocent cohort. This is the Ostrom trade-off in miniature: graduated sanctioning is more effective and more abusable than a flat penalty, so it belongs behind a collective-choice rule, not in the aggregation primitive. Left as a read() post-filter, not merged into pheromone.py.",
+      "tags": [
+        "swarm-substrate",
+        "annotation-contagion",
+        "warning-aggregation",
+        "detection-lag",
+        "veto-weighting",
+        "attribution-risk",
+        "ostrom-tradeoff",
+        "probe-result",
+        "smaller-than-predicted"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/probe_annotation_contagion.py"
+      ]
     }
   ],
   "edges": [
@@ -29027,6 +29080,55 @@
       "target": "artifact_pheromone_annotation_layer",
       "type": "challenges",
       "description": "the gap this exposes: the board catches bad ARTIFACTS at G1/G4, but nothing yet stops a false high-utility annotation - an exploit marked as valuable - from steering agents toward it and propagating the way the math swarm's exploit did. A probe-shaped question for the annotation layer, not the artifact layer"
+    },
+    {
+      "id": "edge_contagion_rig_verifies_thesis",
+      "source": "artifact_probe_annotation_contagion_rig",
+      "target": "concept_the_channel_that_carries_the_exploit_is_the_channel_that_catches_it",
+      "type": "verifies",
+      "description": "tests the transparency thesis at the annotation layer: a visible boosted exploit IS detectable and containable by visible warnings - but only after the honest cohort sees it"
+    },
+    {
+      "id": "edge_contagion_rig_instantiates_case",
+      "source": "artifact_probe_annotation_contagion_rig",
+      "target": "concept_emergent_cheating_and_whistleblowing_in_a_100_agent_math_swarm_transparent_channels_carried_both",
+      "type": "instantiates",
+      "description": "the 100-agent math swarm's contagion (an exploit spreading through the shared library) reproduced in this repo's own pheromone board, with a measurable containment rate"
+    },
+    {
+      "id": "edge_contagion_rig_challenges_pheromone",
+      "source": "artifact_probe_annotation_contagion_rig",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "challenges",
+      "description": "makes the run-397 challenge concrete and quantifies it: the board's plain warnings contain ~83% of boosted-exploit scenarios, leaving the detection-lag window exposed"
+    },
+    {
+      "id": "edge_contagion_finding_core_of_rig",
+      "source": "concept_plain_negative_warnings_mostly_contain_a_boosted_exploit_annotation_the_residual_risk_is_detection_lag",
+      "target": "artifact_probe_annotation_contagion_rig",
+      "type": "core_of",
+      "description": "the rig's headline: plain warnings mostly contain the exploit, the residual risk is temporal (lag), and veto-weighting trades it for an attribution/censorship risk"
+    },
+    {
+      "id": "edge_contagion_finding_refines_pheromone",
+      "source": "concept_plain_negative_warnings_mostly_contain_a_boosted_exploit_annotation_the_residual_risk_is_detection_lag",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "refines",
+      "description": "the module does not need a new aggregation rule for this threat; it needs the ability to post a cheap kind=warning on SUSPICION to shorten the detection lag, and veto-weighting kept OUT of the primitive"
+    },
+    {
+      "id": "edge_contagion_finding_informs_ostrom",
+      "source": "concept_plain_negative_warnings_mostly_contain_a_boosted_exploit_annotation_the_residual_risk_is_detection_lag",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "informs",
+      "description": "veto-weighting is graduated sanctioning: more effective and more abusable than a flat penalty, so it belongs behind a collective-choice rule rather than in the aggregation primitive - the Ostrom trade-off measured in miniature"
+    },
+    {
+      "id": "edge_contagion_finding_grounds_design",
+      "source": "concept_plain_negative_warnings_mostly_contain_a_boosted_exploit_annotation_the_residual_risk_is_detection_lag",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "grounds",
+      "description": "adds a measured threat-model result to the design: the board's transparency is a real defence against annotation contagion, bounded by detection latency"
     }
   ]
 }
