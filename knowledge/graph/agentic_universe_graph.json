@@ -12843,6 +12843,34 @@
         "tools/loop_session.py",
         "docs/loop_environment_model.md"
       ]
+    },
+    {
+      "id": "concept_knowing_when_to_ask_before_acting_is_a_selective_completeness_decision_measured_by_slot_recovery_silent_assumptions_and_interaction_cost",
+      "label": "Ask Before You Optimize: real requests are incomplete, and existing evals assume complete specs so never test whether an agent knows WHEN to clarify. OR-Clarify measures slot recovery / stopping behaviour / silent assumptions / interaction cost; InterOPT decides ask-vs-stop from unresolved formulation-critical gaps",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:clarification",
+      "confidence": 0.7,
+      "description": "arXiv:2609.05258 (Sihan Ge, Yichen Lin, Chenyu Zhou, Jianghao Lin, Tao Yao, Dongdong Ge; v1 2026-09-04, VERIFIED via abstract). LLMs formulate optimization models from natural-language descriptions, but realistic OR requests are OFTEN INCOMPLETE - missing objectives, constraints or business rules change the resulting mathematical program - and existing evaluations assume a complete specification, so they OVERLOOK whether an agent knows when clarification is needed before modelling. OR-CLARIFY. Each task: a partial public problem description, withheld structured HIDDEN SLOTS, bounded interaction with a simulated user. Measures four things existing evals do not: SLOT RECOVERY, STOPPING BEHAVIOUR, SILENT ASSUMPTIONS, INTERACTION COST. Supports open-ended and choice-based clarification. INTEROPT. A two-stage framework: identify unresolved FORMULATION-CRITICAL gaps, then use them to decide whether to ask the next question or to stop. Substantially outperforms all baselines on exact slot recovery in the choice-based setting; competitive with strong prior methods open-ended. THE REFRAME: OR assistance is a SELECTIVE COMPLETENESS DECISION - clarify when needed, stop when ready, and QUANTIFY WHAT REMAINS MISSING. WHY IT LANDS HERE. (1) It is the ASK action class from concept_aggregate_accuracy_masks_action_class_miscalibration made concrete: 'silent assumptions' is exactly the failure mode of an agent that TOOL_CALLed when it should have ASKed, and slot recovery / interaction cost are the diagnostic. (2) Same shape as the gates' 'escalate on unparseability, don't pass' (run 404) - a gate that cannot read its input should ASK, not certify. (3) The swarm substrate has NO ask primitive: an agent contributes on whatever is on the board, with no way to say 'this task_ref is under-specified, clarify before I draft'. pheromone.warn() (run 399) is the nearest shape but it flags suspicion, not a formulation gap. Design note: a kind=ask annotation and a G1 output line 'N unresolved formulation-critical gaps' would give the substrate the selective-completeness decision this paper formalises. CURRENCY: 2026-09-04, OR domain; slot recovery numbers are benchmark-specific, ask-vs-act-as-a-completeness-decision is structural.",
+      "tags": [
+        "clarification",
+        "ask-vs-act",
+        "selective-completeness",
+        "slot-recovery",
+        "silent-assumptions",
+        "stopping-behaviour",
+        "interaction-cost",
+        "or-clarify",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.05258"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.05258"
+      ]
     }
   ],
   "edges": [
@@ -30645,6 +30673,41 @@
       "target": "concept_an_instrument_must_declare_which_corpus_it_measured",
       "type": "instantiates",
       "description": "same family: a metric input (auto-extracted citations) was recording something other than what the metric was measuring (verification work actually done)"
+    },
+    {
+      "id": "edge_ask_first_refines_action_class",
+      "source": "concept_knowing_when_to_ask_before_acting_is_a_selective_completeness_decision_measured_by_slot_recovery_silent_assumptions_and_interaction_cost",
+      "target": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "type": "refines",
+      "description": "the ASK class made concrete: 'silent assumptions' IS choosing TOOL_CALL when ASK was right, and OR-Clarify's slot recovery / stopping behaviour / interaction cost are the action-class diagnostic for that decision"
+    },
+    {
+      "id": "edge_ask_first_supports_escalate",
+      "source": "concept_knowing_when_to_ask_before_acting_is_a_selective_completeness_decision_measured_by_slot_recovery_silent_assumptions_and_interaction_cost",
+      "target": "concept_a_keyword_keyed_monitor_passes_a_drifted_board_as_clean_and_the_fix_is_to_escalate_on_unparseability_not_pass",
+      "type": "supports",
+      "description": "same shape: a gate that cannot read its input should ASK/escalate, not pass; an OR agent with formulation-critical gaps should ask, not model. 'Quantify what remains missing' is the escalation carrying its reason"
+    },
+    {
+      "id": "edge_ask_first_constrains_gates",
+      "source": "concept_knowing_when_to_ask_before_acting_is_a_selective_completeness_decision_measured_by_slot_recovery_silent_assumptions_and_interaction_cost",
+      "target": "artifact_validator_gates",
+      "type": "constrains",
+      "description": "G1 already reports uncited claims; it could also report 'N unresolved formulation-critical gaps' when a task spec is thin - the substrate form of OR-Clarify's slot-recovery output"
+    },
+    {
+      "id": "edge_ask_first_constrains_design",
+      "source": "concept_knowing_when_to_ask_before_acting_is_a_selective_completeness_decision_measured_by_slot_recovery_silent_assumptions_and_interaction_cost",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the substrate has no ASK primitive: an agent contributes on whatever is on the board. A kind=ask annotation ('this task_ref is under-specified, clarify before drafting') is the missing selective-completeness decision"
+    },
+    {
+      "id": "edge_ask_first_supports_forecast_currency",
+      "source": "concept_knowing_when_to_ask_before_acting_is_a_selective_completeness_decision_measured_by_slot_recovery_silent_assumptions_and_interaction_cost",
+      "target": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
+      "type": "supports",
+      "description": "InterOPT decides ask-vs-stop from a forecast of which gaps are formulation-critical - calibrated forecasting before action, applied to the completeness question"
     }
   ]
 }
