@@ -12927,6 +12927,34 @@
       "evidence_links": [
         "tools/loop_action_class.py"
       ]
+    },
+    {
+      "id": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "label": "A Science of Collective AI: MAS research is stuck in trial-and-error because (a) no structured factor taxonomy, so adjustments are unguided, and (b) no unified metric that separates genuine COLLABORATION GAIN from mere RESOURCE ACCUMULATION. Proposes gain metric Gamma + a factor library (control-level presets / information-level dynamics)",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:methodology",
+      "confidence": 0.72,
+      "description": "arXiv:2602.05289 (Jingru Fan, Dewen Liu, Yufan Dang, Huatao Li, Yuheng Wang, Wei Liu, Feiyu Duan, Xuanwen Ding, Shu Yao, Lin Wu, Ruijie Shi, Wai-Shing Leung, Yuan Cheng, Zhongyu Wei, Cheng Yang, Chen Qian, Zhiyuan Liu, Maosong Sun; Tsinghua / ChatDev group; v1 2026-02-05, VERIFIED via abstract). A position paper: LLM multi-agent systems work across many domains but the field relies on EMPIRICAL TRIAL-AND-ERROR with no unified, principled scientific framework. THE BOTTLENECK IS ATTRIBUTION AMBIGUITY, two parts: (1) no STRUCTURED TAXONOMY OF FACTORS, so researchers make unguided adjustments; (2) no UNIFIED METRIC, so a performance gain cannot be attributed to genuine collaboration vs simply MORE BUDGET (more agents = more compute = more samples). THE PROPOSAL. (a) A COLLABORATION GAIN METRIC Gamma as the scientific standard - isolate intrinsic gain from increased budget, so comparisons across configurations are controlled. (b) A FACTOR ATTRIBUTION PARADIGM using Gamma to find the collaboration-driving factors. (c) A MAS FACTOR LIBRARY structuring the design space into CONTROL-LEVEL PRESETS and INFORMATION-LEVEL DYNAMICS. WHY IT LANDS ON THIS PROJECT. The Agentic Universe loop already does much of what the paper asks - falsifiable predictions, probes that isolate one mechanism, verified reads, a structured graph. Two gaps it names precisely: (i) THE Gamma GAP. probe_orchestration_value tests 'when does multi-agent help' and probe_emergent_synergy computes Rosas Psi + differentiation (an information-theoretic genuine-collective-vs-aggregate measure - the project's closest thing to Gamma), but no probe reports a single 'collaboration gain NET OF a single agent given k-times the budget'. That baseline is what makes probe_orchestration_value's verdict rigorous rather than suggestive, and it is a cheap arm to add. (ii) THE TAXONOMY MAP. control-level presets vs information-level dynamics maps onto the swarm substrate: task_ledger stage + relay handoff protocol are control-level presets; the pheromone board signal + reputation are information-level dynamics. The design doc should say which factor each module is, so a change to one is attributed to the right level. CURRENCY: 2026-02-05, a position paper - the specific Gamma formulation is one proposal among possible ones, but 'separate collaboration gain from budget, and taxonomise the factors' is a durable methodological point.",
+      "tags": [
+        "methodology",
+        "collaboration-gain",
+        "gamma-metric",
+        "factor-attribution",
+        "budget-vs-synergy",
+        "control-vs-information",
+        "science-of-collective-ai",
+        "position-paper",
+        "recency-2026-02"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2602.05289"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2602.05289"
+      ]
     }
   ],
   "edges": [
@@ -30813,6 +30841,55 @@
       "target": "concept_the_action_class_classifier_could_not_see_a_consolidation_that_fixed_something_as_consolidation",
       "type": "extends",
       "description": "the same pattern one more time: an action-class instrument's blind spot (it could not see a citation upgrade as distinct from a fold) showed up in its own output and was fixed there"
+    },
+    {
+      "id": "edge_gamma_grounds_synergy_rig",
+      "source": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "target": "artifact_probe_emergent_synergy_rig",
+      "type": "supports",
+      "description": "probe_emergent_synergy's Rosas Psi + differentiation IS the project's Gamma-in-spirit: an information-theoretic measure that separates a genuine collective from an aggregate of independently-good agents"
+    },
+    {
+      "id": "edge_gamma_constrains_orchestration_value_rig",
+      "source": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "target": "artifact_probe_orchestration_value_rig",
+      "type": "constrains",
+      "description": "probe_orchestration_value's 'when does multi-agent help' verdict is suggestive without a budget-matched baseline: a single agent given k-times the samples. Adding that arm makes the collaboration gain a Gamma, not a comparison of selection rules"
+    },
+    {
+      "id": "edge_gamma_refines_verifiable_synthesis",
+      "source": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "target": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
+      "type": "refines",
+      "description": "'multi-agent helps when subtasks are verifiable and synthesis is deterministic' is a factor-attribution finding; the paper says make it one of a STRUCTURED library, not an isolated observation"
+    },
+    {
+      "id": "edge_gamma_supports_cascade_diagnostic",
+      "source": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "target": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+      "type": "supports",
+      "description": "same methodological push: decompose the outcome into attributable factors rather than reporting an aggregate - cascade radius / per-mode recovery for failures, Gamma / factor library for gains"
+    },
+    {
+      "id": "edge_gamma_constrains_design",
+      "source": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the design doc should label each module by factor level: task_ledger stage + relay are control-level presets, the pheromone board + reputation are information-level dynamics - so a change is attributed to the right level"
+    },
+    {
+      "id": "edge_gamma_extends_action_class",
+      "source": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "target": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+      "type": "extends",
+      "description": "aggregate accuracy masks action-class miscalibration; aggregate multi-agent performance masks whether the gain is collaboration or budget - the same 'the average hides the attribution' failure, one level up"
+    },
+    {
+      "id": "edge_gamma_supports_markets_dont_converge",
+      "source": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "target": "concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer",
+      "type": "supports",
+      "description": "'LLM markets converge slowly or not at all' is a Gamma-style result: the mechanism does not deliver its collaboration property, and aggregate task score would not have shown it"
     }
   ]
 }

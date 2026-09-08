@@ -1,0 +1,46 @@
+{
+  "run": 427,
+  "increment": "Literature, fresh axis (methodology) - novelty 0.33! on run 426 flagged a run of self-audit work. Folded arXiv:2602.05289 (Towards a Science of Collective AI; Fan et al., Tsinghua/ChatDev; 2026-02-05). MAS research is stuck in trial-and-error due to attribution ambiguity: (1) no structured factor taxonomy -> unguided adjustments; (2) no unified metric -> a gain cannot be attributed to genuine collaboration vs more budget. Proposes: a collaboration gain metric Gamma (isolate intrinsic gain from budget), a factor attribution paradigm, a factor library split into control-level presets / information-level dynamics. TWO GAPS IT NAMES: (i) probe_emergent_synergy's Rosas Psi IS the project's Gamma-in-spirit but probe_orchestration_value's verdict lacks a budget-matched baseline (single agent at k-times samples); (ii) control-vs-information maps onto the substrate - task_ledger stage + relay = control presets, pheromone board + reputation = information dynamics. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2602.05289",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2602.05289"
+  ],
+  "trace_file": "runtime\\traces\\loop-427.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 427 OK · VALID · graph +1n/+7e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +1~2-0 · novelty 0.33! · acts fold40%"
+}
