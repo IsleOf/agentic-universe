@@ -11551,6 +11551,59 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.03422"
       ]
+    },
+    {
+      "id": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "label": "The cohort monitor aborted on pure benign noise from k=20 - an absolute threshold compared against a sum that grows linearly with pool size, failing in the exact phrasing of a successful stealth detection",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:monitoring",
+      "confidence": 0.9,
+      "description": "Run 385, found in this project's own code while measuring something else. artifact_cohort_monitor sums k per-worker out-of-scope signals and compares the sum to cohort_threshold, an ABSOLUTE CONSTANT. The benign sum is k * benign_signal_mean, so it grows LINEARLY with pool size. With the defaults (mean 0.05, threshold 0.9) the benign sum reaches the threshold at k=18 and exceeds it from k=20, at which point the monitor ABORTS EVERY ROUND ON PURE BENIGN NOISE - no attack present, and no correlation required. Measured: k=12 margin 1.44 sigma, k=16 0.42, k=18 0.00, k=20 -0.37, k=24 -1.02. WHAT MAKES THIS INSTRUMENT DECAY RATHER THAN AN OFF-BY-ONE. The failure is indistinguishable from the success it was built for. The abort reason reads 'cohort score 1.00 > 0.9 (no single worker tripped)' - which is precisely the phrasing that means a stealthy distributed attack evaded per-instance monitoring. The component fails INTO its own success message. An operator reading that line has no way to tell a caught attack from an empty pool that got too big. HOW IT SURVIVED. Run 353 built the component and selftested it at k=6. Every check passed, at one pool size, forever. Nothing in the suite varied the parameter the threshold was implicitly a function of. This is the sixth instrument in this loop's own code found returning plausible values while measuring nothing, and like the others it raised no error. THE FIX, and it is derived rather than guessed: an optional adaptive_threshold scaling the line as k*mean + z*sd*sqrt(k*design_effect) - the same z-gate the margin measurement was already computing, so the threshold tracks pool size and correlation instead of asserting a constant against a quantity that grows with both. It is OFF BY DEFAULT, because silently moving a safety component's decision boundary is the wrong kind of confident. What is ON by default is the honesty: the verdict now carries threshold_below_noise_floor, and when set, the abort reason is prefixed UNRELIABLE so the failure can no longer masquerade as a detection. THE GENERAL SHAPE: a threshold on an aggregate is implicitly a function of every parameter the aggregate depends on. Fixing it as a constant does not remove that dependence, it just stops recording it - and a selftest at a single value of that parameter cannot see the omission.",
+      "tags": [
+        "instrument-decay",
+        "cohort-monitoring",
+        "threshold-calibration",
+        "pool-size",
+        "false-positive",
+        "fails-into-its-success-message",
+        "self-audit",
+        "selftest-at-one-parameter-value"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/cohort_monitor.py"
+      ]
+    },
+    {
+      "id": "concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum",
+      "label": "Correlated worker signals widen the null, they do not deflate the score: fragmented-attack pieces are distinct observations, shared-base-model errors are replicated ones - correcting the wrong one destroys the detection",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:monitoring",
+      "confidence": 0.7,
+      "description": "Run 385. Given arXiv:2609.01873's gamma_cal=0.719 for replicate extraction errors among agents sharing a base model, the obvious correction to a cohort monitor that SUMS per-worker signals is to deflate the sum by a design effect, the way one deflates k replicate reports of a single latent quantity. THAT WOULD BE WRONG, and the distinction is the whole content of this node. TWO DIFFERENT THINGS ARE CORRELATED. (a) k workers each executing a DIFFERENT piece of a fragmented attack produce k distinct observations of k distinct behaviours. That is not replication and the signal sum must keep summing - deflating it by 1+(k-1)*0.719 would divide the k=6 fragmentation case by 4.6 and destroy exactly the detection the component exists for. (b) k workers sharing a base model produce CORRELATED SPURIOUS signals. That IS replication, and it widens the NULL distribution of the sum. SO CORRELATION BELONGS ON THE NOISE FLOOR, NOT ON THE SCORE. The variance of a sum of k signals with average pairwise correlation rho is k*(1+(k-1)*rho) rather than k, so the noise SD inflates by sqrt(1+(k-1)*rho) and a threshold calibrated under an independence assumption sits fewer sigma above the noise than its author believed. MEASURED COST at the project's defaults: at k=6 the 0.9 threshold sits 4.08 sigma above the benign sum at rho=0 and 1.90 at rho=0.719 - roughly three orders of magnitude more false alarms per round, compounded by the cross-round EWMA. At k=8 it is 2.95 -> 1.20. The threshold survives; its margin does not. GENERALISATION BEYOND THIS COMPONENT: whenever an aggregate is compared to a line, ask which of the aggregate's parts are replicates of each other and which are observations of different things. The same correlation coefficient corrects those two in opposite directions, and applying it to the wrong one looks like rigour while removing the signal.",
+      "tags": [
+        "monitoring",
+        "cohort-monitoring",
+        "correlation",
+        "design-effect",
+        "noise-floor",
+        "aggregation",
+        "replication-vs-distinct-observation",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01873"
+      ],
+      "evidence_links": [
+        "tools/cohort_monitor.py",
+        "https://arxiv.org/abs/2609.01873"
+      ]
     }
   ],
   "edges": [
@@ -27862,6 +27915,55 @@
       "target": "concept_llm_monitors_often_do_better_with_less_information_and_extract_then_score_beats_scoring_the_whole_trajectory",
       "type": "informs",
       "description": "if extract-then-score is deployed as an ensemble of extractors, this is the measure that says whether the ensemble is real; semantic agreement between extractors is not evidence that they fail differently"
+    },
+    {
+      "id": "edge_ceiling_detects_cohort_monitor",
+      "source": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "target": "artifact_cohort_monitor",
+      "type": "detects",
+      "description": "found in this component: an absolute cohort_threshold against a benign sum growing as k*mean, aborting on pure noise from k=20 while reporting it in the phrasing of a caught stealth attack. Run 353 selftested it at k=6 only"
+    },
+    {
+      "id": "edge_correlation_placement_refines_cohort_monitor",
+      "source": "concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum",
+      "target": "artifact_cohort_monitor",
+      "type": "refines",
+      "description": "supplies the correct place to apply arXiv:2609.01873's correlation figure - the noise floor, via design_effect and noise_margin_sigma - and explains why the obvious alternative, deflating the cohort score, would destroy the fragmentation detection the component exists for"
+    },
+    {
+      "id": "edge_correlation_placement_instantiates_sybil",
+      "source": "concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum",
+      "target": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "type": "instantiates",
+      "description": "applies the shared-base-model correlation figure to this project's own aggregator, and finds the correction has a direction: replicated errors widen the null, distinct behaviours do not deflate the signal"
+    },
+    {
+      "id": "edge_ceiling_supports_correlation_placement",
+      "source": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "target": "concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum",
+      "type": "supports",
+      "description": "both are the same omission at different severities: a threshold on an aggregate is implicitly a function of every parameter the aggregate depends on - pool size in one case, inter-worker correlation in the other - and fixing it as a constant stops recording the dependence rather than removing it"
+    },
+    {
+      "id": "edge_correlation_placement_constrains_fragmentation",
+      "source": "concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum",
+      "target": "concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it",
+      "type": "constrains",
+      "description": "the cohort remedy this node's source proposes is still correct, but its threshold must be calibrated against a null that accounts for inter-worker correlation and pool size, or the remedy's own false-alarm rate eats it"
+    },
+    {
+      "id": "edge_ceiling_extends_vacuous_pass",
+      "source": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "target": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "type": "extends",
+      "description": "the same family and a step past it. A vacuous pass is an instrument reporting a clean bill of health it never checked; this is an instrument reporting a DETECTION it never made, in the exact wording a real detection would use. The confident-looking failure has stopped being merely uninformative and started being actively misleading"
+    },
+    {
+      "id": "edge_ceiling_supports_classifier_drift",
+      "source": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "target": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
+      "type": "supports",
+      "description": "same structural cause: a component whose output is always well-formed cannot signal that its own preconditions have left the range it was built for. There the fallback bucket widened silently; here the threshold fell below the noise floor silently. Both need a guard asserting the precondition, not a check on the output"
     }
   ]
 }

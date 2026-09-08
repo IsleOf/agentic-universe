@@ -1,0 +1,38 @@
+{
+  "run": 385,
+  "increment": "Went to make cohort_monitor correlation-aware after run 384; found a worse bug on the way. FIRST, WHERE CORRELATION BELONGS: not on the score. Deflating the cohort sum by a design effect - the obvious move - would divide the k=6 fragmentation case by 4.6 and destroy the detection the component exists for, because k workers doing DIFFERENT pieces of an attack are distinct observations, not replicates. Shared-base-model errors ARE replicates, so correlation widens the NULL. Measured cost at the defaults: the 0.9 threshold sits 4.08 sigma above the benign k=6 sum at rho=0 and 1.90 at rho=0.719 (k=8: 2.95 -> 1.20). SECOND AND WORSE, found while measuring the first: cohort_threshold is an ABSOLUTE constant compared against a benign sum growing as k*0.05, so from k=20 the monitor ABORTS EVERY ROUND ON PURE BENIGN NOISE - no attack, no correlation needed (k=18 sigma 0.00, k=20 -0.37, k=24 -1.02). It is instrument decay rather than an off-by-one because the abort reads 'cohort score 1.00 > 0.9 (no single worker tripped)' - the exact phrasing of a caught stealth attack. The component FAILS INTO ITS OWN SUCCESS MESSAGE. It survived because run 353 selftested it at k=6 only. Sixth instrument in this loop's own code returning plausible values while measuring nothing, and the first whose failure mode is textually identical to its success mode. FIX, derived not guessed: optional adaptive_threshold = k*mean + z*sd*sqrt(k*design_effect), OFF by default (never silently move a safety component's boundary on a plugged-in constant); what is ON by default is threshold_below_noise_floor and an UNRELIABLE prefix on the abort reason, so the failure can no longer wear the detection's clothes. cohort_monitor selftest 8 -> 17 checks including an explicit REGRESSION pin on the k=24 false abort. +2 nodes, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.01873",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.01873"
+  ],
+  "trace_file": "runtime\\traces\\loop-385.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 385 OK · VALID · graph +2n/+7e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.90 · files +1~3-0 · novelty 0.44"
+}
