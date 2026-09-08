@@ -1,0 +1,46 @@
+{
+  "run": 441,
+  "increment": "Literature, fresh axis (evaluation accountability) - switching off the swarm-substrate arc (runs 389-440) at its resting point. Folded arXiv:2609.01992 (ClaimReceipt: Verifying Evidence Sufficiency and Coverage in Agent Evaluations; Zhu, Chang; 2026-09-02). Standard logs cannot answer two questions: (1) SUFFICIENCY - is each reported claim recomputable from the retained evidence? (2) COVERAGE - do the retained records cover ALL the committed work? A claim-relative receipt + selective verifier returns PASS/INVALID/INCONCLUSIVE per claim; replayed 1,392 records, reproduced all 5 manual audit verdicts, 11/11 semantic faults 0 FP, 0.021% overhead. LANDS ON the loop's own audit trail: a sweep asserts findings but nothing verifies each is backed by a node / file / selftest (sufficiency); a sweep's 'Next' commits to a follow-on and nothing checks it was done or deferred (coverage) - the exact shape of the run-368 acceptance-gate bug (logged only accepts). Adoptable without keys: a coverage_check on sweep 'Next' bullets + a sufficiency_check that headline claims name a node/file/job. +1 node, +6 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.01992",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.01992"
+  ],
+  "trace_file": "runtime\\traces\\loop-441.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 441 OK · VALID · graph +1n/+6e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.82 · files +1~2-0 · novelty 0.67 · acts prob40%"
+}

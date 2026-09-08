@@ -13134,6 +13134,34 @@
         "docs/swarm-substrate-prototype.md",
         "tools/gates.py"
       ]
+    },
+    {
+      "id": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "label": "ClaimReceipt (Zhu, Chang, arXiv:2609.01992, 2026-09-02): standard logging cannot answer two questions about an agent evaluation - (1) SUFFICIENCY: is each reported claim recomputable from the retained evidence? (2) COVERAGE: do the retained records account for ALL the committed work? A claim-relative receipt + selective verifier returns PASS / INVALID / INCONCLUSIVE per claim. Replayed 1,392 historical records, reproduced all 5 manual audit verdicts, 11/11 semantic faults caught with zero false positives, 0.021% inference overhead / 9.9 KB per transaction.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.74,
+      "description": "arXiv:2609.01992 (Peiying Zhu, Sidi Chang; v1 2026-09-02; VERIFIED via abstract). An accountability layer for agent evaluations. THE GAP. Standard run logs record WHAT happened but cannot answer whether the reported conclusions are actually SUPPORTED by what was retained, nor whether the evaluation ran everything it said it would. TWO PROPERTIES. (1) EVIDENCE SUFFICIENCY - a reported claim is recomputable from the retained evidence. If the number in the report cannot be re-derived from the logged artifacts, the claim is INVALID (or INCONCLUSIVE if evidence is missing). (2) COVERAGE - the retained records cover the COMMITTED experiment set. A frozen, pre-committed manifest says what will run; the verifier detects OMISSIONS against it (an experiment that was promised and quietly skipped). MECHANISM. A claim-relative receipt specification binds typed transaction evidence to a signed experiment manifest; a selective verifier returns PASS / INVALID / INCONCLUSIVE per claim. Prospective auditing: pre-committed assignments, signed terminal receipts, encrypted private evidence, chained verification - an independent auditor checks omissions against the frozen spec. RESULTS. 1,392 historical records replayed exactly; all 5 manually labelled audit verdicts reproduced; 11/11 semantic faults caught, 0 false positives; 0.021% of model-inference time, 9.9 KB per transaction. WHY IT LANDS HERE. The loop's own accountability has both gaps. (i) SUFFICIENCY: a sweep doc asserts findings (numbers, 'selftest GREEN', graph deltas); loop_session records the run; but nothing verifies the sweep's claims are each backed by a graph node / a file / a selftest line. G1's `n_uncited_claims` is the crude version - a claim-shaped line with no citation - ClaimReceipt's 'recomputable from retained evidence' is the strong version. (ii) COVERAGE: a sweep's 'Next' section COMMITS to a follow-on; the next run often does something else; nothing checks whether committed increments were done or explicitly deferred. This is the EXACT shape of the run-368 acceptance-gate bug (logged only accepts, so could not answer the one question it existed for) - a coverage failure in the loop's own audit trail. ADOPTABLE (no keys): a `coverage_check` that reads run N-1's sweep 'Next' bullets and asks whether run N's increment addressed one or the sweep says why not; a `sufficiency_check` that every headline claim in a sweep names a graph node id, a file path, or a selftest job. The signed-manifest / crypto-receipt half needs an operator key - owner-gated, same class as the substrate's capability tokens. CURRENCY: 2026-09-02, within the recency window. Model-independent - it is a logging-and-verification discipline, not a capability.",
+      "tags": [
+        "verification",
+        "evaluation-accountability",
+        "evidence-sufficiency",
+        "coverage",
+        "audit-trail",
+        "claim-receipt",
+        "recency-2026-09",
+        "loop-self-audit",
+        "owner-gated-crypto"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01992"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.01992"
+      ]
     }
   ],
   "edges": [
@@ -31377,6 +31405,48 @@
       "target": "artifact_validator_gates",
       "type": "grounds",
       "description": "five of the six signals are fields on the G1 / G4 verdict dicts in tools/gates.py; section 8 is their reference"
+    },
+    {
+      "id": "edge_claimreceipt_refines_verification_constraint",
+      "source": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "refines",
+      "description": "verification is the binding constraint; ClaimReceipt names two verifiable properties of an evaluation - sufficiency (claims recomputable) and coverage (records cover the committed set) - that are cheap (0.021% overhead) and that the loop's own audit trail does not currently check"
+    },
+    {
+      "id": "edge_claimreceipt_generalises_audit_gate_bug",
+      "source": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "target": "concept_the_acceptance_gate_logged_only_its_accepts_so_its_audit_trail_could_not_answer_the_question_it_existed_for",
+      "type": "extends",
+      "description": "the run-368 bug (the acceptance gate logged only accepts, so could not answer 'is it still rejecting anything') IS a coverage failure: the retained records did not cover the committed decision set. ClaimReceipt is the general form of that lesson"
+    },
+    {
+      "id": "edge_claimreceipt_supports_certificate_governance",
+      "source": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "target": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "type": "supports",
+      "description": "PCAA's portable action certificate governs the ACTION layer; ClaimReceipt's signed receipt governs the EVALUATION layer - the same 'bind the claim to verifiable evidence, let an independent auditor replay it' shape, one level up"
+    },
+    {
+      "id": "edge_claimreceipt_constrains_tampering",
+      "source": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "target": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "type": "constrains",
+      "description": "harness tampering produces illusory gains that PERSIST because the audit trail cannot catch a claim unsupported by evidence; a sufficiency check ('the reported gain is recomputable from the retained held-out runs') is a direct counter"
+    },
+    {
+      "id": "edge_claimreceipt_informs_holdout_set",
+      "source": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "target": "artifact_phase3_holdout_set",
+      "type": "informs",
+      "description": "the frozen holdout set is the loop's pre-committed manifest; ClaimReceipt's coverage check - did every committed task actually run - is a discipline the Phase 3 gate could adopt cheaply"
+    },
+    {
+      "id": "edge_claimreceipt_grounds_g1_uncited",
+      "source": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "target": "artifact_validator_gates",
+      "type": "informs",
+      "description": "G1's n_uncited_claims (a claim-shaped line with no citation marker) is the crude sufficiency check; 'recomputable from retained evidence' is the strong version G1 could grow toward"
     }
   ]
 }

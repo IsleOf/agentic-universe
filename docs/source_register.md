@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 448 nodes, 1849 edges · **Date:** 2026-09-05
+**Graph at generation:** 449 nodes, 1855 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -371,6 +371,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.01861 — `concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document`
 - https://arxiv.org/abs/2609.01870 — `concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains`
 - https://arxiv.org/abs/2609.01873 — `concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation`, `concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum`
+- https://arxiv.org/abs/2609.01992 — `concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work`
 - https://arxiv.org/abs/2609.02580 — `concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer`
 - https://arxiv.org/abs/2609.02925 — `concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote`
 - https://arxiv.org/abs/2609.02992 — `concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free`
