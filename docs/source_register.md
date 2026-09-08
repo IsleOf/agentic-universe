@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 435 nodes, 1774 edges · **Date:** 2026-09-05
+**Graph at generation:** 436 nodes, 1781 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -367,6 +367,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.01056 — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation`
 - https://arxiv.org/abs/2609.01491 — `concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged`
 - https://arxiv.org/abs/2609.01836 — `concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering`
+- https://arxiv.org/abs/2609.01861 — `concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document`
 - https://arxiv.org/abs/2609.01873 — `concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation`, `concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum`
 - https://arxiv.org/abs/2609.02580 — `concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer`
 - https://arxiv.org/abs/2609.03422 — `concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it`

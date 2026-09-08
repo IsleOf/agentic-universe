@@ -1,0 +1,51 @@
+{
+  "run": 420,
+  "increment": "Folded arXiv:2609.01861 (Belief-Calibrated Optimization: An Explicit World Model for Agentic Optimization; Chen, Tian, Dabas, Peris, Gupta, Jin, Kang, Zhang, Wang, Jia; 2026-09-01). A coding-agent-as-optimiser editing a scaffold holds an IMPLICIT belief about how edits change outcomes; BCO writes it into a persistent, continually-revised in-context document (a world model). Beats a matched control lacking ONLY the world model on 5 benchmarks; the gap holds on every held-out split; SURVIVES A TARGET-MODEL SWAP. Ablation: a predictor given the accumulated document forecasts better than one given no document or a same-form falsified copy - the content carries information, not just the form. WHY IT LANDS: the Agentic Universe loop IS a scaffold-optimiser and its belief about how increments move the metrics is scattered across 400+ sweep docs and graph edges, never one revisable account. Third complementary written memory alongside DiagEvo (what fails by cause) and Trace2Tower (what works by abstraction level): what the ENVIRONMENT does in response to an edit. FOLLOW-ON: a docs/loop_environment_model.md. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.01861",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.01861",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01861",
+    "src:https://arxiv.org/abs/2609.01861"
+  ],
+  "trace_file": "runtime\\traces\\loop-420.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 420 OK · VALID · graph +1n/+7e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.84 · files +1~2-0 · novelty 1.00 · acts fold40%"
+}

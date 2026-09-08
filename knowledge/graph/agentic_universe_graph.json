@@ -12765,6 +12765,34 @@
       "evidence_links": [
         "tools/skill_induction.py"
       ]
+    },
+    {
+      "id": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "label": "Belief-Calibrated Optimization: a coding agent optimising a scaffold holds an IMPLICIT belief about how edits change outcomes; writing it into a persistent, continually-revised in-context document (a world model) beats a matched control on 5 benchmarks, holds on held-out splits, and SURVIVES A MODEL SWAP",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:loop_engineering",
+      "confidence": 0.76,
+      "description": "arXiv:2609.01861 (Yuhan Chen, Zhihua Tian, Mahavir Dabas, Charith Peris, Rahul Gupta, Ming Jin, Feiyang Kang, Siyuan Zhang, Nan Wang, Ruoxi Jia; v1 2026-09-01, VERIFIED via abstract). THE PROBLEM. A common way to improve an LLM agent's scaffold is coding-agent-as-optimiser: read current scores and traces, iteratively edit the source, one candidate per round. Each edit is chosen according to a BELIEF about how the environment will respond - what went wrong, which change should help - and that belief is typically IMPLICIT: it lives in the coding agent's reasoning on the current call or latent in its parameters. Later calls see the scores and traces but do not see the belief. BCO. Write the belief down as a PERSISTENT IN-CONTEXT DOCUMENT and continually revise it as candidates are evaluated. The document is a WORLD MODEL - the current account of how the environment responds to edits. Added to an otherwise-standard loop: higher train passrate than a matched control that lacks ONLY the world model, on five benchmarks (memory QA, tool-use QA, code-as-action app agents, terminal agents). The gap holds on EVERY held-out split (not used to select the candidate). After a TARGET-MODEL SWAP (frozen model replaced, scaffold kept) the selected BCO scaffold leads, except where context-window overruns leave it unfinished. THE ABLATION THAT MATTERS. A fresh predictor given the accumulated document forecasts environment response MORE accurately than one given no document or a SAME-FORM COPY WHOSE CONTENT HAS BEEN FALSIFIED - so the document carries reusable information in its CONTENT, not only its form. WHY IT LANDS ON THIS LOOP. The Agentic Universe loop IS a scaffold-optimiser: each run reads the graph + loop_metrics + the sweep docs and makes an edit. Its belief about how increments move the metrics and the frontier is SCATTERED across 400+ sweep docs and the graph edges - never a single revisable account of 'here is how a fold vs a probe vs a fix changes novelty / verified-fraction / the open frontier'. loop_metrics computes the numbers; nothing holds the belief about WHY they move. FOLLOW-ON: a docs/loop_environment_model.md - one revisable document, the loop's world model of its own environment, updated as runs land. Per concept_fixed_schema... and BCO's own model-swap result, a written document transfers where scattered model-coupled reasoning does not. It is the third complementary written memory alongside DiagEvo (what fails, by cause) and Trace2Tower's tower (what works, by abstraction level): what the ENVIRONMENT does in response to an edit. CURRENCY: 2026-09-01; the specific passrates are benchmark-specific, the implicit-belief-should-be-written-and-revised claim is structural and the model-swap result strengthens it.",
+      "tags": [
+        "loop-engineering",
+        "scaffold-optimiser",
+        "world-model",
+        "written-belief",
+        "persistent-document",
+        "survives-model-swap",
+        "content-not-form",
+        "self-improving-harness",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01861"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.01861"
+      ]
     }
   ],
   "edges": [
@@ -30483,6 +30511,55 @@
       "target": "pattern_skill_induction",
       "type": "extends",
       "description": "skill_induction's flat classify() gains level_of() and skill_key(); the flat class list becomes a level x class x outcome space"
+    },
+    {
+      "id": "edge_bco_refines_loop_vs_graph",
+      "source": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "target": "concept_loop_vs_graph",
+      "type": "refines",
+      "description": "the loop is a scaffold-optimiser and its belief about how edits move the metrics is implicit and scattered; BCO says write it into one persistent revisable document - a world model of the loop's own environment"
+    },
+    {
+      "id": "edge_bco_grounds_verif_hierarchy",
+      "source": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "grounds",
+      "description": "BCO's gap holds on every held-out split - a verification result, not a training-set artefact - which is the standard this node sets for a demonstrated self-improvement"
+    },
+    {
+      "id": "edge_bco_supports_memory_portability",
+      "source": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "target": "concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs",
+      "type": "supports",
+      "description": "BCO's world model survives a target-model swap because it is a written document, not compressed model-coupled reasoning - the fixed-schema-portability finding, on the optimiser's belief rather than the agent's memory"
+    },
+    {
+      "id": "edge_bco_companions_trace2tower",
+      "source": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "target": "concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome",
+      "type": "supports",
+      "description": "the third complementary written memory: Trace2Tower's tower is what WORKS by abstraction level, BCO's document is what the ENVIRONMENT does in response to an edit"
+    },
+    {
+      "id": "edge_bco_companions_diagevo",
+      "source": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "target": "concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace",
+      "type": "supports",
+      "description": "DiagEvo keeps what FAILS by cause; BCO keeps how the environment RESPONDS. Two written memories the loop lacks as single documents, scattered instead across sweep docs"
+    },
+    {
+      "id": "edge_bco_informs_conductor",
+      "source": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "target": "artifact_loop_conductor",
+      "type": "informs",
+      "description": "loop_conductor is the headless run driver; a loop_environment_model.md would be an input it reads and revises each run, the way BCO's document sits in the optimisation loop"
+    },
+    {
+      "id": "edge_bco_instantiates_declare_corpus",
+      "source": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "target": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "type": "instantiates",
+      "description": "BCO's falsified-copy ablation is the same discipline: does the document carry information in its content or only look like it does - an instrument (here a world model) must be shown to measure something real"
     }
   ]
 }
