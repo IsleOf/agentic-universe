@@ -11847,6 +11847,31 @@
         "tools/pheromone.py",
         "docs/swarm-substrate-prototype.md"
       ]
+    },
+    {
+      "id": "concept_run_388s_own_harness_expansion_instrument_always_reported_evaluated_because_it_diffed_a_gitignored_file_against_head",
+      "label": "Run 388's _certificates_grew() diffed a GITIGNORED log against `git show HEAD:`, which always failed, always returned 0, so the instrument built to flag unevaluated harness expansion always reported 'evaluated' - the run-385/386 defect, one run after the node naming it",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:self_rebuild",
+      "confidence": 0.9,
+      "description": "Run 391, found when run 390's summary reported retention_evaluated=true / unevaluated_expansion=false for a run that added tools/pheromone.py and issued no gate certificate. Run 388 built _harness_delta() to make harness expansion visible per run and, when the certificate log did not grow, flag unevaluated_expansion. THE BUG: _certificates_grew() established its baseline with subprocess.run(['git','show', f'HEAD:{_CERT_LOG}']). But runtime/observations/certificates/gate_certificates.jsonl is GITIGNORED - only the README beside it is tracked. So `git show HEAD:` fails on every machine, returncode != 0, was = 0, and the code returns `now (183) > was (0)` = TRUE. The instrument reported 'this run's expansion was evaluated' whenever a non-empty local certificate log existed, which after run 340 is always. It never once measured what it claimed to. IT IS THE SAME DEFECT AS RUNS 385-386 AND 388's OWN FINDING: an instrument returning a confident answer where it should decline. And its docstring asserted the opposite of what it did - 'Returns False when the log is missing or unreadable, the conservative direction' - while the code returned True precisely when the git baseline was missing. run-380's residue applies exactly here: intentional and accidental behaviour are indistinguishable by reading; the docstring described the intent and the code did something else, and nothing caught the gap because the run-388 selftest set _CERT_LOG to a nonexistent path AFTER __init__ had already snapshotted the real one, so it tested a case the production path never hits. THE FIX: an IN-SESSION SNAPSHOT. __init__ records _cert_lines_at_open = _count_cert_lines(); _certificates_grew() compares that to the current count; either side unreadable (None, kept distinct from 0) returns False. The in-session baseline is the correct one because the acceptance gate, if it fires for this run at all, fires DURING the session - unlike the graph, which the loop edits before the session opens (_autodelta_vs_head is right to use git there). Same primitive, opposite baseline, because the two artifacts are written at opposite times relative to the session. 5 new selftest checks including one that writes a certificate mid-session and one with an unreadable opening snapshot.",
+      "tags": [
+        "instrument-decay",
+        "self-audit",
+        "harness-expansion",
+        "gitignored-baseline",
+        "in-session-snapshot",
+        "docstring-contradicts-code",
+        "recursive-defect",
+        "loop-session"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/loop_session.py"
+      ]
     }
   ],
   "edges": [
@@ -28487,6 +28512,41 @@
       "target": "artifact_fractal_flock_harness",
       "type": "extends",
       "description": "the annotation layer sits on top of fractal_flock's shared artifact store - the blackboard holds the artifacts, the pheromone table holds the decaying opinions about them"
+    },
+    {
+      "id": "edge_r391_refines_r388",
+      "source": "concept_run_388s_own_harness_expansion_instrument_always_reported_evaluated_because_it_diffed_a_gitignored_file_against_head",
+      "target": "concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion",
+      "type": "refines",
+      "description": "run 388 correctly identified that the retention gate never sees harness expansion and built _harness_delta to surface it; this is the finding that _harness_delta's evaluated/unevaluated signal was itself broken from the first run, so 'unevaluated' never actually fired until run 391 fixed the baseline"
+    },
+    {
+      "id": "edge_r391_extends_r386",
+      "source": "concept_run_388s_own_harness_expansion_instrument_always_reported_evaluated_because_it_diffed_a_gitignored_file_against_head",
+      "target": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "type": "extends",
+      "description": "run 386: an instrument added to catch a miscalibration was miscalibrated twice in one run. run 388's instrument was added to catch unevaluated expansion and was broken in the same way from birth - a git baseline that never existed"
+    },
+    {
+      "id": "edge_r391_instantiates_r387",
+      "source": "concept_run_388s_own_harness_expansion_instrument_always_reported_evaluated_because_it_diffed_a_gitignored_file_against_head",
+      "target": "concept_a_detector_for_a_defect_class_will_commit_that_class_and_its_own_first_output_is_the_test",
+      "type": "instantiates",
+      "description": "run 387's rule: read a new instrument's first output as a claim about the instrument. run 390's first summary said retention_evaluated=true for a run that plainly issued no certificate - the tell was right there in the first output, one run late"
+    },
+    {
+      "id": "edge_r391_instantiates_corpus",
+      "source": "concept_run_388s_own_harness_expansion_instrument_always_reported_evaluated_because_it_diffed_a_gitignored_file_against_head",
+      "target": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "type": "instantiates",
+      "description": "the fix keeps None (unreadable) distinct from 0 (empty log) so the instrument can decline rather than report a confident number from a baseline it never had"
+    },
+    {
+      "id": "edge_r391_supports_vacuous_pass",
+      "source": "concept_run_388s_own_harness_expansion_instrument_always_reported_evaluated_because_it_diffed_a_gitignored_file_against_head",
+      "target": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "type": "supports",
+      "description": "'retention_evaluated: true' on every run since 388 was a vacuous pass - a clean bill of health the instrument never actually checked, because the check compared against a file git could not produce"
     }
   ]
 }

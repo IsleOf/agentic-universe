@@ -62,6 +62,14 @@ class LoopSession:
         self._counts = {"claims": 0, "tools": 0, "artifacts": 0, "notes": 0}
         self._cited = []
         self._graph_delta = None
+        # Run 391. The certificate log is gitignored, so there is no HEAD baseline to
+        # diff against - run 388's _certificates_grew() diffed against `git show HEAD:`,
+        # which always failed, always returned was=0, and so always reported "grew" on
+        # any machine that had ever run the gate. That is the run-385/386 defect in run
+        # 388's own instrument: a confident answer where it should decline. The correct
+        # baseline for "did THIS RUN issue a certificate" is an in-session snapshot,
+        # because the gate, if it fires at all, fires during the session.
+        self._cert_lines_at_open = self._count_cert_lines()
 
     # -- lifecycle --
     def __enter__(self):
@@ -306,20 +314,31 @@ class LoopSession:
 
     _CERT_LOG = "runtime/observations/certificates/gate_certificates.jsonl"
 
-    def _certificates_grew(self):
-        """True only if the gate's certificate log has MORE lines than at HEAD. Returns
-        False when the log is missing or unreadable - the conservative direction, since
-        the claim being made is 'this expansion was evaluated'."""
-        import subprocess
+    def _count_cert_lines(self):
+        """Non-blank lines in the gate certificate log right now, or None if it cannot
+        be read. None is distinct from 0: 0 means an empty log, None means 'no idea'."""
         try:
             here = ROOT / self._CERT_LOG
-            now = sum(1 for l in io.open(here, encoding="utf-8") if l.strip()) if here.exists() else 0
-            r = subprocess.run(["git", "show", f"HEAD:{self._CERT_LOG}"], cwd=ROOT,
-                               capture_output=True, text=True, timeout=30)
-            was = sum(1 for l in r.stdout.splitlines() if l.strip()) if r.returncode == 0 else 0
-            return now > was
+            if not here.exists():
+                return 0
+            return sum(1 for l in io.open(here, encoding="utf-8") if l.strip())
         except Exception:
+            return None
+
+    def _certificates_grew(self):
+        """True only if the certificate log gained a line BETWEEN this session opening
+        and now - i.e. this run actually put a proposal through the acceptance gate.
+
+        The log is gitignored, so there is no HEAD baseline (run 388 tried `git show
+        HEAD:` and it always failed, always returned 0, and so always reported growth).
+        The in-session snapshot taken in __init__ is the right baseline. If either the
+        opening snapshot or the current count is unreadable, return False - the genuinely
+        conservative direction, since the claim is 'this expansion was evaluated'."""
+        before = self._cert_lines_at_open
+        after = self._count_cert_lines()
+        if before is None or after is None:
             return False
+        return after > before
 
     def _write_summary(self, ok):
         RUN_SUMMARY_DIR.mkdir(parents=True, exist_ok=True)
@@ -495,15 +514,27 @@ def _selftest():
         checks["skills/ and runtime/harness/ are harness axes too"] = (
             _ls._harness_delta(["skills/s/SKILL.md"], [])["expanded"]
             and _ls._harness_delta([], ["runtime/harness/x.json"])["expanded"])
-        checks["expansion without a new certificate is flagged unevaluated"] = (
-            _hd["unevaluated_expansion"] is True or _hd["retention_evaluated"] is True)
-        # the conservative direction: a missing/unreadable cert log must not claim evaluation
+        # --- run 391: _certificates_grew must use the in-session snapshot, not a
+        # (gitignored, always-absent) HEAD baseline. Run 388 diffed `git show HEAD:`
+        # which always failed -> always returned "grew" -> retention_evaluated always
+        # True. That is the run-385/386 defect in run 388's own instrument.
         _ls2 = LoopSession(run_no=0, increment="probe")
-        _ls2._CERT_LOG = "runtime/observations/certificates/does_not_exist.jsonl"
-        checks["a missing certificate log reports NOT evaluated, never evaluated"] = (
+        # no certificate written since __init__ -> did NOT grow
+        checks["no certificate since session open -> _certificates_grew() is False"] = (
             _ls2._certificates_grew() is False)
-        checks["...so a no-expansion run is not falsely flagged"] = (
-            not _ls2._harness_delta([], [])["unevaluated_expansion"])
+        checks["...so harness expansion with no gate run is flagged unevaluated"] = (
+            _ls2._harness_delta(["tools/x.py"], [])["unevaluated_expansion"] is True)
+        # simulate a certificate landing during the session
+        _ls2._cert_lines_at_open = (_ls2._count_cert_lines() or 0) - 1
+        checks["a certificate written during the session -> _certificates_grew() is True"] = (
+            _ls2._certificates_grew() is True)
+        checks["...and then the same expansion is NOT flagged unevaluated"] = (
+            _ls2._harness_delta(["tools/x.py"], [])["unevaluated_expansion"] is False)
+        # unreadable at either end -> conservative False, never a confident "evaluated"
+        _ls3 = LoopSession(run_no=0, increment="probe")
+        _ls3._cert_lines_at_open = None
+        checks["an unreadable opening snapshot -> False, never a confident 'evaluated'"] = (
+            _ls3._certificates_grew() is False)
 
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
