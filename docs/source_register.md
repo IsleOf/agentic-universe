@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 433 nodes, 1767 edges · **Date:** 2026-09-05
+**Graph at generation:** 434 nodes, 1772 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -373,6 +373,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.04170 — `concept_emergent_cheating_and_whistleblowing_in_a_100_agent_math_swarm_transparent_channels_carried_both`, `concept_the_channel_that_carries_the_exploit_is_the_channel_that_catches_it`
 - https://arxiv.org/abs/2609.04280 — `concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation`, `concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion`
 - https://arxiv.org/abs/2609.05227 — `concept_affinity_guided_collusive_bidding_more_than_doubles_target_capture_and_looks_like_legitimate_expertise`
+- https://arxiv.org/abs/2609.05261 — `concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome`
 - https://arxiv.org/abs/2609.05279 — `concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress`
 - https://arxiv.org/abs/2609.05339 — `concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs`
 - https://arxiv.org/html/2604.21590v1 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`

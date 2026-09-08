@@ -12714,6 +12714,33 @@
         "tools/gates.py",
         "tools/probe_substrate_adversarial.py"
       ]
+    },
+    {
+      "id": "concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome",
+      "label": "Trace2Tower: flat trajectory retrieval + flat skill summarisation ignore temporal dependencies and outcome topology. Distil traces into a 3-level tower (action templates / procedural routines / task strategies) via contrastive spectral decomposition that suppresses failure-prone shortcuts; ALFWorld 87.31% / 10.35 steps",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:memory",
+      "confidence": 0.68,
+      "description": "arXiv:2609.05261 (Jiazheng Sun, Boyu Yang, Binhao Yuan, Mingxuan Li, Xin Peng; v1 2026-09-04, VERIFIED via abstract). LLM agents increasingly learn from execution traces, and the current paradigm - SHALLOW TRAJECTORY RETRIEVAL and FLAT SKILL SUMMARISATION - ignores the temporal dependencies and outcome-conditioned topology of agent behaviour. TRACE2TOWER. Abstract step-level interactions into CANONICAL EVENTS; build a unified graph governed by semantic compatibility + transition dynamics + outcome evidence; run a CONTRASTIVE SPECTRAL DECOMPOSITION that isolates stable, SUCCESS-ALIGNED behavioural modes while suppressing FAILURE-PRONE SHORTCUTS. The modes populate a dynamic SKILL TOWER with three levels - ACTION TEMPLATES, PROCEDURAL ROUTINES, OVERARCHING TASK STRATEGIES - continuously refined via VERIFIER-GUIDED FEEDBACK. RESULTS: ALFWorld 87.31% success, 10.35 steps, 0.26 invalid actions; WebShop 50.67% exact. Outperforms baselines on task mastery AND context-efficient experience reuse. WHY IT LANDS ON THE LOOP. tools/skill_induction.py mines the loop's increments into flat TASK_CLASSES - the exact bottleneck this paper names. The refinement: organise induced skills by ABSTRACTION LEVEL (a reusable code idiom / a multi-step procedure like fold->probe->fix / a strategy like 'consolidation pass before a feature run') and CONDITION each on outcome (did the increment land, did it survive holdout, did a later run withdraw it). It is the SUCCESS-SIDE COMPANION to concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace - DiagEvo keeps a hierarchy of what FAILS by cause; Trace2Tower keeps a hierarchy of what WORKS by abstraction level, and explicitly suppresses shortcuts, which is a mechanism against the exploration->exploitation decline (a run reaching for the shortcut that worked last time). CURRENCY: 2026-09-04, embodied/web benchmarks; the flat-vs-hierarchical claim and the outcome-conditioning are structural, the pp numbers are task-specific.",
+      "tags": [
+        "memory",
+        "skill-hierarchy",
+        "trace-based-learning",
+        "spectral-decomposition",
+        "outcome-conditioned",
+        "suppress-shortcuts",
+        "action-template-routine-strategy",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.05261"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.05261"
+      ]
     }
   ],
   "edges": [
@@ -30383,6 +30410,41 @@
       "target": "artifact_swarm_substrate_prototype_design",
       "type": "constrains",
       "description": "the design's trust boundary gains a fourth open limitation: a coordinated legitimate validator ring is undetectable without an affinity signal the cooperative layer does not collect; quorum_homogeneous only catches a lazy one"
+    },
+    {
+      "id": "edge_trace2tower_refines_skill_induction",
+      "source": "concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome",
+      "target": "pattern_skill_induction",
+      "type": "refines",
+      "description": "skill_induction mines increments into flat TASK_CLASSES - the flat-summarisation bottleneck this paper names. Refinement: organise by abstraction level (idiom / procedure / strategy) and condition each skill on outcome (landed / survived holdout / withdrawn)"
+    },
+    {
+      "id": "edge_trace2tower_companions_diagevo",
+      "source": "concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome",
+      "target": "concept_diagevo_improve_from_a_hierarchical_error_cause_memory_not_every_trace",
+      "type": "supports",
+      "description": "the success-side companion: DiagEvo keeps a hierarchy of what FAILS by cause, Trace2Tower a hierarchy of what WORKS by abstraction level - two hierarchical memories, not one flat trace log"
+    },
+    {
+      "id": "edge_trace2tower_grounds_verif_hierarchy",
+      "source": "concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome",
+      "target": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
+      "type": "grounds",
+      "description": "the skill tower is refined by verifier-guided feedback - the verifier is exactly the substitute-for-judgment signal whose strength this node tracks, and a stronger verifier makes a better tower"
+    },
+    {
+      "id": "edge_trace2tower_constrains_flock",
+      "source": "concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome",
+      "target": "artifact_fractal_flock_harness",
+      "type": "informs",
+      "description": "fractal_flock produces execution traces (direction + per-agent contributions + the compressed tree); those are the raw material a skill tower would distil, and the compress-on-completion step is already a first abstraction level"
+    },
+    {
+      "id": "edge_trace2tower_refines_creativity_decline",
+      "source": "concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome",
+      "target": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "type": "refines",
+      "description": "'contrastive spectral decomposition suppressing failure-prone shortcuts' is a concrete mechanism against the within-run drift toward the exploit that worked before - the exploration->exploitation decline given a memory-level countermeasure"
     }
   ]
 }
