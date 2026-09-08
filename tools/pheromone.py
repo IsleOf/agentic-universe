@@ -262,6 +262,21 @@ class Pheromone:
                       "answered": False},
             _at=_at, _id=_id)
 
+    def note_alternative(self, task_ref, *, agent, hypothesis, ttl_s=7200.0,
+                         _at=None, _id=None):
+        """Record that a COMPETING hypothesis was explored for `task_ref` (run 438,
+        ArcticSwarm arXiv:2609.01870). ArcticSwarm's commit gate withholds a report
+        until at least one alternative-candidate task has run - empirically the
+        single highest-value check (26.8% -> 91.4% accuracy). This posts a
+        `kind=claim` with `evidence={"alternative_hypothesis": ...}` and NO utility
+        (0.0) - it does not steer the board, it records that the search was not
+        single-candidate. `g4_release` REPORTS when a task has none."""
+        return self.annotate(
+            task_ref, "claim", utility=0.0, confidence=0.6, agent=agent,
+            half_life_s=min(ttl_s / 2, DEFAULT_HALF_LIFE_S), ttl_s=ttl_s,
+            evidence={"alternative_hypothesis": str(hypothesis)},
+            _at=_at, _id=_id)
+
     def answer_ask(self, ask_id, *, task_ref, agent, answer, _at=None):
         """Resolve an open ask by superseding it with an answered copy (same author
         boundary as any supersede - but an ASK is answerable by ANYONE, so this posts

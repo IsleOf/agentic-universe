@@ -24,8 +24,10 @@ WHY A GATE HERE CANNOT BECOME A PERMANENT AUTHORITY (the request's concern):
      validator plus a passing computable check as the second "voter". G4 also
      REPORTS `single_evidence_domain` when the task's whole evidence basis is one
      source — a quorum on it has a structural epistemic cut of 1 no matter how
-     many vote (arXiv:2609.02925) — and `quorum_homogeneous` for a copy-pasted
-     ring (arXiv:2609.05227). Both are reports, never blocks.
+     many vote (arXiv:2609.02925) — `no_alternative_hypothesis` when no
+     competing-candidate task ran (`pheromone.note_alternative`, arXiv:2609.01870),
+     and `quorum_homogeneous` for a copy-pasted ring (arXiv:2609.05227). All are
+     reports, never blocks.
 
 NO MODEL CALLS. The fuzzy part — judging whether a claim is actually supported —
 is the caller's; the gate checks the mechanical, verifiable things and reports the
@@ -280,6 +282,17 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
     evidence_basis_width = None if basis is None else len(basis)
     single_evidence_domain = evidence_basis_width is not None and evidence_basis_width <= 1
 
+    # Run 438 (arXiv:2609.01870, ArcticSwarm): the commit gate withholds a report
+    # until >= 1 alternative-candidate task has run - empirically the single
+    # highest-value check (candidate fixation drops accuracy 91.4% -> 26.8% with
+    # zero alternatives). `pheromone.note_alternative()` records one. REPORT, not a
+    # block (same posture as single_evidence_domain / quorum_homogeneous).
+    n_alternatives = sum(
+        1 for a in v["annotations"]
+        if a["kind"] == "claim" and isinstance(a.get("evidence"), dict)
+        and a["evidence"].get("alternative_hypothesis"))
+    no_alternative_hypothesis = n_alternatives == 0
+
     voters = 1 + len(prior_g4_pass) + (1 if computable_ok else 0)
     passed = True
     if not computable_ok:
@@ -306,6 +319,11 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
                        f"distinct source(s) ({basis}); a quorum on a single-source basis has "
                        f"a structural epistemic cut of 1 (arXiv:2609.02925) - more validators "
                        f"do not add independence, widen the evidence basis. Not a block")
+    if no_alternative_hypothesis:
+        reasons.append("REPORT: no alternative-hypothesis task ran on this task_ref "
+                       "(pheromone.note_alternative). ArcticSwarm (arXiv:2609.01870): "
+                       "single-candidate search fixates - 91.4% -> 26.8% accuracy. "
+                       "Run at least one competing candidate before release. Not a block")
     return _write_verdict(task_ref, pheromone, gate="G4", validator_agent=validator_agent,
                           passed=passed, reasons=reasons,
                           extra={"quorum": voters, "min_quorum": min_quorum,
@@ -313,7 +331,9 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
                                  "counted_prior_pass_ids": counted_pass_ids,
                                  "quorum_homogeneous": quorum_homogeneous,
                                  "evidence_basis_width": evidence_basis_width,
-                                 "single_evidence_domain": single_evidence_domain})
+                                 "single_evidence_domain": single_evidence_domain,
+                                 "n_alternative_hypotheses": n_alternatives,
+                                 "no_alternative_hypothesis": no_alternative_hypothesis})
 
 
 # --------------------------------------------------------------------------- #
@@ -502,6 +522,23 @@ def _selftest():
                          computable_ok=True, min_quorum=2)
         checks["G4 reports width=None (unknown) when no G1 verdict recorded links"] = (
             ve4["evidence_basis_width"] is None and not ve4["single_evidence_domain"])
+
+        # --- run 438: no-alternative-hypothesis report (arXiv:2609.01870) ---
+        pfa2 = Pheromone(tmp / "alt.db")
+        va2 = g4_release("k1", validator_agent="v1", pheromone=pfa2,
+                         computable_ok=True, min_quorum=2)
+        checks["G4 flags no_alternative_hypothesis when no competing task ran"] = (
+            va2["no_alternative_hypothesis"] and va2["n_alternative_hypotheses"] == 0
+            and any("single-candidate search fixates" in r for r in va2["reasons"]))
+        checks["G4 no-alternative report still passes (a REPORT, not a block)"] = va2["pass"]
+        pfa2.note_alternative("k1", agent="explorer", hypothesis="maybe it's X not Y")
+        va3 = g4_release("k1", validator_agent="v2", pheromone=pfa2,
+                         computable_ok=True, min_quorum=2)
+        checks["G4 clears the flag once an alternative hypothesis is noted"] = (
+            not va3["no_alternative_hypothesis"] and va3["n_alternative_hypotheses"] == 1)
+        checks["an alternative-hypothesis note carries no utility of its own (does not steer)"] = (
+            all(a["utility"] == 0.0 for a in pfa2.read("k1")["annotations"]
+                if isinstance(a.get("evidence"), dict) and a["evidence"].get("alternative_hypothesis")))
 
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
