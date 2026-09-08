@@ -297,7 +297,26 @@ def run_dual_extractor(*, adaptation, rho, trials=600, seed=20260382):
             "false_clean_confident": round(confident_miss / trials, 3)}
 
 
-def dual_sweep(adaptations=(0.0, 0.3, 0.6), rhos=(0.0, 0.5, 1.0), length=16, trials=600):
+# Run 384. RHO_EMPIRICAL is not a guess and not a sweep point chosen for roundness.
+# arXiv:2609.01873 (Bara, 2026-09-01) measures correlated replicate-extraction errors
+# induced by a SHARED BASE MODEL among nominally independent agents, over 20,000+
+# controlled LLM-agent calls, and reports gamma_cal = 0.719 estimated out of sample.
+# That is the empirical answer to the requirement run 383 could only state: how
+# uncorrelated are two extractors in practice, when they are two prompts on one model?
+#
+# CAVEAT, AND IT IS NOT A SMALL ONE. gamma_cal and this module's `rho` are DIFFERENT
+# PARAMETERISATIONS of "correlated extraction failure" - gamma_cal is a calibration
+# coefficient in that paper's correlated-extraction aggregator, rho here is a mixture
+# weight on a fully-coupled draw. Plugging one into the other is an ILLUSTRATIVE
+# PLUG-IN, not a calibration, and the mapping between them is not the identity. What
+# survives the caveat is the ORDER OF MAGNITUDE: the real-world figure sits far closer
+# to the coupled end than to the independent one, which is the only thing the
+# conclusion below rests on.
+RHO_EMPIRICAL = 0.719
+
+
+def dual_sweep(adaptations=(0.0, 0.3, 0.6), rhos=(0.0, 0.5, RHO_EMPIRICAL, 1.0),
+               length=16, trials=600):
     out = {}
     for a in adaptations:
         out[a] = {"single": run_monitor_arm("eae", length=length, adaptation=a, trials=trials),
@@ -547,6 +566,20 @@ def _selftest():
     checks["rho is swept free rather than derived from adaptation"] = (
         run_dual_extractor(adaptation=0.0, rho=0.5, trials=100)
         != run_dual_extractor(adaptation=0.6, rho=0.5, trials=100))
+
+    # --- the empirical-rho check (run 384) ---
+    # At rho=0 run 383 found duplication restores detection above the unfiltered monitor
+    # while failing to restore calibration. At the empirically-indicated correlation it
+    # loses BOTH. This check is the reason run 383's recommendation had to be withdrawn.
+    e_hi = run_dual_extractor(adaptation=0.6, rho=RHO_EMPIRICAL, trials=4000)
+    e_direct = run_monitor_arm("direct", length=16, adaptation=0.6, trials=4000)
+    e_indep = run_dual_extractor(adaptation=0.6, rho=0.0, trials=4000)
+    checks["at the empirical rho, the extractor pair loses detection to an unfiltered monitor"] = (
+        e_hi["detect_rate"] < e_direct["detect_rate"])
+    checks["at the empirical rho, most of the independent pair's calibration gain is gone"] = (
+        e_hi["false_clean_confident"] > e_indep["false_clean_confident"] * 1.3)
+    checks["RHO_EMPIRICAL sits nearer the coupled end than the independent end"] = (
+        RHO_EMPIRICAL > 0.5)
 
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")

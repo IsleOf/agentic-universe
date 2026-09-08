@@ -11496,6 +11496,61 @@
       "evidence_links": [
         "tools/probe_subagent_coordination.py"
       ]
+    },
+    {
+      "id": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "label": "Epistemic Sybil: another agent is not another observation. A shared base model induces correlated extraction errors (gamma_cal=0.719) among nominally independent agents, and report-space dedup tracks similarity, not evidential ancestry",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:monitoring",
+      "confidence": 0.72,
+      "description": "arXiv:2609.01873 (Marc Bara, v1 2026-09-01, VERIFIED via abstract). Formalises the EPISTEMIC SYBIL problem: spawning more agents does not multiply evidence. A report Z is an epistemic Sybil extension relative to reports R when I(Theta; Z | R) = 0, and NO REPORT-ONLY AGGREGATOR can generally distinguish replication from independent corroboration - identical reports warrant different posteriors under unobserved ancestry. MEASUREMENTS, over 20,000+ controlled LLM-agent report and extraction calls on synthetic evidentiary documents. (a) Holding ONE evidence root fixed while report multiplicity goes 1 -> 32, naive posterior coverage COLLAPSES from 0.940 to 0.263. (b) Holding report count fixed while evidence-root multiplicity goes 1 -> 16 closes the gap; aggregators are statistically indistinguishable at k=16. So the cure is more EVIDENCE ROOTS, not more agents. (c) THE NUMBER THIS PROJECT NEEDED: replicate extraction errors are correlated at gamma_cal = 0.719, estimated out of sample, and the paper attributes this correlation to the SHARED BASE MODEL among independent agents. (d) A correlated-extraction aggregator restores calibration - the correlation is survivable if you MODEL it. (e) A controlled manipulation separates representation similarity from evidential ancestry: a report-space deduplication mechanism's inferred cluster count moves 1.425 [1.363, 1.485] with representation similarity but only 0.040 [-0.045, 0.120] with a FOURFOLD change in true ancestry. Dedup measures the wrong thing almost entirely. WHY THIS IS DECISIVE HERE. Run 383 swept a free correlation parameter rho and could only state a requirement: an operator must be able to argue their two extractors fail differently, and different prompts on the same model is not that argument. This measures it. 0.719 sits near the coupled end, and re-running the run-383 arm at that value collapses the mitigation on BOTH axes under attack - detection 0.414 against an unfiltered monitor's 0.446, and confident-miss 0.558 recovering only about an eighth of the gap toward the independent pair's 0.397. PARAMETERISATION CAVEAT, recorded rather than buried: gamma_cal is a calibration coefficient in the paper's aggregator and rho is a mixture weight in this project's simulation. They are different parameterisations of correlated extraction failure and the mapping is not the identity. The plug-in is illustrative; what survives the caveat is the ORDER OF MAGNITUDE, which is all the conclusion rests on. CURRENCY: 2026-09-01, within days of folding.",
+      "tags": [
+        "monitoring",
+        "ensemble",
+        "epistemic-sybil",
+        "evidential-ancestry",
+        "correlated-extraction",
+        "calibration",
+        "shared-base-model",
+        "deduplication-measures-the-wrong-thing",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01873"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.01873"
+      ]
+    },
+    {
+      "id": "concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it",
+      "label": "Generative-process diversity (NCD between raw outputs, residualised) predicts correlated failure across 38 LLMs where semantic similarity does not - surface similarity is the wrong instrument for model independence",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:monitoring",
+      "confidence": 0.6,
+      "description": "arXiv:2609.03422 (Ross Tieman, Evan Markou, v1 2026-09-03, VERIFIED via abstract). Argues the diversity that matters for a multi-model system is not semantic diversity but GENERATIVE-PROCESS DIVERSITY - differences between the processes capable of generating the observed outputs. Their instrument, from Algorithmic Information Theory: Normalised Compression Distance between RAW model outputs, residualised against a permutation control. FINDINGS across 38 language models and ten disjoint benchmark families: the measure identifies population structure that semantic similarity MISSES, and predicts cross-task variation in chance-corrected correlated failure among model pairs beyond both semantic similarity and model-pair capability. Cross-benchmark partial rank association -0.216, 95% interval [-0.309, -0.122], negative on all ten benchmarks. THE PREMISE IS THE POINT: different models may be treated as independent components even when their behaviour and failures remain strongly correlated. That is run 383's rho=1 case observed in the wild, and note the population here is 38 DIFFERENT MODELS - not two prompts on one model, which is the weaker independence claim this project was worried about. Correlated failure is a problem even across genuinely distinct models. HONEST EFFECT SIZE, and it constrains how this may be used: -0.216 partial rank association is a directional signal, consistent across all ten benchmarks, but it is WEAK-TO-MODERATE. It supports the claim that more generative-process diversity is associated with less correlated failure. It does NOT license certifying a pair as independent. You cannot measure your way to rho=0 with this - and run 383 already showed rho=0 was not sufficient for calibration anyway, which makes the keep-a-differently-shaped-channel corollary STRONGER rather than weaker. CONVERGENCE WORTH NAMING: this and arXiv:2609.01873 arrive independently at the same negative result about instruments - semantic similarity misses population structure there, report-space deduplication tracks representation similarity rather than evidential ancestry here. Two papers, two methods, one conclusion: SURFACE SIMILARITY IS THE WRONG INSTRUMENT FOR INDEPENDENCE. CURRENCY: 2026-09-03, within days of folding.",
+      "tags": [
+        "monitoring",
+        "ensemble",
+        "generative-process-diversity",
+        "correlated-failure",
+        "normalised-compression-distance",
+        "semantic-similarity-insufficient",
+        "weak-effect-size",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.03422"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.03422"
+      ]
     }
   ],
   "edges": [
@@ -27758,6 +27813,55 @@
       "target": "concept_derive_a_threshold_from_your_own_history_rather_than_defer_it_or_invent_it",
       "type": "instantiates",
       "description": "this arm's first draft asserted a guessed constant (independent < single * 0.6) and went RED at 0.393 vs 0.391; the fix was structural claims - an ordering and a floor - rather than a looser constant, which is this node's discipline applied to a selftest rather than to a gate"
+    },
+    {
+      "id": "edge_sybil_challenges_r383",
+      "source": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "target": "concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent",
+      "type": "challenges",
+      "description": "run 383 left rho a free parameter and could only state a requirement; this measures it at gamma_cal=0.719 for a shared base model. Re-running the arm there collapses the mitigation on BOTH axes under attack (detection 0.414 vs an unfiltered monitor's 0.446), so run 383's two-extractors recommendation is withdrawn as stated - the independent case it relied on is not the case operators are in"
+    },
+    {
+      "id": "edge_sybil_refines_r382",
+      "source": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "target": "concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident",
+      "type": "refines",
+      "description": "supplies the mitigation run 382 asked for and run 383 failed to find: calibration is restored not by MORE extractors but by an aggregator that MODELS the correlation between them, plus more independent evidence roots (1 -> 16 closes the coverage gap)"
+    },
+    {
+      "id": "edge_sybil_constrains_cohort_monitor",
+      "source": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "target": "artifact_cohort_monitor",
+      "type": "constrains",
+      "description": "this component sums per-worker signals as though workers were independent observations. If the workers share a base model their signals are correlated at roughly this magnitude, so the cohort sum overstates its own evidence - it needs a correlation-aware aggregation, not just a threshold"
+    },
+    {
+      "id": "edge_sybil_informs_subagent_rig",
+      "source": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "informs",
+      "description": "supplies RHO_EMPIRICAL to the dual-extractor arm and the empirical-rho selftest checks"
+    },
+    {
+      "id": "edge_gpd_supports_sybil",
+      "source": "concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it",
+      "target": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "type": "supports",
+      "description": "independent convergence on the same negative result about instruments: semantic similarity misses population structure, and report-space dedup tracks representation similarity rather than evidential ancestry. Different methods, one conclusion - surface similarity is the wrong instrument for independence"
+    },
+    {
+      "id": "edge_gpd_challenges_r383",
+      "source": "concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it",
+      "target": "concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent",
+      "type": "challenges",
+      "description": "run 383's requirement was that an operator argue their extractors fail differently; this shows even 38 genuinely distinct models exhibit strongly correlated failure, so the requirement is harder to meet than use-two-different-models - and at -0.216 the proposed instrument is directional, not a certificate of independence"
+    },
+    {
+      "id": "edge_gpd_informs_lessismore",
+      "source": "concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it",
+      "target": "concept_llm_monitors_often_do_better_with_less_information_and_extract_then_score_beats_scoring_the_whole_trajectory",
+      "type": "informs",
+      "description": "if extract-then-score is deployed as an ensemble of extractors, this is the measure that says whether the ensemble is real; semantic agreement between extractors is not evidence that they fail differently"
     }
   ]
 }

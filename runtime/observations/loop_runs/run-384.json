@@ -1,0 +1,53 @@
+{
+  "run": 384,
+  "increment": "Back to literature as run 383 concluded - and literature returned holding the exact free parameter run 383 could not measure. Folded arXiv:2609.01873 (Epistemic Sybil Resistance, 2026-09-01) and arXiv:2609.03422 (Inferred Generative-Process Diversity, 2026-09-03). THE NUMBER: replicate extraction errors correlate at gamma_cal=0.719 out of sample, attributed to the shared base model among nominally independent agents, over 20,000+ LLM calls. Re-running run 383's dual-extractor arm at that value collapses the mitigation on BOTH axes under attack - detection 0.414 vs an unfiltered monitor's 0.446, confident-miss 0.558 recovering an eighth of the gap toward the independent pair's 0.397. Run 383's two-extractors recommendation is WITHDRAWN as stated. Third consecutive withdrawal: 382 withdrew 381's advice, 383 withdrew 382's, 384 withdraws 383's, each because the next run tested what the previous asserted. CAVEAT STATED NOT BURIED: gamma_cal and this project's rho are different parameterisations and the mapping is not the identity; the plug-in is illustrative and only the order of magnitude is load-bearing. Written into RHO_EMPIRICAL's comment. THE MITIGATION THAT WORKS, answering run 382's original question: not more extractors but a correlated-extraction aggregator, plus more EVIDENCE ROOTS rather than more agents - coverage collapses 0.940->0.263 as reports go 1->32 on one root, and 1->16 roots closes it. CONVERGENCE: both papers independently find surface similarity is the wrong instrument for independence - semantic similarity misses population structure across 38 models, and report-space dedup moves 1.425 with representation similarity but 0.040 with a fourfold change in true ancestry. Effect size honesty: 03422's association is -0.216 [-0.309,-0.122], directional not a certificate. +2 nodes, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 8,
+  "trace_valid": true,
+  "counts": {
+    "claims": 4,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.01873",
+      "verified": true
+    },
+    {
+      "id": "src:https://arxiv.org/abs/2609.03422",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.01873",
+      "verified": false
+    },
+    {
+      "id": "arXiv:2609.03422",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01873",
+    "arXiv:2609.03422",
+    "src:https://arxiv.org/abs/2609.01873",
+    "src:https://arxiv.org/abs/2609.03422"
+  ],
+  "trace_file": "runtime\\traces\\loop-384.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 384 OK · VALID · graph +2n/+7e · cites 2v/4 · idle-streak 0 · legible 1.00 · verified-frac 0.91 · files +1~3-0 · novelty 0.40"
+}
