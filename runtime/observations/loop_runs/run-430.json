@@ -1,0 +1,46 @@
+{
+  "run": 430,
+  "increment": "Literature, fresh axis (verification / quorum independence). Folded arXiv:2609.02925 (The Illusion of Independent Quorums; He & Yu, OpenKedge; 2026-08-24). Distinct reviewers usually share upstream telemetry / docs / tool backends, so a quorum's real resilience is the STRUCTURAL EPISTEMIC CUT kappa_E (min fault roots whose exposure reaches a decisive coalition), NOT the vote count. Shared evidence => kappa_E=1: 1->7 reviewers all held ~96-100% unsafe-commit rate; path separation (kappa_E=2) cut it to 6.7% (14.5x), unanimity on separated paths to 0.11% (670x); a shared-telemetry fault took quorum failure 0.4% -> 99.6%. Mitigation DAQC: admit a COMMIT vote iff |Q|>=q_min AND kappa_hat_E>=k_min, recomputed from evidence lineage. LANDS ON: gates.g4_release counts passes with min_quorum=2 but models no evidence overlap - on the shared pheromone board that quorum is structurally Q2 (kappa_E=1); run-417's quorum_homogeneous flag is symptomatic (output correlation), kappa_E is structural (input provenance). Second independent reason not to lean on quorum (run 428: a vote synthesis is budget-negative; this: a shared-evidence quorum is safety-negative). +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.02925",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.02925"
+  ],
+  "trace_file": "runtime\\traces\\loop-430.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 430 OK · VALID · graph +1n/+7e · cites 1v/1 · idle-streak 1 · legible 1.00 · verified-frac 0.83 · files +1~2-0 · novelty 0.33! · acts cons40%"
+}

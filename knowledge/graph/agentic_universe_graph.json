@@ -12983,6 +12983,36 @@
       "evidence_links": [
         "tools/probe_orchestration_value.py"
       ]
+    },
+    {
+      "id": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "label": "The Illusion of Independent Quorums (He & Yu, OpenKedge, arXiv:2609.02925, 2026-08-24): distinct reviewers usually share upstream telemetry / documents / tool backends, so a quorum's real resilience is the STRUCTURAL EPISTEMIC CUT kappa_E = the min number of fault roots whose exposure reaches a decisive coalition, NOT the vote count. Shared evidence => kappa_E=1: 1->7 reviewers all held ~96-100% unsafe-commit rates. Path separation (kappa_E=2) cut that to 6.7% (14.5x); unanimity on separated paths to 0.11% (670x). Mitigation: gate admission on kappa_E recomputed from evidence lineage, not on |Q|.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.78,
+      "description": "arXiv:2609.02925v1 (Jun He, Deying Yu; OpenKedge.io; 2026-08-24, VERIFIED via abstract + HTML intro/tables). Challenges the redundancy assumption behind authorization quorums: that N independent reviewers give N-fold safety. THE CLAIM. Distinct reviewers 'often share upstream telemetry, documents, or tool backends', so one corrupted source fails many votes at once. Model the reviewers and their inputs as a causal DAG; for each modeled fault root c, the exposure map D(c) = {reviewers structurally reachable from c}. Group overlapping exposure sets into EPISTEMIC FAULT DOMAINS. The STRUCTURAL EPISTEMIC CUT kappa_E is the minimum number of fault roots whose exposure collectively covers a minimal decisive coalition under the quorum rule. kappa_E, not |Q|, is the resilience number. EMPIRICAL (120-task benchmark: infra deletion, security-policy mutation, deploy rollback, IAM authz, doc compliance; 16 unsafe / 8 safe per domain; 3 evidence packages per task, E1 corrupted on unsafe tasks). Q1 (same model + evidence) and Q2 (different models, SHARED evidence) both kappa_E=1: 97.3% / 96.8% unsafe commits under a 2-of-3 rule. Q3 (same model, SEPARATED evidence) and Q4 (diverse models + paths) kappa_E=2: 6.7% unsafe commits - 14.5x better from PATH SEPARATION ALONE. Unanimity (3-of-3) on separated paths: 0.11% (670x). Common-cause activation: a shared-telemetry fault took the quorum failure rate from 0.4% to 99.6% (observation-fault class), 1.3% to 94% (derivation class). Scaling paradox (Table 3): 1->7 reviewers with shared evidence sustained ~96-100% unsafe commits - adding voters without addressing dependencies cannot help. MITIGATION: the Dependency-Aware Quorum Controller (DAQC). Two phases: prospective reviewer selection by planned structural exposure; runtime admission that reconstructs actual provenance from captured evidence lineage, recomputes kappa_hat_E, and admits a COMMIT vote iff |Q| >= q_min AND kappa_hat_E >= k_min. A failing vote is denied and forced to full reconfiguration (new reviewers / evidence / rules). Code + benchmark on GitHub. WHY IT LANDS HERE. The swarm substrate's G4 (`gates.g4_release`, quorum-not-veto, `min_quorum=2`) counts prior PASSES but has no model of whether those validators read the same thing. Every agent reads the SAME pheromone board and the SAME task ledger - structurally this is Q2 (different agents, shared evidence), kappa_E=1. The run-417 `quorum_homogeneous` flag (>=3 passes, identical confidence to 2dp, no distinct reasons) is a SYMPTOMATIC detector - it catches the correlation in the OUTPUTS after the fact. kappa_E is the STRUCTURAL version: check the inputs' provenance before counting the vote. To get kappa_E >= 2 the substrate would need per-validator evidence-lineage capture (which board annotations / which files each validator read) and a G4 line that denies release when all counted passes share an evidence domain. This is a second, independent reason not to lean on quorum: run 428 showed a vote synthesis is BUDGET-negative; this shows a quorum on shared evidence is SAFETY-negative. CURRENCY: 2026-08-24, within the recency window. Small-model relevance: the effect is structural (shared inputs), model-size-independent; if anything a fleet of identical small local models is MORE prone to kappa_E=1 because model diversity is also absent.",
+      "tags": [
+        "quorum",
+        "epistemic-fault-domain",
+        "structural-epistemic-cut",
+        "kappa-e",
+        "correlated-failure",
+        "validator-independence",
+        "daqc",
+        "gates",
+        "g4-release",
+        "recency-2026-08",
+        "small-model-regime"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.02925"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.02925"
+      ]
     }
   ],
   "edges": [
@@ -30946,6 +30976,55 @@
       "target": "artifact_probe_emergent_synergy_rig",
       "type": "supports",
       "description": "same measurement intent as probe_emergent_synergy's Rosas Psi + differentiation: separate a genuine collective from an aggregate. The Gamma arm does it in the budget dimension, the synergy rig in the information dimension"
+    },
+    {
+      "id": "edge_efd_sharpens_validator_ring",
+      "source": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "target": "concept_the_substrate_cannot_detect_a_coordinated_legitimate_validator_ring_only_flag_a_lazy_one_that_copy_pastes",
+      "type": "refines",
+      "description": "run 417 said the substrate cannot detect a coordinated legitimate validator ring, only flag a lazy copy-paste one. This names why: the substrate has no provenance DAG, so it cannot compute kappa_E - it can only see output homogeneity, not shared inputs. A ring that reads the same board and writes distinct-looking verdicts has kappa_E=1 and passes quorum_homogeneous"
+    },
+    {
+      "id": "edge_efd_constrains_gates",
+      "source": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "target": "artifact_validator_gates",
+      "type": "constrains",
+      "description": "gates.g4_release counts prior passes with min_quorum=2 but models no evidence-source overlap; on the shared pheromone board that quorum is structurally kappa_E=1. A dependency-aware admission line (deny release when all counted passes share an evidence domain) is the DAQC analogue"
+    },
+    {
+      "id": "edge_efd_generalises_epistemic_sybil",
+      "source": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "target": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
+      "type": "extends",
+      "description": "'another agent is not another observation' was argued from a shared BASE MODEL inducing correlated extraction error. EFDs generalise the same kappa_E=1 conclusion to shared telemetry, documents, and tool backends - the correlation source need not be the model"
+    },
+    {
+      "id": "edge_efd_supports_three_agent_pipeline",
+      "source": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "target": "concept_a_gated_pipeline_with_no_self_review_needs_at_least_three_agents",
+      "type": "supports",
+      "description": "a gated pipeline needs >= 3 agents for a non-contributor gate; this adds that the >=3 must also sit in distinct epistemic fault domains, else the quorum's kappa_E stays 1 regardless of headcount"
+    },
+    {
+      "id": "edge_efd_is_the_independence_test_for_dup_extractor",
+      "source": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "target": "concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent",
+      "type": "supports",
+      "description": "'two extractors restore detection only if the pair is actually independent' - kappa_E computed from the evidence-lineage DAG is the structural test for 'actually independent' that the duplicate-extractor result assumes but does not measure"
+    },
+    {
+      "id": "edge_efd_constrains_substrate_design",
+      "source": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the design doc's G4 quorum section should state kappa_E=1 as the substrate's current quorum resilience (shared board = shared evidence) and name evidence-lineage capture as the prerequisite for a real >= 2 cut"
+    },
+    {
+      "id": "edge_efd_second_reason_against_quorum",
+      "source": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "target": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "type": "supports",
+      "description": "run 428's gamma arm: a vote synthesis is budget-negative. This is the independent safety argument: a quorum whose members share evidence is kappa_E=1 and a shared-source fault flips it from 0.4% to 99.6% failure. Two reasons the substrate should not lean on quorum as its integration mechanism"
     }
   ]
 }
