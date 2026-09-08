@@ -1,0 +1,39 @@
+{
+  "run": 415,
+  "increment": "A standalone synthesis pass (acts fold40% for several runs -> deliberate consolidate, no new code). Updated docs/swarm-substrate-prototype.md with a new section 6 - the design as built and probed across runs 390-414: it runs end to end with no orchestrator object; a gated pipeline needs >=3 agents not 2; the pool-size-scaled threshold applied from birth; transparency is a safety property but only necessary not sufficient (pheromone.warn halves the lag exposure); an evolved private language defeats a keyword monitor silently, two-part fix built; the substrate authenticates no writes (3 red-team bugs fixed, residual Sybil-class); rotation costs 16-63% for real agents / zero for the stigmergic substrate; memory representation determines model-upgrade portability, stores now declare PORTABILITY_CLASS; reputation stays empirical and id normalisation reached relay+reputation. 8 folded papers added to Sources; doc 409 -> 519 lines. +1 node, +2 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-415.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 415 OK · VALID · graph +1n/+2e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.85 · files +1~3-0 · novelty 0.80 · acts fold40%"
+}

@@ -12637,6 +12637,29 @@
         "tools/task_ledger.py",
         "tools/pheromone.py"
       ]
+    },
+    {
+      "id": "concept_the_swarm_substrate_design_doc_now_carries_a_section_6_consolidating_what_15_runs_of_implementation_taught",
+      "label": "docs/swarm-substrate-prototype.md gained a section 6 (runs 390-414): the design as built and probed - the 3-agent floor, transparency-as-safety and its limits, the no-authenticated-writes trust boundary, the zero structural swap cost, and the memory portability classes - so the deliverable reflects what implementation learned",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.6,
+      "description": "Run 415, a consolidation/synthesis pass. The swarm-substrate design doc was written at run 389; runs 397-414 produced ~15 findings that refine it (the k>=3 gated-pipeline floor; transparency is a safety property but only necessary not sufficient; an evolved private language defeats a keyword monitor silently, with a two-part fix built; the substrate authenticates no writes, so identity guards are only as strong as no-impersonation; rotation costs 16-63% communication for real agents but zero for the stigmergic substrate; memory representation determines model-upgrade portability). Rather than rewrite sections 1-5, a new section 6 states each finding and the design change it implies, with the folded papers added to Sources. The doc grew 409 -> 519 lines. This is the loop acting on run 408's finding that it bundles consolidation with action: a standalone synthesis pass that updates the artifact the owner reads, shipping no new code. The run-by-run detail stays in the auto_sweep files; the design doc is now the single place that reflects the current state of the design.",
+      "tags": [
+        "swarm-substrate",
+        "design-doc",
+        "consolidation",
+        "synthesis",
+        "deliverable-maintenance",
+        "implementation-findings"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "docs/swarm-substrate-prototype.md"
+      ]
     }
   ],
   "edges": [
@@ -30222,6 +30245,20 @@
       "target": "artifact_pheromone_annotation_layer",
       "type": "extends",
       "description": "pheromone.py declares its numeric columns fixed-schema and its evidence blob model-coupled, with the register_health re-baseline caveat in the docstring"
+    },
+    {
+      "id": "edge_r415_extends_design",
+      "source": "concept_the_swarm_substrate_design_doc_now_carries_a_section_6_consolidating_what_15_runs_of_implementation_taught",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "extends",
+      "description": "adds section 6 - the design as built and probed across runs 390-414 - so the deliverable carries the implementation findings, not just the original plan"
+    },
+    {
+      "id": "edge_r415_instantiates_bundle_finding",
+      "source": "concept_the_swarm_substrate_design_doc_now_carries_a_section_6_consolidating_what_15_runs_of_implementation_taught",
+      "target": "concept_the_loop_bundles_consolidation_with_action_and_almost_never_does_a_standalone_look_without_changing_pass",
+      "type": "instantiates",
+      "description": "a standalone synthesis pass that updates the artifact the owner reads and ships no new code - the look-without-changing action class run 408 found the loop almost never chooses"
     }
   ]
 }

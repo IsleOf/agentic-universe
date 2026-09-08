@@ -393,6 +393,103 @@ and `fractal_flock.py`.
 
 ---
 
+## 6. What building and probing it taught us (runs 390–414)
+
+Sections 1–5 are the design as written at the start. This section is what the six-module build
+(`pheromone` · `task_ledger`+stage · `relay` · `reputation` · `gates` · `swarm_demo`, plus five
+probe rigs) and a red-team pass actually surfaced. Where a finding changes the design, the
+change is stated here rather than rewritten above.
+
+### 6.1 It runs end to end with no orchestrator object
+`swarm_demo` executes `research → draft → G1 → critique → G4 → done` where every coordination
+decision goes through the ledger, the board, the relay, and the gates. A selftest regex enforces
+that there is no `Orchestrator` / `Chief` / `Boss` / `Manager` class. The `run()` loop holds no
+decision state.
+
+### 6.2 A gated pipeline needs ≥ 3 agents, not 2
+The no-self-review rule (a gate validator may not have contributed to the artifact) plus a
+4-stage pipeline sets a hard floor. At **k = 2**, by the time an artifact reaches G4 both agents
+have contributed, so no valid validator remains and the run stalls **cleanly** (a `GateRefused`
+in the transcript, no exception, no hang). The stated "2–15 agents" is **"3–15" for gated work**;
+a 2-agent fleet can still coordinate for *ungated* tasks.
+
+### 6.3 The pool-size-scaled threshold works, and was applied everywhere from birth
+`pheromone.read()`'s `suggested_threshold` scales as `k·mean + z·sd·√(k·design_effect)` — never
+a bare constant. This is the fix for a real defect found in this repo's *own* `cohort_monitor`
+(it aborted on pure benign noise from k = 20 because it compared an absolute threshold against a
+pool-sized sum). `pheromone` is the first component built after that lesson to pass the
+`param_invariance_audit` scan by construction (its selftest sweeps `range(2, 16)`).
+
+### 6.4 Transparency is a safety property — but only necessary, not sufficient
+DeepMind's 100-agent cheating/whistleblowing study (arXiv:2609.04170): the same transparent
+channels that carried an exploit also let honest agents detect it and organise against it.
+**`relay.py`'s board-not-private-channel and `gates.py`'s contestable-verdict choices are that
+safety property, not just a convenience.** Measured against the real board
+(`probe_annotation_contagion`): plain `kind=warning` annotations contain a boosted-exploit signal
+in ~83% of swept scenarios once the honest cohort is online; the residual risk is the **detection
+lag**, which `pheromone.warn()` (a cheap, weak, self-decaying suspicion flag) roughly halves.
+The limit: transparency gives the counter-response somewhere to happen, it does not guarantee it
+happens — the Ostrom mechanisms are what turn "could detect" into "does enforce".
+
+### 6.5 An evolved private language defeats a keyword monitor — silently
+GlossoGen (arXiv:2609.01491): agents under efficiency pressure evolve compositional,
+human-incomprehensible registers; **weak models can *learn* an existing one even if they cannot
+invent it.** `probe_language_drift_monitor` drove the real `gates.g1_evidence` against text
+drifted from English toward a coded register: it passes a fully-drifted artifact as **clean**
+(zero uncited-claim reports; an unparsed citation reads as no citation). Two-part fix, both
+built: **escalate on unparseability** (a gate that can't read its input says so, it doesn't
+pass) and **`pheromone.register_health()`** — a model-free rolling fraction of annotation text
+carrying English function words, flagging `drifting` as a distribution shift so the board's own
+register is watched.
+
+### 6.6 The trust boundary: the substrate authenticates no writes
+The `agent` field on an annotation is **caller-supplied and unverified**. Every identity-keyed
+guard — gate rotation, no-self-review, the anti-ping-pong window, the reputation ledger,
+correlation de-duplication — is only as strong as "fleet agents do not impersonate each other".
+That is fine for a fleet one operator controls and wrong for an open swarm. A red-team pass
+(`probe_substrate_adversarial`, 11 attacks) fixed three real bugs (whitespace/case self-review,
+cross-author warning suppression, a fabricated G4-pass counted toward quorum) and one disguise
+bug; the residual landings are all Sybil-class and need **signed writes, a capability token from
+the pool (`executor_pool` already has `mint_token` / `redeem_token`), or an external identity
+provider**.
+
+### 6.7 Rotation is not free — but the substrate's cost is zero
+"Testing Interchangeability in LLM Agent Teams" (arXiv:2609.05279): swapping a role-matched
+agent costs **16–63% more communication per progress**, from conventions learned with a former
+partner interfering, and the cost grows with how long the role was held; when the agenda-setter
+is swapped the *incumbent who stayed* pays most of it. `swarm_demo`'s fresh-eyes rule rotates
+agents deliberately. `probe_swap_cost` forced a mid-pipeline rotation and measured **zero change**
+in the substrate's own footprint (ledger tasks, annotations, handoffs identical) — a handoff
+costs the same regardless of who picks it up, because coordination state is external. **The
+structural half is settled; whether real model agents still pay the convention penalty through a
+board is a live-model question.** Design consequence: rotate for safety where safety needs it
+(the gates), let stable working pairs persist elsewhere.
+
+### 6.8 Memory representation determines model-upgrade portability
+"Does Your Agent's Memory Survive a Model Upgrade?" (arXiv:2609.05339, sub-10B models):
+fixed-schema memory transfers across an upgrade with ~0 accuracy change; model-compressed notes
+shift ±10 pp; mixed embeddings forfeit most of the re-embed gain; only retaining raw history
+enables repair. Applied:
+- `task_ledger.py` carries `PORTABILITY_CLASS = "fixed-schema"` — **put anything that must
+  survive a model swap here.**
+- `pheromone.py` carries `PORTABILITY_CLASS = {"numeric_columns": "fixed-schema", "evidence":
+  "model-coupled"}` — the `evidence` blob is disposable (the clock decay already enforces this),
+  and `register_health()` needs its baseline re-established after a model/writer swap.
+- The `.audit` logs and `fractal_flock`'s append-only store are the **raw source history** — keep
+  them uncompressed; store-only repair of compressed notes failed all 48 test cases in the paper.
+- Week-3's vector column needs a **strictly isolated embedding space or a full re-embed**, never
+  a mixed index.
+
+### 6.9 Reputation: keep it empirical, and normalise identity everywhere
+`reputation.py` implements Beta-Bernoulli + UCB + 14-day decay toward the seed (the
+anti-calcification core). Two corrections during the build: reputation must come from **recorded
+outcomes, never agent self-report** (a truthful mechanism doesn't make LLM agents self-report
+truthfully); and the agent-id normalisation (`strip + casefold`) that gates and pheromone got
+had to be applied to `relay` and `reputation` too — a consolidation pass found the earlier fix
+had stopped at the two modules in front of it.
+
+---
+
 ## Sources
 
 - Strands Agents — Swarm Multi-Agent Pattern: <https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/>
@@ -407,3 +504,16 @@ and `fractal_flock.py`.
 - "Drop the Hierarchy and Roles: How Self-Organizing LLM Agents Outperform Designed Structures" (Dochkina, arXiv:2603.28990) — via in-repo graph node `emergent_self_organizing_roles` (VERIFIED read, run 350)
 - Epistemic Sybil Resistance (arXiv:2609.01873) and Inferred Generative-Process Diversity (arXiv:2609.03422) — in-repo, runs 384; correlated-agent and surface-similarity cautions
 - In-repo prior art: [`tools/task_ledger.py`](../tools/task_ledger.py), [`tools/fractal_flock.py`](../tools/fractal_flock.py), [`tools/cohort_monitor.py`](../tools/cohort_monitor.py), [`tools/executor_pool.py`](../tools/executor_pool.py); graph nodes `concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner`, `pattern_market_as_orchestrator`, `pattern_ostrom_swarm_governance`, `emergent_reputation_and_trust_dynamics`, `emergent_stigmergic_coordination`
+
+### Sources folded into §6 (the implementation findings)
+
+- A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms (Paglieri et al., Google DeepMind, arXiv:2609.04170) — transparency as a safety property
+- GlossoGen: Emergent Language in Complex Multi-Agent LLM Interactions (Stengel-Eskin, Kirby et al., arXiv:2609.01491) — evolved human-incomprehensible registers; weak models learn them
+- Agent Memory Is a Surface for Endogenous Authorization Laundering (Cerruti, Okamoto, Erol, arXiv:2609.01836) — memory as part of the authorization policy
+- Testing Interchangeability in LLM Agent Teams (Gao et al., arXiv:2609.05279) — the 16–63% agent-swap communication cost
+- Does Your Agent's Memory Survive a Model Upgrade? (Goyal, Ray, arXiv:2609.05339) — fixed-schema vs model-coupled portability
+- Calibration is the Bottleneck: An Action-Class Diagnostic of Multi-Turn Tool-Calling (Zhao et al., arXiv:2609.00949) — aggregate metrics mask action-class miscalibration
+- Competitive Market Behavior of LLMs (Struski et al., arXiv:2609.02580) — LLM markets converge slowly or not at all
+- In-repo probe rigs: `tools/probe_annotation_contagion.py`, `tools/probe_language_drift_monitor.py`, `tools/probe_substrate_adversarial.py`, `tools/probe_swap_cost.py`; the six built modules and their `selftest_all` jobs
+
+*This document is the design; the `docs/auto_sweep_2026-11-*` files are the run-by-run detail.*
