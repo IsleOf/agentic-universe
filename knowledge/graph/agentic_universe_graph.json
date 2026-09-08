@@ -12871,6 +12871,33 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.05258"
       ]
+    },
+    {
+      "id": "artifact_the_kind_ask_clarification_primitive",
+      "label": "Run 424: pheromone gains kind=ask - an agent posts ask(task_ref, gap, options) when a task is under-specified; carries zero utility (does not steer the board), decays on a 2h TTL, answerable by anyone. G1 reports n_open_clarifications - the substrate form of OR-Clarify's 'quantify what remains missing'",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.6,
+      "description": "Run 424, closing run 423's design note (arXiv:2609.05258). The swarm substrate had no ASK primitive - an agent contributed on whatever was on the board, with no way to flag under-specification and no distinction between 'I doubt this' (warn) and 'I cannot proceed without knowing X' (ask). pheromone.ask(task_ref, agent, gap, options=None, ttl_s=7200): posts a kind=ask annotation (now the 6th KNOWN_KIND) naming the missing thing, with an optional options list for a choice-based question. It carries UTILITY 0.0 - an open ask does not steer the board toward or away from the task, it flags that acting now would be a SILENT ASSUMPTION. Default 2h TTL: an unanswered ask decays, it does not block forever. answer_ask(ask_id, answer) posts an answered copy (an ask is answerable by ANYONE, not just its author). open_asks(task_ref) lists the unanswered ones. gates.g1_evidence now reports n_open_clarifications and a reason line naming the gaps - 'drafting now risks a silent assumption' - REPORT not block, because whether a gap is formulation-critical is the reader's call. This is the substrate form of OR-Clarify's slot-recovery / silent-assumptions measurement. 5 pheromone + 2 gates selftest checks GREEN. Not a full InterOPT two-stage ask-vs-stop decision - that needs a model; this is the primitive it would use.",
+      "tags": [
+        "swarm-substrate",
+        "clarification",
+        "kind-ask",
+        "selective-completeness",
+        "silent-assumptions",
+        "zero-utility",
+        "decays",
+        "g1-gap-count",
+        "run-424"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/pheromone.py",
+        "tools/gates.py"
+      ]
     }
   ],
   "edges": [
@@ -30708,6 +30735,34 @@
       "target": "concept_calibrated_forecasting_before_action_is_the_influence_currency",
       "type": "supports",
       "description": "InterOPT decides ask-vs-stop from a forecast of which gaps are formulation-critical - calibrated forecasting before action, applied to the completeness question"
+    },
+    {
+      "id": "edge_r424_implements_ask_concept",
+      "source": "artifact_the_kind_ask_clarification_primitive",
+      "target": "concept_knowing_when_to_ask_before_acting_is_a_selective_completeness_decision_measured_by_slot_recovery_silent_assumptions_and_interaction_cost",
+      "type": "implements",
+      "description": "the substrate primitive for the selective-completeness decision: kind=ask names a gap, G1 quantifies open ones, the reader decides if a gap is formulation-critical"
+    },
+    {
+      "id": "edge_r424_extends_pheromone",
+      "source": "artifact_the_kind_ask_clarification_primitive",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "extends",
+      "description": "adds kind=ask (6th KNOWN_KIND), ask() / answer_ask() / open_asks(); an open ask carries zero utility so it does not distort the aggregate signal"
+    },
+    {
+      "id": "edge_r424_extends_gates",
+      "source": "artifact_the_kind_ask_clarification_primitive",
+      "target": "artifact_validator_gates",
+      "type": "extends",
+      "description": "g1_evidence reports n_open_clarifications and names the gaps - REPORT not block"
+    },
+    {
+      "id": "edge_r424_constrains_design",
+      "source": "artifact_the_kind_ask_clarification_primitive",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the design doc's contribution model gains an ASK path: an agent handed an under-specified task_ref posts kind=ask rather than drafting a silent assumption"
     }
   ]
 }

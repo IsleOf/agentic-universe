@@ -1,0 +1,42 @@
+{
+  "run": 424,
+  "increment": "Closed run 423's design note: the swarm substrate had no ASK primitive. Added pheromone.ask(task_ref, agent, gap, options) - a kind=ask annotation (6th KNOWN_KIND) naming a missing thing; carries utility 0.0 (does not steer the board, flags that acting now is a silent assumption); 2h TTL so an unanswered ask decays; answer_ask() posts an answered copy (answerable by anyone); open_asks() lists unanswered. gates.g1_evidence now reports n_open_clarifications + a reason line naming the gaps ('drafting now risks a silent assumption') - REPORT not block, per OR-Clarify's 'quantify what remains missing'. Not a full InterOPT ask-vs-stop decision (needs a model) - the primitive it would use. pheromone +5 / gates +2 selftest checks GREEN; not flagged by param_invariance_audit. +1 node, +4 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/gates.py",
+        "tools/pheromone.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-424.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 424 OK · VALID · graph +1n/+4e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.84 · files +1~4-0 · novelty 0.83 · acts fold50%"
+}

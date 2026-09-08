@@ -99,7 +99,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PATH = ROOT / "runtime" / "observations" / "pheromone.db"
 
-KNOWN_KINDS = ("utility", "warning", "claim", "bid", "done")
+KNOWN_KINDS = ("utility", "warning", "claim", "bid", "done", "ask")
 # numeric columns are fixed-schema/portable; the `evidence` blob is model-coupled
 # free text that does not survive a model swap (run 413, arXiv:2609.05339).
 PORTABILITY_CLASS = {"numeric_columns": "fixed-schema", "evidence": "model-coupled"}
@@ -213,6 +213,44 @@ class Pheromone:
             agent=agent, half_life_s=min(ttl_s / 2, DEFAULT_HALF_LIFE_S), ttl_s=ttl_s,
             evidence={"suspicion": True, "note": note, "names_cohort": names_cohort},
             _at=_at, _id=_id)
+
+    def ask(self, task_ref, *, agent, gap, options=None, ttl_s=7200.0, _at=None, _id=None):
+        """Post a CLARIFICATION request - a `kind=ask` annotation - when a task_ref is
+        under-specified for the work it needs (run 424, arXiv:2609.05258). `gap` names
+        the missing thing ('objective unspecified', 'which auth flow?'); `options` is
+        an optional list for a choice-based question. It carries NO utility (0.0) - an
+        open ask does not steer the board toward or away from the task, it flags that
+        acting now would be a silent assumption. `open_asks(task_ref)` lists the
+        unanswered ones; a downstream gate / agent treats a task with open asks as
+        'clarify before finalising'. Default 2h TTL: an unanswered ask decays, it does
+        not block forever."""
+        return self.annotate(
+            task_ref, "ask", utility=0.0, confidence=0.6, agent=agent,
+            half_life_s=min(ttl_s / 2, DEFAULT_HALF_LIFE_S), ttl_s=ttl_s,
+            evidence={"gap": gap, "options": list(options) if options else None,
+                      "answered": False},
+            _at=_at, _id=_id)
+
+    def answer_ask(self, ask_id, *, task_ref, agent, answer, _at=None):
+        """Resolve an open ask by superseding it with an answered copy (same author
+        boundary as any supersede - but an ASK is answerable by ANYONE, so this posts
+        a fresh `kind=ask` marked answered rather than superseding)."""
+        return self.annotate(
+            task_ref, "ask", utility=0.0, confidence=0.9, agent=agent,
+            evidence={"answers": ask_id, "answer": answer, "answered": True},
+            _at=_at)
+
+    def open_asks(self, task_ref, *, at=None):
+        """Live `kind=ask` annotations whose gap has not been answered."""
+        live, _ = self._live_rows(task_ref, at=at)
+        asks = [r for r, _ in live if r["kind"] == "ask"]
+        answered_ids = {json.loads(r["evidence"] or "{}").get("answers")
+                        for r in asks if r["evidence"]}
+        return [{"id": r["id"], "agent": r["agent"],
+                 **(json.loads(r["evidence"]) if r["evidence"] else {})}
+                for r in asks
+                if r["evidence"] and not json.loads(r["evidence"]).get("answered")
+                and r["id"] not in answered_ids]
 
     # -- read: no lock, no turn, no permission check ---------------------------
     def _live_rows(self, task_ref, *, at=None):
@@ -549,6 +587,23 @@ def _selftest():
         checks["PORTABILITY_CLASS marks evidence model-coupled, numerics fixed (run 413)"] = (
             PORTABILITY_CLASS["evidence"] == "model-coupled"
             and PORTABILITY_CLASS["numeric_columns"] == "fixed-schema")
+
+        # --- run 424: the kind=ask clarification primitive ---
+        pa = Pheromone(tmp / "ask.db")
+        aid = pa.ask("t", agent="a1", gap="which auth flow - oauth or session?",
+                     options=["oauth", "session"])
+        checks["ask() posts a kind=ask with the gap and options"] = (
+            len(pa.open_asks("t")) == 1
+            and pa.open_asks("t")[0]["gap"].startswith("which auth"))
+        checks["an open ask carries zero utility (does not steer the board)"] = (
+            pa.read("t")["signal_raw"] == 0.0)
+        pa.answer_ask(aid, task_ref="t", agent="a2", answer="oauth")
+        checks["answer_ask clears the open ask"] = pa.open_asks("t") == []
+        pa.ask("t", agent="a3", gap="what is the SLA?")
+        checks["a fresh unanswered ask reopens the clarify-needed state"] = (
+            len(pa.open_asks("t")) == 1)
+        checks["'ask' is a known kind"] = "ask" in KNOWN_KINDS
+        pa.close()
 
         for key, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {key}")

@@ -144,11 +144,26 @@ def g1_evidence(task_ref, artifact_text, *, evidence_links, validator_agent, phe
         reasons.append(f"REPORT: {len(uncited)} claim-shaped line(s) with no nearby "
                        f"citation marker (not a block): e.g. {uncited[:3]}")
 
+    # Run 424 (arXiv:2609.05258): "quantify what remains missing". Count open
+    # clarification requests (kind=ask) on this task - a draft built while the spec
+    # has unanswered formulation-critical gaps is a silent assumption. REPORT, not a
+    # block: the reader decides whether the gap is formulation-critical.
+    open_asks = []
+    try:
+        open_asks = pheromone.open_asks(task_ref)
+    except AttributeError:
+        pass
+    if open_asks:
+        reasons.append(f"REPORT: {len(open_asks)} unanswered clarification request(s) on "
+                       f"this task - drafting now risks a silent assumption: "
+                       f"{[a['gap'] for a in open_asks][:3]}")
+
     if passed and not reasons:
         reasons.append("evidence links present and resolvable")
     return _write_verdict(task_ref, pheromone, gate="G1", validator_agent=validator_agent,
                           passed=passed, reasons=reasons,
-                          extra={"n_links": len(links), "n_uncited_claims": len(uncited)})
+                          extra={"n_links": len(links), "n_uncited_claims": len(uncited),
+                                 "n_open_clarifications": len(open_asks)})
 
 
 def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quorum=2):
@@ -354,6 +369,16 @@ def _selftest():
                             computable_ok=True, min_quorum=q)
             checks[f"q={q}: G4 verdict is well-formed and meets the exact quorum"] = (
                 vv["pass"] and vv["quorum"] == q)
+
+        # --- run 424: G1 reports open clarification requests ---
+        pfa = Pheromone(tmp / "g1ask.db")
+        pfa.ask("ta", agent="worker1", gap="which auth flow?")
+        va = g1_evidence("ta", "The relay ports the handoff [see relay.py].",
+                         evidence_links=["tools/relay.py"], validator_agent="v9", pheromone=pfa)
+        checks["G1 reports an open clarification request (run 424)"] = (
+            va["n_open_clarifications"] == 1
+            and any("unanswered clarification" in r for r in va["reasons"]))
+        checks["...but still passes - it is a REPORT, not a block"] = va["pass"]
 
         # --- run 417: homogeneity flag for a copy-pasted validator ring ---
         pfr = Pheromone(tmp / "ring.db")
