@@ -251,24 +251,35 @@ assumed. Classifying all 295 recorded runs with `skill_induction.classify`:
 
 | task class | share |
 |---|---|
-| literature sweep | 35.3% |
-| *(unclassified)* | 33.6% |
-| build | 18.6% |
-| doc refresh | 8.1% |
-| consistency re-read | 3.7% |
-| graph hygiene / design integration | 0.6% |
+| literature sweep | 44.6% |
+| build | 32.1% |
+| doc refresh | 7.1% |
+| *(unclassified)* | 6.4% |
+| consistency re-read | 4.4% |
+| project audit | 4.4% |
+| design integration / graph hygiene | 1.0% |
 
-**`literature sweep` + `build` = ~54%** — both are multi-turn tool use carrying state across
+**`literature sweep` + `build` = ~77%** — both are multi-turn tool use carrying state across
 many steps, structurally TAU-2-shaped. The posture doc's named elicitation examples map onto
-`consistency re-read` + `design integration` = **~4%**, and "research direction-setting" is not
+`consistency re-read` + `design integration` ≈ **5%**, and "research direction-setting" is not
 a task class at all. So the claim "most of what this project's loop actually does" is
 elicitation-shaped is not supported by the loop's own record; the distribution points the
 other way.
 
-*Two caveats, both real.* `classify()` is a keyword matcher and 33.6% fell to `other`, so the
-percentages are rough — the direction (sweep + build dominate) is robust, the exact numbers are
-not. And the mapping of each task class onto the elicitation/capability axis is a judgement,
-not a measurement.
+*(Numbers corrected run 365. The first pass ran on a stale keyword vocabulary that sent 33.6%
+of runs to `other` and read sweep+build at 53.9%. Refreshing the vocabulary against the
+unclassified text — and adding `project audit`, a class that postdated the taxonomy — cut
+`other` to 6.4% and raised sweep+build to 76.7%. The conclusion strengthened.)*
+
+*Three caveats, all real.* **(1)** A 26-run spot-check against runs whose true class is known
+agrees 22/26 (85%); the named failure mode is that verification and adversarial passes leak
+into `build` (run 364's own record classifies as `build`, partly because its increment text
+mentions task-class names). So 76.7% modestly **over**-states the TAU-2 share — a defensible
+band is roughly **70–77%**, not a point estimate. **(2)** Mapping each task class onto the
+elicitation/capability axis is judgement, not measurement. **(3)** Run 365 *predicted* the
+refresh would strengthen this conclusion before measuring, which is a bias risk; it was
+mitigated by deriving the new keywords from reading the unclassified increments rather than
+from aiming at a target distribution, but the reader should weigh it.
 
 **What would settle it:** the comparison nobody has run — *vanilla small model + strong harness*
 vs *agentically-trained small model*, on this loop's actual task mix rather than on TAU-2. Every

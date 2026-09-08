@@ -5786,7 +5786,7 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:phase4_skeleton",
       "confidence": 0.7,
-      "description": "tools/skill_induction.py, run 70: classifies the loop's 56-run history (via experience-bank workflow entries) into task classes; a class recurring >= 4 times becomes a candidate skill written to the harness registry as a tool component, status=candidate (no auto-promotion). Induced literature_sweep (support 22) and build (support 9). Enforces the distillation/discovery tension: withheld_runs() marks a fixed 20% of runs permanently and deterministically skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). Not built: LLM clustering, auto-promotion, finer task-class classification (needs live per-run summaries). Run 72: added retire() - the deprecation stage of pattern_agentic_skill_lifecycle (principle_retraction_capacity). A skill whose task class is unseen in the last 12 workflow entries is marked deprecated - kept and auditable, not deleted - and stops being offered; idempotent, and revives if the class recurs. On the real corpus, literature_sweep deprecates (12 straight build runs). Run 76: task-class classifier expanded (added 'design integration' class, priority-ordered keyword matching, ~2x keyword coverage) - 'other' dropped from 20/61 to 7/61 workflow entries (the remaining 7 are genuinely pre-loop seed/schema runs). Now induces build, citation_upgrade, literature_sweep; loop_proposer's mode-diversity dimension has accurate input.",
+      "description": "tools/skill_induction.py, run 70: classifies the loop's 56-run history (via experience-bank workflow entries) into task classes; a class recurring >= 4 times becomes a candidate skill written to the harness registry as a tool component, status=candidate (no auto-promotion). Induced literature_sweep (support 22) and build (support 9). Enforces the distillation/discovery tension: withheld_runs() marks a fixed 20% of runs permanently and deterministically skill-withheld (principle_diversity_maintenance constrains pattern_skill_induction). Not built: LLM clustering, auto-promotion, finer task-class classification (needs live per-run summaries). Run 72: added retire() - the deprecation stage of pattern_agentic_skill_lifecycle (principle_retraction_capacity). A skill whose task class is unseen in the last 12 workflow entries is marked deprecated - kept and auditable, not deleted - and stops being offered; idempotent, and revives if the class recurs. On the real corpus, literature_sweep deprecates (12 straight build runs). Run 76: task-class classifier expanded (added 'design integration' class, priority-ordered keyword matching, ~2x keyword coverage) - 'other' dropped from 20/61 to 7/61 workflow entries (the remaining 7 are genuinely pre-loop seed/schema runs). Now induces build, citation_upgrade, literature_sweep; loop_proposer's mode-diversity dimension has accurate input. VOCABULARY REFRESH + DRIFT GUARD (run 365). Run 364 found 33.6% of the live run corpus classifying as 'other': the keyword lists had drifted from how increments are actually written (bare 'fold <id>' rather than 'folded in'; 'wire A to B' and 'build x.py' rather than 'tools/'), and an entire task class - per-project audits - postdated the taxonomy. classify() never signalled this because it always returns something. Fixed: terms derived by reading the unclassified runs, plus a new 'project audit' class; 'other' 33.6% -> 6.4%. Added a CLASSIFIER-DRIFT GUARD to the selftest - it classifies the live run corpus and fails the build if 'other' exceeds 15%, so the next vocabulary drift turns the build RED instead of quietly making every task-class measurement rougher. Non-hermetic by necessity; skipped when the corpus has under 50 runs.",
       "tags": [
         "distillation-vs-discovery",
         "lifecycle-complete",
@@ -11010,7 +11010,7 @@
       "approach_family": "emergent_behaviors",
       "branch_key": "emergent_behaviors:self_assessment",
       "confidence": 0.6,
-      "description": "Adversarial pass, run 364, against this project's own posture. The emergence-first fork is defended (docs/emergence_first_posture.md, run 237) by a TASK-SHAPE claim: harness-only suffices for elicitation-shaped work - named as 'research direction-setting, graph engineering, adversarial reading, most of what this project's loop actually does' - and only hits a ceiling on capability-shaped work. Two things now press on it. (1) AgenticQwen (2604.21590): TAU-2 multi-turn tool use is procedural, in-domain and tool-mediated, i.e. elicitation-shaped by that definition - yet a vanilla 8B scores 19.3 where a trained 8B scores 51.7. If elicitation-shaped work were harness-solvable, the vanilla floor should not be that low. (2) MEASURED, not asserted: classifying all 295 recorded runs with skill_induction.classify gives literature sweep 35.3%, other 33.6%, build 18.6%, doc refresh 8.1%, consistency re-read 3.7%, graph hygiene + design integration 0.6%. literature-sweep plus build is ~54% of the loop's actual work, and both are multi-turn tool use carrying state across many steps - the TAU-2 shape. The posture's named elicitation examples map to ~4%, and 'research direction-setting' is not a task class in the loop's own taxonomy at all. So the claim 'most of what this project's loop actually does' is elicitation-shaped is not supported by the loop's own record. THE ESCAPE, stated fairly: TAU-2 is also long-horizon multi-turn, and the posture already concedes long-horizon planning to the capability side. Taking that escape is expensive precisely because the loop's own work has the same shape - it moves the project's core activity onto the contested side of its own line. CAVEATS: classify() is a keyword matcher and 33.6% fell to 'other', so the direction (sweep + build dominate) is robust while the exact percentages are not; and mapping task classes onto the elicitation/capability axis is judgement, not measurement. DISCRIMINATING TEST, unrun: vanilla small model + strong harness vs agentically-trained small model, evaluated on THIS loop's task mix rather than on TAU-2. Every component exists (call_model seam, the probe rigs, the frozen held-out set); it needs a model budget. SECONDARY FINDING: 33.6% of runs classify as 'other', which means skill_induction's keyword vocabulary is stale relative to how increments are currently written - a measurement instrument drifting away from what it measures.",
+      "description": "Adversarial pass, run 364, against this project's own posture. The emergence-first fork is defended (docs/emergence_first_posture.md, run 237) by a TASK-SHAPE claim: harness-only suffices for elicitation-shaped work - named as 'research direction-setting, graph engineering, adversarial reading, most of what this project's loop actually does' - and only hits a ceiling on capability-shaped work. Two things now press on it. (1) AgenticQwen (2604.21590): TAU-2 multi-turn tool use is procedural, in-domain and tool-mediated, i.e. elicitation-shaped by that definition - yet a vanilla 8B scores 19.3 where a trained 8B scores 51.7. If elicitation-shaped work were harness-solvable, the vanilla floor should not be that low. (2) MEASURED, not asserted: classifying all 295 recorded runs with skill_induction.classify gives literature sweep 35.3%, other 33.6%, build 18.6%, doc refresh 8.1%, consistency re-read 3.7%, graph hygiene + design integration 0.6%. literature-sweep plus build is ~54% of the loop's actual work, and both are multi-turn tool use carrying state across many steps - the TAU-2 shape. The posture's named elicitation examples map to ~4%, and 'research direction-setting' is not a task class in the loop's own taxonomy at all. So the claim 'most of what this project's loop actually does' is elicitation-shaped is not supported by the loop's own record. THE ESCAPE, stated fairly: TAU-2 is also long-horizon multi-turn, and the posture already concedes long-horizon planning to the capability side. Taking that escape is expensive precisely because the loop's own work has the same shape - it moves the project's core activity onto the contested side of its own line. CAVEATS: classify() is a keyword matcher and 33.6% fell to 'other', so the direction (sweep + build dominate) is robust while the exact percentages are not; and mapping task classes onto the elicitation/capability axis is judgement, not measurement. DISCRIMINATING TEST, unrun: vanilla small model + strong harness vs agentically-trained small model, evaluated on THIS loop's task mix rather than on TAU-2. Every component exists (call_model seam, the probe rigs, the frozen held-out set); it needs a model budget. SECONDARY FINDING: 33.6% of runs classify as 'other', which means skill_induction's keyword vocabulary is stale relative to how increments are currently written - a measurement instrument drifting away from what it measures. NUMBERS CORRECTED (run 365): the run-364 measurement used a stale keyword vocabulary. Refreshing TASK_CLASSES against the unclassified increment text - and adding 'project audit', a class that postdated the taxonomy - cut 'other' from 33.6% to 6.4% and moved literature-sweep+build from 53.9% to 76.7%. The conclusion STRENGTHENED. Honesty bounds now carried in the doc: a 26-run spot-check against known-truth runs agrees 22/26 (85%), with the named lean that verification and adversarial passes leak into 'build' (run 364's own record classifies as build, partly because its increment text mentions task-class names), so 76.7% modestly over-states and the defensible claim is a 70-77% BAND, not a point estimate. And run 365 predicted the strengthening before measuring it - a bias risk mitigated by deriving the new keywords from reading the unclassified runs rather than aiming at a target distribution, but not eliminated.",
       "tags": [
         "adversarial-pass",
         "task-shape",
@@ -11028,6 +11028,34 @@
       ],
       "evidence_links": [
         "docs/what_would_make_this_wrong.md"
+      ]
+    },
+    {
+      "id": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
+      "label": "A classifier with a fallback bucket never reports that it has stopped working - it just quietly widens the bucket; guard it by asserting the fallback rate against live data, not by trusting the labels",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:observability",
+      "confidence": 0.66,
+      "description": "Found in this project's own loop, run 365, one run after a structurally identical bug (run 361: two self-observability metrics that were never populated). skill_induction.classify() maps an increment to a task class and falls back to 'other'. It always returns a label, so it never looks broken. Over ~30 runs the loop's writing style drifted - bare 'fold <arxiv id>' instead of 'folded in', 'wire A to B' and 'build x.py' instead of 'tools/' - and a whole task class (per-project audits) appeared that the taxonomy predated. Result: 33.6% of the corpus silently in 'other', every task-class measurement quietly rougher, and a conclusion in docs/what_would_make_this_wrong.md computed on it. THE GENERAL SHAPE: any classifier with a catch-all bucket degrades invisibly, because the failure mode is a label, not an error. The guard is to assert the FALLBACK RATE against live data as a build check - run 365 added exactly that (fail if 'other' > 15% of the real run corpus). SIBLING FAILURE, run 361: a metric that depends on the agent remembering to populate it reads empty when the agent is busiest. Same family - an instrument that returns a plausible value while measuring nothing. Both were found by RUNNING the instrument over real data rather than trusting its output. THE UNCOMFORTABLE COROLLARY: fixing the classifier strengthened a conclusion that is bad news for this project's own bet, and run 365 predicted that direction before measuring. A drifted instrument is dangerous in both directions - it can hide a finding you would want, and it can hide one you would not.",
+      "tags": [
+        "classifier-drift",
+        "fallback-bucket",
+        "self-observability",
+        "measurement-validity",
+        "found-in-own-loop",
+        "drift-guard",
+        "instrument-decay"
+      ],
+      "derived_from": [
+        "tools/skill_induction.py",
+        "runtime/observations/loop_runs/ (296 runs classified)",
+        "docs/what_would_make_this_wrong.md"
+      ],
+      "evidence_links": [
+        "tools/skill_induction.py"
       ]
     }
   ],
@@ -26843,6 +26871,27 @@
       "target": "concept_geometric_reliability_decay",
       "type": "refines",
       "description": "the long-horizon escape route for the defence runs straight into the decay limit: whichever way the line is drawn, multi-turn state-carrying work is where both problems live"
+    },
+    {
+      "id": "edge_classifier_drift_extends_selfobs_metric",
+      "source": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
+      "target": "concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric",
+      "type": "extends",
+      "description": "sibling failure found one run later: run 361 was a field never populated, this is a field always populated with a fallback - both return a plausible value while measuring nothing"
+    },
+    {
+      "id": "edge_classifier_drift_grounds_skill_induction",
+      "source": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
+      "target": "artifact_phase4_skill_induction",
+      "type": "grounds",
+      "description": "the run-365 vocabulary refresh plus the fallback-rate build check is this concept applied to the classifier that revealed it"
+    },
+    {
+      "id": "edge_classifier_drift_constrains_taskshape",
+      "source": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
+      "target": "concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims",
+      "type": "constrains",
+      "description": "the task-shape conclusion was computed on the drifted classifier; correcting it moved sweep+build from 53.9% to 76.7%, which is why that node now carries a band rather than a point estimate"
     }
   ]
 }

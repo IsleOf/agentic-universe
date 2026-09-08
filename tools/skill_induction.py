@@ -52,23 +52,42 @@ RETIRE_WINDOW = 12        # runs; a skill unseen for this many recent runs is re
 
 # canonical task-class labels, matched against the free-text run notes.
 # Order matters: more specific classes are checked before broad ones when scores tie.
+# Vocabulary refreshed run 365. Run 364 measured this taxonomy against the run
+# corpus and found 33.6% of runs classifying as "other" - the keyword lists had
+# drifted from how increments are actually written (bare "fold X" instead of
+# "folded in"; "wire A to B" and "build x.py" instead of "tools/"; and a whole
+# task class, per-project audits, that postdates the taxonomy). A classifier
+# silently losing contact with what it classifies is the same failure family as
+# the run-361 dead metrics: it looks fine because it always returns something.
+# Terms below were derived by reading the unclassified runs, not by aiming at a
+# target distribution.
 TASK_CLASSES = {
     "build": ["built", "tools/", "selftest", "gate green", "phase 0", "phase 1", "phase 2",
               "phase 3", "phase 4", "phase 5", "skeleton", "loop_session", "harness_registry",
-              "trace substrate", "pre-commit hook", "predicate"],
+              "trace substrate", "pre-commit hook", "predicate",
+              # run 365: the loop writes "build x.py" / "wire A to B" far more than "tools/"
+              "build ", "wire ", "fix ", ".py", "rig", "adapter", "seam", "probe_"],
+    "project audit": ["poly-bot", "poster-studio", "project graph", "project_state",
+                      "audit", "coverage pass", "gap analysis", "handover", "per-agent"],
     "citation upgrade": ["citation upgrade", "citation check", "abstract-read", "abstract read",
                          "-> verified", "verified run", "both citations", "verified real but",
                          "upgraded to verified", "headline number"],
     "consistency re-read": ["consistency", "re-read", "reconcil", "internal-consistency",
-                            "read the 4 design docs", "read the four design docs", "no contradictions"],
+                            "read the 4 design docs", "read the four design docs", "no contradictions",
+                            # run 365
+                            "re-rank", "severity", "adversarial pass", "verification pass"],
     "design integration": ["folded run", "into the design", "revised docs/nourishing", "revised the design",
-                           "one rule unifying", "unifying", "design consequence", "revised nourishing_harness"],
+                           "one rule unifying", "unifying", "design consequence", "revised nourishing_harness",
+                           # run 365
+                           "spec ", "architecture", "self_rebuild", "requirements"],
     "graph hygiene": ["hygiene", "orphan", "edge-type audit", "challenges-edge audit", "inconclusive",
                       "retraction", "structural edge", "structural edges", "reconciled verification_state"],
     "doc refresh": ["refresh", "rewrote", "rewritten", "stale", "graph_state", "map of swept",
                     "literature_coverage", "coverage map"],
     "literature sweep": ["sweep", "arxiv", "folded in", "new finding", "folded a verified",
-                         "cross-lingual", "market dynamics", "narrow", "cs.ma", "past ~sept"],
+                         "cross-lingual", "market dynamics", "narrow", "cs.ma", "past ~sept",
+                         # run 365: the loop overwhelmingly writes bare "fold <id> <title>"
+                         "fold ", "deepen", "citation sweep"],
 }
 
 
@@ -244,6 +263,31 @@ def _selftest():
             "retired skills are kept (deprecated), not deleted": retired_kept,
             "a second retire() pass is idempotent": retire(reg, bank) == [],
         }
+
+        # Classifier-drift guard (run 365). Run 364 found 33.6% of the real run
+        # corpus classifying as "other" - the vocabulary had drifted from how
+        # increments are written, and nothing caught it because classify() always
+        # returns something. This makes the drift self-detecting: if the loop's
+        # writing style moves away from the keywords again, the build goes RED
+        # instead of the measurement quietly getting rougher.
+        # Non-hermetic by necessity (it measures the live corpus); skipped if absent.
+        import glob as _glob
+        corpus = _glob.glob(str(ROOT / "runtime" / "observations" / "loop_runs" / "run-*.json"))
+        if len(corpus) >= 50:
+            unclassified = 0
+            total = 0
+            for p in corpus:
+                try:
+                    inc = json.loads(Path(p).read_text(encoding="utf-8")).get("increment") or ""
+                except Exception:
+                    continue
+                total += 1
+                if classify(inc) == "other":
+                    unclassified += 1
+            rate = unclassified / total if total else 0.0
+            checks[f"TASK_CLASSES still fits the run corpus (other={rate:.1%}, cap 15%)"] = rate <= 0.15
+        else:
+            checks["classifier-drift guard skipped (corpus < 50 runs)"] = True
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         print(f"\n  workflow entries: {n_workflow}")
