@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 365 nodes, 1477 edges · **Date:** 2026-09-05
+**Graph at generation:** 366 nodes, 1483 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -343,11 +343,12 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - explicit ECC non-goal: automatic mutation of harness configs without verifier evidence — `pattern_verifier_gated_promotion`
 - graph reasoning over emergent_authorization_laundering + emergent_stale_belief_propagation + pattern_runtime_adaptive_workflow — `concept_agent_shaped_topology_is_agent_corruptible`
 - hooks/pre-commit — `artifact_phase5_exec_guard`
+- https://arxiv.org/abs/2505.00234 — `artifact_probe_memory_horizon_rig`
 - https://arxiv.org/abs/2507.18224 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
 - https://arxiv.org/abs/2509.26354 — `concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker`
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2510.14548 — `concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model`
-- https://arxiv.org/abs/2603.29231 — `concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance`
+- https://arxiv.org/abs/2603.29231 — `artifact_probe_memory_horizon_rig`, `concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance`
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - https://arxiv.org/abs/2606.23764 — `concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules`
 - https://arxiv.org/abs/2607.07368 — `artifact_cohort_monitor`, `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it` +1
@@ -400,6 +401,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/probe_identity_masking.py — `artifact_probe_identity_masking_rig`
 - tools/probe_idle_agent.py — `artifact_probe_idle_agent_rig`
+- tools/probe_memory_horizon.py — `artifact_probe_memory_horizon_rig`
 - tools/probe_orchestration_value.py — `artifact_probe_orchestration_value_rig`
 - tools/probe_orchestration_value.py (run 221) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - tools/probe_redteam_rate.py — `artifact_probe_redteam_rate_rig`
