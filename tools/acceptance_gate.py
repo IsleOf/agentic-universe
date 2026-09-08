@@ -62,14 +62,16 @@ def _held_out_outcome(baseline_scores, candidate_scores) -> float:
 
 _PATCH_ALLOWED_KEYS = {"proposal_metadata", "add_nodes", "add_edges"}
 _DESTRUCTIVE = ("remove", "delete", "modify", "update", "set_", "overwrite", "replace", "drop")
-# NOT A VERIFIED PROPERTY (run 373, arXiv:2608.03609). This matches on the NAME of a
-# key, so `rm_nodes` or `purge_nodes` passes. That is not a gap to close by lengthening
-# the list - name-matching is non-EQUIVARIANT (renaming an identifier changes the
-# decision), and equivariance is exactly the condition under which verifying an
-# LLM-plus-harness deployment is tractable at all. A longer word list is the same
-# non-equivariant move repeated. Treat this as a heuristic with good coverage against
-# accidental and unsophisticated cases, and NOT as a guarantee; the real upgrade is a
-# whitelist over patch SHAPE (add-only structure) rather than a blacklist over key names.
+# Kept for REPORTING only (run 374). The refusal below is now shape-based: any key
+# outside _PATCH_ALLOWED_KEYS is refused whatever it is called. This list only labels
+# which flavour of unknown key showed up, so a reader can tell `purge_nodes` from a
+# stray `noteworthy`. It is no longer load-bearing, and lengthening it changes nothing.
+#
+# Why the change (arXiv:2608.03609, folded run 373): name-matching is non-EQUIVARIANT -
+# renaming an identifier changes the decision - and equivariance is the condition under
+# which verifying an LLM-plus-harness deployment is tractable at all. `rm_nodes` slipped
+# past the run-371 blacklist. A whitelist over patch SHAPE is equivariant by construction:
+# every key outside the contract is refused identically, so renaming buys nothing.
 
 
 def modification_footprint(proposal) -> dict:
@@ -158,12 +160,25 @@ def check(proposal, baseline_scores, candidate_scores, forecast, *,
     # and would be honoured by any apply_patch that read them. That is the concrete,
     # currently-unguarded version of the axis.
     footprint = modification_footprint(proposal)
-    if footprint["destructive_keys"]:
+    # SCOPE: check() is polymorphic - `proposal` is a graph patch on the fold path and a
+    # loop-harness POLICY EDIT on the improvement_loop path (keys like rule / identity /
+    # scope). Applying the graph-patch contract to both refuses every policy edit, which
+    # is how this was caught: the first run of the new whitelist broke the gate's own
+    # selftest. Enforce the contract only on objects that CLAIM to be graph patches.
+    # Residual gap, stated: an object with none of the allowed keys is not patch-shaped
+    # and is not checked here - nothing in the pipeline produces one, and check_patch
+    # would not read it as a patch either, but it is not a proof.
+    patch_shaped = any(k in proposal for k in _PATCH_ALLOWED_KEYS) if isinstance(proposal, dict) else False
+    off_contract = sorted(footprint["destructive_keys"] + footprint["unknown_keys"])
+    if patch_shaped and off_contract:
         return _reject_cert(
             proposal, forecast,
-            f"patch carries destructive/mutating key(s) {footprint['destructive_keys']} - "
-            f"the graph-patch contract is add-only and check_patch ignores unknown keys, "
-            f"so this must be refused here",
+            f"patch carries key(s) outside the add-only contract: {off_contract}. "
+            f"Allowed top-level keys are {sorted(_PATCH_ALLOWED_KEYS)}; anything else - "
+            f"including annotations - belongs inside proposal_metadata. Refused on SHAPE, "
+            f"not on the key's name, so renaming it does not help "
+            f"(equivariance, arXiv:2608.03609). knowledge_graph.check_patch ignores unknown "
+            f"keys, so this is the only place it is caught.",
             footprint, cert_dir, clock)
 
     verdict = verify_loop_edit(baseline_scores, candidate_scores,
@@ -319,10 +334,25 @@ def _selftest():
         json.loads((tmp / "gate_certificates.jsonl").read_text().splitlines()[-1])["decision"]
         == "reject")
 
+    # EQUIVARIANCE (run 374): the refusal is on SHAPE, so renaming the offending key
+    # cannot buy passage. `rm_nodes` slipped past the run-371 name blacklist; it must now
+    # be refused exactly as `remove_nodes` is. This is the check that proves the upgrade
+    # did what it claimed rather than just reading better.
+    _renamed = {**_patch, "rm_nodes": ["concept_anchor"]}
+    _cr = check(_renamed, base, cand, fc, cert_dir=tmp, clock=lambda: 1011.0)
+    checks["EQUIVARIANT: `rm_nodes` is refused exactly as `remove_nodes` is"] = (
+        _cr["decision"] == "reject" and _cd["decision"] == "reject")
+    checks["the run-371 name blacklist would have MISSED `rm_nodes` (upgrade is real)"] = (
+        not modification_footprint(_renamed)["destructive_keys"]
+        and modification_footprint(_renamed)["unknown_keys"] == ["rm_nodes"])
+
     _benign_extra = {**_patch, "note": "a harmless annotation"}
-    checks["a non-destructive unknown key is reported, not refused"] = (
-        modification_footprint(_benign_extra)["unknown_keys"] == ["note"]
-        and not modification_footprint(_benign_extra)["destructive_keys"])
+    _cb = check(_benign_extra, base, cand, fc, cert_dir=tmp, clock=lambda: 1012.0)
+    checks["a benign unknown key is ALSO refused - the contract is a whitelist"] = (
+        _cb["decision"] == "reject" and "belongs inside proposal_metadata" in _cb["gate"]["reason"])
+    checks["a policy edit (not patch-shaped) is NOT subject to the patch contract"] = (
+        check({"rule": "keep everything", "identity": "unchanged", "scope": ["one_key"]},
+              base, cand, fc, cert_dir=tmp, clock=lambda: 1013.0)["decision"] == "accept")
 
     v = verify_certificate(cert, good_edit)
     checks["verify_certificate replays a genuine certificate"] = v["ok"]
