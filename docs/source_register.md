@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 403 nodes, 1633 edges · **Date:** 2026-09-05
+**Graph at generation:** 404 nodes, 1638 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -347,7 +347,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - hooks/pre-commit — `artifact_phase5_exec_guard`
 - https://arxiv.org/abs/2505.00234 — `artifact_probe_memory_horizon_rig`
 - https://arxiv.org/abs/2507.18224 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
-- https://arxiv.org/abs/2509.05764 — `artifact_swarm_substrate_prototype_design`, `concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior`
+- https://arxiv.org/abs/2509.05764 — `artifact_reputation_module`, `artifact_swarm_substrate_prototype_design`, `concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior`
 - https://arxiv.org/abs/2509.26354 — `concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker`
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2510.10047 — `artifact_swarm_substrate_prototype_design`, `concept_swarmsys_embedding_matched_allocation_with_validate_before_reinforce_is_the_closest_published_orchestratorless_design`

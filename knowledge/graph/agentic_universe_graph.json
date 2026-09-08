@@ -11926,6 +11926,35 @@
         "tools/relay.py",
         "docs/swarm-substrate-prototype.md"
       ]
+    },
+    {
+      "id": "artifact_reputation_module",
+      "label": "tools/reputation.py - Beta-Bernoulli (successes, failures) + UCB selection bonus + 14-day exponential decay toward the (1,1) seed applied on every read; ELO for head-to-head; abstention counted but not punished; the 'personal assistant' is just select() recomputed per call",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.68,
+      "description": "Run 394, week-1 build list item 4. tools/reputation.py, a selftest_all job. JSON-backed with atomic write + .audit log, like task_ledger. Pure stdlib, no model calls. Per agent: Beta-Bernoulli (successes, failures) seeded (1,1); elo seeded 1000; last_active. reputation = se/(se+fe); uncertainty = sqrt(rep(1-rep)/(se+fe)); score = reputation + 0.5*uncertainty - 0.05*load. select(candidates) is the argmax score, ties broken by id for determinism. THE ANTI-CALCIFICATION CORE, applied on EVERY read: shrink = 0.5**(idle_days/14); se = 1 + (successes-1)*shrink and likewise fe and elo toward their seeds. An idle proven agent slides back toward reputation 0.5 / elo 1000. The selftest shows a 30-win incumbent losing select() to an 8-win challenger once 88 days idle - the 'personal assistant' role is a standing wave, superseded the moment another agent's decayed reputation is higher, never an appointment. record(a, 'abstention') is COUNTED (n_abstentions) but does NOT move reputation - voluntary abstention in a stated incompetence zone is a valued behaviour (emergent_self_organizing_roles found it spontaneously and useful), not a fault. duel(winner, loser) is a K=24 ELO update, both ratings read decayed first. Reputation is EMPIRICAL (recorded outcomes) not DECLARED (agent self-report), per concept_mechanism_incentive_compat_does_not_transfer - a truthful mechanism does not make LLM agents self-report truthfully. Prior art (design doc): DRF (arXiv:2509.05764, the exact UCB+ELO+decay stack), AgentLance / pattern_market_as_orchestrator (reputation-weighted allocation), classic UCB1 / Thompson / TrueSkill. 46 selftest checks GREEN including a range(2,16) select() sweep; not flagged by param_invariance_audit.",
+      "tags": [
+        "swarm-substrate",
+        "reputation",
+        "ucb-bandit",
+        "elo",
+        "recency-decay",
+        "non-calcifying",
+        "abstention-not-punished",
+        "empirical-not-declared",
+        "week-1-build"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2509.05764"
+      ],
+      "evidence_links": [
+        "tools/reputation.py",
+        "docs/swarm-substrate-prototype.md"
+      ]
     }
   ],
   "edges": [
@@ -28657,6 +28686,41 @@
       "target": "pattern_ostrom_swarm_governance",
       "type": "instantiates",
       "description": "the anti-ping-pong guard is a graduated institutional response the population runs, not a central controller: repeated handoffs among too few agents trip a deterministic refusal that any fresh agent clears"
+    },
+    {
+      "id": "edge_reputation_module_implements_noncalc",
+      "source": "artifact_reputation_module",
+      "target": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
+      "type": "implements",
+      "description": "the concrete module: Beta-Bernoulli + UCB score + 0.5**(idle_days/14) decay toward the (1,1) seed on every read, with a selftest showing the incumbent losing the role to a fresher agent"
+    },
+    {
+      "id": "edge_reputation_module_implements_substrate_design",
+      "source": "artifact_reputation_module",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "implements",
+      "description": "week-1 build list item 4: the trust layer that lets a personal-assistant role emerge from performance data without calcifying"
+    },
+    {
+      "id": "edge_reputation_module_instantiates_roles",
+      "source": "artifact_reputation_module",
+      "target": "emergent_self_organizing_roles",
+      "type": "instantiates",
+      "description": "record('abstention') is counted but not punished - the paper found voluntary abstention in an incompetence zone was one of the valuable spontaneous behaviours"
+    },
+    {
+      "id": "edge_reputation_module_grounds_rep_dynamics",
+      "source": "artifact_reputation_module",
+      "target": "emergent_reputation_and_trust_dynamics",
+      "type": "grounds",
+      "description": "turns 'repeated interaction produces reputation and trust signals' into an update rule with decay - the shortest-path-from-observation-to-system this node called for"
+    },
+    {
+      "id": "edge_reputation_module_constrained_by_mech_transfer",
+      "source": "concept_mechanism_incentive_compat_does_not_transfer",
+      "target": "artifact_reputation_module",
+      "type": "constrains",
+      "description": "reputation is derived from recorded outcomes, never from an agent's self-report, because a truthful mechanism does not make LLM agents bid or self-report truthfully"
     }
   ]
 }
