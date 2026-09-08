@@ -12481,6 +12481,32 @@
       "evidence_links": [
         "tools/loop_action_class.py"
       ]
+    },
+    {
+      "id": "concept_the_run_400_402_id_normalisation_fixed_gates_and_pheromone_but_missed_relay_and_reputation",
+      "label": "A standalone consolidation pass (run 409, prompted by run 408) found the runs-400/402 agent-id normalisation was applied to gates.py and pheromone.py but NOT to relay.py's anti-ping-pong window or reputation.py's record keying - both explicitly named in the run-402 trust-boundary node as identity-keyed guards",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.85,
+      "description": "Run 409. Run 408's loop_action_class showed the loop bundles consolidation with action and almost never does a standalone look-without-changing pass; this is that pass, done first, before deciding what to change. It swept the graph (structural: no missing descriptions/labels, no bad confidence, no duplicate ids, 0 missing evidence_links, no orphans/dangling - clean) and the toolchain (59 selftest_all jobs all present). It found ONE real gap: the agent-id normalisation runs 400 and 402 introduced (_norm_agent: strip + casefold, so 'alice' / 'Alice' / 'alice ' are one principal) was applied to gates.py's no-self-review / rotation guard and pheromone.py's contributors / supersede check - but NOT to:   (a) relay.py's anti-ping-pong window - _recent_agents and would_refuse compared raw       strings, so an agent bouncing work could keep the distinct-agent count up with       whitespace/case variants of its own id;   (b) reputation.py's _agent keying - 'alice' and 'Alice' accrued SEPARATE reputation       records and separate selection scores. Both modules are EXPLICITLY listed in the run-402 trust-boundary node as identity-keyed guards that inherit the normalisation, so the node overstated coverage. Fixed both this run (a shared _norm matching pheromone._norm_agent) plus a selftest check in each. THE PATTERN: runs 400/402 fixed the two INSTANCES they were looking at (the gate and the board) and the class - 'every identity comparison in the substrate' - was left with two more instances. concept_a_fix_applied_to_the_instance_leaves_the_class_untouched, again, and it took a deliberate consolidation pass rather than another feature run to surface it - which is run 408's point made concrete.",
+      "tags": [
+        "swarm-substrate",
+        "consolidation-pass",
+        "agent-id-normalisation",
+        "instance-vs-class",
+        "relay",
+        "reputation",
+        "incomplete-fix",
+        "look-before-changing"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/relay.py",
+        "tools/reputation.py"
+      ]
     }
   ],
   "edges": [
@@ -29870,6 +29896,34 @@
       "target": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
       "type": "extends",
       "description": "'always couple looking with changing' is an action-class bias aggregate metrics do not catch - the loop rarely gets a clean read on its own state before acting on it"
+    },
+    {
+      "id": "edge_r409_corrects_trust_boundary",
+      "source": "concept_the_run_400_402_id_normalisation_fixed_gates_and_pheromone_but_missed_relay_and_reputation",
+      "target": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "type": "refines",
+      "description": "the run-402 node listed relay's ping-pong window and reputation among the identity-keyed guards that inherit _norm_agent, but they did not - this run makes the claim true rather than aspirational"
+    },
+    {
+      "id": "edge_r409_instantiates_bundle_finding",
+      "source": "concept_the_run_400_402_id_normalisation_fixed_gates_and_pheromone_but_missed_relay_and_reputation",
+      "target": "concept_the_loop_bundles_consolidation_with_action_and_almost_never_does_a_standalone_look_without_changing_pass",
+      "type": "instantiates",
+      "description": "run 408 found the loop never does a standalone consolidation pass; this is one, done first, and it found a real gap two feature runs had missed"
+    },
+    {
+      "id": "edge_r409_instantiates_instance_class",
+      "source": "concept_the_run_400_402_id_normalisation_fixed_gates_and_pheromone_but_missed_relay_and_reputation",
+      "target": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "type": "instantiates",
+      "description": "runs 400/402 fixed the gate and the board (the instances in front of them); the class - every identity comparison in the substrate - kept two more instances until a pass went looking for them"
+    },
+    {
+      "id": "edge_r409_verified_by_action_class",
+      "source": "artifact_loop_action_class",
+      "target": "concept_the_run_400_402_id_normalisation_fixed_gates_and_pheromone_but_missed_relay_and_reputation",
+      "type": "verifies",
+      "description": "loop_action_class's consolidate-0 finding is what prompted this run; the run itself is the first consolidate increment in the recent window"
     }
   ]
 }

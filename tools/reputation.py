@@ -71,6 +71,14 @@ def _now():
     return round(time.time(), 3)
 
 
+def _norm(aid):
+    """Canonical agent id — must match pheromone._norm_agent. Run 409 (a
+    consolidation pass) found reputation records were keyed on the raw id, so
+    'alice' and 'Alice' accrued separate reputation and separate selection scores -
+    the gap runs 400/402 closed for gates and pheromone but missed here."""
+    return str(aid).strip().casefold()
+
+
 class Reputation:
     def __init__(self, path=DEFAULT_PATH, *, half_life_days=HALF_LIFE_DAYS,
                  c_explore=C_EXPLORE, load_penalty=LOAD_PENALTY):
@@ -96,6 +104,7 @@ class Reputation:
             fh.write(json.dumps({"ts": _now(), "event": event}) + "\n")
 
     def _agent(self, aid):
+        aid = _norm(aid)
         a = self._data["agents"].get(aid)
         if a is None:
             a = {"successes": 1.0, "failures": 1.0, "elo": ELO_SEED,
@@ -283,6 +292,16 @@ def _selftest():
             pick = Rk.select(pool)
             checks[f"k={k}: select returns an agent from the pool"] = pick in pool
             checks[f"k={k}: selection is deterministic"] = Rk.select(pool) == pick
+
+        # run 409: reputation is keyed on the normalised id
+        Rn = Reputation(tmp / "norm.json")
+        for _ in range(10):
+            Rn.record("Alice", "success")
+        for _ in range(5):
+            Rn.record("alice ", "success")
+        checks["'Alice' and 'alice ' accrue to one reputation record"] = (
+            Rn._agent("ALICE")["successes"] == 16.0)   # 1 seed + 15
+        checks["...and one snapshot entry"] = len(Rn.snapshot()) == 1
 
         for key, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {key}")

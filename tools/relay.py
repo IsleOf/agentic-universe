@@ -55,6 +55,14 @@ def _now():
     return round(time.time(), 3)
 
 
+def _norm(aid):
+    """Canonical agent id — must match pheromone._norm_agent / gates._norm. Run 409
+    (a consolidation pass) found the anti-ping-pong window still compared raw
+    strings, so 'a1' and 'A1' and 'a1 ' counted as three distinct agents - the gap
+    runs 400/402 closed for gates and pheromone but missed here."""
+    return str(aid).strip().casefold()
+
+
 class RelayRefused(RuntimeError):
     """A handoff the anti-ping-pong guard would not allow."""
 
@@ -87,14 +95,15 @@ class Relay:
         tmp.replace(self._state_path)
 
     def _recent_agents(self):
-        return [h["from"] for h in self._hist["handoffs"][-self.window:]]
+        return [_norm(h["from"]) for h in self._hist["handoffs"][-self.window:]]
 
     def would_refuse(self, from_agent):
         """True if adding a handoff BY `from_agent` now would leave the last
         `window` handoffs with fewer than `min_unique` distinct agents. A short
         history (< window handoffs) never refuses — the swarm has not had a chance
-        to diversify yet."""
-        recent = self._recent_agents() + [from_agent]
+        to diversify yet. Agent ids are normalised (run 409) so whitespace/case
+        variants do not inflate the distinct count."""
+        recent = self._recent_agents() + [_norm(from_agent)]
         recent = recent[-self.window:]
         if len(recent) < self.window:
             return False
@@ -258,6 +267,14 @@ def _selftest():
         checks["handoff history persists across a restart"] = (
             r_reload.history() == hist_before and len(hist_before) == 4)
         r_reload.close()
+
+        # run 409: the guard normalises agent ids
+        g2 = Relay(ledger_path=tmp / "n.json", pheromone_path=tmp / "n.db",
+                   window=4, min_unique=2)
+        g2._hist["handoffs"] = [{"from": a} for a in ("b", "B", "b ", " b")]  # all one principal
+        checks["whitespace/case handoff variants collapse to one distinct agent"] = (
+            g2.would_refuse("b"))
+        g2.close()
 
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
