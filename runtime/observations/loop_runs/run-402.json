@@ -1,0 +1,43 @@
+{
+  "run": 402,
+  "increment": "Consistency sweep over the substrate for other annotation-as-authorization uses after runs 400-401. Found the root: pheromone.annotate's `agent` field is caller-supplied and UNAUTHENTICATED - a cheater can post as anyone (fake warnings, retract others' warnings by impersonating the author, fake gate verdicts, inflated contributions). Every identity-keyed guard (rotation, no-self-review, ping-pong window, reputation, correlation dedup) sits on that unverified claim; the runs-400/401 fixes harden accidental attacks not a determined impersonator. STATED in pheromone.py's docstring as the trust boundary: cooperative layer, fleet-one-operator-controls; closing it needs signed writes / capability tokens (executor_pool has mint_token/redeem_token) / an external IdP. ALSO FIXED: content stamped kind=utility with evidence={gate:X} to dodge run 401's contributor-exclusion - a gate verdict is always kind=claim/warning. Red-team rig now 11 attacks, 5 land (all Sybil/impersonation known-limits), 0 unexpected. General shape: audit for the identity PRIMITIVE many rules share, state its strength once. +1 node, +6 edges. The swarm-substrate arc (389-402) is complete.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 5,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/gates.py",
+        "tools/pheromone.py",
+        "tools/probe_substrate_adversarial.py"
+      ],
+      "n_paths": 3,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-402.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 402 OK · VALID · graph +1n/+6e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.88 · files +1~5-0 · novelty 1.00"
+}

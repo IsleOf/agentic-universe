@@ -176,9 +176,14 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
     #       against the gate's own run log after the fact (bounded event sourcing).
     # What is NOT closed: a FRESH sock-puppet id posting a fake pass - that is the
     # same Sybil limitation run 400 recorded; it needs an identity registry.
+    # A gate verdict is ALWAYS kind=claim or kind=warning. Anyone who posted a
+    # kind=utility / done / bid did content work here, regardless of whatever they
+    # stuffed into the evidence field (run 402: content disguised as a gate verdict
+    # must not dodge the contributor check).
     content_contributors = {
         _norm(a["agent"]) for a in v["annotations"]
-        if not (isinstance(a.get("evidence"), dict) and a["evidence"].get("gate"))
+        if a["kind"] not in ("claim", "warning")
+        or not (isinstance(a.get("evidence"), dict) and a["evidence"].get("gate"))
     }
     prior_pass_anns = [
         a for a in v["annotations"]

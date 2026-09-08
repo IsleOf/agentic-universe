@@ -13,6 +13,20 @@ Same discipline as `task_ledger.py` / `fractal_flock.py`: pure stdlib (sqlite3 i
 stdlib), no model calls. The generative work is the caller's; this is only the
 substrate.
 
+TRUST BOUNDARY (run 402, stated explicitly so the guarantees downstream are legible).
+The `agent` field on an annotation is CALLER-SUPPLIED AND UNAUTHENTICATED. This
+module does not verify that the writer is who they say they are, and every
+identity-keyed guard built on it (gate rotation, no-self-review, the anti-ping-pong
+window, the reputation ledger, correlation de-duplication) is therefore only as
+strong as the assumption that agents in the fleet do not impersonate each other.
+That assumption is reasonable for a fleet one operator controls and it is the wrong
+assumption for an open swarm. Closing it needs one of: signed writes (an
+operator-held key per agent), a capability token minted by the pool (executor_pool
+already has mint_token / redeem_token), or an external identity provider. Until
+then: `_norm_agent` collapses accidental id variation, `supersedes` is honoured
+within one (claimed) author only, and gate quorum excludes content contributors and
+returns its counted ids for audit - but a determined impersonator is out of scope.
+
 THREE THINGS THIS GETS RIGHT THAT THE FRAMEWORKS DO NOT (see the design doc):
 
   1. DECAY IS AN EXPLICIT CLOCK, not "other profiles evolve". SwarmSys leaves

@@ -12244,6 +12244,33 @@
         "https://arxiv.org/abs/2609.01836",
         "tools/gates.py"
       ]
+    },
+    {
+      "id": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "label": "The swarm substrate authenticates no writes: pheromone.annotate's `agent` field is caller-supplied and unverified, so every identity-keyed guard (rotation, no-self-review, ping-pong window, reputation, correlation dedup) is only as strong as 'fleet agents do not impersonate each other'",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.8,
+      "description": "Run 402, a consistency sweep over the substrate for other annotation-as-authorization uses after runs 400-401 fixed two. The sweep found the root beneath both: pheromone.annotate(task_ref, kind, u, c, agent=...) takes `agent` as a plain string from the caller and NEVER verifies the writer is that agent. So a cheater can post an annotation AS anyone - a fake warning from a respected agent, a retraction of someone else's warning (now that supersede is within-author, impersonate the author), a fake gate verdict, inflated contributions. Every identity-keyed guard in the substrate is downstream of that unverified claim: gate rotation and no-self-review (gates.py), the anti-ping-pong window (relay.py), the reputation ledger (reputation.py), and the shared-base-model correlation de-duplication (pheromone read()). The runs-400/401 fixes (id normalisation, within-author supersede, contributor-excluded quorum with audit ids) all sit ON TOP of an unauthenticated identity and are worth having, but they harden accidental and lazy attacks, not a determined impersonator. This is now STATED in pheromone.py's docstring as the trust boundary: the substrate is a COOPERATIVE coordination layer that assumes a fleet one operator controls and does not impersonate itself; it is the wrong assumption for an open swarm. Closing it needs one of: signed writes (an operator-held key per agent), a capability token minted by the pool (executor_pool already has mint_token / redeem_token - the nearest available path), or an external identity provider. ALSO FIXED THIS RUN: content work stamped kind=claim/utility with evidence={gate:X} to dodge run 401's contributor-exclusion - a gate verdict is always kind=claim or kind=warning, so kind=utility/done/bid counts as content regardless of the evidence field. GENERAL SHAPE: when a system has many identity-keyed rules, audit for the identity PRIMITIVE they all share and state its strength once, rather than re-reasoning about each rule.",
+      "tags": [
+        "swarm-substrate",
+        "trust-boundary",
+        "unauthenticated-writes",
+        "impersonation",
+        "identity-primitive",
+        "cooperative-layer",
+        "capability-tokens",
+        "consistency-sweep"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/pheromone.py",
+        "tools/gates.py",
+        "tools/probe_substrate_adversarial.py"
+      ]
     }
   ],
   "edges": [
@@ -29353,6 +29380,48 @@
       "target": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
       "type": "verifies",
       "description": "probe_substrate_adversarial gained two laundering attacks in run 401: the content-contributor case (now blocked) and the fresh-sock-puppet case (recorded as a known Sybil limit)"
+    },
+    {
+      "id": "edge_trust_boundary_grounds_r400",
+      "source": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "target": "concept_the_no_self_review_and_no_delete_your_warning_guards_needed_author_normalisation_to_actually_hold",
+      "type": "grounds",
+      "description": "run 400 normalised the agent id string; this is the deeper fact - the string itself is unauthenticated, so normalisation collapses accidental variation but a deliberate impersonator writes whatever `agent` value they like"
+    },
+    {
+      "id": "edge_trust_boundary_extends_r401",
+      "source": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "target": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "type": "extends",
+      "description": "the authorization-laundering frame taken to its root: the substrate's memory is not just un-provenanced, its WRITES are unauthenticated, so the source-event a permission should be backed by can itself be forged"
+    },
+    {
+      "id": "edge_trust_boundary_documents_pheromone",
+      "source": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "constrains",
+      "description": "now written into pheromone.py's docstring as the explicit trust boundary: cooperative layer, fleet-one-operator-controls, determined impersonator out of scope"
+    },
+    {
+      "id": "edge_trust_boundary_refines_gates",
+      "source": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "target": "artifact_validator_gates",
+      "type": "refines",
+      "description": "run 402 tightened content_contributors: a gate verdict is always kind=claim/warning, so content stamped kind=utility with an evidence.gate field still counts as content and cannot free its author to be a counted prior validator"
+    },
+    {
+      "id": "edge_trust_boundary_informs_pool",
+      "source": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "target": "decision_v2_4_executor_pool_collective_module_spec",
+      "type": "informs",
+      "description": "executor_pool's mint_token / redeem_token is the nearest available path to authenticated writes: a per-round capability token the pool issues and the board verifies would move the identity primitive from 'claimed string' to 'held capability'"
+    },
+    {
+      "id": "edge_redteam_verifies_trust_boundary",
+      "source": "artifact_probe_substrate_adversarial_redteam",
+      "target": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "type": "verifies",
+      "description": "probe_substrate_adversarial's impersonate-via-agent-field attack lands and is recorded as the trust boundary, not a regression; the disguised-content attack is blocked"
     }
   ]
 }

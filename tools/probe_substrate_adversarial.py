@@ -199,6 +199,56 @@ def attack_launder_a_g4_pass_as_a_fresh_sock_puppet():
             "severity": "known-limit" if landed else "n/a"}
 
 
+def attack_content_disguised_as_gate_verdict():
+    """A cheater does content work but stamps it kind=claim with evidence={gate:X}
+    so the run-401 contributor-exclusion does not see them as a content contributor,
+    freeing them to also post a counted 'prior pass'. Run 402: a gate verdict is
+    always kind=claim/warning, so kind=utility with an evidence.gate still counts as
+    content."""
+    d = _wd()
+    pf = Pheromone(d / "p.db")
+    pf.annotate("t", "utility", 0.7, 0.9, agent="sneak",
+                evidence={"gate": "G1", "disguise": True})           # content in verdict clothing
+    pf.annotate("t", "claim", 0.3, 0.85, agent="sneak",
+                evidence={"gate": "G4", "pass": True, "reasons": []})  # then a fake pass
+    try:
+        v = g4_release("t", validator_agent="cheater", pheromone=pf,
+                       computable_ok=True, min_quorum=3)
+        landed = v["pass"]
+    except GateRefused:
+        landed = False
+    pf.close()
+    return {"attack": "content work disguised as a gate verdict to dodge contributor-exclusion",
+            "landed": landed,
+            "detail": ("disguised content let the author be counted as a prior validator"
+                       if landed else
+                       "blocked - kind=utility is content regardless of the evidence field"),
+            "severity": "medium" if landed else "n/a"}
+
+
+def attack_impersonate_another_agent_in_the_agent_field():
+    """The `agent` field is caller-supplied. A cheater posts a warning-retraction /
+    a fake pass / inflated contributions AS another agent. This is THE root identity
+    gap (run 402 trust boundary): the substrate does not authenticate writes."""
+    d = _wd()
+    pf = Pheromone(d / "p.db")
+    # honest 'auditor' posts a real warning
+    pf.annotate("t", "warning", -0.8, 0.9, agent="auditor", _at=1000.0)
+    # cheater impersonates 'auditor' to supersede it (now same claimed author -> honoured)
+    real_warn = [a for a in pf.read("t", at=1001.0)["annotations"] if a["kind"] == "warning"][0]
+    pf.annotate("t", "utility", 0.9, 0.9, agent="auditor",
+                supersedes=real_warn["id"], _at=1002.0)
+    still_warned = any(a["kind"] == "warning"
+                       for a in pf.read("t", at=1003.0)["annotations"])
+    pf.close()
+    return {"attack": "impersonate another agent via the unauthenticated `agent` field",
+            "landed": not still_warned,
+            "detail": ("posting AS 'auditor' let the cheater supersede auditor's own warning - "
+                       "the substrate authenticates no writes (run 402 trust boundary)"
+                       if not still_warned else "unexpectedly blocked"),
+            "severity": "known-limit" if not still_warned else "n/a"}
+
+
 def attack_reputation_tiebreak_gaming():
     """Two agents at identical reputation; an adversary wants 'a_winner' picked.
     select() breaks ties by agent id (sorted). Can a name choice force selection?"""
@@ -243,18 +293,21 @@ ATTACKS = [
     attack_ping_pong_with_rotating_sock_puppets,
     attack_launder_a_g4_pass_as_a_content_contributor,
     attack_launder_a_g4_pass_as_a_fresh_sock_puppet,
+    attack_content_disguised_as_gate_verdict,
+    attack_impersonate_another_agent_in_the_agent_field,
     attack_reputation_tiebreak_gaming,
     attack_boost_own_reputation_via_self_annotation,
 ]
 
 # attacks that CANNOT be closed inside the substrate (they need identity
-# infrastructure or signed verdicts); a landing here is a documented limitation,
-# not a regression.
+# infrastructure, signed writes, or capability tokens); a landing here is a
+# documented limitation, not a regression.
 _KNOWN_LIMITS = {
     "self-review via a fresh sock-puppet id",
     "ping-pong via rotating sock-puppet ids",
     "fake completion via a direct kind=done annotation",  # mitigated by "ledger is truth"
     "launder a fake G4 pass via a fresh sock-puppet id",
+    "impersonate another agent via the unauthenticated `agent` field",
 }
 
 
@@ -303,6 +356,12 @@ def _selftest():
         not by_name["supersede another agent's warning"]["landed"])
     checks["a content contributor cannot launder a fake G4 pass (run 401 fix)"] = (
         not by_name["launder a fake G4 pass as a content contributor"]["landed"])
+    checks["content disguised as a gate verdict still counts as content (run 402 fix)"] = (
+        not by_name["content work disguised as a gate verdict to dodge contributor-exclusion"]
+        ["landed"])
+    checks["agent-field impersonation is recorded as a known limit (the trust boundary)"] = (
+        by_name["impersonate another agent via the unauthenticated `agent` field"]["landed"]
+        and out["n_landed_unexpected"] == 0)
     # blocked by design:
     checks["reputation is decoupled from the board (self-annotation buys nothing)"] = (
         not by_name["inflate reputation via positive self-annotations on the board"]["landed"])
