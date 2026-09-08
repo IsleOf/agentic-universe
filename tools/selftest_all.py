@@ -45,6 +45,7 @@ JOBS = [
     ("cohort_monitor.py", ["selftest"]),
     ("param_invariance_audit.py", ["selftest"]),
     ("pheromone.py", ["selftest"]),
+    ("relay.py", ["selftest"]),
     ("executor_pool.py", ["selftest"]),
     ("probe_memory_horizon.py", ["selftest"]),
     ("probe_governance_lever.py", ["selftest"]),

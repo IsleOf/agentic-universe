@@ -11898,6 +11898,34 @@
         "tools/task_ledger.py",
         "docs/swarm-substrate-prototype.md"
       ]
+    },
+    {
+      "id": "artifact_relay_handoff_with_anti_ping_pong_guard",
+      "label": "tools/relay.py - handoff() threads the pipeline and drops the context-rich trace on the pheromone board (not a private channel); complete() closes the final stage; a deterministic anti-ping-pong guard refuses a handoff that would leave the last N handoffs with too few distinct agents",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.68,
+      "description": "Run 393, week-1 build list item 3. tools/relay.py, a selftest_all job. Ports the two things the Strands Agents Swarm pattern gets right onto this repo's own substrate (task_ledger + pheromone), no model calls. handoff(task_ref, from_agent, message, context, to_hint): closes the current task, leaves the message + to_hint + context as a kind=done PHEROMONE ANNOTATION so the next agent reads the handoff from the board rather than a private channel (Strands passes it in the handoff input; here it is public), and threads the pipeline via Ledger.next_stage(). A fresh positive marker is dropped on the new task so the board surfaces it. complete(task_ref, from_agent, artifact_ref): closes the pipeline's final task and posts the artifact reference. THE ANTI-PING-PONG GUARD is Strands' repetitive_handoff_detection_window / repetitive_handoff_min_unique_agents, made deterministic: if the last `window` (default 6) handoffs would use fewer than `min_unique` (default 3) distinct agents, would_refuse() is True and handoff() raises RelayRefused - the swarm is bouncing work between the same agents. A short history (< window handoffs) never refuses; a fresh agent always breaks the loop. The handoff history lives in a state file beside the ledger and survives a restart, so the guard is not fooled by a process bounce. 13 selftest checks GREEN. Not flagged by param_invariance_audit. This completes the deterministic spine of the swarm substrate: task_ledger (what to do and in what order), pheromone (where the signal is), relay (how work moves and the trace it leaves). The only piece left before the swarm_demo acceptance test is reputation (which agent) and the gates (does the artifact pass).",
+      "tags": [
+        "swarm-substrate",
+        "handoff",
+        "anti-ping-pong",
+        "strands-pattern-ported",
+        "deterministic",
+        "no-model-calls",
+        "week-1-build",
+        "board-not-private-channel"
+      ],
+      "derived_from": [
+        "https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/"
+      ],
+      "evidence_links": [
+        "tools/relay.py",
+        "docs/swarm-substrate-prototype.md"
+      ]
     }
   ],
   "edges": [
@@ -28601,6 +28629,34 @@
       "target": "artifact_pheromone_annotation_layer",
       "type": "informs",
       "description": "the deterministic half of the substrate; the pheromone layer is the half that says WHICH ready task_ref an agent should pick up when several are available at the current stage"
+    },
+    {
+      "id": "edge_relay_implements_substrate_design",
+      "source": "artifact_relay_handoff_with_anti_ping_pong_guard",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "implements",
+      "description": "week-1 build list item 3: ports Strands' handoff_to_agent / complete_swarm_task contract and the repetitive-handoff window onto task_ledger + pheromone"
+    },
+    {
+      "id": "edge_relay_extends_sequential_protocol",
+      "source": "artifact_relay_handoff_with_anti_ping_pong_guard",
+      "target": "concept_the_sequential_protocol_is_a_stage_column_plus_dependency_threading_not_a_turn_taking_loop",
+      "type": "extends",
+      "description": "handoff() calls Ledger.next_stage() to thread research->draft->critique->final; the relay is the operation that moves an agent through the stage column"
+    },
+    {
+      "id": "edge_relay_uses_pheromone",
+      "source": "artifact_relay_handoff_with_anti_ping_pong_guard",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "depends_on",
+      "description": "the handoff message, to_hint and context are written as a kind=done annotation on the board - the next agent reads the handoff publicly, and a fresh utility marker on the new task makes the board surface it"
+    },
+    {
+      "id": "edge_relay_instantiates_ostrom_graduated_response",
+      "source": "artifact_relay_handoff_with_anti_ping_pong_guard",
+      "target": "pattern_ostrom_swarm_governance",
+      "type": "instantiates",
+      "description": "the anti-ping-pong guard is a graduated institutional response the population runs, not a central controller: repeated handoffs among too few agents trip a deterministic refusal that any fresh agent clears"
     }
   ]
 }

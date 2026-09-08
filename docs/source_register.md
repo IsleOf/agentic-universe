@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 402 nodes, 1629 edges · **Date:** 2026-09-05
+**Graph at generation:** 403 nodes, 1633 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -368,7 +368,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.03422 — `concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it`
 - https://arxiv.org/abs/2609.04280 — `concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation`, `concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion`
 - https://arxiv.org/html/2604.21590v1 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`
-- https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/ — `artifact_swarm_substrate_prototype_design`
+- https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/ — `artifact_relay_handoff_with_anti_ping_pong_guard`, `artifact_swarm_substrate_prototype_design`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`

@@ -1,0 +1,51 @@
+{
+  "run": 393,
+  "increment": "Week-1 build list item 3: tools/relay.py. Ports the two things Strands Agents Swarm gets right onto task_ledger + pheromone, no model calls. handoff() closes the current task, leaves message+to_hint+context as a kind=done PHEROMONE annotation (the next agent reads the handoff from the board, not a private channel), and threads the pipeline via next_stage(). complete() closes the final stage and posts the artifact ref. The anti-ping-pong guard is Strands' repetitive_handoff window made deterministic: last N handoffs with < min_unique distinct agents -> RelayRefused; short history never refuses; a fresh agent clears it; history is a state file that survives a restart. 13 selftest checks GREEN, not flagged by param_invariance_audit. The deterministic spine of the swarm substrate is now complete (ledger + pheromone + relay); reputation and gates remain before swarm_demo. +1 node, +4 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/relay.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/relay.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/"
+  ],
+  "trace_file": "runtime\\traces\\loop-393.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 393 OK · VALID · graph +1n/+4e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.89 · files +2~3-0 · novelty 1.00"
+}
