@@ -1,0 +1,23 @@
+{
+  "run": 364,
+  "increment": "adversarial pass on the projects own posture - the task-shape defence of the no-training fork is weaker than stated; measured all 295 runs with skill_induction.classify, literature sweep 35.3 pct plus build 18.6 pct is the TAU-2 shape while the postures named elicitation examples are 4 pct",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-364.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 364 OK · VALID · graph +1n/+4e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.77 · novelty 1.00"
+}

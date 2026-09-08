@@ -11000,6 +11000,35 @@
       "evidence_links": [
         "https://arxiv.org/abs/2604.21590"
       ]
+    },
+    {
+      "id": "concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims",
+      "label": "The task-shape defence of the no-training fork is weaker than stated: TAU-2-style tool use is elicitation-shaped yet a vanilla 8B scores 19.3, and ~54% of this loop's own measured work has that same shape while its named elicitation examples are ~4%",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:self_assessment",
+      "confidence": 0.6,
+      "description": "Adversarial pass, run 364, against this project's own posture. The emergence-first fork is defended (docs/emergence_first_posture.md, run 237) by a TASK-SHAPE claim: harness-only suffices for elicitation-shaped work - named as 'research direction-setting, graph engineering, adversarial reading, most of what this project's loop actually does' - and only hits a ceiling on capability-shaped work. Two things now press on it. (1) AgenticQwen (2604.21590): TAU-2 multi-turn tool use is procedural, in-domain and tool-mediated, i.e. elicitation-shaped by that definition - yet a vanilla 8B scores 19.3 where a trained 8B scores 51.7. If elicitation-shaped work were harness-solvable, the vanilla floor should not be that low. (2) MEASURED, not asserted: classifying all 295 recorded runs with skill_induction.classify gives literature sweep 35.3%, other 33.6%, build 18.6%, doc refresh 8.1%, consistency re-read 3.7%, graph hygiene + design integration 0.6%. literature-sweep plus build is ~54% of the loop's actual work, and both are multi-turn tool use carrying state across many steps - the TAU-2 shape. The posture's named elicitation examples map to ~4%, and 'research direction-setting' is not a task class in the loop's own taxonomy at all. So the claim 'most of what this project's loop actually does' is elicitation-shaped is not supported by the loop's own record. THE ESCAPE, stated fairly: TAU-2 is also long-horizon multi-turn, and the posture already concedes long-horizon planning to the capability side. Taking that escape is expensive precisely because the loop's own work has the same shape - it moves the project's core activity onto the contested side of its own line. CAVEATS: classify() is a keyword matcher and 33.6% fell to 'other', so the direction (sweep + build dominate) is robust while the exact percentages are not; and mapping task classes onto the elicitation/capability axis is judgement, not measurement. DISCRIMINATING TEST, unrun: vanilla small model + strong harness vs agentically-trained small model, evaluated on THIS loop's task mix rather than on TAU-2. Every component exists (call_model seam, the probe rigs, the frozen held-out set); it needs a model budget. SECONDARY FINDING: 33.6% of runs classify as 'other', which means skill_induction's keyword vocabulary is stale relative to how increments are currently written - a measurement instrument drifting away from what it measures.",
+      "tags": [
+        "adversarial-pass",
+        "task-shape",
+        "elicitation-vs-capability",
+        "self-assessment",
+        "measured-not-asserted",
+        "no-training-fork",
+        "posture-correction"
+      ],
+      "derived_from": [
+        "docs/emergence_first_posture.md",
+        "docs/what_would_make_this_wrong.md",
+        "https://arxiv.org/abs/2604.21590",
+        "runtime/observations/loop_runs/ (295 runs classified)"
+      ],
+      "evidence_links": [
+        "docs/what_would_make_this_wrong.md"
+      ]
     }
   ],
   "edges": [
@@ -26786,6 +26815,34 @@
       "target": "concept_compaction_cliff",
       "type": "supports",
       "description": "context length named as the limiting factor for capable small agents, which is where the compaction cliff bites hardest"
+    },
+    {
+      "id": "edge_taskshape_challenges_emergence_first",
+      "source": "concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims",
+      "target": "approach_emergence_first",
+      "type": "challenges",
+      "description": "not the bet itself but its defence: the elicitation/capability line may not fall where the posture places it, and the loop's measured task mix sits on the contested side"
+    },
+    {
+      "id": "edge_taskshape_depends_on_agenticqwen",
+      "source": "concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims",
+      "target": "concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct",
+      "type": "depends_on",
+      "description": "the vanilla-8B 19.3 floor on procedural tool use is what makes the task-shape defence testable rather than rhetorical"
+    },
+    {
+      "id": "edge_taskshape_informs_skill_induction",
+      "source": "concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims",
+      "target": "artifact_phase4_skill_induction",
+      "type": "informs",
+      "description": "its TASK_CLASSES taxonomy supplied the measurement - and 33.6% falling to 'other' shows the keyword vocabulary has drifted from how increments are now written"
+    },
+    {
+      "id": "edge_taskshape_refines_geometric_decay",
+      "source": "concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims",
+      "target": "concept_geometric_reliability_decay",
+      "type": "refines",
+      "description": "the long-horizon escape route for the defence runs straight into the decay limit: whichever way the line is drawn, multi-turn state-carrying work is where both problems live"
     }
   ]
 }

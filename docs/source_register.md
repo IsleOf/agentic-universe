@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 369 nodes, 1498 edges · **Date:** 2026-09-05
+**Graph at generation:** 370 nodes, 1502 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -349,7 +349,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2510.05174 — `artifact_probe_emergent_synergy_rig`
 - https://arxiv.org/abs/2510.14548 — `concept_open_ended_llm_agents_can_self_generate_tasks_and_accumulate_knowledge_but_repeat_themselves_and_form_no_self_model`
 - https://arxiv.org/abs/2603.29231 — `artifact_probe_memory_horizon_rig`, `concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance`
-- https://arxiv.org/abs/2604.21590 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`
+- https://arxiv.org/abs/2604.21590 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`, `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
 - https://arxiv.org/abs/2605.18535 — `concept_the_prefrontal_turn_capability_lever_moved_to_executive_control_and_local_context_is_undelegatable`
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - https://arxiv.org/abs/2606.23764 — `concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules`
@@ -369,6 +369,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI — `concept_context_economics`
 - runtime/harness/context/loop_policy.history.json — `artifact_phase3_first_closed_loop`
 - runtime/observations/loop_history_summary.json — `artifact_loop_adapter_real_trace`, `artifact_loop_metrics_phase3_real`
+- runtime/observations/loop_runs/ (295 runs classified) — `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
 - runtime/observations/loop_runs/run-334..360 — `concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric`
 - runtime/observations/loop_runs/run-67.json — `artifact_loop_session_live_recording`
 - same sweep: no verifiable mechanism work since the run-5 sources (Sophia, Tao of Agency, Learnable Novelty - all position/framework). The field is investing in supervised curriculum generation, not intrinsic drive. — `concept_intrinsic_motivation`
@@ -559,6 +560,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/auto_sweep_2026-10-19-1800.md` — `concept_naive_trajectory_accumulation_already_helps`
 - `docs/auto_sweep_2026-10-20-0600.md` — `concept_agent_communication_is_a_layered_attack_surface`
 - `docs/auto_sweep_2026-10-20-1200.md` — `emergent_social_conventions`
+- `docs/emergence_first_posture.md` — `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
 - `docs/emergence_safety_case_template.md` — `artifact_emergence_safety_case_template`
 - `docs/graph_state_2026-09.md` — `emergent_self_organizing_roles`, `pattern_five_w_message_instrumentation`, `pattern_shallow_hierarchy` +1
 - `docs/graph_state_2026-09.md (experiment 5)` — `emergent_role_specialization_failure_modes`
@@ -599,6 +601,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
 - `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_cohort_monitor`, `artifact_conductor_blessed_manifest_preflight` +8
+- `docs/what_would_make_this_wrong.md` — `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`, `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`

@@ -230,6 +230,52 @@ per-step measurement of where trajectories actually fail.
 
 **Companion caution — the loop's returns may plateau even if the harness keeps mattering (added run 129).** `concept_rest_react_founds_the_trajectory_retrain_loop` (arXiv:2312.10003): the earliest published multi-iteration self-improvement result gets its gains in *two* iterations and then saturates. If the middle loop's returns decay the same way, the loop keeps running, keeps passing its gate (a gate only rejects regressions, it does not require progress), and quietly stops producing real improvement — the same "improvements stopped landing" signature as the model-native case, from a different cause. `concept_recursive_meta_skill_evolution` is the proposed answer (evolve the improvement procedure itself when the task loop plateaus), but that it *works* — that meta-level search reliably re-opens a plateaued object-level loop — is a hypothesis, not a result. The cheap tell: track the accept-rate and the held-out-score trend of the middle loop over a run window; a long run of gate-passing edits that don't move the held-out score is the plateau.
 
+**Update (run 364) — the sharpest pressure yet on the fork, and it lands on the *defence*, not the bet.**
+`concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`
+(AgenticQwen, `2604.21590`, VERIFIED — abstract *and* HTML results table): on TAU-2 multi-turn
+tool use, an agentically-trained 8B scores **51.7** against a 235B model's **56.5**, while the
+*same 8B untrained* scores **19.3**. A 32.4-point jump at fixed model size, from training, in
+this project's own small-model regime.
+
+The standing defence (posture doc, run 237) is a **task-shape** claim: harness-only suffices
+for *elicitation-shaped* work — "research direction-setting, graph engineering, adversarial
+reading, **most of what this project's loop actually does**" — and only hits a ceiling on
+*capability-shaped* work. TAU-2 is procedural, in-domain, tool-mediated multi-turn work. It
+looks elicitation-shaped. If it is, the defence predicts a vanilla model should already be
+decent at it, and 19.3 says otherwise.
+
+There is a real escape: TAU-2 is also *long-horizon multi-turn*, and the posture already
+concedes long-horizon planning to the capability side. But taking that escape is expensive,
+because **the loop's own work has the same shape** — and that part is now measured rather than
+assumed. Classifying all 295 recorded runs with `skill_induction.classify`:
+
+| task class | share |
+|---|---|
+| literature sweep | 35.3% |
+| *(unclassified)* | 33.6% |
+| build | 18.6% |
+| doc refresh | 8.1% |
+| consistency re-read | 3.7% |
+| graph hygiene / design integration | 0.6% |
+
+**`literature sweep` + `build` = ~54%** — both are multi-turn tool use carrying state across
+many steps, structurally TAU-2-shaped. The posture doc's named elicitation examples map onto
+`consistency re-read` + `design integration` = **~4%**, and "research direction-setting" is not
+a task class at all. So the claim "most of what this project's loop actually does" is
+elicitation-shaped is not supported by the loop's own record; the distribution points the
+other way.
+
+*Two caveats, both real.* `classify()` is a keyword matcher and 33.6% fell to `other`, so the
+percentages are rough — the direction (sweep + build dominate) is robust, the exact numbers are
+not. And the mapping of each task class onto the elicitation/capability axis is a judgement,
+not a measurement.
+
+**What would settle it:** the comparison nobody has run — *vanilla small model + strong harness*
+vs *agentically-trained small model*, on this loop's actual task mix rather than on TAU-2. Every
+piece needed to run it now exists (`call_model` seam, the probe rigs, the frozen held-out set);
+it needs a model budget. Until then §6 should be read as **contested and newly pressured**,
+not as "the best news in this document".
+
 ## 7. Every empirical claim in the graph may be language-parochial (added run 47)
 
 `concept_interaction_language_shifts_emergence` — the Shibboleth Effect (arXiv:2606.11082, VERIFIED) shows the
