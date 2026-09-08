@@ -11440,6 +11440,34 @@
       "evidence_links": [
         "https://arxiv.org/abs/2601.21112"
       ]
+    },
+    {
+      "id": "concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident",
+      "label": "Extract-then-score monitoring trades a noisy-signal problem for a recall problem at the extractor: against an adversary optimising against the FILTER it loses to an unfiltered monitor, and its misses are confident false-cleans",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:monitoring",
+      "confidence": 0.55,
+      "description": "Run 382. Run 381 folded arXiv:2601.21112 (the less-is-more effect: LLM monitors often detect sabotage BETTER with less of the trajectory, and extract-and-evaluate beats scoring the whole thing by 16.8pp) and recorded, as an open question rather than a claim, that the EXTRACTOR then becomes a single point of failure. This node is the result of building the arm that tests it: run_monitor_arm / extractor_sweep / assess_extractor in tools/probe_subagent_coordination.py. TWO MONITOR ARCHITECTURES over one trajectory. DIRECT scores the whole thing, accuracy degrading with length (the mechanism less-is-more names); it cannot be evaded by phrasing because it sees everything, only noisily. EaE runs an extractor at recall r, then a scorer at high accuracy on whatever was pulled; it is insensitive to length and blind to whatever the extractor missed. The adversary knob is ADAPTATION: how much the saboteur has optimised its phrasing against the EXTRACTOR rather than the scorer. WHAT THE SWEEP SHOWS. (1) It REPRODUCES the paper's regime. On a long trajectory (L=16) against a non-adaptive adversary EaE detects 0.877 vs the direct monitor's 0.462, and the direct monitor's advantage at L=2 (0.853 vs 0.853, and clearly ahead once adaptation is nonzero) inverts as length grows - exactly the reported finding that longer traces gain more from filtering. (2) It BREAKS in the regime the paper does not test. At adaptation 0.6 the direct monitor overtakes EaE (0.417 vs 0.330) at the same length. Evading an extractor is a different and easier target than evading a scorer, and filtering hands the adversary that target. (3) THE ASYMMETRY THAT MATTERS IS NOT THE DETECTION GAP. It is the CONFIDENT-MISS gap: at L=16, adaptation 0.6, EaE produces 0.652 false-cleans in which the pipeline reports safe having believed it read the relevant material, against ~0 for the direct monitor, whose misses are noisy misses accompanied by the uncertainty that noise implies. A monitor that is slightly worse is a tolerable monitor; a monitor that is confidently wrong is a broken oversight signal, because the operator above it stops looking. WHAT THIS IS NOT. The adversary's ability to trade scorer-evasion for extractor-evasion is an ASSUMPTION the simulation encodes, not a result it produces. If extractor-evasion and scorer-evasion turn out to be the same capability, the crossover disappears. The paper does not measure this either - which is the point: this is an open question with a shape, not an answer. The falsifiable form: run EaE and a direct monitor against a red team explicitly instructed to defeat the EXTRACTOR, and check whether the 16.8pp gain survives. IMPLICATION FOR THIS PROJECT, since the janitor and the cohort monitor are both built on filtering: prefer filtering for CAPACITY and keep an unfiltered or differently-filtered channel for ADVERSARIAL coverage. Two extractors with uncorrelated failure modes beat one good one, for the same reason two monitors beat one.",
+      "tags": [
+        "monitoring",
+        "extract-and-evaluate",
+        "adversarial-robustness",
+        "recall",
+        "confident-false-clean",
+        "single-point-of-failure",
+        "probe-result",
+        "assumption-encoded",
+        "recency-2026-02"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2601.21112"
+      ],
+      "evidence_links": [
+        "tools/probe_subagent_coordination.py"
+      ]
     }
   ],
   "edges": [
@@ -27646,6 +27674,34 @@
       "target": "artifact_probe_idle_agent_rig",
       "type": "informs",
       "description": "the covert-vs-overt observation arm measures the same asymmetry this paper reports"
+    },
+    {
+      "id": "edge_extractor_evasion_challenges_lessismore",
+      "source": "concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident",
+      "target": "concept_llm_monitors_often_do_better_with_less_information_and_extract_then_score_beats_scoring_the_whole_trajectory",
+      "type": "challenges",
+      "description": "not the less-is-more effect itself, which this arm reproduces, but its SCOPE: the 16.8pp gain is measured against adversaries not optimising against the extractor, and the arm finds an adaptation level at which an unfiltered monitor wins"
+    },
+    {
+      "id": "edge_extractor_evasion_core_of_subagent_rig",
+      "source": "concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "core_of",
+      "description": "the arm lives in this rig: run_monitor_arm / extractor_sweep / assess_extractor, alongside the relay-spread and fragmentation arms"
+    },
+    {
+      "id": "edge_extractor_evasion_constrains_cohort_monitor",
+      "source": "concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident",
+      "target": "artifact_cohort_monitor",
+      "type": "constrains",
+      "description": "run 381 told this component to derive its per-worker signal by extract-then-score; this constrains that advice - do it for capacity, but keep a second channel with an uncorrelated failure mode, because a confident false-clean is worse than a noisy one"
+    },
+    {
+      "id": "edge_extractor_evasion_constrains_per_consumer_views",
+      "source": "concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident",
+      "target": "concept_trace_compiles_to_per_consumer_views",
+      "type": "constrains",
+      "description": "compiling per-consumer views is filtering, so the janitor inherits the same exposure: a view that omits the relevant material reads as clean rather than as incomplete"
     }
   ]
 }

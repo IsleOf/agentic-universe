@@ -1,0 +1,43 @@
+{
+  "run": 382,
+  "increment": "Built the extractor-evasion arm on probe_subagent_coordination (run_monitor_arm / extractor_sweep / assess_extractor), filling the gap run 381 named when folding arXiv:2601.21112. It reproduces the less-is-more effect (EaE 0.877 vs direct 0.462 at L=16 against a naive adversary, gain growing with length) and then breaks it: at adaptation 0.6 the UNFILTERED monitor overtakes EaE. The decisive asymmetry is not the detection gap but the confident-miss gap, 0.652 vs ~0 - filtering removes the failure's warning label. The adversary's ability to trade scorer-evasion for extractor-evasion is an assumption the sim encodes and the verdict string says so. +1 node, +4 edges (challenges the less-is-more node's SCOPE, core_of the rig, constrains cohort_monitor and per-consumer-views - partly withdrawing run 381's advice one run later, which is the correct direction of travel).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2601.21112",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2601.21112",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2601.21112",
+    "src:https://arxiv.org/abs/2601.21112"
+  ],
+  "trace_file": "runtime\\traces\\loop-382.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 382 OK · VALID · graph +1n/+4e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.92 · files +1~3-0 · novelty 1.00"
+}
