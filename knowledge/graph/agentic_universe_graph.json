@@ -9917,7 +9917,7 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:self_rebuild",
       "confidence": 0.6,
-      "description": "tools/acceptance_gate.py (run 300), the v2.1 core brick from docs/self_rebuild_v2.md section 7. check() composes improvement_loop.verify_loop_edit (frozen held-out set + category-masking + tamper + legibility) + the PACE anytime-valid e-value + a PROCESS-ADJUSTED flag (a pass that only holds after a deterministic_repair is downgraded to accept_conditional - the AgentLens shape, run 298) + a FORECAST Brier score (the proposer stated P(edit helps); scored on the held-out outcome). Emits a signed certificate {proposal_hash, gate, e_value, forecast:{brier}, certificate_hash} to an append-only log at runtime/observations/certificates/. verify_certificate() recomputes the proposal hash, the certificate hash and the Brier - the independent-verifier-can-replay property. Exogenous: nothing in the module lets a proposer edit the held-out set, alpha, or a past certificate. 11 selftest checks GREEN; selftest_all JOBS -> 36. Not yet wired as the loop commit gate (v2.1 remaining).",
+      "description": "tools/acceptance_gate.py (run 300), the v2.1 core brick from docs/self_rebuild_v2.md section 7. check() composes improvement_loop.verify_loop_edit (frozen held-out set + category-masking + tamper + legibility) + the PACE anytime-valid e-value + a PROCESS-ADJUSTED flag (a pass that only holds after a deterministic_repair is downgraded to accept_conditional - the AgentLens shape, run 298) + a FORECAST Brier score (the proposer stated P(edit helps); scored on the held-out outcome). Emits a signed certificate {proposal_hash, gate, e_value, forecast:{brier}, certificate_hash} to an append-only log at runtime/observations/certificates/. verify_certificate() recomputes the proposal hash, the certificate hash and the Brier - the independent-verifier-can-replay property. Exogenous: nothing in the module lets a proposer edit the held-out set, alpha, or a past certificate. 11 selftest checks GREEN; selftest_all JOBS -> 36. Not yet wired as the loop commit gate (v2.1 remaining). MINIMAL-MODIFICATION TERM (run 371, from the run-370 WorldBench fold). Until now check() received the proposal ONLY to hash it - every accept/reject term came from held-out scores, so the gate measured whether an edit HELPS and never what it DISTURBED. Added modification_footprint(proposal): added_nodes / added_edges, touch_surface (distinct PRE-EXISTING node ids the new edges attach to - a patch wiring into 30 unrelated nodes is not minimal even though it deletes nothing), destructive_keys, unknown_keys. It rides on EVERY certificate, accept or reject. One hard refusal: a patch carrying a destructive or mutating key is rejected BEFORE the held-out comparison, because the graph-patch contract is add-only (proposal_metadata / add_nodes / add_edges) while knowledge_graph.check_patch silently IGNORES unknown keys - so a patch carrying remove_nodes validates today and would be honoured by any apply_patch that read them. The selftest asserts that check_patch really does let such a patch through, so if the validator is ever tightened this justification fails loudly instead of going stale.",
       "tags": [
         "acceptance-gate",
         "certificate",
@@ -11220,6 +11220,34 @@
       ],
       "evidence_links": [
         "https://arxiv.org/abs/2609.01056"
+      ]
+    },
+    {
+      "id": "concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed",
+      "label": "An acceptance gate scoring only held-out improvement is blind to collateral modification - the proposal reached this project's gate solely to be hashed, so a patch could improve the score while touching anything at all",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:acceptance",
+      "confidence": 0.72,
+      "description": "Run 371, acting on the run-370 WorldBench fold. Its Constrained Task Success metric scores completion AND minimal modification, and every model tested traded correctness against environment preservation. Checking this project's own gate against that: acceptance_gate.check(proposal, ...) passed `proposal` to proposal_digest() and nowhere else. Accept/reject came entirely from baseline vs candidate held-out scores. The gate therefore had NO term for what a patch disturbed - confirmed by reading the code, not inferred. improvement_loop.blast_radius exists but applies only to context-policy edits (pin/compress classes) and only when `edit` is supplied; it never sees a graph patch. THE SHARP VERSION, which is a latent vulnerability rather than a missing nicety: the graph-patch contract is add-only, but knowledge_graph.check_patch IGNORES keys it does not recognise. A patch carrying `remove_nodes` or `modify_nodes` validates cleanly today. Nothing would have honoured it yet - no current apply_patch reads those keys - but nothing would have objected either, and the gate is precisely the component whose job is to object. Fixed by adding modification_footprint to every certificate and refusing destructive keys before the held-out comparison. The refusal is logged like any other adjudication (run 368), so a blocked patch leaves a trace rather than vanishing. WHAT IS STILL UNMEASURED: touch_surface is reported but not thresholded - there is no principled cap on how many pre-existing nodes one patch may wire into, and picking one arbitrarily would be worse than reporting it. And the environment this loop actually modifies is the repository, not just the graph; nothing scores collateral file changes.",
+      "tags": [
+        "minimal-modification",
+        "environment-preservation",
+        "acceptance-gate",
+        "add-only-contract",
+        "latent-vulnerability",
+        "worldbench-cts",
+        "found-in-own-loop"
+      ],
+      "derived_from": [
+        "tools/acceptance_gate.py",
+        "tools/knowledge_graph.py",
+        "https://arxiv.org/abs/2609.01056"
+      ],
+      "evidence_links": [
+        "tools/acceptance_gate.py"
       ]
     }
   ],
@@ -27217,6 +27245,27 @@
       "target": "concept_search_time_contamination_inflates_agent_evals",
       "type": "instantiates",
       "description": "second instance in nine runs: a search summary attached a specific safety claim (English refusal vs translated compliance) to this paper that is absent from its abstract. Excluded. Two occurrences make abstract-fetching a practice rule, not a precaution"
+    },
+    {
+      "id": "edge_minmod_implements_worldbench",
+      "source": "concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed",
+      "target": "concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation",
+      "type": "implements",
+      "description": "the CTS minimal-modification idea applied to this project's own gate"
+    },
+    {
+      "id": "edge_minmod_refines_grounded_acceptance",
+      "source": "concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "refines",
+      "description": "grounded acceptance scored whether an edit helps; this adds the second half CTS names - what the edit disturbed"
+    },
+    {
+      "id": "edge_minmod_grounds_gate",
+      "source": "concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed",
+      "target": "artifact_acceptance_gate",
+      "type": "grounds",
+      "description": "modification_footprint on every certificate, plus a hard refusal for destructive keys before the held-out comparison"
     }
   ]
 }

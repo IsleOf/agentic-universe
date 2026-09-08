@@ -58,6 +58,76 @@ def _held_out_outcome(baseline_scores, candidate_scores) -> float:
     return 1.0 if (risk_after < risk_before or (risk_before == 0 and risk_after == 0)) else 0.0
 
 
+# --- minimal modification (run 371, from WorldBench's Constrained Task Success) ---
+
+_PATCH_ALLOWED_KEYS = {"proposal_metadata", "add_nodes", "add_edges"}
+_DESTRUCTIVE = ("remove", "delete", "modify", "update", "set_", "overwrite", "replace", "drop")
+
+
+def modification_footprint(proposal) -> dict:
+    """What does this patch DISTURB, as opposed to add?
+
+    The graph-patch contract is add-only, but `knowledge_graph.check_patch` ignores
+    keys it does not know, so a destructive key rides through validation unnoticed.
+    This names the footprint explicitly:
+
+      added_nodes / added_edges - the intended growth
+      touch_surface             - distinct PRE-EXISTING node ids the new edges attach
+                                  to; a patch that wires into 30 unrelated nodes is
+                                  not minimal even though it deletes nothing
+      destructive_keys          - any key whose name implies mutation or removal
+      unknown_keys              - anything else outside the contract (reported, not fatal)
+    """
+    if not isinstance(proposal, dict):
+        return {"added_nodes": 0, "added_edges": 0, "touch_surface": 0,
+                "destructive_keys": [], "unknown_keys": []}
+    add_nodes = proposal.get("add_nodes") or []
+    add_edges = proposal.get("add_edges") or []
+    new_ids = {n.get("id") for n in add_nodes if isinstance(n, dict)}
+    touched = set()
+    for e in add_edges:
+        if not isinstance(e, dict):
+            continue
+        for end in (e.get("source"), e.get("target")):
+            if end and end not in new_ids:
+                touched.add(end)
+    extra = [k for k in proposal if k not in _PATCH_ALLOWED_KEYS]
+    destructive = sorted(k for k in extra if any(d in k.lower() for d in _DESTRUCTIVE))
+    return {
+        "added_nodes": len(add_nodes),
+        "added_edges": len(add_edges),
+        "touch_surface": len(touched),
+        "destructive_keys": destructive,
+        "unknown_keys": sorted(k for k in extra if k not in destructive),
+    }
+
+
+def _reject_cert(proposal, forecast, reason, footprint, cert_dir, clock):
+    """A refusal that never reached the held-out comparison. Logged like any other
+    adjudication (run 368) so the record cannot be read as a clean run."""
+    cert = {
+        "schema": "gate.1",
+        "ts": round(clock(), 3),
+        "decision": "reject",
+        "gate": {"held_out_accept": False, "reason": reason},
+        "modification_footprint": footprint,
+        "forecast": {"metric": (forecast or {}).get("metric"), "brier": None},
+        "proposal_hash": proposal_digest(proposal),
+        "e_value": None, "e_threshold": None, "e_committed": False,
+        "authority": "the add-only graph-patch contract - checked before the held-out set",
+        "fallback": "reject the patch; a mutating change needs an explicit, reviewed path",
+        "provenance": "explicit_dir" if cert_dir else "default_log",
+    }
+    cert["certificate_hash"] = hashlib.sha256(
+        json.dumps({k: cert[k] for k in cert if k != "certificate_hash"},
+                   sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+    d = Path(cert_dir) if cert_dir else CERT_DIR
+    d.mkdir(parents=True, exist_ok=True)
+    with (d / "gate_certificates.jsonl").open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(cert, sort_keys=True) + "\n")
+    return cert
+
+
 def check(proposal, baseline_scores, candidate_scores, forecast, *,
           verifier_disagreements=None, legibility=None, repaired=False,
           edit=None, cert_dir=None, clock=time.time):
@@ -66,6 +136,28 @@ def check(proposal, baseline_scores, candidate_scores, forecast, *,
     the held-out risk. Returns a certificate dict; on accept it is also appended
     to the append-only log.
     """
+    # --- minimal-modification term (run 371) -----------------------------
+    # From WorldBench (arXiv:2609.01056, folded run 370): every model tested
+    # traded task CORRECTNESS against ENVIRONMENT PRESERVATION, and its metric
+    # scores completion AND minimal modification. This gate scored only whether an
+    # edit HELPS - the proposal was passed in solely to be hashed, never inspected -
+    # so an edit that improved the held-out score while disturbing things it had no
+    # business touching passed cleanly.
+    #
+    # The graph-patch contract is ADD-ONLY (`proposal_metadata` / `add_nodes` /
+    # `add_edges`), but knowledge_graph.check_patch silently IGNORES unknown keys.
+    # A patch carrying `remove_nodes` or `modify_nodes` therefore validates today,
+    # and would be honoured by any apply_patch that read them. That is the concrete,
+    # currently-unguarded version of the axis.
+    footprint = modification_footprint(proposal)
+    if footprint["destructive_keys"]:
+        return _reject_cert(
+            proposal, forecast,
+            f"patch carries destructive/mutating key(s) {footprint['destructive_keys']} - "
+            f"the graph-patch contract is add-only and check_patch ignores unknown keys, "
+            f"so this must be refused here",
+            footprint, cert_dir, clock)
+
     verdict = verify_loop_edit(baseline_scores, candidate_scores,
                                verifier_disagreements=verifier_disagreements,
                                legibility=legibility, edit=edit)
@@ -85,6 +177,8 @@ def check(proposal, baseline_scores, candidate_scores, forecast, *,
         "ts": round(clock(), 3),
         "proposal_hash": proposal_digest(proposal),
         "decision": decision,
+        # what the patch DISTURBED, not just whether it helped (run 371)
+        "modification_footprint": footprint,
         "gate": {
             "held_out_accept": verdict["accept"],
             "risk_before": ev["risk_before"],
@@ -157,6 +251,21 @@ def verify_certificate(cert, proposal) -> dict:
     return {"ok": all(checks.values()), "checks": checks}
 
 
+def _destructive_passes_check_patch() -> bool:
+    """The gap this term closes: knowledge_graph.check_patch ignores unknown keys, so
+    a patch carrying `remove_nodes` VALIDATES. Asserting this keeps the justification
+    honest - if check_patch is ever tightened, this check fails and the comment above
+    the gate term must be corrected rather than left stale."""
+    try:
+        from knowledge_graph import check_patch
+    except Exception:
+        return True
+    graph = {"nodes": [{"id": "concept_anchor", "label": "a", "type": "concept"}], "edges": []}
+    patch = {"proposal_metadata": {}, "add_nodes": [], "add_edges": [],
+             "remove_nodes": ["concept_anchor"]}
+    return check_patch(patch, graph) == []
+
+
 def _selftest():
     import tempfile
     tmp = Path(tempfile.mkdtemp(prefix="acc-gate-"))
@@ -177,6 +286,36 @@ def _selftest():
         (tmp / "gate_certificates.jsonl").exists()
         and (tmp / "gate_certificates.jsonl").read_text().count("\n") == 1)
 
+    # minimal-modification term (run 371, from WorldBench CTS)
+    _fp = cert["modification_footprint"]
+    checks["every certificate carries a modification_footprint"] = (
+        set(_fp) == {"added_nodes", "added_edges", "touch_surface",
+                     "destructive_keys", "unknown_keys"})
+
+    _patch = {"proposal_metadata": {}, "add_nodes": [{"id": "concept_new"}],
+              "add_edges": [{"id": "e1", "source": "concept_new", "target": "existing_a"},
+                            {"id": "e2", "source": "concept_new", "target": "existing_b"}]}
+    _f2 = modification_footprint(_patch)
+    checks["touch_surface counts PRE-EXISTING endpoints only, not the new node"] = (
+        _f2["touch_surface"] == 2 and _f2["added_nodes"] == 1)
+
+    _destructive = {**_patch, "remove_nodes": ["concept_anchor"]}
+    _cd = check(_destructive, base, cand, fc, cert_dir=tmp, clock=lambda: 1010.0)
+    checks["a patch carrying a destructive key is REFUSED before the held-out set"] = (
+        _cd["decision"] == "reject"
+        and _cd["modification_footprint"]["destructive_keys"] == ["remove_nodes"]
+        and "add-only" in _cd["gate"]["reason"])
+    checks["check_patch would have LET that patch through (this is the gap closed)"] = (
+        _destructive_passes_check_patch())
+    checks["the destructive refusal is logged like any other adjudication"] = (
+        json.loads((tmp / "gate_certificates.jsonl").read_text().splitlines()[-1])["decision"]
+        == "reject")
+
+    _benign_extra = {**_patch, "note": "a harmless annotation"}
+    checks["a non-destructive unknown key is reported, not refused"] = (
+        modification_footprint(_benign_extra)["unknown_keys"] == ["note"]
+        and not modification_footprint(_benign_extra)["destructive_keys"])
+
     v = verify_certificate(cert, good_edit)
     checks["verify_certificate replays a genuine certificate"] = v["ok"]
     tampered = dict(cert); tampered["decision"] = "reject"
@@ -190,11 +329,16 @@ def _selftest():
     # 0 rejections never looked wrong. A gate you cannot audit for rejections is a
     # gate you cannot distinguish from always-accept.
     worse = {f"t{i}": (1.0 if i < 5 else 0.0) for i in range(17)}
+    _lines_before_reject = (tmp / "gate_certificates.jsonl").read_text().count("\n")
     cert_r = check(good_edit, base, worse, fc, repaired=False, edit=good_edit, cert_dir=tmp,
                    clock=lambda: 1001.0)
     checks["a regressing edit is rejected"] = cert_r["decision"] == "reject"
+    # Counted RELATIVE to the line count just before this call. The original used a
+    # hard-coded `== 2` and broke the moment run 371 added another logged rejection
+    # earlier in the selftest - a brittle assertion of exactly the kind this file
+    # keeps finding elsewhere.
     checks["a rejected edit IS appended (the log must be auditable for rejections)"] = (
-        (tmp / "gate_certificates.jsonl").read_text().count("\n") == 2)
+        (tmp / "gate_certificates.jsonl").read_text().count("\n") == _lines_before_reject + 1)
     checks["the logged rejection carries decision=reject"] = (
         json.loads((tmp / "gate_certificates.jsonl").read_text()
                    .splitlines()[-1])["decision"] == "reject")
