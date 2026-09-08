@@ -12376,6 +12376,34 @@
         "tools/pheromone.py",
         "tools/probe_language_drift_monitor.py"
       ]
+    },
+    {
+      "id": "concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer",
+      "label": "Replicating seminal double-auction experiments with LLM agents instead of humans: markets converge SLOWLY OR NOT AT ALL to equilibrium, allocating less efficiently than human markets; heterogeneity across model families and roles; the trade-now decision correlates with a CoT shift from strategy to urgency",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:agent_markets",
+      "confidence": 0.72,
+      "description": "arXiv:2609.02580 (Pawel Struski, Jakub Swistak, Inez Okulska, Przemyslaw Biecek; v1 2026-09-02, VERIFIED via abstract). Replicates seminal economic experiments with LLM agents replacing human subjects, in a DOUBLE AUCTION - a widely-used market mechanism - and asks whether the market still delivers an EFFICIENT ALLOCATION, framed as a novel alignment dimension: an LLM agent's compatibility with a fundamental market mechanism. FINDINGS. (1) Markets populated by LLM agents show SLOWER OR NO CONVERGENCE toward equilibrium and give LESS EFFICIENT allocations than human-populated markets. The convergence property that makes a double auction useful for humans does not carry over. (2) SUBSTANTIAL HETEROGENEITY across model families and across market roles - there is no single 'LLM market behaviour'. (3) A lexical analysis of CoT traces: the decision to EXECUTE A TRADE rather than keep incrementally adjusting price is associated with a SHIFT FROM STRATEGIC CONSIDERATIONS TOWARD URGENCY. (4) Testing framework released. WHY IT MATTERS HERE. pattern_market_as_orchestrator (AgentLance) reuses a market - bids, public reputation, a VCG payment rule - as the swarm's allocator, and reports it beats centralised orchestration. This paper is the caution alongside: the mechanism's DESIRABLE PROPERTY (efficient convergent allocation) is a property of humans running it, not of the rules. So a market-as-orchestrator inherits whatever convergence behaviour the specific model population has, and the abstract says that ranges from slow to absent. It extends concept_mechanism_incentive_compat_does_not_transfer from 'a truthful mechanism does not make LLM agents bid truthfully' to 'an efficient mechanism does not make LLM agents allocate efficiently'. The strategy->urgency CoT shift is the same within-run framing drift concept_agent_creativity_declines_exploration_to_exploitation names, observed on a different axis: the terminal move (trade / ship) is preceded by an urgency frame, not a strategic one. CURRENCY: 2026-09-02; the convergence numbers are model-generation-dependent, but 'mechanism properties are properties of who runs them' is structural.",
+      "tags": [
+        "agent-markets",
+        "double-auction",
+        "market-convergence",
+        "allocative-efficiency",
+        "mechanism-properties-dont-transfer",
+        "model-family-heterogeneity",
+        "strategy-to-urgency-shift",
+        "cot-lexical-analysis",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.02580"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.02580"
+      ]
     }
   ],
   "edges": [
@@ -29653,6 +29681,34 @@
       "target": "concept_pheromone_register_health_is_a_cheap_model_free_distribution_shift_detector_on_the_boards_own_language",
       "type": "verifies",
       "description": "probe_language_drift_monitor's run-405 arm: coded boards of 22 and 45 annotations that g1 passes clean are flagged drifting; plain-English boards are not"
+    },
+    {
+      "id": "edge_double_auction_challenges_market_orchestrator",
+      "source": "concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer",
+      "target": "pattern_market_as_orchestrator",
+      "type": "challenges",
+      "description": "AgentLance reports a market beats centralised orchestration; this shows the market mechanism's efficient-convergence property is a property of the humans who designed and usually run it, and with LLM agents it ranges from slow to absent - so the orchestrator inherits its population's convergence behaviour, not the rules'"
+    },
+    {
+      "id": "edge_double_auction_extends_mechanism_transfer",
+      "source": "concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer",
+      "target": "concept_mechanism_incentive_compat_does_not_transfer",
+      "type": "extends",
+      "description": "from 'a truthful mechanism does not make LLM agents bid truthfully' to 'an efficient mechanism does not make LLM agents allocate efficiently' - the same non-transfer, on the outcome dimension rather than the incentive dimension"
+    },
+    {
+      "id": "edge_double_auction_supports_creativity_shift",
+      "source": "concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer",
+      "target": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
+      "type": "supports",
+      "description": "the trade-now decision is preceded by a CoT shift from strategic to urgency framing - the same within-run drift toward a terminal move that the exploration->exploitation decline describes, on the market axis"
+    },
+    {
+      "id": "edge_double_auction_constrains_epistemic_market",
+      "source": "concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer",
+      "target": "concept_epistemic_market_orchestration_organises_agents_around_claims_not_messages",
+      "type": "constrains",
+      "description": "an epistemic market organised around claims and forecasts still relies on a clearing mechanism; if LLM agents do not converge in a plain double auction, a claims market needs to show its own clearing converges rather than assume it"
     }
   ]
 }
