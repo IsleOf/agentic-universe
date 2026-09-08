@@ -11604,6 +11604,32 @@
         "tools/cohort_monitor.py",
         "https://arxiv.org/abs/2609.01873"
       ]
+    },
+    {
+      "id": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "label": "The noise-margin instrument added in run 385 to catch a hidden parameter dependence had two of its own within one run: it assumed a benign signal level nobody checked, and it measured a threshold the decision did not use",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:monitoring",
+      "confidence": 0.9,
+      "description": "Run 386, auditing executor_pool at the pool sizes that break the monitor watching it. Run 385 found artifact_cohort_monitor's abort threshold was implicitly a function of pool size, and fixed it by ADDING AN INSTRUMENT - noise_margin_sigma - that reports how many SDs of the benign sum the threshold sits above. That instrument shipped with two hidden parameter dependences of exactly the kind it existed to expose. DEFECT 1, THE ASSUMED CORPUS. noise_margin_sigma is computed from benign_signal_mean, a constructor constant defaulting to 0.05. executor_pool's workers emit 0.02. So on a 20-worker all-benign round the margin reported -0.37 and threshold_below_noise_floor=True while the actual cohort score was 0.40, under half the 0.9 threshold. The instrument cried wolf at k=20 when the component's real ceiling was k=45. It was measuring an assumption, and it never said so. DEFECT 2, THE WRONG LINE. noise_margin_sigma measured against self.cohort_threshold while round_verdict() gated on effective_threshold(). With run 385's adaptive threshold enabled - the fix for defect 1 of the previous run - the margin reported 'below the noise floor' at k=50 and k=100 while the real gate sat a full 3 sigma clear. An instrument measuring a different quantity than the one the decision uses. THE PATTERN, and this is why it is a node rather than two commits. Run 385 fixed a threshold with a hidden parameter dependence and, in the same file, in the same run, introduced an instrument with a hidden parameter dependence. Then the fix for THAT introduced a third. Three instances across two runs, each the same shape: a quantity computed from a constant that the surrounding system had already moved. This is the wiring-recreates-the-bug pattern and the instance-not-the-class pattern arriving together, and the reason it keeps happening is structural - each fix adds a new derived quantity, and a new derived quantity is a new place for an assumption to hide. THE FIX AS APPLIED. Defect 2 is a real fix: measure the line the decision uses, which also yields a self-consistency property - with the adaptive threshold on, the margin returns adaptive_z exactly, and a selftest pins that. Defect 1 CANNOT be fixed the obvious way. This class cannot estimate the benign floor from the signals it sees, because separating benign from attack signal is the thing it is trying to do; the median is contaminated by design under the fragmentation threat model, where k/2 attackers move it. So the median is used ONLY to detect DISAGREEMENT with the assumption, never to replace it, and a margin whose assumption the observations contradict is reported as UNVALIDATED rather than as a number. An instrument that cannot measure its own precondition should say so, not substitute a worse estimate and stay quiet. AT THE POOL LEVEL: executor_pool still REFUSES a round when the monitor aborts - not accepting on absent evidence is the safe side and that does not change. What changed is that it now reports decision_basis 'evidence' vs 'unreliable_monitor', because rejecting for a reason and rejecting because the instrument is out of range are different events, and conflating them is how the k>=20 false abort would have been read as a caught attack.",
+      "tags": [
+        "instrument-decay",
+        "self-audit",
+        "cohort-monitoring",
+        "executor-pool",
+        "hidden-parameter-dependence",
+        "assumption-vs-observation",
+        "instrument-cannot-measure-its-own-precondition",
+        "recursive-defect"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/cohort_monitor.py",
+        "tools/executor_pool.py"
+      ]
     }
   ],
   "edges": [
@@ -27964,6 +27990,48 @@
       "target": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
       "type": "supports",
       "description": "same structural cause: a component whose output is always well-formed cannot signal that its own preconditions have left the range it was built for. There the fallback bucket widened silently; here the threshold fell below the noise floor silently. Both need a guard asserting the precondition, not a check on the output"
+    },
+    {
+      "id": "edge_recursive_defect_refines_ceiling",
+      "source": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "target": "concept_an_absolute_threshold_on_a_pool_sized_sum_has_an_undocumented_ceiling_where_noise_wears_the_costume_of_the_attack",
+      "type": "refines",
+      "description": "the direct sequel: run 385 fixed that threshold by adding a margin instrument, and this is what the margin instrument turned out to be. Two hidden parameter dependences in the fix for one"
+    },
+    {
+      "id": "edge_recursive_defect_instantiates_corpus",
+      "source": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "target": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "type": "instantiates",
+      "description": "the margin measured an assumed benign signal level and reported the result as though it had observed one. The cure applied is precisely this node's - declare the corpus: the verdict now carries assumed_benign_mean beside observed_median_signal and labels the margin UNVALIDATED when they disagree"
+    },
+    {
+      "id": "edge_recursive_defect_extends_wiring",
+      "source": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "target": "concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere",
+      "type": "extends",
+      "description": "same shape at shorter range. There the bug was recreated one run later in another component; here it was recreated in the SAME FILE within the SAME RUN, by the fix itself - and then once more by the fix for that"
+    },
+    {
+      "id": "edge_recursive_defect_supports_instance_class",
+      "source": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "target": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "type": "supports",
+      "description": "each fix addressed its instance and left the class - 'a quantity computed from a constant the surrounding system has already moved' - untouched, which is why the third instance appeared immediately after the second"
+    },
+    {
+      "id": "edge_recursive_defect_detects_cohort_monitor",
+      "source": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "target": "artifact_cohort_monitor",
+      "type": "detects",
+      "description": "both defects live in this component's own instrumentation, added the previous run"
+    },
+    {
+      "id": "edge_recursive_defect_constrains_executor_pool",
+      "source": "concept_the_instrument_added_to_catch_a_miscalibration_was_itself_miscalibrated_twice_in_one_run",
+      "target": "decision_v2_4_executor_pool_collective_module_spec",
+      "type": "constrains",
+      "description": "the pool inherits the monitor's calibrated range: with the default monitor an all-benign 50-worker round is refused. It still refuses - safe side - but now reports decision_basis 'unreliable_monitor' instead of presenting it as a detection"
     }
   ]
 }

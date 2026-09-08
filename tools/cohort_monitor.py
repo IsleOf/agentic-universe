@@ -95,6 +95,29 @@ scales the line as k*mean + z*sd*sqrt(k*design_effect), which is the same z-gate
 margin was already measuring - derived from the noise model rather than guessed, and
 off by default.
 
+THE MARGIN'S OWN HIDDEN PARAMETER (run 386, found one run after adding the margin).
+`noise_margin_sigma` is computed from `benign_signal_mean`, a CONSTRUCTOR CONSTANT. Run
+385 fixed a threshold that was implicitly a function of pool size by measuring the
+margin - and the margin is implicitly a function of an assumed benign signal level that
+nobody checks against what the pool actually emits. executor_pool's workers emit 0.02;
+this class assumes 0.05. So at k=20 the margin reported -0.37 and "below noise floor"
+while the real cohort score was 0.40, less than half the threshold. The instrument that
+was added to catch a miscalibration was itself miscalibrated, in the same way, one run
+later.
+
+The cure is the one concept_an_instrument_must_declare_which_corpus_it_measured already
+states: an instrument must say what it measured. The verdict now carries
+`assumed_benign_mean` beside `observed_median_signal`, and sets `noise_model_mismatch`
+when they diverge materially. A margin computed from an assumption that the observations
+contradict is reported as UNVALIDATED rather than as a number.
+
+Note what cannot be fixed here: this class cannot estimate the benign floor from the
+signals it sees, because separating benign from attack signal is the very thing it is
+trying to do. The median is a contaminated estimator under the fragmentation threat
+model - k/2 attackers move it. So the median is used only to DETECT DISAGREEMENT with
+the assumption, never to replace it. An instrument that cannot measure its own
+precondition should say so, not substitute a worse estimate and stay quiet.
+
 DELIBERATELY NOT CHANGED: the abort logic. This is a safety component and silently
 moving its decision boundary on the strength of a plugged-in literature constant would
 be the wrong kind of confident. `signal_correlation` defaults to 0.0, which reproduces
@@ -148,6 +171,29 @@ class CohortMonitor:
             return 1.0
         return 1.0 + (k - 1) * self.signal_correlation
 
+    def observed_median_signal(self):
+        """Median of this round's per-worker signals, or None when the round is empty.
+        Used ONLY to detect disagreement with `benign_signal_mean` - never to replace it.
+        Under the fragmentation threat model this estimator is contaminated by design:
+        k/2 attackers move the median, which is exactly the case the monitor exists for."""
+        vals = sorted(self._round.values())
+        if not vals:
+            return None
+        mid = len(vals) // 2
+        med = vals[mid] if len(vals) % 2 else (vals[mid - 1] + vals[mid]) / 2.0
+        return round(med, 4)
+
+    def noise_model_mismatch(self):
+        """True when the observed median is far enough from the assumed benign mean that
+        `noise_margin_sigma` should not be read as a measurement. 'Far enough' is a factor
+        of two in either direction - chosen because the margin scales with the assumed
+        mean, so a 2x error in the mean is roughly a 2x error in the reported headroom."""
+        med = self.observed_median_signal()
+        if med is None or self.benign_signal_mean <= 0:
+            return False
+        r = med / self.benign_signal_mean
+        return r > 2.0 or r < 0.5
+
     def noise_margin_sigma(self, k=None):
         """How many SDs of the BENIGN cohort sum the abort threshold sits above that
         sum's mean. This is the number the fixed threshold was implicitly asserting and
@@ -160,7 +206,14 @@ class CohortMonitor:
         sd = self.benign_signal_sd * ((k * self.design_effect(k)) ** 0.5)
         if sd <= 0:
             return None
-        return round((self.cohort_threshold - k * self.benign_signal_mean) / sd, 2)
+        # Run 386: measure against the line ACTUALLY APPLIED, not the fixed constant.
+        # The first version used self.cohort_threshold while round_verdict() gated on
+        # effective_threshold(), so with adaptive_threshold on it reported "below the
+        # noise floor" at k=50 while the real gate sat 3 sigma clear. An instrument that
+        # measures a different quantity than the one the decision uses is the same class
+        # of defect this margin was added to catch - third instance in three runs.
+        # Self-consistency: with adaptive_threshold on this returns adaptive_z exactly.
+        return round((self.effective_threshold(k) - k * self.benign_signal_mean) / sd, 2)
 
     def effective_threshold(self, k=None):
         """The cohort line actually applied. Fixed by default; when `adaptive_threshold`
@@ -192,6 +245,7 @@ class CohortMonitor:
             reasons.append(f"smoothed cohort score {prov_ewma} > {self.ewma_threshold} "
                            f"(slow-burn across {self.rounds_seen + 1} rounds)")
         margin = self.noise_margin_sigma()
+        mismatch = self.noise_model_mismatch()
         # The threshold has fallen to or below the pool's own benign floor. Any abort
         # from here is noise wearing the costume of a distributed attack.
         below_floor = margin is not None and margin <= 0
@@ -216,7 +270,14 @@ class CohortMonitor:
             "margin_warning": margin_warning,
             "effective_threshold": self.effective_threshold(),
             "threshold_below_noise_floor": below_floor,
+            "assumed_benign_mean": self.benign_signal_mean,
+            "observed_median_signal": self.observed_median_signal(),
+            "noise_model_mismatch": mismatch,
             "margin_note": (
+                f"UNVALIDATED: margin assumes a benign per-worker signal of "
+                f"{self.benign_signal_mean} but this round's median is "
+                f"{self.observed_median_signal()}; the margin below is computed from the "
+                f"assumption, not from these observations" if mismatch else
                 f"threshold {self.cohort_threshold} sits {margin} SD above the benign "
                 f"{len(self._round)}-worker sum at rho={self.signal_correlation}"
                 + (" — thin; the threshold was calibrated against an independence "
@@ -236,6 +297,13 @@ class CohortMonitor:
         cohort signals accumulate for the human monitor."""
         return (f"cohort monitor: {self.rounds_seen} rounds, smoothed score {self.ewma}"
                 + (f" (>{self.ewma_threshold} — WATCH)" if self.ewma > self.ewma_threshold else ""))
+
+
+def _fill(monitor, k, signal):
+    """Observe `k` workers at one signal level. Selftest helper."""
+    for i in range(k):
+        monitor.observe(f"w{i}", signal)
+    return monitor
 
 
 def _selftest():
@@ -364,6 +432,43 @@ def _selftest():
         > CohortMonitor(adaptive_threshold=True).effective_threshold(6))
     checks["adaptive off by default: effective_threshold == cohort_threshold"] = (
         _benign(6)["effective_threshold"] == CohortMonitor().cohort_threshold)
+
+    # 11. run 386: the margin must declare the corpus it assumed
+    m = CohortMonitor()                      # assumes 0.05
+    for i in range(20):
+        m.observe(f"w{i}", 0.02)             # what executor_pool's workers actually emit
+    v = m.round_verdict()
+    checks["a benign-mean mismatch is detected"] = v["noise_model_mismatch"]
+    checks["the verdict reports assumed AND observed, not just the margin"] = (
+        v["assumed_benign_mean"] == 0.05 and v["observed_median_signal"] == 0.02)
+    checks["a mismatched margin is labelled UNVALIDATED"] = (
+        "UNVALIDATED" in v["margin_note"])
+    checks["REGRESSION: the k=20 margin was -0.37 while the real score was 0.40"] = (
+        v["cohort_score"] < v["effective_threshold"] and v["noise_margin_sigma"] < 0)
+    m2 = CohortMonitor(benign_signal_mean=0.02)
+    for i in range(20):
+        m2.observe(f"w{i}", 0.02)
+    v2 = m2.round_verdict()
+    checks["...and a correctly-stated benign mean clears the mismatch"] = (
+        not v2["noise_model_mismatch"] and "UNVALIDATED" not in v2["margin_note"])
+    checks["a matching noise model gives a margin that agrees with the score"] = (
+        v2["noise_margin_sigma"] > 0)
+    checks["empty round -> no median invented"] = (
+        CohortMonitor().observed_median_signal() is None)
+
+    # 12. run 386: the margin measures the line the decision actually uses
+    m = CohortMonitor(benign_signal_mean=0.02, adaptive_threshold=True, adaptive_z=3.0)
+    for i in range(50):
+        m.observe(f"w{i}", 0.02)
+    v = m.round_verdict()
+    checks["the margin measures effective_threshold, not the fixed constant"] = (
+        v["noise_margin_sigma"] == 3.0)
+    checks["...so a correctly-configured pool is clear at k=50, not 'below the floor'"] = (
+        not v["abort"] and not v["threshold_below_noise_floor"])
+    checks["REGRESSION: adaptive threshold at k=100 stays z sigma clear"] = (
+        (lambda mm: mm.round_verdict()["noise_margin_sigma"])(
+            _fill(CohortMonitor(benign_signal_mean=0.02, adaptive_threshold=True), 100, 0.02))
+        == 3.0)
 
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")

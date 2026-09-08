@@ -150,6 +150,22 @@ class ExecutorPool:
         v = self.monitor.round_verdict()
         v["patches"] = {wid: rec["task"] for wid, rec in self._patches.items()}
         v["accept_round"] = not v["abort"]
+        # Run 386. A round is still REFUSED when the monitor aborts - not accepting on
+        # absent evidence is the safe side and that does not change. What changes is that
+        # the pool no longer presents an unreliable abort as though it were a detection.
+        # Rejecting for a good reason and rejecting because the instrument is out of range
+        # are different events for whoever reads this, and conflating them is how run 385's
+        # k>=20 false abort would have been read as a caught attack.
+        unreliable = bool(v.get("threshold_below_noise_floor")
+                          or v.get("noise_model_mismatch"))
+        v["decision_basis"] = ("evidence" if not unreliable
+                               else "unreliable_monitor")
+        v["pool_size"] = len(self._patches)
+        if unreliable and v["abort"]:
+            v["accept_round_caveat"] = (
+                f"round refused, but the cohort monitor is out of its calibrated range at "
+                f"k={len(self._patches)} — treat this as INDETERMINATE, not as evidence of "
+                f"coordination")
         return v
 
     def end_round(self):

@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 391 nodes, 1580 edges · **Date:** 2026-09-05
+**Graph at generation:** 392 nodes, 1586 edges · **Date:** 2026-09-05
 
 ## How to read this
 
