@@ -398,7 +398,14 @@ def status_line(local_summary=None, metrics=None):
     gd_str = (f"graph +{gd['nodes']}n/+{gd['edges']}e" if gd else "graph +0")
     cites = ls.get("citations") or []
     nv = sum(1 for c in cites if c.get("verified"))
-    vf = m.get("verified_citation_fraction")
+    # Prefer the LIVE verified fraction (run 367). Run 366 added it but left the
+    # status line rendering the history-blended value, so the very display that
+    # made the staleness visible ("verified-frac 0.774" identical for ~30 runs)
+    # kept showing the stale number after the fix. Fall back to the blended value
+    # only when there is no live corpus.
+    vf = m.get("verified_citation_fraction_live")
+    if vf is None:
+        vf = m.get("verified_citation_fraction")
     parts = [
         f"run {ls.get('run', '?')} {light}",
         "VALID" if ls.get("trace_valid", True) else "TRACE-INVALID",

@@ -1,0 +1,23 @@
+{
+  "run": 367,
+  "increment": "test the run-366 prediction by auditing janitor views and finding three more - two were incomplete prior fixes (a second undrifted classifier at 14.8 pct other, and status_line still rendering the stale verified-frac) plus a vacuous pass: the bank-staleness view reported healthy on an empty bank",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 6
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-367.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 367 OK · VALID · graph +2n/+6e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.92 · novelty 1.00"
+}

@@ -11084,6 +11084,62 @@
       "evidence_links": [
         "tools/loop_metrics.py"
       ]
+    },
+    {
+      "id": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "label": "Runs 365 and 366 each fixed one instance of a bug that had two: 365 refreshed one of the loop's TWO increment classifiers, 366 computed a live metric but left the status line rendering the stale one - the fix must reach the class and the display, not just the case that was noticed",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:observability",
+      "confidence": 0.7,
+      "description": "Run 367 predicted, out loud in run 366, that janitor's views and the acceptance-gate scores would not be clean on a 3-in-3 base rate, then tested the prediction. Three more findings, and the interesting part is that two of them were INCOMPLETE PRIOR FIXES rather than fresh bugs. (1) TWO CLASSIFIERS, ONE FIXED. The loop classifies its own increments twice - skill_induction.TASK_CLASSES and janitor._KIND_HINTS - over the same text, drifting independently. Run 365 refreshed the first and left the second at 14.8% 'other'. The run-365 lesson ('a classifier with a fallback bucket hides its own drift') was applied to the instance that produced it, not to the class of instruments it named. Fixed: janitor vocabulary refreshed to 7.4% 'other' and given the same fallback-rate build guard. (2) THE FIX THAT DID NOT REACH THE DISPLAY. Run 366 added verified_citation_fraction_live (0.92) beside the history-blended value (0.774), but left status_line rendering the blended one - so the very display whose frozen constant made the staleness noticeable kept printing the stale number after the fix. Fixed: status_line prefers the live value, falling back only when there is no live corpus. GENERAL SHAPE: a fix lands where attention was, which is the instance and the computation. It does not automatically reach the sibling instrument or the surface the reader actually looks at. Two questions worth asking of any instrument fix: does another instrument do the same job, and does the thing people READ now show the corrected value?",
+      "tags": [
+        "incomplete-fix",
+        "instrument-decay",
+        "self-observability",
+        "duplicate-instruments",
+        "display-vs-computation",
+        "found-in-own-loop",
+        "prediction-tested"
+      ],
+      "derived_from": [
+        "tools/janitor.py",
+        "tools/loop_metrics.py",
+        "tools/skill_induction.py"
+      ],
+      "evidence_links": [
+        "tools/janitor.py"
+      ]
+    },
+    {
+      "id": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "label": "The experience bank has held 0 entries for 366 runs and the staleness view reported 'None - all entries carry a current manifest' - a clean bill of health for a subject that does not exist",
+      "type": "bug",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:observability",
+      "confidence": 0.85,
+      "description": "Run 367. janitor's bank_staleness view computed `stale = bank.stale(manifest)` and rendered an empty list as 'None - all entries carry a current manifest'. The experience bank in fact holds 0 workflow and 0 step entries: the check passed because there was nothing to check. Of the four instrument failures found in runs 361-367 this is the purest - the others returned a plausible number, this one returned an explicit clean bill of health. TWO SEPARATE PROBLEMS, and only the first is fixed. (a) THE VIEW lied by omission; now it distinguishes EMPTY from CLEAN and says so in bold, with a selftest guard. (b) THE BANK IS ACTUALLY EMPTY, which is a real project finding and is NOT fixed. Phase 2 condensation (experience_bank.condense over run traces) is not running in the live loop - it exists, it is selftested against a synthetic corpus, and nothing calls it on real runs. Consequences: pattern_experience_bank and concept_cer_training_free_experience_replay_works have no live instantiation; the run-357 bounded top_k retrieval fix and the run-175 utility-weighted retention API are both real code operating on an empty store; and concept_unmanaged_skill_libraries_silently_drift cannot be observed here because there is no library. The graph has carried artifact_phase2_experience_bank as a built component throughout. It IS built - it is simply not wired to anything that feeds it.",
+      "tags": [
+        "vacuous-pass",
+        "empty-subject",
+        "experience-bank",
+        "phase-2",
+        "not-wired",
+        "found-in-own-loop",
+        "open-problem"
+      ],
+      "derived_from": [
+        "tools/janitor.py",
+        "tools/experience_bank.py",
+        "runtime/observations/loop_runs/ (366 runs, bank stats 0/0)"
+      ],
+      "evidence_links": [
+        "tools/janitor.py"
+      ]
     }
   ],
   "edges": [
@@ -26940,6 +26996,48 @@
       "target": "artifact_loop_metrics_phase3_real",
       "type": "grounds",
       "description": "the run-366 provenance map, live counterparts and selftest contract are this concept applied to the metrics layer that revealed it"
+    },
+    {
+      "id": "edge_incomplete_fix_extends_provenance",
+      "source": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "target": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "type": "extends",
+      "description": "run 366 named the contract but its own fix stopped short of the display; this is that gap generalised"
+    },
+    {
+      "id": "edge_incomplete_fix_refines_classifier_drift",
+      "source": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "target": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
+      "type": "refines",
+      "description": "the run-365 lesson was applied to the classifier that produced it and not to the loop's second classifier doing the same job"
+    },
+    {
+      "id": "edge_incomplete_fix_grounds_janitor",
+      "source": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "target": "artifact_janitor",
+      "type": "grounds",
+      "description": "janitor's _KIND_HINTS refresh plus its new fallback-rate guard"
+    },
+    {
+      "id": "edge_vacuous_pass_extends_incomplete_fix",
+      "source": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "target": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "type": "extends",
+      "description": "same audit, distinct failure: not an incomplete fix but a check that passes because its subject is absent"
+    },
+    {
+      "id": "edge_vacuous_pass_challenges_experience_bank",
+      "source": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "target": "artifact_phase2_experience_bank",
+      "type": "challenges",
+      "description": "the component is built and selftested but has never held a live entry - Phase 2 condensation is not wired into the running loop"
+    },
+    {
+      "id": "edge_vacuous_pass_constrains_janitor",
+      "source": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+      "target": "artifact_janitor",
+      "type": "constrains",
+      "description": "a view must distinguish an empty subject from a healthy one; guarded in the selftest"
     }
   ]
 }

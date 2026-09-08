@@ -27,12 +27,24 @@ RUNS_DIR = ROOT / "runtime" / "observations" / "loop_runs"
 VIEWS_DIR = ROOT / "runtime" / "observations" / "views"
 
 # increment-kind classifier (mirrors loop_conductor.pick_increment's vocabulary)
+# Vocabulary refreshed run 367. This is the loop's SECOND increment classifier -
+# skill_induction.TASK_CLASSES is the other - and run 365 refreshed only that one,
+# so this one kept drifting unnoticed at 14.8% "other". Two classifiers over the
+# same text, drifting independently, is itself the finding: the fix in 365 was
+# applied to an instance rather than to the class.
 _KIND_HINTS = (
     ("fold", ("fold ", "folded", "citation sweep", "literature")),
-    ("build", ("build", "built ", "tools/", "skeleton", "wired", ".py -")),
-    ("consistency", ("consistency pass", "adversarial pass", "integrate", "reconcile", "orientation refresh")),
-    ("doc", ("refresh", "snapshot", "handoff", "readme", "sweep doc", "audit")),
-    ("probe", ("dry-ran", "dry-run", "probe ", "sweep end to end")),
+    ("build", ("build", "built ", "tools/", "skeleton", "wired", ".py -",
+               # run 367
+               "wire ", "fix ", "add ", "harden", ".py", "seam", "adapter", "guard")),
+    ("consistency", ("consistency pass", "adversarial pass", "integrate", "reconcile",
+                     "orientation refresh",
+                     # run 367
+                     "re-rank", "severity", "verification pass", "audit every", "coverage pass")),
+    ("doc", ("refresh", "snapshot", "handoff", "readme", "sweep doc", "audit",
+             # run 367
+             "spec ", "prompt", "coordination")),
+    ("probe", ("dry-ran", "dry-run", "probe ", "sweep end to end", "probe_")),
     ("deepen", ("deepen", "grounded", "citation sweep on")),
 )
 
@@ -159,9 +171,22 @@ def stale_bank_flags() -> str:
         from experience_bank import ExperienceBank
         from harness_registry import Registry
         bank = ExperienceBank()
+        # An empty bank produces an empty stale list, which used to render as
+        # "None - all entries carry a current manifest" - a clean bill of health for
+        # a subject that does not exist. Run 367 found the bank at 0 workflow / 0 step
+        # entries after 366 runs, reported as healthy. Distinguish EMPTY from CLEAN:
+        # a vacuous pass is the most confident-looking failure an instrument has.
+        stats = bank.stats()
+        if not sum(stats.values()):
+            return ("# Experience-bank staleness\n\n"
+                    "**EMPTY — nothing to check.** The bank holds 0 workflow and 0 step "
+                    "entries, so a staleness check is vacuous. This is not a clean bill of "
+                    "health: Phase 2 condensation is not running, and `experience_bank`'s "
+                    "retrieval work (bounded `top_k`, run 357) is currently unexercised.\n")
         stale = bank.stale(Registry().manifest())
         if not stale:
-            return "# Experience-bank staleness\n\nNone — all entries carry a current manifest.\n"
+            return (f"# Experience-bank staleness\n\nNone — all "
+                    f"{sum(stats.values())} entries carry a current manifest.\n")
         return "# Experience-bank staleness\n\n" + "\n".join(
             f"- `{s}` — re-verify before reuse" for s in stale) + "\n"
     except Exception as e:                     # pragma: no cover - defensive
@@ -225,6 +250,23 @@ def _selftest():
         "human_monitor.md", "agent_context.md", "drift_report.md", "bank_staleness.md"}
     checks["run() reports the span"] = res["span"] == (1, 9)
     checks["janitor writes, never deletes"] = not any(p.name.startswith("run-") for p in (tmp / "views").iterdir())
+
+    # Classifier-drift guard (run 367), mirroring the one skill_induction got in
+    # run 365. This is the loop's SECOND increment classifier; run 365 fixed only
+    # the first, and this one kept drifting to 14.8% "other" unnoticed. Applying a
+    # fix to one instance of a class and not the other is the mistake being
+    # guarded against here as much as the drift itself.
+    live = load_runs()
+    if len(live) >= 50:
+        rate = sum(1 for r in live if classify(r.get("increment") or "") == "other") / len(live)
+        checks[f"_KIND_HINTS still fits the run corpus (other={rate:.1%}, cap 15%)"] = rate <= 0.15
+    else:
+        checks["classifier-drift guard skipped (corpus < 50 runs)"] = True
+
+    # Vacuity guard: an empty subject must not render as a clean bill of health.
+    _flags = stale_bank_flags()
+    checks["bank-staleness view distinguishes EMPTY from CLEAN"] = (
+        "EMPTY" in _flags or "entries carry a current manifest" in _flags)
 
     import shutil
     shutil.rmtree(tmp, ignore_errors=True)
