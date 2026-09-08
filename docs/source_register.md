@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 370 nodes, 1502 edges · **Date:** 2026-09-05
+**Graph at generation:** 377 nodes, 1528 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -356,6 +356,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2607.07368 — `artifact_cohort_monitor`, `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it` +1
 - https://arxiv.org/abs/2608.20099 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
+- https://arxiv.org/abs/2609.01056 — `concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation`
 - https://arxiv.org/html/2604.21590v1 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
@@ -368,20 +369,25 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - revised auto run 6 (2026-09-08): topology starts closed, opens under observation — `approach_nourishing_harness`
 - run 27 audit: triangulated by concept_reused_input_dominates (96%), concept_tool_definition_tax (~55k), concept_compaction_cliff, and the Agent Zero / Hermes convergence on token cost as first-class UI — `concept_context_economics`
 - runtime/harness/context/loop_policy.history.json — `artifact_phase3_first_closed_loop`
+- runtime/observations/certificates/gate_certificates.jsonl (183 entries) — `concept_the_acceptance_gate_logged_only_its_accepts_so_its_audit_trail_could_not_answer_the_question_it_existed_for`
 - runtime/observations/loop_history_summary.json — `artifact_loop_adapter_real_trace`, `artifact_loop_metrics_phase3_real`
 - runtime/observations/loop_runs/ (295 runs classified) — `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
+- runtime/observations/loop_runs/ (296 runs classified) — `concept_a_classifier_that_always_returns_something_hides_its_own_drift`
+- runtime/observations/loop_runs/ (297 live runs vs a 56-run replay) — `concept_an_instrument_must_declare_which_corpus_it_measured`
+- runtime/observations/loop_runs/ (366 runs, bank stats 0/0) — `concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has`
 - runtime/observations/loop_runs/run-334..360 — `concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric`
 - runtime/observations/loop_runs/run-67.json — `artifact_loop_session_live_recording`
 - same sweep: no verifiable mechanism work since the run-5 sources (Sophia, Tao of Agency, Learnable Novelty - all position/framework). The field is investing in supervised curriculum generation, not intrinsic drive. — `concept_intrinsic_motivation`
 - seed graph 2026-09-01 (foundational concept, not a literature fold) — `concept_agent_os_desktop_shell`, `concept_memory_and_learning`, `concept_swarm_decentralized_coordination` +5
 - synthesis of concept_mast_multi_agent_failure_taxonomy, concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding, concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery, concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response, concept_epistemic_sybil_collapse (run 218) — `concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic`
 - targeted sweep 2026-09-15 (intrinsic-motivation / curiosity / autotelic / open-ended, cs.AI+cs.LG, Aug-Sep 2026): the recent field has almost nothing on genuine self-generated-goal mechanisms in LLM agents. The adjacent work (ARISE-RL 2609.01058 rubric-mediated task co-evolution; 2608.31075 self-generated curricula) is task/curriculum GENERATION driven by an external objective, not curiosity or intrinsic goals. Stays speculative - under-evidenced by the field, not only by this project. Raises the value of the idle-agent probe as a field-level datapoint. — `concept_autotelic_agency`
+- tools/acceptance_gate.py — `concept_the_acceptance_gate_logged_only_its_accepts_so_its_audit_trail_could_not_answer_the_question_it_existed_for`
 - tools/call_model.py — `artifact_call_model_seam`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/cohort_monitor.py — `artifact_cohort_monitor`
 - tools/epistemic_constitution.py — `artifact_epistemic_constitution_harness`
 - tools/exec_guard.py — `artifact_gate_the_gate_self_design_ack`, `artifact_phase5_exec_guard`
 - tools/executor_pool.py — `artifact_executor_pool_skeleton`
-- tools/experience_bank.py — `artifact_phase2_experience_bank`, `pattern_memory_writes_pass_a_deterministic_risk_gate`
+- tools/experience_bank.py — `artifact_phase2_experience_bank`, `concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has`, `concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere` +1
 - tools/fractal_flock.py — `artifact_fractal_flock_harness`
 - tools/fs_sandbox.py — `artifact_fs_sandbox`
 - tools/harness_registry.py — `artifact_conductor_blessed_manifest_preflight`, `artifact_phase1_harness_registry`
@@ -389,12 +395,12 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/holdout_verifier2.py — `artifact_phase3_heterogeneous_verifier`
 - tools/improvement_loop.py — `artifact_phase3_improvement_loop`
 - tools/improvement_loop.py paired_eprocess (run 220) - advisory anytime-valid paired commit gate — `concept_the_acceptor_not_the_proposer_is_the_weak_point_of_self_evolution`
-- tools/janitor.py — `artifact_janitor`
+- tools/janitor.py — `artifact_janitor`, `concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched`, `concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has`
 - tools/loop_adapter.py — `artifact_loop_adapter_real_trace`
 - tools/loop_conductor.py — `artifact_conductor_blessed_manifest_preflight`
-- tools/loop_metrics.py — `artifact_loop_metrics_phase3_real`
+- tools/loop_metrics.py — `artifact_loop_metrics_phase3_real`, `concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched`, `concept_an_instrument_must_declare_which_corpus_it_measured`
 - tools/loop_proposer.py — `artifact_phase3_proposer_context`, `concept_all_five_v2_probe_adapters_are_live_wired`
-- tools/loop_session.py — `artifact_loop_session_live_recording`, `concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric`
+- tools/loop_session.py — `artifact_loop_session_live_recording`, `concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric`, `concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere`
 - tools/phase0_selftest.py — `artifact_phase0_trace_substrate`
 - tools/probe_activation_generalisation.py — `artifact_probe_activation_generalisation_rig`
 - tools/probe_adversarial_collaboration.py — `artifact_probe_adversarial_collaboration_rig`
@@ -415,7 +421,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_trust_transfer.py — `artifact_probe_trust_transfer_rig`
 - tools/probe_trust_weighted_voting.py — `artifact_probe_trust_weighted_voting_rig`
 - tools/research_worker.py — `artifact_research_worker`
-- tools/skill_induction.py — `artifact_phase4_skill_induction`
+- tools/skill_induction.py — `artifact_phase4_skill_induction`, `concept_a_classifier_that_always_returns_something_hides_its_own_drift`, `concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched`
 - tools/supervisor.py (run 250) — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
 - tools/task_ledger.py (run 244) — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - tools/topology_recover.py — `artifact_phase0_trace_substrate`
@@ -601,7 +607,7 @@ Nodes derived from this repository's own documents and conversation archives.
 - `docs/research_operating_plan.md: pass/fail must be computed, never judged by a model` — `concept_work_substitution_frontier`
 - `docs/research_operating_plan.md: the bottleneck is verification capacity` — `concept_verification_is_the_binding_constraint`
 - `docs/self_rebuild_v2.md` — `artifact_acceptance_gate`, `artifact_cohort_monitor`, `artifact_conductor_blessed_manifest_preflight` +8
-- `docs/what_would_make_this_wrong.md` — `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
+- `docs/what_would_make_this_wrong.md` — `concept_a_classifier_that_always_returns_something_hides_its_own_drift`, `concept_the_elicitation_capability_line_may_not_put_this_projects_own_work_where_the_posture_claims`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research)` — `approach_agent_habitat`, `concept_autotelic_agency`, `emergent_evaluator_mode_collapse` +3
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (Perplexity deep research) - autotelic AI, learnable novelty, Sophia internal reward generator` — `concept_intrinsic_motivation`
 - `knowledge/notes/2026-09-04-creativity-diversity-mitigation.md (owner's Perplexity deep-research, origin/main) - source` — `concept_human_effort_shifts_from_ideating_to_verifying_and_ownership_is_negotiated`, `concept_llm_steering_has_four_control_surfaces_input_structural_state_output`

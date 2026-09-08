@@ -289,6 +289,24 @@ not as "the best news in this document".
 
 ## 7. Every empirical claim in the graph may be language-parochial (added run 47)
 
+**Update (run 370) — §7 gets its first hard number, 323 runs after it was written.**
+`concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation`
+(WorldBench, `2609.01056`, VERIFIED): 1,600 persona-grounded workflow tasks across **seven
+languages and eight cultures**, built by *localisation* (native tasks, human annotators with
+language- and culture-specific expertise) rather than translation. **Frontier models reach
+49.2% Constrained Task Success.** That is not a rounding error on the English results this
+entire graph is built from, and §7 has sat last-ranked and untouched since run 47 partly
+because nothing had ever put a figure on it.
+
+**The larger finding in that paper is not about language at all**, and it lands on §2 rather
+than §7: *every* model showed a large gap between **correctness** and **environment
+preservation**. CTS scores task completion *and minimal modification*. This project's
+`pattern_grounded_acceptance_only` scores whether an edit **helps**; it does not score what
+the edit **disturbed**. An edit that improves the held-out score while touching things it had
+no business touching passes this gate and fails theirs. `fs_sandbox.escape_report` is the
+closest existing instrument and it measures attempted *escapes*, not collateral modification
+*inside* the jail. That is an unguarded axis, and it is cheap to state and not cheap to fix.
+
 `concept_interaction_language_shifts_emergence` — the Shibboleth Effect (arXiv:2606.11082, VERIFIED) shows the
 *language of interaction* shifts model behaviour independent of content: Llama-4 under Turkish showed +0.800
 coercive rhetoric (p=.002), Gemini-3.1-Pro −0.750 (p=.005), and the direction is model-dependent, from training

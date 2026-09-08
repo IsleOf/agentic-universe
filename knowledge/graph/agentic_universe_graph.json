@@ -11193,6 +11193,34 @@
       "evidence_links": [
         "tools/loop_session.py"
       ]
+    },
+    {
+      "id": "concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation",
+      "label": "WorldBench: 1,600 localised tasks over 7 languages / 8 cultures - frontier models reach only 49.2% Constrained Task Success, and every model shows a large gap between getting the task right and leaving the environment intact",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:evaluation",
+      "confidence": 0.66,
+      "description": "arXiv:2609.01056 (Ranaldi, Shen, Kai, Birch / Edinburgh, submitted 2026-09-01, VERIFIED via abstract - inside the recency window and the most recent fold in this graph). WorldBench: 1,600 persona-grounded everyday-workflow tasks across SEVEN LANGUAGES and EIGHT CULTURES, agents acting in a sandbox via structured actions. Construction principle is LOCALISATION, not translation - filtered and refined by human annotators with language- and culture-specific expertise, so the tasks are native to each setting rather than English tasks rendered elsewhere. New metric CONSTRAINED TASK SUCCESS (CTS), which scores task completion AND minimal modification AND complementary properties, via deterministic checks plus LLM-as-Judge. HEADLINE: frontier models reach only 49.2% CTS, and ALL models show large gaps between CORRECTNESS and ENVIRONMENT PRESERVATION. Agents remain brittle in multilingual agentic scenarios, especially long-horizon and under state-preservation constraints. TWO SEPARATE THINGS THIS BEARS ON HERE. (1) The language gap: this is the first hard number against docs/what_would_make_this_wrong.md section 7 (every empirical claim in the graph may be language-parochial), which has sat last-ranked and untouched since run 47. 49.2% is not a rounding error on the English results the rest of this graph is built from. (2) The environment-preservation gap, which is arguably the bigger finding for this project and is NOT about language at all: an agent can complete a task correctly while damaging the environment it ran in, and CTS is built to catch exactly that. pattern_grounded_acceptance_only scores whether an edit helps; it does not score what the edit disturbed. fs_sandbox's escape_report is the closest thing this project has, and it measures attempted escapes, not collateral modification inside the jail. WHAT IS NOT IN THE ABSTRACT, and is deliberately excluded: a web-search summary attributed a safety finding to this paper (that agents refuse a query in English but comply when it is translated, because safety boundaries are English-calibrated). That claim does not appear in the fetched abstract and is not folded here. See the citation-hygiene edge - this is the SECOND time in nine runs that a search summary attached a plausible, specific, unverifiable claim to a real paper.",
+      "tags": [
+        "multilingual",
+        "language-parochial",
+        "worldbench",
+        "cts",
+        "environment-preservation",
+        "minimal-modification",
+        "long-horizon",
+        "localisation-not-translation",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01056"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.01056"
+      ]
     }
   ],
   "edges": [
@@ -27161,6 +27189,34 @@
       "target": "artifact_loop_session_live_recording",
       "type": "grounds",
       "description": "the condense/prune call and the bank_base override both live in _write_summary"
+    },
+    {
+      "id": "edge_worldbench_challenges_grounded_acceptance",
+      "source": "concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation",
+      "target": "pattern_grounded_acceptance_only",
+      "type": "challenges",
+      "description": "the gate scores whether an edit HELPS; CTS scores completion AND minimal modification. An edit that improves the held-out score while disturbing things it had no business touching passes this project's gate and fails WorldBench's"
+    },
+    {
+      "id": "edge_worldbench_informs_fs_sandbox",
+      "source": "concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation",
+      "target": "artifact_fs_sandbox",
+      "type": "informs",
+      "description": "escape_report measures attempted escapes from the jail; environment preservation is about collateral modification INSIDE it, which nothing here currently measures"
+    },
+    {
+      "id": "edge_worldbench_supports_geometric_decay",
+      "source": "concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation",
+      "target": "concept_geometric_reliability_decay",
+      "type": "supports",
+      "description": "brittleness concentrated in long-horizon tasks and under state-preservation constraints, now measured in seven languages rather than one"
+    },
+    {
+      "id": "edge_worldbench_instantiates_search_contamination",
+      "source": "concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation",
+      "target": "concept_search_time_contamination_inflates_agent_evals",
+      "type": "instantiates",
+      "description": "second instance in nine runs: a search summary attached a specific safety claim (English refusal vs translated compliance) to this paper that is absent from its abstract. Excluded. Two occurrences make abstract-fetching a practice rule, not a precaution"
     }
   ]
 }
