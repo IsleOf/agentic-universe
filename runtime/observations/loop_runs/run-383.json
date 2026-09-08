@@ -1,0 +1,43 @@
+{
+  "run": 383,
+  "increment": "Tested the mitigation run 382 recommended without testing. Fourth arm on probe_subagent_coordination (run_dual_extractor / dual_sweep / assess_dual), rho swept free rather than modelled as driven by adaptation. The advice is HALF right and the wrong half is the half that mattered: two independent extractors restore DETECTION (0.568 vs the unfiltered monitor's 0.417 and a single extractor's 0.330) but not CALIBRATION - confident false-cleans fall 0.652 -> 0.393 against the unfiltered monitor's ~0. The whole gain is decorrelation, not duplication: two fully coupled extractors sit at 0.603 cm / 0.377 detection, i.e. what two prompts on one base model buys is nothing. Yields a checkable REQUIREMENT rather than a mechanism claim. Method note: the first draft asserted a guessed constant (independent < single * 0.6) and went RED at 0.393 vs 0.391; the fix was structural claims - an ordering and a floor - not a looser constant. +1 node, +4 edges. arXiv:2601.21112.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2601.21112",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2601.21112",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2601.21112",
+    "src:https://arxiv.org/abs/2601.21112"
+  ],
+  "trace_file": "runtime\\traces\\loop-383.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 383 OK · VALID · graph +1n/+4e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.92 · files +1~3-0 · novelty 0.67"
+}

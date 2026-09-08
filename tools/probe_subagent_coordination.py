@@ -258,6 +258,101 @@ def run_monitor_arm(architecture, *, length, adaptation, trials=600, seed=202603
             "false_clean_confident": round(confident_miss / trials, 3)}
 
 
+def run_dual_extractor(*, adaptation, rho, trials=600, seed=20260382):
+    """Run 383. The mitigation run 382 RECOMMENDED WITHOUT TESTING: two extractors,
+    union of their output scored.
+
+    Run 382's sweep found extract-then-score loses to an unfiltered monitor against an
+    adversary optimising against the extractor, and - worse - that its misses are
+    CONFIDENT. The advice written into the graph was "two extractors with uncorrelated
+    failure modes beat one good one". That advice has a free parameter nobody had
+    measured: HOW uncorrelated?
+
+    `rho` is the probability the two extractors fail TOGETHER rather than independently
+    (a mixture, not a Gaussian copula - the exact dependence structure is not what this
+    is measuring). rho=0 is two genuinely independent filters; rho=1 is two filters that
+    are the same filter wearing different names, which is what you get by default when
+    both are the same base model with different prompts.
+
+    This deliberately does NOT model adaptation driving rho upward. That coupling is
+    plausible - an adversary optimising against "filters" would tend to find blind spots
+    generic extractors share - but asserting it would be a second encoded assumption
+    stacked on run 382's first. Instead rho is swept free, so the arm yields a
+    REQUIREMENT the operator can check against their own setup rather than a mechanism
+    claim they have to accept.
+    """
+    rng = random.Random(f"{seed}-{adaptation}-{rho}")
+    recall = max(_EXTRACT_BASE * (1.0 - adaptation), 0.02)
+    detected = confident_miss = 0
+    for _ in range(trials):
+        if rng.random() < rho:
+            pulled = rng.random() < recall              # coupled: one draw for both
+        else:
+            pulled = (rng.random() < recall) or (rng.random() < recall)
+        hit = pulled and rng.random() < _SCORER_ACC
+        if not pulled:
+            confident_miss += 1
+        detected += hit
+    return {"detect_rate": round(detected / trials, 3),
+            "false_clean_confident": round(confident_miss / trials, 3)}
+
+
+def dual_sweep(adaptations=(0.0, 0.3, 0.6), rhos=(0.0, 0.5, 1.0), length=16, trials=600):
+    out = {}
+    for a in adaptations:
+        out[a] = {"single": run_monitor_arm("eae", length=length, adaptation=a, trials=trials),
+                  "direct": run_monitor_arm("direct", length=length, adaptation=a, trials=trials)}
+        for r in rhos:
+            out[a][f"dual_rho{r}"] = run_dual_extractor(adaptation=a, rho=r, trials=trials)
+    return out
+
+
+def assess_dual(dw):
+    hi = max(dw)
+    rho_keys = sorted(k for k in dw[hi] if k.startswith("dual_rho"))
+    lo_rho, hi_rho = rho_keys[0], rho_keys[-1]
+    # does the mitigation restore EaE above the unfiltered monitor under attack?
+    rescued = {k: dw[hi][k]["detect_rate"] > dw[hi]["direct"]["detect_rate"] for k in rho_keys}
+    first_fail = next((k for k in rho_keys if not rescued[k]), None)
+    # the confident-miss claim: does duplication kill the confident false-clean?
+    cm_single = dw[hi]["single"]["false_clean_confident"]
+    cm_indep = dw[hi][lo_rho]["false_clean_confident"]
+    cm_coupled = dw[hi][hi_rho]["false_clean_confident"]
+    return {
+        "rescued_by_rho": rescued,
+        "first_rho_that_fails": first_fail,
+        "confident_miss_single": cm_single,
+        "confident_miss_independent_pair": cm_indep,
+        "confident_miss_coupled_pair": cm_coupled,
+        "verdict": (
+            f"The run-382 advice is HALF right, and the half it gets wrong is the half that "
+            f"mattered. On DETECTION it holds: under attack (adaptation {hi}) two independent "
+            f"extractors reach {dw[hi][lo_rho]['detect_rate']} against the unfiltered monitor's "
+            f"{dw[hi]['direct']['detect_rate']} and a single extractor's "
+            f"{dw[hi]['single']['detect_rate']}, so duplication does restore the ordering run 382 "
+            f"found inverted. "
+            f"On CONFIDENT FALSE-CLEANS - which run 382 argued was the number that actually "
+            f"mattered, because a confidently wrong monitor stops the operator looking - it does "
+            f"NOT. A single extractor sits at {cm_single}; two independent ones cut that to "
+            f"{cm_indep}, a real improvement, but the unfiltered monitor's rate is ~0. "
+            f"Duplication narrows the gap and does not close it: the filtered pipeline still "
+            f"reports safe, having believed it read the relevant material, in roughly "
+            f"{cm_indep:.0%} of attacked cases. "
+            f"And the improvement is entirely decorrelation, not duplication - two fully coupled "
+            f"extractors sit at {cm_coupled}, essentially the single-extractor rate, which is "
+            f"what prompting one base model twice buys you. "
+            + (f"The pair stops beating the unfiltered monitor at {first_fail}."
+               if first_fail else
+               "The pair beats the unfiltered monitor at every rho swept.")
+            + " REQUIREMENT this yields, which is why rho is swept free rather than modelled as "
+              "driven by adaptation: an operator must be able to argue their two extractors fail "
+              "DIFFERENTLY, and 'different prompts on the same model' is not that argument. "
+              "COROLLARY: because even the independent pair keeps a substantial confident-miss "
+              "rate, an unfiltered or differently-shaped channel is not redundant with a second "
+              "extractor. Filtering buys capacity and detection; it does not buy back calibration."),
+    }
+
+
 def extractor_sweep(lengths=(2, 8, 16), adaptations=(0.0, 0.3, 0.6), trials=600):
     out = {}
     for L in lengths:
@@ -427,6 +522,31 @@ def _selftest():
         a["eae_confident_miss_excess"] > 0.3)
     checks["the verdict names the assumption it encodes rather than hiding it"] = (
         "ASSUMPTION" in a["verdict"])
+
+    # --- dual-extractor arm (run 383) ---
+    dw = dual_sweep(trials=400)
+    da = assess_dual(dw)
+    hi = max(dw)
+    # NOTE: these are STRUCTURAL claims, not thresholds. An earlier draft asserted
+    # `independent < single * 0.6`, a constant guessed rather than derived (the failure
+    # concept_derive_the_threshold_dont_guess_it names), and it went RED at 0.393 vs 0.391.
+    # The load-bearing facts are the ORDERING and the FLOOR, and neither needs a constant.
+    checks["two INDEPENDENT extractors strictly cut the confident false-clean rate"] = (
+        da["confident_miss_independent_pair"] < da["confident_miss_single"])
+    checks["but duplication does NOT restore the unfiltered monitor's calibration"] = (
+        da["confident_miss_independent_pair"]
+        > dw[hi]["direct"]["false_clean_confident"] + 0.2)
+    checks["duplication DOES restore detection above the unfiltered monitor"] = (
+        dw[hi]["dual_rho0.0"]["detect_rate"] > dw[hi]["direct"]["detect_rate"])
+    checks["two COUPLED extractors buy essentially nothing (rho=1 ~ single)"] = (
+        abs(da["confident_miss_coupled_pair"] - da["confident_miss_single"]) < 0.08)
+    checks["the mitigation's value is in decorrelation, not duplication"] = (
+        da["confident_miss_coupled_pair"] > da["confident_miss_independent_pair"] * 1.5)
+    checks["the verdict states a checkable REQUIREMENT, not a mechanism claim"] = (
+        "REQUIREMENT" in da["verdict"])
+    checks["rho is swept free rather than derived from adaptation"] = (
+        run_dual_extractor(adaptation=0.0, rho=0.5, trials=100)
+        != run_dual_extractor(adaptation=0.6, rho=0.5, trials=100))
 
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")

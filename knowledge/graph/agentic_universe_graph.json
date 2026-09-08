@@ -11468,6 +11468,34 @@
       "evidence_links": [
         "tools/probe_subagent_coordination.py"
       ]
+    },
+    {
+      "id": "concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent",
+      "label": "Two extractors restore detection but NOT calibration: the confident-false-clean rate falls 0.652->0.393 against an unfiltered monitor's ~0, and only decorrelation buys even that - two prompts on one model buy nothing",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:monitoring",
+      "confidence": 0.58,
+      "description": "Run 383. Run 382 found extract-then-score loses to an unfiltered monitor against an adversary optimising against the EXTRACTOR, and that its misses are CONFIDENT false-cleans (0.652 vs ~0). It then recommended a mitigation IT DID NOT TEST: 'two extractors with uncorrelated failure modes beat one good one'. This node is the test, run 383's dual-extractor arm (run_dual_extractor / dual_sweep / assess_dual). rho is the probability the two extractors fail TOGETHER rather than independently, swept free. THE ADVICE IS HALF RIGHT, AND THE HALF IT GETS WRONG IS THE HALF THAT MATTERED. On DETECTION it holds: at adaptation 0.6 and L=16, two independent extractors reach 0.568 against the unfiltered monitor's 0.417 and a single extractor's 0.330. Duplication does restore the ordering run 382 found inverted. On CONFIDENT FALSE-CLEANS it does not. Run 382's own argument was that the confident-miss rate is the number that matters, because a confidently wrong monitor makes the operator above it stop looking. A single extractor sits at 0.652; two independent ones cut it to 0.393 - a real improvement - but the unfiltered monitor sits at ~0. Duplication NARROWS the gap and does not close it. The filtered pipeline still reports safe, having believed it read the relevant material, in roughly 39% of attacked cases. AND THE IMPROVEMENT IS ENTIRELY DECORRELATION, NOT DUPLICATION. Two fully coupled extractors (rho=1) sit at 0.603 confident-miss and 0.377 detection - within noise of the single extractor, and BELOW the unfiltered monitor. That is precisely what 'two prompts on the same base model' buys: nothing. The mitigation's entire value lives in the independence, which is the part hardest to establish and easiest to assume. THE REQUIREMENT, which is why rho is swept free rather than modelled as driven by adaptation (that coupling is plausible but asserting it would stack a second encoded assumption on run 382's first): an operator must be able to ARGUE their two extractors fail differently, and 'different prompts on the same model' is not that argument. COROLLARY, and the operational point: because even the independent pair keeps a substantial confident-miss rate, an unfiltered or differently-SHAPED channel is not redundant with a second extractor. Filtering buys capacity and detection. It does not buy back calibration. METHOD NOTE: the first version of this arm asserted 'independent < single * 0.6', a constant guessed rather than derived, and it went RED at 0.393 against a 0.391 line. The fix was not a looser constant but STRUCTURAL claims - the ordering and the floor - which need no constant at all.",
+      "tags": [
+        "monitoring",
+        "extract-and-evaluate",
+        "ensemble",
+        "decorrelation",
+        "confident-false-clean",
+        "calibration",
+        "untested-advice-tested",
+        "probe-result",
+        "recency-2026-02"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2601.21112"
+      ],
+      "evidence_links": [
+        "tools/probe_subagent_coordination.py"
+      ]
     }
   ],
   "edges": [
@@ -27702,6 +27730,34 @@
       "target": "concept_trace_compiles_to_per_consumer_views",
       "type": "constrains",
       "description": "compiling per-consumer views is filtering, so the janitor inherits the same exposure: a view that omits the relevant material reads as clean rather than as incomplete"
+    },
+    {
+      "id": "edge_dual_extractor_refines_r382",
+      "source": "concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent",
+      "target": "concept_extract_then_score_converts_a_noise_problem_into_a_recall_problem_and_its_misses_are_confident",
+      "type": "refines",
+      "description": "tests the mitigation run 382 recommended without testing, and partly withdraws it: duplication restores DETECTION above the unfiltered monitor but leaves the confident-false-clean rate an order of magnitude above it, which was run 382's own stated reason for caring"
+    },
+    {
+      "id": "edge_dual_extractor_core_of_subagent_rig",
+      "source": "concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "core_of",
+      "description": "the fourth arm on this rig: run_dual_extractor / dual_sweep / assess_dual"
+    },
+    {
+      "id": "edge_dual_extractor_constrains_cohort_monitor",
+      "source": "concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent",
+      "target": "artifact_cohort_monitor",
+      "type": "constrains",
+      "description": "if this component derives per-worker signals by extract-then-score, a second extractor is only worth its cost when its failures are genuinely uncorrelated with the first's - and even then an unfiltered channel is not redundant, because filtering does not buy back calibration"
+    },
+    {
+      "id": "edge_dual_extractor_instantiates_derive_threshold",
+      "source": "concept_duplicating_the_extractor_restores_detection_but_not_calibration_and_only_if_the_pair_is_actually_independent",
+      "target": "concept_derive_a_threshold_from_your_own_history_rather_than_defer_it_or_invent_it",
+      "type": "instantiates",
+      "description": "this arm's first draft asserted a guessed constant (independent < single * 0.6) and went RED at 0.393 vs 0.391; the fix was structural claims - an ordering and a floor - rather than a looser constant, which is this node's discipline applied to a selftest rather than to a gate"
     }
   ]
 }
