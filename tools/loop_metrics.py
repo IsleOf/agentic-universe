@@ -414,6 +414,14 @@ def status_line(local_summary=None, metrics=None):
         f"idle-streak {m.get('idle_run_streak', 0)}" + ("!" if plateau else ""),
         f"legible {leg:.2f}" if leg is not None else "legible n/a",
         f"verified-frac {vf:.2f}" if vf is not None else "verified-frac n/a",
+        # repository footprint (run 372) - deletions get a bang, because this loop is
+        # append-mostly and a deleted file is the strongest disturbance signal it can
+        # produce. Surfaced here because run 367 found a fix that never reached the
+        # display is a fix the reader never sees.
+        (lambda f: (f"files +{f['added']}~{f['modified']}-{f['deleted']}"
+                    + ("!" if f["deleted"] else "")
+                    + (f" ?{f['n_unexpected']}" if f.get("n_unexpected") else ""))
+         if f else "files n/a")((local_summary or {}).get("file_footprint")),
         (f"novelty {nov:.2f}" + ("!" if nov < THRESHOLDS["run_novelty"] else ""))
         if (nov := m.get("run_novelty")) is not None else "novelty n/a",
     ]

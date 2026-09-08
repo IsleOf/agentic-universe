@@ -1,0 +1,31 @@
+{
+  "run": 372,
+  "increment": "close the repository half of the minimal-modification gap - LoopSession now records a file_footprint (added/modified/deleted vs HEAD, deleted_paths in full, paths outside the expected prefixes) on every run and surfaces it in the status line",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 1
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-372.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 372 OK · VALID · graph +0n/+1e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.92 · files +1~3-0 · novelty 1.00"
+}

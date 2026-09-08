@@ -209,6 +209,56 @@ class LoopSession:
             self.cite(aid, verified=False,
                       purpose="auto-extracted from the increment line (run 361)")
 
+    # files a run is expected to touch. Anything else is not forbidden - it is
+    # REPORTED, because "unexpected" is a judgement the reader should make, not one
+    # a keyword list should make silently (the run-365 lesson).
+    _EXPECTED_PREFIXES = ("knowledge/graph/", "docs/auto_sweep_", "runtime/observations/",
+                          "docs/", "tools/", ".gitignore")
+
+    def _file_footprint_vs_head(self):
+        """What did this run change in the REPOSITORY, not just the graph? (run 372)
+
+        Run 371 gave the acceptance gate a minimal-modification term for graph
+        patches, and named the half it could not reach: the environment this loop
+        actually modifies is the repo. WorldBench's CTS (run 370) scores completion
+        AND minimal modification, and every model it tested traded one against the
+        other - so measuring only "did the increment land" is measuring one side.
+
+        Same mechanism as _autodelta_vs_head: diff the working tree against HEAD.
+        DELETIONS are surfaced separately and in full, because this loop is
+        append-mostly and a deleted file is the strongest disturbance signal it can
+        produce - the one thing that should essentially never happen unnoticed.
+        """
+        import subprocess
+        try:
+            r = subprocess.run(["git", "diff", "--name-status", "HEAD"], cwd=ROOT,
+                               capture_output=True, text=True, timeout=30)
+            u = subprocess.run(["git", "ls-files", "--others", "--exclude-standard"],
+                               cwd=ROOT, capture_output=True, text=True, timeout=30)
+            if r.returncode != 0:
+                return None
+        except Exception:
+            return None
+        modified, deleted = [], []
+        for line in r.stdout.splitlines():
+            parts = line.split("\t")
+            if len(parts) < 2:
+                continue
+            status, p = parts[0].strip(), parts[-1].strip()
+            (deleted if status.startswith("D") else modified).append(p)
+        added = [p.strip() for p in u.stdout.splitlines() if p.strip()]
+        touched = modified + added + deleted
+        unexpected = sorted(p for p in touched
+                            if not p.startswith(self._EXPECTED_PREFIXES))
+        return {
+            "added": len(added),
+            "modified": len(modified),
+            "deleted": len(deleted),
+            "deleted_paths": sorted(deleted),          # in full, never truncated
+            "unexpected_paths": unexpected[:20],
+            "n_unexpected": len(unexpected),
+        }
+
     def _write_summary(self, ok):
         RUN_SUMMARY_DIR.mkdir(parents=True, exist_ok=True)
         path = self._rec._path
@@ -222,7 +272,8 @@ class LoopSession:
             "trace_events": n_events,
             "trace_valid": not errors,
             "counts": self._counts,
-            "graph_delta": self._graph_delta,  # {"nodes": d, "edges": d} or None if the run wrote no graph
+            "graph_delta": self._graph_delta,
+            "file_footprint": self._file_footprint_vs_head(),   # run 372  # {"nodes": d, "edges": d} or None if the run wrote no graph
             "citations": self._cited,
             "distinct_evidence_roots": distinct_roots,
             "trace_file": (str(path.relative_to(ROOT))
@@ -346,6 +397,18 @@ def _selftest():
         with s4:
             s4.graph_write(nodes=(10, 12), edges=(40, 45))
         c = json.loads((RUN_SUMMARY_DIR / "run-996.json").read_text(encoding="utf-8"))
+        # repository footprint (run 372)
+        _fp = summ.get("file_footprint")
+        checks["run summary carries a file_footprint"] = (
+            _fp is not None and set(_fp) >= {"added", "modified", "deleted",
+                                             "deleted_paths", "n_unexpected"})
+        checks["deleted_paths is a list, reported in full (never truncated)"] = (
+            isinstance(_fp.get("deleted_paths"), list)
+            and len(_fp["deleted_paths"]) == _fp["deleted"])
+        checks["expected-prefix paths are not flagged unexpected"] = (
+            not any(p.startswith(LoopSession._EXPECTED_PREFIXES)
+                    for p in _fp.get("unexpected_paths", [])))
+
         # Phase 2 wiring + test/production separation (run 369)
         from experience_bank import ExperienceBank as _EB
         checks["condense populates the bank from a real run trace"] = (
