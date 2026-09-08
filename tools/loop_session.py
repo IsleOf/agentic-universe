@@ -66,6 +66,16 @@ class LoopSession:
 
     def __exit__(self, exc_type, exc, tb):
         ok = exc_type is None
+        # must run while the recorder is still open - cite() writes a CLAIM event
+        try:
+            self._autocite_from_increment()
+        except Exception:
+            pass
+        if self._graph_delta is None:          # explicit graph_write() always wins
+            try:
+                self._graph_delta = self._autodelta_vs_head()
+            except Exception:
+                pass
         self._rec.step("researcher", self.step_id, "close", layer="harness",
                        note="run complete" if ok else f"aborted: {exc_type.__name__}")
         self._rec.close()
@@ -125,6 +135,76 @@ class LoopSession:
         self._counts["artifacts"] += 1
 
     # -- summary --
+    _ID_IN_INCREMENT = None
+    GRAPH_REL = "knowledge/graph/agentic_universe_graph.json"
+
+    @classmethod
+    def _graph_counts(cls, text):
+        try:
+            g = json.loads(text)
+            return len(g["nodes"]), len(g["edges"])
+        except Exception:
+            return None
+
+    def _autodelta_vs_head(self):
+        """Derive graph_delta as (working tree - last commit), run 361.
+
+        Same failure as the citation signal: `graph_delta` is set only by an explicit
+        `graph_write()` call, and `None` meant BOTH "this run wrote no graph" and
+        "this run forgot to record it". Conflating those is what let `idle_run_streak`
+        climb to 27 across runs that were changing the graph every time.
+
+        Measured against HEAD rather than an in-session snapshot, because the loop
+        edits the graph before opening the session - an __enter__ snapshot would
+        already contain the run's own changes and always read zero. Delta-vs-last-
+        commit is also the more meaningful quantity: what THIS run changed.
+
+        A count, never a quality claim (see the auto-cite bound above).
+        """
+        import subprocess
+        p = ROOT / self.GRAPH_REL
+        if not p.exists():
+            return None
+        now = self._graph_counts(p.read_text(encoding="utf-8"))
+        try:
+            head = subprocess.run(["git", "show", f"HEAD:{self.GRAPH_REL}"], cwd=ROOT,
+                                  capture_output=True, text=True, timeout=30)
+            before = self._graph_counts(head.stdout) if head.returncode == 0 else None
+        except Exception:
+            before = None
+        if now is None or before is None:
+            return None
+        return {"nodes": now[0] - before[0], "edges": now[1] - before[1]}
+
+    def _autocite_from_increment(self):
+        """Auto-record any arXiv id named in the increment line as a *referenced*
+        evidence root (run 361).
+
+        Why this exists: `distinct_evidence_roots` is what `loop_metrics.run_novelty`
+        and `loop_conductor._corpus_drift` read to detect a plateau. It is populated
+        only by `cite()`, and across runs 334-360 the loop folded eight papers and
+        called `cite()` zero times - so the novelty signal read empty all session and
+        the status line said `novelty n/a` while the loop looked healthy. A metric
+        that depends on the agent remembering to call a method is not a metric.
+
+        Auto-extracted ids are recorded `verified=False`, ALWAYS. Verification is a
+        claim about work actually done (fetched the abstract, checked the number);
+        auto-inflating `verified_citation_fraction` from a string match would be the
+        grader-gaming this project has folded five papers about. An explicit
+        `cite(id, verified=True)` still wins - already-cited ids are never doubled.
+        """
+        import re as _re
+        if type(self)._ID_IN_INCREMENT is None:
+            type(self)._ID_IN_INCREMENT = _re.compile(r"(?:arXiv:)?(\d{4}\.\d{4,5})")
+        already = {c["id"] for c in self._cited}
+        for m in type(self)._ID_IN_INCREMENT.finditer(self.increment or ""):
+            aid = f"arXiv:{m.group(1)}"
+            if aid in already:
+                continue
+            already.add(aid)
+            self.cite(aid, verified=False,
+                      purpose="auto-extracted from the increment line (run 361)")
+
     def _write_summary(self, ok):
         RUN_SUMMARY_DIR.mkdir(parents=True, exist_ok=True)
         path = self._rec._path
@@ -193,7 +273,49 @@ def _selftest():
                 == ["arXiv:2601.99999", "arXiv:2609.03035"],
             "manifest hash present": bool(summ["harness_manifest_hash"]),
             "counts tallied": summ["counts"]["claims"] == 2 and summ["counts"]["artifacts"] == 2,
+            "an increment with no arXiv id auto-cites nothing":
+                len(summ["citations"]) == 2,
         }
+
+        # auto-cite from the increment line (run 361): the novelty signal must not
+        # depend on the agent remembering to call cite().
+        s2 = LoopSession(run_no=998,
+                         increment="fold arXiv:2606.23075 MLAS and 2509.26354 misevolution",
+                         trace_dir=str(tmp / "traces2"), registry_base=str(tmp / "harness"))
+        with s2:
+            pass
+        a = json.loads((RUN_SUMMARY_DIR / "run-998.json").read_text(encoding="utf-8"))
+        checks["auto-cite: both ids in the increment become evidence roots"] = (
+            a["distinct_evidence_roots"] == ["arXiv:2509.26354", "arXiv:2606.23075"])
+        checks["auto-cite: prefixed and bare arXiv ids both parse"] = (
+            len(a["citations"]) == 2)
+        checks["auto-cite NEVER marks a citation verified (no grader-gaming)"] = (
+            all(not c["verified"] for c in a["citations"]))
+        (RUN_SUMMARY_DIR / "run-998.json").unlink()
+
+        # an explicit verified cite must win over the auto-extractor, not duplicate
+        s3 = LoopSession(run_no=997, increment="fold arXiv:2606.23075 MLAS",
+                         trace_dir=str(tmp / "traces3"), registry_base=str(tmp / "harness"))
+        with s3:
+            s3.cite("2606.23075", verified=True, purpose="abstract fetched and checked")
+        b = json.loads((RUN_SUMMARY_DIR / "run-997.json").read_text(encoding="utf-8"))
+        checks["auto-cite does not duplicate an explicitly cited id"] = (
+            len(b["citations"]) == 1)
+        checks["an explicit verified cite survives the auto-extractor"] = (
+            b["citations"][0]["verified"] is True)
+        checks["auto graph_delta populates instead of leaving None"] = (
+            b["graph_delta"] is not None and set(b["graph_delta"]) == {"nodes", "edges"})
+        (RUN_SUMMARY_DIR / "run-997.json").unlink()
+
+        # an explicit graph_write() must win over the auto-derivation
+        s4 = LoopSession(run_no=996, increment="explicit graph write",
+                         trace_dir=str(tmp / "traces4"), registry_base=str(tmp / "harness"))
+        with s4:
+            s4.graph_write(nodes=(10, 12), edges=(40, 45))
+        c = json.loads((RUN_SUMMARY_DIR / "run-996.json").read_text(encoding="utf-8"))
+        checks["an explicit graph_write survives the auto-derivation"] = (
+            c["graph_delta"] == {"nodes": 2, "edges": 5})
+        (RUN_SUMMARY_DIR / "run-996.json").unlink()
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         (RUN_SUMMARY_DIR / "run-999.json").unlink()  # clean the selftest artifact

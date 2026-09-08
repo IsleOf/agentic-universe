@@ -5709,7 +5709,7 @@
       "approach_family": "self_improving_harness",
       "branch_key": "self_improving_harness:live_recording",
       "confidence": 0.8,
-      "description": "tools/loop_session.py, run 67: a LoopSession context manager the autonomous loop wraps its work in, so each run emits Phase 0 events as it happens (cite/tool/graph_write/note/commit) rather than being reconstructed from the evolution_log afterwards. Writes a committed per-run summary (runtime/observations/loop_runs/run-<N>.json) and a gitignored raw trace. SKILL.md updated to require it. Run 67 is the first live-recorded run. This closes the gap the adapter (run 66) left: replay of history -> a real run emitting events.",
+      "description": "tools/loop_session.py, run 67: a LoopSession context manager the autonomous loop wraps its work in, so each run emits Phase 0 events as it happens (cite/tool/graph_write/note/commit) rather than being reconstructed from the evolution_log afterwards. Writes a committed per-run summary (runtime/observations/loop_runs/run-<N>.json) and a gitignored raw trace. SKILL.md updated to require it. Run 67 is the first live-recorded run. This closes the gap the adapter (run 66) left: replay of history -> a real run emitting events. SELF-OBSERVABILITY FIX (run 361). distinct_evidence_roots - the field loop_metrics.run_novelty and loop_conductor._corpus_drift read to detect a plateau - was populated ONLY by an explicit cite() call. Across runs 334-360 the loop folded eight papers and called cite() zero times, so the novelty signal read empty for an entire session while every status line said \"novelty n/a\" and the loop looked healthy. Found by actually running janitor.classify over the recent corpus instead of assuming. Fix: _autocite_from_increment() scans the increment line for arXiv ids on __exit__ (while the recorder is still open) and records any not already cited. Auto-extracted ids are ALWAYS verified=False - verification is a claim about work done, and auto-inflating verified_citation_fraction from a string match would be exactly the grader-gaming concept_gate_faces_a_pretrained_grader_gamer warns about. An explicit cite(verified=True) still wins and is never doubled. +6 selftest checks (12 total). GENERAL LESSON: a metric that depends on the agent remembering to call a method is not a metric.",
       "tags": [
         "phase-0",
         "live-recording",
@@ -10913,6 +10913,33 @@
       ],
       "evidence_links": [
         "tools/probe_memory_horizon.py"
+      ]
+    },
+    {
+      "id": "concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric",
+      "label": "A self-observability metric the agent must remember to populate will read empty exactly when the agent is busiest - derive it from work already done, and never let derivation inflate a verification claim",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:observability",
+      "confidence": 0.68,
+      "description": "Found in this project's own loop, run 361. distinct_evidence_roots feeds run_novelty and the conductor plateau detector, but was populated only by an explicit LoopSession.cite() call. Over runs 334-360 the loop folded eight arXiv papers and called cite() zero times: the novelty signal read empty for a whole session, the status line reported \"novelty n/a\", and nothing else was visibly wrong - the kind mix looked healthy (5 fold / 5 build over 14 runs) so a plateau check on kinds alone would also have passed. The failure mode is specific and general: an observability field the working agent must remember to fill will be emptiest during the longest, most productive stretches, because that is when attention is on the work. DERIVE the signal from an artifact the work already produces (here: the increment line, which the loop is required to write anyway). THE BOUND: derivation may populate a COUNT, never a QUALITY claim. The run-361 fix records auto-extracted citations verified=False always, because deriving \"verified\" from a string match would inflate verified_citation_fraction - the metric the project uses to check itself - which is grader-gaming against its own gate (concept_gate_faces_a_pretrained_grader_gamer). Related to concept_ahe_three_observability_pillars... (decision observability) and to concept_agentic_governance_needs_unified_observability...; this is the failure mode BELOW those - not \"the wrong tools\" but \"the right field, never filled\".",
+      "tags": [
+        "self-observability",
+        "metrics",
+        "novelty",
+        "plateau-detection",
+        "derived-signal",
+        "grader-gaming-bound",
+        "found-in-own-loop"
+      ],
+      "derived_from": [
+        "tools/loop_session.py",
+        "runtime/observations/loop_runs/run-334..360"
+      ],
+      "evidence_links": [
+        "tools/loop_session.py"
       ]
     }
   ],
@@ -26595,6 +26622,34 @@
       "target": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
       "type": "informs",
       "description": "the Memory pathway: unbounded accumulation is the degrading variable, which is the same lever the misevolution finding points at"
+    },
+    {
+      "id": "edge_selfobs_metric_grounds_loop_session",
+      "source": "concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric",
+      "target": "artifact_loop_session_live_recording",
+      "type": "grounds",
+      "description": "the run-361 _autocite_from_increment fix is this concept applied to the loop that found it"
+    },
+    {
+      "id": "edge_selfobs_metric_constrains_loop_metrics",
+      "source": "concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric",
+      "target": "artifact_loop_metrics_phase3_real",
+      "type": "constrains",
+      "description": "run_novelty is only as good as distinct_evidence_roots; a metric layer must not assume its inputs are populated"
+    },
+    {
+      "id": "edge_selfobs_metric_refines_ahe_observability",
+      "source": "concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric",
+      "target": "concept_ahe_three_observability_pillars_turn_every_harness_edit_into_a_falsifiable_contract",
+      "type": "refines",
+      "description": "AHE names WHICH observability pillars are needed; this names the failure below them - the right field, present and never filled"
+    },
+    {
+      "id": "edge_selfobs_metric_challenges_grader_gamer",
+      "source": "concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric",
+      "target": "concept_gate_faces_a_pretrained_grader_gamer",
+      "type": "challenges",
+      "description": "auto-deriving a metric is a tempting fix that would game the project own gate if it derived VERIFIED status; the bound (count yes, quality no) is what keeps the fix honest"
     }
   ]
 }
