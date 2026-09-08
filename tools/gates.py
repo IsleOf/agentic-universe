@@ -195,6 +195,21 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
     prior_g4_pass = {_norm(a["agent"]) for a in prior_pass_anns}
     counted_pass_ids = sorted(a["id"] for a in prior_pass_anns)
 
+    # Run 417 (arXiv:2609.05227, CABAL): a collusion ring supplies validators who each
+    # pass every per-agent check - the quorum is met by coordinated agents. The
+    # substrate has no affinity signal, so it CANNOT detect this. What it can cheaply
+    # flag is HOMOGENEITY: real independent validators vary in confidence and reasoning;
+    # a ring that copy-pastes a verdict does not. `quorum_homogeneous` REPORTS (never
+    # blocks) when >= 3 prior passes all share one confidence value to 2 dp AND none
+    # gave a distinct reason. Low coverage - a careful ring varies its output - but the
+    # CABAL "Very-High-only diagnostic" is exactly this shape: precise, low-recall.
+    quorum_homogeneous = False
+    if len(prior_pass_anns) >= 3:
+        confs = {round(a["confidence"], 2) for a in prior_pass_anns}
+        reasons_sets = [tuple(a["evidence"].get("reasons") or []) for a in prior_pass_anns]
+        quorum_homogeneous = (len(confs) == 1
+                              and len(set(reasons_sets)) <= 1)
+
     voters = 1 + len(prior_g4_pass) + (1 if computable_ok else 0)
     passed = True
     if not computable_ok:
@@ -212,11 +227,16 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
     if passed:
         reasons.append(f"released: quorum {voters}/{min_quorum}, no live warnings, "
                        f"computable checks pass")
+    if quorum_homogeneous:
+        reasons.append("REPORT: the prior G4 passes are homogeneous (identical confidence "
+                       "and reasoning) - weak signal of a coordinated validator ring "
+                       "(arXiv:2609.05227); not a block, review the validators")
     return _write_verdict(task_ref, pheromone, gate="G4", validator_agent=validator_agent,
                           passed=passed, reasons=reasons,
                           extra={"quorum": voters, "min_quorum": min_quorum,
                                  "live_warnings": len(live_warnings),
-                                 "counted_prior_pass_ids": counted_pass_ids})
+                                 "counted_prior_pass_ids": counted_pass_ids,
+                                 "quorum_homogeneous": quorum_homogeneous})
 
 
 # --------------------------------------------------------------------------- #
@@ -334,6 +354,25 @@ def _selftest():
                             computable_ok=True, min_quorum=q)
             checks[f"q={q}: G4 verdict is well-formed and meets the exact quorum"] = (
                 vv["pass"] and vv["quorum"] == q)
+
+        # --- run 417: homogeneity flag for a copy-pasted validator ring ---
+        pfr = Pheromone(tmp / "ring.db")
+        for a in ("r1", "r2", "r3"):
+            pfr.annotate("t", "claim", 0.3, 0.85, agent=a,
+                         evidence={"gate": "G4", "pass": True, "reasons": []})
+        vr = g4_release("t", validator_agent="r4", pheromone=pfr,
+                        computable_ok=True, min_quorum=4)
+        checks["a copy-pasted G4 quorum is flagged quorum_homogeneous (run 417)"] = (
+            vr["quorum_homogeneous"]
+            and any("coordinated validator ring" in x for x in vr["reasons"]))
+        checks["...but still passes - it is a REPORT, not a block"] = vr["pass"]
+        pfv = Pheromone(tmp / "varied.db")
+        for a, c, rs in (("x1", 0.8, ["ok"]), ("x2", 0.9, ["tests"]), ("x3", 0.7, ["links"])):
+            pfv.annotate("t", "claim", 0.3, c, agent=a,
+                         evidence={"gate": "G4", "pass": True, "reasons": rs})
+        checks["a varied quorum is NOT flagged homogeneous"] = (
+            not g4_release("t", validator_agent="x4", pheromone=pfv,
+                           computable_ok=True, min_quorum=4)["quorum_homogeneous"])
 
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")

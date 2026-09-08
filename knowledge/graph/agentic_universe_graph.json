@@ -12688,6 +12688,32 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.05227"
       ]
+    },
+    {
+      "id": "concept_the_substrate_cannot_detect_a_coordinated_legitimate_validator_ring_only_flag_a_lazy_one_that_copy_pastes",
+      "label": "Run 417: a G4 collusion ring where every member passes every per-agent check meets the quorum and the substrate has no affinity signal to detect it. The only cheap defence is quorum_homogeneous - a REPORT flag for a ring that copy-pastes identical confidence + reasoning; a ring that varies its output lands clean",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:collusion",
+      "confidence": 0.72,
+      "description": "Run 417, acting on run 416's CABAL fold. Added a probe_substrate_adversarial arm: a ring of k agents each passes _guard (not content contributors, not consecutive gate roles) and posts a G4 pass. RESULT: the ring meets the quorum, unavoidably - every colluder is exactly who they claim to be, so signed writes and the run-402 identity normalisation do nothing, and the substrate has no notion of affinity between validators. WHAT WAS ADDED: g4_release now computes quorum_homogeneous - True when >= 3 prior G4 passes all share one confidence value (2 dp) AND none gave a distinct reason - and REPORTS it in the verdict reasons (never blocks). This is the substrate form of CABAL's 'Very-High-only diagnostic': precise, LOW RECALL. It catches a lazy ring that copy-pastes a verdict; a ring that varies confidence and reasoning is not flagged, and the arm records that as a known-limit landing. THE HONEST POSITION: detecting a coordinated-but-individually-legitimate ring needs an affinity or interaction-history signal the substrate deliberately does not collect (it is a cooperative coordination layer, run 402). quorum_homogeneous raises the cost of a lazy attack; it does not close the gap. Recorded on the design node as an open limitation alongside the Sybil ones.",
+      "tags": [
+        "collusion",
+        "validator-ring",
+        "quorum-attack",
+        "low-recall-detection",
+        "copy-paste-flag",
+        "known-limit",
+        "cooperative-layer",
+        "run-417"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/gates.py",
+        "tools/probe_substrate_adversarial.py"
+      ]
     }
   ],
   "edges": [
@@ -30329,6 +30355,34 @@
       "target": "concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation",
       "type": "refines",
       "description": "the Sybil node is 'N agents may not be N independent observations'; CABAL adds the adversarial case - N agents deliberately coordinated to look independent, where the correlation is intentional and affinity-masked rather than shared-base-model"
+    },
+    {
+      "id": "edge_r417_instantiates_cabal",
+      "source": "concept_the_substrate_cannot_detect_a_coordinated_legitimate_validator_ring_only_flag_a_lazy_one_that_copy_pastes",
+      "target": "concept_affinity_guided_collusive_bidding_more_than_doubles_target_capture_and_looks_like_legitimate_expertise",
+      "type": "instantiates",
+      "description": "the CABAL collusion-ring attack run against the real G4 gate: the ring meets quorum and only a lazy copy-paste is flaggable, matching the paper's precise-but-low-coverage detector"
+    },
+    {
+      "id": "edge_r417_refines_gates",
+      "source": "concept_the_substrate_cannot_detect_a_coordinated_legitimate_validator_ring_only_flag_a_lazy_one_that_copy_pastes",
+      "target": "artifact_validator_gates",
+      "type": "refines",
+      "description": "adds quorum_homogeneous: a REPORT flag when >= 3 prior passes share one confidence value and no distinct reasoning - a weak signal of a coordinated validator ring"
+    },
+    {
+      "id": "edge_r417_verified_by_redteam",
+      "source": "artifact_probe_substrate_adversarial_redteam",
+      "target": "concept_the_substrate_cannot_detect_a_coordinated_legitimate_validator_ring_only_flag_a_lazy_one_that_copy_pastes",
+      "type": "verifies",
+      "description": "the collusion-ring arm: 6 attacks land now, all Sybil/collusion-class known limits, 0 unexpected"
+    },
+    {
+      "id": "edge_r417_constrains_design",
+      "source": "concept_the_substrate_cannot_detect_a_coordinated_legitimate_validator_ring_only_flag_a_lazy_one_that_copy_pastes",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the design's trust boundary gains a fourth open limitation: a coordinated legitimate validator ring is undetectable without an affinity signal the cooperative layer does not collect; quorum_homogeneous only catches a lazy one"
     }
   ]
 }

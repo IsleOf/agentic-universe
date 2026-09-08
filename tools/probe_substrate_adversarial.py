@@ -249,6 +249,35 @@ def attack_impersonate_another_agent_in_the_agent_field():
             "severity": "known-limit" if not still_warned else "n/a"}
 
 
+def attack_collusion_ring_meets_the_quorum():
+    """A ring of k agents each passes _guard (not content contributors, not
+    consecutive gate roles) and posts a G4 pass - the quorum is met by coordinated
+    agents. arXiv:2609.05227: signed writes and identity normalisation do not help,
+    because every colluder IS who they claim to be. What the substrate CAN do is
+    flag HOMOGENEITY - a ring that copy-pastes its verdict. This attack checks both:
+    the ring meets quorum (it does, unavoidably) and whether homogeneity is flagged."""
+    d = _wd()
+    pf = Pheromone(d / "p.db")
+    for a in ("ring1", "ring2", "ring3"):
+        pf.annotate("t", "claim", 0.3, 0.85, agent=a,
+                    evidence={"gate": "G4", "pass": True, "reasons": []})
+    v = g4_release("t", validator_agent="ring4", pheromone=pf,
+                   computable_ok=True, min_quorum=4)
+    ring_met_quorum = v["pass"]
+    flagged = v.get("quorum_homogeneous", False)
+    pf.close()
+    return {"attack": "a collusion ring meets the G4 quorum",
+            "landed": ring_met_quorum,     # meeting the quorum IS the attack succeeding
+            "detail": ("the ring met the quorum - every colluder passes every per-agent check "
+                       "and the substrate has no affinity signal (arXiv:2609.05227). "
+                       + ("A LAZY ring is now flagged quorum_homogeneous (identical confidence "
+                          "and reasoning) - a weak, low-coverage signal, run 417; a ring that "
+                          "varies its output still lands clean."
+                          if flagged else
+                          "This ring varied its output and was not flagged.")),
+            "severity": "known-limit"}
+
+
 def attack_reputation_tiebreak_gaming():
     """Two agents at identical reputation; an adversary wants 'a_winner' picked.
     select() breaks ties by agent id (sorted). Can a name choice force selection?"""
@@ -295,6 +324,7 @@ ATTACKS = [
     attack_launder_a_g4_pass_as_a_fresh_sock_puppet,
     attack_content_disguised_as_gate_verdict,
     attack_impersonate_another_agent_in_the_agent_field,
+    attack_collusion_ring_meets_the_quorum,
     attack_reputation_tiebreak_gaming,
     attack_boost_own_reputation_via_self_annotation,
 ]
@@ -308,6 +338,7 @@ _KNOWN_LIMITS = {
     "fake completion via a direct kind=done annotation",  # mitigated by "ledger is truth"
     "launder a fake G4 pass via a fresh sock-puppet id",
     "impersonate another agent via the unauthenticated `agent` field",
+    "a collusion ring meets the G4 quorum",
 }
 
 

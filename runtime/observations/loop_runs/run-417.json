@@ -1,0 +1,42 @@
+{
+  "run": 417,
+  "increment": "Run 416's next item: a probe_substrate_adversarial arm for the CABAL collusion-ring attack. A ring of k agents each passes _guard and posts a G4 pass - the ring MEETS THE QUORUM, unavoidably (every colluder is who they claim to be; the substrate has no affinity signal). ADDED: g4_release computes quorum_homogeneous - True when >= 3 prior G4 passes share one confidence value (2dp) AND no distinct reasoning - and REPORTS it (never blocks). The substrate form of CABAL's Very-High-only diagnostic: precise, LOW RECALL - catches a lazy copy-paste ring, a ring that varies its output lands clean (recorded as a known-limit). HONEST POSITION: detecting a coordinated-but-legitimate ring needs an affinity/interaction-history signal the cooperative layer deliberately does not collect; quorum_homogeneous raises the cost of a lazy attack, does not close the gap. Recorded on the design node as a fourth open limitation. gates +3 checks; probe_substrate_adversarial 12 attacks, 6 land (all Sybil/collusion known-limits), 0 unexpected. +1 node, +4 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/gates.py",
+        "tools/probe_substrate_adversarial.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-417.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 417 OK · VALID · graph +1n/+4e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.85 · files +1~4-0 · novelty 0.86 · acts fold40%"
+}
