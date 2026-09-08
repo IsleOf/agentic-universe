@@ -43,6 +43,17 @@ CLOSED = ("done", "failed", "abandoned")
 STATUSES = OPEN + CLOSED
 MAX_ATTEMPTS_DEFAULT = 3
 
+# Run 392 — pipeline stage, for the Sequential swarm protocol
+# (docs/swarm-substrate-prototype.md §5.2, week-1 build list item 2). A task carries a
+# `stage`; `next_ready()` prefers earlier stages so a fleet finishes all pending
+# research before it drafts, all drafting before it critiques, etc. — the "agents take
+# turns with visibility into prior outputs" protocol that "Drop the Hierarchy and Roles"
+# (emergent_self_organizing_roles) found beats both central control and full autonomy.
+# `stage` is orthogonal to `status`: a task is `pending`/`active`/`done` AT a stage.
+STAGES = ("research", "draft", "critique", "final")
+STAGE_RANK = {s: i for i, s in enumerate(STAGES)}
+DEFAULT_STAGE = "research"
+
 
 def _now():
     return round(time.time(), 3)
@@ -75,16 +86,30 @@ class Ledger:
         return self._data["tasks"][tid]
 
     # --- mutations -------------------------------------------------------
-    def add(self, goal, *, deps=(), owner=None, meta=None):
+    def add(self, goal, *, deps=(), owner=None, meta=None, stage=DEFAULT_STAGE):
+        if stage not in STAGE_RANK:
+            raise ValueError(f"unknown stage {stage!r}; expected one of {STAGES}")
         tid = f"t_{uuid.uuid4().hex[:8]}"
         self._data["tasks"][tid] = {
-            "id": tid, "goal": goal, "status": "pending",
+            "id": tid, "goal": goal, "status": "pending", "stage": stage,
             "deps": list(deps), "owner": owner, "meta": meta or {},
             "attempts": 0, "result_ref": None, "notes": [],
             "created": _now(), "updated": _now(), "claimed_at": None,
         }
-        self._flush(f"add {tid}")
+        self._flush(f"add {tid} @{stage}")
         return tid
+
+    def next_stage(self, tid, goal, *, owner=None, meta=None):
+        """Add the follow-on task at the next pipeline stage, depending on `tid`.
+        `research -> draft -> critique -> final`. Raises at the end of the pipeline
+        (a `final` task is completed, not advanced). This is how the Sequential
+        protocol threads: each stage's output becomes the next stage's dependency,
+        so `next_ready()` will not surface the draft task until the research is done."""
+        cur = self.get(tid).get("stage", DEFAULT_STAGE)
+        rank = STAGE_RANK[cur]
+        if rank + 1 >= len(STAGES):
+            raise ValueError(f"{tid} is at the last stage {cur!r}; complete it, don't advance")
+        return self.add(goal, deps=[tid], owner=owner, meta=meta, stage=STAGES[rank + 1])
 
     def _set(self, tid, **fields):
         t = self._data["tasks"][tid]
@@ -136,12 +161,23 @@ class Ledger:
         return all(self._data["tasks"].get(d, {}).get("status") == "done"
                    for d in self._data["tasks"][tid]["deps"])
 
-    def next_ready(self, owner=None):
-        """Deterministic: the oldest `pending` task whose deps are all done.
-        Returns the task dict or None."""
+    def next_ready(self, owner=None, *, by_stage=True):
+        """Deterministic: the `pending` task whose deps are all done that comes
+        first in (stage order, creation time, id). With `by_stage=False` it is
+        purely (creation time, id) — the pre-run-392 behaviour.
+
+        `by_stage=True` (the default) is what makes this a Sequential-protocol
+        driver: every ready `research` task is handed out before any `draft` task,
+        so the fleet moves through the pipeline in lockstep rather than racing a
+        half-researched draft ahead. Ties within a stage still break on age, so it
+        stays fully deterministic."""
         ready = [t for t in self._data["tasks"].values()
                  if t["status"] == "pending" and self._deps_done(t["id"])]
-        ready.sort(key=lambda t: (t["created"], t["id"]))
+        if by_stage:
+            ready.sort(key=lambda t: (STAGE_RANK.get(t.get("stage", DEFAULT_STAGE), 0),
+                                      t["created"], t["id"]))
+        else:
+            ready.sort(key=lambda t: (t["created"], t["id"]))
         return ready[0] if ready else None
 
     def sweep_stale(self, max_active_secs):
@@ -218,6 +254,46 @@ def _selftest():
         s = L2.summary()
         checks["summary counts add up"] = s["total"] == 3 and s["open"] + s["closed"] == 3
 
+        # --- run 392: pipeline stages drive the Sequential protocol ---
+        S = Ledger(tmp / "stage.json")
+        r1 = S.add("research X")
+        r2 = S.add("research Y")
+        checks["a task defaults to the research stage"] = S.get(r1)["stage"] == "research"
+        d1 = S.next_stage(r1, "draft X from research X")
+        checks["next_stage creates a draft task depending on the research"] = (
+            S.get(d1)["stage"] == "draft" and S.get(d1)["deps"] == [r1])
+        checks["the draft is not ready while its research is pending"] = (
+            S.next_ready()["id"] in (r1, r2))
+        # by_stage: all ready research goes out before any draft
+        S.claim(r1, "w1"); S.complete(r1)
+        checks["with research r1 done, next_ready still prefers pending research r2"] = (
+            S.next_ready()["id"] == r2 and S.next_ready()["stage"] == "research")
+        S.claim(r2, "w2"); S.complete(r2)
+        checks["only once all research is done does the draft surface"] = (
+            S.next_ready()["id"] == d1)
+        # by_stage=False falls back to pure age order
+        S.add("late research Z")
+        checks["by_stage=False ignores stage, picks oldest ready (the draft)"] = (
+            S.next_ready(by_stage=False)["id"] == d1)
+        # the pipeline has an end
+        f1 = S.next_stage(S.next_stage(d1, "critique"), "final")
+        try:
+            S.next_stage(f1, "beyond final")
+            checks["next_stage past 'final' raises"] = False
+        except ValueError:
+            checks["next_stage past 'final' raises"] = True
+        try:
+            S.add("bad", stage="nonsense")
+            checks["an unknown stage is rejected at add()"] = False
+        except ValueError:
+            checks["an unknown stage is rejected at add()"] = True
+        # a pre-run-392 ledger with no stage key still works
+        legacy = Ledger(tmp / "legacy.json")
+        lt = legacy.add("old task")
+        del legacy.get(lt)["stage"]
+        checks["a task missing the stage key defaults gracefully in next_ready"] = (
+            legacy.next_ready()["id"] == lt)
+
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         allok = all(checks.values())
@@ -238,6 +314,11 @@ def _cli(argv=None):
         sp = sub.add_parser(name)
         if name not in ("selftest",):
             sp.add_argument("--ledger", default="task_ledger.json")
+        if name == "add":
+            sp.add_argument("--stage", default=DEFAULT_STAGE, choices=STAGES)
+        if name == "next":
+            sp.add_argument("--any-stage", action="store_true",
+                            help="ignore pipeline stage order (pure age order)")
         for a in args:
             sp.add_argument(a)
     args = p.parse_args(argv)
@@ -245,7 +326,7 @@ def _cli(argv=None):
         return _selftest()
     L = Ledger(args.ledger)
     if args.cmd == "add":
-        print(L.add(args.goal))
+        print(L.add(args.goal, stage=args.stage))
     elif args.cmd == "claim":
         L.claim(args.tid, args.owner); print("claimed")
     elif args.cmd == "complete":
@@ -255,14 +336,17 @@ def _cli(argv=None):
     elif args.cmd == "block":
         L.block(args.tid, args.note); print("blocked")
     elif args.cmd == "next":
-        t = L.next_ready(); print(json.dumps(t, indent=2) if t else "(nothing ready)")
+        t = L.next_ready(by_stage=not args.any_stage)
+        print(json.dumps(t, indent=2) if t else "(nothing ready)")
     elif args.cmd == "sweep":
         print("swept:", L.sweep_stale(float(args.secs)))
     elif args.cmd == "summary":
         print(json.dumps(L.summary(), indent=2))
     elif args.cmd == "list":
-        for t in sorted(L.tasks.values(), key=lambda x: x["created"]):
-            print(f"{t['id']}  {t['status']:9}  {t['goal']}")
+        for t in sorted(L.tasks.values(),
+                        key=lambda x: (STAGE_RANK.get(x.get("stage", DEFAULT_STAGE), 0),
+                                       x["created"])):
+            print(f"{t['id']}  {t['status']:9}  {t.get('stage', DEFAULT_STAGE):9}  {t['goal']}")
     return 0
 
 

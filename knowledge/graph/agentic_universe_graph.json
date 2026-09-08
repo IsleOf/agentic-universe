@@ -11872,6 +11872,32 @@
       "evidence_links": [
         "tools/loop_session.py"
       ]
+    },
+    {
+      "id": "concept_the_sequential_protocol_is_a_stage_column_plus_dependency_threading_not_a_turn_taking_loop",
+      "label": "The Sequential swarm protocol is implemented as a `stage` column on the task ledger plus each stage's output being the next stage's dependency - `next_ready()` prefers earlier stages, so the fleet moves through research->draft->critique->final in lockstep with no coordinator",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:swarm_substrate",
+      "confidence": 0.62,
+      "description": "Run 392, week-1 build list item 2. 'Drop the Hierarchy and Roles' (in emergent_self_organizing_roles) found a Sequential protocol - agents take turns with visibility into prior outputs - beats both central control and full autonomy. The question this run answers: what is the minimal mechanism that produces 'take turns with visibility into prior outputs' WITHOUT a turn-taking loop or a coordinator holding the turn pointer? ANSWER: a `stage` field on each task_ledger task (research -> draft -> critique -> final, orthogonal to status), and `next_stage(tid, goal)` which adds the follow-on task with `deps=[tid]` at the next stage. Two deterministic rules do the rest: (1) `_deps_done` already blocks a draft task until its research task is `done` - 'visibility into prior outputs' is just a dependency; (2) `next_ready()` sorts by (STAGE_RANK, created, id), so every ready research task is handed out before any draft task - 'take turns' is just a sort key. No coordinator, no turn pointer, no message bus; the file decides, exactly as pattern_deterministic_task_ledger... established for plain task ordering. `by_stage=False` restores the pre-392 pure-age ordering for callers that want a flat queue. A task missing the `stage` key (a pre-392 ledger) defaults to `research` gracefully - backward compatible. The pipeline has a hard end: `next_stage` past `final` raises rather than inventing a stage. This is the deterministic half of the swarm substrate; the generative half - what an agent actually contributes at each stage, and the pheromone signal that says which task_ref to pick up - is artifact_pheromone_annotation_layer and the callers' work.",
+      "tags": [
+        "swarm-substrate",
+        "sequential-protocol",
+        "task-ledger",
+        "pipeline-stages",
+        "deterministic-coordination",
+        "no-coordinator",
+        "week-1-build",
+        "backward-compatible"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/task_ledger.py",
+        "docs/swarm-substrate-prototype.md"
+      ]
     }
   ],
   "edges": [
@@ -28547,6 +28573,34 @@
       "target": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
       "type": "supports",
       "description": "'retention_evaluated: true' on every run since 388 was a vacuous pass - a clean bill of health the instrument never actually checked, because the check compared against a file git could not produce"
+    },
+    {
+      "id": "edge_seq_protocol_implements_substrate_design",
+      "source": "concept_the_sequential_protocol_is_a_stage_column_plus_dependency_threading_not_a_turn_taking_loop",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "implements",
+      "description": "week-1 build list item 2: task_ledger gains a stage column and next_stage(); next_ready() becomes the Sequential-protocol driver by sorting on stage rank"
+    },
+    {
+      "id": "edge_seq_protocol_extends_ledger_pattern",
+      "source": "concept_the_sequential_protocol_is_a_stage_column_plus_dependency_threading_not_a_turn_taking_loop",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "extends",
+      "description": "the same 'the file decides, not the model' discipline, now across pipeline stages: 'take turns' is a sort key and 'visibility into prior outputs' is a dependency, both already primitives the ledger had"
+    },
+    {
+      "id": "edge_seq_protocol_instantiates_roles",
+      "source": "concept_the_sequential_protocol_is_a_stage_column_plus_dependency_threading_not_a_turn_taking_loop",
+      "target": "emergent_self_organizing_roles",
+      "type": "instantiates",
+      "description": "turns the paper's Sequential protocol into a concrete minimal mechanism - a stage field plus dependency threading - with no turn-taking loop and no coordinator holding the turn"
+    },
+    {
+      "id": "edge_seq_protocol_pairs_with_pheromone",
+      "source": "concept_the_sequential_protocol_is_a_stage_column_plus_dependency_threading_not_a_turn_taking_loop",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "informs",
+      "description": "the deterministic half of the substrate; the pheromone layer is the half that says WHICH ready task_ref an agent should pick up when several are available at the current stage"
     }
   ]
 }

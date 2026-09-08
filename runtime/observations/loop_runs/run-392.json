@@ -1,0 +1,41 @@
+{
+  "run": 392,
+  "increment": "Week-1 build list item 2: task_ledger.py gains a `stage` field (research->draft->critique->final, orthogonal to status). The Sequential protocol that 'Drop the Hierarchy and Roles' found beats both extremes turns out to be two primitives the ledger already had: 'visibility into prior outputs' IS a dependency (_deps_done blocks a draft until its research is done; next_stage() adds the follow-on with deps=[tid]), and 'take turns' IS a sort key (next_ready() sorts by (STAGE_RANK, created, id), so all ready research goes out before any draft). No coordinator, no turn pointer. by_stage=False restores the flat queue; a pre-392 task with no stage key defaults to research gracefully; next_stage past 'final' raises. task_ledger selftest 21 checks GREEN (+9). One transient selftest_all RED on the first post-patch run that named no failing check and did not reproduce in 10 reruns - task_ledger's own selftest (isolated tmpdir) passed 100%; likely a Windows fs race, flagged not buried. +1 node, +4 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/task_ledger.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-392.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 392 OK · VALID · graph +1n/+4e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.89 · files +1~3-0 · novelty 1.00"
+}
