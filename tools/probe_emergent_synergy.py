@@ -354,6 +354,11 @@ def _selftest():
     try:
         _sl = sweep(rounds=80, policy_factory=lambda arm: model_agents(
             __import__("call_model").call_model))
+        # EQUALITY IS INTENTIONAL here: the three arms are the experiment's design, a
+        # closed set. A fourth arm SHOULD break this and make someone think about what
+        # the assess() thresholds now mean. Contrast the acceptance-gate footprint check
+        # (run 379), where an exact key set was accidental brittleness and became a
+        # superset test. Marked so the difference is legible without re-deriving it.
         checks["sweep(policy_factory=model_agents(call_model)) runs (AU_MODEL_BACKEND=fake)"] = (
             set(_sl) == {"control", "personas", "meta"})
     except Exception as e:

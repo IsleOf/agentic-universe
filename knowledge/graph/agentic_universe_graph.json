@@ -11386,6 +11386,33 @@
       "evidence_links": [
         "tools/acceptance_gate.py"
       ]
+    },
+    {
+      "id": "concept_three_salient_instances_are_not_a_class_check_before_generalising_the_fix",
+      "label": "Three brittle assertions in one session read as a systemic pattern; auditing the codebase found only two more and both were INTENTIONAL - the generalisation was wrong, and one grep was the whole cost of finding out",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "self_improving_harness",
+      "branch_key": "self_improving_harness:observability",
+      "confidence": 0.68,
+      "description": "Run 380. Across runs 368, 371 and 379 a hard-coded equality assertion of mine broke on a legitimate extension - a line count, then an exact key set, then the same key set again. By the third I had written 'the pattern is clear enough to state' and was preparing to apply the run-367 lesson (a fix applied to the instance leaves the class untouched) to my own selftests. The audit found TWO further exact-equality assertions in the whole toolchain, and both are CORRECT: `set(arms) == {control, personas, meta}` guards a closed experimental design where a fourth arm SHOULD break the test and force a rethink of the thresholds; and `committed == [(500, 'accept')] and len(applied) == 1` encodes exactly-once apply, which loosening to >= would silently permit a double-apply. Zero brittle assertions against live or growing corpora. So the class did not exist. Three salient instances in close succession FELT systemic and were simply three. Generalising would have produced a batch of 'fixes' that removed real guarantees - the exactly-once check especially, which is precisely the kind of property a reflexive superset-ification destroys. WHAT THE AUDIT DID FIND, and it is the useful residue: intentional equality and accidental equality are INDISTINGUISHABLE BY READING. The remedy is not to change either assertion but to mark the intentional ones, which is now done in both places with the reason. The general shape: an availability-driven generalisation from a recent salient run is cheap to test and expensive to act on unchecked. Run 365 already logged the mirror-image risk - predicting a direction before measuring it - and this is the same discipline applied to a pattern claim rather than a numeric one.",
+      "tags": [
+        "over-generalisation",
+        "availability-bias",
+        "negative-result",
+        "selftest-hygiene",
+        "intentional-vs-accidental",
+        "found-in-own-loop"
+      ],
+      "derived_from": [
+        "tools/probe_emergent_synergy.py",
+        "tools/research_worker.py",
+        "audit of tools/*.py, run 380"
+      ],
+      "evidence_links": [
+        "tools/research_worker.py"
+      ]
     }
   ],
   "edges": [
@@ -27536,6 +27563,20 @@
       "target": "artifact_acceptance_gate",
       "type": "grounds",
       "description": "TOUCH_SURFACE_FLAG at 2x the observed historical max, flagged on every certificate"
+    },
+    {
+      "id": "edge_three_instances_refines_instance_vs_class",
+      "source": "concept_three_salient_instances_are_not_a_class_check_before_generalising_the_fix",
+      "target": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
+      "type": "refines",
+      "description": "the converse case: run 367 warned that a fix stops at the instance, and this is the opposite error - generalising to a class that turned out not to exist"
+    },
+    {
+      "id": "edge_three_instances_extends_derived_threshold",
+      "source": "concept_three_salient_instances_are_not_a_class_check_before_generalising_the_fix",
+      "target": "concept_derive_a_threshold_from_your_own_history_rather_than_defer_it_or_invent_it",
+      "type": "extends",
+      "description": "same discipline, different object: run 379 measured before setting a number, this measured before acting on a pattern claim"
     }
   ]
 }

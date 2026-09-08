@@ -179,6 +179,9 @@ def _selftest():
     rec = c.conduct(500, recent_kinds=["fold", "build", "doc"], frontier_swept=True,
                     use_corpus=False)
     checks["conduct() runs end to end with the fake worker and accepts the no-op"] = (
+        # EQUALITY IS INTENTIONAL: exactly-once apply and exactly-one commit ARE the
+        # properties under test, not incidental shapes. Loosening these to >= would
+        # silently permit a double-apply.
         rec.accepted and committed == [(500, "accept")] and len(applied) == 1)
     checks["the accepted run carries a certificate"] = rec.certificate is not None
 
