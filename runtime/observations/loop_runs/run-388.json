@@ -1,0 +1,53 @@
+{
+  "run": 388,
+  "increment": "Folded arXiv:2609.04280 (EVOHARNESSBENCH, 2026-09-03) - harness expansion ALONE degrades previously-solved tasks, adaptation gains are inconsistent, and retention and adaptation pull in different directions. This loop is an evolving harness on all three of its axes. MEASURED the local gap: verify_loop_edit has one non-test caller, acceptance_gate.check(), which sees PROPOSALS only; adding a tool, a probe arm or a selftest job never reaches it (exec_guard guards JOB removal, not addition). Runs 382-387 added 922 lines to tools/, one tool, one job, two probe arms - and issued ZERO certificates against a log of 183. COUNTERWEIGHT stated honestly: selftest_all IS the paper's deployment evaluation and has stayed GREEN; it measures component self-consistency, not task competence, which is exactly the paper's second setting and the one this project lacks. BUILT the cheap half only: loop_session._harness_delta() records per run whether tools/, skills/ or runtime/harness/ were touched and whether the certificate log GREW, flagging unevaluated_expansion. DID NOT wire expansion into the gate - that changes the loop's own acceptance path and is owner-gated. +2 nodes, +6 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 2,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/loop_session.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": true,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.04280",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.04280",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.04280",
+    "src:https://arxiv.org/abs/2609.04280"
+  ],
+  "trace_file": "runtime\\traces\\loop-388.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 388 OK · VALID · graph +2n/+6e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.90 · files +1~3-0 · novelty 0.33!"
+}

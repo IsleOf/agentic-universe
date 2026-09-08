@@ -11677,6 +11677,62 @@
       "evidence_links": [
         "tools/param_invariance_audit.py"
       ]
+    },
+    {
+      "id": "concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation",
+      "label": "EVOHARNESSBENCH: adding capabilities to an agent's harness degrades performance on previously solved tasks (harness-induced forgetting), adaptation gains are inconsistent, and retention and adaptation pull in different directions",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:self_rebuild",
+      "confidence": 0.74,
+      "description": "arXiv:2609.04280 (Ke, Patil, Shi, Li, Liu, Shekkizhar, Koul, Wang, Nguyen, Yavuz, Bansal, Joty; v1 2026-09-03, VERIFIED via abstract). Introduces EVOHARNESSBENCH, a benchmark for agents under CONTROLLED HARNESS EVOLUTION along three axes - tools, skills, and specialist agents. The design choice that makes it relevant here: existing continual-learning benchmarks put the non-stationarity in the TASK STREAM and hold the harness fixed; this puts the non-stationarity in the EXTERNALLY SUPPLIED HARNESS ITSELF. 17 multi-stage harness streams built deterministically from verifier-based benchmarks: 802 tasks, 520 tools, 42 skills, 62 agents. TWO SETTINGS. Deployment evaluation isolates RETENTION of previously accessible competence as the harness expands. Self-evolving adaptation evaluation tests whether accumulated experience stays useful as new capabilities arrive. THREE PERSISTENT GAPS. (1) HARNESS EXPANSION ALONE CAN DEGRADE PERFORMANCE ON PREVIOUSLY SOLVED TASKS - harness-induced forgetting, with no change to the tasks and no change to the policy. (2) Gains from self-evolving adaptation are inconsistent across evolution stages, capability axes and environments. (3) Retention and adaptation PULL IN DIFFERENT DIRECTIONS: preserving earlier competence does not necessarily improve adaptation to new capabilities, and vice versa. WHY THIS IS THE MOST DIRECTLY APPLICABLE PAPER THIS PROJECT HAS FOLDED. This loop IS an evolving harness, on all three of the paper's axes, and has been for 388 runs: it adds tools, induces skills, and registers probes and selftest jobs on its own initiative. Finding (1) says that is not a free action. CURRENCY: 2026-09-03, days old at fold. The claim is about contemporary agent harnesses and is the kind of result that could soften as models get better at tool selection over large toolsets - but the mechanism, more capabilities meaning more ways to choose wrong, is not obviously generation-bound.",
+      "tags": [
+        "harness-evolution",
+        "harness-induced-forgetting",
+        "retention",
+        "adaptation",
+        "continual-learning",
+        "self-improving-harness",
+        "benchmark",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.04280"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.04280"
+      ]
+    },
+    {
+      "id": "concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion",
+      "label": "This project's retention gate fires on PROPOSALS, never on harness expansion: 183 certificates, zero across runs 382-387, which added 922 lines of tools, a new tool, a new selftest job and two probe arms",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:self_rebuild",
+      "confidence": 0.88,
+      "description": "Run 388, measured while folding arXiv:2609.04280. That paper's first finding is that HARNESS EXPANSION ALONE degrades previously-solved tasks. This project has the instrument to detect that - a frozen held-out task set (holdout_tasks), a second independently-implemented scorer (holdout_verifier2), and improvement_loop.verify_loop_edit which rejects on regression and treats verifier disagreement conservatively. The instrument is good. IT IS WIRED TO THE WRONG EVENT. verify_loop_edit is reachable from exactly one non-test call site: acceptance_gate.check(), which adjudicates PROPOSALS - graph patches and policy edits. Adding a file to tools/, an arm to a probe, or a job to selftest_all's JOBS list does not route through it. exec_guard watches selftest_all for manifest SHRINKAGE, so job REMOVAL is guarded; job ADDITION is not. MEASURED over runs 382-387: +922 insertions across tools/, one new tool file (param_invariance_audit.py), one new selftest job, two new probe arms (extractor-evasion and dual-extractor), roughly 40 new selftest checks. Certificates issued in that window: ZERO. The gate log holds 183 entries, none of them from these six runs. Harness expansion on all three of the paper's axes, with no retention evaluation at any point. THE HONEST COUNTERWEIGHT, because the gap is narrower than it first looks. selftest_all IS a retention instrument and a real one: 51 jobs re-run every single run, which is structurally the paper's DEPLOYMENT EVALUATION - does previously accessible competence survive the expansion. It has stayed GREEN throughout. What it measures is COMPONENT SELF-CONSISTENCY: every component still passes its own tests. What it cannot measure is TASK COMPETENCE - whether the loop still chooses well now that it has more tools to choose among. A tool can keep passing its own tests while the system around it gets worse at using it. That distinction is exactly the paper's two settings, and this project has the first and not the second. FINDING (3) ALSO HAS A LOCAL INSTANCE, made by instinct rather than by measurement: run 385 added an adaptive threshold to cohort_monitor (adaptation) while deliberately defaulting signal_correlation to 0.0 so existing behaviour was bit-identical (retention). That was the retention/adaptation tension being traded off by judgement. The paper says the tension is real and does not resolve itself, which retrospectively supports the caution but also says the judgement was unmeasured. WHAT WOULD CLOSE IT, stated as a requirement rather than built here: harness expansion should be an event the retention gate can see. The cheapest honest version is not a new gate but a TRIGGER - route tool/skill/job additions through the same holdout scoring that proposals get, or at minimum record harness-axis deltas per run so that expansion without evaluation is visible rather than silent.",
+      "tags": [
+        "self-audit",
+        "retention",
+        "harness-evolution",
+        "acceptance-gate",
+        "holdout",
+        "instrument-wired-to-wrong-event",
+        "measured",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.04280"
+      ],
+      "evidence_links": [
+        "tools/acceptance_gate.py",
+        "tools/improvement_loop.py",
+        "runtime/observations/certificates/gate_certificates.jsonl"
+      ]
     }
   ],
   "edges": [
@@ -28128,6 +28184,48 @@
       "target": "concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched",
       "type": "supports",
       "description": "the reason a detector inherits the class is that its author holds the class's assumptions while writing it - so building the detector does not, by itself, move anyone from the instance to the class"
+    },
+    {
+      "id": "edge_harness_evolution_grounds_retention_gap",
+      "source": "concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation",
+      "target": "concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion",
+      "type": "grounds",
+      "description": "the paper's finding (1) is what makes the wiring gap matter: if harness expansion were free, a gate that never fires on it would cost nothing"
+    },
+    {
+      "id": "edge_retention_gap_detects_param_audit",
+      "source": "concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion",
+      "target": "artifact_param_invariance_audit",
+      "type": "constrains",
+      "description": "run 387 added this tool and a 51st selftest job - harness expansion on two of the paper's three axes - and no retention evaluation was triggered by either"
+    },
+    {
+      "id": "edge_retention_gap_constrains_holdout",
+      "source": "concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion",
+      "target": "artifact_phase3_holdout_set",
+      "type": "constrains",
+      "description": "the frozen set is the right instrument and is not the problem; its trigger is. It is reachable only from acceptance_gate.check(), which sees proposals and never sees a new tool, a new probe arm or a new selftest job"
+    },
+    {
+      "id": "edge_retention_gap_detects_gate",
+      "source": "concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion",
+      "target": "artifact_acceptance_gate",
+      "type": "detects",
+      "description": "183 certificates, zero across runs 382-387, over six runs that added 922 lines to tools/. The gate is not failing to decide correctly - it is never being asked"
+    },
+    {
+      "id": "edge_harness_evolution_challenges_self_rebuild",
+      "source": "concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation",
+      "target": "artifact_self_rebuild_v2_plan",
+      "type": "challenges",
+      "description": "the v2 spine's premise is a harness that rebuilds itself; this says expansion along exactly those axes degrades previously-solved competence on its own, and that retention and adaptation cannot both be optimised by assuming they agree"
+    },
+    {
+      "id": "edge_harness_evolution_constrains_skill_induction",
+      "source": "concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation",
+      "target": "pattern_skill_induction",
+      "type": "constrains",
+      "description": "skill induction is the paper's SKILLS axis running unattended in this project: every induced skill is a harness expansion whose retention cost is currently unmeasured"
     }
   ]
 }

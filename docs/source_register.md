@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 394 nodes, 1593 edges · **Date:** 2026-09-05
+**Graph at generation:** 396 nodes, 1599 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -364,6 +364,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.01056 — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation`
 - https://arxiv.org/abs/2609.01873 — `concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation`, `concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum`
 - https://arxiv.org/abs/2609.03422 — `concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it`
+- https://arxiv.org/abs/2609.04280 — `concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation`, `concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion`
 - https://arxiv.org/html/2604.21590v1 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7

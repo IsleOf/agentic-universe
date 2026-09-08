@@ -25,6 +25,7 @@ Pure stdlib.
 """
 from __future__ import annotations
 
+import io
 import json
 import sys
 from pathlib import Path
@@ -257,7 +258,68 @@ class LoopSession:
             "deleted_paths": sorted(deleted),          # in full, never truncated
             "unexpected_paths": unexpected[:20],
             "n_unexpected": len(unexpected),
+            "harness": self._harness_delta(added, modified),
         }
+
+    # Paths that ARE the harness, in the sense arXiv:2609.04280 uses: the tools,
+    # skills and specialist agents that shape what an agent can observe and do.
+    _HARNESS_PREFIXES = ("tools/", "skills/", "runtime/harness/")
+
+    def _harness_delta(self, added, modified):
+        """Did this run EXPAND THE HARNESS, and was that expansion evaluated? (run 388)
+
+        arXiv:2609.04280 (EVOHARNESSBENCH) finds that harness expansion ALONE degrades
+        performance on previously solved tasks - harness-induced forgetting, with no
+        change to the tasks and no change to the policy. This loop is an evolving
+        harness on all three of that paper's axes and has been for 388 runs.
+
+        This project already owns the instrument that would catch it: the frozen
+        holdout_tasks set, a second independent scorer in holdout_verifier2, and
+        improvement_loop.verify_loop_edit. Run 388 measured where that instrument is
+        wired and found it fires on PROPOSALS only - acceptance_gate.check() is its one
+        non-test caller. Adding a file to tools/, an arm to a probe, or a job to
+        selftest_all's JOBS never reaches it. Over runs 382-387 the loop added 922 lines
+        to tools/, one new tool, one new selftest job and two probe arms, and issued
+        ZERO certificates.
+
+        This does not fix that. Wiring harness expansion into the retention gate is a
+        change to the loop's own acceptance path and belongs behind the owner's
+        promotion step, not in a run that noticed the gap. What it does is make the gap
+        VISIBLE PER RUN rather than silent: expansion is recorded, and when it happens
+        without a retention evaluation, the run summary says so.
+
+        `retention_evaluated` is deliberately conservative - it asks whether the gate
+        certificate log GREW during this run, not whether a gate exists. An instrument
+        that reports on its own behalf is how the run-368 accept-only log happened.
+        """
+        expanded = sorted(set(p for p in list(added) + list(modified)
+                              if p.startswith(self._HARNESS_PREFIXES)))
+        new_files = sorted(p for p in added if p.startswith(self._HARNESS_PREFIXES))
+        return {
+            "expanded": bool(expanded),
+            "paths": expanded[:20],
+            "n_paths": len(expanded),
+            "new_harness_files": new_files,
+            "retention_evaluated": self._certificates_grew(),
+            "unevaluated_expansion": bool(expanded) and not self._certificates_grew(),
+        }
+
+    _CERT_LOG = "runtime/observations/certificates/gate_certificates.jsonl"
+
+    def _certificates_grew(self):
+        """True only if the gate's certificate log has MORE lines than at HEAD. Returns
+        False when the log is missing or unreadable - the conservative direction, since
+        the claim being made is 'this expansion was evaluated'."""
+        import subprocess
+        try:
+            here = ROOT / self._CERT_LOG
+            now = sum(1 for l in io.open(here, encoding="utf-8") if l.strip()) if here.exists() else 0
+            r = subprocess.run(["git", "show", f"HEAD:{self._CERT_LOG}"], cwd=ROOT,
+                               capture_output=True, text=True, timeout=30)
+            was = sum(1 for l in r.stdout.splitlines() if l.strip()) if r.returncode == 0 else 0
+            return now > was
+        except Exception:
+            return False
 
     def _write_summary(self, ok):
         RUN_SUMMARY_DIR.mkdir(parents=True, exist_ok=True)
@@ -423,6 +485,26 @@ def _selftest():
         checks["an explicit graph_write survives the auto-derivation"] = (
             c["graph_delta"] == {"nodes": 2, "edges": 5})
         (RUN_SUMMARY_DIR / "run-996.json").unlink()
+        # --- run 388: harness expansion must be visible per run ---
+        _ls = LoopSession(run_no=0, increment="probe")
+        _hd = _ls._harness_delta(["tools/new_thing.py"], ["docs/auto_sweep_x.md"])
+        checks["a new file under tools/ counts as harness expansion"] = (
+            _hd["expanded"] and _hd["new_harness_files"] == ["tools/new_thing.py"])
+        checks["a docs-only change is NOT harness expansion"] = (
+            not _ls._harness_delta([], ["docs/auto_sweep_x.md"])["expanded"])
+        checks["skills/ and runtime/harness/ are harness axes too"] = (
+            _ls._harness_delta(["skills/s/SKILL.md"], [])["expanded"]
+            and _ls._harness_delta([], ["runtime/harness/x.json"])["expanded"])
+        checks["expansion without a new certificate is flagged unevaluated"] = (
+            _hd["unevaluated_expansion"] is True or _hd["retention_evaluated"] is True)
+        # the conservative direction: a missing/unreadable cert log must not claim evaluation
+        _ls2 = LoopSession(run_no=0, increment="probe")
+        _ls2._CERT_LOG = "runtime/observations/certificates/does_not_exist.jsonl"
+        checks["a missing certificate log reports NOT evaluated, never evaluated"] = (
+            _ls2._certificates_grew() is False)
+        checks["...so a no-expansion run is not falsely flagged"] = (
+            not _ls2._harness_delta([], [])["unevaluated_expansion"])
+
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         (RUN_SUMMARY_DIR / "run-999.json").unlink()  # clean the selftest artifact
