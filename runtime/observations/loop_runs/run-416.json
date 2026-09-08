@@ -1,0 +1,51 @@
+{
+  "run": 416,
+  "increment": "Folded arXiv:2609.05227 (CABAL: Multi-Agent Simulacra for Tracing the Effects of Collusive Bidding in Peer Review; Zhou et al.; 2026-09-04). LLM reviewer agents with honest or collusive policies in a fixed conference environment. Affinity-guided collusive bidding: use mutual reviewer-paper affinities to build rings and pick targets, producing EXPERTISE-CONSISTENT attacks. More than 2x target-paper capture; colluders score targets ~2 pts higher; conference-wide effects modest (damage stays local); bid-phase detectors confounded by benign affinity. WHY IT LANDS: a worked instance of the detection gap in concept_human_anti_collusion_mechanisms_map_to_agents_with_four_structural_gaps. Bears on the substrate: G4's '>= 2 independent validators' assumes independence, and a ring supplies validators who each pass every per-agent check with affinity-consistent apparent independence - the run-401 quorum-laundering finding one level up (a REAL pass from a coordinated agent, not a forged one), which signed writes and identity normalisation do not touch. Expertise-consistent, so the register-drift monitors (404-405) do not fire. +1 node, +6 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.05227",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.05227",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.05227",
+    "src:https://arxiv.org/abs/2609.05227"
+  ],
+  "trace_file": "runtime\\traces\\loop-416.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 416 OK · VALID · graph +1n/+6e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.85 · files +1~2-0 · novelty 0.80 · acts fold40%"
+}
