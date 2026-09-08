@@ -33,6 +33,11 @@ Validate a project graph with:
 
 ## Instructions to give each agent
 
+**Current (run 358): use `codex_mapping_prompt.md`** — the full paste-ready briefs, written
+against the real state of both repos (poly-bot needs a *refresh* pass, its map is stamped
+2026-09-07 and the code has moved; poster-studio needs the *first* pass, nothing landed).
+The two short blurbs below are the earlier run-321 versions, kept for the priority lists.
+
 ### poly-bot session (Codex / AGY fleet)
 > Read `docs/audits/poly-bot/{PROJECT_STATE.md, poly-bot_project_graph.json,
 > watchdog_ledger_integration.md}`. First-pass from a 2026-09-07 read — verify and fill the
