@@ -21,7 +21,11 @@ WHY A GATE HERE CANNOT BECOME A PERMANENT AUTHORITY (the request's concern):
      uses. A later agent can post a contradicting `warning` and reopen the task.
   4. QUORUM, NOT VETO (G4). One validator can `flag` (post a warning) but not
      `block`. Release needs `min_quorum` independent PASS annotations, or one
-     validator plus a passing computable check as the second "voter".
+     validator plus a passing computable check as the second "voter". G4 also
+     REPORTS `single_evidence_domain` when the task's whole evidence basis is one
+     source — a quorum on it has a structural epistemic cut of 1 no matter how
+     many vote (arXiv:2609.02925) — and `quorum_homogeneous` for a copy-pasted
+     ring (arXiv:2609.05227). Both are reports, never blocks.
 
 NO MODEL CALLS. The fuzzy part — judging whether a claim is actually supported —
 is the caller's; the gate checks the mechanical, verifiable things and reports the
@@ -61,6 +65,39 @@ _CITE_RE = re.compile(r"(\[[^\]]+\]|\(arxiv:[^)]+\)|https?://|\^\d+|\bsee\s+\w+\
 
 class GateRefused(RuntimeError):
     """The rotation / self-review rules will not let this agent gate this task."""
+
+
+_ARXIV_RE = re.compile(r"(?:arxiv:\s*|arxiv\.org/(?:abs|pdf)/)(\d{4}\.\d{4,5})", re.I)
+
+
+def _evidence_root(link):
+    """Normalise one evidence link to its FAULT ROOT — the thing that, if wrong,
+    is wrong for everyone who relies on this link. Two links with the same root
+    are not independent evidence (arXiv:2609.02925)."""
+    s = str(link).strip()
+    m = _ARXIV_RE.search(s)
+    if m:
+        return f"arxiv:{m.group(1)}"
+    if s.startswith(("http://", "https://")):
+        rest = s.split("://", 1)[1]
+        return "web:" + rest.split("/", 1)[0].casefold()      # the netloc
+    return "repo:" + s.split("#", 1)[0].split(":", 1)[0].strip("/").casefold()
+
+
+def _evidence_basis(task_ref, pheromone):
+    """The distinct fault roots the task's evidence rests on, read from the most
+    recent G1 PASS verdict's recorded links. Returns a sorted list, or None when
+    no G1 verdict recorded links (unknown, NOT zero — an instrument that cannot
+    measure its input must say so, not return a plausible number)."""
+    anns = pheromone.read(task_ref)["annotations"]
+    g1_passes = [a for a in anns
+                 if a["kind"] == "claim" and isinstance(a.get("evidence"), dict)
+                 and a["evidence"].get("gate") == "G1" and a["evidence"].get("pass")
+                 and isinstance(a["evidence"].get("evidence_links"), list)]
+    if not g1_passes:
+        return None
+    links = g1_passes[-1]["evidence"]["evidence_links"]
+    return sorted({_evidence_root(x) for x in links if str(x).strip()})
 
 
 def _norm(aid):
@@ -163,7 +200,11 @@ def g1_evidence(task_ref, artifact_text, *, evidence_links, validator_agent, phe
     return _write_verdict(task_ref, pheromone, gate="G1", validator_agent=validator_agent,
                           passed=passed, reasons=reasons,
                           extra={"n_links": len(links), "n_uncited_claims": len(uncited),
-                                 "n_open_clarifications": len(open_asks)})
+                                 "n_open_clarifications": len(open_asks),
+                                 # Run 430 (arXiv:2609.02925): record the LINKS, not just
+                                 # the count, so G4 can compute the task's evidence basis
+                                 # width — the ceiling on any quorum's epistemic cut.
+                                 "evidence_links": list(links)})
 
 
 def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quorum=2):
@@ -225,6 +266,20 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
         quorum_homogeneous = (len(confs) == 1
                               and len(set(reasons_sets)) <= 1)
 
+    # Run 430 (arXiv:2609.02925, "The Illusion of Independent Quorums"): a quorum's
+    # real resilience is the STRUCTURAL EPISTEMIC CUT — the min number of fault roots
+    # whose failure reaches a decisive coalition — not the vote count. The substrate
+    # captures no per-validator evidence lineage, so it cannot compute a true kappa_E.
+    # What it CAN compute is the ceiling: kappa_E <= the number of distinct fault
+    # roots the task's evidence rests on. If the whole basis is one source, every
+    # validator who checked it is in one fault domain and a quorum adds no
+    # independence (1->7 reviewers held ~96-100% unsafe-commit rate in the paper).
+    # REPORT (never block) — same posture as quorum_homogeneous. `basis is None`
+    # means no G1 verdict recorded links: unknown, so do not flag.
+    basis = _evidence_basis(task_ref, pheromone)
+    evidence_basis_width = None if basis is None else len(basis)
+    single_evidence_domain = evidence_basis_width is not None and evidence_basis_width <= 1
+
     voters = 1 + len(prior_g4_pass) + (1 if computable_ok else 0)
     passed = True
     if not computable_ok:
@@ -246,12 +301,19 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
         reasons.append("REPORT: the prior G4 passes are homogeneous (identical confidence "
                        "and reasoning) - weak signal of a coordinated validator ring "
                        "(arXiv:2609.05227); not a block, review the validators")
+    if single_evidence_domain:
+        reasons.append(f"REPORT: the task's entire evidence basis is {evidence_basis_width} "
+                       f"distinct source(s) ({basis}); a quorum on a single-source basis has "
+                       f"a structural epistemic cut of 1 (arXiv:2609.02925) - more validators "
+                       f"do not add independence, widen the evidence basis. Not a block")
     return _write_verdict(task_ref, pheromone, gate="G4", validator_agent=validator_agent,
                           passed=passed, reasons=reasons,
                           extra={"quorum": voters, "min_quorum": min_quorum,
                                  "live_warnings": len(live_warnings),
                                  "counted_prior_pass_ids": counted_pass_ids,
-                                 "quorum_homogeneous": quorum_homogeneous})
+                                 "quorum_homogeneous": quorum_homogeneous,
+                                 "evidence_basis_width": evidence_basis_width,
+                                 "single_evidence_domain": single_evidence_domain})
 
 
 # --------------------------------------------------------------------------- #
@@ -398,6 +460,48 @@ def _selftest():
         checks["a varied quorum is NOT flagged homogeneous"] = (
             not g4_release("t", validator_agent="x4", pheromone=pfv,
                            computable_ok=True, min_quorum=4)["quorum_homogeneous"])
+
+        # --- run 430: single-evidence-domain report (arXiv:2609.02925) ---
+        pfe = Pheromone(tmp / "efd.db")
+        # a task whose G1 pass cited ONE arxiv link -> basis width 1 -> flagged
+        g1_evidence("e1", "SwarmSys reports +11.9% (arXiv:2510.10047).",
+                    evidence_links=["https://arxiv.org/abs/2510.10047"],
+                    validator_agent="v1", pheromone=pfe)
+        ve = g4_release("e1", validator_agent="v2", pheromone=pfe,
+                        computable_ok=True, min_quorum=2)
+        checks["G4 flags single_evidence_domain when the basis is one source"] = (
+            ve["single_evidence_domain"] and ve["evidence_basis_width"] == 1
+            and any("structural epistemic cut of 1" in r for r in ve["reasons"]))
+        checks["G4 single-domain report still passes (a REPORT, not a block)"] = ve["pass"]
+
+        # a task with two INDEPENDENT roots (an arxiv paper + a repo file) -> not flagged
+        pfe2 = Pheromone(tmp / "efd2.db")
+        g1_evidence("e2", "The relay ports the handoff [see relay.py].\n"
+                    "SwarmSys reports +11.9% (arXiv:2510.10047).",
+                    evidence_links=["tools/relay.py", "https://arxiv.org/abs/2510.10047"],
+                    validator_agent="v1", pheromone=pfe2)
+        ve2 = g4_release("e2", validator_agent="v2", pheromone=pfe2,
+                         computable_ok=True, min_quorum=2)
+        checks["G4 does NOT flag a two-root evidence basis"] = (
+            not ve2["single_evidence_domain"] and ve2["evidence_basis_width"] == 2)
+
+        # two links to the SAME arxiv paper (abs + pdf) collapse to one root
+        pfe3 = Pheromone(tmp / "efd3.db")
+        g1_evidence("e3", "x (arXiv:2510.10047).",
+                    evidence_links=["https://arxiv.org/abs/2510.10047",
+                                    "https://arxiv.org/pdf/2510.10047"],
+                    validator_agent="v1", pheromone=pfe3)
+        ve3 = g4_release("e3", validator_agent="v2", pheromone=pfe3,
+                         computable_ok=True, min_quorum=2)
+        checks["two links to one paper (abs + pdf) count as one fault root"] = (
+            ve3["evidence_basis_width"] == 1 and ve3["single_evidence_domain"])
+
+        # no G1 verdict on the task -> width is UNKNOWN (None), not flagged
+        pfe4 = Pheromone(tmp / "efd4.db")
+        ve4 = g4_release("e4", validator_agent="v2", pheromone=pfe4,
+                         computable_ok=True, min_quorum=2)
+        checks["G4 reports width=None (unknown) when no G1 verdict recorded links"] = (
+            ve4["evidence_basis_width"] is None and not ve4["single_evidence_domain"])
 
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
