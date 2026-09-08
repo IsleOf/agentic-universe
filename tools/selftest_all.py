@@ -45,6 +45,7 @@ JOBS = [
     ("cohort_monitor.py", ["selftest"]),
     ("executor_pool.py", ["selftest"]),
     ("probe_memory_horizon.py", ["selftest"]),
+    ("probe_governance_lever.py", ["selftest"]),
     ("probe_epistemic_market.py", ["selftest"]),
     ("probe_identity_masking.py", ["selftest"]),
     ("probe_adversarial_collaboration.py", ["selftest"]),

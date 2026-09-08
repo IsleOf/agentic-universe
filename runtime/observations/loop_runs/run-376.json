@@ -1,0 +1,31 @@
+{
+  "run": 376,
+  "increment": "build tools/probe_governance_lever.py - make the run-375 mechanism-design vs preference-engineering tension falsifiable on a commons; preference out-yields the cap 285 vs 223 at full adoption, mechanism wins from 12.5 pct defection, and stacking both gives mechanisms yield not preferences",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 3
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-376.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 376 OK · VALID · graph +1n/+3e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.92 · files +2~3-0 · novelty 1.00"
+}

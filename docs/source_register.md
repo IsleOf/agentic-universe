@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 381 nodes, 1545 edges · **Date:** 2026-09-05
+**Graph at generation:** 382 nodes, 1548 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -355,7 +355,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2606.23764 — `concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules`
 - https://arxiv.org/abs/2607.07368 — `artifact_cohort_monitor`, `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it` +1
 - https://arxiv.org/abs/2608.03609 — `concept_replace_a_name_blacklist_with_a_shape_whitelist_to_get_equivariance_for_free`, `concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate`
-- https://arxiv.org/abs/2608.07280 — `concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes`
+- https://arxiv.org/abs/2608.07280 — `artifact_probe_governance_lever_rig`, `concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes`
 - https://arxiv.org/abs/2608.20099 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
 - https://arxiv.org/abs/2608.23552 — `concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability`
 - https://arxiv.org/abs/2609.01056 — `concept_a_gate_that_scores_only_whether_an_edit_helps_cannot_see_what_it_disturbed`, `concept_multilingual_agents_reach_49pct_and_all_models_trade_correctness_against_environment_preservation`
@@ -413,6 +413,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/probe_emergent_synergy.py — `artifact_probe_emergent_synergy_rig`
 - tools/probe_epistemic_market.py — `artifact_probe_epistemic_market_rig`
 - tools/probe_epistemic_sybil.py — `artifact_probe_epistemic_sybil_rig`, `concept_all_five_v2_probe_adapters_are_live_wired`
+- tools/probe_governance_lever.py — `artifact_probe_governance_lever_rig`
 - tools/probe_identity_masking.py — `artifact_probe_identity_masking_rig`
 - tools/probe_idle_agent.py — `artifact_probe_idle_agent_rig`
 - tools/probe_memory_horizon.py — `artifact_probe_memory_horizon_rig`

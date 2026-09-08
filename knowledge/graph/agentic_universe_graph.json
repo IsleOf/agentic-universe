@@ -11331,6 +11331,35 @@
       "evidence_links": [
         "https://arxiv.org/abs/2608.07280"
       ]
+    },
+    {
+      "id": "artifact_probe_governance_lever_rig",
+      "label": "Governance-lever probe: mechanism design vs preference engineering on a commons - preference yields 28% more at full adoption, mechanism wins from 12.5% defection, and stacking both gives mechanism's yield, not preference's",
+      "type": "artifact",
+      "status": "to_test",
+      "verification_state": "validated",
+      "approach_family": "emergent_behaviors",
+      "branch_key": "emergent_behaviors:governance",
+      "confidence": 0.6,
+      "description": "tools/probe_governance_lever.py (run 376). Run 375 folded MARP and recorded a live tension rather than resolving it: one node says govern by MECHANISM DESIGN in institution-space, the other fits a collective PREFERENCE model - and both report working. This rig makes the tension falsifiable on a common-pool resource game (the Harvest-Game shape MARP uses). THE TRAP IT HAD TO AVOID: modelling mechanism as an unevadable constraint and preference as an internal weight makes mechanism win by definition. So each lever carries its real cost - mechanism is COARSE (one cap for heterogeneous agents) and needs MONITORING (a violation is clipped only with probability `detect`); preference is FINE-GRAINED and needs no monitoring but is completely inert on an agent that never adopted it. RESULTS (sustain rate / mean yield, 200 episodes per cell): ungoverned always collapses (0.00 / 70). At FULL ADOPTION preference out-yields the cap 285 vs 223 - about 28% more, because fine-grained restraint has no deadweight loss - and both sustain. The CROSSOVER is at 12.5% defection, one agent in eight: preference sustain falls 1.00 -> 0.72, and by 25% defection it has collapsed to 0.04 while mechanism still holds at 1.00. Imperfect monitoring is what mechanism pays for that robustness: at detect=0.9 it loses 0.65 of sustain rate, because a cap with little headroom cannot absorb even occasional evasion. THE RESULT I DID NOT PREDICT, and the practically useful one: stacking BOTH levers sustains everywhere but yields ~220 - no better than mechanism alone, and well below preference's 285. The cap binds first, so the preference model adds nothing on top of it. If you expect ANY defection you are choosing mechanism's yield whether or not you also do preference engineering; the levers do not compose additively. HONESTY BOUND, asserted by the selftest: the two cost structures are ASSUMPTIONS the sim encodes, not results it produces. What follows from them - the crossover point, its monitoring sensitivity, the non-composition - is the contribution. CALIBRATION NOTE: the first parameterisation set the cap at 1.9/agent = 15.2 per round against a commons whose logistic regrowth peaks at 7.0 per round, so every arm collapsed and the rig measured only that the cap was not a cap. Recomputed from the regrowth curve rather than guessed.",
+      "tags": [
+        "governance",
+        "mechanism-design",
+        "preference-engineering",
+        "commons",
+        "crossover",
+        "monitoring-cost",
+        "non-composition",
+        "probe-rig",
+        "assumption-explicit"
+      ],
+      "derived_from": [
+        "tools/probe_governance_lever.py",
+        "https://arxiv.org/abs/2608.07280"
+      ],
+      "evidence_links": [
+        "tools/probe_governance_lever.py"
+      ]
     }
   ],
   "edges": [
@@ -27446,6 +27475,27 @@
       "target": "emergent_social_conventions",
       "type": "refines",
       "description": "conventions emerge from interaction; this says the convention that emerges can be selected by choosing the collective metric the reward model is fit to"
+    },
+    {
+      "id": "edge_govlever_refines_mechanism_design",
+      "source": "artifact_probe_governance_lever_rig",
+      "target": "concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering",
+      "type": "refines",
+      "description": "bounds the claim: mechanism design wins from 12.5% non-adoption onward, but costs 28% of yield at full adoption and needs near-perfect monitoring to hold that advantage"
+    },
+    {
+      "id": "edge_govlever_refines_marp",
+      "source": "artifact_probe_governance_lever_rig",
+      "target": "concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes",
+      "type": "refines",
+      "description": "bounds the other side: a collective preference model is the better lever only while adoption is complete, and is inert on the agents that most need governing"
+    },
+    {
+      "id": "edge_govlever_informs_executable_governance",
+      "source": "artifact_probe_governance_lever_rig",
+      "target": "concept_executable_institutional_governance_beats_constitutional_governance_convergent_2026",
+      "type": "informs",
+      "description": "the monitoring result sharpens executable governance: an external rule is only as strong as detection, and a cap with little headroom cannot absorb occasional evasion"
     }
   ]
 }
