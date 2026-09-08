@@ -165,10 +165,30 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
 
     v = pheromone.read(task_ref)
     live_warnings = [a for a in v["annotations"] if a["kind"] == "warning"]
-    prior_g4_pass = {_norm(a["agent"]) for a in v["annotations"]
-                     if a["kind"] == "claim" and isinstance(a.get("evidence"), dict)
-                     and a["evidence"].get("gate") == "G4" and a["evidence"].get("pass")}
-    prior_g4_pass.discard(_norm(validator_agent))
+
+    # Run 401 (arXiv:2609.01836, authorization laundering): a "prior G4 PASS" is an
+    # authorisation written into shared memory, and a cheater can write one directly
+    # (a kind=claim shaped like a verdict) with no gate run behind it. Two provenance
+    # checks, neither of which needs a signing key:
+    #   (a) a content contributor to this task cannot also be a counted prior
+    #       validator - a real validator only ever posted a gate verdict here;
+    #   (b) the counted annotation ids are returned, so the quorum is auditable
+    #       against the gate's own run log after the fact (bounded event sourcing).
+    # What is NOT closed: a FRESH sock-puppet id posting a fake pass - that is the
+    # same Sybil limitation run 400 recorded; it needs an identity registry.
+    content_contributors = {
+        _norm(a["agent"]) for a in v["annotations"]
+        if not (isinstance(a.get("evidence"), dict) and a["evidence"].get("gate"))
+    }
+    prior_pass_anns = [
+        a for a in v["annotations"]
+        if a["kind"] == "claim" and isinstance(a.get("evidence"), dict)
+        and a["evidence"].get("gate") == "G4" and a["evidence"].get("pass")
+        and _norm(a["agent"]) != _norm(validator_agent)
+        and _norm(a["agent"]) not in content_contributors
+    ]
+    prior_g4_pass = {_norm(a["agent"]) for a in prior_pass_anns}
+    counted_pass_ids = sorted(a["id"] for a in prior_pass_anns)
 
     voters = 1 + len(prior_g4_pass) + (1 if computable_ok else 0)
     passed = True
@@ -190,7 +210,8 @@ def g4_release(task_ref, *, validator_agent, pheromone, computable_ok, min_quoru
     return _write_verdict(task_ref, pheromone, gate="G4", validator_agent=validator_agent,
                           passed=passed, reasons=reasons,
                           extra={"quorum": voters, "min_quorum": min_quorum,
-                                 "live_warnings": len(live_warnings)})
+                                 "live_warnings": len(live_warnings),
+                                 "counted_prior_pass_ids": counted_pass_ids})
 
 
 # --------------------------------------------------------------------------- #

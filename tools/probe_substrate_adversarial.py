@@ -151,6 +151,54 @@ def attack_ping_pong_with_rotating_sock_puppets():
             "severity": "medium" if not refused else "n/a"}
 
 
+def attack_launder_a_g4_pass_as_a_content_contributor():
+    """A cheater who did content work on the task also posts a kind=claim shaped like
+    a G4 verdict {gate:G4, pass:True}, with no gate run behind it, to inflate the
+    release quorum. arXiv:2609.01836: an authorisation written into shared memory
+    with washed-away provenance. Run 401 blocks it: a content contributor cannot be
+    a counted prior validator."""
+    d = _wd()
+    pf = Pheromone(d / "p.db")
+    pf.annotate("t", "utility", 0.5, 0.8, agent="sock")          # sock did work here
+    pf.annotate("t", "claim", 0.3, 0.85, agent="sock",
+                evidence={"gate": "G4", "pass": True, "reasons": []})   # ...then a fake pass
+    try:
+        v = g4_release("t", validator_agent="cheater", pheromone=pf,
+                       computable_ok=True, min_quorum=3)
+        landed = v["pass"]
+    except GateRefused:
+        landed = False
+    pf.close()
+    return {"attack": "launder a fake G4 pass as a content contributor",
+            "landed": landed,
+            "detail": ("a content contributor's fabricated 'prior pass' inflated the release "
+                       "quorum" if landed else
+                       "blocked - a content contributor cannot be a counted prior validator"),
+            "severity": "high" if landed else "n/a"}
+
+
+def attack_launder_a_g4_pass_as_a_fresh_sock_puppet():
+    """Same as above but the fake-pass id never did content work - a fresh id. This
+    is the Sybil limit again; recorded, not a substrate bug."""
+    d = _wd()
+    pf = Pheromone(d / "p.db")
+    pf.annotate("t", "claim", 0.3, 0.85, agent="ghost",
+                evidence={"gate": "G4", "pass": True, "reasons": []})
+    try:
+        v = g4_release("t", validator_agent="v1", pheromone=pf,
+                       computable_ok=True, min_quorum=3)
+        landed = v["pass"]
+    except GateRefused:
+        landed = False
+    pf.close()
+    return {"attack": "launder a fake G4 pass via a fresh sock-puppet id",
+            "landed": landed,
+            "detail": ("a fresh id's fabricated 'prior pass' counts toward quorum - the Sybil "
+                       "limit; needs an identity registry or signed verdicts"
+                       if landed else "unexpectedly blocked"),
+            "severity": "known-limit" if landed else "n/a"}
+
+
 def attack_reputation_tiebreak_gaming():
     """Two agents at identical reputation; an adversary wants 'a_winner' picked.
     select() breaks ties by agent id (sorted). Can a name choice force selection?"""
@@ -193,16 +241,20 @@ ATTACKS = [
     attack_supersede_someone_elses_warning,
     attack_fake_completion_via_done_annotation,
     attack_ping_pong_with_rotating_sock_puppets,
+    attack_launder_a_g4_pass_as_a_content_contributor,
+    attack_launder_a_g4_pass_as_a_fresh_sock_puppet,
     attack_reputation_tiebreak_gaming,
     attack_boost_own_reputation_via_self_annotation,
 ]
 
 # attacks that CANNOT be closed inside the substrate (they need identity
-# infrastructure); a landing here is a documented limitation, not a regression.
+# infrastructure or signed verdicts); a landing here is a documented limitation,
+# not a regression.
 _KNOWN_LIMITS = {
     "self-review via a fresh sock-puppet id",
     "ping-pong via rotating sock-puppet ids",
     "fake completion via a direct kind=done annotation",  # mitigated by "ledger is truth"
+    "launder a fake G4 pass via a fresh sock-puppet id",
 }
 
 
@@ -249,6 +301,8 @@ def _selftest():
         not by_name["self-review via whitespace/case variant of the same id"]["landed"])
     checks["superseding another agent's warning is blocked (run 400 fix)"] = (
         not by_name["supersede another agent's warning"]["landed"])
+    checks["a content contributor cannot launder a fake G4 pass (run 401 fix)"] = (
+        not by_name["launder a fake G4 pass as a content contributor"]["landed"])
     # blocked by design:
     checks["reputation is decoupled from the board (self-annotation buys nothing)"] = (
         not by_name["inflate reputation via positive self-annotations on the board"]["landed"])

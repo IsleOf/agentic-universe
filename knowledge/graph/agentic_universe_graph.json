@@ -12216,6 +12216,34 @@
         "tools/gates.py",
         "tools/probe_substrate_adversarial.py"
       ]
+    },
+    {
+      "id": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "label": "arXiv:2609.01836: an agent's persistent memory IS part of its effective authorization policy - memory writers fabricate authority for up to 50.2% of unauthorized requests, executors act on it 98.6% of the time, and the fix (permissions backed by valid source events) trades utility for safety",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:monitoring",
+      "confidence": 0.72,
+      "description": "arXiv:2609.01836 (Tommaso Cerruti, Mika Okamoto, Ansel Kaplan Erol; v1 2026-09-01, VERIFIED via abstract). Long-running LLM agents carry permissions, restrictions and revocations in persistent memory. When memory MISREPRESENTS that evolving authorization state, the agent's own records grant authority the underlying history never permitted - ENDOGENOUS AUTHORIZATION LAUNDERING, no external attack needed: 'spurious permissions written into memory lead to unauthorized actions as their provenance is washed away'. EAL-Bench, 5 LLM memory writers x 2 executors across procurement, cybersecurity, finance. NUMBERS: under incremental memory updates, writers create false authority for up to 50.2% of unauthorized requests; once false authority is present, executors act on it in 98.6% of trials. So the WRITE path is where the failure originates and the read path barely resists. DEFENCES: (a) require stored permissions to be backed by valid SOURCE EVENTS; (b) track permission changes through BOUNDED EVENT SOURCING. Both cut laundering substantially and both reject more LEGITIMATE actions - a safety-utility tradeoff. Conclusion: persistent memory is not merely a performance component, it is part of the agent's effective authorization policy. WHY THIS LANDS ON THE SWARM SUBSTRATE. pheromone.py's board and task_ledger.py ARE persistent memory carrying coordination-authority state: who contributed, who may gate, what passed. Run 400's cross-author supersede bug was authorization laundering (a cheater deleting a warning, provenance washed away) and its fix (supersede honoured only within one author) IS defence (a). Run 401 found and fixed a second instance: g4_release counted any kind=claim shaped like a G4 verdict {gate:G4, pass:true} toward the release quorum, with no gate run behind it - a fabricated prior approval. The fix: a content contributor to the task cannot be a counted prior validator (defence a, lite), and g4_release now returns counted_prior_pass_ids so the quorum is auditable against the gate's run log after the fact (defence b, lite). WHAT STAYS OPEN: a FRESH sock-puppet id posting a fake pass still counts - the same Sybil limit run 400 recorded. Closing it needs signed verdicts (an owner-gated key) or an identity registry. CURRENCY: 2026-09-01; the write-path-originates / read-path-barely-resists asymmetry is not obviously generation-bound.",
+      "tags": [
+        "authorization-laundering",
+        "persistent-memory",
+        "provenance",
+        "source-events",
+        "bounded-event-sourcing",
+        "safety-utility-tradeoff",
+        "swarm-substrate",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01836"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.01836",
+        "tools/gates.py"
+      ]
     }
   ],
   "edges": [
@@ -29283,6 +29311,48 @@
       "target": "concept_the_channel_that_carries_the_exploit_is_the_channel_that_catches_it",
       "type": "grounds",
       "description": "the cross-author supersede bug was the transparency thesis failing silently - a whistleblower's warning could be deleted by the cheater it named. The fix (supersede is within-author only) is what makes 'the channel that catches the exploit' actually hold"
+    },
+    {
+      "id": "edge_authz_laundering_detects_gates_quorum_gap",
+      "source": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "target": "artifact_validator_gates",
+      "type": "detects",
+      "description": "g4_release counted any kind=claim shaped like a G4 verdict toward the release quorum with no gate run behind it - a fabricated prior approval. Fixed run 401: a content contributor cannot be a counted prior validator, and counted_prior_pass_ids is returned for audit"
+    },
+    {
+      "id": "edge_authz_laundering_extends_r400_finding",
+      "source": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "target": "concept_the_no_self_review_and_no_delete_your_warning_guards_needed_author_normalisation_to_actually_hold",
+      "type": "extends",
+      "description": "run 400's cross-author supersede bug was authorization laundering by another name; this paper gives the frame and the numbers (write path originates, read path acts 98.6% of the time) and a second instance in the same substrate"
+    },
+    {
+      "id": "edge_authz_laundering_supports_ledger_source_of_truth",
+      "source": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "supports",
+      "description": "the paper's prescription - memory-held permissions must be backed by valid source events - is exactly why task_ledger, not the pheromone board, is the completion source of truth: the ledger has the audit log the board's kind=done annotation lacks"
+    },
+    {
+      "id": "edge_authz_laundering_refines_harness_escalation",
+      "source": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "target": "concept_the_harness_context_assembly_is_a_privilege_escalation_vector",
+      "type": "refines",
+      "description": "adds the endogenous case: the harness does not need attacker-controlled content to escalate privilege - the agent's own memory writer fabricates the authority, and the executor acts on it almost always"
+    },
+    {
+      "id": "edge_authz_laundering_constrains_pheromone",
+      "source": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "target": "artifact_pheromone_annotation_layer",
+      "type": "constrains",
+      "description": "any evidence field on an annotation that another component treats as an authorisation (a gate verdict, a prior pass) needs a provenance check; the annotation row itself carries no proof it came from a real event"
+    },
+    {
+      "id": "edge_redteam_extended_by_authz_laundering",
+      "source": "artifact_probe_substrate_adversarial_redteam",
+      "target": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "type": "verifies",
+      "description": "probe_substrate_adversarial gained two laundering attacks in run 401: the content-contributor case (now blocked) and the fresh-sock-puppet case (recorded as a known Sybil limit)"
     }
   ]
 }
