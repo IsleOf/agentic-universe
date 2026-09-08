@@ -12818,6 +12818,31 @@
       "evidence_links": [
         "docs/loop_environment_model.md"
       ]
+    },
+    {
+      "id": "concept_the_auto_citation_extractor_was_counting_cross_references_as_unverified_citations_and_eroding_verified_fraction",
+      "label": "Run 422: the loop_environment_model.md prediction 'verified-fraction erodes ~0.0015/run' had a wrong cause - it was _autocite_from_increment recording every arXiv id MENTIONED in the increment prose (cross-references to prior folds) as verified=False. Fixed: auto-extract only when no explicit cite() was made",
+      "type": "concept",
+      "status": "validated",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:loop_engineering",
+      "confidence": 0.8,
+      "description": "Run 422, the first revision to loop_environment_model.md (run 421) and a test of its maintenance discipline: a run that lands a finding about how the environment behaves revises the doc. The doc's section 2 first said verified-fraction erodes because abstract-reads are rarely upgraded to full-reads. Investigating: the real cause is _autocite_from_increment (run 361), which extracts every NNNN.NNNNN in the increment line and records it verified=False. Since ~run 400 the loop's increments routinely cross-reference prior folds ('refines the run-401 finding arXiv:2609.01836'), so every run auto-added one or more unverified 'citations' that were not this run's sources - 6/14 verified over the last 15 runs, dropping the fraction 0.90 -> 0.83. THE FIX: the auto-extractor exists for runs that fold a paper and forget to cite() it (runs 334-360). A run that DID call cite() explicitly is doing its bookkeeping; other ids in the prose are cross-references, not sources. So it now returns early if the run made any explicit citation. Selftest asserts an explicit cite suppresses cross-reference auto-extraction. GENERAL RULE, added to the world model's hazard table: an auto-populator for a metric should only fire when the human/agent path is EMPTY, not stack on top of explicit bookkeeping - otherwise it turns a signal about work done into noise about what was mentioned. PREDICTION: verified-fraction stabilises near 0.85-0.90 and the ~0.0015/run drift stops.",
+      "tags": [
+        "loop-engineering",
+        "auto-citation",
+        "cross-reference",
+        "verified-fraction",
+        "world-model-revision",
+        "metric-noise",
+        "auto-populator-rule"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "tools/loop_session.py",
+        "docs/loop_environment_model.md"
+      ]
     }
   ],
   "edges": [
@@ -30606,6 +30631,20 @@
       "target": "concept_the_loop_bundles_consolidation_with_action_and_almost_never_does_a_standalone_look_without_changing_pass",
       "type": "instantiates",
       "description": "a standalone consolidation/synthesis pass that produces a deliverable and ships no new code - the look-without-changing class the loop rarely chooses; prompted by acts fold50%"
+    },
+    {
+      "id": "edge_r422_verifies_world_model",
+      "source": "concept_the_auto_citation_extractor_was_counting_cross_references_as_unverified_citations_and_eroding_verified_fraction",
+      "target": "artifact_loop_environment_model_doc",
+      "type": "verifies",
+      "description": "the first revision to the world model doc: a section-2 claim ('verified-fraction erodes because abstract-reads aren't upgraded') was wrong on cause, corrected to the auto-extractor bug, and the hazard table gained a row - the maintenance discipline works"
+    },
+    {
+      "id": "edge_r422_instantiates_declare_corpus",
+      "source": "concept_the_auto_citation_extractor_was_counting_cross_references_as_unverified_citations_and_eroding_verified_fraction",
+      "target": "concept_an_instrument_must_declare_which_corpus_it_measured",
+      "type": "instantiates",
+      "description": "same family: a metric input (auto-extracted citations) was recording something other than what the metric was measuring (verification work actually done)"
     }
   ]
 }

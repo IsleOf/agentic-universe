@@ -56,11 +56,16 @@ in a row. The status line shows `acts <dominant><pct>` every run.
 - A pure consolidation run holds `novelty` roughly flat (it's a look, not a new claim).
 
 ### `verified-fraction`
-- Drifts **down** slowly (0.90 → 0.84 over ~40 runs) because every fold adds a
-  verified-via-abstract citation and the loop rarely goes back to upgrade abstract-reads to
-  full-reads. This is a real, slow erosion. A `citation upgrade` run (fetch the arXiv page,
-  confirm the headline number, upgrade the node) is the counterweight and the loop is overdue
-  for a batch of them.
+- Drifted **down** 0.90 → 0.83 over runs 382–421. **Run 422 found the cause and it was not what
+  this line first said:** it was `_autocite_from_increment` recording every arXiv id *mentioned*
+  in the increment prose — cross-references to prior folds — as `verified=False`. A run that
+  already cites its real source explicitly does not need its cross-references counted as
+  citations. Fixed run 422: the auto-extractor now only fires when the run made **no** explicit
+  `cite()` call (its original run-334–360 purpose). Prediction: `verified-fraction` stabilises
+  near 0.85–0.90 and stops the ~0.0015/run drift.
+- The remaining genuine gap — abstract-reads never upgraded to full-reads — is real but small;
+  a `citation upgrade` run (fetch the arXiv page, confirm the headline number) is the
+  counterweight if the fraction still drifts after run 422.
 
 ### `legible` (self-report legibility)
 - Held at **1.00** for ~40 runs. The one persistent legibility risk is nested-lambda selftest
@@ -86,6 +91,7 @@ in a row. The status line shows `acts <dominant><pct>` every run.
 | a fix that stops at the instance | runs 365, 366, 400, 402, 409 | after fixing an instance, grep for the class before moving on — but run 380: also check the class exists before generalising |
 | heredoc `\n` / dict-key mangling in patch scripts | ~6 times this session | write patch scripts to a scratchpad `.py` file, never inline in a heredoc |
 | a gitignored file has no `git show HEAD:` baseline | run 391 | for anything the session itself writes during a run, snapshot at `__enter__`, don't diff against HEAD |
+| an auto-extractor counting cross-references as citations | run 422 | an auto-populator for a metric should only fire when the human/agent path is empty, not stack on top of explicit bookkeeping |
 | bundling consolidation with a fix so it never counts as consolidation | run 409/410 | a run that *leads* with consolidation language is a consolidate run regardless of what it then shipped |
 
 ---

@@ -210,6 +210,15 @@ class LoopSession:
         if type(self)._ID_IN_INCREMENT is None:
             type(self)._ID_IN_INCREMENT = _re.compile(r"(?:arXiv:)?(\d{4}\.\d{4,5})")
         already = {c["id"] for c in self._cited}
+        # Run 422. The auto-extractor exists for runs that fold a paper and forget to
+        # cite() it (runs 334-360). If the run DID call cite() explicitly, it is doing
+        # its citation bookkeeping, and any *other* ids in the prose are CROSS-
+        # REFERENCES to prior folds, not this run's sources - recording them
+        # verified=False just erodes verified_citation_fraction ~0.0015/run for no
+        # signal (the loop_environment_model.md prediction, measured). So: only
+        # auto-extract when the run made no explicit citation at all.
+        if any(self._cited):
+            return
         for m in type(self)._ID_IN_INCREMENT.finditer(self.increment or ""):
             aid = f"arXiv:{m.group(1)}"
             if aid in already:
@@ -468,6 +477,20 @@ def _selftest():
             len(b["citations"]) == 1)
         checks["an explicit verified cite survives the auto-extractor"] = (
             b["citations"][0]["verified"] is True)
+
+        # run 422: a run that cites its source explicitly does NOT auto-add a
+        # cross-referenced id from the prose (that was eroding verified-fraction)
+        s3b = LoopSession(run_no=989, increment=(
+            "fold arXiv:2606.23075; it refines the run-401 finding arXiv:2509.99999 "
+            "and compounds arXiv:2510.88888"),
+            trace_dir=str(tmp / "traces3b"), registry_base=str(tmp / "harness"),
+            bank_base=str(tmp / "bank"))
+        with s3b:
+            s3b.cite("2606.23075", verified=True, purpose="the actual source")
+        bx = json.loads((RUN_SUMMARY_DIR / "run-989.json").read_text(encoding="utf-8"))
+        checks["run 422: explicit cite suppresses auto-extraction of cross-references"] = (
+            len(bx["citations"]) == 1 and bx["citations"][0]["verified"] is True)
+        (RUN_SUMMARY_DIR / "run-989.json").unlink()
         checks["auto graph_delta populates instead of leaving None"] = (
             b["graph_delta"] is not None and set(b["graph_delta"]) == {"nodes", "edges"})
         (RUN_SUMMARY_DIR / "run-997.json").unlink()
