@@ -7,8 +7,30 @@ the volatile parts flagged as `question` nodes.
 
 | project | path | source | status |
 |---|---|---|---|
-| poly-bot | `poly-bot/` | `/home/dev/poly-bot`, read 2026-09-07 | first pass — needs the active session to verify + fill the 6 question nodes |
-| poster-studio | `poster-studio/` | `/home/dev/poster-studio`, read 2026-09-07 | first pass — needs the active session to verify + fill the 5 question nodes |
+| poly-bot | `poly-bot/` | `/home/dev/poly-bot`, read 2026-09-07 | ✅ **refresh pass done in-repo (verified run 377) — but UNCOMMITTED** |
+| poster-studio | `poster-studio/` | `/home/dev/poster-studio`, read 2026-09-07 | ⏳ first pass not started — no `knowledge/` dir yet |
+
+### poly-bot — verified run 377 (2026-09-08)
+The session ran the refresh brief (`codex_mapping_prompt.md` Block A + B2) and followed it
+closely. Working tree, **not yet committed** (408 insertions / 264 deletions across
+`knowledge/graph/` + `docs/PROJECT_STATE.md`):
+
+- **32 → 38 nodes, 28 → 37 edges**, `last_updated` bumped to 2026-09-08.
+- **The three watchdog gaps mapped as `bug` nodes, not fixed** — as briefed. Statuses are
+  nuanced rather than binary: attempt ceiling is *partial* failure accounting; the deadline
+  bounds missing-report work *only on ticks*; the digest exists but uses *generic* failure
+  categories.
+- **`polybot__q_worker_fleet_fix` → `polybot__bug_agy_dstate_hang`** (`bug`, open, "has
+  mitigation, not a proven cure") — exactly the conversion Block B2 asked for. The id changed,
+  so a naive diff reads it as a deletion; it is not.
+- **Two questions re-opened** (`q_flb_signoff`, `q_blocked_on_data_items`) — expired answers
+  re-opened rather than left stale, which the brief explicitly asked for.
+- **Four new `component` nodes** covering the drift the brief named: model-routing provenance,
+  the AGY host loop, VPS Drive offload, rotating generated checklist lanes.
+
+**Open action for the owner:** the work is in poly-bot's working tree only. The Agentic
+Universe loop does not commit into other repos (see Workflow below), so that session or the
+owner needs to commit and push it, or it is lost.
 
 Extra follow-through:
 - `poly-bot/watchdog_ledger_integration.md` — the 3 additions to
