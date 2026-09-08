@@ -20,6 +20,7 @@ MECHANISM
   reputation(a)   = successes_eff / (successes_eff + failures_eff)      posterior mean
   uncertainty(a)  = sqrt( rep (1-rep) / (successes_eff + failures_eff) )
   score(a, load)  = reputation(a) + C * uncertainty(a) - load_penalty * load
+                    - slash_eff(a)   (run 432: a penalty record() cannot lift)
 
   DECAY, applied on EVERY read (this is the anti-calcification core):
       idle_days   = (now - last_active) / 86400
@@ -34,6 +35,12 @@ MECHANISM
                                zone is a valued behaviour (emergent_self_organizing_roles),
                                not a fault
       duel(winner, loser)      ELO update, K = 24
+      slash(a, severity)       add a penalty to score(a) that record("success")
+                               cannot lift; decays on a 60-day half-life
+
+  whitewash_risk(a, candidates) -> a REPORT dict: is a's standing carried by the
+  exploration bonus (the shape of a reset identity) while it is also competitive
+  for selection? Never blocks (arXiv:2609.02992).
 
   select(candidates, load_of) -> the argmax score among candidates; ties broken by
   agent id for determinism. The "personal assistant" is just select(all_agents,
@@ -65,6 +72,21 @@ LOAD_PENALTY = 0.05        # per open task the agent already holds
 ELO_K = 24.0
 ELO_SEED = 1000.0
 OUTCOMES = ("success", "failure", "abstention")
+
+# Run 432 (arXiv:2609.02992, "Tempting the Agent"): reputation only disciplines an
+# agent when abandoning an identity is costly, and the substrate makes reset free.
+# Two bounded, honest half-measures — neither closes economic-Sybil (that needs
+# identity binding), both make the temptation VISIBLE and priced under a stable id:
+#   slash()          a penalty a fresh record(success) cannot lift (Prop 4.4: a
+#                    degraded identity should keep less value). Decays on a LONGER
+#                    half-life than the Beta counts so a burst of wins can't wash it.
+#   whitewash_risk() a REPORT: an agent whose effective evidence is thin (a reset's
+#                    (1,1) seed) but whose selection score is already competitive —
+#                    the score is carried by the exploration bonus, not earned
+#                    reputation (Prop 4.8: the more it can win, the more a reset pays).
+SLASH_HALF_LIFE_DAYS = 60.0    # ~4x the reputation half-life
+THIN_OBS_EFF = 4.0            # effective successes+failures; the (1,1) seed alone is 2.0
+EXPLORE_FRACTION_FLAG = 0.5   # >half the selection score is unearned exploration bonus
 
 
 def _now():
@@ -108,8 +130,11 @@ class Reputation:
         a = self._data["agents"].get(aid)
         if a is None:
             a = {"successes": 1.0, "failures": 1.0, "elo": ELO_SEED,
-                 "last_active": _now(), "n_abstentions": 0}
+                 "last_active": _now(), "n_abstentions": 0, "slash": 0.0,
+                 "slash_at": _now()}
             self._data["agents"][aid] = a
+        a.setdefault("slash", 0.0)          # records written before run 432
+        a.setdefault("slash_at", a["last_active"])
         return a
 
     # -- decay ------------------------------------------------------------
@@ -138,10 +163,25 @@ class Reputation:
     def elo(self, aid, *, at=None):
         return self._decayed(self._agent(aid), at=at)[2]
 
+    def _slash_eff(self, a, *, at=None):
+        """The live slash penalty — decays toward 0 on SLASH_HALF_LIFE_DAYS, which is
+        longer than the reputation half-life, so a burst of fresh successes cannot
+        wash it out before it has cost the agent selection."""
+        raw = a.get("slash", 0.0)
+        if raw <= 0.0:
+            return 0.0
+        now = _now() if at is None else at
+        idle_days = max(0.0, (now - a.get("slash_at", a["last_active"])) / 86400.0)
+        return raw * (0.5 ** (idle_days / SLASH_HALF_LIFE_DAYS))
+
+    def slash_penalty(self, aid, *, at=None):
+        return self._slash_eff(self._agent(aid), at=at)
+
     def score(self, aid, *, load=0, at=None):
         return (self.reputation(aid, at=at)
                 + self.c_explore * self.uncertainty(aid, at=at)
-                - self.load_penalty * load)
+                - self.load_penalty * load
+                - self._slash_eff(self._agent(aid), at=at))
 
     def select(self, candidates, *, load_of=None, at=None):
         """The argmax-score agent among `candidates`. `load_of` maps agent -> open
@@ -168,6 +208,59 @@ class Reputation:
         a["last_active"] = _now() if _at is None else float(_at)
         self._flush(f"record {aid} {outcome}")
 
+    def slash(self, aid, severity, *, reason="", _at=None):
+        """Apply a penalty that a later record('success') cannot lift — only time
+        (SLASH_HALF_LIFE_DAYS) or a fresh evaluation erodes it. `severity` in
+        (0, 1]; accumulates, capped at 4.0. This is the Prop-4.4 half-measure: it
+        makes continued operation under a KNOWN-bad identity costly, forcing a
+        visible reset rather than quiet milking. It does NOT follow a new id."""
+        sev = float(severity)
+        if not (0.0 < sev <= 1.0):
+            raise ValueError("severity must be in (0, 1]")
+        a = self._agent(aid)
+        now = _now() if _at is None else float(_at)
+        # decay what's already there to `now`, then add
+        a["slash"] = min(4.0, self._slash_eff(a, at=now) + sev)
+        a["slash_at"] = now
+        self._flush(f"slash {aid} {sev} {reason}".strip())
+
+    def whitewash_risk(self, aid, *, candidates=None, at=None):
+        """REPORT (never blocks): is this agent's standing carried by the exploration
+        bonus rather than earned reputation, while it is also competitive for
+        selection? That is the shape of a reset identity (arXiv:2609.02992, Prop 4.8).
+        `candidates` (optional): the pool it would be selected from."""
+        a = self._agent(aid)
+        se, fe, _ = self._decayed(a, at=at)
+        total_eff = se + fe
+        sc = self.score(aid, load=0, at=at)
+        explore_part = self.c_explore * self.uncertainty(aid, at=at)
+        # what fraction of this agent's standing ABOVE the (0.5) prior is unearned
+        # exploration bonus rather than recorded reputation? A pure seed identity
+        # scores 1.0 here; a proven agent scores near 0.
+        earned = max(0.0, self.reputation(aid, at=at) - 0.5)
+        explore_fraction = explore_part / (earned + explore_part) if (earned + explore_part) > 0 else 1.0
+        would_be_selected = bool(
+            candidates and _norm(self.select(list(candidates), at=at) or "") == _norm(aid))
+        thin = total_eff < THIN_OBS_EFF
+        # with a pool, "competitive" means would actually be selected; without one,
+        # fall back to the exploration-bonus fraction as a best-effort signal.
+        competitive = would_be_selected if candidates else explore_fraction > EXPLORE_FRACTION_FLAG
+        risky = thin and competitive
+        if risky:
+            why = ("would be selected from the given pool" if (candidates and would_be_selected)
+                   else f"{explore_fraction:.0%} of its above-prior standing is exploration bonus")
+            reason = (f"thin evidence ({total_eff:.1f} effective obs, seed is 2.0) but {why} "
+                      f"- standing is not yet earned; a reset identity has this shape")
+        elif thin:
+            reason = "thin evidence but not competitive for selection - low concern"
+        else:
+            reason = "standing is backed by recorded outcomes"
+        return {"agent": _norm(aid), "effective_observations": round(total_eff, 2),
+                "score": round(sc, 4), "explore_fraction": round(explore_fraction, 3),
+                "would_be_selected": would_be_selected,
+                "slash_penalty": round(self._slash_eff(a, at=at), 4),
+                "whitewash_risk": risky, "reason": reason}
+
     def duel(self, winner, loser, *, at=None):
         """Head-to-head ELO update (K=24). Both ratings are read decayed first so a
         stale agent's rating has already reverted toward 1000."""
@@ -186,6 +279,7 @@ class Reputation:
                       "uncertainty": round(self.uncertainty(aid, at=at), 4),
                       "elo": round(self.elo(aid, at=at), 1),
                       "score": round(self.score(aid, at=at), 4),
+                      "slash": round(self._slash_eff(self._agent(aid), at=at), 4),
                       "raw": {"successes": self._agent(aid)["successes"],
                               "failures": self._agent(aid)["failures"],
                               "abstentions": self._agent(aid)["n_abstentions"]}}
@@ -198,6 +292,14 @@ def _selftest():
     import tempfile
     tmp = Path(tempfile.mkdtemp(prefix="reputation-"))
     checks = {}
+
+    def _rejects(fn):
+        try:
+            fn()
+            return False
+        except (ValueError, TypeError):
+            return True
+
     try:
         R = Reputation(tmp / "r.json")
         DAY = 86400.0
@@ -293,6 +395,47 @@ def _selftest():
             checks[f"k={k}: select returns an agent from the pool"] = pick in pool
             checks[f"k={k}: selection is deterministic"] = Rk.select(pool) == pick
 
+        # run 432: slash — a penalty record("success") cannot lift
+        Rs = Reputation(tmp / "slash.json")
+        base = _now()
+        for _ in range(20):
+            Rs.record("milker", "success", _at=base)
+        score_clean = Rs.score("milker", at=base + DAY)
+        Rs.slash("milker", 0.8, reason="delivered a bad batch", _at=base + DAY)
+        checks["slash lowers the score"] = Rs.score("milker", at=base + DAY) < score_clean - 0.5
+        for _ in range(10):
+            Rs.record("milker", "success", _at=base + 2 * DAY)
+        checks["a burst of fresh successes does NOT lift the slash"] = (
+            Rs.slash_penalty("milker", at=base + 2 * DAY) > 0.5)
+        checks["...so the milker's score stays depressed right after the slash"] = (
+            Rs.score("milker", at=base + 2 * DAY) < score_clean)
+        checks["slash decays away over its (longer) half-life"] = (
+            Rs.slash_penalty("milker", at=base + 240 * DAY) < 0.1)
+        checks["slash rejects an out-of-range severity"] = (
+            _rejects(lambda: Rs.slash("x", 1.5)))
+        checks["slash accumulates and caps at 4.0"] = (
+            [Rs.slash("capped", 1.0, _at=base) for _ in range(6)]
+            and Rs._agent("capped")["slash"] == 4.0)
+        checks["slash shows in the snapshot"] = "slash" in Rs.snapshot()["milker"]
+
+        # run 432: whitewash_risk — a thin-evidence agent that is still competitive
+        Rw = Reputation(tmp / "ww.json")
+        b = _now()
+        for _ in range(40):
+            Rw.record("veteran", "success", _at=b)
+        # a fresh identity: (1,1) seed only, score carried by the exploration bonus
+        risk_fresh = Rw.whitewash_risk("fresh_reset", candidates=["fresh_reset", "unknown2"], at=b)
+        checks["whitewash_risk flags a thin agent that would be selected"] = (
+            risk_fresh["whitewash_risk"] and risk_fresh["effective_observations"] < 4.0)
+        checks["whitewash_risk: the veteran is not flagged"] = (
+            not Rw.whitewash_risk("veteran", candidates=["veteran", "fresh_reset"], at=b)["whitewash_risk"])
+        checks["whitewash_risk: a thin agent NOT competitive is low-concern, not flagged"] = (
+            not Rw.whitewash_risk("fresh_reset", candidates=["fresh_reset", "veteran"], at=b)["whitewash_risk"])
+        checks["whitewash_risk names the exploration-bonus reason"] = (
+            "exploration bonus" in Rw.whitewash_risk("lonely_thin", at=b)["reason"])
+        checks["whitewash_risk is a report - it returns a dict, raises nothing"] = (
+            isinstance(risk_fresh, dict) and "reason" in risk_fresh)
+
         # run 409: reputation is keyed on the normalised id
         Rn = Reputation(tmp / "norm.json")
         for _ in range(10):
@@ -316,7 +459,7 @@ def _cli(argv=None):
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("selftest")
-    for name in ("record", "duel", "score", "select", "show"):
+    for name in ("record", "duel", "score", "select", "show", "slash", "whitewash-risk"):
         sp = sub.add_parser(name)
         sp.add_argument("--db", default=str(DEFAULT_PATH))
         if name == "record":
@@ -330,6 +473,13 @@ def _cli(argv=None):
             sp.add_argument("--load", type=int, default=0)
         if name == "select":
             sp.add_argument("agents", nargs="+")
+        if name == "slash":
+            sp.add_argument("agent")
+            sp.add_argument("severity", type=float)
+            sp.add_argument("--reason", default="")
+        if name == "whitewash-risk":
+            sp.add_argument("agent")
+            sp.add_argument("--candidates", nargs="*", default=None)
     args = p.parse_args(argv)
     if args.cmd == "selftest":
         return _selftest()
@@ -343,6 +493,11 @@ def _cli(argv=None):
         print(round(R.score(args.agent, load=args.load), 4))
     elif args.cmd == "select":
         print(R.select(args.agents))
+    elif args.cmd == "slash":
+        R.slash(args.agent, args.severity, reason=args.reason)
+        print(f"{args.agent}: {json.dumps(R.snapshot()[_norm(args.agent)])}")
+    elif args.cmd == "whitewash-risk":
+        print(json.dumps(R.whitewash_risk(args.agent, candidates=args.candidates), indent=2))
     elif args.cmd == "show":
         print(json.dumps(R.snapshot(), indent=2))
     return 0

@@ -1,0 +1,48 @@
+{
+  "run": 433,
+  "increment": "Build, operationalising run 432's fold (arXiv:2609.02992). Added two bounded, honest half-measures to tools/reputation.py against reputation-milking. slash(aid, severity, reason=): adds a score penalty a later record('success') cannot lift; decays on a 60-day half-life (~4x the reputation half-life) so a burst of wins can't wash it - the Prop-4.4 lever against milking under a KNOWN-bad id. whitewash_risk(aid, candidates): a REPORT (never blocks) - flags an agent whose effective evidence is thin (near the (1,1) seed) but that would still be selected, or whose above-prior standing is >50% exploration bonus - the shape of a reset identity (Prop 4.8). Neither closes economic-Sybil (a new id sheds both); they make the temptation visible and priced under a stable id. +14 reputation selftests (34 -> 48). swarm_demo / probe_substrate_adversarial / probe_swap_cost still GREEN. +2 edges (reputation implements the concept), concept node updated, 0.74 -> 0.75. CLI: slash / whitewash-risk.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 3,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/reputation.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.02992",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.02992"
+  ],
+  "trace_file": "runtime\\traces\\loop-433.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 433 OK · VALID · graph +0n/+2e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.83 · files +3~3-0 · novelty 0.80 · acts fold40%"
+}
