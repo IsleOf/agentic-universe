@@ -12793,6 +12793,31 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.01861"
       ]
+    },
+    {
+      "id": "artifact_loop_environment_model_doc",
+      "label": "docs/loop_environment_model.md - the loop's written, revisable world model of its own environment: how each increment class moves the graph / novelty / verified-fraction / legibility, the recurring hazards and the rules they produced, and 5 falsifiable predictions",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:loop_engineering",
+      "confidence": 0.55,
+      "description": "Run 421, the BCO follow-on (run 420). A single prose document holding what was scattered across 400+ sweep docs: (1) the five-class action space with typical graph deltas and when-to-choose guidance; (2) how the environment responds - ~1.2 nodes / ~5.4 edges per run, edges (challenges/constrains/refines to existing nodes) matter more than nodes, novelty recovers on a fresh fold and decays 0.33-0.44 on 3-4 consecutive same-thread runs, verified-fraction erodes ~0.0015/run because abstract-reads are rarely upgraded, legibility held at 1.00 with brittle-equality as the standing risk; (3) seven recurring environment hazards each of which cost a run to learn, with the rule each produced (scale thresholds don't fix them; an instrument that can't measure must say so; read a detector's own first output; grep for the class after fixing an instance; write patch scripts to files; snapshot session-written files at __enter__; a run that leads with consolidation language is a consolidate run); (4) the idle-state rule; (5) five falsifiable predictions including 'the next loop_action_class monoculture flag will be fold' and 'a fold with zero challenges/constrains/refines edges will be found to contribute nothing within ~5 runs'. PORTABILITY_CLASS fixed-schema in spirit - prose, no model-coupled compression - so it transfers across a model swap, per BCO's own result and concept_fixed_schema... It is the third of three written memories the loop should keep (DiagEvo: what fails by cause; Trace2Tower's tower: what works by abstraction level; this: what the environment does in response to an edit). Not yet wired as a loop_conductor input - that is the next step and the test of whether it works is whether the hazard list in section 3 stops growing.",
+      "tags": [
+        "loop-engineering",
+        "world-model",
+        "written-belief",
+        "bco",
+        "fixed-schema-portable",
+        "environment-model",
+        "falsifiable-predictions",
+        "third-written-memory"
+      ],
+      "derived_from": [],
+      "evidence_links": [
+        "docs/loop_environment_model.md"
+      ]
     }
   ],
   "edges": [
@@ -30560,6 +30585,27 @@
       "target": "concept_an_instrument_must_declare_which_corpus_it_measured",
       "type": "instantiates",
       "description": "BCO's falsified-copy ablation is the same discipline: does the document carry information in its content or only look like it does - an instrument (here a world model) must be shown to measure something real"
+    },
+    {
+      "id": "edge_r421_implements_bco",
+      "source": "artifact_loop_environment_model_doc",
+      "target": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+      "type": "implements",
+      "description": "the persistent, revisable world-model document BCO recommends, for this loop's own scaffold-optimisation environment - prose so it survives a model swap"
+    },
+    {
+      "id": "edge_r421_informs_conductor",
+      "source": "artifact_loop_environment_model_doc",
+      "target": "artifact_loop_conductor",
+      "type": "informs",
+      "description": "the intended next step: loop_conductor reads and revises this document each run, the way BCO's world model sits inside the optimisation loop"
+    },
+    {
+      "id": "edge_r421_instantiates_bundle_finding",
+      "source": "artifact_loop_environment_model_doc",
+      "target": "concept_the_loop_bundles_consolidation_with_action_and_almost_never_does_a_standalone_look_without_changing_pass",
+      "type": "instantiates",
+      "description": "a standalone consolidation/synthesis pass that produces a deliverable and ships no new code - the look-without-changing class the loop rarely chooses; prompted by acts fold50%"
     }
   ]
 }

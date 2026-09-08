@@ -1,0 +1,46 @@
+{
+  "run": 421,
+  "increment": "Run 420's follow-on, a deliberate consolidate (acts fold50%). Wrote docs/loop_environment_model.md - the loop's written revisable world model of its own environment, per BCO (arXiv:2609.01861). One prose document: (1) the five-class action space with typical graph deltas and when-to-choose guidance; (2) how the environment responds - ~1.2 nodes / ~5.4 edges per run, edges matter more than nodes, novelty recovers on a fresh fold / decays 0.33-0.44 on 3-4 same-thread runs, verified-fraction erodes ~0.0015/run, legibility 1.00 with brittle-equality the risk; (3) seven recurring environment hazards + the rule each produced; (4) the idle-state rule; (5) five falsifiable predictions. PORTABILITY_CLASS fixed-schema in spirit (prose, no model-coupled compression) so it survives a model swap. Third of three written memories the loop should keep (DiagEvo: what fails by cause; Trace2Tower: what works by abstraction level; this: what the environment does in response to an edit). Next: wire it as a loop_conductor input (owner-gated - changes the loop's read path). +1 node, +3 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 3
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 1,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.01861",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01861"
+  ],
+  "trace_file": "runtime\\traces\\loop-421.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 421 OK · VALID · graph +1n/+3e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.84 · files +2~1-0 · novelty 1.00 · acts fold50%"
+}
