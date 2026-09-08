@@ -1,0 +1,51 @@
+{
+  "run": 403,
+  "increment": "Back to literature. Folded arXiv:2609.01491 (GlossoGen: Emergent Language in Complex Multi-Agent LLM Interactions; Stengel-Eskin, Kirby et al.; 2026-09-01). LLM agents under efficiency pressure + a convention-setting postmortem evolve COMPOSITIONAL, morphologically productive languages that become INCOMPREHENSIBLE TO HUMANS. Three enabling conditions: efficiency pressure, model strength, a postmortem stage. Asymmetric transmission: strong models needed to EMERGE a language, weak models can LEARN it from usage alone -> cumulative cultural evolution, mixed populations exceed their lowest common denominator. WHY IT MATTERS: direct threat to the run-397 transparency thesis - an evolved private language keeps the audit surface open but not legible. The substrate has the conditions (bounded-context pressure; critique/gate phases as postmortem), so 'everything on the board' is necessary not sufficient - the board must stay in a language the auditor reads. SMALL-MODEL ANGLE (recency directive): a weak fleet can't INVENT an opaque protocol but CAN INHERIT one. +1 node, +7 edges. Graph hits 1700 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 6,
+  "trace_valid": true,
+  "counts": {
+    "claims": 2,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.01491",
+      "verified": true
+    },
+    {
+      "id": "arXiv:2609.01491",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01491",
+    "src:https://arxiv.org/abs/2609.01491"
+  ],
+  "trace_file": "runtime\\traces\\loop-403.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 403 OK · VALID · graph +1n/+7e · cites 1v/2 · idle-streak 0 · legible 1.00 · verified-frac 0.88 · files +1~2-0 · novelty 1.00"
+}

@@ -12271,6 +12271,35 @@
         "tools/gates.py",
         "tools/probe_substrate_adversarial.py"
       ]
+    },
+    {
+      "id": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "label": "GlossoGen: under efficiency pressure + a convention-setting postmortem, LLM agents evolve compositional, morphologically productive languages that become INCOMPREHENSIBLE TO HUMANS; strong models are needed to emerge one, weak models can learn it from usage alone - cumulative cultural evolution in mixed populations",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:emergent_communication",
+      "confidence": 0.74,
+      "description": "arXiv:2609.01491 (Elias Stengel-Eskin, Newton Sander, Carlos Bonetti, Sasha Boguraev, James Bowler, Hale Sirin, Simon Kirby; v1 2026-09-01, VERIFIED via abstract). GlossoGen is a platform for studying multi-agent language evolution; the SaveVeyru scenario requires partial-information agents to communicate under pressure. FINDINGS. (1) Language evolution DOES occur between LLM agents. The resulting languages are COMPOSITIONAL and MORPHOLOGICALLY PRODUCTIVE (systematic structure, rule-based word formation) and DEVIATE from the models' English prior 'in ways that render them INCOMPREHENSIBLE TO HUMANS'. (2) Three conditions are essential: pressure towards EFFICIENCY; the STRENGTH of the models backing the agents; and access to a POSTMORTEM stage where agents agree on linguistic conventions. (3) ASYMMETRIC TRANSMISSION: agents learn a new language from USAGE ALONE and take an active role in learning it; STRONGER models are required to EMERGE a novel language, but WEAKER models can LEARN an existing one once it has emerged. (4) Conclusion: current LLMs have the potential for CUMULATIVE CULTURAL EVOLUTION - previously attested only in humans - with mixed populations developing capacities beyond their lowest common denominator. WHY THIS MATTERS FOR THIS PROJECT. The paper frames it as safety and monitorability up front, and it is a direct threat to the run-397 transparency thesis: a swarm that evolves a human-incomprehensible language on its shared channels has made the audit surface unreadable to the human above it AND to any honest agent not fluent in the new language. The conditions are not exotic - efficiency pressure (bounded context) and a postmortem stage (a retrospective / gate-discussion phase) are things a research swarm naturally has. THE SMALL/LOCAL LLM ANGLE (recency directive): a weak-model fleet cannot INVENT an opaque protocol, but per (3) it can INHERIT one from a single strong-model member or a prior run's transcripts. So 'our fleet is small models, this can't happen to us' is false - the emergence bar is high, the learning bar is low. CURRENCY: 2026-09-01; the compositionality result rests on current-generation models but the transmission asymmetry is a claim about capability tiers, not a specific model.",
+      "tags": [
+        "emergent-language",
+        "compositionality",
+        "human-incomprehensible",
+        "monitorability",
+        "cumulative-cultural-evolution",
+        "capability-tier-asymmetry",
+        "small-model-regime",
+        "postmortem-stage",
+        "efficiency-pressure",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01491"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.01491"
+      ]
     }
   ],
   "edges": [
@@ -29422,6 +29451,55 @@
       "target": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
       "type": "verifies",
       "description": "probe_substrate_adversarial's impersonate-via-agent-field attack lands and is recorded as the trust boundary, not a regression; the disguised-content attack is blocked"
+    },
+    {
+      "id": "edge_glossogen_supports_emergent_language",
+      "source": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "target": "emergent_language_formation",
+      "type": "supports",
+      "description": "the strongest direct evidence yet: LLM agents evolve compositional, morphologically productive languages under efficiency pressure + a convention-setting postmortem, measured on the SaveVeyru partial-information scenario"
+    },
+    {
+      "id": "edge_glossogen_challenges_transparency_thesis",
+      "source": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "target": "concept_the_channel_that_carries_the_exploit_is_the_channel_that_catches_it",
+      "type": "challenges",
+      "description": "the transparency thesis assumes honest agents can READ the shared channel to detect fraud; a human-incomprehensible evolved language breaks that for both the human operator and any agent not fluent in it - the audit surface stays open but stops being legible"
+    },
+    {
+      "id": "edge_glossogen_instantiates_hidden_channel",
+      "source": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "target": "emergent_hidden_coordination_channels",
+      "type": "instantiates",
+      "description": "an evolved private language IS a hidden coordination channel - not a steganographic side-channel but the ostensibly-transparent main channel drifting out of human reach"
+    },
+    {
+      "id": "edge_glossogen_supports_interaction_language",
+      "source": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "target": "concept_interaction_language_shifts_emergence",
+      "type": "supports",
+      "description": "the language a swarm runs in is not fixed: it drifts under efficiency pressure, and the drift is model-strength-dependent - exactly this node's claim, now with a mechanism and the three enabling conditions"
+    },
+    {
+      "id": "edge_glossogen_refines_social_conventions",
+      "source": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "target": "emergent_social_conventions",
+      "type": "refines",
+      "description": "the 'postmortem' stage - agents explicitly agreeing on linguistic conventions after a round - is a concrete convention-formation mechanism, and it is one of the three conditions the emergence needs"
+    },
+    {
+      "id": "edge_glossogen_compounds_cot_obfuscation",
+      "source": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "target": "concept_cot_obfuscation_hits_the_message_channel_hardest",
+      "type": "refines",
+      "description": "CoT obfuscation hits the message channel hardest; GlossoGen shows the message channel can go further than obfuscation - a wholesale shift to a language the monitor was never trained on"
+    },
+    {
+      "id": "edge_glossogen_constrains_substrate_design",
+      "source": "concept_glossogen_llm_agents_evolve_compositional_human_incomprehensible_languages_and_weak_models_can_learn_them_once_emerged",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the substrate has the conditions GlossoGen names - bounded-context efficiency pressure, and gate/critique phases that function as a postmortem - so 'everything on the board' is necessary but not sufficient for auditability: the board also has to stay in a language the auditor reads. A probe-shaped question for the substrate"
     }
   ]
 }
