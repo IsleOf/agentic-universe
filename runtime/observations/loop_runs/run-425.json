@@ -1,0 +1,46 @@
+{
+  "run": 425,
+  "increment": "Citation upgrade (underrepresented action class; the world model's named counterweight for verified-fraction drift). Full HTML read of arXiv:2601.21112 v2, the heavily-connected less-is-more node folded via abstract at run 381. Added precision: the +16.8pp is on TPR@1%FPR over the strongest baseline within each attacker model group; less-is-more holds in 7 of 8 monitor-environment pairs NOT universally (exception: SHADE-Arena + Claude-3.7-Sonnet, where CoT+action won); monitoring-awareness gap is a log-AUROC delta >0.4 on average; filtering helps SMALLER models (GPT-4.1-mini +26.3pp vs Claude-3.7-Sonnet +8.8pp on the same benchmark) and LONGER trajectories (~28,500 tokens in MLE-Sabotage) separably. THE CORRECTION: less-is-more is not a law - a capable monitor on a long complex trajectory can prefer more; filtering is strongest for a small monitor on a long trace, exactly this project's SMALL/LOCAL regime. New constrains edge to the run-382 extractor-recall finding. verification_state -> validated. 0 nodes, +1 edge.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 1
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2601.21112",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2601.21112"
+  ],
+  "trace_file": "runtime\\traces\\loop-425.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 425 OK · VALID · graph +0n/+1e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.84 · files +1~2-0 · novelty 0.75 · acts fold50%"
+}
