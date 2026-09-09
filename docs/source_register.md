@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 449 nodes, 1855 edges · **Date:** 2026-09-05
+**Graph at generation:** 450 nodes, 1857 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -371,7 +371,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.01861 — `concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document`
 - https://arxiv.org/abs/2609.01870 — `concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains`
 - https://arxiv.org/abs/2609.01873 — `concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation`, `concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum`
-- https://arxiv.org/abs/2609.01992 — `concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work`
+- https://arxiv.org/abs/2609.01992 — `artifact_sweep_audit`, `concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work`
 - https://arxiv.org/abs/2609.02580 — `concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer`
 - https://arxiv.org/abs/2609.02925 — `concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote`
 - https://arxiv.org/abs/2609.02992 — `concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free`
@@ -452,6 +452,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/research_worker.py — `artifact_research_worker`, `concept_three_salient_instances_are_not_a_class_check_before_generalising_the_fix`
 - tools/skill_induction.py — `artifact_phase4_skill_induction`, `concept_a_classifier_that_always_returns_something_hides_its_own_drift`, `concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched`
 - tools/supervisor.py (run 250) — `pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest`
+- tools/sweep_audit.py — `artifact_sweep_audit`
 - tools/task_ledger.py (run 244) — `pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth`
 - tools/topology_recover.py — `artifact_phase0_trace_substrate`
 - tools/trace_substrate.py — `artifact_phase0_trace_substrate`

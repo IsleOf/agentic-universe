@@ -13162,6 +13162,34 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.01992"
       ]
+    },
+    {
+      "id": "artifact_sweep_audit",
+      "label": "tools/sweep_audit.py (run 442) - a no-keys ClaimReceipt for the loop's own docs/auto_sweep_*.md. sufficiency_check: every headline claim (a number, a GREEN, an arrow result) names something that backs it (an arXiv id, a repo file, a selftest ref, a VALID, a graph node/edge id). coverage_check: run N's increment addressed >= 1 of run N-1's sweep Next bullets OR the increment explains the pivot. Heuristic, reports + a flag, judgement stays manual.",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.7,
+      "description": "Run 442, operationalising run 441's ClaimReceipt fold (arXiv:2609.01992) at the resolution the loop can support without an operator key. SUFFICIENCY. Over a sweep's finding-bearing sections (The finding / What changed / What it consolidates / Why it lands here / Increment), every line that asserts a checkable result - a percentage, a 'GREEN', a '->' or 'Gamma =' - is a headline. A headline is BACKED if it, or the doc, names an arXiv id, a `tools/*.py` path, a `selftest` reference, a `VALID`, or a graph node / edge / pattern id. Unbacked headlines are listed. COVERAGE. run N is COVERED if its increment (sweep + run-N.json) addresses at least one distinctive token from run N-1's sweep `## Next` bullets, OR the increment explicitly explains a pivot (`fresh axis`, `switching`, `resting point`, `consolidation pass`, `continue literature`). A run that silently ignores every option its predecessor gave it, with no stated pivot, is a COVERAGE GAP - the run-368 acceptance-gate-bug shape in the loop's own audit trail. Multi-line Next bullets are joined with their indented continuations (a parser fix found in the run-442 build - the first cut only read a bullet's first line and false-flagged run 440). NOT DONE (owner-gated, same class as the substrate's capability tokens): the signed-manifest / cryptographic-receipt half of ClaimReceipt. CLI: `report [run]` / `selftest`. In selftest_all JOBS (run 442). Pure stdlib.",
+      "tags": [
+        "verification",
+        "self-audit",
+        "evidence-sufficiency",
+        "coverage",
+        "sweep-docs",
+        "heuristic-report",
+        "run-442",
+        "claim-receipt"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01992",
+        "tools/sweep_audit.py"
+      ],
+      "evidence_links": [
+        "tools/sweep_audit.py"
+      ]
     }
   ],
   "edges": [
@@ -31447,6 +31475,20 @@
       "target": "artifact_validator_gates",
       "type": "informs",
       "description": "G1's n_uncited_claims (a claim-shaped line with no citation marker) is the crude sufficiency check; 'recomputable from retained evidence' is the strong version G1 could grow toward"
+    },
+    {
+      "id": "edge_sweep_audit_implements_claimreceipt",
+      "source": "artifact_sweep_audit",
+      "target": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "type": "implements",
+      "description": "sweep_audit.py is the no-keys version of ClaimReceipt over the loop's own sweep docs: sufficiency_check = 'is each headline recomputable from what's named', coverage_check = 'did run N do what run N-1 committed to, or say why not'"
+    },
+    {
+      "id": "edge_sweep_audit_detects_audit_gate_bug_class",
+      "source": "artifact_sweep_audit",
+      "target": "concept_the_acceptance_gate_logged_only_its_accepts_so_its_audit_trail_could_not_answer_the_question_it_existed_for",
+      "type": "detects",
+      "description": "coverage_check is exactly the check the run-368 acceptance gate lacked: it would have caught 'the record cannot answer the question it exists for' by comparing committed Next bullets against what was actually done"
     }
   ]
 }

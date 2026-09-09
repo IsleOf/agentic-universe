@@ -1,0 +1,51 @@
+{
+  "run": 442,
+  "increment": "Build, operationalising run 441's ClaimReceipt fold (arXiv:2609.01992). Built tools/sweep_audit.py - a no-keys ClaimReceipt over the loop's own docs/auto_sweep_*.md. sufficiency_check: every headline claim in a sweep (a number, a GREEN, a '->' result, 'Gamma =') names something that backs it - an arXiv id, a repo file, a `selftest` ref, a VALID, or a graph node/edge id; unbacked headlines are listed. coverage_check: run N's increment addressed >= 1 distinctive token from run N-1's sweep `## Next` bullets, OR the increment explains the pivot (fresh axis / consolidation pass / continue literature); a run that silently ignores every option it gave itself is a COVERAGE GAP - the run-368 acceptance-gate-bug shape. Heuristic, reports + a flag, judgement manual (like param_invariance_audit / loop_action_class). A parser fix during the build: multi-line Next bullets must be joined with their continuations (the first cut false-flagged run 440). 7 selftests; added to selftest_all JOBS. +1 artifact node (validated), +2 edges (implements ClaimReceipt; detects the run-368 bug class).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/selftest_all.py",
+        "tools/sweep_audit.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/sweep_audit.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.01992",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.01992"
+  ],
+  "trace_file": "runtime\\traces\\loop-442.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 442 OK · VALID · graph +1n/+2e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.82 · files +2~3-0 · novelty 0.75 · acts cons40%"
+}
