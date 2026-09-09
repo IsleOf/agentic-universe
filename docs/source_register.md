@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 457 nodes, 1913 edges · **Date:** 2026-09-05
+**Graph at generation:** 458 nodes, 1920 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -377,6 +377,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.02580 — `concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer`
 - https://arxiv.org/abs/2609.02620 — `concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever`, `finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy`
 - https://arxiv.org/abs/2609.02925 — `concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote`
+- https://arxiv.org/abs/2609.02967 — `concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data`
 - https://arxiv.org/abs/2609.02992 — `concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free`
 - https://arxiv.org/abs/2609.03422 — `concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it`
 - https://arxiv.org/abs/2609.03425 — `concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory`

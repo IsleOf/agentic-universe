@@ -13387,6 +13387,34 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.04194"
       ]
+    },
+    {
+      "id": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "label": "FGLGuard (Yu, Jiang, Li et al., arXiv:2609.02967, 2026-09-02): the inter-agent COMMUNICATION GRAPH is the detection substrate - a GNN over the connection graph localises dangerous agents and intervenes STRUCTURALLY (topology as containment, not reactive blocking). FEDERATED: operators can't pool private prompts / tool outputs / workflows, so each trains a local edge-featured graph-attention detector and shares only model updates. A single federated guard across 4 different-domain operators is within 0.03 AUROC of full centralisation; live deployment cut AgentDojo attack-success 43% at zero API overhead. CENTRALISED TRANSFER LEARNING COLLAPSED (0.51 -> 0.70 only after in-domain retraining) - a detector trained on one operator's attacks does not transfer.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:security",
+      "confidence": 0.72,
+      "description": "arXiv:2609.02967 (Jinxi Yu, Eric Hanchen Jiang, Levina Li, Dong Liu, Zhi Zhang, Wenxiao Zhao, Yanxuan Yu, Kai-Wei Chang, Ying Nian Wu; v1 2026-09-02; VERIFIED via abstract). THE PROBLEM. Topology-guided defences for multi-agent LLM systems need CENTRALISED data pooling, which breaks across organisational silos - different operators cannot share prompts, tool outputs, proprietary workflows, and no silo alone sees the full attack distribution. THE MECHANISM. The communication graph between agents is the FOUNDATION for spotting risky behaviour: a GNN (edge-featured graph attention) trained over inter-agent connections LOCALISES dangerous agents and intervenes STRUCTURALLY - topology as a direct containment lever, not reactive per-message blocking. FEDERATED (FGLGuard). Each operator independently trains an edge-featured graph attention detector on its own labelled episode graphs and shares ONLY model updates. Proximal local objectives for non-IID data; domain-balanced aggregation; over-refusal-constrained threshold calibration; corroborated upstream scoring with guarded rewrites. RESULTS. Federated FGLGuard EXCEEDS centralised in-domain across three benchmarks without pooling; a single federated guard across FOUR different-domain operators is within 0.03 AUROC of full centralisation; live deployment cut AgentDojo attack-success by 43% with minimal utility loss and ZERO API overhead. Centralised TRANSFER learning COLLAPSED (AUROC 0.51 -> 0.70 only after in-domain retraining) - a detector trained on one operator's attacks does not transfer to another's. WHY IT LANDS HERE. The swarm substrate has NO TOPOLOGY: every agent reads one shared pheromone board, so there is no connection graph to learn a detector over and no structural containment lever. `probe_subagent_coordination`'s same-parent-ID filter is a hand-coded topology constraint; this is its learned generalisation. `cohort_monitor` aggregates per-worker signals but is not graph-structured. Two takeaways the project can use without training a GNN: (i) RECORD the topology. The Phase 0 trace has sender/receiver on every MESSAGE; a per-run inter-agent graph is already derivable and is a monitoring surface the loop does not use. (ii) FEDERATION is the answer to the Civilization framework's silo problem (run 454): independent civilizations that cannot pool episodes CAN pool a detector's parameters. And 'centralised transfer collapsed' is a hard version of 'a detector's first output is a claim about the detector' - a shared detector trained elsewhere is near chance until locally retrained. CURRENCY: 2026-09-02, within the recency window. Small-model relevance: a GNN detector is small and cheap (zero API overhead reported); the topology of a small-local-model fleet is exactly what a resource-constrained operator can afford to monitor.",
+      "tags": [
+        "communication-topology",
+        "graph-neural-network",
+        "federated-learning",
+        "structural-containment",
+        "topology-guided-safety",
+        "no-data-pooling",
+        "transfer-collapse",
+        "recency-2026-09",
+        "silo-defence"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.02967"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.02967"
+      ]
     }
   ],
   "edges": [
@@ -32078,6 +32106,55 @@
       "target": "artifact_phase0_trace_substrate",
       "type": "informs",
       "description": "the Phase 0 trace records what the agent CLAIMS it did (Five-W enforced); it does not and cannot record which recorded steps were causally load-bearing - that needs an advantage-style rollout, out of scope for the substrate"
+    },
+    {
+      "id": "edge_fglguard_extends_topology_shapes_error",
+      "source": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "target": "concept_topology_shapes_error_propagation",
+      "type": "extends",
+      "description": "topology shapes error propagation; FGLGuard makes the topology a LEARNED detection and containment substrate - a GNN over the connection graph localises the danger and intervenes structurally"
+    },
+    {
+      "id": "edge_fglguard_refines_layered_attack_surface",
+      "source": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "target": "concept_agent_communication_is_a_layered_attack_surface",
+      "type": "refines",
+      "description": "agent communication is a layered attack surface; this adds that the GRAPH STRUCTURE of that surface is itself a signal - who talks to whom, learned as edge features, predicts risky behaviour"
+    },
+    {
+      "id": "edge_fglguard_generalises_fragment_monitoring",
+      "source": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "target": "concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it",
+      "type": "refines",
+      "description": "distributed attacks fragment below per-instance monitoring; a graph-structured detector sees the fragmentation pattern in the topology that per-instance and even summed-cohort monitors miss"
+    },
+    {
+      "id": "edge_fglguard_constrains_cohort_monitor",
+      "source": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "target": "artifact_cohort_monitor",
+      "type": "constrains",
+      "description": "cohort_monitor sums per-worker out-of-scope signals; FGLGuard says the CONNECTION STRUCTURE carries information the sum discards - two workers coordinating via a shared neighbour is a graph pattern, not a magnitude"
+    },
+    {
+      "id": "edge_fglguard_answers_civilization_silo_problem",
+      "source": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "target": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "type": "supports",
+      "description": "the Civilization framework's problem is independent operators who cannot pool episodes; FGLGuard's federation is the concrete answer - pool a detector's parameters, not the data, and stay within 0.03 AUROC of centralisation"
+    },
+    {
+      "id": "edge_fglguard_constrains_substrate_design",
+      "source": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the substrate is flat - one shared board, no connection graph - so it has no topology to monitor or to use for containment. Recording the per-run inter-agent graph from the Phase 0 MESSAGE sender/receiver fields is the cheap first step"
+    },
+    {
+      "id": "edge_fglguard_informs_subagent_coordination_rig",
+      "source": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "target": "artifact_probe_subagent_coordination_rig",
+      "type": "informs",
+      "description": "probe_subagent_coordination's same-parent-ID filter is a hand-coded topology constraint that BOUNDS but does not stop spread; FGLGuard is the learned version that localises the specific dangerous edges"
     }
   ]
 }
