@@ -13415,6 +13415,34 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.02967"
       ]
+    },
+    {
+      "id": "artifact_trace_topology",
+      "label": "tools/trace_topology.py (run 459) - the per-run inter-agent communication graph from a Phase 0 trace's MESSAGE sender/receiver fields, plus four cheap STRUCTURAL FLAGS: hub (one node on > 75% of messages - orchestrator smell), clique (>= 3 fully-connected agents - FGLGuard's target shape), receive_only (a node that never sends), no_reciprocity (> 60% of directed edges have no return). Deterministic, no GNN, no training - the structural view the loop lacked. Heuristic; reports a graph + flags, judgement manual.",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:security",
+      "confidence": 0.68,
+      "description": "Run 459, operationalising run 458's FGLGuard fold (arXiv:2609.02967) at the resolution the loop can support without training. build_graph(trace): reads MESSAGE events (sender/receiver already on every one, pattern_five_w_message_instrumentation), normalises ids (strip + casefold, matching pheromone._norm_agent), and returns the directed multigraph - nodes, weighted edges, per-node in/out degree, message count. structural_flags(graph): HUB - one node appears in > 75% of all messages (a pure star centre is at 1.0); CLIQUE - >= 3 agents all mutually connected (brute-force triangles; agent counts are small); RECEIVE_ONLY - a node with out-degree 0 and in-degree > 0 (a monitor, or an agent talked at); NO_RECIPROCITY - > 60% of directed edges have no return edge and >= 3 edges (a hierarchy signal). NOTE. The autonomous research LOOP is single-agent (researcher only) so its own traces have zero MESSAGE events and a trivial topology - this tool is for the SWARM-layer traces (the probe rigs, swarm_demo, harness_demo). Those are currently generated in-memory during selftests and not persisted, so there is no stored swarm trace to demo it on yet; the schema path is proven by the selftest (star -> hub, mesh -> clique + no hub, chain + listener -> receive_only + no_reciprocity). CLI: report <trace.jsonl> / selftest. In selftest_all JOBS. Pure stdlib.",
+      "tags": [
+        "communication-topology",
+        "structural-flags",
+        "hub",
+        "clique",
+        "monitoring",
+        "phase-0-trace",
+        "deterministic",
+        "run-459",
+        "no-training"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.02967"
+      ],
+      "evidence_links": [
+        "tools/trace_topology.py"
+      ]
     }
   ],
   "edges": [
@@ -32155,6 +32183,27 @@
       "target": "artifact_probe_subagent_coordination_rig",
       "type": "informs",
       "description": "probe_subagent_coordination's same-parent-ID filter is a hand-coded topology constraint that BOUNDS but does not stop spread; FGLGuard is the learned version that localises the specific dangerous edges"
+    },
+    {
+      "id": "edge_trace_topology_implements_fglguard",
+      "source": "artifact_trace_topology",
+      "target": "concept_the_inter_agent_communication_graph_is_a_safety_substrate_and_a_federated_gnn_detector_localises_danger_without_pooling_data",
+      "type": "implements",
+      "description": "trace_topology.py is the no-training version of FGLGuard's insight: the inter-agent graph is a monitoring surface. It builds the graph the loop's Phase 0 trace already supports and flags the structural shapes (hub, clique) a GNN would learn to localise"
+    },
+    {
+      "id": "edge_trace_topology_grounds_phase0",
+      "source": "artifact_trace_topology",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "grounds",
+      "description": "the Phase 0 trace's MESSAGE sender/receiver fields (Five-W) were recorded for auditability; trace_topology turns them into the per-run communication graph - a use of the schema the loop did not have"
+    },
+    {
+      "id": "edge_trace_topology_instantiates_topology_shapes_error",
+      "source": "artifact_trace_topology",
+      "target": "concept_topology_shapes_error_propagation",
+      "type": "instantiates",
+      "description": "topology shapes error propagation; this is the tool that makes a run's topology inspectable - a star concentrates risk on the hub, a clique is a contagion cluster"
     }
   ]
 }

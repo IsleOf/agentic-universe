@@ -1,0 +1,51 @@
+{
+  "run": 459,
+  "increment": "Build, operationalising run 458's FGLGuard fold. Built tools/trace_topology.py - the per-run inter-agent communication graph from a Phase 0 trace's MESSAGE sender/receiver fields, plus four cheap STRUCTURAL FLAGS: hub (one node on > 75% of messages - orchestrator smell), clique (>= 3 fully-connected agents - FGLGuard's target shape), receive_only (a node that never sends), no_reciprocity (> 60% of directed edges have no return). Deterministic, no GNN, no training - the structural view the loop lacked. 12 selftests (star -> hub; mesh -> clique + no hub; chain + listener -> receive_only + no_reciprocity; id normalisation; empty trace clean). NOTE the research loop is single-agent so its own traces have 0 MESSAGE events; this tool is for the swarm-layer traces (probes, swarm_demo, harness_demo), which are currently in-memory-only - the schema path is proven by selftest. Added to selftest_all JOBS. +1 artifact node (validated), +3 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 3
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/selftest_all.py",
+        "tools/trace_topology.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/trace_topology.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.02967",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.02967"
+  ],
+  "trace_file": "runtime\\traces\\loop-459.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 459 OK · VALID · graph +1n/+3e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.81 · files +2~3-0 · novelty 1.00 · acts fold50% · audit refix!"
+}

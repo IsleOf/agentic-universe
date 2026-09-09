@@ -46,6 +46,7 @@ JOBS = [
     ("param_invariance_audit.py", ["selftest"]),
     ("loop_action_class.py", ["selftest"]),
     ("sweep_audit.py", ["selftest"]),
+    ("trace_topology.py", ["selftest"]),
     ("pheromone.py", ["selftest"]),
     ("relay.py", ["selftest"]),
     ("reputation.py", ["selftest"]),
