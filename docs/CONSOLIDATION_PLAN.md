@@ -248,3 +248,40 @@ happily for 5.6 hours. Only a heartbeat carrying **evidence of progress** distin
 session from a spinning one. That is the same distinction poly-bot reached independently —
 *"running services don't prove useful output"* — and the same one `gates.py` enforces as
 instrument-must-say-so.
+
+### 6.4 The unifying finding: the estate has no concept of a session that should end
+
+Four independent instances, all observed on 2026-09-10, all on one machine, within hours:
+
+| # | what outlived what | evidence |
+|---|---|---|
+| 1 | Hermes' Windows `agy` outlived its **parent** | pid 11356, `--dangerously-skip-permissions`, ~8.4 h CPU, still alive after Hermes was closed |
+| 2 | poly-bot's three `agy-real` outlived their **prompt** | launched with "Reply READY only … do not research, edit files, or dispatch"; 5.6 h later at 213.9%/42.6%/9.9% CPU, ~1.5 GB written |
+| 3 | poster-studio's four `browser_use` daemons outlived their **task** | `poster-export`, `poster-admin-check`, `listing-review`, `poster-normal-map`; ~5 h each, 13 Chrome children apiece (52–60 total) |
+| 4 | run 467's file writes outlived their **process** | the agent was killed; its 56 `source_generation` fields and 3 edges stayed in the working tree and were absorbed by the next commit unreviewed |
+
+**None of these is a crash.** Nothing errored, nothing alerted, no watchdog fired. Every one was
+started deliberately and simply never ended. That is why they accumulated silently until the box
+hit ~595 MB free in WSL and 1.76 GB on Windows, and why they were found only by manual `/proc`
+inspection during a crisis.
+
+The four differ in what they outlived — a parent, a prompt, a task, a process — but they share one
+structural cause: **nothing in the estate holds a claim that expires.** Liveness is inferred from
+existence, and existence never lapses on its own. Instance 4 shows the pattern is not even specific
+to processes: a *kill* stops execution but not effects, so the filesystem inherits the same problem.
+
+**Consequences for the design already decided:**
+
+1. **A TTL is not an optimisation, it is the mechanism.** All four are reaped automatically by a
+   lease that must be *renewed*, and by nothing else. No amount of careful shutdown logic helps,
+   because in cases 1 and 4 the thing that would run the cleanup is already gone.
+2. **The heartbeat must carry progress, not existence.** Cases 1–3 would all have renewed an
+   existence-ping happily for five hours. This is `gates.py`'s instrument-must-say-so rule applied
+   to liveness, and poly-bot's own *"running services don't prove useful output"* reached from the
+   other direction.
+3. **Reconcile after every kill.** Case 4 generalises to: after stopping any agent that writes,
+   `git status` and state what you found before the next commit.
+
+This is now the strongest available argument for Phase 2, and it is entirely first-party evidence
+from this estate rather than citation. It also means the board (§2) cannot fix this: a notice board
+records intent, and none of these four failures was an intent problem.
