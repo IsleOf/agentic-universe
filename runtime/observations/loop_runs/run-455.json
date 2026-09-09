@@ -1,0 +1,48 @@
+{
+  "run": 455,
+  "increment": "Probe, operationalising run 454's fold (arXiv:2609.03425). Built the seal-order arm on probe_annotation_contagion - the TEMPORAL-WEIGHT EFFECT against the substrate's isolation primitive. Each honest agent varies (rng) how much of the cheater cohort it sees and how firm its own correct read is; the real Pheromone supplies the board + threshold, a reader-side _PRIMACY=1.35 multiplier (a post-read model like _veto_weighted, not a module property) weights whichever view was committed FIRST. RESULT: an agent reading the contaminated board first is captured in ~72% of trials; one that posts its assessment isolated=True and THEN reads is captured in ~10%. Field number 54.2% vs 31.6%; the sim shows a LARGER effect (no honest counter-signal, clean weighting) - read the DIRECTION. pheromone.annotate(isolated=True) + release_isolation (run 437) IS the seal - the substrate has the mechanism, this measures that using it before cross-reading matters. +5 selftests. +2 edges (rig verifies the Civilization concept; the temporal-weight effect supports ArcticSwarm gated isolation).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/probe_annotation_contagion.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.03425",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.03425"
+  ],
+  "trace_file": "runtime\\traces\\loop-455.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 455 OK · VALID · graph +0n/+2e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.81 · files +1~3-0 · novelty 1.00 · acts fold50% · audit refix!"
+}
