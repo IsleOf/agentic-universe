@@ -136,6 +136,34 @@ class OrchestrationLedger:
         return cur
 
     # --- queries -----------------------------------------------------
+    def check_startable(self, run_no, max_stale_hours=48):
+        """Run 465. Refuse to start `run_no` if a *different, lower* run is still
+        `dispatched` and older than `max_stale_hours` -- a crashed prior run that
+        never completed. A fresh session / the cron calls this before starting.
+
+        Returns (ok: bool, reason: str). ok=True with reason "" when clear.
+        A recent in-flight run (younger than the threshold) does NOT block: the
+        assumption is another session is legitimately mid-run.
+        """
+        now = _now()
+        cutoff = max_stale_hours * 3600.0
+        stale = []
+        for r in self._data["runs"].values():
+            if r["state"] != DISPATCHED:
+                continue
+            if int(r["run_no"]) >= int(run_no):
+                continue
+            age = now - (r.get("dispatched_at") or now)
+            if age > cutoff:
+                stale.append((int(r["run_no"]), age))
+        if stale:
+            stale.sort()
+            rn, age = stale[0]
+            return (False, f"run {rn} still dispatched and stale "
+                           f"({age / 3600.0:.1f}h > {max_stale_hours}h); "
+                           f"resolve it before starting run {run_no}")
+        return (True, "")
+
     def status(self):
         done = sorted(int(r["run_no"]) for r in self._data["runs"].values()
                       if r["state"] == DONE)
@@ -224,6 +252,39 @@ def _selftest():
         E = OrchestrationLedger(tmp / "empty.json")
         checks["empty ledger: next_run is 1"] = E.status()["next_run"] == 1
         checks["empty ledger: highest_done is None"] = E.status()["highest_done"] is None
+
+        # --- run 465: check_startable stale-in-flight guard ---
+        S = OrchestrationLedger(tmp / "startable.json")
+        S.claim(40, agent="crashed")          # a prior run that never completed
+        S.claim(41, agent="also-crashed")
+        # sweep the threshold and the stale run's age; assert the boundary flips
+        for max_stale in (6, 12, 24, 48):
+            for age_h in range(2, 16):
+                S.get("40")["dispatched_at"] = _now() - age_h * 3600.0
+                S.get("41")["dispatched_at"] = _now() - age_h * 3600.0
+                ok, reason = S.check_startable(42, max_stale_hours=max_stale)
+                expect_ok = age_h <= max_stale
+                checks[f"startable(max={max_stale}h, age={age_h}h) -> {expect_ok}"] = (
+                    ok == expect_ok)
+                if not ok:
+                    checks[f"...reason names the stale run (max={max_stale},age={age_h})"] = (
+                        "40" in reason)
+        # boundary is clean: at exactly the threshold it is still ok, one past it blocks
+        S.get("40")["dispatched_at"] = _now() - 24 * 3600.0
+        S.get("41")["dispatched_at"] = _now() - 24 * 3600.0
+        checks["startable: age == threshold is ok"] = S.check_startable(42, 24)[0] is True
+        S.get("40")["dispatched_at"] = _now() - 24 * 3600.0 - 1
+        checks["startable: age just past threshold blocks"] = (
+            S.check_startable(42, 24)[0] is False)
+        # no stale run -> ok
+        S.complete(40, sha="x"); S.complete(41, sha="y")
+        checks["startable: no stale run -> ok"] = S.check_startable(42, 24) == (True, "")
+        # recent in-flight -> ok (another session legitimately mid-run)
+        S.claim(43, agent="live")
+        checks["startable: recent in-flight -> ok"] = S.check_startable(44, 24)[0] is True
+        # a HIGHER dispatched run never blocks a lower start number
+        checks["startable: a higher in-flight run does not block"] = (
+            S.check_startable(42, 24)[0] is True)
 
         for k, ok in checks.items():
             if not ok:

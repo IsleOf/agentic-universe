@@ -1,0 +1,42 @@
+{
+  "run": 465,
+  "increment": "Wire orchestration_ledger into the loop's dispatch boundary + a stale-in-flight guard",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 0,
+    "modified": 6,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/loop_session.py",
+        "tools/orchestration_ledger.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-465.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 465 OK · VALID · graph +1n/+2e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +0~6-0 · novelty 0.67 · acts fold30% · audit cov!refix!"
+}

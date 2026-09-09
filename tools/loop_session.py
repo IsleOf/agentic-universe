@@ -41,7 +41,11 @@ RUN_SUMMARY_DIR = ROOT / "runtime" / "observations" / "loop_runs"
 
 class LoopSession:
     def __init__(self, run_no, increment, *, language="en", trace_dir=None,
-                 registry_base=None, bank_base=None):
+                 registry_base=None, bank_base=None, ledger_path=None):
+        # ledger_path (run 465): tests MUST pass a tmp path so selftests do not
+        # write the production orchestration ledger. Same discipline as bank_base.
+        self._ledger_path = ledger_path
+        self._commit_sha = None
         # bank_base (run 369): tests MUST pass a tmp dir. Run 368 found selftests
         # writing into the production certificate log; wiring Phase 2 one run later
         # re-created the same mixing until this override existed.
@@ -72,9 +76,21 @@ class LoopSession:
         self._cert_lines_at_open = self._count_cert_lines()
 
     # -- lifecycle --
+    def _ledger(self):
+        from orchestration_ledger import OrchestrationLedger
+        return (OrchestrationLedger(self._ledger_path) if self._ledger_path
+                else OrchestrationLedger())
+
     def __enter__(self):
         self._rec.step("researcher", self.step_id, "open",
                        note=self.increment[:200], layer="harness")
+        # Run 465. The dispatch boundary now WRITES the orchestration ledger
+        # instead of it being hand-seeded from a session's context. Bookkeeping,
+        # not a decision: claim on open, complete on clean exit.
+        try:
+            self._ledger().claim(self.run_no, agent="conductor")
+        except Exception:
+            pass
         return self
 
     def __exit__(self, exc_type, exc, tb):
@@ -93,6 +109,14 @@ class LoopSession:
                        note="run complete" if ok else f"aborted: {exc_type.__name__}")
         self._rec.close()
         self._write_summary(ok)
+        if ok:
+            try:
+                d = self._graph_delta or {}
+                self._ledger().complete(
+                    self.run_no, self._commit_sha or "pending",
+                    node_delta=d.get("nodes"), edge_delta=d.get("edges"))
+            except Exception:
+                pass
         return False
 
     # -- events --
@@ -143,6 +167,7 @@ class LoopSession:
         self._counts["notes"] += 1
 
     def commit(self, sha="pending"):
+        self._commit_sha = sha
         self._rec.artifact("researcher", "git", "write", layer="harness",
                            note=f"commit {sha} for run {self.run_no}")
         self._counts["artifacts"] += 1
@@ -427,7 +452,7 @@ def _selftest():
     try:
         s = LoopSession(run_no=999, increment="selftest run",
                         trace_dir=str(tmp / "traces"),
-                        registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"))
+                        registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"), ledger_path=str(tmp / "ledger.json"))
         with s:
             s.cite("2609.03035", verified=True, purpose="probe survives eval awareness")
             s.cite("2601.99999", verified=False)
@@ -451,11 +476,20 @@ def _selftest():
                 len(summ["citations"]) == 2,
         }
 
+        # run 465: the dispatch boundary writes the orchestration ledger
+        from orchestration_ledger import OrchestrationLedger as _OL
+        _led = _OL(str(tmp / "ledger.json"))
+        checks["run 465: clean exit marks the run done in the ledger"] = (
+            _led.get(999) is not None and _led.get(999)["state"] == "done")
+        checks["run 465: completed ledger entry carries the commit sha"] = (
+            _led.get(999)["sha"] == "abc1234")
+        checks["run 465: an aborted run stays dispatched, not done"] = None  # set below
+
         # auto-cite from the increment line (run 361): the novelty signal must not
         # depend on the agent remembering to call cite().
         s2 = LoopSession(run_no=998,
                          increment="fold arXiv:2606.23075 MLAS and 2509.26354 misevolution",
-                         trace_dir=str(tmp / "traces2"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"))
+                         trace_dir=str(tmp / "traces2"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"), ledger_path=str(tmp / "ledger.json"))
         with s2:
             pass
         a = json.loads((RUN_SUMMARY_DIR / "run-998.json").read_text(encoding="utf-8"))
@@ -469,7 +503,7 @@ def _selftest():
 
         # an explicit verified cite must win over the auto-extractor, not duplicate
         s3 = LoopSession(run_no=997, increment="fold arXiv:2606.23075 MLAS",
-                         trace_dir=str(tmp / "traces3"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"))
+                         trace_dir=str(tmp / "traces3"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"), ledger_path=str(tmp / "ledger.json"))
         with s3:
             s3.cite("2606.23075", verified=True, purpose="abstract fetched and checked")
         b = json.loads((RUN_SUMMARY_DIR / "run-997.json").read_text(encoding="utf-8"))
@@ -484,7 +518,7 @@ def _selftest():
             "fold arXiv:2606.23075; it refines the run-401 finding arXiv:2509.99999 "
             "and compounds arXiv:2510.88888"),
             trace_dir=str(tmp / "traces3b"), registry_base=str(tmp / "harness"),
-            bank_base=str(tmp / "bank"))
+            bank_base=str(tmp / "bank"), ledger_path=str(tmp / "ledger.json"))
         with s3b:
             s3b.cite("2606.23075", verified=True, purpose="the actual source")
         bx = json.loads((RUN_SUMMARY_DIR / "run-989.json").read_text(encoding="utf-8"))
@@ -497,7 +531,7 @@ def _selftest():
 
         # an explicit graph_write() must win over the auto-derivation
         s4 = LoopSession(run_no=996, increment="explicit graph write",
-                         trace_dir=str(tmp / "traces4"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"))
+                         trace_dir=str(tmp / "traces4"), registry_base=str(tmp / "harness"), bank_base=str(tmp / "bank"), ledger_path=str(tmp / "ledger.json"))
         with s4:
             s4.graph_write(nodes=(10, 12), edges=(40, 45))
         c = json.loads((RUN_SUMMARY_DIR / "run-996.json").read_text(encoding="utf-8"))
@@ -558,6 +592,21 @@ def _selftest():
         _ls3._cert_lines_at_open = None
         checks["an unreadable opening snapshot -> False, never a confident 'evaluated'"] = (
             _ls3._certificates_grew() is False)
+
+        # run 465: an aborted run must NOT be marked done (only claimed)
+        _lp = str(tmp / "ledger_abort.json")
+        try:
+            with LoopSession(run_no=995, increment="aborts",
+                             trace_dir=str(tmp / "tracesA"),
+                             registry_base=str(tmp / "harness"),
+                             bank_base=str(tmp / "bank"), ledger_path=_lp):
+                raise RuntimeError("boom")
+        except RuntimeError:
+            pass
+        _la = _OL(_lp).get(995)
+        checks["run 465: an aborted run stays dispatched, not done"] = (
+            _la is not None and _la["state"] == "dispatched")
+        (RUN_SUMMARY_DIR / "run-995.json").unlink(missing_ok=True)
 
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
