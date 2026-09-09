@@ -13466,6 +13466,34 @@
         "https://arxiv.org/abs/2609.08832"
       ],
       "subnodes": []
+    },
+    {
+      "id": "artifact_probe_consistency_gap_rig",
+      "label": "Consistency-gap probe: mean pass rate vs all-of-N success under repetition",
+      "type": "artifact",
+      "status": "to_test",
+      "verification_state": "validated_in_sandbox",
+      "approach_family": "evaluation_accountability",
+      "branch_key": "evaluation_accountability:consistency_gap",
+      "confidence": 0.55,
+      "description": "tools/probe_consistency_gap.py (run 463) operationalises the run-462 fold of arXiv:2609.08832. scenario() -> bool is any stochastic pass/fail check; consistency_gap runs it n times per block over many blocks and reports mean_pass (fraction of all individual runs), all_of_n (fraction of blocks where every run passed) and gap = mean_pass - all_of_n. sweep_n sweeps the block size k over range(2,16): the gap is 0 for a deterministic scenario and monotone non-decreasing in k for any flaky one, so the sweep itself is the diagnostic for whether a check is single-run-sufficient. flip_risk(p, thresh) is the loop-facing number: the block size at which independent all-of-k success p**k drops below a decision threshold that mean pass clears - i.e. how many repetitions turn a headline 'pass' into a 'fail'. For a 0.9 bar, p=0.95 flips at k=3 and p=0.995 at k~22. This makes sweep_audit's own failure mode self-applicable: an 'audit ok' from a single run whose headline would flip on repetition is itself a headline-substitution. HONESTY BOUND: flip_risk assumes run-to-run independence (a floor on the gap - correlated failures widen it); the rig measures the gap for a supplied scenario, it does not itself estimate any real loop scenario's p. 10 selftest checks; selftest_all JOBS +1.",
+      "tags": [
+        "evaluation",
+        "reliability",
+        "consistency",
+        "all-of-n",
+        "repetition",
+        "probe-rig",
+        "single-run-sufficiency",
+        "assumption-explicit"
+      ],
+      "derived_from": [
+        "tools/probe_consistency_gap.py",
+        "https://arxiv.org/abs/2609.08832"
+      ],
+      "evidence_links": [
+        "tools/probe_consistency_gap.py"
+      ]
     }
   ],
   "edges": [
@@ -32288,6 +32316,27 @@
       "status": "to_test",
       "verification_state": "needs_empirical_validation",
       "approach_family": "evaluation_accountability"
+    },
+    {
+      "id": "edge_artifact_probe_consistency_gap_rig__instantiates__concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "source": "artifact_probe_consistency_gap_rig",
+      "target": "concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "type": "instantiates",
+      "description": "turns the folded consistency gap into a runnable rig: sweep_n shows all_of_n collapsing as k grows while mean_pass holds, reproducing the paper's shape on any flaky scenario"
+    },
+    {
+      "id": "edge_artifact_probe_consistency_gap_rig__supports__concept_verification_completeness_gap",
+      "source": "artifact_probe_consistency_gap_rig",
+      "target": "concept_verification_completeness_gap",
+      "type": "supports",
+      "description": "a single-run pass is an incomplete verification when the check is flaky; the gap curve quantifies how incomplete"
+    },
+    {
+      "id": "edge_artifact_probe_consistency_gap_rig__challenges__artifact_sweep_audit",
+      "source": "artifact_probe_consistency_gap_rig",
+      "target": "artifact_sweep_audit",
+      "type": "challenges",
+      "description": "flip_risk applies sweep_audit's headline-substitution test to sweep_audit itself: an 'audit ok' from one run whose finding would flip on repetition is a headline-substitution the current audit cannot catch"
     }
   ]
 }
