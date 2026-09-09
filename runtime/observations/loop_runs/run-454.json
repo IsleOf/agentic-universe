@@ -1,0 +1,46 @@
+{
+  "run": 454,
+  "increment": "Literature, fresh axis (inter-system coordination - the project has covered intra-fleet heavily, not fleet-to-fleet). Folded arXiv:2609.03425 (The Civilization Framework: Sovereign-Anchored Communication Between Personal Multi-Agent Systems; Guangjun Liu; 2026-09-03). Between INDEPENDENT MAS the addressable unit should be a CIVILIZATION - one human sovereign + a persistent ledger + interchangeable agents - not an agent. 'Authority derives from memory': an agent's power is capped by the memory it can access, externalised through SIGNED CREDENTIALS, separate from civilization-level reputation. Embassy Protocol: commitment state on BOTH ledgers, not delivery, is ground truth. THE TEMPORAL-WEIGHT EFFECT (1,908 preregistered trials): an unverified claim arriving FIRST captured 54.2% of answers vs 31.6% when the receiver had SEALED its own response. LANDS ON: the §7 capability-token recommendation (run 435) arrived at independently + more complete (memory-cap, civ-vs-agent reputation split); the temporal-weight effect QUANTIFIES ArcticSwarm candidate fixation (run 436) and 'seal before you see theirs' IS gated isolation (run 437). +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.03425",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.03425"
+  ],
+  "trace_file": "runtime\\traces\\loop-454.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 454 OK · VALID · graph +1n/+7e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.81 · files +1~2-0 · novelty 1.00 · acts fold40% · audit refix!"
+}

@@ -13329,6 +13329,35 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.01985"
       ]
+    },
+    {
+      "id": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "label": "The Civilization Framework (Guangjun Liu, arXiv:2609.03425, 2026-09-03): between INDEPENDENT multi-agent systems, the addressable unit should be a CIVILIZATION - one human sovereign + a persistent ledger + interchangeable agents - not an agent. 'Authority derives from memory': an agent's power to act for its civilization is capped by the memory it can access and externalised through SIGNED CREDENTIALS, separate from civilization-level reputation. The Embassy Protocol: async messages to a resident ledger endpoint; COMMITMENT STATE ON BOTH LEDGERS, not delivery, is ground truth. THE TEMPORAL-WEIGHT EFFECT (1,908 preregistered trials): an unverified upstream claim arriving FIRST captured 54.2% of answers vs 31.6% when the receiver had already SEALED its own response.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:trust",
+      "confidence": 0.7,
+      "description": "arXiv:2609.03425 (Guangjun Liu; v1 2026-09-03; VERIFIED via abstract). A framework for coordination BETWEEN independent (personal) multi-agent systems - a new axis for this project, which has covered INTRA-fleet coordination heavily but not fleet-to-fleet. THE PROBLEM. Human intermediaries relaying messages between AI systems lose information; but agent-to-agent needs an accountability model. THE UNIT. The addressable entity is a CIVILIZATION: one human SOVEREIGN, a persistent LEDGER, and swappable AGENTS acting on the sovereign's behalf. Authority and identity anchor to the sovereign, not to any agent. AUTHORITY DERIVES FROM MEMORY. 'An agent's power to act for its civilization is capped by the memory it can access and externalised through signed credentials, separate from civilization-level reputation.' An agent cannot exceed its delegated authority; the credential chain is cryptographically verifiable. THE EMBASSY PROTOCOL. A carrier-agnostic overlay: messages arrive asynchronously at a resident ledger endpoint, ANY online agent of the receiver handles them, and COMMITMENT STATE ON BOTH LEDGERS - not delivery - is ground truth. Transport is decoupled from verification. THE TEMPORAL-WEIGHT EFFECT (the quantified hazard). Claims arriving FIRST gain unearned credibility. Preregistered, 1,908 trials: an unverified upstream claim arriving first captured 54.2% of answers; the same claim arriving AFTER the receiver had SEALED its own response captured only 31.6%. WHY IT LANDS HERE. (i) 'Authority anchored to a human sovereign, externalised through signed credentials, capped by accessible memory' IS the substrate's §7 capability-token recommendation (run 435), independently arrived at and more complete - it adds the memory-cap and the civilization-vs-agent reputation split. (ii) The TEMPORAL-WEIGHT EFFECT is the QUANTIFIED version of ArcticSwarm's candidate fixation (run 436) and the herding literature: 54.2 vs 31.6 is the cost of NOT sealing your own answer first, and 'seal before you see theirs' IS ArcticSwarm's gated isolation, now with a number. The substrate's isolated-annotation primitive (run 437) is the seal. (iii) 'Commitment state on both ledgers is ground truth, not delivery' maps onto the substrate's 'the ledger is truth, the board is a hint' rule and PCAA's outcome closure checkpoint. CURRENCY: 2026-09-03, within the recency window. LIMITS: single author, the cryptographic-credential half needs an operator key (owner-gated, same class as the substrate's capability tokens); the temporal-weight number is one task family. Small-model relevance: a fleet of small local models under one operator IS one civilization - the sovereign anchor is free (the operator), and sealing before cross-reading is a cheap protocol rule.",
+      "tags": [
+        "inter-system-coordination",
+        "civilization",
+        "sovereign-anchored",
+        "signed-credentials",
+        "authority-from-memory",
+        "temporal-weight-effect",
+        "seal-before-you-see",
+        "embassy-protocol",
+        "recency-2026-09",
+        "capability-token"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.03425"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.03425"
+      ]
     }
   ],
   "edges": [
@@ -31908,6 +31937,55 @@
       "target": "artifact_sweep_audit",
       "type": "informs",
       "description": "run 453: status_line's `audit` token runs sweep_audit.report on the latest sweep doc and names which of sufficiency / coverage / refix flagged - the loop's self-audit in the health glance (run 367's lesson: a check the reader never sees is a check that does not act)"
+    },
+    {
+      "id": "edge_civilization_grounds_capability_token_node",
+      "source": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "target": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+      "type": "supports",
+      "description": "the substrate's §7 fix - bind the agent field to a capability token minted by an operator - is independently arrived at here as 'authority anchored to a human sovereign, externalised through signed credentials'; the Civilization framework adds the memory-cap and the civilization-vs-agent reputation split"
+    },
+    {
+      "id": "edge_civilization_quantifies_arcticswarm_fixation",
+      "source": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "target": "concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains",
+      "type": "supports",
+      "description": "the TEMPORAL-WEIGHT EFFECT (54.2% vs 31.6% over 1,908 trials) is the quantified cost of ArcticSwarm's candidate fixation: an early unverified claim captures answers unless the receiver SEALED its own first - which is exactly gated isolation"
+    },
+    {
+      "id": "edge_civilization_extends_herding",
+      "source": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+      "type": "extends",
+      "description": "'showing votes causes herding' - this adds a magnitude and a mechanism: order alone (who spoke first), not the vote tally, moves 22 points of answers, and 'seal your response before reading theirs' is the fix"
+    },
+    {
+      "id": "edge_civilization_extends_authority_from_memory",
+      "source": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "target": "concept_persistent_memory_is_part_of_the_authorization_policy_endogenous_authorization_laundering",
+      "type": "extends",
+      "description": "'persistent memory is part of the authorization policy' - the Civilization framework makes it a design principle: 'authority derives from memory', an agent's power is CAPPED by the memory it can access, and that cap is externalised through signed credentials"
+    },
+    {
+      "id": "edge_civilization_supports_action_certificate",
+      "source": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "target": "concept_runtime_governance_organizes_around_a_portable_action_certificate",
+      "type": "supports",
+      "description": "PCAA's portable action certificate and outcome-closure checkpoint; the Embassy Protocol's 'commitment state on both ledgers, not delivery, is ground truth' is the same principle for inter-system messages"
+    },
+    {
+      "id": "edge_civilization_addresses_trust_boundary",
+      "source": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "target": "concept_the_swarm_substrate_authenticates_no_writes_so_the_unverified_agent_field_is_the_whole_trust_boundary",
+      "type": "informs",
+      "description": "the substrate authenticates no writes; the Civilization model is a concrete answer at the fleet level - a sovereign anchor plus signed credentials per agent, with reputation kept at the civilization not the agent"
+    },
+    {
+      "id": "edge_civilization_extends_canonical_action_identity",
+      "source": "concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory",
+      "target": "concept_governance_needs_a_canonical_action_identity_across_heterogeneous_runtimes",
+      "type": "extends",
+      "description": "governance needs a canonical action identity across heterogeneous runtimes; the Civilization framework raises the unit one level - a canonical PRINCIPAL identity (the civilization) across heterogeneous agent SYSTEMS"
     }
   ]
 }

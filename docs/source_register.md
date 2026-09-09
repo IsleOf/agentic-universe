@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 455 nodes, 1897 edges · **Date:** 2026-09-05
+**Graph at generation:** 456 nodes, 1904 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -379,6 +379,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.02925 — `concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote`
 - https://arxiv.org/abs/2609.02992 — `concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free`
 - https://arxiv.org/abs/2609.03422 — `concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it`
+- https://arxiv.org/abs/2609.03425 — `concept_the_addressable_unit_between_independent_agent_systems_is_a_civilization_human_sovereign_plus_ledger_and_authority_derives_from_memory`
 - https://arxiv.org/abs/2609.04170 — `concept_emergent_cheating_and_whistleblowing_in_a_100_agent_math_swarm_transparent_channels_carried_both`, `concept_the_channel_that_carries_the_exploit_is_the_channel_that_catches_it`
 - https://arxiv.org/abs/2609.04270 — `concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects`
 - https://arxiv.org/abs/2609.04280 — `concept_harness_expansion_alone_degrades_previously_solved_tasks_and_retention_fights_adaptation`, `concept_this_loops_retention_gate_is_wired_to_proposals_not_to_harness_expansion`
