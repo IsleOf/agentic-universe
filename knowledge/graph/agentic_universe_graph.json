@@ -13273,6 +13273,35 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.02094"
       ]
+    },
+    {
+      "id": "concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects",
+      "label": "Reviewer Capability Governs Rejection Targeting, Not Repair Skill (Faizan Tanveer, arXiv:2609.04270, 2026-09-02): in an execute-review-revise pipeline, a STRONGER reviewer improves WHICH answers are rejected (targets genuinely wrong ones) but NOT whether flagged answers get fixed. A mid-tier cross-family reviewer: 52% -> 64% (+12pp, p=0.0005), zero damaged answers. SAME-MODEL self-review: 0.85 recall but 2.1x over-rejection, 35% of CORRECT answers flagged wrong, 15% repair rate vs 43% for mid-tier. The weakest reviewer changed 0 final answers and DOUBLED token cost. 100 olympiad math problems.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.7,
+      "description": "arXiv:2609.04270 (Faizan Tanveer; v1 2026-09-02; VERIFIED via abstract). SETUP. An execute-review-revise pipeline: an EXECUTOR generates a solution, a REVIEWER rejects problematic ones, a REVISER tries to fix the rejected. Reviewer capability is VARIED across a tier spectrum (not held constant); 100 olympiad math problems as a fixed benchmark. THE FINDING. Reviewer capability governs REJECTION TARGETING (which answers get flagged) but NOT REPAIR SKILL (whether a flagged answer becomes correct). NUMBERS. Mid-tier CROSS-FAMILY reviewer: accuracy 52% -> 64% (+12pp, p=0.0005), ZERO answers damaged, 43% repair rate. SAME-MODEL SELF-REVIEW: 0.85 recall (it catches wrong answers) BUT rejects 2.1x as often, 35% of CORRECT answers flagged as wrong, and only a 15% repair rate. WEAKEST reviewer: changed ZERO final answers while DOUBLING token cost - pure waste. ALLOCATION. Put the stronger model in the REVIEW role (rejection precision is what capability buys); a weak reviewer is negative-value (cost up, accuracy flat). WHY IT LANDS HERE. The swarm substrate's G1 / G4 are STATELESS, capability-agnostic functions - they check mechanical things and REPORT the rest, but the 'fuzzy part' (is this claim actually supported) is 'the caller's', i.e. whatever model the validator agent runs. This paper says that model's CAPABILITY and its FAMILY relative to the executor are load-bearing: a same-model validator over-rejects (35% false positives - it would bounce a third of good drafts back to the draft stage), and a weak validator is worse than none (run 428's gamma logic: a mechanism that costs budget and changes nothing is Gamma-negative). swarm_demo picks validators by REPUTATION (a performance history) with a no-self-review / rotation guard - the guard prevents SAME-AGENT review but not SAME-MODEL or WEAK-MODEL review, because the substrate has no model-tier or model-family signal. This is a concrete argument for a validator-selection rule: prefer a validator whose model family differs from the executor's AND whose capability tier is >= the executor's. It also refines the run-218 criterion: 'multi-agent helps when subtasks are verifiable' assumes a reviewer capable of verifying; a weak reviewer makes the verify step negative-value. CURRENCY: 2026-09-02, within the recency window. LIMITS: single author, one narrow domain (olympiad math), N=100 - the DIRECTION (capability -> targeting not repair; self-review over-rejects) is the finding, not the exact percentages. Small-model relevance: a fleet of identical small local models is the same-model self-review case - expect ~35% false rejections at the review step unless a cross-family or stronger reviewer is available.",
+      "tags": [
+        "reviewer-capability",
+        "execute-review-revise",
+        "self-review-over-rejects",
+        "rejection-targeting",
+        "repair-skill",
+        "model-allocation",
+        "cross-family",
+        "gates",
+        "recency-2026-09",
+        "small-model-regime"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.04270"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.04270"
+      ]
     }
   ],
   "edges": [
@@ -31726,6 +31755,55 @@
       "target": "concept_unmanaged_skill_libraries_silently_drift",
       "type": "implements",
       "description": "Library Drift (run 208) flagged 'no bounded active-cap'; consolidate() is the mechanism that keeps the candidate set from accreting near-duplicates - a report, human decides the merge"
+    },
+    {
+      "id": "edge_reviewer_capability_refines_three_agent_pipeline",
+      "source": "concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects",
+      "target": "concept_a_gated_pipeline_with_no_self_review_needs_at_least_three_agents",
+      "type": "refines",
+      "description": "'a gated pipeline with no self-review needs >= 3 agents' - this adds that the >= 3 must also include a validator whose model is not the executor's family and not weaker: same-model review over-rejects 35% of correct answers, a weak reviewer changes nothing at double cost"
+    },
+    {
+      "id": "edge_reviewer_capability_constrains_gates",
+      "source": "concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects",
+      "target": "artifact_validator_gates",
+      "type": "constrains",
+      "description": "G1/G4 are stateless and capability-agnostic; the 'fuzzy part' runs on the validator agent's model. A validator-selection rule (prefer a different model family and a >= capability tier than the executor) is the missing lever - the substrate has no model-tier or family signal"
+    },
+    {
+      "id": "edge_reviewer_capability_extends_routing",
+      "source": "concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects",
+      "target": "concept_model_routing_per_task_class_is_a_harness_lever_with_a_cost_accuracy_feedback_loop",
+      "type": "extends",
+      "description": "model routing per task class is a harness lever; this is the review-role version - route the stronger / cross-family model to the REVIEW seat specifically, because that is where capability buys rejection precision"
+    },
+    {
+      "id": "edge_reviewer_capability_supports_efd",
+      "source": "concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects",
+      "target": "concept_a_quorum_of_reviewers_who_share_an_evidence_source_has_a_structural_epistemic_cut_of_one_no_matter_how_many_vote",
+      "type": "supports",
+      "description": "same-model reviewers are epistemically correlated (kappa_E=1); this quantifies the cost - not just missed faults but 35% FALSE rejections and a repair-rate ceiling"
+    },
+    {
+      "id": "edge_reviewer_capability_extends_outcome_judges",
+      "source": "concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects",
+      "target": "concept_outcome_only_judges_miss_silent_faults",
+      "type": "extends",
+      "description": "outcome-only judges miss silent faults; this adds the other error direction - a same-model or over-eager judge produces FALSE rejections (2.1x over-flagging), which cost throughput as flagged drafts bounce back"
+    },
+    {
+      "id": "edge_reviewer_capability_supports_gamma",
+      "source": "concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects",
+      "target": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "type": "supports",
+      "description": "run 428: a vote synthesis is budget-negative. Same shape: a weak reviewer doubled token cost and changed zero final answers - a review mechanism can be Gamma-negative if the reviewer is not capable enough"
+    },
+    {
+      "id": "edge_reviewer_capability_constrains_swarm_demo",
+      "source": "concept_reviewer_capability_governs_which_answers_get_rejected_not_whether_they_get_repaired_and_self_review_over_rejects",
+      "target": "artifact_swarm_demo_acceptance_test",
+      "type": "constrains",
+      "description": "swarm_demo's _fresh_validator picks by reputation with a no-self-review guard; the guard blocks same-AGENT review but not same-MODEL or weak-model review, so a fleet of identical small models would over-reject at every gate"
     }
   ]
 }
