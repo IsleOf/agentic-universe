@@ -1,0 +1,48 @@
+{
+  "run": 462,
+  "increment": "Fold arXiv:2609.08832 - the consistency gap: mean pass rate hides run-to-run outcome flips",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 1,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [
+      "\"C\\357\\200\\272UsersPCAppDataLocalTempclaudeC--39f53bd2-d795-41d1-b391-639e3ef10795scratchpadst.log\""
+    ],
+    "n_unexpected": 1,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.08832",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.08832"
+  ],
+  "trace_file": "runtime\\traces\\loop-462.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 462 OK · VALID · graph +1n/+6e · cites 1v/1 · idle-streak 1 · legible 1.00 · verified-frac 0.81 · files +1~1-0 ?1 · novelty 0.75 · acts fold30% · audit refix!"
+}

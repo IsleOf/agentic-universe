@@ -13443,6 +13443,29 @@
       "evidence_links": [
         "tools/trace_topology.py"
       ]
+    },
+    {
+      "id": "concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "label": "The consistency gap: average pass rate hides run-to-run flips",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "evaluation_accountability",
+      "branch_key": "evaluation_accountability:consistency_gap",
+      "confidence": 0.6,
+      "description": "An LLM agent's mean per-run pass rate overstates deployable reliability because outcomes flip across repeated runs of the same task. On AppWorld with ReAct/GPT-4.1 (arXiv:2609.08832) per-run pass averages 77% but all-of-5 success is only 53% - a 24-point consistency gap. Mechanism of repair: a Consistency Analyzer locates the trajectory steps likely to flip and a Guideline Generator distils them into episodic memory injected on similar future tasks, raising all-of-5 success by +16 pts same-task and +13 pts on similar-task generalisation. The headline single-run number is the wrong unit for trust; consistency-under-repetition is the accountable one.",
+      "tags": [
+        "evaluation",
+        "reliability",
+        "consistency",
+        "episodic-memory",
+        "self-evolving",
+        "agent-eval"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.08832"
+      ],
+      "subnodes": []
     }
   ],
   "edges": [
@@ -32211,6 +32234,60 @@
       "target": "artifact_trace_topology",
       "type": "grounds",
       "description": "run 460: probe_subagent_coordination emits MESSAGE events for the contagion spread; its high-deference cohort is the real swarm trace trace_topology is validated against (a near-complete graph -> the clique flag)"
+    },
+    {
+      "id": "edge_concept_consistency_gap_average_pass_rate_hides_run_to_run_flips__refines__concept_benchmark_headline_substitution",
+      "source": "concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "target": "concept_benchmark_headline_substitution",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "evaluation_accountability"
+    },
+    {
+      "id": "edge_concept_consistency_gap_average_pass_rate_hides_run_to_run_flips__supports__concept_verification_completeness_gap",
+      "source": "concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "target": "concept_verification_completeness_gap",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "evaluation_accountability"
+    },
+    {
+      "id": "edge_concept_consistency_gap_average_pass_rate_hides_run_to_run_flips__extends__concept_geometric_reliability_decay",
+      "source": "concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "target": "concept_geometric_reliability_decay",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "evaluation_accountability"
+    },
+    {
+      "id": "edge_concept_consistency_gap_average_pass_rate_hides_run_to_run_flips__supports__concept_memory_and_learning",
+      "source": "concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "target": "concept_memory_and_learning",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "evaluation_accountability"
+    },
+    {
+      "id": "edge_concept_consistency_gap_average_pass_rate_hides_run_to_run_flips__supports__pattern_continual_self_refinement",
+      "source": "concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "target": "pattern_continual_self_refinement",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "evaluation_accountability"
+    },
+    {
+      "id": "edge_concept_consistency_gap_average_pass_rate_hides_run_to_run_flips__challenges__concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "source": "concept_consistency_gap_average_pass_rate_hides_run_to_run_flips",
+      "target": "concept_misevolution_a_self_evolving_agent_drifts_into_harm_with_no_attacker",
+      "type": "challenges",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "evaluation_accountability"
     }
   ]
 }

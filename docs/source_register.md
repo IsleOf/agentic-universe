@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 459 nodes, 1923 edges · **Date:** 2026-09-05
+**Graph at generation:** 460 nodes, 1930 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -390,6 +390,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.05261 — `concept_flat_skill_summarisation_is_a_bottleneck_organise_skills_by_abstraction_level_and_condition_them_on_outcome`
 - https://arxiv.org/abs/2609.05279 — `concept_swapping_a_role_matched_agent_costs_little_task_score_but_16_to_63_percent_more_communication_per_progress`
 - https://arxiv.org/abs/2609.05339 — `concept_fixed_schema_agent_memory_survives_a_model_upgrade_compressed_notes_and_mixed_embeddings_do_not_and_only_raw_history_repairs`
+- https://arxiv.org/abs/2609.08832 — `concept_consistency_gap_average_pass_rate_hides_run_to_run_flips`
 - https://arxiv.org/html/2604.21590v1 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`
 - https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/ — `artifact_relay_handoff_with_anti_ping_pong_guard`, `artifact_swarm_substrate_prototype_design`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
