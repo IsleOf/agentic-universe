@@ -1,0 +1,46 @@
+{
+  "run": 451,
+  "increment": "Literature, fresh axis (agent-built-system defects). Folded arXiv:2609.01985 (When Agents Implement Systems: A Case Study in Defects, Detection, and Evaluation Rigor; Phanindra Reddy Madduru; 2026-09-02). An LLM agent built a multi-component retrieval system; 5 ARCHITECTURAL defects (schema, async orchestration, config), not code bugs. Standard practice misses them: component-isolated tests skip the integration; benchmarks that substitute GOLD labels for the agent's actual pipeline output mask real errors. One defect: a claimed performance fix NEVER re-measured on the regression that motivated it. HotpotQA: filtered retrieval optimal by budget-3, unfiltered 69% at budget-10 (p<0.0001). LANDS ON the verification thesis with concrete real-world instances: 'claimed fix never re-measured' = the ClaimReceipt sufficiency failure (441) + tampering-flag 'gain with no mechanism' (190); sweep_audit (442) checks Next coverage but not fix re-verification (a refix_check is sharper); selftest_all is mostly component tests, swarm_demo the one end-to-end; _fake_worker is a gold substitute. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.01985",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.01985"
+  ],
+  "trace_file": "runtime\\traces\\loop-451.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 451 OK · VALID · graph +1n/+7e · cites 1v/1 · idle-streak 1 · legible 1.00 · verified-frac 0.81 · files +1~2-0 · novelty 0.75 · acts fold50%"
+}

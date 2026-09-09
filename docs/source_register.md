@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 454 nodes, 1888 edges · **Date:** 2026-09-05
+**Graph at generation:** 455 nodes, 1895 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -371,6 +371,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.01861 — `concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document`
 - https://arxiv.org/abs/2609.01870 — `concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains`
 - https://arxiv.org/abs/2609.01873 — `concept_another_agent_is_not_another_observation_epistemic_sybil_and_shared_base_model_extraction_correlation`, `concept_correlation_belongs_on_the_noise_floor_not_on_the_signal_sum`
+- https://arxiv.org/abs/2609.01985 — `concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss`
 - https://arxiv.org/abs/2609.01992 — `artifact_sweep_audit`, `concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work`
 - https://arxiv.org/abs/2609.02094 — `concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune`
 - https://arxiv.org/abs/2609.02580 — `concept_double_auction_markets_of_llm_agents_converge_slowly_or_not_at_all_so_a_mechanisms_human_properties_do_not_transfer`

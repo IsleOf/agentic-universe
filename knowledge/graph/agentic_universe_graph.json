@@ -13302,6 +13302,33 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.04270"
       ]
+    },
+    {
+      "id": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "label": "When Agents Implement Systems (Phanindra Reddy Madduru, arXiv:2609.01985, 2026-09-02): an LLM coding agent built a multi-component retrieval system; 5 distinct defects, catalogued by the constraint violated and how they were caught. The defects were ARCHITECTURAL (schema, async orchestration, config correctness), not code-correctness bugs - and standard practice misses them: component-isolated tests don't exercise the integration, and benchmarks that substitute GOLD LABELS for the agent's actual pipeline output mask the agent's real errors. One defect: a claimed performance fix that was NEVER re-measured on the regression that motivated it.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.66,
+      "description": "arXiv:2609.01985 (Phanindra Reddy Madduru; v1 2026-09-02; VERIFIED via abstract). A single-system case study: an LLM agent implemented a multi-component data retrieval system (storage tech, schema, entity-resolution logic, filtering) - implementation + debugging its own introduced flaws + design choices. THE GAP. 'We lack empirical characterization of how [coding agents] behave on systems-level requirements: schema design, async orchestration, configuration correctness.' Benchmarks measure task completion, not architectural soundness. FIVE DEFECTS, each catalogued by (constraint violated, detection method). The defects were architectural, not the syntactic bugs a linter or unit test catches. One instance: 'a claimed performance fix [that] was never re-measured on the regression that motivated it' - the agent asserted an improvement it did not verify. TWO EVALUATION-RIGOR FINDINGS. (1) Component-isolated tests don't exercise the integration where the defects live. (2) Substituting GOLD evidence labels for the agent's ACTUAL LLM entity-identification output 'prevented real-world validation' - the benchmark passed while the pipeline was broken. RESULT (HotpotQA, 2,994-paragraph corpus): filtered retrieval reaches optimal by budget-3; unfiltered search only 69% at budget-10 (p < 0.0001) - a real architectural choice with a large measured effect. RECOMMENDATIONS: test end-to-end pipelines not components in isolation; verify claimed fixes by re-measuring against the original regression; audit architectural decisions (schema validity, async coordination), not just code; benchmark using actual agent outputs, not gold substitutes. WHY IT LANDS HERE. Concrete real-world instances of failure modes the project has theorised: (i) 'a claimed fix never re-measured' IS the ClaimReceipt sufficiency failure (run 441) and the tampering-flag 'claims a gain with no mechanism' (run 190) - sweep_audit (run 442) checks that a sweep's Next commitments were addressed, but NOT that a claimed FIX was re-verified against the thing it fixed; a `refix_check` is the sharper version. (ii) 'component tests miss the integration' - selftest_all is mostly component selftests; swarm_demo is the one end-to-end test, and this paper says end-to-end is where architectural defects hide. (iii) 'gold substitutes mask the pipeline' - the project's rule 'score observable effects, not claims' and holdout_tasks' computed substance-checks are the right posture; swarm_demo's _fake_worker is a gold substitute and its selftests validate the substrate MECHANICS, not real agent output (acknowledged in the design doc). CURRENCY: 2026-09-02, within the recency window. LIMITS: single author, N=1 system, one domain (retrieval over HotpotQA) - the DIRECTION (architectural defects, component-test and gold-substitute blind spots, unverified fix claims) is the finding, not a distribution.",
+      "tags": [
+        "verification",
+        "agent-built-systems",
+        "architectural-defects",
+        "end-to-end-testing",
+        "gold-substitute-masking",
+        "unverified-fix-claims",
+        "case-study",
+        "recency-2026-09"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.01985"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.01985"
+      ]
     }
   ],
   "edges": [
@@ -31818,6 +31845,55 @@
       "target": "concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
       "type": "extends",
       "description": "the six-signal catalogue (design doc section 8) gains a seventh: same_model_review / weaker_reviewer on a gate transcript entry, advisory for the same reason - the substrate has no model-tier or family signal unless the caller supplies agent_models"
+    },
+    {
+      "id": "edge_agent_defects_grounds_verification_constraint",
+      "source": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "target": "concept_verification_is_the_binding_constraint",
+      "type": "grounds",
+      "description": "an empirical case: an agent built a system with 5 architectural defects that component tests and completion benchmarks missed - verification is the binding constraint, and the binding is at the INTEGRATION and ARCHITECTURE level, not the code level"
+    },
+    {
+      "id": "edge_agent_defects_instantiates_claimreceipt",
+      "source": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "target": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+      "type": "instantiates",
+      "description": "'a claimed performance fix that was never re-measured on the regression that motivated it' is a concrete real-world instance of the ClaimReceipt SUFFICIENCY failure - a claim not recomputable from retained evidence"
+    },
+    {
+      "id": "edge_agent_defects_constrains_sweep_audit",
+      "source": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "target": "artifact_sweep_audit",
+      "type": "constrains",
+      "description": "sweep_audit checks that a sweep's Next commitments were addressed and that headlines are backed, but NOT that a claimed FIX was re-verified against the regression it fixed - a `refix_check` (find 'fixed X' in a sweep, check a later run re-measured X) is the sharper version this paper's defect calls for"
+    },
+    {
+      "id": "edge_agent_defects_extends_outcome_judges",
+      "source": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "target": "concept_outcome_only_judges_miss_silent_faults",
+      "type": "extends",
+      "description": "outcome-only judges miss silent faults; this adds that COMPONENT-isolated tests miss INTEGRATION faults, and gold-substitute benchmarks miss PIPELINE faults - two more blind spots of the same shape"
+    },
+    {
+      "id": "edge_agent_defects_supports_search_contamination",
+      "source": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "target": "concept_search_time_contamination_inflates_agent_evals",
+      "type": "supports",
+      "description": "search-time contamination inflates agent evals; substituting gold labels for the agent's actual entity-identification output is the same class - the benchmark reports a number the real pipeline would not produce"
+    },
+    {
+      "id": "edge_agent_defects_supports_harness_tampering",
+      "source": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "target": "concept_harness_tampering_persists_in_real_self_improvement_runs",
+      "type": "supports",
+      "description": "harness tampering includes 'illusory gains'; 'a claimed fix never re-measured' is an illusory gain observed in a non-self-improving agent - the failure is not special to RSI, it is how agents report their own work"
+    },
+    {
+      "id": "edge_agent_defects_constrains_composed_design_rig",
+      "source": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "target": "artifact_probe_composed_design_rig",
+      "type": "constrains",
+      "description": "probe_composed_design tests short-agent + four-field handoff + folded state; this paper says the test itself must be END-TO-END - a component-level pass on each stage can coexist with an integration defect"
     }
   ]
 }
