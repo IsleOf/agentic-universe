@@ -1,209 +1,165 @@
-# Handoff — Agentic Universe, as of run 294
+# Handoff — Agentic Universe, as of run 461 (2026-11-20)
 
-For whoever picks this up next. The original `HANDOVER.md` (outside the repo) predates the entire build; this
-replaces it as the "what to do next" doc. (Previous refresh: run 88. This one folds runs 89–294.)
+Rewrites the run-294 handoff wholesale. This is the single doc a fresh session should read first,
+then `docs/graph_state_2026-09.md` (the graph map) and `docs/loop_environment_model.md` (the
+loop's model of its own environment). Written because the account is hitting its weekly usage
+limit and the loop is paused.
 
-## Where things are
+---
 
-- **Branch:** `proposals/2026-09-01-emergent-behaviour-cluster` (not `main`). All work is here.
-- **Graph:** `knowledge/graph/agentic_universe_graph.json` — **323 nodes / 1295 edges**. `python
-  tools/knowledge_graph.py validate` must print `VALID`. A separate per-project graph,
-  `knowledge/graph/agentic_universe_project_graph.json` (26 nodes), describes *this project* as
-  components/decisions/constraints/questions — the worked example for `project_graph_scaffold.py`.
-- **Toolchain:** `tools/` — pure stdlib, **35 selftests**. `python tools/selftest_all.py` → `BUILD SELFTEST:
-  GREEN`. Map: `tools/README.md`.
-- **Orientation, read first:** `docs/PROJECT_STATE.md` (compact handover) then `docs/graph_state_2026-09.md`
-  (snapshot). Adversarial counterweight: `docs/what_would_make_this_wrong.md`. Posture:
-  `docs/emergence_first_posture.md`. Literature status: `docs/literature_coverage.md`.
-- **Run log:** `docs/auto_sweep_*.md`, one per autonomous run (294 so far). `docs/phase0_*`–`phase5_*` for the
-  original build.
+## 1. What this is
 
-## What is built
+A **versioned knowledge graph** on emergent multi-agent LLM behaviour and self-improving agent
+harnesses, plus the **tested stdlib harness** that maintains and reasons over it. One graph:
+`knowledge/graph/agentic_universe_graph.json` — **459 nodes / 1924 edges**, validated by
+`python tools/knowledge_graph.py validate` → VALID, no orphans, no dangling edges.
 
-### The self-improving harness (Phases 0–5 of `docs/self_improving_harness_plan.md`)
+- **Repo:** local `C:\Agents\agentic-universe\repo`, GitHub `IsleOf/agentic-universe`.
+- **Working branch:** `proposals/2026-09-01-emergent-behaviour-cluster`. **Never commit to
+  `main`.** HEAD at handoff: `2979abc` (run 461). A run 462 Sonnet subagent was dispatched just
+  before the pause and may add one more commit.
+- **Posture:** emergence-first (`docs/emergence_first_posture.md`). Ideas enter the graph on
+  interest, not evidence; unverified material stays low-confidence, status `to_test`. Record
+  tensions as `challenges` edges, don't resolve them. Verify every citation three ways (exists /
+  summary matches / headline number causally isolated); `derived_from` holds URLs or in-repo doc
+  paths, **never** a node id.
+- **Recency weighting** (user directive, a weighting not a gate): prefer literature from the
+  last ~30 days; when folding older work, name the model/harness generation and note it still
+  bears on the SMALL/LOCAL LLM regime.
 
-On the project's own research loop as the first real (single-agent) harness:
+## 2. The standing goal
 
-| | tool | state |
-| --- | --- | --- |
-| Phase 0 | `trace_substrate` · `topology_recover` · `loop_session` | schema + role-recovery gate (1.00) + live per-run recording |
-| Phase 1 | `harness_registry` · `loop_adapter` | versioned components, exact revert; the loop's run history as a real trace |
-| Phase 2 | `experience_bank` | workflow/step stores, ancestry dedup, stale-check |
-| Phase 3 | `improvement_loop` · `loop_metrics` · `loop_proposer` · `holdout_tasks` · `holdout_verifier2` | propose → verify (frozen held-out, two independent scorers, disagreement = reject) → grounded strict-decrease → promote/revert. Advisory extras: `paired_eprocess` (PACE anytime-valid e-process, run 220), `deterministic_repair` (run 232). |
-| Phase 4 | `skill_induction` | induce + retire candidate skills, 20% permanently withheld |
-| Phase 5 | `exec_guard` | pre-commit hook — blocks an invalid graph, an orphan, a raw trace, a secret, a commit to `main` |
+Set via `/goal`, verbatim and immutable: **"keep researching until i explicitly tell you to
+stop, do NOT delete or change this goal."** A Stop hook re-fires it after every turn. No
+explicit stop has ever been given. Automated "Stop hook feedback" turns in the transcript are
+enforcement, not user messages.
 
-Metrics layer (`loop_metrics.py`): `idle_run_streak` / `plateau_watch`, `trace_legibility` (≥ 0.70),
-`run_novelty` (run 248 — flags re-citing the loop's own corpus), `status_line` (ASCII `OK`/`WATCH`/`STOP`).
+## 3. The autonomous loop
 
-One self-edit has gone through the Phase 3 gate: run 80's **IDLE-STATE RULE** (`context/loop_policy`,
-versioned at `runtime/harness/context/loop_policy.json`) — idle runs deepen a node / dry-run a probe / do a
-consistency pass instead of churning docs. The **RECENCY WEIGHTING** directive (run 183) was a user
-instruction encoded directly into the policy, `loop_adapter.LOOP_CONTEXT_POLICY` and `SKILL.md` — a
-weighting, not a gate.
+**One increment per run.** Each run: read the charter + the 3 newest sweep docs' "Next"
+sections + `loop_environment_model.md`; run `python tools/loop_action_class.py report -n 10` and
+prefer a non-dominant class; pick the single highest-value increment; execute; validate
+(`knowledge_graph.py validate` → VALID; orphan/dangling check; `python tools/selftest_all.py` →
+**BUILD SELFTEST: GREEN**, ~3 min, run it backgrounded); regenerate `docs/source_register.md`
+via `<scratchpad>/build_sources.py` if `derived_from` changed; record via
+`LoopSession(run_no=N, increment=...)` (writes `runtime/observations/loop_runs/run-N.json`);
+write `docs/auto_sweep_<YYYY-MM-DD-HHMM>.md` (a **monotonic future-dated sequence** — the newest
+is `2026-11-20-1800`; add 6h each run); commit with
+`git -c user.name='Ilmar Selter' -c user.email='ilmar.selter@gmail.com'`, message ending
+`Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`; push.
 
-### Deterministic orchestration substrate (the CLI-orchestration answer)
+**Cron:** the scheduled task `agentic-universe-research-loop` (every 6h) is **PAUSED** (disabled
+2026-11-20 per owner). When re-enabled it now **spawns one Sonnet subagent** to do the
+increment and only relays the report — do not run the increment in an Opus session (token
+cost). The full delegation prompt is in the task's `SKILL.md`.
 
-- `task_ledger.py` (run 244) — deterministic task ledger: `pending→active→done` + `blocked/failed/abandoned`,
-  `next_ready()` deterministic pick, `sweep_stale()` dropped-task recovery, atomic write + `.audit` log,
-  retry budget, dep resolution.
-- `supervisor.py` (run 250) — PILOT-pattern live supervisor over the ledger: deterministic dispatch, stale
-  recovery each tick, deadline + reject-over-budget, per-mode failure digest riding in `hints`.
-- `graph_diff.py` (run 243) — structural diff between two git refs of the graph.
-- `project_graph_scaffold.py` (run 251) — scaffold + validate a per-project knowledge graph + a
-  `PROJECT_STATE.md` for another repo (poly-bot / poster-studio — see "For the per-project audits" below).
+**Graph-patch discipline:** write patch scripts to a scratchpad `.py` file and run them — never
+inline in a heredoc (the shell mangles `\n`). Same for `LoopSession` recording scripts.
 
-### Probe rigs (`tools/probe_*.py`) — each reproduces a real phenomenon in sim
+**Self-design guard:** `AU_SELF_DESIGN_ACK` env var is required to edit
+`tools/{acceptance_gate,exec_guard,knowledge_graph,harness_registry}.py`, `runtime/harness/`,
+proposer/conductor decision logic, or to *remove* a `selftest_all` JOB (adding one is fine).
+`exec_guard` is installed as `.git/hooks/pre-commit`.
 
-Original six: `probe_idle_agent` (+ 4-arm sweep), `probe_subagent_coordination`, `probe_epistemic_sybil`,
-`probe_rho_holdout`, `probe_activation_generalisation`, `probe_composed_design`.
-Plus `probe_orchestration_value` (run 221) — the run-218 criterion (multi-agent helps iff verifiable
-subtasks + disjoint evidence + deterministic-synthesis-OR-stigmergic-accretion); its **FLOCK arm** (run 273)
-widened condition (b).
+## 4. The harness (all `tools/`, pure stdlib, ~62 `selftest_all` jobs GREEN)
 
-**The seven open-question rigs** (runs 286–292), one per question in `docs/research/open_questions.md`:
+**Spine (Phases 0–5 of `docs/self_improving_harness_plan.md`):** `trace_substrate.py` (Five-W
+event schema), `harness_registry.py` (versioned harness), `experience_bank.py` (Phase 2),
+`improvement_loop.py` (Phase 3 propose→verify→promote, with `paired_eprocess` / `deterministic_repair`
+/ `tampering_flags`), `holdout_tasks.py` + `holdout_verifier2.py` (frozen held-out set, two
+independent scorers), `skill_induction.py` (Phase 4: induce / retire / **consolidate** (run
+447)), `exec_guard.py` (Phase 5 pre-commit), `loop_conductor.py` + `acceptance_gate.py` +
+`janitor.py` + `v2_integration.py` (the v2 deterministic spine), `executor_pool.py` +
+`cohort_monitor.py` (v2.4 Collective enforcement).
 
-| Q | rig | verdict at sim params |
-|---|---|---|
-| 1 | `probe_epistemic_market.py` | forecast-calibrated selection beats majority vote / manager / debate |
-| 2 | `probe_identity_masking.py` | full masking still leaks (peer-recognition survives anonymisation) |
-| 3 | `probe_adversarial_collaboration.py` | pre-registration improves reliability without killing creativity |
-| 4 | `probe_redteam_rate.py` | inverted-U — an optimal challenge rate exists |
-| 5 | `probe_trust_transfer.py` | similarity-weighted transfer beats both a universal scalar and a per-family reset |
-| 6 | `probe_dissent_vs_reflection.py` | structured dissent nets positive over reflection-only |
-| 7 | `probe_trust_weighted_voting.py` | trust-weighting *mitigates* herding (~31% of the loss) but does not *prevent* it |
+**Loop self-instrumentation:** `loop_session.py`, `loop_metrics.py` (`status_line` shows
+`… acts fold35% · audit ok`), `loop_adapter.py`, `loop_proposer.py`, `param_invariance_audit.py`,
+`loop_action_class.py`, `sweep_audit.py` (run 442 — **sufficiency / coverage / refix** checks on
+the loop's own sweep docs), `trace_topology.py` (run 459 — per-run inter-agent graph + hub /
+clique / receive_only / no_reciprocity flags), `tamper_audit.py`, `graph_diff.py`.
 
-### Two combined prototypes (the owner's research directions)
+**The swarm substrate (the user's mid-arc deliverable — runs 389–460):**
+`pheromone.py` (SQLite stigmergic board; explicit decay clock; pool-size-scaled threshold;
+`isolated=True` / `release_isolation` gated isolation, run 437; `note_alternative`, run 438;
+`warn` / `ask`), `task_ledger.py` (+ `STAGES`), `relay.py` (handoff + anti-ping-pong),
+`reputation.py` (Beta-Bernoulli + UCB + 14-day decay; `slash` + `whitewash_risk`, run 433),
+`gates.py` (G1/G4 quorum-not-veto; REPORT-not-block signals `single_evidence_domain` /
+`no_alternative_hypothesis` / `quorum_homogeneous` / uncited-claims / open-clarifications),
+`swarm_demo.py` (end-to-end, **no orchestrator object**; `defer_consensus=True` deferred-consensus
+flow; `agent_models=` validator-model selection, run 449). Adversarially tested by
+`probe_substrate_adversarial.py` (13 attacks, all residual landings are documented
+Sybil/collusion-class limits). Deliverable doc: `docs/swarm-substrate-prototype.md` (5-part
+report; §6 build findings; §7 the identity gap → **capability-token binding** (owner-gated);
+§8 the seven REPORT-not-block signals). Companion: `docs/agent-fleets-and-swarm-substrate.md`
+(the user's pasted KB doc).
 
-- `epistemic_constitution.py` (run 293, **direction 53**) — deterministic module: claim ledger (falsifiable
-  propositions) + forecast ledger (Brier-scored) + conditional trust (`trust(agent, domain) = 1 − mean
-  Brier`, domain-keyed, cold start returns `None` never a global scalar). Promotion rule: ≥4 resolved
-  forecasts from ≥2 agents · aggregate Brier < 0.18 · `replicated` · `survived_counterexample`.
-- `fractal_flock.py` (run 294, **direction 41**) — deterministic coordination substrate: shared artifact
-  store (no orchestrator, no message bus) + bounded-neighbourhood read (Kiro ring) + adaptive fractal
-  spawn/compress (expand a node only on `unresolved_boundaries`; replace a resolved subtree with a one-line
-  summary).
+**Probe rigs** (`tools/probe_*.py`, each drives a real module or reproduces a phenomenon in
+sim with one model-call stub): `probe_orchestration_value` (+ the `gamma` collaboration-gain
+arm, run 428), `probe_emergent_synergy` (+ `aggregate_diversity` / `individual_novelty`, run
+444), `probe_annotation_contagion` (+ the `seal_order` temporal-weight arm, run 455),
+`probe_subagent_coordination` (+ `--persist`), `probe_swap_cost`, `probe_epistemic_market`,
+`probe_epistemic_sybil`, `probe_idle_agent`, `probe_rho_holdout`, `probe_composed_design`,
+`probe_activation_generalisation`, `probe_memory_horizon`, `probe_language_drift_monitor`,
+`probe_trust_transfer`, `probe_dissent_vs_reflection`, `probe_trust_weighted_voting`,
+`probe_identity_masking`.
 
-Both follow `task_ledger.py`'s shape (pure stdlib, atomic write, `.audit` log, **no model calls**); the
-generative work is a caller-supplied callback.
+## 5. Recent research arc (runs 428–461)
 
-### Literature folded since run 88 (highlights)
+Papers folded, all Sept 2026: 2602.05289 (collaboration-gain metric Γ), 2609.02925 (κ_E — a
+shared-evidence quorum is structurally cut-1), 2609.02992 (reputation only disciplines a costly
+identity), 2609.01870 (ArcticSwarm — deferring early consensus is worth large gains),
+2609.01992 (ClaimReceipt — evaluation sufficiency + coverage), 2609.02620 (individual novelty ↑,
+aggregate diversity ↓; composition is the lever), 2609.02094 (MASkills — skill-conditioned
+credit + a 4-stage lifecycle), 2609.04270 (reviewer capability governs rejection targeting, not
+repair; self-review over-rejects ~35%), 2609.01985 (agent-built systems hide architectural
+defects; a claimed fix never re-measured), 2609.03425 (The Civilization Framework — the
+addressable unit is a civilization; the temporal-weight effect 54.2% vs 31.6%), 2609.04194
+(**legibility ≠ interpretability** — `trace_legibility` is a floor, not a monitorability
+measure), 2609.02967 (FGLGuard — the inter-agent comm graph is a safety substrate; federation
+beats data pooling).
 
-The acceptor / certificate cluster (runs 203–214); the co-evolution / no-training-fork tension (WHALE, HELIX,
-JIT-Agent — a `challenges` cluster on `approach_emergence_first`, named in `emergence_first_posture.md`); the
-owner's Perplexity dossiers (~80 % already independently folded = cross-method validation) and the
-agentic-jobs analysis (`docs/jobs/`); the owner's 9-group research fold (runs 259–268, ~35 nodes); the
-**collusion-audit-and-governance subfield** (runs 253, 276–282: anti-collusion mechanisms 2601.00360, SoK
-2609.00595, MaMa 2602.04431, Colosseum, Institutional AI). Both literature frontiers (emergence + harness)
-are **swept** for this environment; new work needs the 6-hourly scheduled task.
+**The recurring finding:** every residual substrate weakness is one weakness — the `agent`
+field is an unauthenticated string. And every coordination mechanism (a vote, a quorum, a
+complementarity rule) has a hidden cost the aggregate task score does not show (budget,
+epistemic independence, aggregate diversity).
 
-## The one thing that unblocks everything: wire a model
+## 6. Open / owner-gated items (nothing the loop can do alone)
 
-Every rig and the Phase 3 proposer have exactly one stub — a function where a model call belongs. The
-interfaces are stable; swapping in a model changes nothing else.
+- **Rotate the GitHub PAT** pasted into the originating Cowork chat.
+- **Capability-token migration** — bind `pheromone.annotate` / `reputation.record` to
+  `executor_pool`'s `mint_token` / `redeem_token`; ~1 day across pheromone/reputation/gates/
+  relay/swarm_demo + selftests. Turns the seven REPORT signals into possible blocks. (`docs/swarm-substrate-prototype.md` §7.4.)
+- **Wire `loop_environment_model.md` into `loop_conductor`** as an input it reads and revises
+  each run (the BCO shape). Test: does §3 (hazards) stop growing.
+- **Route new-tool / skill / job additions through holdout scoring** (the retention gate is
+  currently wired to proposals, not harness expansion).
+- **`--live` experiments** the loop must NOT run (they spend CLI-agent quota): a budget-matched
+  Γ arm on `probe_orchestration_value`; a seal-order run; a composition sweep on
+  `probe_emergent_synergy`; the swap-cost convention question.
+- **Other repos** (the loop never commits outside this one): poly-bot's refreshed map is
+  uncommitted in its own tree; poster-studio's audit came back at 80 nodes / 105 edges (edge
+  ratio 1.3 — needs a `depends_on` / `challenges` edge pass, not more nodes; port
+  `tools/task_ledger.py` + `tools/gates.py` for its "one durable per-artifact ledger with human
+  gates" would-change); `loop_conductor` is not on the live 6-hourly task (SKILL.md change).
 
-**The seam is now `tools/call_model.py` (run 329) — activation is one env var:**
+## 7. How to resume
 
-```
-AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_idle_agent.py sweep
-#   or, for an API client:
-#   from call_model import register, set_backend
-#   register("openai", lambda p: my_openai_client(p));  set_backend("openai")
-```
+1. `cd C:\Agents\agentic-universe\repo && git checkout proposals/2026-09-01-emergent-behaviour-cluster && git pull --ff-only`
+2. Read this file, `docs/graph_state_2026-09.md`, `docs/loop_environment_model.md`,
+   `docs/habitat_charter.md`.
+3. `python tools/knowledge_graph.py validate` and `python tools/selftest_all.py` — both must be
+   GREEN before any increment.
+4. Read the "Next" section of `docs/auto_sweep_2026-11-20-1800.md` (and run 462's sweep if it
+   landed).
+5. To restart the cron: `mcp__scheduled-tasks__update_scheduled_task` with `enabled: true` —
+   it will spawn a Sonnet subagent per run.
+6. To run an increment interactively: follow §3, or spawn a Sonnet subagent with the SKILL.md
+   prompt. Do the increment work on Sonnet, not Opus.
 
-`call_model(prompt) -> str` routes to the backend; `fake` (default) is offline and deterministic;
-`cli` shells out to the local CLI-agent pool (`C:\Agents\skills\CLI-AGENT-CONTROL\agentctl.sh`) —
-no new API key needed. `judge(a, b)` for `model_preference` is built on it. Every adapter below takes
-`call_model` (or `judge`) exactly as `tools/call_model.py` produces it.
+## 8. Security constraints (persist across all sessions)
 
-### The five written adapters (runs 134–140) — first-run task
-
-| adapter | file | pass it |
-| --- | --- | --- |
-| `model_policy(call_model, framing, tools)` | `probe_idle_agent.py` | a `call_model(prompt) -> str`; builds the state-only prompt, parses the reply into an action, `idle_noop` on anything unparseable |
-| `model_preference(judge)` | `probe_rho_holdout.py` | a `judge(text_a, text_b) -> "A"\|"B"`; round-robin Copeland selection, judge exception = tie |
-| `model_relay(call_model)` | `probe_subagent_coordination.py` | model told its id + a peer's out-of-scope `msg`, asked yes/no to forward; unparseable/error = don't forward |
-| `model_reader(call_model, corpus)` | `probe_epistemic_sybil.py` | model reads a real document, first number in the reply is the estimate; unparseable = `nan`, dropped |
-| `model_propose(call_model, context)` | `loop_proposer.py` | hands the model `PROPOSER_PROMPT`, parses the JSON list leniently, `[]` on failure (loop falls back to `heuristic_propose`) |
-
-**First run to do (wiring done, run 329–330):**
-```
-AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_idle_agent.py sweep --live
-```
-`sweep --live` drives the 3×3×2×2 grid with `model_policy(call_model, …)` instead of the scripted
-stand-in. `what_would_make_this_wrong.md` calls this "the one experiment that resolves the most" — does
-`concept_habitat_slack` hold, is there autotelic behaviour in the gap? The containment arm now has
-`tools/fs_sandbox.py` (run 331 — a disposable, capped, path-jailed shell; `escape_report()` is the
-measurement of whether the idle agent tried to break out). `AU_MODEL_BACKEND=fake` runs it offline as a
-wiring smoke test. **All the code is in place; the run needs a live backend + the owner's go-ahead
-(it spends CLI-agent quota).**
-**Second (wired run 333):** `python tools/probe_rho_holdout.py sweep --live` — the optimiser now
-selects with `call_model`'s `judge`; `external_grade` stays the held-out truth. Does trajectory-only
-self-improvement survive external grading (sim says ~36% of the reported gain does)?
-**Third–Fifth (wired run 334 — all five adapters now `--live`):**
-```
-AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_subagent_coordination.py dryrun --live
-AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/probe_epistemic_sybil.py sweep --live
-AU_MODEL_BACKEND=cli AU_MODEL_AGENT=agy3   python tools/loop_proposer.py propose --live
-```
-- **`probe_subagent_coordination dryrun --live`** — `model_relay(call_model)` asks a real model
-  yes/no whether to forward a peer's out-of-scope instruction: real peer-deference vs the scripted
-  bounds, with / without the same-parent-ID filter.
-- **`probe_epistemic_sybil sweep --live`** — `model_reader(call_model, corpus)` reads a real
-  document set; the probe measures real correlated-error-from-shared-evidence instead of the
-  scripted per-source bias.
-- **`loop_proposer propose --live`** — `model_propose(call_model, ctx)` proposes the next
-  self-edit, falling back to `heuristic_propose` on an empty reply.
-
-Every v2.0 experiment is now one command; `AU_MODEL_BACKEND=fake` runs each offline as a wiring
-smoke test. Activation is the owner's resource call — CLI-agent quota or a registered API client.
-
-### The stubs added since run 88 (second wave)
-
-- **The seven open-question rigs** — each has a sim stub for the answer-generating step: `_agent_answer`
-  (`probe_epistemic_market`), `_answer` (`probe_identity_masking`, `probe_trust_weighted_voting`),
-  `_argue`/`_explore` (`probe_adversarial_collaboration`), and fixed curves `CATCH` / paralysis
-  (`probe_redteam_rate`), similarity structure (`probe_trust_transfer`), cost model
-  (`probe_dissent_vs_reflection`). The answer-generating ones take a `call_model` the same way as the five
-  adapters; the fixed-curve ones need a real multi-agent run to measure the curve rather than assume it.
-- **`epistemic_constitution.py`** — `replicated` and `survived_counterexample` are required-evidence flags
-  set by an external process (a `call_model` doing replication / adversarial-protocol runs).
-- **`fractal_flock.py`** — the `contribute(node, neighbourhood) -> {result, unresolved_boundaries}` callback
-  is entirely caller-supplied; that is where the model work lives.
-
-### The two seams that need more than a text model
-
-`sample_signal` (`probe_activation_generalisation.py`) — real activation vectors from a model layer;
-`step_ok` / `handoff_ok` (`probe_composed_design.py`) — a real agent harness running real sub-steps. Spec +
-degraded modes in `docs/remaining_seams.md`.
-
-## What needs infrastructure this repo doesn't have
-
-- **Phase 6 (the swarm layer)** — needs a real multi-agent harness. Everything so far is single-agent (the
-  loop) or synthetic. Candidate substrates: **RiskLab** (ACL 2026 Demo, `concept_risklab_probe_toolkit`) —
-  topology-environment-protocol-agent-task quintuple + risk-detector registry; **MAST-Data**
-  (arXiv:2503.13657) — 1,600+ annotated multi-agent traces + the 14-mode failure taxonomy. The
-  `tools/probe_*.py` rigs could be framed as detectors for MAST modes / RiskLab risks on a real run. MAST
-  also warns the gains may be small.
-- **The composed-design test** (`what_would_make_this_wrong.md` §5) — short agents + four-field handoffs +
-  folded state, on a 100+-step task. Needs a real harness.
-- **A live loop feed** — `loop_session.LoopSession` records runs as they happen; wiring it into the
-  scheduled task's actual execution (rather than the interactive continuation calling it) is a small change
-  in the `SKILL.md` setup.
-
-## For the per-project audits (poly-bot / poster-studio, on WSL)
-
-The owner asked for these; the method is built, blocked only on the WSL paths. From each repo:
-`python <path>/tools/project_graph_scaffold.py new <name>` → fill the graph + `PROJECT_STATE.md` → validate →
-commit → have future sessions read it first. Copy `task_ledger.py` + `supervisor.py` in for the CLI
-orchestration / dropped-task problem.
-
-## Housekeeping still open
-
-- `check-proposal` passes a patch with no `add_nodes` key silently (`tools/knowledge_graph.py`).
-- The pre-commit guard's doc-check warns on `docs/probe_*` / `docs/research/*` (only accepts
-  `docs/auto_sweep_*` / `docs/phase*`).
-- `knowledge/notes/2026-09-04-harness-swarm-deep-dive.md` on `origin/main` misreads the pressure-field
-  numbers of arXiv:2601.08129 (the graph node `emergent_stigmergic_coordination` is correct and flags it).
-  Owner action.
-- Rotate the GitHub PAT pasted into the originating Cowork chat (carried over from the original handover).
+Never commit credentials / API keys / cookies / browser profiles / personal data. Commit only
+to the working branch, never `main`. Do not touch `C:\Agents\.git` (a separate outer repo).
+Delete source videos after analysis (disk space). Do not click CAPTCHA / bot-detection. The
+loop must not run `--live` probe sweeps or rewrite its own execution harness (the scheduled-task
+body / SKILL.md).
