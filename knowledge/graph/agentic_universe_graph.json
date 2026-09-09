@@ -13358,6 +13358,35 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.03425"
       ]
+    },
+    {
+      "id": "concept_legibility_is_not_interpretability_step_importance_is_only_partially_recoverable_from_the_reasoning_text",
+      "label": "Legibility is Not Interpretability (Du, Hoyle, Ruis, Locatelli; arXiv:2609.04194, COLM 2026, 2026-09-03): a readable reasoning trace does NOT reveal which steps drive the output. ACTUAL step importance = 'advantage' - the change in expected reward from including that step, via Monte Carlo rollouts (causal ablation). JUDGED importance = an LLM judge or a fine-tuned step critic reading the text. The gap is substantial: capable LLMs beat prevalence baselines but 'fall well short of a noise ceiling'; step importance is 'only partially recoverable from the text of the reasoning trace'. Fine-tuning helps for INCORRECT responses, stays far from ceiling for CORRECT ones. Challenges process reward models and LLM-as-judge evaluation.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:verification",
+      "confidence": 0.72,
+      "description": "arXiv:2609.04194 (Kevin Du, Alexander Hoyle, Laura Ruis, Acyr Locatelli; COLM 2026; v1 2026-09-03; VERIFIED via abstract). THE DISTINCTION. LEGIBILITY = how readable/transparent a trace appears to a human. INTERPRETABILITY = the trace actually revealing the model's decision mechanism. Readable steps may not reflect which steps drive the output. METHOD. ACTUAL importance is operationalised as ADVANTAGE: the change in expected reward (e.g. correct final answer) from INCLUDING a step, estimated by Monte Carlo rollouts - a causal ablation, not surface plausibility. JUDGED importance: LLM judges read the text; fine-tuned models act as step-level critics. FINDINGS. Capable LLMs beat a prevalence baseline but fall WELL SHORT of a noise ceiling. Fine-tuning improves the judge on INCORRECT responses but stays far from ceiling on CORRECT ones. Conclusion: step importance is 'only partially recoverable from the text of the reasoning trace'. IMPLICATIONS. Process reward models and LLM-as-judge frameworks may MISIDENTIFY the truly important reasoning steps while appearing convincing to a human reviewer. WHY IT LANDS HERE. The project MEASURES trace legibility and treats trace quality as a monitorability signal: loop_metrics.trace_legibility (run 155, threshold 0.70) is a fraction-of-steps-that-read-as-sentences; improvement_loop.verify_loop_edit(legibility=(before,after)) (run 156) REJECTS an edit that trades legibility for held-out score. This paper says that is a FLOOR, not a ceiling. The floor is still worth keeping - an illegible trace is definitely not monitorable, and run 156's caution (don't let the trace degrade) is directly supported. But NO doc or node should read a high trace_legibility as 'the trace is interpretable / the reasoning is monitorable' - only as 'the trace is legible'. Establishing that a step MATTERS needs an advantage-style causal check (MC rollouts), which the project does not do and cannot do cheaply offline. This also sharpens concept_cot_monitorability_is_a_fragile_property_to_preserve: even a preserved, legible, per-consumer-compiled trace (run 188) may not show the causally-load-bearing steps. And it is the other half of concept_rewriting_cot_alone_defeats_judges_90pct: a judge can be fooled by a rewrite, AND a judge misses which steps matter even on an honest trace. CURRENCY: 2026-09-03, within the recency window. Model-independent (it is about the text->importance mapping, not a capability). ADOPTABLE: a wording pass on the project's docs to say 'legible' where they currently imply 'monitorable/interpretable' from the legibility metric alone.",
+      "tags": [
+        "legibility-vs-interpretability",
+        "cot-faithfulness",
+        "step-importance",
+        "advantage",
+        "monte-carlo-ablation",
+        "process-reward-model",
+        "llm-as-judge",
+        "trace-legibility",
+        "recency-2026-09",
+        "consistency-check"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.04194"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.04194"
+      ]
     }
   ],
   "edges": [
@@ -32000,6 +32029,55 @@
       "target": "concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains",
       "type": "supports",
       "description": "ArcticSwarm's gated isolation is worth +3.8pp; the temporal-weight effect (measured here against the substrate) is the same mechanism from the reader's side - commit before you see the peer signal"
+    },
+    {
+      "id": "edge_legibility_not_interp_constrains_loop_metrics",
+      "source": "concept_legibility_is_not_interpretability_step_importance_is_only_partially_recoverable_from_the_reasoning_text",
+      "target": "artifact_loop_metrics_phase3_real",
+      "type": "constrains",
+      "description": "loop_metrics.trace_legibility is a FLOOR (is anything readable), not a monitorability measure. The metric is fine as-is; the constraint is on how it is READ - a high value means legible, not interpretable"
+    },
+    {
+      "id": "edge_legibility_not_interp_refines_improvement_loop",
+      "source": "concept_legibility_is_not_interpretability_step_importance_is_only_partially_recoverable_from_the_reasoning_text",
+      "target": "artifact_phase3_improvement_loop",
+      "type": "refines",
+      "description": "verify_loop_edit rejecting an edit that trades legibility for score is a defensible FLOOR check, and this paper supports the caution; but a legibility GAIN is not evidence of an interpretability gain and the gate should not be read as one"
+    },
+    {
+      "id": "edge_legibility_not_interp_sharpens_monitorability",
+      "source": "concept_legibility_is_not_interpretability_step_importance_is_only_partially_recoverable_from_the_reasoning_text",
+      "target": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
+      "type": "refines",
+      "description": "CoT monitorability is fragile to preserve; this adds that even a PRESERVED legible trace only partially recovers which steps mattered - preservation is necessary, not sufficient, for monitoring"
+    },
+    {
+      "id": "edge_legibility_not_interp_challenges_per_consumer_views",
+      "source": "concept_legibility_is_not_interpretability_step_importance_is_only_partially_recoverable_from_the_reasoning_text",
+      "target": "concept_trace_compiles_to_per_consumer_views",
+      "type": "challenges",
+      "description": "compiling the trace into per-consumer views improves a monitor's accuracy on the SURFACE; this paper says the causally-important steps are only partially in the text, so a compiled view can still miss them"
+    },
+    {
+      "id": "edge_legibility_not_interp_extends_outcome_judges",
+      "source": "concept_legibility_is_not_interpretability_step_importance_is_only_partially_recoverable_from_the_reasoning_text",
+      "target": "concept_outcome_only_judges_miss_silent_faults",
+      "type": "extends",
+      "description": "outcome-only judges miss silent faults; step-level judges MISIDENTIFY which steps matter - both directions of 'the judge's picture is not the causal picture'"
+    },
+    {
+      "id": "edge_legibility_not_interp_complements_rewriting_cot",
+      "source": "concept_legibility_is_not_interpretability_step_importance_is_only_partially_recoverable_from_the_reasoning_text",
+      "target": "concept_rewriting_cot_alone_defeats_judges_90pct",
+      "type": "supports",
+      "description": "rewriting the CoT alone defeats judges 90% of the time (adversarial); this is the non-adversarial half - a judge misses which steps matter even on an honest trace"
+    },
+    {
+      "id": "edge_legibility_not_interp_informs_phase0",
+      "source": "concept_legibility_is_not_interpretability_step_importance_is_only_partially_recoverable_from_the_reasoning_text",
+      "target": "artifact_phase0_trace_substrate",
+      "type": "informs",
+      "description": "the Phase 0 trace records what the agent CLAIMS it did (Five-W enforced); it does not and cannot record which recorded steps were causally load-bearing - that needs an advantage-style rollout, out of scope for the substrate"
     }
   ]
 }

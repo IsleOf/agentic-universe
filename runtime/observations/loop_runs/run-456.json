@@ -1,0 +1,46 @@
+{
+  "run": 456,
+  "increment": "Literature, fresh axis (interpretability / a consistency check on the project's own trace_legibility claim). Folded arXiv:2609.04194 (Legibility is Not Interpretability: Comparing Judged and Actual Importance in Chain-Of-Thought Reasoning; Du, Hoyle, Ruis, Locatelli; COLM 2026; 2026-09-03). LEGIBILITY = how readable a trace appears; INTERPRETABILITY = the trace revealing the decision mechanism. ACTUAL step importance = 'advantage' (change in expected reward from including a step, via MC rollouts / causal ablation); JUDGED importance = an LLM judge or fine-tuned step critic reading the text. The gap is substantial - capable LLMs beat prevalence baselines but fall WELL SHORT of a noise ceiling; step importance is 'only partially recoverable from the text'. Challenges PRMs and LLM-as-judge. LANDS ON: loop_metrics.trace_legibility (run 155) + improvement_loop.verify_loop_edit(legibility) (run 156) are a FLOOR, not a monitorability measure - keep them, but no doc/node should read a high trace_legibility as 'interpretable/monitorable', only 'legible'; establishing a step MATTERS needs an advantage check the project can't do cheaply offline. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.04194",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.04194"
+  ],
+  "trace_file": "runtime\\traces\\loop-456.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 456 OK · VALID · graph +1n/+7e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.81 · files +1~2-0 · novelty 1.00 · acts fold50% · audit refix!"
+}
