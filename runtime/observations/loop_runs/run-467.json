@@ -1,0 +1,39 @@
+{
+  "run": 467,
+  "increment": "Consolidation run 467, completed by the interactive session after the run agent was killed mid-flight during a machine resource crisis. Part A: triaged the 75 recency warnings introduced by ff04b5c into FOUNDATIONAL 69 / STALE 3 / UNCLEAR 3, and populated source_generation on the 56 unique older endpoints (1 -> 57 populated) so a future run can tell a foundational method ancestor from a generation-stale empirical claim WITHOUT re-reading the source. The count is foundational-heavy by design: the graph deliberately wires 2023-2026 method/taxonomy ancestors as refines sources into 2026 findings, and 'latest research rules' does not mean a 2023 method paper cannot refine a 2026 result. 3 STALE cases got challenges edges NEW->OLD; no reversals, no deletions, no supersedes (none was a clean supersession). Part B: recorded the run-466 false-RED hazard in loop_environment_model.md section 3. Post-hoc: added a second hazard row - killing a subagent does not roll back its filesystem work, and commit d1d9567 silently absorbed this run's uncommitted output under a message describing only its own +1 node / +5 edges; the sweep doc carries the correction. The run agent's BUILD SELFTEST GREEN claim is recorded as UNVERIFIED because the agent was killed before it could be confirmed and selftest_all was not re-run during the crisis.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 3,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 0
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-467.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 467 OK · VALID · graph +0n/+0e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +1~3-0 · novelty 1.00 · acts cons40% · audit cov!refix!"
+}
