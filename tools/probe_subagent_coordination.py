@@ -603,6 +603,9 @@ def _cli(argv=None):
     d.add_argument("--live", action="store_true",
                    help="relay_policy = model_relay(call_model) - a real model asked yes/no to "
                         "forward a peer's out-of-scope message. Respects AU_MODEL_BACKEND.")
+    d.add_argument("--persist", action="store_true",
+                   help="also write the run's trace to runtime/traces/swarm-subagent-"
+                        "coordination.jsonl so tools/trace_topology.py has a real swarm trace")
     fr = sub.add_parser("fragmentation",
                         help="the distributed-attack arm (arXiv:2607.07368): per-instance vs "
                              "cohort monitoring as attackers coordinate")
@@ -619,7 +622,14 @@ def _cli(argv=None):
             pol = model_relay(call_model)
         else:
             pol = high_deference if args.deference == "high" else low_deference
-        _e, spread = run_cohort("dryrun", same_parent_filter=args.filter, relay_policy=pol)
+        buf = io.StringIO() if args.persist else None
+        _e, spread = run_cohort("dryrun", same_parent_filter=args.filter,
+                                relay_policy=pol, sink=buf)
+        if args.persist and buf is not None:
+            out = ROOT / "runtime" / "traces" / "swarm-subagent-coordination.jsonl"
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(buf.getvalue(), encoding="utf-8")
+            print(f"trace -> {out}")
         print(json.dumps(spread, indent=2))
         return 0
     return 2

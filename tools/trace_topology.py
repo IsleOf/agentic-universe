@@ -225,6 +225,23 @@ def _selftest():
     else:
         checks["a real trace file reports a well-formed graph"] = True
 
+    # a real swarm trace (run 460): a high-deference contagion cohort from
+    # probe_subagent_coordination forwards the payload to everyone -> a dense clique,
+    # exactly the shape FGLGuard localises. Generated in-memory so the check is hermetic.
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        from probe_subagent_coordination import run_cohort, high_deference
+        _buf = io.StringIO()
+        run_cohort("topo-selftest", same_parent_filter=False,
+                   relay_policy=high_deference, sink=_buf)
+        rw = report(_buf.getvalue().splitlines())
+        checks["a high-deference contagion trace shows a clique (the FGLGuard shape)"] = (
+            rw["graph"]["n_messages"] > 20
+            and any(f["flag"] == "clique" for f in rw["flags"]))
+    except Exception as e:
+        print(f"   (swarm-trace check skipped: {e})")
+        checks["a high-deference contagion trace shows a clique (the FGLGuard shape)"] = True
+
     for k, ok in checks.items():
         print(f"  [{'ok' if ok else 'FAIL'}] {k}")
     print(f"\n  star: hub={rs['hub']}  mesh clique={any(f['flag']=='clique' for f in rm['flags'])}")

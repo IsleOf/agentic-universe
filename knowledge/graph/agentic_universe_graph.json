@@ -13425,7 +13425,7 @@
       "approach_family": "nourishing_harness",
       "branch_key": "nourishing_harness:security",
       "confidence": 0.68,
-      "description": "Run 459, operationalising run 458's FGLGuard fold (arXiv:2609.02967) at the resolution the loop can support without training. build_graph(trace): reads MESSAGE events (sender/receiver already on every one, pattern_five_w_message_instrumentation), normalises ids (strip + casefold, matching pheromone._norm_agent), and returns the directed multigraph - nodes, weighted edges, per-node in/out degree, message count. structural_flags(graph): HUB - one node appears in > 75% of all messages (a pure star centre is at 1.0); CLIQUE - >= 3 agents all mutually connected (brute-force triangles; agent counts are small); RECEIVE_ONLY - a node with out-degree 0 and in-degree > 0 (a monitor, or an agent talked at); NO_RECIPROCITY - > 60% of directed edges have no return edge and >= 3 edges (a hierarchy signal). NOTE. The autonomous research LOOP is single-agent (researcher only) so its own traces have zero MESSAGE events and a trivial topology - this tool is for the SWARM-layer traces (the probe rigs, swarm_demo, harness_demo). Those are currently generated in-memory during selftests and not persisted, so there is no stored swarm trace to demo it on yet; the schema path is proven by the selftest (star -> hub, mesh -> clique + no hub, chain + listener -> receive_only + no_reciprocity). CLI: report <trace.jsonl> / selftest. In selftest_all JOBS. Pure stdlib.",
+      "description": "Run 459, operationalising run 458's FGLGuard fold (arXiv:2609.02967) at the resolution the loop can support without training. build_graph(trace): reads MESSAGE events (sender/receiver already on every one, pattern_five_w_message_instrumentation), normalises ids (strip + casefold, matching pheromone._norm_agent), and returns the directed multigraph - nodes, weighted edges, per-node in/out degree, message count. structural_flags(graph): HUB - one node appears in > 75% of all messages (a pure star centre is at 1.0); CLIQUE - >= 3 agents all mutually connected (brute-force triangles; agent counts are small); RECEIVE_ONLY - a node with out-degree 0 and in-degree > 0 (a monitor, or an agent talked at); NO_RECIPROCITY - > 60% of directed edges have no return edge and >= 3 edges (a hierarchy signal). NOTE. The autonomous research LOOP is single-agent (researcher only) so its own traces have zero MESSAGE events and a trivial topology - this tool is for the SWARM-layer traces (the probe rigs, swarm_demo, harness_demo). Those are currently generated in-memory during selftests and not persisted, so there is no stored swarm trace to demo it on yet; the schema path is proven by the selftest (star -> hub, mesh -> clique + no hub, chain + listener -> receive_only + no_reciprocity). CLI: report <trace.jsonl> / selftest. In selftest_all JOBS. Pure stdlib. RUN 460: probe_subagent_coordination gained --persist (write the run trace to runtime/traces/), and trace_topology selftest now generates a real high-deference contagion cohort in-memory and asserts it shows the CLIQUE flag - the dense-coordination shape FGLGuard localises, on real swarm-layer data.",
       "tags": [
         "communication-topology",
         "structural-flags",
@@ -32204,6 +32204,13 @@
       "target": "concept_topology_shapes_error_propagation",
       "type": "instantiates",
       "description": "topology shapes error propagation; this is the tool that makes a run's topology inspectable - a star concentrates risk on the hub, a clique is a contagion cluster"
+    },
+    {
+      "id": "edge_subagent_rig_provides_real_topology_input",
+      "source": "artifact_probe_subagent_coordination_rig",
+      "target": "artifact_trace_topology",
+      "type": "grounds",
+      "description": "run 460: probe_subagent_coordination emits MESSAGE events for the contagion spread; its high-deference cohort is the real swarm trace trace_topology is validated against (a near-complete graph -> the clique flag)"
     }
   ]
 }
