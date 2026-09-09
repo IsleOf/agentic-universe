@@ -13218,6 +13218,33 @@
       "evidence_links": [
         "https://arxiv.org/abs/2609.02620"
       ]
+    },
+    {
+      "id": "finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy",
+      "label": "Run 444's probe_emergent_synergy result, read as a finding: the `meta` arm (personas + complementarity coordination) has HIGHER Psi than `personas` but LOWER aggregate diversity - coordination RE-CORRELATED the differentiated fleet (aggregate diversity 0.49 -> 0.39, back toward the interchangeable control's 0.38). Adding a coordination mechanism can trade aggregate diversity for synergy; the two are not the same good.",
+      "type": "finding",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:diversity",
+      "confidence": 0.55,
+      "description": "Run 445, a consolidation pass on run 444's numbers. probe_emergent_synergy's three arms are a coordination ladder: control (one shared policy) -> personas (fixed private biases, no coordination) -> meta (personas + each agent covers a complement's blind spot). AGGREGATE DIVERSITY (mean pairwise action-series distance): control 0.38, personas 0.49, meta 0.39. PSI (dynamical emergence): control +0.005, personas -0.026, meta +0.059. THE READING. personas is the MOST diverse in the aggregate and the LEAST synergistic. meta adds a coordination rule and Psi crosses into emergence - but the same rule pulls the agents back into partial lockstep, and aggregate diversity falls almost to the interchangeable-control level. A substrate that layers coordination on a differentiated fleet (relay handoffs threading a single artifact, reputation-weighted selection concentrating work on the top agents) may be buying Psi at the cost of the population diversity that arXiv:2609.02620 says protects against correlated failure. LIMITS: sim, one task (the guessing game), N=5, one seed. The DIRECTION is the finding, not the magnitudes. A live-model run of the same three arms would test whether real agents show the same diversity/synergy tradeoff under a coordination rule. Compatible with run 428's gamma result (a vote synthesis is budget-negative) and run 430's kappa_E=1 (a quorum on shared inputs) - all three say a coordination mechanism has a hidden cost the aggregate task score does not show.",
+      "tags": [
+        "diversity",
+        "coordination-cost",
+        "synergy-vs-diversity",
+        "emergent-synergy",
+        "swarm-substrate",
+        "run-445",
+        "consolidation",
+        "simulation"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.02620"
+      ],
+      "evidence_links": [
+        "tools/probe_emergent_synergy.py"
+      ]
     }
   ],
   "edges": [
@@ -31573,6 +31600,41 @@
       "target": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
       "type": "verifies",
       "description": "run 444: probe_emergent_synergy now reports aggregate_diversity + individual_novelty per arm and asserts the paper's decomposition - aggregate diversity moves with composition while per-agent novelty stays roughly flat; the control (interchangeable) arm narrows the aggregate"
+    },
+    {
+      "id": "edge_recorrelation_finding_grounded_by_synergy_rig",
+      "source": "artifact_probe_emergent_synergy_rig",
+      "target": "finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy",
+      "type": "grounds",
+      "description": "run 444's per-arm aggregate_diversity + psi_emergence numbers are the evidence: personas 0.49/-0.03, meta 0.39/+0.06"
+    },
+    {
+      "id": "edge_recorrelation_finding_refines_hybrid_creativity",
+      "source": "finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy",
+      "target": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "type": "refines",
+      "description": "'composition is the lever' - this adds that a COORDINATION mechanism applied on top of a good composition can undo part of it, re-correlating the fleet"
+    },
+    {
+      "id": "edge_recorrelation_finding_constrains_substrate_design",
+      "source": "finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "relay threading a single artifact and reputation concentrating work on the top agents are coordination mechanisms; on a differentiated fleet they may trade aggregate diversity for Psi, and the substrate has no population-diversity read to notice"
+    },
+    {
+      "id": "edge_recorrelation_finding_challenges_flock",
+      "source": "finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy",
+      "target": "concept_orchestratorless_flock_coordinates_through_shared_state_not_a_central_planner",
+      "type": "challenges",
+      "description": "the orchestratorless flock coordinates through shared state; run 444 shows that even a light coordination rule (cover your complement's blind spot) re-correlates a differentiated flock - shared-state coordination is not diversity-neutral"
+    },
+    {
+      "id": "edge_recorrelation_finding_parallels_gamma",
+      "source": "finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy",
+      "target": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
+      "type": "supports",
+      "description": "run 428: a vote synthesis is budget-negative. Same shape: a coordination mechanism (vote, or complementarity) has a hidden cost - budget there, aggregate diversity here - that the aggregate task score hides"
     }
   ]
 }
