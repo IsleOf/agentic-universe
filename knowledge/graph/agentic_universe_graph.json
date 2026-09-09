@@ -13245,6 +13245,34 @@
       "evidence_links": [
         "tools/probe_emergent_synergy.py"
       ]
+    },
+    {
+      "id": "concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune",
+      "label": "MASkills (Yao, Liu, Fleming, Chen, Wei; arXiv:2609.02094, EMNLP 2026 Findings, 2026-09-02): a multi-agent LLM system improves through experience better via STRUCTURED SKILLS (when/how to act, which tools) than via reflection memories that are hard to retrieve/refine/scale. Needs (1) SKILL-CONDITIONED CREDIT ASSIGNMENT - attribute an outcome to the specific skill that helped or hurt; (2) HIERARCHICAL credit aggregation across agent and system levels; (3) a FOUR-STAGE lifecycle: refine / induce / consolidate / prune; (4) momentum-smoothed updates so skill optimisation does not oscillate. HotpotQA / LoCoMo / GAIA.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "nourishing_harness",
+      "branch_key": "nourishing_harness:skills",
+      "confidence": 0.72,
+      "description": "arXiv:2609.02094 (Huaiyuan Yao, Xiaoou Liu, Charles Fleming, Tianlong Chen, Hua Wei; EMNLP 2026 Findings; v1 2026-09-02; VERIFIED via abstract). THE PIVOT. Self-reflection produces experience memories that are 'difficult to reliably retrieve, refine, or scale'; AGENT SKILLS - structured procedural knowledge specifying WHEN to act, HOW to act, WHICH tools - are more actionable and scalable units of improvement. (Independent restatement of this project's run-175 / run-208 pivot from raw experience to structured skills.) FOUR TECHNICAL PARTS. (1) SKILL-CONDITIONED CREDIT ASSIGNMENT - attribute a performance outcome back to the specific skill(s) that contributed, so optimisation targets an individual skill rather than the whole system. (2) HIERARCHICAL CREDIT AGGREGATION - credits aggregate across levels, so a gain can be assigned to an individual agent OR the collective. (3) A FOUR-STAGE SKILL LIBRARY LIFECYCLE: REFINEMENT (improve an existing skill), INDUCTION (a new skill from a successful interaction), CONSOLIDATION (merge similar/redundant skills), PRUNING (drop ineffective ones). (4) MOMENTUM-SMOOTHED OPTIMISATION - momentum on skill updates to stop erratic iteration-to-iteration swings. RESULTS: effective across HotpotQA, LoCoMo, GAIA (abstract gives no numbers - folded partially_validated). WHY IT LANDS HERE. The project's skill_induction.py has INDUCTION (candidates from recurring task classes) and PRUNING (retire/deprecate), and experience_bank.prune() backs it. Two of MASkills's four stages are MISSING: REFINEMENT (there is no way to improve a candidate skill in place) and CONSOLIDATION (no merge of redundant skills) - exactly the two gaps run 208 (Library Drift) flagged as 'no bounded active-cap, no meta-skill prior'. SKILL-CONDITIONED CREDIT ASSIGNMENT is the harder gap: skill_key(note_text, outcome=) (run 419) records <level>/<class>@<outcome> but does NOT attribute a run's outcome to a specific skill; and in the swarm substrate, credit assignment is the same problem as the gamma metric (run 428 - was the gain collaboration or budget?) one level down (was the gain skill A or skill B?). Hierarchical aggregation maps onto per-agent reputation + a fleet-level signal. CURRENCY: 2026-09-02, within the recency window. Small-model relevance: structured skills are MORE valuable for a small model (less in-weight procedural knowledge to fall back on) - this is a nourishing-harness lever that does not need a bigger base.",
+      "tags": [
+        "skills",
+        "credit-assignment",
+        "skill-lifecycle",
+        "refine-induce-consolidate-prune",
+        "multi-agent",
+        "momentum",
+        "recency-2026-09",
+        "small-model-regime",
+        "phase-4-gap"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.02094"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.02094"
+      ]
     }
   ],
   "edges": [
@@ -31635,6 +31663,55 @@
       "target": "finding_orchestration_value_gamma_arm_abc_win_is_collaboration_gain_vote_synthesis_is_budget_negative",
       "type": "supports",
       "description": "run 428: a vote synthesis is budget-negative. Same shape: a coordination mechanism (vote, or complementarity) has a hidden cost - budget there, aggregate diversity here - that the aggregate task score hides"
+    },
+    {
+      "id": "edge_maskills_constrains_skill_induction",
+      "source": "concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune",
+      "target": "artifact_phase4_skill_induction",
+      "type": "constrains",
+      "description": "skill_induction.py has induction + pruning; MASkills's four-stage lifecycle names two missing stages - REFINEMENT (improve a candidate in place) and CONSOLIDATION (merge redundant skills) - and skill-conditioned credit assignment (attribute an outcome to a specific skill), which skill_key records but does not compute"
+    },
+    {
+      "id": "edge_maskills_refines_library_drift",
+      "source": "concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune",
+      "target": "concept_unmanaged_skill_libraries_silently_drift",
+      "type": "refines",
+      "description": "Library Drift (run 208) said unmanaged skill libraries degrade and named 'no bounded active-cap, no meta-skill prior'; MASkills gives the operational answer - a four-stage lifecycle with consolidation and refinement, not just induction and retirement"
+    },
+    {
+      "id": "edge_maskills_supports_experience_bank_pivot",
+      "source": "concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune",
+      "target": "artifact_phase2_experience_bank",
+      "type": "supports",
+      "description": "MASkills independently makes the run-175 case: structured skills beat reflection memories that are hard to retrieve/refine/scale - the experience_bank -> skill_induction layering is the right shape"
+    },
+    {
+      "id": "edge_maskills_extends_skill_value",
+      "source": "concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune",
+      "target": "concept_skill_value_is_measured_by_paired_live_trials_not_artifact_scans",
+      "type": "extends",
+      "description": "'skill value is measured by paired live trials, not artifact scans' (ACES) - MASkills adds the attribution step: once you have a trial outcome, credit it to the specific skill so you refine that one, not the whole system"
+    },
+    {
+      "id": "edge_maskills_deepens_two_axis_key",
+      "source": "concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune",
+      "target": "concept_skill_induction_now_emits_a_two_axis_key_level_slash_class_at_outcome_not_a_flat_class_label",
+      "type": "refines",
+      "description": "skill_induction's <level>/<class>@<outcome> key records the outcome but not WHICH skill caused it; skill-conditioned credit assignment is the missing third axis"
+    },
+    {
+      "id": "edge_maskills_parallels_gamma_metric",
+      "source": "concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune",
+      "target": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
+      "type": "supports",
+      "description": "the collaboration-gain metric asks 'was the multi-agent gain collaboration or budget'; skill-conditioned credit assignment asks 'was the gain skill A or skill B' - the same attribution-ambiguity problem one level down, and both call for a structured factor taxonomy over ad-hoc adjustment"
+    },
+    {
+      "id": "edge_maskills_grounds_trajectory_accumulation",
+      "source": "concept_a_multi_agent_skill_library_needs_skill_conditioned_credit_assignment_and_a_four_stage_lifecycle_refine_induce_consolidate_prune",
+      "target": "concept_naive_trajectory_accumulation_already_helps",
+      "type": "extends",
+      "description": "naive trajectory accumulation already helps; MASkills is the next step - don't just keep the trajectories, distil them into refinable skills with credit attached"
     }
   ]
 }
