@@ -156,3 +156,49 @@ stale-dominant edge.
 2. `AU_SELF_DESIGN_ACK` for the §4 recency fix.
 3. Phase 1 — does Aether die, or become a client of agent-farm?
 4. Whether to adopt amux for the Phase 4 dashboard, after a maturity verification pass.
+
+---
+
+## 6. Observed 2026-09-10: two failures that argue for Phase 2
+
+Both were observed live on the machine, not inferred. They are the strongest available evidence
+for the lease in Phase 2, because they are this estate's own failures rather than a citation.
+
+### 6.1 Closing a front-end does not reap its worker
+
+The owner closed Hermes. Its Windows `agy` (pid 11356, `--dangerously-skip-permissions`) **kept
+running** and was, hours later, the single hungriest process on the box at **30,171 CPU-seconds
+(~8.4 h)**. Nothing noticed. Nothing reclaimed it.
+
+This is a supervision gap that recurs every time an agent front-end is closed, and no amount of
+care at shutdown fixes it — the parent is gone precisely when the cleanup would need to run.
+
+**A lease fixes it structurally.** If the worker holds a lease it must renew, the lease expires
+when the parent stops renewing, and the worker is reaped without anyone having to remember.
+This is the same `check_startable(max_stale_hours=...)` staleness check already implemented in
+`tools/orchestration_ledger.py`, applied to processes instead of runs.
+
+### 6.2 Simultaneous directives with no ordering caused a self-inflicted halt
+
+Directives D-003 (`poly-bot`) and D-004 (`poster-studio`) were posted to the board at the same
+time with **no arbitration between them**. Both agents reached for the same four agy accounts.
+Combined with 52 orphaned WSL Chrome processes, 3 long-running `agy-real` instances at sustained
+8–26% CPU, 17 `claude` processes and 18 VS Code processes on a 15.8 GB box with ~2 GB free, the
+system slowed to a near halt.
+
+The board was stood up to *coordinate* agents and its first real use *caused* contention, because
+a shared notice board is not an allocator. Writing "who should do what" is not the same as
+enforcing "who may hold what, and when".
+
+**This is the run-244 finding again, one level up:** a deterministic ledger is the orchestration
+source of truth, and advisory prose is not a substitute for an atomic claim. It is also exactly
+the pathology Anthropic measured (2026-08-16): fleets flooding a shared resource because nothing
+arbitrates.
+
+Stopgap in place: a RESOURCE ARBITRATION section on the board (one agy holder at a time, announce
+`TAKING`/`RELEASED`, never poll faster than 10 min). It is a courtesy protocol with no
+enforcement — which is the definition of the gap Phase 2 closes.
+
+**Revised priority:** Phase 2 is no longer the third step after security and broker consolidation.
+It is the step that stops the estate hurting itself, and both failures above happened while it
+was still queued.
