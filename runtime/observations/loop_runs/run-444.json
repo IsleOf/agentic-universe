@@ -1,0 +1,48 @@
+{
+  "run": 444,
+  "increment": "Probe, operationalising run 443's fold (arXiv:2609.02620). Added two population-level metrics to probe_emergent_synergy: aggregate_diversity (mean pairwise normalised Hamming distance between agents' full action series - the paper's 'diversity in the aggregate') and individual_novelty (mean per-agent entropy - the paper's 'novelty of individual output'). Reported per arm; assess() gains 3 checks. RESULT over the existing composition axis: aggregate diversity control 0.38 -> personas 0.49 -> meta 0.39 while individual novelty stays ~1.00/0.85/0.95 (spread ~0.15). Reproduces the paper in sim: the interchangeable (control) arm narrows the aggregate even though each agent is individually just as unpredictable; the metacognition arm's complementarity coordination RE-correlates them - more coordination is not more diversity. 3 helper-sanity + 3 assess checks (13 -> 19). +1 edge (the rig verifies the run-443 concept).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 1
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/probe_emergent_synergy.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.02620",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.02620"
+  ],
+  "trace_file": "runtime\\traces\\loop-444.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 444 OK · VALID · graph +0n/+1e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.82 · files +1~3-0 · novelty 0.50 · acts cons40%"
+}

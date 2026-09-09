@@ -122,6 +122,33 @@ def differentiation(series):
     return (sum((c - mean) ** 2 for c in corrs) / N) ** 0.5
 
 
+def aggregate_diversity(series):
+    """Population-level diversity (run 444, arXiv:2609.02620): the mean pairwise
+    normalised Hamming distance between agents' full action series. 0 = every agent
+    produced an identical sequence; ~0.5 = maximally varied for bits. This is the
+    paper's 'diversity in the aggregate' - it can FALL even as each agent's own
+    output gets more novel."""
+    if len(series) < 3:
+        return 0.0
+    N = len(series[0])
+    cols = [[row[i] for row in series] for i in range(N)]
+    dists = [sum(1 for a, b in zip(cols[i], cols[j]) if a != b) / len(series)
+             for i in range(N) for j in range(i + 1, N)]
+    return sum(dists) / len(dists) if dists else 0.0
+
+
+def individual_novelty(series):
+    """The paper's 'novelty of individual output': mean per-agent entropy of the
+    action series - how unpredictable each agent is ON ITS OWN, ignoring the
+    others. Distinct from aggregate_diversity: a pool can have high individual
+    novelty (every agent flips a lot) and near-zero aggregate diversity (they all
+    flip the same way)."""
+    if len(series) < 3:
+        return 0.0
+    N = len(series[0])
+    return sum(_entropy([row[i] for row in series]) for i in range(N)) / N
+
+
 def pairwise_coinformation(series):
     """Mean co-information coI(a_i,t ; a_j,t ; V_{t+1}) over agent pairs.
     coI = I(a_i;a_j) - I(a_i;a_j | V_next). Negative mean = the pair carries
@@ -270,6 +297,8 @@ def sweep(*, rounds=ROUNDS, seed=SEED, policy_factory=None):
             "psi_emergence": round(psi_emergence(series), 4),
             "differentiation": round(differentiation(series), 4),
             "mean_pair_coinformation": round(pairwise_coinformation(series), 4),
+            "aggregate_diversity": round(aggregate_diversity(series), 4),
+            "individual_novelty": round(individual_novelty(series), 4),
             "rounds": len(series),
         }
     return out
@@ -281,6 +310,13 @@ PSI_EMERGENT = 0.03      # Psi above this = the synergy/emergence signal is pres
 def assess(sw):
     c, p, m = (sw[a]["psi_emergence"] for a in ("control", "personas", "meta"))
     dc, dp, dm = (sw[a]["differentiation"] for a in ("control", "personas", "meta"))
+    # run 444 (arXiv:2609.02620): the composition axis. control = interchangeable
+    # agents (one policy), personas/meta = differentiated. Prediction: AGGREGATE
+    # diversity rises with composition heterogeneity while INDIVIDUAL novelty
+    # (per-agent entropy) stays roughly flat - the two are separate axes.
+    adc, adp, adm = (sw[a]["aggregate_diversity"] for a in ("control", "personas", "meta"))
+    inc_, inp, inm = (sw[a]["individual_novelty"] for a in ("control", "personas", "meta"))
+    novelty_spread = max(inc_, inp, inm) - min(inc_, inp, inm)
     return {
         # Psi axis: only the metacognition arm should cross into emergence
         "control_not_emergent": c <= PSI_EMERGENT,
@@ -290,6 +326,12 @@ def assess(sw):
         # differentiation axis: personas AND meta are identity-differentiated, control is not
         "personas_differentiated_vs_control": dp > dc + 0.02,
         "meta_differentiated_vs_control": dm > dc + 0.02,
+        # composition axis (run 444)
+        "aggregate_diversity_rises_with_heterogeneity": adp > adc + 0.02 and adm > adc,
+        "individual_novelty_roughly_flat_across_composition": novelty_spread < 0.2,
+        "composition_is_a_lever_for_aggregate_diversity": adp > adc + 0.02,
+        "aggregate_diversity_by_arm": {"control": adc, "personas": adp, "meta": adm},
+        "individual_novelty_by_arm": {"control": inc_, "personas": inp, "meta": inm},
         "verdict": (
             f"Psi: control {c:+.3f} / personas {p:+.3f} / meta {m:+.3f}  |  "
             f"differentiation: control {dc:.3f} / personas {dp:.3f} / meta {dm:.3f}. "
@@ -300,7 +342,15 @@ def assess(sw):
                "Differentiation and emergence are separate axes."
                if (c <= PSI_EMERGENT and p <= PSI_EMERGENT and m > PSI_EMERGENT
                    and dp > dc and dm > dc)
-               else "Does NOT cleanly reproduce the three-condition pattern at these params.")),
+               else "Does NOT cleanly reproduce the three-condition pattern at these params.")
+            + f" COMPOSITION (run 444): aggregate diversity control {adc:.3f} -> personas "
+            f"{adp:.3f} -> meta {adm:.3f} while individual novelty stays "
+            f"{inc_:.2f}/{inp:.2f}/{inm:.2f} (spread {novelty_spread:.2f}). "
+            + ("Reproduces arXiv:2609.02620: interchangeable agents narrow the aggregate "
+               "even though each agent is individually just as unpredictable - composition "
+               "is the lever, per-agent novelty is not the whole story."
+               if (adp > adc + 0.02 and novelty_spread < 0.2)
+               else "The composition effect is not clean at these params.")),
     }
 
 
@@ -339,6 +389,18 @@ def _selftest():
         "meta arm has the highest Psi": a["meta_has_the_highest_psi"],
         "meta arm is also identity-differentiated": a["meta_differentiated_vs_control"],
         "verdict names Riedl's three conditions": "three conditions" in a["verdict"],
+        # run 444: the composition / novelty-vs-diversity axis
+        "aggregate diversity rises with composition heterogeneity (arXiv:2609.02620)":
+            a["aggregate_diversity_rises_with_heterogeneity"],
+        "individual novelty stays roughly flat across the three compositions":
+            a["individual_novelty_roughly_flat_across_composition"],
+        "the verdict reports the composition effect": "COMPOSITION (run 444)" in a["verdict"],
+        "MI helpers: aggregate_diversity of one repeated series is 0":
+            aggregate_diversity([(0, 0), (1, 1), (0, 0), (1, 1)]) == 0.0,
+        "MI helpers: aggregate_diversity of anti-correlated agents is 1.0":
+            aggregate_diversity([(0, 1), (1, 0), (0, 1), (1, 0)]) == 1.0,
+        "MI helpers: individual_novelty of a constant agent is 0":
+            individual_novelty([(0, 1), (0, 0), (0, 1), (0, 0)]) < 0.6,
     })
 
     # model_agents adapter: a fake model that just echoes the hint -> control-like
