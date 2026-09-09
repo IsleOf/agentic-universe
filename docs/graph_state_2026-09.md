@@ -1,21 +1,56 @@
 # Agentic Universe Graph State — September 2026
 
-> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252, 279, 301, 327, 346.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
+> **Rewritten run 20. Refreshed runs 51, 88, 145, 162, 202, 219, 229, 235, 252, 279, 301, 327, 346, 450.** The pre-2026-09-06 version described a 32-node graph under a governance-first posture; it is gone. The graph JSON is the source of truth; this is the orientation layer.
 
 ## Purpose
 
 Human- and agent-readable map of `knowledge/graph/agentic_universe_graph.json`: its structure, its central thesis, and where the evidence stands. Companion: `tools/README.md` (the toolchain), `docs/phase0_*`–`phase5_*` (the build).
 
-## Snapshot (run 346)
+## Snapshot (run 449)
 
-**358 nodes · 1436 edges · 9 approach families · 217 `challenges` edges (~15% of all edges).**
+**454 nodes · 1888 edges · 10 approach families · 246 `challenges` edges (~13% of all edges).**
 
-`verification_state`: 114 needs-validation · **192 partially-validated** · **40 validated** · 5 inconclusive · 7 unset.
+`verification_state`: 117 needs-validation · **238 partially-validated** · **86 validated** · 5 inconclusive · 8 unset/other.
 (`validated` is reserved for `artifact_*` nodes with passing computed selftests; VERIFIED-arXiv literature
 nodes sit at `partially_validated`.)
-Families: self_improving_harness 152 · emergent_behaviors 92 · orchestration_first 28 · agent_habitat 27 · nourishing_harness 25 · graph_engineering 22 · rest 12.
-Edge types: supports 485 · challenges 217 · instantiates 206 · refines 211 · informs 91 · implements 55 · depends_on 52 · extends 38 · grounds 27 · verifies 24 · constrains 23 · rest 7.
-Selftests: `python tools/selftest_all.py` → **BUILD SELFTEST: GREEN** (46 jobs).
+Families: self_improving_harness 168 · emergent_behaviors 96 · nourishing_harness 66 · emergence_first 32 · orchestration_first 29 · agent_habitat 29 · graph_engineering 22 · rest 12.
+Edge types: supports 550 · refines 283 · instantiates 246 · challenges 246 · informs 126 · extends 86 · implements 81 · constrains 74 · depends_on 70 · grounds 58 · verifies 37 · detects 14 · core_of 13 · records 4.
+Selftests: `python tools/selftest_all.py` → **BUILD SELFTEST: GREEN** (~65 jobs). The `nourishing_harness`
+family more than doubled (25 → 66) — the swarm-substrate work landed there.
+
+**Runs 389–449 — the swarm-substrate arc + three follow-on threads.** The user's mid-arc task:
+prototype a **non-hierarchical swarm substrate** for a 2–15 agent fleet (no Chief-of-Staff). Built and
+probed in `tools/`: `pheromone.py` (SQLite stigmergic board, explicit decay clock, pool-size-scaled
+threshold, run-437 gated isolation, run-438 `note_alternative`), `task_ledger.py` (+stage), `relay.py`
+(handoff + anti-ping-pong), `reputation.py` (Beta-Bernoulli + UCB + decay; run-433 `slash` /
+`whitewash_risk`), `gates.py` (G1/G4 quorum-not-veto; run-431 `single_evidence_domain`, run-438
+`no_alternative_hypothesis`), `swarm_demo.py` (end-to-end, no orchestrator object; run-439 deferred
+consensus, run-449 validator-model selection), and probes `probe_substrate_adversarial.py` (13 attacks),
+`probe_annotation_contagion.py`, `probe_swap_cost.py`. Deliverable `docs/swarm-substrate-prototype.md`
+(5-part report; §6 build findings 390–414; §7 the identity gap → capability-token binding, **owner-gated**;
+§8 the seven REPORT-not-block gate signals).
+
+**The recurring finding across the arc:** every residual substrate weakness is *one* weakness — the
+`agent` field is an unauthenticated string. Runs 428 (`gamma` arm: a vote synthesis is budget-negative),
+430 (a shared-evidence quorum is `κ_E = 1`), 432–434 (reputation only disciplines a costly identity),
+445 (coordination re-correlates a differentiated fleet), 448 (same-model review over-rejects ~35%) all
+say a coordination mechanism has a hidden cost the aggregate task score does not show.
+
+**Three follow-on threads (441–449):** *evaluation accountability* — folded ClaimReceipt (2609.01992),
+built `tools/sweep_audit.py` (sufficiency + coverage checks on the loop's own sweep docs). *Collective
+creativity / diversity* — folded 2609.02620 (individual novelty ↑, aggregate diversity ↓, composition is
+the lever), added `aggregate_diversity` / `individual_novelty` to `probe_emergent_synergy`. *Skill
+libraries* — folded MASkills (2609.02094), added the `consolidate()` lifecycle stage to
+`skill_induction.py`.
+
+**Meta-instruments added since run 346:** `param_invariance_audit.py` (387), `loop_action_class.py`
+(408, `verify` class 426, fold-override narrowed 429), `docs/loop_environment_model.md` (421 — the loop's
+self-revising world model, per BCO 2609.01861), `sweep_audit.py` (442).
+
+### Snapshot (run 346) — prior
+
+**358 nodes · 1436 edges · 9 approach families · 217 `challenges` edges (~15%).** verification_state:
+114 needs-validation · 192 partially-validated · 40 validated · 5 inconclusive · 7 unset. Selftests: 46 jobs.
 
 **Runs 327–345** — v2.0 wiring finished, an evolution-aware security layer built, two
 emergence-side probes.
