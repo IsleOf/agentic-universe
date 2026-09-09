@@ -1,0 +1,42 @@
+{
+  "run": 453,
+  "increment": "Build, run 452's Next. Wired sweep_audit into loop_metrics.status_line as an `audit ok` / `audit suf!cov!refix!` token (best-effort, never raises, ASCII) - the loop now sees its own three-check self-audit (sufficiency / coverage / refix) in the one-line health glance, per run 367's lesson that a check the reader never sees is a check that does not act. Wiring it IMMEDIATELY surfaced a coverage_check false positive: a Next bullet naming `refix_check(run_n)` did not match run 452's increment saying `refix_check(run_n, window=15)` - fixed by also matching the identifier sub-parts of a backticked token (`refix_check(run_n)` -> refix_check, run_n). Runs 442-452 now all read coverage-clean. +2 loop_metrics selftests; +1 edge (loop_metrics informs / surfaces sweep_audit).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 1
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/loop_metrics.py",
+        "tools/sweep_audit.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-453.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 453 OK · VALID · graph +0n/+1e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.81 · files +1~4-0 · novelty 1.00 · acts fold50% · audit refix!"
+}

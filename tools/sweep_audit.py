@@ -169,12 +169,19 @@ def coverage_check(run_no, *, sweeps=None):
     bullets = _bullets(prior_next)
     inc = _increment_text(run_no, sweeps).lower()
     pivot = bool(_PIVOT.search(inc))
+    _skip = ("report", "block", "the", "bounded", "build", "consolidate", "probe",
+             "alternatively", "run_n", "task_ref", "with", "that", "this", "from")
     addressed = []
     for b in bullets:
-        toks = {t for grp in _TOKEN.findall(b) for t in grp if t and len(t) > 3}
-        toks = {t.lower() for t in toks
-                if t.lower() not in ("report", "block", "the", "bounded", "build",
-                                     "consolidate", "probe", "alternatively")}
+        raw = {t for grp in _TOKEN.findall(b) for t in grp if t and len(t) > 3}
+        toks = set()
+        for t in raw:
+            toks.add(t.lower())
+            # also the identifier parts: `refix_check(run_n)` -> refix_check, run_n
+            for part in re.split(r"[^\w.]+", t):
+                if len(part) > 4:
+                    toks.add(part.lower())
+        toks = {t for t in toks if t not in _skip}
         if any(t in inc for t in toks):
             addressed.append(b[:100])
     covered = bool(addressed) or pivot or not bullets

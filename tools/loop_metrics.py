@@ -425,8 +425,34 @@ def status_line(local_summary=None, metrics=None):
         (f"novelty {nov:.2f}" + ("!" if nov < THRESHOLDS["run_novelty"] else ""))
         if (nov := m.get("run_novelty")) is not None else "novelty n/a",
         _action_class_glance(),
+        _sweep_audit_glance(),
     ]
     return " · ".join(p for p in parts if p)
+
+
+def _sweep_audit_glance():
+    """Run 453: a one-token view of `sweep_audit` on the most recent sweep doc -
+    `audit ok`, or `audit suf!cov!refix!` naming which of the three checks flagged
+    (sufficiency: an unbacked headline claim; coverage: a run that ignored its
+    predecessor's Next with no pivot; refix: a claimed fix nobody re-measured).
+    Best-effort - never raises."""
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        from sweep_audit import report as _sar, _sweep_index
+        idx = _sweep_index()
+        if not idx:
+            return ""
+        r = _sar(max(idx), sweeps=idx)
+        flags = []
+        if r["sufficiency"].get("flag"):
+            flags.append("suf")
+        if r["coverage"].get("flag"):
+            flags.append("cov")
+        if r["refix"].get("flag"):
+            flags.append("refix")
+        return "audit " + ("".join(f + "!" for f in flags) if flags else "ok")
+    except Exception:
+        return ""
 
 
 def _action_class_glance():
@@ -546,6 +572,15 @@ def _selftest():
             "status_line: an invalid trace shows the stop-and-look light":
                 status_line({"run": 9, "trace_valid": False, "graph_delta": None, "citations": []},
                             metrics={**m, "plateau_watch": False}).startswith("run 9 STOP"),
+            "status_line carries the sweep-audit glance (run 453)":
+                "audit " in status_line({"run": 9, "trace_valid": True, "graph_delta": None,
+                                         "citations": []}, metrics=m),
+            "_sweep_audit_glance returns a well-formed token and never raises": (
+                lambda g: g == "" or g == "audit ok"
+                or (g.startswith("audit ") and g[6:].strip("!").replace("!", "")
+                    and all(f in ("suf", "cov", "refix")
+                            for f in g[6:].replace("!", " ").split()))
+            )(_sweep_audit_glance()),
             "run_novelty: all-new roots over the window -> ratio 1.0 (run 248)":
                 run_novelty([{"run": i, "distinct_evidence_roots": [f"arXiv:{i}"]} for i in range(1, 5)],
                             window=6)["novelty_ratio"] == 1.0,
