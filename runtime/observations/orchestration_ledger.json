@@ -15,13 +15,13 @@
     "464": {
       "agent": "build-session-run464",
       "dispatched_at": 1788944802.152,
-      "done_at": null,
-      "edge_delta": null,
+      "done_at": 1788945057.159,
+      "edge_delta": 2,
       "gate_verdict": "audit cov!refix! (advisory; owner-directed build, pivot phrase not matched)",
-      "node_delta": null,
+      "node_delta": 1,
       "run_no": 464,
-      "sha": null,
-      "state": "dispatched"
+      "sha": "13841da",
+      "state": "done"
     }
   }
 }
