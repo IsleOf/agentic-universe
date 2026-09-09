@@ -1,0 +1,39 @@
+{
+  "run": 461,
+  "increment": "Consolidation pass - the overdue BCO revision of docs/loop_environment_model.md (last touched run 422, 38 runs ago; the doc's stated maintenance rule is 'every run that lands a finding about how the loop's environment behaves revises the relevant line'). Revision 461 covers runs 428-460: §2 gains a legibility-FLOOR line (run 456 - legible != monitorable) and a `sweep_audit` self-audit line (runs 442/453 - sufficiency/coverage/refix in status_line, and wiring it caught its own coverage false positive); §3 gains 5 hazards (429 classifier-token-leak, 450 orientation-doc-drift, 428/430/445 coordination-cost-the-aggregate-hides, 459 single-agent-loop-has-no-topology); §5 CHECKS the model's own predictions - §3 grew by 5 rows in 40 runs so the model is not yet closing the loop on its hazards, and 3 of the 5 are one meta-hazard (a mechanism has a failure mode the headline signal doesn't show). No code, no graph change.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 0
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 1,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-461.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 461 OK · VALID · graph +0n/+0e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.81 · files +1~1-0 · novelty 0.80 · acts fold40% · audit refix!"
+}

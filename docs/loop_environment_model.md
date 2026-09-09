@@ -12,7 +12,11 @@
 > transfers across a model swap (BCO's own result).
 >
 > **Scope note:** this is a belief, not a law. Numbers are rough central tendencies over the
-> ~40-run window 382–421, and the sample is one model family on one task.
+> window 382–460, and the sample is one model family on one task.
+>
+> **Revisions:** run 421 (introduced), 422 (verified-fraction erosion), **461** (runs 428–460 —
+> the swarm-substrate arc + follow-on threads; §2 gains the legibility-floor and `sweep_audit`
+> lines, §3 gains 5 hazards, §5 checks the model's own predictions).
 
 ---
 
@@ -68,10 +72,23 @@ in a row. The status line shows `acts <dominant><pct>` every run.
   counterweight if the fraction still drifts after run 422.
 
 ### `legible` (self-report legibility)
-- Held at **1.00** for ~40 runs. The one persistent legibility risk is nested-lambda selftest
+- Held at **1.00** for ~80 runs. The one persistent legibility risk is nested-lambda selftest
   checks and brittle exact-equality assertions — runs 380 and 386 both traced defects to
   "intentional and accidental equality are indistinguishable by reading". Mark intentional
   equality, and prefer structural claims (an ordering, a floor) over guessed constants.
+- **`legible` (and `trace_legibility`) is a FLOOR, not a monitorability measure** (run 456,
+  arXiv:2609.04194). An illegible trace is definitely not monitorable, so the metric earns its
+  place; a legible one does not mean the causally-important steps are visible. Never read a high
+  value here as "the loop is interpretable/monitorable" — only "the record explains itself."
+
+### `sweep_audit` (self-audit, added run 442, in `status_line` from run 453)
+- The loop now audits its own sweep docs: **sufficiency** (every headline claim names a backing —
+  arXiv id / file / selftest / node id), **coverage** (this run addressed a prior Next bullet or
+  stated a pivot), **refix** (a "fixed X" claim was re-measured somewhere). Rendered as
+  `audit ok` / `audit suf!cov!refix!`. Real corpus reads clean.
+- Wiring it into `status_line` (run 453) immediately caught a `coverage_check` false positive —
+  the same run-367 lesson: **a check that does not reach the display is a check the loop never
+  acts on, and surfacing it is also how you find the check's own bug.**
 
 ### `param_invariance_audit`
 - A new module is flagged the moment its selftest exercises a size-like parameter at one value.
@@ -93,6 +110,10 @@ in a row. The status line shows `acts <dominant><pct>` every run.
 | a gitignored file has no `git show HEAD:` baseline | run 391 | for anything the session itself writes during a run, snapshot at `__enter__`, don't diff against HEAD |
 | an auto-extractor counting cross-references as citations | run 422 | an auto-populator for a metric should only fire when the human/agent path is empty, not stack on top of explicit bookkeeping |
 | bundling consolidation with a fix so it never counts as consolidation | run 409/410 | a run that *leads* with consolidation language is a consolidate run regardless of what it then shipped |
+| a classifier heuristic keyed on a token that also appears in unrelated boilerplate | run 429 (`loop_action_class`'s "cited + fold verb" override matched the bare token "fold" in the status-line phrase `acts fold50%`) | key a heuristic on a *verb* next to the signal, not a token that leaks in from framing text; and reword the increment if it trips the classifier twice |
+| an orientation doc silently going stale | runs 202/219/…/450 (recurring; `graph_state` was ~100 runs behind at run 450) | orientation docs (`graph_state`, `HANDOFF`, `tools/README`) need a scheduled refresh, not a memory-triggered one; the Snapshot count line is the tell |
+| a coordination mechanism with a cost the aggregate score hides | runs 428 (a vote synthesis is budget-negative), 430 (a shared-evidence quorum is κ_E=1), 445 (coordination re-correlates a differentiated fleet) | before adding a coordination mechanism, ask what it costs *net of what the aggregate task score would show* — budget, epistemic independence, aggregate diversity |
+| the loop is single-agent, so tools built for multi-agent traces have no real input from it | run 459 (`trace_topology` on the loop's own traces → 0 messages) | a swarm-layer tool must be validated on a swarm-layer trace (a probe rig's, generated in-memory), not the loop's own |
 
 ---
 
@@ -114,4 +135,11 @@ consolidation pass. A run that would add a node with no edge to an existing node
   the one a consolidation pass finds contributes nothing.
 - Wiring `loop_environment_model.md` as an input `loop_conductor` reads and revises each run
   (the BCO shape) would show up as fewer repeated hazards from §3 — the test is whether §3 stops
-  growing.
+  growing. **Status after ~40 runs: §3 grew by 5 rows (runs 429, 450, 428/430/445, 459), so it
+  is still growing — the model is not yet closing the loop on its own hazards.** Three of the
+  five, though, are one meta-hazard: *a mechanism (a classifier, a coordination step, a doc) has
+  a failure mode the headline signal does not show.*
+- The `acts <class>%` monoculture prediction held loosely: over runs 428–460 the mix stayed
+  varied (fold ~35%, no monoculture flag), because the swarm-substrate and follow-on threads
+  forced `build` / `probe` / `consolidate` runs. When the substrate work is fully done, expect
+  the fold-drift prediction to bite.
