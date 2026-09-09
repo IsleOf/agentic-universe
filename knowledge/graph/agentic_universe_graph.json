@@ -13172,7 +13172,7 @@
       "approach_family": "nourishing_harness",
       "branch_key": "nourishing_harness:verification",
       "confidence": 0.7,
-      "description": "Run 442, operationalising run 441's ClaimReceipt fold (arXiv:2609.01992) at the resolution the loop can support without an operator key. SUFFICIENCY. Over a sweep's finding-bearing sections (The finding / What changed / What it consolidates / Why it lands here / Increment), every line that asserts a checkable result - a percentage, a 'GREEN', a '->' or 'Gamma =' - is a headline. A headline is BACKED if it, or the doc, names an arXiv id, a `tools/*.py` path, a `selftest` reference, a `VALID`, or a graph node / edge / pattern id. Unbacked headlines are listed. COVERAGE. run N is COVERED if its increment (sweep + run-N.json) addresses at least one distinctive token from run N-1's sweep `## Next` bullets, OR the increment explicitly explains a pivot (`fresh axis`, `switching`, `resting point`, `consolidation pass`, `continue literature`). A run that silently ignores every option its predecessor gave it, with no stated pivot, is a COVERAGE GAP - the run-368 acceptance-gate-bug shape in the loop's own audit trail. Multi-line Next bullets are joined with their indented continuations (a parser fix found in the run-442 build - the first cut only read a bullet's first line and false-flagged run 440). NOT DONE (owner-gated, same class as the substrate's capability tokens): the signed-manifest / cryptographic-receipt half of ClaimReceipt. CLI: `report [run]` / `selftest`. In selftest_all JOBS (run 442). Pure stdlib.",
+      "description": "Run 442, operationalising run 441's ClaimReceipt fold (arXiv:2609.01992) at the resolution the loop can support without an operator key. SUFFICIENCY. Over a sweep's finding-bearing sections (The finding / What changed / What it consolidates / Why it lands here / Increment), every line that asserts a checkable result - a percentage, a 'GREEN', a '->' or 'Gamma =' - is a headline. A headline is BACKED if it, or the doc, names an arXiv id, a `tools/*.py` path, a `selftest` reference, a `VALID`, or a graph node / edge / pattern id. Unbacked headlines are listed. COVERAGE. run N is COVERED if its increment (sweep + run-N.json) addresses at least one distinctive token from run N-1's sweep `## Next` bullets, OR the increment explicitly explains a pivot (`fresh axis`, `switching`, `resting point`, `consolidation pass`, `continue literature`). A run that silently ignores every option its predecessor gave it, with no stated pivot, is a COVERAGE GAP - the run-368 acceptance-gate-bug shape in the loop's own audit trail. Multi-line Next bullets are joined with their indented continuations (a parser fix found in the run-442 build - the first cut only read a bullet's first line and false-flagged run 440). NOT DONE (owner-gated, same class as the substrate's capability tokens): the signed-manifest / cryptographic-receipt half of ClaimReceipt. CLI: `report [run]` / `selftest`. In selftest_all JOBS (run 442). Pure stdlib. RUN 452 added refix_check(run_n, window=15): the sharper sufficiency check arXiv:2609.01985's defect calls for. For each 'fixed X' claim in a window of sweeps, check X was re-measured - same-sweep (a re-verify word near the claim, or the fix names code AND the sweep shows selftest GREEN) or in a later run's increment (a subject token + a re-verify word). A prose-subject filter drops meta-commentary. Run on the real corpus: every named historical fix claim (runs 400, 409) was re-verified - the loop's run-selftest_all-every-commit discipline holds. +5 selftests; CLI report gains a REFIX line.",
       "tags": [
         "verification",
         "self-audit",
@@ -31894,6 +31894,13 @@
       "target": "artifact_probe_composed_design_rig",
       "type": "constrains",
       "description": "probe_composed_design tests short-agent + four-field handoff + folded state; this paper says the test itself must be END-TO-END - a component-level pass on each stage can coexist with an integration defect"
+    },
+    {
+      "id": "edge_sweep_audit_addresses_agent_defect_class",
+      "source": "artifact_sweep_audit",
+      "target": "concept_agent_built_systems_hide_architectural_defects_that_component_tests_and_gold_substitute_benchmarks_miss",
+      "type": "detects",
+      "description": "refix_check is the executable counter to 'a claimed fix never re-measured on the regression that motivated it' - it flags a fix claim in the loop's own sweeps that no later run re-verified"
     }
   ]
 }

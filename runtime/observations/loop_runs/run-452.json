@@ -1,0 +1,48 @@
+{
+  "run": 452,
+  "increment": "Build, operationalising run 451's fold (arXiv:2609.01985). Added sweep_audit.refix_check(run_n, window=15): the sharper sufficiency check the paper's defect ('a claimed fix never re-measured on the regression that motivated it') calls for. For each 'fixed X' claim in a window of sweeps, check X was re-measured - SAME-SWEEP (a re-verify word near the claim, or the fix names code AND the sweep shows selftest GREEN) or in a LATER run's increment (a subject token + a re-verify word). A prose-subject filter (>=3 stopwords) drops meta-commentary. Two parser fixes during the build: `**Fixed:**` markdown broke the separator class, and fixture run numbers collided with real run-N.json records (moved to >9000). RESULT on the real corpus: every named historical fix claim (runs 400, 409) was re-verified - the loop's run-selftest_all-every-commit discipline holds. +5 selftests (12 -> 17); CLI report gains a REFIX line. +1 edge (sweep_audit detects the agent-defect class).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 1
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/sweep_audit.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.01985",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01985"
+  ],
+  "trace_file": "runtime\\traces\\loop-452.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 452 OK · VALID · graph +0n/+1e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.81 · files +1~3-0 · novelty 1.00 · acts fold50%"
+}

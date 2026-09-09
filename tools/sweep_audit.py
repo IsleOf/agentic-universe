@@ -55,6 +55,18 @@ _PIVOT = re.compile(
     r"different axis|continue literature|novelty (is )?due|"
     r"(deliberate |standalone )?consolidat(e|ion) pass|consolidation pass", re.I)
 
+# run 452 (arXiv:2609.01985): a "fixed X" claim, and its subject. The paper's defect
+# is an agent claiming a fix it never re-measured on the regression that motivated it.
+_FIX_CLAIM = re.compile(
+    r"\b(?:fixed|the fix for|a parser fix|repaired|corrected)\b[:\s*_]+"
+    r"([`a-zA-Z][\w./`() -]{3,60})", re.I)
+# a token that names code: a path, a file, or `module.attr`
+_CODEISH = re.compile(r"tools/|\.py$|^[a-z_]+\.[a-z_]{2,}")
+# the fix's subject re-checked: it (or a token from it) appears with a verify word
+_REVERIFY = re.compile(
+    r"\bre-?ran\b|\bre-?measur|\bre-?check|\bre-?verif|\bregression\b|\bstill (GREEN|passes)\b|"
+    r"\bconfirmed\b|\bunreproduced\b|\bselftest\b.*\bGREEN\b|\bheld across\b", re.I)
+
 
 def _bullets(section_text):
     """Top-level `-`/`*` bullets, each joined with its indented continuation lines."""
@@ -181,10 +193,82 @@ def coverage_check(run_no, *, sweeps=None):
     }
 
 
+def _fix_subject_tokens(subject):
+    """Distinctive tokens from a fix subject (a `code.thing()`, a tools/x.py, a
+    snake_case name), lowercased, len > 3."""
+    toks = set()
+    for grp in _TOKEN.findall(subject):
+        for t in grp:
+            if t and len(t) > 3:
+                toks.add(t.lower().strip("`() "))
+    return {t for t in toks if t and t not in ("report", "block", "with", "that", "this")}
+
+
+def refix_check(run_no, *, sweeps=None, window=15):
+    """arXiv:2609.01985's defect: a claimed fix that was never re-measured on the
+    regression that motivated it. For each 'fixed X' claim in the sweeps in
+    [run_no - window, run_no], check whether X was re-verified - EITHER in that
+    same sweep (a re-verify word near the fix, or the fix is to a `tools/*.py`
+    that selftest_all re-exercises and the sweep shows GREEN) OR in a later sweep's
+    increment (a subject token + a re-verify word). Flags the rest.
+    """
+    sweeps = sweeps or _sweep_index()
+    runs = sorted(r for r in sweeps if run_no - window <= r <= run_no)
+    later_text = {r: _increment_text(r, sweeps).lower() for r in runs}
+    fix_claims, unverified = [], []
+    for r in runs:
+        try:
+            text = io.open(sweeps[r], encoding="utf-8").read()
+        except OSError:
+            continue
+        low = text.lower()
+        for m in _FIX_CLAIM.finditer(text):
+            subject = m.group(1).strip().rstrip(".,;:")
+            # a subject that reads as prose (several stopwords) is meta-commentary,
+            # not a named fix target - skip it
+            _stop = sum(1 for w in re.findall(r"[a-z]+", subject.lower())
+                        if w in ("the", "a", "an", "in", "and", "same", "run", "as",
+                                 "that", "this", "was", "is", "of", "to", "it", "on"))
+            if _stop >= 3:
+                continue
+            toks = _fix_subject_tokens(subject)
+            if not toks:
+                continue
+            # same-sweep re-verify: a re-verify word within ~200 chars of the claim,
+            # or the subject names a tool file and the sweep asserts selftest GREEN
+            near = low[max(0, m.start() - 40): m.end() + 220]
+            doc_verified = ("build selftest: green" in low or "selftest_all" in low
+                            or "selftest → green" in low or "selftest green" in low
+                            or "→ valid" in low or "graph valid" in low)
+            same_sweep = bool(_REVERIFY.search(near)) or (
+                any(_CODEISH.search(t) for t in toks) and doc_verified)
+            # later-sweep re-verify: a subject token + a re-verify word in a run > r
+            later = any(
+                any(t in later_text[k] for t in toks) and _REVERIFY.search(later_text[k])
+                for k in runs if k > r)
+            entry = {"run": r, "subject": subject[:60],
+                     "verified": "same-sweep" if same_sweep else "later" if later else None}
+            fix_claims.append(entry)
+            if not (same_sweep or later):
+                unverified.append(entry)
+    return {
+        "run": run_no, "window": window,
+        "n_fix_claims": len(fix_claims),
+        "n_unverified": len(unverified),
+        "unverified": unverified,
+        "flag": bool(unverified),
+        "note": ("every fix claim in the window was re-verified"
+                 if not unverified else
+                 f"{len(unverified)} fix claim(s) with no re-measurement (arXiv:2609.01985): "
+                 + "; ".join(f"run {e['run']}: {e['subject']}" for e in unverified[:3])),
+    }
+
+
 def report(run_no, *, sweeps=None):
     sweeps = sweeps or _sweep_index()
     return {"sufficiency": sufficiency_check(run_no, sweeps=sweeps),
-            "coverage": coverage_check(run_no, sweeps=sweeps)}
+            "coverage": coverage_check(run_no, sweeps=sweeps),
+            "refix": refix_check(run_no, sweeps=sweeps)}
 
 
 # --------------------------------------------------------------------------- #
@@ -255,6 +339,40 @@ def _selftest():
             sufficiency_check(999, sweeps=idx).get("backed") is None
             and coverage_check(999, sweeps=idx).get("covered") is None)
 
+        # --- run 452: refix_check (arXiv:2609.01985). Fixture run numbers are >9000
+        #     so they cannot collide with real run-N.json records _increment_text reads.
+        (d / "auto_sweep_2026-02-02-0000.md").write_text(
+            "# Autonomous sweep — 2026-02-02 00:00 (run 9020)\n\n"
+            "## Increment\nFixed `tools/relayfix._norm()` - it lost whitespace variants. "
+            "selftest_all GREEN.\n\n## Next\n- more\n", encoding="utf-8")
+        (d / "auto_sweep_2026-02-02-0600.md").write_text(
+            "# Autonomous sweep — 2026-02-02 06:00 (run 9021)\n\n"
+            "## Increment\nFixed `tools/metriczz.status_line` - it showed the wrong "
+            "idle streak.\n\n## Next\n- more\n", encoding="utf-8")
+        (d / "auto_sweep_2026-02-02-1200.md").write_text(
+            "# Autonomous sweep — 2026-02-02 12:00 (run 9022)\n\n"
+            "## Increment\nFixed a parser bug in `tools/quxparse.py`.\n\n"
+            "## Next\n- more\n", encoding="utf-8")
+        (d / "auto_sweep_2026-02-02-1800.md").write_text(
+            "# Autonomous sweep — 2026-02-02 18:00 (run 9023)\n\n"
+            "## Increment\nRe-ran the `tools/quxparse.py` regression; it still passes.\n\n"
+            "## Next\n- more\n", encoding="utf-8")
+        idx2 = {}
+        for p in glob.glob(g):
+            m = re.search(r"\(run\s+(\d+)\)", io.open(p, encoding="utf-8").readline())
+            if m:
+                idx2[int(m.group(1))] = Path(p)
+        rf = refix_check(9023, sweeps=idx2, window=10)
+        checks["refix: a fix to a tools/*.py with selftest_all GREEN is same-sweep verified"] = (
+            not any(e["run"] == 9020 for e in rf["unverified"]))
+        checks["refix: a tool fix with no selftest note and no later re-check is flagged"] = (
+            any(e["run"] == 9021 for e in rf["unverified"]) and rf["flag"])
+        checks["refix: a fix re-measured in a later run is not flagged"] = (
+            not any(e["run"] == 9022 for e in rf["unverified"]))
+        checks["refix: the note names arXiv:2609.01985"] = "2609.01985" in rf["note"]
+        checks["refix: runs on the real corpus without crashing"] = (
+            isinstance(refix_check(max(_sweep_index() or {0: 0}), window=8)["n_fix_claims"], int))
+
         # runs against the real corpus: must not crash, must classify
         real_idx = _sweep_index()
         if real_idx:
@@ -295,17 +413,23 @@ def _cli(argv=None):
     if args.json:
         print(json.dumps(r, indent=2))
         return 0
-    s, c = r["sufficiency"], r["coverage"]
-    print(f"sweep audit — run {run_no}\n")
+    def _a(text):   # Windows cp1252 console cannot print e.g. kappa / em-dash
+        return str(text).encode("ascii", "replace").decode("ascii")
+    s, c, x = r["sufficiency"], r["coverage"], r["refix"]
+    print(_a(f"sweep audit - run {run_no}\n"))
     print(f"  SUFFICIENCY  {s.get('n_headlines', 0)} headline claim(s), "
           f"{s.get('n_unbacked', 0)} unbacked "
           f"(backed {s.get('backed_fraction')})")
     for u in s.get("unbacked", []):
-        print(f"    unbacked: {u}")
-    print(f"  COVERAGE     {c.get('note')}")
+        print(_a(f"    unbacked: {u}"))
+    print(_a(f"  COVERAGE     {c.get('note')}"))
     for a in c.get("addressed", []):
-        print(f"    addressed: {a}")
-    if s.get("flag") or c.get("flag"):
+        print(_a(f"    addressed: {a}"))
+    print(f"  REFIX        {x.get('n_fix_claims', 0)} fix claim(s) in the last "
+          f"{x.get('window')} sweeps, {x.get('n_unverified', 0)} not re-measured")
+    for e in x.get("unverified", []):
+        print(_a(f"    unverified: run {e['run']}: {e['subject']}"))
+    if s.get("flag") or c.get("flag") or x.get("flag"):
         print("\n  ** FLAG **")
     return 0
 
