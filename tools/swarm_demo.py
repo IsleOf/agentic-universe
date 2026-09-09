@@ -24,6 +24,13 @@ The demo ships a `_fake_worker` (no model calls) that writes a plausible stub pe
 stage and, at the research stage, emits an `evidence` list so G1 has something to
 check.
 
+`agent_models={agent: {"family", "tier"}}` (run 449, arXiv:2609.04270): when set,
+`_fresh_validator` prefers a validator whose model family differs from the task's
+executor and whose tier is >= it, and the gate transcript entries REPORT
+`same_model_review` / `weaker_reviewer` when no such validator is available -
+same-model review over-rejects ~35% of correct answers, a weaker reviewer is
+negative value. REPORT, never block.
+
 CLI: run / selftest.  Pure stdlib.
 """
 from __future__ import annotations
@@ -66,7 +73,7 @@ def _fake_worker(agent_id, stage, task, board):
 
 class SwarmDemo:
     def __init__(self, work_dir, agents, *, contribute=_fake_worker, computable_ok=True,
-                 defer_consensus=True):
+                 defer_consensus=True, agent_models=None):
         self.dir = Path(work_dir)
         self.dir.mkdir(parents=True, exist_ok=True)
         # run 439 (ArcticSwarm, arXiv:2609.01870): the research contribution is
@@ -85,6 +92,12 @@ class SwarmDemo:
         self.agents = list(agents)
         self.contribute = contribute
         self.computable_ok = computable_ok
+        # run 449 (arXiv:2609.04270): reviewer capability governs rejection targeting.
+        # {agent: {"family": str, "tier": int}}. When set, _fresh_validator prefers a
+        # validator whose model family differs from the task's executor and whose tier
+        # is >= the executor's, and the gate transcript REPORTS same_model_review /
+        # weaker_reviewer when no such validator is available. REPORT, never block.
+        self.agent_models = dict(agent_models or {})
         self.transcript = []
 
     def _pick(self, task):
@@ -130,14 +143,15 @@ class SwarmDemo:
                     n = self.pher.release_isolation(task["id"], agent=agent)
                     self.transcript.append({"event": "release_isolation",
                                             "task": task["id"], "agent": agent, "n": n})
-                # G1 by a fresh validator
-                v_agent = self._fresh_validator(task["id"])
+                # G1 by a fresh validator (run 449: prefer a cross-family / >= tier one)
+                v_agent = self._fresh_validator(task["id"], executor=agent)
                 try:
                     g1 = g1_evidence(task["id"], out["text"],
                                      evidence_links=out.get("evidence", []),
                                      validator_agent=v_agent, pheromone=self.pher)
                     self.transcript.append({"gate": "G1", "task": task["id"],
-                                            "validator": v_agent, "pass": g1["pass"]})
+                                            "validator": v_agent, "pass": g1["pass"],
+                                            **self._reviewer_model_report(v_agent, agent)})
                     if not g1["pass"]:
                         self.ledger.fail(task["id"], f"G1 failed: {g1['reasons']}")
                         self.rep.record(agent, "failure")
@@ -162,7 +176,7 @@ class SwarmDemo:
                             hypothesis=f"considered an alternative framing of '{goal}'")
                         self.transcript.append({"event": "note_alternative",
                                                 "task": task["id"], "agent": alt})
-                v_agent = self._fresh_validator(task["id"])
+                v_agent = self._fresh_validator(task["id"], executor=agent)
                 try:
                     g4 = g4_release(task["id"], validator_agent=v_agent, pheromone=self.pher,
                                     computable_ok=self.computable_ok, min_quorum=2)
@@ -170,7 +184,8 @@ class SwarmDemo:
                                             "validator": v_agent, "pass": g4["pass"],
                                             "quorum": g4["quorum"],
                                             "no_alternative_hypothesis":
-                                                g4["no_alternative_hypothesis"]})
+                                                g4["no_alternative_hypothesis"],
+                                            **self._reviewer_model_report(v_agent, agent)})
                     if g4["pass"]:
                         released = task["id"]
                         break
@@ -192,10 +207,39 @@ class SwarmDemo:
         return {"released": released, "root": root,
                 "steps": len(self.transcript), "transcript": self.transcript}
 
-    def _fresh_validator(self, task_ref):
+    def _fresh_validator(self, task_ref, *, executor=None):
         contributors = set(self.pher.read(task_ref)["contributors"])
         pool = [a for a in self.agents if a not in contributors]
-        return self.rep.select(pool) if pool else self.agents[-1]
+        if not pool:
+            return self.agents[-1]
+        if self.agent_models and executor in self.agent_models:
+            ex = self.agent_models[executor]
+            # prefer: different family AND tier >= executor's, then reputation order
+            def _key(a):
+                m = self.agent_models.get(a, {})
+                diff_family = m.get("family") != ex.get("family")
+                tier_ok = m.get("tier", 0) >= ex.get("tier", 0)
+                return (not (diff_family and tier_ok), not diff_family, not tier_ok)
+            pool = sorted(pool, key=lambda a: (_key(a), a))
+            # reputation.select only among the best-keyed tier so it still breaks ties
+            best = _key(pool[0])
+            top = [a for a in pool if _key(a) == best]
+            return self.rep.select(top) or pool[0]
+        return self.rep.select(pool)
+
+    def _reviewer_model_report(self, validator, executor):
+        """arXiv:2609.04270: flag when the chosen validator shares the executor's
+        model family (self-review over-rejects) or is a weaker tier (negative value).
+        REPORT only - returned in the gate transcript entry."""
+        if not self.agent_models or executor not in self.agent_models \
+                or validator not in self.agent_models:
+            return {}
+        ex, va = self.agent_models[executor], self.agent_models[validator]
+        return {
+            "same_model_review": va.get("family") == ex.get("family"),
+            "weaker_reviewer": va.get("tier", 0) < ex.get("tier", 0),
+            "reviewer_tier_delta": va.get("tier", 0) - ex.get("tier", 0),
+        }
 
     def audit_ok(self):
         """Every closed task has an audit line; every stage that ran left a board
@@ -266,6 +310,30 @@ def _selftest():
             e.get("gate") == "G4" and e.get("no_alternative_hypothesis") is True
             for e in r1b["transcript"])
         d1b.close()
+
+        # 1c. run 449: validator model-family / tier awareness (arXiv:2609.04270)
+        models_ok = {"a1": {"family": "X", "tier": 2}, "a2": {"family": "Y", "tier": 2},
+                     "a3": {"family": "Y", "tier": 3}, "a4": {"family": "X", "tier": 1}}
+        d1c = SwarmDemo(tmp / "models_ok", ["a1", "a2", "a3", "a4"], computable_ok=True,
+                        agent_models=models_ok)
+        r1c = d1c.run("map the auth flow")
+        gates1c = [e for e in r1c["transcript"] if e.get("gate") in ("G1", "G4")]
+        checks["with a cross-family >= tier validator available, no gate flags same_model_review"] = (
+            r1c["released"] is not None
+            and gates1c and not any(e.get("same_model_review") for e in gates1c))
+        checks["the model report is stamped into gate transcript entries"] = any(
+            "same_model_review" in e for e in gates1c)
+        d1c.close()
+
+        # all one family -> same_model_review flagged, but still releases (REPORT not block)
+        models_mono = {a: {"family": "X", "tier": 2} for a in ("m1", "m2", "m3", "m4")}
+        d1d = SwarmDemo(tmp / "models_mono", ["m1", "m2", "m3", "m4"], computable_ok=True,
+                        agent_models=models_mono)
+        r1d = d1d.run("something")
+        checks["an all-one-family fleet flags same_model_review at a gate"] = any(
+            e.get("same_model_review") for e in r1d["transcript"] if e.get("gate"))
+        checks["...but still releases - it is a REPORT, not a block"] = r1d["released"] is not None
+        d1d.close()
 
         # 2. a failing computable check -> G4 does NOT release, but the run still
         #    terminates cleanly (no exception, no infinite loop)

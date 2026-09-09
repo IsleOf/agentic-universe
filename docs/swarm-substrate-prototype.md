@@ -558,7 +558,7 @@ substrate's trust model and is **owner-gated**.
 
 ## 8. The REPORT-not-block signal catalogue (runs 424–439)
 
-The substrate now emits **six advisory signals** — five in the gate verdicts, one on every
+The substrate now emits **seven advisory signals** — five in the gate verdicts, one on every
 `pheromone.read`. None blocks; each names a condition a reader should weigh. They are advisory
 *by design* (§7): the substrate cannot enforce on identity it cannot authenticate.
 
@@ -570,6 +570,7 @@ The substrate now emits **six advisory signals** — five in the gate verdicts, 
 | `single_evidence_domain` | G4 verdict | the task's whole evidence basis is ≤ 1 distinct fault root — a quorum on it has `κ_E = 1` | run 431, arXiv:2609.02925 |
 | `no_alternative_hypothesis` | G4 verdict | no `pheromone.note_alternative()` was recorded — single-candidate search fixates (91.4 % → 26.8 %) | run 438, arXiv:2609.01870 |
 | `isolated_withheld` | every `read()` | count of peer working notes hidden from this reader because they are still isolated | run 437, arXiv:2609.01870 |
+| `same_model_review` / `weaker_reviewer` | G1 / G4 transcript (`swarm_demo`, when `agent_models` set) | the chosen validator shares the executor's model family (self-review over-rejects ~35% of correct answers) or is a weaker tier (negative value) | run 449, arXiv:2609.04270 |
 
 **How to read a stack of these.** A G4 verdict that passes quorum but carries
 `single_evidence_domain` + `no_alternative_hypothesis` + `quorum_homogeneous` describes a release
