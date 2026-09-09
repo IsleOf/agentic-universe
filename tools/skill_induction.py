@@ -225,6 +225,80 @@ def retire(reg: Registry, bank: ExperienceBank, window=RETIRE_WINDOW):
     return retired
 
 
+def _wordset(s):
+    return {w for w in re.findall(r"[a-z]{3,}", (s or "").lower())}
+
+
+def _jaccard(a, b):
+    if not a and not b:
+        return 0.0
+    u = a | b
+    return len(a & b) / len(u) if u else 0.0
+
+
+def consolidate(reg: Registry, min_overlap=0.35):
+    """The CONSOLIDATION stage of the skill lifecycle (run 447, MASkills
+    arXiv:2609.02094 - the fourth stage alongside induce / prune(retire) / refine).
+
+    Find candidate skills that are NEAR-DUPLICATES: same abstraction level, AND a
+    keyword vocabulary or procedure text that overlaps above `min_overlap` (Jaccard
+    on word sets). REPORT them as merge candidates - never auto-merges: writes a
+    `skill__consolidation_note` component (status candidate) and returns the
+    proposals; a human merges or rejects (same discipline as no-auto-promotion).
+
+    Returns a list of {keep, merge, overlap, basis, reason}.
+    """
+    skills = []
+    for c in reg.list():
+        if c["kind"] != "tool" or not c["name"].startswith("skill_"):
+            continue
+        if c["name"] in ("skill__consolidation_note",):
+            continue
+        try:
+            s = json.loads(reg.get("tool", c["name"]))
+        except Exception:
+            continue
+        if s.get("status") == "deprecated" or not s.get("task_class"):
+            continue
+        s["_kw"] = _wordset(" ".join(TASK_CLASSES.get(s["task_class"], [])))
+        s["_proc"] = _wordset(s.get("procedure"))
+        skills.append(s)
+
+    proposals = []
+    for i in range(len(skills)):
+        for j in range(i + 1, len(skills)):
+            a, b = skills[i], skills[j]
+            if a["task_class"] == b["task_class"]:
+                continue                       # same class = same skill, not a merge
+            if level_of(a["task_class"]) != level_of(b["task_class"]):
+                continue
+            kw_ov = _jaccard(a["_kw"], b["_kw"])
+            proc_ov = _jaccard(a["_proc"], b["_proc"])
+            ov = max(kw_ov, proc_ov)
+            if ov < min_overlap:
+                continue
+            keep, merge = sorted(
+                (a, b), key=lambda s: (-s.get("support", 0), s["task_class"]))
+            proposals.append({
+                "keep": keep["task_class"], "merge": merge["task_class"],
+                "overlap": round(ov, 3),
+                "basis": "keyword vocabulary" if kw_ov >= proc_ov else "procedure text",
+                "reason": (f"same level ({level_of(keep['task_class'])}); "
+                           f"{'keyword' if kw_ov >= proc_ov else 'procedure'} "
+                           f"Jaccard {ov:.2f} >= {min_overlap}"),
+            })
+    proposals.sort(key=lambda p: -p["overlap"])
+    if proposals:
+        reg.set("tool", "skill__consolidation_note", json.dumps(
+            {"status": "candidate", "kind": "consolidation_proposal",
+             "proposals": proposals,
+             "note": "near-duplicate candidate skills; a human merges or rejects. "
+                     "NEVER auto-merged (no-auto-promotion discipline, same as induce)."},
+            indent=2),
+            note=f"consolidation: {len(proposals)} near-duplicate pair(s)", author="consolidate")
+    return proposals
+
+
 def _procedure_for(cls):
     return {
         "literature sweep": "narrow arXiv/cs.MA window; verify each citation 3 ways; fold only VERIFIED "
@@ -342,6 +416,37 @@ def _selftest():
         checks["a literature fold keys as a procedure"] = (
             skill_key("folded arXiv:1234.5678 literature sweep").startswith("procedure/"))
 
+        # --- run 447: the CONSOLIDATION stage (MASkills, arXiv:2609.02094) ---
+        _dupproc = ("narrow arxiv window verify each citation fold novel mechanisms "
+                    "write sweep doc")
+        reg.set("tool", "skill_dup_a", json.dumps(
+            {"name": "dup_a", "task_class": "literature sweep", "status": "candidate",
+             "support": 20, "procedure": _dupproc}, indent=2), author="selftest")
+        reg.set("tool", "skill_dup_b", json.dumps(
+            {"name": "dup_b", "task_class": "consistency re-read", "status": "candidate",
+             "support": 5, "procedure": _dupproc}, indent=2), author="selftest")
+        reg.set("tool", "skill_diff_level", json.dumps(
+            {"name": "diff_level", "task_class": "citation upgrade", "status": "candidate",
+             "support": 9, "procedure": _dupproc}, indent=2), author="selftest")
+        props = consolidate(reg, min_overlap=0.5)
+        pair = next((p for p in props
+                     if {p["keep"], p["merge"]} == {"literature sweep", "consistency re-read"}),
+                    None)
+        checks["consolidate proposes merging two near-duplicate same-level skills"] = (
+            pair is not None and pair["keep"] == "literature sweep"    # higher support kept
+            and pair["overlap"] >= 0.5)
+        checks["consolidate does NOT pair skills at different abstraction levels"] = (
+            not any("citation upgrade" in (p["keep"], p["merge"]) for p in props))
+        checks["consolidate writes a candidate consolidation_note, never auto-merges"] = (
+            json.loads(reg.get("tool", "skill__consolidation_note"))["status"] == "candidate"
+            and all(reg.get("tool", f"skill_{n}") for n in ("dup_a", "dup_b")))
+        checks["consolidate is deterministic"] = (
+            [(p["keep"], p["merge"]) for p in consolidate(reg, min_overlap=0.5)]
+            == [(p["keep"], p["merge"]) for p in props])
+        real_props = consolidate(reg)   # default threshold, real induced skills + fixtures
+        checks["consolidate runs on the real induced skills without crashing"] = (
+            isinstance(real_props, list))
+
         for k, ok in checks.items():
             print(f"  [{'ok' if ok else 'FAIL'}] {k}")
         print(f"\n  workflow entries: {n_workflow}")
@@ -372,7 +477,10 @@ def _cli(argv=None):
             reg, bank, _ = _build_corpus_bank(tmp)
             cands = induce(reg, bank)
             retired = retire(reg, bank)
-            print(json.dumps({"induced": cands, "retired": [s["task_class"] for s in retired]},
+            merges = consolidate(reg)
+            print(json.dumps({"induced": cands,
+                              "retired": [s["task_class"] for s in retired],
+                              "consolidation_candidates": merges},
                              indent=2))
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
