@@ -1,0 +1,39 @@
+{
+  "run": 466,
+  "increment": "fold Anthropic's field report 'Patterns and problems in emerging multi-agent systems' (2026-08-16) - first-party evidence domain",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 1,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-466.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 466 OK · VALID · graph +1n/+7e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +2~4-0 · novelty 1.00 · acts fold40% · audit cov!refix!"
+}

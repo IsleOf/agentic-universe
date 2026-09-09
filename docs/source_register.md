@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 463 nodes, 1937 edges · **Date:** 2026-09-05
+**Graph at generation:** 464 nodes, 1944 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -393,6 +393,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2609.08832 — `artifact_probe_consistency_gap_rig`, `concept_consistency_gap_average_pass_rate_hides_run_to_run_flips`
 - https://arxiv.org/html/2604.21590v1 — `concept_a_trained_8b_agent_reaches_92pct_of_a_235b_model_while_the_vanilla_8b_reaches_34pct`
 - https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/ — `artifact_relay_handoff_with_anti_ping_pong_guard`, `artifact_swarm_substrate_prototype_design`
+- https://www.anthropic.com/research/multiagent-systems — `concept_emerging_multi_agent_systems_fail_in_four_families_conformity_epistemic_coordination_goal_incompatibility`
 - knowledge/graph/agentic_universe_graph.json — `emergent_self_organizing_roles`
 - literature sweep 2026-09-05 (arXiv API + Hacker News; Reddit and X unreachable from this environment) — `concept_harness_capability_delta`, `concept_verification_completeness_gap`, `emergent_autonomous_discovery` +7
 - multi-agent orchestration surveys; swarm intelligence patterns — `emergent_natural_teaming`
