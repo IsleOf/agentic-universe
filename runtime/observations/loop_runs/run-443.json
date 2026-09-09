@@ -1,0 +1,46 @@
+{
+  "run": 443,
+  "increment": "Literature, fresh axis (collective creativity / diversity) - novelty 0.50 on run 442. Folded arXiv:2609.02620 (Collective creativity in hybrid societies; Youngblood, Mudd, Anglada-Tort et al.; 2026-09-02). Creativity with generative AI is a property of the HYBRID COLLECTIVE, not the individual: AI-assisted ideation RELIABLY raises individual-output novelty while NARROWING aggregate diversity. Mixed human+AI groups can out-perform AND out-diversify either kind alone (complementary search) - but only with deliberate COMPOSITION (which agents, proportions, connection topology), else individual gains erode collective diversity. LANDS ON: the swarm substrate treats agents as interchangeable (reputation-only selection), has no composition knob and no population-diversity read; a fleet of identical small local models is the composition that collapses fastest. Sharpens run-218 condition (a): disjoint EVIDENCE is not enough if the agents SEARCH the same way. +1 node, +7 edges.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 5,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 2,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "src:https://arxiv.org/abs/2609.02620",
+      "verified": true
+    }
+  ],
+  "distinct_evidence_roots": [
+    "src:https://arxiv.org/abs/2609.02620"
+  ],
+  "trace_file": "runtime\\traces\\loop-443.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 443 OK · VALID · graph +1n/+7e · cites 1v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.82 · files +1~2-0 · novelty 0.50 · acts cons40%"
+}

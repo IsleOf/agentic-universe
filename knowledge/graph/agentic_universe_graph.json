@@ -13190,6 +13190,34 @@
       "evidence_links": [
         "tools/sweep_audit.py"
       ]
+    },
+    {
+      "id": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "label": "Collective creativity in hybrid societies (Youngblood, Mudd, Anglada-Tort et al., arXiv:2609.02620, 2026-09-02): creativity with generative AI is a property of the HYBRID COLLECTIVE, not the individual. AI-assisted ideation RELIABLY raises the novelty of individual output while NARROWING diversity in the aggregate. Mixed human+AI groups can out-perform AND out-diversify either kind alone - because humans and models search in complementary ways - but ONLY with deliberate composition (which agents, what proportions, what connection topology), or individual gains erode collective diversity.",
+      "type": "concept",
+      "status": "to_test",
+      "verification_state": "partially_validated",
+      "approach_family": "emergence_first",
+      "branch_key": "emergence_first:diversity",
+      "confidence": 0.72,
+      "description": "arXiv:2609.02620 (Mason Youngblood, Katie Mudd, Manuel Anglada-Tort, Cameron Jones, Elena Miu, Diana Omigie, Margaret Schedel; v1 2026-09-02; VERIFIED via abstract). A synthesis/position paper framing generative-AI creativity as a COLLECTIVE, population-level property. THE DISTINCTION. NOVELTY is a property of an individual artifact; DIVERSITY is population-level variation across artifacts. They move in OPPOSITE directions under AI assistance: AI-assisted ideation 'reliably raises the novelty of individual output while narrowing diversity in the aggregate' - every contributor gets more novel, the population converges. THE LEVER. Outcomes depend on COMPOSITION: which agents participate, their proportions, and their connection patterns. Mixed human+AI collectives can 'out-perform and out-diversify groups of either kind alone' because humans and models 'search in complementary ways' - but this requires deliberate composition choices; left alone, the individual-novelty gain erodes collective diversity. WHY IT LANDS HERE. The swarm substrate treats agents as INTERCHANGEABLE (swarm_demo's fresh-eyes rotation picks by reputation, not by complementarity) and has NO composition knob and NO population-diversity read. This paper says both are load-bearing: a fleet of identical small local models is the worst case (no complementary search directions, so the aggregate collapses to one contributor's distribution even as each looks more novel). probe_emergent_synergy's Rosas Psi + differentiation is the project's closest population-diversity instrument; this paper is the argument for why a substrate should carry a composition parameter (mix model families / prompt regimes / isolation topology) and measure aggregate diversity, not just per-agent quality. It also sharpens the run-218 criterion's condition (a) 'disjoint evidence': disjoint EVIDENCE is not enough if the agents SEARCH the same way. CURRENCY: 2026-09-02, within the recency window. It is a framing paper - the specific novelty/diversity numbers are thin - but 'individual novelty up, population diversity down, composition is the fix' is a durable, measured direction. Directly serves the owner's small/local-model interest: identical small models are the composition that collapses fastest.",
+      "tags": [
+        "diversity",
+        "collective-creativity",
+        "novelty-vs-diversity",
+        "hybrid-society",
+        "composition",
+        "connection-topology",
+        "emergence-first",
+        "recency-2026-09",
+        "small-model-regime"
+      ],
+      "derived_from": [
+        "https://arxiv.org/abs/2609.02620"
+      ],
+      "evidence_links": [
+        "https://arxiv.org/abs/2609.02620"
+      ]
     }
   ],
   "edges": [
@@ -31489,6 +31517,55 @@
       "target": "concept_the_acceptance_gate_logged_only_its_accepts_so_its_audit_trail_could_not_answer_the_question_it_existed_for",
       "type": "detects",
       "description": "coverage_check is exactly the check the run-368 acceptance gate lacked: it would have caught 'the record cannot answer the question it exists for' by comparing committed Next bullets against what was actually done"
+    },
+    {
+      "id": "edge_hybrid_creativity_grounds_diversity_maintenance",
+      "source": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "target": "principle_diversity_maintenance",
+      "type": "supports",
+      "description": "'diversity is maintained, not assumed' - this measures the mechanism by which it erodes: AI assistance raises individual novelty and the population converges unless composition is chosen deliberately"
+    },
+    {
+      "id": "edge_hybrid_creativity_extends_structural_decoupling",
+      "source": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "target": "pattern_structural_decoupling",
+      "type": "extends",
+      "description": "decouple model / prompt / context to hold variety - this adds the COLLECTIVE level: decoupling at the population scale means composing complementary searchers, not just varying one agent's inputs"
+    },
+    {
+      "id": "edge_hybrid_creativity_informs_synergy_rig",
+      "source": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "target": "artifact_probe_emergent_synergy_rig",
+      "type": "informs",
+      "description": "probe_emergent_synergy computes Rosas Psi + differentiation - the project's aggregate-diversity instrument; this paper is the argument for adding a composition arm (vary model family / search regime, not just persona) and reading population diversity"
+    },
+    {
+      "id": "edge_hybrid_creativity_refines_epistemic_sybil",
+      "source": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "target": "concept_epistemic_sybil_collapse",
+      "type": "refines",
+      "description": "epistemic Sybil collapse is 'another agent is not another observation' when agents share a base model; this is the creative-output version - individual novelty rises but the aggregate collapses because the searchers are not complementary"
+    },
+    {
+      "id": "edge_hybrid_creativity_supports_generative_process_diversity",
+      "source": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "target": "concept_generative_process_diversity_predicts_correlated_failure_and_semantic_similarity_misses_it",
+      "type": "supports",
+      "description": "generative-process diversity predicts correlated failure and semantic similarity misses it; same lesson for creative output - measure the population distribution, not per-artifact novelty"
+    },
+    {
+      "id": "edge_hybrid_creativity_sharpens_arcticswarm",
+      "source": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "target": "concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains",
+      "type": "refines",
+      "description": "ArcticSwarm's gated isolation gives disjoint EVIDENCE; this adds that isolation of evidence is not enough if the agents search the same way - connection topology AND searcher complementarity both matter for aggregate diversity"
+    },
+    {
+      "id": "edge_hybrid_creativity_constrains_substrate_design",
+      "source": "concept_ai_ideation_raises_individual_novelty_but_narrows_aggregate_diversity_and_composition_is_the_lever",
+      "target": "artifact_swarm_substrate_prototype_design",
+      "type": "constrains",
+      "description": "the substrate has no composition parameter and no population-diversity read; a fleet of identical small local models is the composition that collapses aggregate diversity fastest, and swarm_demo's reputation-only selection cannot see it"
     }
   ]
 }
