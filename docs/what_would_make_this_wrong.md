@@ -160,6 +160,22 @@ Partial defences already in the design: the grounded (non-transcript) gate reads
 
 **Cheap mitigation:** where a probe *can* be run both overtly and covertly at similar cost, run both and report the gap — the same discipline §7 asks for the language arm.
 
+## 2d. A legible trace is not an interpretable one (added run 456)
+
+`concept_legibility_is_not_interpretability...` (arXiv:2609.04194, COLM 2026):
+actual step importance — measured as "advantage", the change in expected reward
+from including a step, via Monte Carlo rollouts — is "only partially recoverable
+from the text of the reasoning trace." An LLM judge or a fine-tuned step critic
+reading the text falls well short of a noise ceiling. This challenges process
+reward models and LLM-as-judge frameworks generally, and it lands on this
+project's `loop_metrics.trace_legibility` + `verify_loop_edit(legibility)`: those
+are a **floor** (illegible → definitely not monitorable), not a monitorability
+measure. The correction is narrow — a wording discipline: say "legible" where a
+doc currently implies "monitorable / interpretable" from the legibility metric
+alone. It does **not** weaken §2 (the grounded gate reads environment state, not
+the trace) or §2c (eval-awareness is a separate confound); it removes an
+over-reading the loop could have drifted into.
+
 ## 3. The central habitat mechanism is unverified
 
 `concept_habitat_slack` — "autotelic behaviour appears in the gap" — is the load-bearing claim under the whole habitat model, and it rests on one speculative node (`emergent_spontaneous_self_inquiry`) and the idle-agent probe that hasn't been run. If the budget sweep is flat, the habitat charter needs rewriting.

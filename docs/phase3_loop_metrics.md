@@ -101,6 +101,18 @@ computable flag. Threshold 0.70; below it, `propose_loop_edit` emits a
 explanatory, verified by recomputing `trace_legibility` on the replayed corpus.
 Real corpus is ~0.996 — the loop's traces are legible today; this is a tripwire.
 
+**Legibility is a floor, not a monitorability measure (run 456,
+`concept_legibility_is_not_interpretability...`, arXiv:2609.04194).** An illegible
+trace is definitely not monitorable, so `trace_legibility` earns its place as a
+*necessary* condition and run 156's caution (don't let a harness edit trade it for
+score) stands. But a *legible* trace does not mean the causally-load-bearing steps
+are the ones visible in it — that paper measured actual step importance as
+"advantage" (change in expected reward from including a step, via Monte Carlo
+rollouts) and found it "only partially recoverable from the text of the reasoning
+trace." So read a high `trace_legibility` as "the record explains itself in
+English," never as "the reasoning is interpretable / the loop is monitorable." The
+loop does no advantage-style causal check and cannot do one cheaply offline.
+
 ## Selftest
 
 `python tools/loop_metrics.py selftest` → GREEN. `tools/selftest_all.py` runs
