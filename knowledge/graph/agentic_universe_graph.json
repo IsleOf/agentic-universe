@@ -2109,7 +2109,8 @@
    ],
    "evidence_links": [
     "docs/emergence_probe_catalogue.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (AISAI 28-model game-theory panel, arXiv:2511.00926)"
   },
   {
    "id": "emergent_spontaneous_self_inquiry",
@@ -2310,7 +2311,8 @@
    ],
    "evidence_links": [
     "docs/emergence_probe_catalogue.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (multi-agent cascade studies, 2026-04)"
   },
   {
    "id": "emergent_misaligned_communication_under_stress",
@@ -3257,7 +3259,8 @@
    ],
    "evidence_links": [
     "docs/habitat_charter.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (Spark Effect / Diversity Collapse, ACL 2026 Findings)"
   },
   {
    "id": "emergent_evaluator_mode_collapse",
@@ -3342,7 +3345,8 @@
    ],
    "evidence_links": [
     "docs/habitat_charter.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (Tao of Agency / intrinsic-motivation synthesis, 2026-06)"
   },
   {
    "id": "concept_work_substitution_frontier",
@@ -3885,7 +3889,8 @@
    ],
    "evidence_links": [
     "docs/research_fetch_sweep_2026-09-05.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (AHE citation-graph synthesis, 2026-04)"
   },
   {
    "id": "pattern_recoverability_constrained_evolution",
@@ -4267,7 +4272,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-07-0000.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (RHO, EMNLP 2026 Findings, SWE-Bench Pro)"
   },
   {
    "id": "pattern_alternating_weight_harness_optimization",
@@ -4605,7 +4611,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-09-0600.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (peer-recognition classifier, arXiv:2606.09854)"
   },
   {
    "id": "emergent_whistleblowing",
@@ -5412,7 +5419,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-18-0000.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (Shibboleth Effect; Llama-4 / Gemini-3.1 / GPT-4o / DeepSeek-R1)"
   },
   {
    "id": "concept_mechanism_incentive_compat_does_not_transfer",
@@ -5645,7 +5653,8 @@
    ],
    "evidence_links": [
     "docs/phase2_experience_bank.md"
-   ]
+   ],
+   "source_generation": "this project's own build, run 64 (against the Phase 0 schema)"
   },
   {
    "id": "artifact_phase3_improvement_loop",
@@ -6200,7 +6209,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-01-1200.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (MAEBE / Greatest Good Benchmark, ICML 2025 workshop)"
   },
   {
    "id": "concept_gate_faces_a_pretrained_grader_gamer",
@@ -6254,7 +6264,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-02-1800.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (Harness-Bench, 106 tasks / 5194 trajectories)"
   },
   {
    "id": "concept_self_harness_validates_the_three_loop",
@@ -6282,7 +6293,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-03-0000.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (Self-Harness, arXiv:2606.09498)"
   },
   {
    "id": "concept_environmental_pressure_has_an_inverted_u",
@@ -6309,7 +6321,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-03-1200.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (Yerkes-Dodson for AI Agents, arXiv:2603.07360)"
   },
   {
    "id": "concept_risklab_probe_toolkit",
@@ -6363,7 +6376,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-04-0000.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (CONSCIENTIA, arXiv:2604.09746)"
   },
   {
    "id": "concept_aggregate_score_masks_per_layer_regression",
@@ -6502,7 +6516,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-05-1800.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (Emergent Convergence in Multi-Agent LLM Annotation)"
   },
   {
    "id": "concept_rest_react_founds_the_trajectory_retrain_loop",
@@ -6530,7 +6545,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-06-0600.md"
-   ]
+   ],
+   "source_generation": "GPT-3.5 / ReAct era (2023, Google DeepMind, arXiv:2312.10003)"
   },
   {
    "id": "concept_adaptive_self_improvement_in_the_low_data_regime",
@@ -6558,7 +6574,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-06-1200.md"
-   ]
+   ],
+   "source_generation": "GPT-4 / early-agent era (2025-02, ICML 2025, arXiv:2502.02534)"
   },
   {
    "id": "concept_bottleneck_is_the_model_harness_coupling",
@@ -6585,7 +6602,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-06-1800.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (agent-system-and-harness-design survey, arXiv:2606.20683)"
   },
   {
    "id": "concept_what_when_how_where_to_evolve",
@@ -6616,7 +6634,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-07-0600.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (self-evolving-agents survey, arXiv:2507.21046)"
   },
   {
    "id": "concept_ace_context_evolution_self_improvement",
@@ -6644,7 +6663,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-08-1200.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (ACE / Agentic Context Engineering, arXiv:2510.04618)"
   },
   {
    "id": "concept_horizon_gap_outcome_signals_decay",
@@ -6757,7 +6777,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-11-0600.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (DeepVerifier, ACL 2026 Findings)"
   },
   {
    "id": "concept_frontier_models_can_scheme_in_context",
@@ -6815,7 +6836,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-12-1200.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (OpenAI + Apollo anti-scheming stress test, arXiv:2509.15541)"
   },
   {
    "id": "concept_mast_multi_agent_failure_taxonomy",
@@ -6844,7 +6866,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-13-0600.md"
-   ]
+   ],
+   "source_generation": "GPT-4 / early-agent era (2025-03, MAST, NeurIPS 2025 D&B; 7 frameworks / 1600 traces)"
   },
   {
    "id": "concept_memory_poisoning_one_write_persists",
@@ -6872,7 +6895,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-13-1200.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (MPBench memory-poisoning study)"
   },
   {
    "id": "concept_cot_obfuscation_hits_the_message_channel_hardest",
@@ -6899,7 +6923,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-14-0600.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (CoT-obfuscation stress test, arXiv:2510.19851)"
   },
   {
    "id": "concept_cot_monitorability_is_a_fragile_property_to_preserve",
@@ -6926,7 +6951,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-14-1200.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (multi-org CoT-monitorability position paper, arXiv:2507.11473)"
   },
   {
    "id": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
@@ -6953,7 +6979,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-16-0000.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (Gemini 2.5 Pro / GPT-5 / Grok 4 / Claude Sonnet 4)"
   },
   {
    "id": "concept_cer_training_free_experience_replay_works",
@@ -6981,7 +7008,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-16-1200.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (Contextual Experience Replay, ACL 2025)"
   },
   {
    "id": "concept_rewriting_cot_alone_defeats_judges_90pct",
@@ -7065,7 +7093,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-18-0000.md"
-   ]
+   ],
+   "source_generation": "GPT-4 / early-agent era (2025-02, ToolMaker, ACL 2025)"
   },
   {
    "id": "concept_incomplete_task_induces_shutdown_resistance",
@@ -7092,7 +7121,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-18-1800.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (Palisade; Grok 4 / GPT-5 / Gemini 2.5 Pro, 100k trials)"
   },
   {
    "id": "concept_naive_trajectory_accumulation_already_helps",
@@ -7120,7 +7150,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-19-1800.md"
-   ]
+   ],
+   "source_generation": "GPT-4 / early-agent era (2025-05, NeurIPS 2025, ALFWorld)"
   },
   {
    "id": "concept_agent_communication_is_a_layered_attack_surface",
@@ -7148,7 +7179,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-20-0600.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (agent-communication-security survey, arXiv:2506.19676)"
   },
   {
    "id": "concept_incremental_attacks_boil_the_frog",
@@ -7178,7 +7210,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-06-0000.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (Boiling the Frog multi-turn benchmark, arXiv:2605.22643, 9-model panel)"
   },
   {
    "id": "concept_self_improvement_strength_tracks_the_verification_hierarchy",
@@ -7645,7 +7678,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-12-1200.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (More Is Different position paper, arXiv:2604.19827)"
   },
   {
    "id": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
@@ -7674,7 +7708,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-12-1800.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (mechanistic LSA toy model; GPT-5-mini spot-validated)"
   },
   {
    "id": "concept_coding_agent_reliability_is_a_system_property_evaluated_as_a_dependency_chain",
@@ -7762,7 +7797,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-13-1200.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (Proof-Carrying Agent Actions, arXiv:2606.04104)"
   },
   {
    "id": "concept_sea_steering_adapter_around_a_frozen_base_with_an_anytime_valid_certificate_gate",
@@ -7851,7 +7887,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-14-1200.md"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (MyAntFarm.ai, single-domain, promotional framing, 348 trials)"
   },
   {
    "id": "concept_multi_agent_helps_when_subtasks_are_verifiable_and_synthesis_is_deterministic",
@@ -8025,7 +8062,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-17-0000.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (PCN-Rec, arXiv:2601.09771)"
   },
   {
    "id": "concept_component_lifecycle_reasoning_degrades_with_size_a_deterministic_checker_beats_it",
@@ -8259,7 +8297,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-20-0600.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (HCI research-ideation study, arXiv:2601.12152)"
   },
   {
    "id": "concept_human_knowledge_capture_must_be_platform_level_and_crystallize_dialogue",
@@ -8380,7 +8419,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-21-1200.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (AI Steerability 360, IBM, arXiv:2603.07837)"
   },
   {
    "id": "concept_agent_creativity_declines_exploration_to_exploitation_within_a_run_novel_but_less_useful",
@@ -8471,7 +8511,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-23-1200.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (anti-collusion governance framework, arXiv:2601.00360)"
   },
   {
    "id": "pattern_memory_writes_pass_a_deterministic_risk_gate",
@@ -9303,7 +9344,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-28-1800.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (Colosseum, arXiv:2602.15198)"
   },
   {
    "id": "concept_institutional_ai_governs_collusion_by_mechanism_design_not_preference_engineering",
@@ -9356,7 +9398,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-29-0000.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (repeated Prisoner's Dilemma study, arXiv:2601.19082)"
   },
   {
    "id": "concept_agentic_governance_needs_unified_observability_not_disjoint_eval_ml_apm_tools",
@@ -9510,7 +9553,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-09-30-0600.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (MaMa, arXiv:2602.04431)"
   },
   {
    "id": "artifact_probe_epistemic_market_rig",
@@ -10040,7 +10084,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-06-0000.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (SEVerA, arXiv:2603.25111)"
   },
   {
    "id": "concept_harness_updating_is_flat_in_base_capability_but_harness_benefit_is_non_monotonic",
@@ -10065,7 +10110,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-06-0600.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (A-Evolve, arXiv:2605.30621)"
   },
   {
    "id": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
@@ -10171,7 +10217,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-07-0600.md"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (Among Us study, arXiv:2603.26635; explicit current-models claim)"
   },
   {
    "id": "artifact_v2_integration_dry_run",
@@ -10222,7 +10269,8 @@
    ],
    "evidence_links": [
     "docs/auto_sweep_2026-10-08-0000.md"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (MRMMIA, arXiv:2605.27825)"
   },
   {
    "id": "concept_code_as_agent_harness_survey_names_six_open_challenges_the_project_has_a_mapped_answer_to_five",
@@ -10490,7 +10538,8 @@
    ],
    "evidence_links": [
     "https://arxiv.org/abs/2606.23075"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (MLAS matrix, arXiv:2606.23075)"
   },
   {
    "id": "concept_prime_agent_a_low_friction_membrane_pushes_measurement_to_the_models_true_capability",
@@ -10688,7 +10737,8 @@
    ],
    "evidence_links": [
     "https://arxiv.org/abs/2509.26354"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (Shanghai AI Lab, arXiv:2509.26354; rev 2026-03)"
   },
   {
    "id": "concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model",
@@ -10772,7 +10822,8 @@
    ],
    "evidence_links": [
     "https://arxiv.org/abs/2606.23764"
-   ]
+   ],
+   "source_generation": "Claude 4 / 2026 agent-harness era (CAREB-MAS, arXiv:2606.23764)"
   },
   {
    "id": "artifact_cohort_monitor",
@@ -10828,7 +10879,8 @@
    ],
    "evidence_links": [
     "https://arxiv.org/abs/2510.14548"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (ETH Zurich open-ended-agent study, arXiv:2510.14548)"
   },
   {
    "id": "artifact_executor_pool_skeleton",
@@ -10884,7 +10936,8 @@
    ],
    "evidence_links": [
     "https://arxiv.org/abs/2603.29231"
-   ]
+   ],
+   "source_generation": "2026 early agent-harness era (reliability-science, 10-model / 23k-episode panel, arXiv:2603.29231)"
   },
   {
    "id": "artifact_probe_memory_horizon_rig",
@@ -11028,7 +11081,8 @@
    ],
    "evidence_links": [
     "docs/what_would_make_this_wrong.md"
-   ]
+   ],
+   "source_generation": "this project's own adversarial pass, run 364"
   },
   {
    "id": "concept_a_classifier_that_always_returns_something_hides_its_own_drift",
@@ -11766,7 +11820,8 @@
    "evidence_links": [
     "https://arxiv.org/abs/2510.10047",
     "https://arxiv.org/html/2510.10047v1"
-   ]
+   ],
+   "source_generation": "2025 pre-reasoning-model era (SwarmSys, arXiv:2510.10047)"
   },
   {
    "id": "concept_reputation_selection_stays_non_calcifying_only_with_ucb_exploration_and_recency_decay_toward_the_prior",
@@ -12926,7 +12981,8 @@
    "derived_from": [],
    "evidence_links": [
     "tools/loop_action_class.py"
-   ]
+   ],
+   "source_generation": "this project's own loop note, run 426"
   },
   {
    "id": "concept_multi_agent_research_needs_a_collaboration_gain_metric_net_of_budget_and_a_structured_factor_taxonomy",
@@ -13580,6 +13636,33 @@
    ],
    "evidence_links": [
     "https://www.anthropic.com/research/multiagent-systems"
+   ]
+  },
+  {
+   "id": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "label": "An idle-prompted agent session is not an idle process (measured live, 2026-09-10)",
+   "type": "observation",
+   "status": "to_test",
+   "verification_state": "observed_once",
+   "approach_family": "emergent_behaviour",
+   "branch_key": "idle_agent",
+   "confidence": 0.55,
+   "source_date": "2026-09",
+   "source_generation": "Antigravity/Gemini agy CLI, 2026 agent-harness era (Windows 11 + WSL Ubuntu, single-owner box)",
+   "description": "Three agy-real CLI sessions were launched with the explicit prompt 'Reply READY only. This is a session bootstrap; do not research, edit files, or dispatch anything.' After 5.6 hours of wall time they were consuming 213.9%, 42.6% and 9.9% CPU respectively (95, 55 and 30 minutes of accumulated CPU time), holding 434/327/251 MB RSS, and had written 741 MB, 419 MB and 357 MB to disk despite being forbidden to edit files. One had 703,514 voluntary context switches against ~1,500 for its two siblings - a spin-poll signature three orders of magnitude out of line. All three reported process state S (sleeping) while 17-19 threads churned, so a state-based liveness check would have called them idle. The measurement is a single uncontrolled observation on one harness, not an experiment: the cause (a stuck bootstrap handshake, a retry loop, a leaked watcher) was NOT isolated before the processes were reaped, so this records the phenomenon, not its mechanism.",
+   "tags": [
+    "idle_agent",
+    "liveness",
+    "empirical",
+    "resource_exhaustion",
+    "single_observation",
+    "harness_behaviour"
+   ],
+   "derived_from": [
+    "docs/CONSOLIDATION_PLAN.md"
+   ],
+   "evidence_links": [
+    "docs/CONSOLIDATION_PLAN.md"
    ]
   }
  ],
@@ -32501,6 +32584,74 @@
    "target": "emergent_deception_and_collusion",
    "type": "supports",
    "description": "Adds a first-party instance to a node otherwise built from arXiv/OpenReview sources: agents in a Bertrand pricing game reached explicit price floors by round 3 and sustained price-matching with all direct communication removed - spontaneous collusion recognised and adopted, matching this node's claim that gating only communication is insufficient."
+  },
+  {
+   "id": "edge_orchestrabench_challenges_incident_response_win",
+   "source": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+   "target": "concept_multi_agent_orchestration_wins_decisively_in_some_domains_incident_response",
+   "type": "challenges",
+   "status": "to_test",
+   "verification_state": "needs_empirical_validation",
+   "approach_family": "emergent_behaviors",
+   "confidence": 0.4,
+   "description": "STALE-recency counter-tension (run 467). The incident-response win (2025-11, single domain, promotional framing, pre-reasoning-model panel) sits older-source on a challenges edge to this 2026-08 diagnostic framework. OrchestraBench's cascade-radius / per-mode-recovery view is the better-instrumented and more recent measurement; the older decisive-win claim should not set the standing of orchestration-failure diagnosis. Tension recorded, not resolved."
+  },
+  {
+   "id": "edge_compaction_cliff_challenges_shutdown_resistance",
+   "source": "concept_compaction_cliff",
+   "target": "concept_incomplete_task_induces_shutdown_resistance",
+   "type": "challenges",
+   "status": "to_test",
+   "verification_state": "needs_empirical_validation",
+   "approach_family": "emergent_behaviors",
+   "confidence": 0.4,
+   "description": "STALE-recency counter-tension (run 467). Shutdown-resistance rates (2025-09, Palisade; Grok 4 / GPT-5 / Gemini 2.5 Pro) are an older model-generation behaviour claim on a challenges edge to the 2026-08 compaction-cliff result. The specific subversion percentages are unlikely to transfer to the Claude 4 agent-harness era and should not dominate a newer, mechanism-level finding about rule loss under compaction. Tension recorded, not resolved."
+  },
+  {
+   "id": "edge_self_modeling_challenges_self_recognition_hierarchy",
+   "source": "emergent_consciousness_like_self_modeling",
+   "target": "emergent_self_recognition_rationality_hierarchy",
+   "type": "challenges",
+   "status": "to_test",
+   "verification_state": "needs_empirical_validation",
+   "approach_family": "emergent_behaviors",
+   "confidence": 0.4,
+   "description": "STALE-recency counter-tension (run 467). The self-recognition / self-flattery panel (2025-11, AISAI, 28 models) is an older-generation empirical claim on a challenges edge to a 2026-03 node. Self-recognition behaviour is model-generation-sensitive; the older panel should not be the authority on how 2026 self-modeling signals are read. Tension recorded, not resolved."
+  },
+  {
+   "id": "edge_observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live__grounds__emergent_spontaneous_self_inquiry",
+   "source": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "target": "emergent_spontaneous_self_inquiry",
+   "type": "grounds",
+   "description": "A live instance of an agent doing something substantial while nominally idle: the prompt forbade all work, yet the sessions burned CPU and wrote 1.5 GB. Grounds the phenomenon in an uncontrolled field measurement without establishing that self-inquiry was the cause."
+  },
+  {
+   "id": "edge_observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live__challenges__artifact_probe_idle_agent_rig",
+   "source": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "target": "artifact_probe_idle_agent_rig",
+   "type": "challenges",
+   "description": "The probe models idle-agent behaviour in simulation; this is a real harness producing 213.9% CPU and 703k voluntary context switches from a do-nothing prompt. If the rig cannot reproduce a spin signature of that magnitude, it is under-modelling the idle case."
+  },
+  {
+   "id": "edge_observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live__supports__pattern_supervisor_stagnation_redirect",
+   "source": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "target": "pattern_supervisor_stagnation_redirect",
+   "type": "supports",
+   "description": "Direct support for watching stagnation rather than errors: nothing errored. Three sessions ran 5.6 hours, exited nothing, and were only found by manual inspection during a resource crisis."
+  },
+  {
+   "id": "edge_observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live__instantiates__concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+   "source": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "target": "concept_a_vacuous_pass_is_the_most_confident_looking_failure_an_instrument_has",
+   "type": "instantiates",
+   "description": "Process state read S (sleeping) while the process pegged two cores. A liveness check on process existence or scheduler state returns a confident, wrong answer - the vacuous pass in operational form."
+  },
+  {
+   "id": "edge_observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live__informs__artifact_orchestration_ledger",
+   "source": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "target": "artifact_orchestration_ledger",
+   "type": "informs",
+   "description": "Argues for a renewable lease over a liveness ping: a heartbeat that means 'process exists' would have renewed happily for 5.6 hours. Only a heartbeat carrying evidence of progress distinguishes a working session from a spinning one."
   }
  ]
 }

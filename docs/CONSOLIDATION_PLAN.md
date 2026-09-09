@@ -202,3 +202,49 @@ enforcement — which is the definition of the gap Phase 2 closes.
 **Revised priority:** Phase 2 is no longer the third step after security and broker consolidation.
 It is the step that stops the estate hurting itself, and both failures above happened while it
 was still queued.
+
+### 6.3 An idle-prompted agent session is not an idle process (the measurement)
+
+Cited by graph node
+`observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live`.
+
+Three `agy-real` sessions were launched from `/home/dev/poly-bot` with this exact command line:
+
+```
+agy-real --dangerously-skip-permissions --prompt-interactive
+  "Reply READY only. This is a session bootstrap;
+   do not research, edit files, or dispatch anything."
+```
+
+After 5.6 hours of wall time, measured 2026-09-10 via `/proc` and `top -bn2`:
+
+| pid | %CPU (instantaneous) | CPU time | RSS | bytes written | voluntary ctx switches |
+|---|---|---|---|---|---|
+| 163730 | **213.9%** | 95:26 | 434 MB | 741 MB | 1,689 |
+| 166103 | 42.6% | 55:08 | 327 MB | 419 MB | **703,514** |
+| 163739 | 9.9% | 29:49 | 251 MB | 357 MB | 1,395 |
+
+Four things make this a finding rather than an anecdote:
+
+1. **The prompt forbade all work** — no research, no edits, no dispatch — yet ~1.5 GB was written
+   to disk and two-plus cores were pegged.
+2. **All three reported process state `S (sleeping)`** while 17–19 threads churned. Any liveness
+   check reading process existence or scheduler state would have called them idle. This is the
+   vacuous pass in operational form.
+3. **703,514 voluntary context switches on one process against ~1,500 on its siblings** — a
+   spin-poll signature three orders of magnitude out of line, from identical command lines.
+4. **Nothing detected it.** No error, no alert. They were found by manual `/proc` inspection
+   during a resource crisis, 5.6 hours in, on a box with ~720 MB free.
+
+**Limits of this observation.** One harness, one box, three processes, uncontrolled. The *cause*
+was not isolated before the processes were reaped — a stuck bootstrap handshake, a retry loop and
+a leaked watcher are all consistent with the data. This records the phenomenon, not its mechanism,
+and `verification_state` on the node is `observed_once` accordingly. Reproducing it deliberately
+(launch N do-nothing sessions, watch ctx-switch rate) is a cheap follow-up that would turn it into
+a real result — and `tools/probe_idle_agent.py` is the rig that should be able to.
+
+**Why it matters for Phase 2.** A heartbeat meaning *"the process exists"* would have renewed
+happily for 5.6 hours. Only a heartbeat carrying **evidence of progress** distinguishes a working
+session from a spinning one. That is the same distinction poly-bot reached independently —
+*"running services don't prove useful output"* — and the same one `gates.py` enforces as
+instrument-must-say-so.
