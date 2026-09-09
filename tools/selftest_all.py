@@ -69,6 +69,7 @@ JOBS = [
     ("probe_trust_weighted_voting.py", ["selftest"]),
     ("tamper_audit.py", ["selftest"]),
     ("graph_diff.py", ["selftest"]),
+    ("knowledge_graph.py", ["selftest"]),
     ("task_ledger.py", ["selftest"]),
     ("orchestration_ledger.py", ["selftest"]),
     ("supervisor.py", ["selftest"]),
