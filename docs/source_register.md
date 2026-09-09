@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 461 nodes, 1933 edges · **Date:** 2026-09-05
+**Graph at generation:** 462 nodes, 1935 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -437,6 +437,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - tools/loop_metrics.py — `artifact_loop_metrics_phase3_real`, `concept_a_fix_applied_to_the_instance_leaves_the_class_and_the_display_untouched`, `concept_an_instrument_must_declare_which_corpus_it_measured`
 - tools/loop_proposer.py — `artifact_phase3_proposer_context`, `concept_all_five_v2_probe_adapters_are_live_wired`
 - tools/loop_session.py — `artifact_loop_session_live_recording`, `concept_a_self_observability_metric_that_depends_on_the_agent_remembering_to_record_it_is_not_a_metric`, `concept_wiring_a_component_immediately_recreates_the_mixing_bug_you_just_fixed_elsewhere`
+- tools/orchestration_ledger.py — `artifact_orchestration_ledger`
 - tools/phase0_selftest.py — `artifact_phase0_trace_substrate`
 - tools/probe_activation_generalisation.py — `artifact_probe_activation_generalisation_rig`
 - tools/probe_adversarial_collaboration.py — `artifact_probe_adversarial_collaboration_rig`

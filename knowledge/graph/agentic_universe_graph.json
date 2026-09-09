@@ -13494,6 +13494,32 @@
       "evidence_links": [
         "tools/probe_consistency_gap.py"
       ]
+    },
+    {
+      "id": "artifact_orchestration_ledger",
+      "label": "tools/orchestration_ledger.py (run 464) - the research loop's own dispatch state as a deterministic file, not session context",
+      "type": "artifact",
+      "status": "active",
+      "verification_state": "validated",
+      "approach_family": "evaluation_accountability",
+      "branch_key": "evaluation_accountability:orchestration_ledger",
+      "confidence": 0.6,
+      "description": "Run 464. The loop's orchestration layer - which run is next, what has been dispatched but not yet landed - had lived in a session's conversation context. That is the run-244 CordisBench finding (pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth: LLM state-reasoning degrades with system size, so task state must not live in the model's context) applied one level up, to the loop's own meta-layer: a fresh session or the cron cannot see what a prior session had in flight. OrchestrationLedger(path=DEFAULT) backs a committed runtime/observations/orchestration_ledger.json. .claim(run_no, agent=None) marks a run 'dispatched' with a timestamp (idempotent refresh while still dispatched; refuses to re-claim a run already 'done'). .complete(run_no, sha, node_delta, edge_delta) marks it 'done'. .status() is the deterministic pick a fresh session needs: highest done run, any dispatched-but-not-done runs (stale in-flight - a session died mid-run), and the next run number. .record_gate(run_no, verdict) stores a sweep_audit verdict string on the run entry, advisory - it never blocks a claim or a complete. Atomic write (tmp + os.replace) + a sibling .audit append log, same discipline as tools/task_ledger.py. PORTABILITY_CLASS fixed-schema. Selftest sweeps the block size n over range(2,16) claiming/completing each and asserting status() stays consistent, plus the stale-in-flight, re-claim-refusal, idempotency and reload-from-disk cases: 90 checks GREEN. selftest_all JOBS +1. Pure stdlib.",
+      "tags": [
+        "orchestration",
+        "dispatch-state",
+        "deterministic-ledger",
+        "loop-self-audit",
+        "context-not-source-of-truth",
+        "fixed-schema",
+        "practicing-what-we-preach"
+      ],
+      "derived_from": [
+        "tools/orchestration_ledger.py"
+      ],
+      "evidence_links": [
+        "tools/orchestration_ledger.py"
+      ]
     }
   ],
   "edges": [
@@ -32337,6 +32363,20 @@
       "target": "artifact_sweep_audit",
       "type": "challenges",
       "description": "flip_risk applies sweep_audit's headline-substitution test to sweep_audit itself: an 'audit ok' from one run whose finding would flip on repetition is a headline-substitution the current audit cannot catch"
+    },
+    {
+      "id": "edge_artifact_orchestration_ledger__implements__deterministic_task_ledger_source_of_truth",
+      "source": "artifact_orchestration_ledger",
+      "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+      "type": "implements",
+      "description": "orchestration_ledger.py applies the CordisBench finding one level up: the loop's own dispatch state (next run, in-flight runs) becomes a deterministic file a fresh session reads, not something the model holds in context"
+    },
+    {
+      "id": "edge_artifact_orchestration_ledger__informs__artifact_sweep_audit",
+      "source": "artifact_orchestration_ledger",
+      "target": "artifact_sweep_audit",
+      "type": "informs",
+      "description": "record_gate(run_no, verdict) lands the per-run sweep_audit verdict on the orchestration ledger entry, so a run's advisory gate result is recorded alongside its dispatch state rather than only in a session's context"
     }
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "run": 464,
+  "increment": "Build tools/orchestration_ledger.py - the loop dispatch state as a deterministic file, not session context (run-244 finding applied to the meta-layer)",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 1
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 2
+  },
+  "file_footprint": {
+    "added": 3,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/orchestration_ledger.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/orchestration_ledger.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-464.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 464 OK · VALID · graph +1n/+2e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +3~3-0 · novelty 0.75 · acts fold40% · audit cov!refix!"
+}
