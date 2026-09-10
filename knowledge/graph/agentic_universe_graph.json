@@ -13722,6 +13722,35 @@
    "evidence_links": [
     "https://arxiv.org/abs/2608.02645"
    ]
+  },
+  {
+   "id": "concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some",
+   "label": "Deployment-aware evaluation: no single model wins all workloads, local open-weight is competitive in some",
+   "type": "concept",
+   "status": "to_test",
+   "verification_state": "abstract_read_plus_second_fetch",
+   "approach_family": "evaluation",
+   "branch_key": "model_selection",
+   "confidence": 0.6,
+   "source_date": "2026-09",
+   "source_generation": "Claude 4 / 2026 agent-harness era (DAREBench, arXiv:2609.06059, 2026-09-05: 23 commercial API models + 12 local open-weight, 7,587 model-task runs, OpenClaw execution env, 233 tasks from 22 source benchmarks)",
+   "description": "DAREBench (Deployment-Aware and Reliable Evaluation of Models as Agents, arXiv:2609.06059, 2026-09-05) evaluates models as agents on a 2x3 workload matrix - input modality (text / multimodal) x execution form (3 categories) - under a contract-based protocol with evidence-based score auditing (each score recomputable from retained evidence). Headline: 'No single model dominates all workload groups'; 'text and multimodal tasks exhibit distinct accuracy-cost trade-offs'; 'local open-weight models are competitive in several groups but still trail frontier commercial models overall.' The 'deployment-aware' move is to report workload profile + deployment mode + accuracy-cost Pareto rather than one aggregate score - the model-selection question is 'which model for which workload at which cost', not 'which model is best'. Directly relevant to the SMALL/LOCAL LLM regime: on a real single-owner box choosing between local open-weight, CLI frontier agents and IDE-extension agents, the right unit of comparison is the workload group, not the leaderboard.",
+   "tags": [
+    "evaluation",
+    "deployment_aware",
+    "small_local_llm",
+    "pareto",
+    "accuracy_cost",
+    "model_selection",
+    "abstract_read",
+    "recent_30d"
+   ],
+   "derived_from": [
+    "https://arxiv.org/abs/2609.06059"
+   ],
+   "evidence_links": [
+    "https://arxiv.org/abs/2609.06059"
+   ]
   }
  ],
  "edges": [
@@ -32794,6 +32823,48 @@
    "target": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
    "type": "supports",
    "description": "Per-failure-mode recovery needs the failure modes enumerated. Non-atomic failure (timeout-after-dispatch, delayed visibility, partial update) is a named mode with a named recovery (verify-before-retry) — a concrete row for that framework."
+  },
+  {
+   "id": "edge_concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some__instantiates__concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability",
+   "source": "concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some",
+   "target": "concept_optionality_is_a_first_class_metric_promote_on_pareto_not_capability",
+   "type": "instantiates",
+   "description": "The loop's own promote-on-Pareto-not-capability rule, applied to model selection at deployment: DAREBench reports an accuracy-cost Pareto per workload group and refuses a single aggregate winner, which is the same principle for a different decision."
+  },
+  {
+   "id": "edge_concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some__supports__concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+   "source": "concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some",
+   "target": "concept_aggregate_accuracy_masks_action_class_miscalibration_decompose_the_failure_dont_average_it",
+   "type": "supports",
+   "description": "Same 'decompose, don't average' argument, one level up: aggregate model accuracy across a mixed workload hides that a model strong on text tool-use is weak on multimodal artifact delivery. The 2x3 matrix is the decomposition."
+  },
+  {
+   "id": "edge_concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some__extends__concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+   "source": "concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some",
+   "target": "concept_an_evaluation_is_auditable_only_if_each_claim_is_recomputable_from_retained_evidence_and_records_cover_the_committed_work",
+   "type": "extends",
+   "description": "ClaimReceipt says an eval is auditable only if each claim recomputes from retained evidence. DAREBench's 'evidence-based score auditing' applies that to a public agent benchmark - the scores ship with the evidence, not just the number."
+  },
+  {
+   "id": "edge_concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some__refines__concept_work_substitution_frontier",
+   "source": "concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some",
+   "target": "concept_work_substitution_frontier",
+   "type": "refines",
+   "description": "Verification cost sets the substitution frontier - but so does workload shape. DAREBench shows local open-weight already substitutes for frontier IN SOME workload groups, so the frontier is not one line across all work, it is per-workload."
+  },
+  {
+   "id": "edge_concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some__supports__concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time",
+   "source": "concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some",
+   "target": "concept_autoharness_a_synthesised_code_harness_lets_a_small_model_beat_a_large_one_and_can_replace_the_model_at_decision_time",
+   "type": "supports",
+   "description": "AutoHarness: a small model + a synthesised harness beats a large model alone. DAREBench's 'local open-weight competitive in several groups' is the population-level version of the same result - and its accuracy-cost axis is where the harness-wrapped small model wins outright."
+  },
+  {
+   "id": "edge_concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some__extends__concept_capability_is_a_model_harness_config_property",
+   "source": "concept_deployment_aware_evaluation_no_single_model_wins_all_workloads_and_local_open_weight_is_competitive_in_some",
+   "target": "concept_capability_is_a_model_harness_config_property",
+   "type": "extends",
+   "description": "Capability is a model-harness-config property. DAREBench adds deployment MODE (local / API / air-gapped) as a config axis that changes the ranking, so the property is model x harness x deployment-mode x workload."
   }
  ]
 }

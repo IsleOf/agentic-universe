@@ -1,0 +1,46 @@
+{
+  "run": 470,
+  "increment": "Run 470, fold, fresh axis (evaluation/model-selection, owner small-local-LLM regime). Folded arXiv:2609.06059 (DAREBench, 2026-09-05): deployment-aware agent eval on a 2x3 workload matrix (text/multimodal x 3 execution forms), 23 commercial + 12 local open-weight models, 7587 runs, contract-based protocol with evidence-based score auditing. Findings: no single model dominates all workload groups; text vs multimodal have distinct accuracy-cost trade-offs; local open-weight competitive in several groups but trails frontier overall. +1 node (468) / +6 edges (1970). instantiates optionality-promote-on-Pareto (at model-selection time); supports aggregate-accuracy-masks-miscalibration (2x3 matrix IS the decomposition); extends ClaimReceipt (evidence-based auditing on a public benchmark); REFINES work-substitution-frontier (frontier is per-workload not one line, local already substitutes in some groups); supports AutoHarness (population-level small+harness-competes); extends capability-is-model-harness-config (+ deployment mode axis). verification_state abstract_read_plus_second_fetch. validate VALID, 75 recency unchanged. selftest_all GREEN at 468, not re-run (graph-only). NOTE 3 folds in a row 468-470, run 471 should be probe/consolidate.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.06059",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.06059"
+  ],
+  "trace_file": "runtime\\traces\\loop-470.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 470 OK · VALID · graph +1n/+6e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +1~3-0 · novelty 1.00 · acts cons40% · audit ok"
+}
