@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 464 nodes, 1944 edges · **Date:** 2026-09-05
+**Graph at generation:** 466 nodes, 1958 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -254,6 +254,8 @@ Referenced via research notes; not independently opened. Verify before relying o
 
 ## Software and projects
 
+- **https://github.com/olivaresai/olivares**
+  - informs: `concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product`
 - **openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm**
   - informs: `pattern_skill_induction`
 - **openJiuwen / jiuwenswarm (Huawei Technologies) - VERIFIED, github.com/openJiuwen-ai/jiuwenswarm - Auto Harness optimised end-to-end from evaluation with no weight training; Skill Self-Evolution from error signals**
@@ -479,6 +481,7 @@ Nodes derived from this repository's own documents and conversation archives.
 
 - `architecture/foundations.md` — `pattern_five_w_message_instrumentation`
 - `architecture/foundations.md: write an executable GREEN/RED predicate before building a loop` — `concept_work_substitution_frontier`
+- `docs/CONSOLIDATION_PLAN.md` — `concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product`, `observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live`
 - `docs/HANDOFF.md` — `artifact_call_model_seam`
 - `docs/auto_sweep_2026-09-06-0000.md` — `concept_incremental_attacks_boil_the_frog`
 - `docs/auto_sweep_2026-09-06-1200.md` — `concept_harness_evolution_subfield`

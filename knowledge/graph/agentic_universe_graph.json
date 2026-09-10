@@ -13664,6 +13664,36 @@
    "evidence_links": [
     "docs/CONSOLIDATION_PLAN.md"
    ]
+  },
+  {
+   "id": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "label": "A shipped governance plane pairs fenced leases with deny-closed per-agent identity — the capability-token gap, closed in a product",
+   "type": "concept",
+   "status": "to_test",
+   "verification_state": "single_external_source_plus_local_observation",
+   "approach_family": "multi_agent_coordination",
+   "branch_key": "identity_and_authority",
+   "confidence": 0.5,
+   "source_date": "2026-09",
+   "source_generation": "Claude 4 / 2026 agent-harness era (Olivares AI v26.8.0 beta, AGPL; evaluated from repo + web, olivares.ai returns 403; cross-checked against this machine's own agent estate)",
+   "description": "Olivares AI (github.com/olivaresai/olivares, v26.8.0 first tagged release, AGPL-3.0 core) ships the two mechanisms the swarm-substrate design doc (section 7) named as the missing fix for its four residual gaps: (1) FENCED leases on work items - 'two agents cannot hold the same work at once', with takeover and revoke - i.e. Kleppmann fencing tokens, strictly stronger than a compare-and-swap claim; and (2) a deny-closed per-agent identity layer - a Cedar authorization engine at four enforcement points (Claude Code PreToolUse/PostToolUse hooks, an inline /v1/messages proxy, an MCP tools/call gate, an A2A delegation gate) that BLOCKS unauthorized actions rather than logging them, backed by a hash-chained Ed25519-signed ledger. This is the capability-token binding this project has kept owner-gated for 40+ runs, now existing as installable software. Two caveats matter: it is a beta, and it does NOT do multi-account credential/quota rotation (the one capability that is genuinely absent market-wide), so a rotation layer still sits underneath. The pairing is the point: a lease answers 'who may hold this work' and the identity layer answers 'is this actor who it claims' - the substrate's advisory signals become blocks only when both hold.",
+   "tags": [
+    "identity",
+    "fenced_lease",
+    "capability_token",
+    "governance_plane",
+    "external_instantiation",
+    "olivares_ai",
+    "single_source"
+   ],
+   "derived_from": [
+    "https://github.com/olivaresai/olivares",
+    "docs/CONSOLIDATION_PLAN.md"
+   ],
+   "evidence_links": [
+    "https://github.com/olivaresai/olivares",
+    "docs/CONSOLIDATION_PLAN.md"
+   ]
   }
  ],
  "edges": [
@@ -32652,6 +32682,48 @@
    "target": "artifact_orchestration_ledger",
    "type": "informs",
    "description": "Argues for a renewable lease over a liveness ping: a heartbeat that means 'process exists' would have renewed happily for 5.6 hours. Only a heartbeat carrying evidence of progress distinguishes a working session from a spinning one."
+  },
+  {
+   "id": "edge_concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product__instantiates__concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+   "source": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "target": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+   "type": "instantiates",
+   "description": "Olivares ships exactly the doc's section-7 fix: fenced leases + a deny-closed per-agent identity layer. The concept the project theorised and owner-gated is now a beta product, which is a chance to test the design against something real rather than only against its own probes."
+  },
+  {
+   "id": "edge_concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product__challenges__concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
+   "source": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "target": "concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
+   "type": "challenges",
+   "description": "The doc's position is that the six signals stay advisory *because* identity is unauthenticated. Olivares claims deny-closed enforcement on an unmodified Claude Code via hooks - if that holds, advisory-only was a tooling gap, not a law, and the six could become blocks without rewriting the agents."
+  },
+  {
+   "id": "edge_concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product__extends__pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+   "source": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+   "type": "extends",
+   "description": "The task-ledger pattern says dispatch state belongs in a deterministic store, not model context. A fenced lease adds the missing half: the store also has to *refuse* a second holder, and survive the first holder vanishing without releasing."
+  },
+  {
+   "id": "edge_concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product__grounds__observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "source": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "target": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "type": "grounds",
+   "description": "Live estate evidence for why the lease half matters: on 2026-09-10 four classes of agent session (a CLI outliving its parent, three bootstraps outliving their prompt, four browser daemons outliving their task, a killed worker's writes outliving its process) each held a resource with no expiring claim. A fenced lease with a TTL reaps all four; nothing else observed did."
+  },
+  {
+   "id": "edge_concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product__informs__artifact_orchestration_ledger",
+   "source": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "target": "artifact_orchestration_ledger",
+   "type": "informs",
+   "description": "orchestration_ledger.py's claim()/check_startable() is the hand-built minimum of what Olivares' fenced lease does as a product. If the Olivares spike (bx-09) works in the estate, the ledger stays as the loop's internal record and the lease moves to Olivares; if not, the ledger is the fallback design."
+  },
+  {
+   "id": "edge_concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product__supports__concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+   "source": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "target": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+   "type": "supports",
+   "description": "Same root: discipline mechanisms (reputation, quorum, leases) only bind when identity is costly to forge or reset. A deny-closed per-agent identity layer is what makes reset non-free, which is the precondition every other mechanism assumed and none of them supplied."
   }
  ]
 }
