@@ -13921,6 +13921,32 @@
    "evidence_links": [
     "https://arxiv.org/abs/2604.18658"
    ]
+  },
+  {
+   "id": "artifact_secret_scan",
+   "label": "tools/secret_scan.py - scans and redacts credential-shaped strings in text before it is persisted",
+   "type": "artifact",
+   "status": "active",
+   "verification_state": "selftest_green_16_16",
+   "approach_family": "agent_safety",
+   "branch_key": "owner_harm",
+   "confidence": 0.65,
+   "source_date": "2026-09",
+   "source_generation": "run 477 build - closes the run-476 owner-harm gap the same day it was found",
+   "description": "10 named patterns (Google OAuth access/refresh token, Google API key, AWS access key id, GitHub token, Slack token, Bearer header, JWT-shaped, private-key block, generic key=value). scan() is pure/read-only, returns masked findings only (never the raw secret). redact() defaults to ACTING (unlike orphan_scan/kill_reconcile which REPORT only) because the cost asymmetry is different here: a false positive masks a few characters in a log, a false negative leaks a credential. 16/16 selftest incl. a length-boundary sweep (the run-385 hazard), idempotence on already-redacted text, multi-secret + overlap handling, and None/empty-input safety. Added to selftest_all JOBS.",
+   "tags": [
+    "owner_harm",
+    "secret_scan",
+    "content_boundary",
+    "act_not_report",
+    "credential_leak"
+   ],
+   "derived_from": [
+    "docs/auto_sweep_2026-11-24-1200.md"
+   ],
+   "evidence_links": [
+    "tools/secret_scan.py"
+   ]
   }
  ],
  "edges": [
@@ -33259,6 +33285,27 @@
    "target": "artifact_kill_reconcile",
    "type": "extends",
    "description": "kill_reconcile and orphan_scan both check process/action state at a boundary. Owner-harm's credential-leak case argues for a companion class of check that scans OUTPUT before it is retained or forwarded (a secret-scan on tool results), not process state - a different boundary shape."
+  },
+  {
+   "id": "edge_artifact_secret_scan__implements__concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "source": "artifact_secret_scan",
+   "target": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "type": "implements",
+   "description": "The concrete fix the run-476 fold named: scan tool/diagnostic output for credential shapes before it is written to a log, commit, or board file - the exact incident (cat config.yaml -> a live token in tool output) that grounded the fold."
+  },
+  {
+   "id": "edge_artifact_secret_scan__refines__concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "source": "artifact_secret_scan",
+   "target": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "type": "refines",
+   "description": "Extends the boundary-check family to a new boundary SHAPE: not process/action state (orphan_scan, kill_reconcile) but OUTPUT CONTENT, checked just before persistence. Also the first of the family that acts by default rather than reporting, because the false-negative cost (a leaked credential) outweighs the false-positive cost (a masked log line) in this one case."
+  },
+  {
+   "id": "edge_artifact_secret_scan__extends__artifact_kill_reconcile",
+   "source": "artifact_secret_scan",
+   "target": "artifact_kill_reconcile",
+   "type": "extends",
+   "description": "Same file, same session two runs apart: kill_reconcile guards the commit boundary against leftover PROCESS effects; secret_scan guards it against leftover CONTENT effects. Natural next integration: wire secret_scan into the same commit path kill_reconcile already gates."
   }
  ]
 }

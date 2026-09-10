@@ -1,0 +1,44 @@
+{
+  "run": 477,
+  "increment": "Run 477, build. tools/secret_scan.py closes the run-476 owner-harm gap same day found: nothing checked tool OUTPUT for credential-shaped content before persistence. 10 named patterns (Google OAuth access/refresh token, Google API key, AWS key id, GitHub token, Slack token, Bearer header, JWT-shaped, private-key block, generic key=value). scan() pure/read-only, returns masked findings only, never raw text. redact() defaults to ACTING not reporting - departure from orphan_scan/kill_reconcile house style, justified because false-negative cost (leaked credential) outweighs false-positive cost (masked log char) here specifically. 16/16 selftest incl length-boundary sweep (run-385 hazard), idempotence, 4-secret overlap, None/empty safety. Added to selftest_all, full suite GREEN. +1 node (475) / +3 edges (2005): implements the run-476 fold fix; refines the run-471 boundary-check family with a new boundary shape (output content not process/action state) and is the first family member that acts by default; extends kill_reconcile (content vs process effects at the same commit boundary). validate VALID, 76 recency unchanged. Next: wire into the commit path kill_reconcile already gates, and into diagnostic scripts generally (would have caught the actual incident at the source). Action mix 471-477 build/fold-heavy; a consolidation connecting the boundary-check family + its owner-harm limit case is due.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 3,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 3
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/secret_scan.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/secret_scan.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-477.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 477 OK · VALID · graph +1n/+3e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.79 · files +2~4-0 · novelty 1.00 · acts fold30% · audit cov!"
+}
