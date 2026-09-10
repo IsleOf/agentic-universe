@@ -145,6 +145,10 @@ NOT moved to COMPLETED — runs every conductor tick once everything above is do
 
 ## COMPLETED
 
+## TASK bx-12 — restore WSL reachability to Aether without re-exposing it to the LAN
+DONE by owner + orchestrator, 2026-09-10, with owner-approved elevation (UAC). Used option 1 from the spec: `netsh interface portproxy add v4tov4 listenaddress=172.24.128.1 listenport=8317 connectaddress=127.0.0.1 connectport=8317`, plus a firewall rule scoped to 172.24.128.0/20 (the actual WSL vEthernet subnet, not a wider RFC1918 range). Verified: `curl http://172.24.128.1:8317/v1/models` from WSL -> HTTP 200, 7ms. Verified NOT re-exposed: `Get-NetTCPConnection -LocalPort 8317` shows only 172.24.128.1 and 127.0.0.1 listening, no 0.0.0.0.
+
+
 ## TASK bx-04 — poly-bot graph edge pass
 DONE by poly-bot in-session as commit `d4448e98` on
 `proposals/consolidate-agy-fleet-controller-2026-09-09` (2026-09-09T21:02Z).
@@ -196,26 +200,5 @@ collision this session spent a day fixing. Blocked on agent-farm's Q-AF-5
 ---
 
 ## TASK bx-12 — restore WSL reachability to Aether without re-exposing it to the LAN
-blocked:
-kind: build
+DONE by owner + orchestrator, 2026-09-10, with owner-approved elevation (UAC). Used option 1 from the spec: `netsh interface portproxy add v4tov4 listenaddress=172.24.128.1 listenport=8317 connectaddress=127.0.0.1 connectport=8317`, plus a firewall rule scoped to 172.24.128.0/20 (the actual WSL vEthernet subnet, not a wider RFC1918 range). Verified: `curl http://172.24.128.1:8317/v1/models` from WSL -> HTTP 200, 7ms. Verified NOT re-exposed: `Get-NetTCPConnection -LocalPort 8317` shows only 172.24.128.1 and 127.0.0.1 listening, no 0.0.0.0.
 
-win-agy's security fix (bind Aether to 127.0.0.1) closed the LAN exposure but
-also cut off WSL. Confirmed 2026-09-10: from WSL, 127.0.0.1:8317 refuses
-instantly (nothing listening on WSL's own loopback) and the old gateway address
-172.24.128.1:8317 times out. win-agy's Q-WA-1 report says poly-bot is only an
-OPTIONAL REST consumer (Hermes, the critical one, is a Windows app and is
-unaffected) - so this is real but not urgent.
-
-Fix options, pick the narrowest that works:
-1. `netsh interface portproxy add v4tov4 listenaddress=<WSL vEthernet IP>
-   listenport=8317 connectaddress=127.0.0.1 connectport=8317` - forwards only
-   from the WSL-facing adapter, not the LAN. Preferred if it works cleanly.
-2. Bind Aether to the WSL vEthernet adapter's specific IP in addition to
-   127.0.0.1 (not 0.0.0.0) - same effect, no portproxy needed, if the server
-   supports binding multiple addresses.
-3. Last resort: 0.0.0.0 + a Windows Firewall inbound rule scoping :8317 to
-   127.0.0.1 and the WSL subnet only, explicitly denying the rest of the LAN.
-
-Verify: `curl 127.0.0.1:8317/v1/models` succeeds from WSL AND `Test-NetConnection
--Port 8317` from another LAN host still fails. Report which option was used and
-why to outbox.
