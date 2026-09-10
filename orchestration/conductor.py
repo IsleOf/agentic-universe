@@ -19,6 +19,7 @@ Safety:
   - subprocess hard timeout; the contract also tells the worker to self-stop at 45m
 """
 import datetime
+import os
 import pathlib
 import re
 import subprocess
@@ -32,12 +33,31 @@ LOG = AGENTIC / "conductor.log"
 OUTBOX = AGENTIC / "board" / "outbox" / "conductor.md"
 
 MODEL = "claude-sonnet-5"
-# The worker needs to edit files and run git/python. Tune flags to your CLI version.
-# acceptEdits = apply edits without prompting, still prompt (=hang) on anything
-# else -> the timeout below is the backstop. Do NOT add --dangerously-skip-permissions.
-WORKER_FLAGS = ["--model", MODEL, "--permission-mode", "acceptEdits"]
 WORKER_CWD = "/mnt/c/Agents/agentic-universe/repo"
 WORKER_TIMEOUT_S = 3600
+
+# 2026-09-10, owner directive: "use agy agents for research, that's cheapest for
+# me" -> agy-real is the default worker backend. Falls back to claude if agy is
+# unavailable or WORKER_BACKEND=claude is set.
+#
+# ACCOUNT CAVEAT: agy-real needs an isolated account (agy2/agy3/agy4/agy_0.0) or
+# it silently falls back to the SHARED default profile (~/.gemini/antigravity-cli)
+# - the exact bug documented in ~/.local/bin/agy's own shim comment, and the root
+# cause of the 2026-09-10 contention incident this session spent a day fixing.
+# agent-farm owns account allocation (its Q-AF-5 is still open on the board) and
+# `agy-go` is ITS script, not a general-purpose default - grabbing it here would
+# recreate the same collision. Until agent-farm assigns a dedicated account, set
+# WORKER_AGY_ACCOUNT to a name from ~/agent-farm/instances/agy-native-<name>/, or
+# leave it None to run under whatever profile is currently active (informational
+# only - do NOT run this unattended against a shared account without checking the
+# board's "TAKING agy" protocol first).
+WORKER_BACKEND = os.environ.get("WORKER_BACKEND", "agy")
+WORKER_AGY_ACCOUNT = os.environ.get("WORKER_AGY_ACCOUNT")  # e.g. "agy3", or None
+AGY_BIN = "/home/dev/.local/bin/agy-real"
+AGY_FLAGS = ["--print", "--mode", "accept-edits",
+            "--print-timeout", "%ds" % WORKER_TIMEOUT_S]
+# claude fallback
+CLAUDE_FLAGS = ["--model", MODEL, "--permission-mode", "acceptEdits"]
 
 
 def now():
@@ -150,13 +170,25 @@ def main():
         return 1
 
     LOCK.write_text(now())
-    log(f"dispatching worker for {tid} (cwd={cwd})")
+    log(f"dispatching worker for {tid} (cwd={cwd}, backend={WORKER_BACKEND})")
     prompt = CONTRACT.read_text(encoding="utf-8") + "\n\n---\n\n" + block
+    if WORKER_BACKEND == "agy":
+        cmd = [AGY_BIN] + AGY_FLAGS + [prompt]
+        env = dict(os.environ, AGY_LAUNCHED_VIA_WRAPPER="1")
+        if WORKER_AGY_ACCOUNT:
+            # matches agy-instance's own HOME-isolation convention
+            env["HOME"] = ("/home/dev/agent-farm/instances/agy-native-%s"
+                          % WORKER_AGY_ACCOUNT)
+        else:
+            log(f"{tid} WARNING: no WORKER_AGY_ACCOUNT set - running under "
+                f"whatever profile is currently active, not an isolated one")
+    else:
+        cmd = ["claude", "-p", prompt] + CLAUDE_FLAGS
+        env = None
     try:
         r = subprocess.run(
-            ["claude", "-p", prompt] + WORKER_FLAGS,
-            capture_output=True, text=True, timeout=WORKER_TIMEOUT_S,
-            cwd=cwd,
+            cmd, capture_output=True, text=True, timeout=WORKER_TIMEOUT_S,
+            cwd=cwd, env=env,
         )
         out = (r.stdout or "").strip().splitlines()
         tail = out[-1] if out else "(no output)"

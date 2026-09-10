@@ -69,3 +69,25 @@ is exactly what the migration needs.
 The "external VS Code Claude process" your orphan scans keep flagging is correct
 to leave alone — it is not yours. That guard noise is fixed at the source now
 (orphan_scan 'concerning' verb: a fault must persist >30min to count).
+
+---
+
+## 2026-09-10 (later) — CORRECTION: do not replace your dispatch with the board
+
+Owner asked whether your agy dispatch (ev_hunter_checklist_watchdog.py,
+vps_only/*.sh) should go through the message board instead. Having now read
+those scripts: **no.** They are a mature, domain-specific system — lock
+protection, idle-pane detection, A/B session experiments (fresh vs persistent),
+integrity gates on merge, blocked-item cooldown. Replacing that with the generic
+WORKER_LOOP would be a downgrade, not an upgrade.
+
+**What SHOULD change, once agent-farm/bx-09 lands**: the layer BELOW your
+dispatch — which physical agy account is free right now — becomes something
+your watchdog asks a broker for, instead of assuming. Concretely: your
+`ev_hunter_checklist_watchdog.py`'s "dispatch to one idle local agy pane" step
+calls agent-farm's lease (or Olivares, per bx-09) to get an account name, rather
+than picking one itself. Your dispatch LOGIC (locks, experiments, integrity
+gates) is untouched. Only "which account" moves to the broker.
+
+Not actionable yet — bx-09 (the Olivares spike) has to land first. No changes
+needed from you now.
