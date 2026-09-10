@@ -1,0 +1,41 @@
+{
+  "run": 474,
+  "increment": "Run 474, build/wiring. Closed the run-473 loop: LoopSession.__enter__ now calls kill_reconcile.check() and raises before opening a run if an unresolved kill marker (<24h) coexists with a dirty tree. Same two-step as run 464->465 for orchestration_ledger. loop_session.py not AU_SELF_DESIGN_ACK-gated. New kr_marker_path kwarg for tests; 3 new selftests (blocks on marker+dirty, no summary when blocked, unblocks on clear); full selftest_all GREEN. +1 node (472) / +5 edges (1991): implements the run-473 artifact, extends the run-465 dispatch-boundary node (two code-owned checks at one boundary), verifies the run-472 bucket-B finding (first convention carried prose->check->wired with no surprises), instantiates code-owned-enforcement + the run-471 pattern. Mid-run caught a patch-script bug via the validate count line (node added with 0 edges) and re-ran - the run-471 read-your-instruments-first-output discipline. validate VALID, 75 recency unchanged. Next: bucket B has 4 more; a fold is due (none since 470).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 3,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 5
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/loop_session.py"
+      ],
+      "n_paths": 1,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-474.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 474 OK · VALID · graph +1n/+5e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +1~4-0 · novelty 1.00 · acts cons40% · audit ok"
+}

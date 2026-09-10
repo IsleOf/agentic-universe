@@ -13836,6 +13836,34 @@
    "evidence_links": [
     "tools/kill_reconcile.py"
    ]
+  },
+  {
+   "id": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "label": "run 474: kill_reconcile.check() now gates LoopSession open, the way the orchestration ledger gates dispatch",
+   "type": "concept",
+   "status": "active",
+   "verification_state": "selftest_green_wired",
+   "approach_family": "harness_design",
+   "branch_key": "deterministic_spine",
+   "confidence": 0.7,
+   "source_date": "2026-09",
+   "source_generation": "run 474 - wiring run 473 into the loop, the same close run 465 did for orchestration_ledger",
+   "description": "LoopSession.__enter__ now calls kill_reconcile.check() and raises before opening a run if an unresolved kill marker (<24h) coexists with a dirty tree. This makes the run-473 check BIND rather than sit unused - a killed subagent must be reconciled before the next run lands on top. Override is explicit: python tools/kill_reconcile.py clear. loop_session.py is not AU_SELF_DESIGN_ACK-gated so this was the legitimate seam. 3 new selftests (blocks on marker+dirty, no summary written when blocked, unblocks on clear); full selftest_all GREEN. This is the run-472 bucket-B pattern completed end to end: convention -> check (473) -> wired at the boundary (474).",
+   "tags": [
+    "deterministic_spine",
+    "named_boundary",
+    "kill_reconcile",
+    "wired",
+    "loop_close",
+    "bucket_b"
+   ],
+   "derived_from": [
+    "docs/auto_sweep_2026-11-23-1800.md"
+   ],
+   "evidence_links": [
+    "tools/loop_session.py",
+    "tools/kill_reconcile.py"
+   ]
   }
  ],
  "edges": [
@@ -33062,6 +33090,41 @@
    "target": "artifact_sweep_audit",
    "type": "extends",
    "description": "Same shape as sweep_audit and orphan_scan: a cheap deterministic (ok, reason) check a caller consults, REPORT not block."
+  },
+  {
+   "id": "edge_concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch__implements__artifact_kill_reconcile",
+   "source": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "target": "artifact_kill_reconcile",
+   "type": "implements",
+   "description": "The run-473 predicate, now called at LoopSession.__enter__ - built and wired in consecutive runs, the same two-step run 464/465 used for the orchestration ledger."
+  },
+  {
+   "id": "edge_concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch__extends__concept_the_loops_dispatch_boundary_now_writes_the_orchestration_ledger",
+   "source": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "target": "concept_the_loops_dispatch_boundary_now_writes_the_orchestration_ledger",
+   "type": "extends",
+   "description": "Run 465 made the dispatch boundary write the ledger; run 474 makes the same boundary refuse to open while a kill is unreconciled - two code-owned checks at one boundary, each returning a reason."
+  },
+  {
+   "id": "edge_concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch__verifies__finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "source": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "target": "finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "type": "verifies",
+   "description": "Run 472 predicted bucket B = conventions one check from binding. This is the first carried convention -> check -> wired, and it worked with no surprises - one data point that the bucket-B claim is actionable."
+  },
+  {
+   "id": "edge_concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch__instantiates__concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "source": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "target": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "type": "instantiates",
+   "description": "The reconcile-after-a-kill rule was prose in loop_environment_model.md section 3 and got bypassed on 2026-09-10. It is now code at the run-open boundary: prose -> predicate (473) -> wired (474)."
+  },
+  {
+   "id": "edge_concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch__instantiates__concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "source": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "target": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "type": "instantiates",
+   "description": "The run-open boundary now carries a second must-hold check (a kill is reconciled) alongside the ledger claim - the run-471 pattern, one more instance."
   }
  ]
 }

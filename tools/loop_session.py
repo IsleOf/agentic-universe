@@ -41,10 +41,14 @@ RUN_SUMMARY_DIR = ROOT / "runtime" / "observations" / "loop_runs"
 
 class LoopSession:
     def __init__(self, run_no, increment, *, language="en", trace_dir=None,
-                 registry_base=None, bank_base=None, ledger_path=None):
+                 registry_base=None, bank_base=None, ledger_path=None,
+                 kr_marker_path=None):
         # ledger_path (run 465): tests MUST pass a tmp path so selftests do not
         # write the production orchestration ledger. Same discipline as bank_base.
         self._ledger_path = ledger_path
+        # kr_marker_path (run 474): tests point kill_reconcile at a tmp marker so
+        # a real ~/.agentic marker does not affect the selftest, and vice versa.
+        self._kr_marker_path = kr_marker_path
         self._commit_sha = None
         # bank_base (run 369): tests MUST pass a tmp dir. Run 368 found selftests
         # writing into the production certificate log; wiring Phase 2 one run later
@@ -90,6 +94,24 @@ class LoopSession:
         try:
             self._ledger().claim(self.run_no, agent="conductor")
         except Exception:
+            pass
+        # Run 474. Close the run-473 loop: refuse to open a run while an
+        # unresolved kill marker coexists with a dirty tree. This is the
+        # boundary run 472 flagged as missing — a killed subagent's leftover
+        # writes must be reconciled BEFORE the next run's work lands on top
+        # (the d1d9567 hazard). REPORT with a reason; a caller can override by
+        # clearing the marker deliberately.
+        try:
+            from kill_reconcile import check as _kr_check, DEFAULT_MARKER as _KRM
+            ok, why, files = _kr_check(
+                marker_path=self._kr_marker_path or _KRM)
+            if not ok:
+                raise RuntimeError(
+                    "kill_reconcile: " + why
+                    + ("\n  dirty: " + ", ".join(files[:12]) if files else "")
+                    + "\nReconcile the tree, then `python tools/kill_reconcile.py "
+                      "clear \"<why it's fine>\"`, then retry.")
+        except ImportError:
             pass
         return self
 
@@ -535,6 +557,41 @@ def _selftest():
         with s4:
             s4.graph_write(nodes=(10, 12), edges=(40, 45))
         c = json.loads((RUN_SUMMARY_DIR / "run-996.json").read_text(encoding="utf-8"))
+
+        # run 474: an unresolved kill marker + dirty tree refuses to OPEN a run.
+        import kill_reconcile as _kr
+        _krm = tmp / "kr_marker.json"
+        _kr.mark("selftest: pretend a subagent was killed", path=_krm)
+        # tree is dirty (this very edit) -> __enter__ must raise
+        _blocked = False
+        try:
+            with LoopSession(run_no=995, increment="should not open",
+                             trace_dir=str(tmp / "t5"), registry_base=str(tmp / "harness"),
+                             bank_base=str(tmp / "bank"), ledger_path=str(tmp / "ledger.json"),
+                             kr_marker_path=str(_krm)):
+                pass
+        except RuntimeError as e:
+            _blocked = "kill_reconcile" in str(e)
+        checks["run 474: kill marker + dirty tree blocks LoopSession open"] = _blocked
+        checks["run 474: blocked run leaves no summary"] = not (
+            RUN_SUMMARY_DIR / "run-995.json").exists()
+        # clearing the marker unblocks (tree still dirty, but the kill is reconciled)
+        _kr.clear("selftest done", path=_krm)
+        _ok2 = False
+        try:
+            with LoopSession(run_no=994, increment="opens after clear",
+                             trace_dir=str(tmp / "t6"), registry_base=str(tmp / "harness"),
+                             bank_base=str(tmp / "bank"), ledger_path=str(tmp / "ledger.json"),
+                             kr_marker_path=str(_krm)):
+                pass
+            _ok2 = (RUN_SUMMARY_DIR / "run-994.json").exists()
+        except RuntimeError:
+            _ok2 = False
+        checks["run 474: clearing the marker unblocks open"] = _ok2
+        for _rn in ("run-995.json", "run-994.json"):
+            _p = RUN_SUMMARY_DIR / _rn
+            if _p.exists():
+                _p.unlink()
         # repository footprint (run 372)
         _fp = summ.get("file_footprint")
         checks["run summary carries a file_footprint"] = (
