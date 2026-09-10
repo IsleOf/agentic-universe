@@ -444,6 +444,22 @@ def _selftest():
         seen_r.append(is_reapable(dict(ee, cmdline=p["cmdline"], comm="agy-real"))[0])
     ck("reapability monotone in age", seen_r == sorted(seen_r))
 
+    # 6c. concerning() - the guard predicate. A young spinning process (startup
+    # churn) must NOT count; a long-stuck one must.
+    young_spin = {"pid": 30, "ppid": 9, "comm": "claude", "cmdline": "claude",
+                  "start_s": now - 79, "voluntary_ctxt": 79 * 42, "cpu_pct": 0.0}
+    old_spin = {"pid": 31, "ppid": 9, "comm": "claude", "cmdline": "claude",
+                "start_s": now - 3000, "voluntary_ctxt": 3000 * 42, "cpu_pct": 0.0}
+    cl = classify([young_spin, old_spin], now)
+    conc = concerning(cl)
+    ck("79s spinning session is NOT concerning", 30 not in conc)
+    ck("50min spinning session IS concerning", 31 in conc)
+    # sweep the age boundary: monotone, one transition
+    trans = [1 if 40 in concerning(classify(
+        [dict(old_spin, pid=40, start_s=now - a, voluntary_ctxt=a * 42)], now)) else 0
+        for a in range(0, 7200, 120)]
+    ck("concerning() monotone in age", trans == sorted(trans))
+
     # 7. report() hides clean processes but shows flagged ones
     mixed = [{"pid": 10, "ppid": 9, "comm": "clean", "cmdline": S,
               "start_s": now - 5, "voluntary_ctxt": 1, "cpu_pct": 0.0},
@@ -462,9 +478,39 @@ def _selftest():
     return 0 if ok else 1
 
 
+def concerning(classified, min_age_s=1800.0):
+    """PIDs a health gate should care about: a FAULT signal that has persisted
+    past `min_age_s` (default 30min), so a fresh session spiking context switches
+    through startup is ignored but a genuinely stuck one blocks dispatch.
+
+    Deliberately does NOT require STALE (the 1h age budget): a session spinning
+    for 40 minutes is already a problem, it should not get a free hour.
+    Weaker than is_reapable() - this only pauses new work, it never kills.
+    """
+    out = []
+    for pid, c in classified.items():
+        if c["detail"].get("out_of_scope"):
+            continue
+        if not any(s in FAULT_SIGNALS for s in c["signals"]):
+            continue
+        age = c["detail"].get("age_s")
+        if age is not None and age > min_age_s:
+            out.append(pid)
+    return out
+
+
 def main(argv):
     if len(argv) > 1 and argv[1] == "selftest":
         return _selftest()
+    if len(argv) > 1 and argv[1] == "concerning":
+        # for guard.sh: print count of genuinely-stuck sessions, nothing else
+        if not os.path.isdir("/proc"):
+            print("0")
+            return 0
+        import time
+        procs = collect_linux(boot_s=time.time() - _uptime(), now_s=time.time())
+        print(len(concerning(classify(procs, time.time()))))
+        return 0
     if len(argv) > 1 and argv[1] == "scan":
         if not os.path.isdir("/proc"):
             print("scan requires /proc (Linux/WSL); nothing measured", file=sys.stderr)

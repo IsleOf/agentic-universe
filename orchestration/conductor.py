@@ -70,20 +70,67 @@ def next_task():
     for block in re.split(r"(?=^## TASK )", QUEUE.read_text(encoding="utf-8"), flags=re.M):
         if not block.startswith("## TASK "):
             continue
-        m = re.search(r"^blocked:\s*(.*)$", block, flags=re.M)
+        # [ \t]* not \s* - \s crosses newlines, so an empty "blocked:" would
+        # swallow the next line as its value and every task looks blocked.
+        m = re.search(r"^blocked:[ \t]*(.*)$", block, flags=re.M)
         if m and m.group(1).strip().lower() in ("", "none", "-"):
             tid = block.split("\n", 1)[0].replace("## TASK ", "").split("—")[0].strip()
-            cm = re.search(r"^cwd:\s*(\S+)", block, flags=re.M)
+            cm = re.search(r"^cwd:[ \t]*(\S+)", block, flags=re.M)
             cwd = cm.group(1).strip() if cm else WORKER_CWD
             return tid, block.strip(), cwd
     return None
 
 
+def _selftest():
+    """Parse-only checks. No dispatch, no guard, no filesystem writes."""
+    ok = True
+    sample = (
+        "# QUEUE\n\n"
+        "## TASK t1 — first\nblocked:\nkind: build\nbody one\n\n"
+        "## TASK t2 — second\nblocked: t1\nkind: build\nbody two\n\n"
+        "## TASK t3 — third\nblocked: none\ncwd: /home/dev/poly-bot\nbody three\n"
+    )
+    global QUEUE
+    real = QUEUE
+    import tempfile
+    tf = pathlib.Path(tempfile.mkstemp(suffix=".md")[1])
+    tf.write_text(sample)
+    QUEUE = tf
+    try:
+        t = next_task()
+        cases = [
+            ("picks first unblocked", t and t[0] == "t1"),
+            ("empty 'blocked:' is not blocked", t and t[0] == "t1"),
+            ("cwd defaults when absent", t and t[2] == WORKER_CWD),
+        ]
+        # block t1 -> should fall through to t3 (t2 blocked by t1 literal, still
+        # 'blocked: t1' which is non-empty so also skipped)
+        QUEUE.write_text(sample.replace("## TASK t1 — first\nblocked:\n",
+                                        "## TASK t1 — first\nblocked: done\n"))
+        t = next_task()
+        cases.append(("skips non-empty blocked, honours cwd:",
+                      t and t[0] == "t3" and t[2] == "/home/dev/poly-bot"))
+        QUEUE.write_text("# QUEUE\n\nno tasks here\n")
+        cases.append(("no tasks -> None", next_task() is None))
+        for name, cond in cases:
+            print("  %-45s %s" % (name, "ok" if cond else "FAIL"))
+            ok = ok and bool(cond)
+    finally:
+        QUEUE = real
+        tf.unlink(missing_ok=True)
+    print("conductor selftest:", "GREEN" if ok else "RED")
+    return 0 if ok else 1
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "selftest":
+        return _selftest()
+    dry = len(sys.argv) > 1 and sys.argv[1] == "dry"
+
     if LOCK.exists():
         log("worker.lock present - skip")
         return 0
-    if not guard_ok():
+    if not dry and not guard_ok():
         log("guard failed - skip (box unhealthy or worker running)")
         return 0
     task = next_task()
@@ -91,6 +138,12 @@ def main():
         log("queue empty - nothing to do")
         return 0
     tid, block, cwd = task
+
+    if dry:
+        print(f"DRY: would dispatch {tid} (cwd={cwd}), prompt "
+              f"{len(CONTRACT.read_text()) + len(block)} chars, "
+              f"guard={'ok' if guard_ok() else 'FAIL'}")
+        return 0
 
     if not CONTRACT.exists():
         log("WORKER_CONTRACT.md missing - refusing to dispatch")

@@ -8,8 +8,12 @@
 set -u
 AGENTIC="$HOME/.agentic"
 REPO="/mnt/c/Agents/agentic-universe/repo"
+# The worker runs `claude` inside WSL, so WSL free RAM is the load-bearing gate.
+# Windows free RAM on this box is volatile (many VS Code windows + the WSL VM
+# itself), so its threshold is only a floor against true starvation, not a
+# match for WSL's.
 MIN_WSL_MB=1500
-MIN_WIN_MB=1500
+MIN_WIN_MB=500
 
 log() { echo "$(date -uIs) guard: $1" >> "$AGENTIC/guard.log"; }
 fail() { log "SKIP - $1"; exit 1; }
@@ -26,11 +30,13 @@ if [ -n "${win_free:-}" ]; then
   [ "$win_free" -lt "$MIN_WIN_MB" ] && fail "Windows free ${win_free}MB < ${MIN_WIN_MB}MB"
 fi
 
-# 3. no stuck agent sessions (the four-instances-in-one-day failure)
+# 3. no genuinely-stuck agent sessions. "concerning" = a fault signal AND stale
+# AND older than 30min, so a fresh session churning through startup (which spikes
+# context switches for a minute) does not block dispatch. 2026-09-10: guard was
+# matching the raw word "spinning" and a 79s-old claude session blocked it.
 if [ -f "$REPO/tools/orphan_scan.py" ]; then
-  flagged=$(python3 "$REPO/tools/orphan_scan.py" scan 2>/dev/null \
-    | grep -cE 'idle_prompted_but_busy|spinning' || true)
-  [ "${flagged:-0}" -gt 0 ] && fail "${flagged} flagged session(s) present - reap first"
+  stuck=$(python3 "$REPO/tools/orphan_scan.py" concerning 2>/dev/null || echo 0)
+  [ "${stuck:-0}" -gt 0 ] && fail "${stuck} stuck session(s) present - reap first"
 fi
 
 # 4. a worker already running
