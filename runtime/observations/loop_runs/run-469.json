@@ -1,0 +1,46 @@
+{
+  "run": 469,
+  "increment": "Run 469, fold, fresh axis (execution layer, not coordination). Folded arXiv:2608.02645 (Verified Tool Calls Under Non-Atomic Failures, 2026-07-31): real tool calls are not atomic (timeout-after-dispatch, delayed visibility, partial state updates) so an agent retries a call that partly succeeded and duplicates the action; fix is a verification-aware wrapper (postcondition check, verify-before-retry, idempotency keys), model-independent. +1 node (467) / +6 edges (1964). extends PILOT task-ledger (dispatch idempotency -> tool-call idempotency one layer down); GROUNDS on this session live non-atomic failures (agy-real bootstraps that sent READY then hung, killed worker whose writes survived); informs capability-token node (lease says you-no-longer-hold-this, idempotency key says you-already-did-this); supports code-owned-enforcement; REFINES pass/fail-overcredits-lucky-retries (some retries are harmful duplicates the metric hides); supports cascade-radius/per-mode-recovery. verification_state abstract_read - citation upgrade needed for the duplicate-action number. validate VALID, 75 recency warnings unchanged. selftest_all GREEN at 468, not re-run (graph-only).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 6
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2608.02645",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.02645"
+  ],
+  "trace_file": "runtime\\traces\\loop-469.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 469 OK · VALID · graph +1n/+6e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +1~3-0 · novelty 1.00 · acts cons40% · audit cov!"
+}

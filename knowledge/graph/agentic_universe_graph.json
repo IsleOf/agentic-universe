@@ -13694,6 +13694,34 @@
     "https://github.com/olivaresai/olivares",
     "docs/CONSOLIDATION_PLAN.md"
    ]
+  },
+  {
+   "id": "concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "label": "Tool-call reliability is a non-atomic-failure problem: idempotency keys + verify-before-retry, not a better model",
+   "type": "concept",
+   "status": "to_test",
+   "verification_state": "abstract_read",
+   "approach_family": "execution_layer",
+   "branch_key": "tool_call_reliability",
+   "confidence": 0.55,
+   "source_date": "2026-07",
+   "source_generation": "2026 mid-year, pre-Claude-4.x agent-harness era (controlled simulation with injected non-atomic failures, no model named — the mechanism is model-independent by design)",
+   "description": "Verified Tool Calls Improve LLM Agent Reliability Under Non-Atomic Failures (arXiv:2608.02645, 2026-07-31). Real tool calls are NOT atomic: timeout-after-dispatch, delayed visibility, and partial state updates make an agent believe a call failed when it partly or fully succeeded, so it retries and produces duplicate actions. The fix is not a stronger model but a verification-aware tool WRAPPER: postcondition verification (did the world actually change?), verify-before-retry, and idempotency keys (a repeated call with the same key is a no-op). Evaluated in a controlled sim with injected non-atomic failures; the abstract reports 'significantly reduces duplicate actions while maintaining comparable task success' but names no number or model. The claim that matters here: reliability under partial failure is an execution-layer property the harness owns, orthogonal to model capability — the same shape as 'only code-owned enforcement preserves safety and utility' and 'a deterministic task ledger is the source of truth', now applied one layer down at the individual tool call.",
+   "tags": [
+    "tool_call",
+    "idempotency",
+    "non_atomic_failure",
+    "execution_layer",
+    "verify_before_retry",
+    "abstract_read",
+    "harness_owned"
+   ],
+   "derived_from": [
+    "https://arxiv.org/abs/2608.02645"
+   ],
+   "evidence_links": [
+    "https://arxiv.org/abs/2608.02645"
+   ]
   }
  ],
  "edges": [
@@ -32724,6 +32752,48 @@
    "target": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
    "type": "supports",
    "description": "Same root: discipline mechanisms (reputation, quorum, leases) only bind when identity is costly to forge or reset. A deny-closed per-agent identity layer is what makes reset non-free, which is the precondition every other mechanism assumed and none of them supplied."
+  },
+  {
+   "id": "edge_concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model__extends__pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+   "source": "concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "target": "pattern_pilot_supervisor_over_a_task_ledger_deterministic_dispatch_abort_and_failure_digest",
+   "type": "extends",
+   "description": "The PILOT pattern makes DISPATCH idempotent at the task level (a deterministic ledger, abort, failure digest). This paper makes the individual TOOL CALL idempotent one layer down — same principle, finer grain: a key so a repeated call is a no-op, a postcondition check so a silent partial success is caught."
+  },
+  {
+   "id": "edge_concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model__grounds__observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "source": "concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "target": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "type": "grounds",
+   "description": "This session's live non-atomic failures: three agy-real bootstraps sent READY then hung (delayed-visibility / partial-handshake), and a killed worker's file writes survived its process (partial state update the next git add absorbed). Both are exactly the failure class idempotency keys + postcondition checks address."
+  },
+  {
+   "id": "edge_concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model__informs__concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+   "source": "concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "target": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+   "type": "informs",
+   "description": "Fenced leases (Olivares, run 468) give takeover/revoke at the work-item level; an idempotency key gives the same safety at the tool-call level. A lease says 'you no longer hold this'; an idempotency key says 'you already did this'. A coordination layer needs both — different failure modes, same 'refuse the duplicate' answer."
+  },
+  {
+   "id": "edge_concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model__supports__concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "source": "concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "target": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "type": "supports",
+   "description": "The wrapper is code-owned enforcement at the tool boundary: the harness, not the model's judgement, decides whether a retry is safe. Same argument as the guardrail node, applied to retry semantics rather than action permission."
+  },
+  {
+   "id": "edge_concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model__refines__concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever",
+   "source": "concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "target": "concept_pass_fail_agent_scoring_overcredits_lucky_retries_and_misses_the_feedback_loop_lever",
+   "type": "refines",
+   "description": "Pass/fail scoring overcredits lucky retries. This paper shows some of those retries are not lucky but HARMFUL — a duplicate action that the success metric counts as fine because the task still completed. 'Comparable task success, fewer duplicate actions' is precisely the gap a task-success metric hides."
+  },
+  {
+   "id": "edge_concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model__supports__concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+   "source": "concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "target": "concept_orchestration_failure_is_diagnosable_by_cascade_radius_and_per_mode_recovery",
+   "type": "supports",
+   "description": "Per-failure-mode recovery needs the failure modes enumerated. Non-atomic failure (timeout-after-dispatch, delayed visibility, partial update) is a named mode with a named recovery (verify-before-retry) — a concrete row for that framework."
   }
  ]
 }

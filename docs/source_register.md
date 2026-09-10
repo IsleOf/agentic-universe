@@ -3,7 +3,7 @@
 Attribution for every external idea in `knowledge/graph/agentic_universe_graph.json`.
 Generated from the graph's `derived_from` fields, so it stays complete by construction rather than by memory.
 
-**Graph at generation:** 466 nodes, 1958 edges · **Date:** 2026-09-05
+**Graph at generation:** 467 nodes, 1964 edges · **Date:** 2026-09-05
 
 ## How to read this
 
@@ -362,6 +362,7 @@ Venues, blogs, and industry reports cited in research notes. Weaker provenance t
 - https://arxiv.org/abs/2606.23075 — `artifact_v2_mlas_coverage_map`, `concept_self_evolution_converts_every_attack_from_session_bounded_to_lineage_persistent`
 - https://arxiv.org/abs/2606.23764 — `concept_relational_authority_and_center_periphery_stratification_emerge_from_minimal_production_rules`
 - https://arxiv.org/abs/2607.07368 — `artifact_cohort_monitor`, `artifact_probe_subagent_coordination_rig`, `concept_distributed_attacks_fragment_below_per_instance_monitoring_and_a_planner_amplifies_it` +1
+- https://arxiv.org/abs/2608.02645 — `concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model`
 - https://arxiv.org/abs/2608.03609 — `concept_replace_a_name_blacklist_with_a_shape_whitelist_to_get_equivariance_for_free`, `concept_verifying_an_llm_plus_harness_is_undecidable_and_the_tractable_case_needs_equivariance_llm_agents_violate`
 - https://arxiv.org/abs/2608.07280 — `artifact_probe_governance_lever_rig`, `concept_emergent_multi_agent_behaviour_can_be_steered_by_a_reward_model_learned_from_episode_level_collective_outcomes`
 - https://arxiv.org/abs/2608.20099 — `concept_the_communication_topology_can_be_generated_from_the_task_query_by_a_trained_autoregressive_model`
