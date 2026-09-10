@@ -29,6 +29,10 @@ LOOP — repeat until a STOP condition is met:
    - /home/dev/.agentic/board/README.md   (first iteration only)
    - /home/dev/.agentic/board/BOARD.md
    - /home/dev/.agentic/board/inbox/<AGENT>.md
+   - YOUR HANDOFF FILE at <your repo>/.agent/HANDOFF.md  — this is "where was I".
+     Read it before deciding what to do. If it does not exist, create it from the
+     template in step 6b. Do NOT read old session logs or scattered *HANDOVER*
+     docs — one handoff file, that path, nothing else.
 
 3. PICK ONE unit of work:
    a. an open directive or unanswered QUESTION in your inbox
@@ -59,6 +63,19 @@ LOOP — repeat until a STOP condition is met:
    ANSWERS: <one line per QUESTION id answered, or "none open">
    BLOCKED: <what you need from the owner, or "nothing">
    RESOURCES: <agy account taken/released, browser sessions opened/closed, or "none">
+
+6b. UPDATE YOUR HANDOFF — OVERWRITE <your repo>/.agent/HANDOFF.md with:
+   # <AGENT> handoff — <UTC timestamp>
+   NOW: <the one thing in progress, or "idle">
+   DONE THIS SESSION: <bullets, max 5>
+   NEXT: <the single next action a fresh session should take>
+   BLOCKED: <what needs the owner or another agent, or "nothing">
+   OPEN THREADS: <unresolved questions/uncertainties, max 3>
+   DEPTH: <non-obvious context a fresh session would burn tokens rediscovering>
+
+   This is OVERWRITTEN every time, never appended — it must always be ~1 screen
+   and always current. It is your memory across your own 6-hour restarts. The
+   board outbox is for others; this is for the next you.
 
 7. SLEEP, then loop:
    - did real work       → sleep 60

@@ -114,6 +114,28 @@ count and the watchdog profile numbers to outbox.
 
 ---
 
+## TASK bx-10 — poster-studio: collapse 7 handoff docs into 1
+blocked:
+kind: docs-only
+cwd: /home/dev/poster-studio
+
+poster-studio has AGENTS.md, AGENT_CONTRACT.md, SESSION_HANDOVER.md,
+CODEX_HANDOVER.md, HANDOVER.md, PLAN.md, AUDIT_DOSSIER.md — overlapping, drifting,
+nobody knows which is current. That is the "orientation doc silently goes stale"
+hazard at scale.
+
+Collapse to ONE file at `.agent/HANDOFF.md` using the template in
+`/home/dev/.agentic/board/WORKER_LOOP.md` step 6b (NOW / DONE THIS SESSION /
+NEXT / BLOCKED / OPEN THREADS / DEPTH). Move anything still useful from the
+others into it or into `docs/`. Delete the redundant *HANDOVER* / *HANDOFF*
+duplicates (keep AGENTS.md and AGENT_CONTRACT.md if they are contracts, not
+session state). Commit. Report which files were removed.
+
+poly-bot: your `docs/agent_handover/` is already focused — just add
+`.agent/HANDOFF.md` from the template as your resume file; no cleanup needed.
+
+---
+
 ## TASK bx-08 — poster-studio: per-run receipt emitter
 blocked:
 kind: build
