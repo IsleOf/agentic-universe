@@ -73,6 +73,7 @@ JOBS = [
     ("task_ledger.py", ["selftest"]),
     ("orchestration_ledger.py", ["selftest"]),
     ("orphan_scan.py", ["selftest"]),
+    ("kill_reconcile.py", ["selftest"]),
     ("supervisor.py", ["selftest"]),
     ("project_graph_scaffold.py", ["selftest"]),
     ("epistemic_constitution.py", ["selftest"]),

@@ -110,6 +110,17 @@
       "run_no": 472,
       "sha": "pending",
       "state": "done"
+    },
+    "473": {
+      "agent": "conductor",
+      "dispatched_at": 1789015736.098,
+      "done_at": 1789015736.549,
+      "edge_delta": 5,
+      "gate_verdict": null,
+      "node_delta": 1,
+      "run_no": 473,
+      "sha": "pending",
+      "state": "done"
     }
   }
 }

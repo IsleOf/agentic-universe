@@ -1,0 +1,44 @@
+{
+  "run": 473,
+  "increment": "Run 473, BUILD. tools/kill_reconcile.py - the first bucket-B convention (run 472) as a check. The run-467 hazard: a kill stops execution not filesystem effects; next git add -A absorbs leftovers (commit d1d9567 swept in 56 source_generation fields under a message describing only its own work). mark(reason) on a kill; check() -> (ok, reason, files), False iff an unresolved marker <24h coexists with a dirty tree, names the paths; clear(reason) writes an audit line. REPORT-only, orphan_scan.is_reapable() shape, stale window scaled. 10/10 selftest incl corrupt-marker, git-unreadable, stale-window sweep (one monotone transition). Added to selftest_all JOBS, full suite GREEN. +1 node (471) / +5 edges (1986) artifact_kill_reconcile: implements the run-472 bucket-B finding, instantiates run-471 boundary-check pattern + code-owned-enforcement, detects the filesystem half of the idle-prompted observation, extends orphan_scan. validate VALID, 75 recency unchanged. Next: wire kill_reconcile.check() into LoopSession (not gated) to refuse recording a run while ok=False.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 3,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 5
+  },
+  "file_footprint": {
+    "added": 2,
+    "modified": 4,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": true,
+      "paths": [
+        "tools/kill_reconcile.py",
+        "tools/selftest_all.py"
+      ],
+      "n_paths": 2,
+      "new_harness_files": [
+        "tools/kill_reconcile.py"
+      ],
+      "retention_evaluated": false,
+      "unevaluated_expansion": true
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-473.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 473 OK · VALID · graph +1n/+5e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +2~4-0 · novelty 1.00 · acts cons40% · audit cov!"
+}

@@ -13808,6 +13808,34 @@
    "evidence_links": [
     "docs/loop_environment_model.md"
    ]
+  },
+  {
+   "id": "artifact_kill_reconcile",
+   "label": "tools/kill_reconcile.py - refuse to commit while a killed subagent may have dirtied the tree",
+   "type": "artifact",
+   "status": "active",
+   "verification_state": "selftest_green_10_10",
+   "approach_family": "harness_design",
+   "branch_key": "deterministic_spine",
+   "confidence": 0.7,
+   "source_date": "2026-09",
+   "source_generation": "run 473 build - the first bucket-B convention (run 472) turned into a check",
+   "description": "A callable predicate for the run-467 hazard (killing a process stops execution not filesystem effects; the next git add -A absorbs the leftovers - commit d1d9567). mark(reason) when you kill something; check() returns (ok, reason, files) and is False iff an unresolved marker <24h old coexists with a dirty tree; clear(reason) writes an audit line. REPORT-only, matches orphan_scan.is_reapable() shape - a caller (a commit script, LoopSession) decides. Stale-window scaled not fixed. 10/10 selftest incl. corrupt-marker, git-unreadable, and a stale-window sweep asserting one monotone transition. Added to selftest_all JOBS.",
+   "tags": [
+    "deterministic_spine",
+    "named_boundary",
+    "kill_reconcile",
+    "bucket_b",
+    "auditable_refusal",
+    "report_not_block"
+   ],
+   "derived_from": [
+    "docs/loop_environment_model.md",
+    "docs/auto_sweep_2026-11-23-1200.md"
+   ],
+   "evidence_links": [
+    "tools/kill_reconcile.py"
+   ]
   }
  ],
  "edges": [
@@ -32999,6 +33027,41 @@
    "target": "artifact_sweep_audit",
    "type": "informs",
    "description": "The 6 PARTIAL hazards are candidate sweep_audit-style checks: doc-staleness by age, a dirty-tree-after-kill flag, a recorder/selftest lock. Each is a convention today that a cheap deterministic check would enforce."
+  },
+  {
+   "id": "edge_artifact_kill_reconcile__implements__finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "source": "artifact_kill_reconcile",
+   "target": "finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "type": "implements",
+   "description": "Run 472 named 6 bucket-B conventions that are one cheap check from binding and picked kill-then-dirty-tree as the cheapest/highest-value. This is that check."
+  },
+  {
+   "id": "edge_artifact_kill_reconcile__instantiates__concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "source": "artifact_kill_reconcile",
+   "target": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "type": "instantiates",
+   "description": "A code-owned check at a named boundary (the commit, right after a kill) returning a reason - the pattern from run 471, applied to the boundary run 472 flagged as missing."
+  },
+  {
+   "id": "edge_artifact_kill_reconcile__detects__observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "source": "artifact_kill_reconcile",
+   "target": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "type": "detects",
+   "description": "The filesystem half of that observation: a killed subagent whose writes outlived it. check() catches exactly the d1d9567 situation before the commit rather than after."
+  },
+  {
+   "id": "edge_artifact_kill_reconcile__instantiates__concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "source": "artifact_kill_reconcile",
+   "target": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "type": "instantiates",
+   "description": "Enforcement in code at the commit boundary, not a prose rule in a handoff doc - the rule that was written and not followed on 2026-09-10."
+  },
+  {
+   "id": "edge_artifact_kill_reconcile__extends__artifact_sweep_audit",
+   "source": "artifact_kill_reconcile",
+   "target": "artifact_sweep_audit",
+   "type": "extends",
+   "description": "Same shape as sweep_audit and orphan_scan: a cheap deterministic (ok, reason) check a caller consults, REPORT not block."
   }
  ]
 }
