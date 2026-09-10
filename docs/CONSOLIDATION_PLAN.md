@@ -249,7 +249,46 @@ session from a spinning one. That is the same distinction poly-bot reached indep
 *"running services don't prove useful output"* — and the same one `gates.py` enforces as
 instrument-must-say-so.
 
-### 6.4 The unifying finding: the estate has no concept of a session that should end
+#### 6.3b Q-PS-1 answered at the code level: the close path exists, nothing calls it
+
+Read-only inspection of
+`/home/dev/.local/lib/python3.12/site-packages/browser_use/skill_cli/daemon.py`
+(2026-09-10), after four of these daemons held 52–60 Chrome processes and ~11 GB
+for twelve hours.
+
+**The daemon has a correct, complete shutdown path:**
+- a `shutdown` action over its control socket (`daemon.py:140`, `:164`)
+- `SIGINT` / `SIGTERM` / `SIGHUP` handlers (`:231`, `:239`)
+- graceful teardown that stops the browser session with a 10 s timeout (`:311`)
+- a CDP watchdog: if the browser dies, the next poll sees `is_cdp_connected=False`
+  and triggers shutdown (`:100`)
+
+That is why `kill -TERM` reaped all of them cleanly — no `-9` was needed.
+
+**Two things are missing, and together they are the whole leak:**
+
+1. **No caller.** `grep -rIl "skill_cli"` across `~/poster-studio` returns *nothing* —
+   no script in the project starts these daemons. They were launched ad-hoc by an
+   agent using the CLI directly. A daemon with no owning script has no owning
+   shutdown either.
+2. **No idle timeout.** The only timeout in the loop is `readline(timeout=300)` on
+   an accepted *connection* (`:123`, "Connection timeout" `:144`). There is no
+   session-level idle budget. The self-cleanup path fires only when the **browser**
+   dies — so a daemon whose Chrome stays healthy lives forever.
+
+**This is `§6.4` confirmed in source rather than inferred.** The mechanism was
+never missing; the *expiring claim* was. The daemon is designed to be long-lived
+and explicitly closed, the caller owns that responsibility, and here there was no
+caller to hold it.
+
+**The fix is not "remember to close them."** Ad-hoc agent spawns will always
+forget, and the 2026-09-10 evidence is that they did for twelve hours. Either the
+spawning agent sends `{"action": "shutdown"}` when its fetch completes — which
+requires a caller that exists — or a supervisor reaps by idle time. Given agents
+spawn these directly, the supervisor path is the only reliable one, and it is
+`bx-02`'s `reaper.sh` calling `orphan_scan.is_reapable()`.
+
+## 6.4 The unifying finding: the estate has no concept of a session that should end
 
 Four independent instances, all observed on 2026-09-10, all on one machine, within hours:
 
