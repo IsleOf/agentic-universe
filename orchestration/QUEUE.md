@@ -44,10 +44,14 @@ kind: build
 Create `/home/dev/.agentic/reaper.sh` and `/home/dev/.agentic/digest.sh`.
 (`guard.sh` already exists — read it for house style.)
 
-- `reaper.sh`: run `python3 <repo>/tools/orphan_scan.py scan`; for any PID
-  flagged BOTH `stale` AND (`idle_prompted_but_busy` OR `spinning`) AND age > 2h,
-  log to `reaper.log` and `kill -TERM` (TERM first, not -9). NEVER touch a PID
-  outside orphan_scan's session scope. Default = dry-run; `--reap` to act.
+- `reaper.sh`: **must call `orphan_scan.is_reapable()` and act on nothing else.**
+  Do NOT re-implement the predicate in shell — on 2026-09-10 the rule existed
+  here as prose, was bypassed by a hand-written one-off script, and three VS Code
+  Codex extension servers (the live agents for poster-studio and poly-bot) were
+  killed because they were `stale`. `stale` is an age fact, not a fault.
+  `is_reapable()` returns `(bool, reason)`; log the reason for every PID whether
+  reaped or spared. `kill -TERM` first, never `-9` first. Default = dry-run;
+  `--reap` to act. A prose safety rule does not bind; only code does.
 - `digest.sh`: regenerate `/home/dev/.agentic/STATUS.md` — one screen: work_ledger
   summary, open QUEUE tasks, last 5 `conductor.log` lines, orphan_scan flagged
   count, free MB both sides. Pure shell/python, no LLM.

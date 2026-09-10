@@ -60,7 +60,11 @@ def guard_ok():
 
 
 def next_task():
-    """First '## TASK' block in QUEUE.md whose 'blocked:' line is empty/none/-."""
+    """First '## TASK' block in QUEUE.md whose 'blocked:' line is empty/none/-.
+
+    Returns (task_id, block_text, cwd). `cwd:` line in the block overrides the
+    default repo dir, so the conductor can dispatch a worker into ~/poly-bot etc.
+    """
     if not QUEUE.exists():
         return None
     for block in re.split(r"(?=^## TASK )", QUEUE.read_text(encoding="utf-8"), flags=re.M):
@@ -69,7 +73,9 @@ def next_task():
         m = re.search(r"^blocked:\s*(.*)$", block, flags=re.M)
         if m and m.group(1).strip().lower() in ("", "none", "-"):
             tid = block.split("\n", 1)[0].replace("## TASK ", "").split("—")[0].strip()
-            return tid, block.strip()
+            cm = re.search(r"^cwd:\s*(\S+)", block, flags=re.M)
+            cwd = cm.group(1).strip() if cm else WORKER_CWD
+            return tid, block.strip(), cwd
     return None
 
 
@@ -84,20 +90,20 @@ def main():
     if not task:
         log("queue empty - nothing to do")
         return 0
-    tid, block = task
+    tid, block, cwd = task
 
     if not CONTRACT.exists():
         log("WORKER_CONTRACT.md missing - refusing to dispatch")
         return 1
 
     LOCK.write_text(now())
-    log(f"dispatching worker for {tid}")
+    log(f"dispatching worker for {tid} (cwd={cwd})")
     prompt = CONTRACT.read_text(encoding="utf-8") + "\n\n---\n\n" + block
     try:
         r = subprocess.run(
             ["claude", "-p", prompt] + WORKER_FLAGS,
             capture_output=True, text=True, timeout=WORKER_TIMEOUT_S,
-            cwd=WORKER_CWD,
+            cwd=cwd,
         )
         out = (r.stdout or "").strip().splitlines()
         tail = out[-1] if out else "(no output)"
