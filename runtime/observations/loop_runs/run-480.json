@@ -1,0 +1,39 @@
+{
+  "run": 480,
+  "increment": "Run 480, CONSOLIDATION. Resolved three threads into a two-class reliability taxonomy. Class A - a single wrong decision at an identifiable point (task ledger, fenced lease, idempotency key, kill_reconcile, secret_scan/commit_guard): fixed by a code-owned check at a named boundary returning a reason. Run 476 owner-harm challenged this family (credential leak via a legitimate read seemed to have no boundary) - that challenge is now ANSWERED not open: 477/478 built the boundary, just a different shape (output content before persistence, not process/action state). Class B - accumulated drift with no single wrong step: run 479 geometric decay, saturating below 1 for every model, bounding context STEEPENS decay. No boundary to check - every step locally correct, aggregate still collapses by step 16. Only working mitigation anywhere in this project is structural: bound session length + restart clean (WORKER_LOOP.md 6h exit), not detect-and-refuse. OPERATIONAL NOTE stated plainly: this interactive session by run 480 is many hours and well past 16 steps deep - a live Class B instance, not hypothetical. +1 node (478) / +5 edges (2017): refines run-471 boundary-check node (every -> every Class A property, Class B out of scope by construction); verifies owner-harm + commit_guard (challenge closed, with the closing artifact); grounds run-479 decay as the Class B instance; informs kill_reconcile (A and B mitigations running side by side). validate VALID, 76 recency unchanged. selftest_all GREEN at 478. Next: test the taxonomy against future section-3 hazards (recurring-across-correct-steps = Class B = bound, not check); action mix has no probe/fix since 472, one is due.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 3,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 5
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-480.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 480 OK · VALID · graph +1n/+5e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.79 · files +1~3-0 · novelty 1.00 · acts fold40% · audit cov!"
+}

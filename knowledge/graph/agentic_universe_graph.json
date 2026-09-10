@@ -14001,6 +14001,35 @@
    "evidence_links": [
     "https://arxiv.org/abs/2609.01660"
    ]
+  },
+  {
+   "id": "finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session",
+   "label": "Two classes of reliability threat: a single wrong step (fixed by a boundary check) vs accumulated drift (fixed only by bounding the session)",
+   "type": "finding",
+   "status": "active",
+   "verification_state": "consolidation_of_runs_471_473_474_476_477_478_479",
+   "approach_family": "harness_design",
+   "branch_key": "deterministic_spine",
+   "confidence": 0.65,
+   "source_date": "2026-09",
+   "source_generation": "synthesis, runs 471-479 this session; no single external source",
+   "description": "Consolidating three threads that looked like they might be in tension. CLASS A - a single wrong decision at an identifiable point: run 471's family (task ledger, fenced lease, idempotency key, kill_reconcile) plus secret_scan/commit_guard (477, 478). All fixed the same way: a code-owned check at a named boundary, returning a reason. Run 476's owner-harm fold CHALLENGED this family - a credential leaking through a legitimate diagnostic read has no clean ACTION-level boundary to check. That challenge is now ANSWERED, not open: 477/478 found the boundary was real, just a different SHAPE - output CONTENT, checked just before persistence, not process or action state. Owner-harm/credential-leak is Class A after all; it needed a new boundary shape, not a new class. CLASS B - accumulated drift with no single wrong step: run 479's finding that task success decays geometrically with STEP COUNT, saturating below 1 for every model tested, and that bounding/compacting context STEEPENS the decay rather than fixing it. There is no boundary to put a check at here - every individual step can be locally correct and the aggregate still collapses by step 16. The only working mitigation found anywhere in this project is structural: bound the session's length and restart clean (WORKER_LOOP.md's 6h exit), not detect-and-refuse at a point. OPERATIONAL NOTE: this interactive session, by run 480, is many hours and well past 16 steps deep - a live instance of the Class B regime run 479 measured, not a hypothetical.",
+   "tags": [
+    "synthesis",
+    "reliability_taxonomy",
+    "boundary_check",
+    "geometric_decay",
+    "class_a_class_b",
+    "consolidation",
+    "resolves_a_challenge"
+   ],
+   "derived_from": [
+    "docs/auto_sweep_2026-11-25-0600.md",
+    "docs/loop_environment_model.md"
+   ],
+   "evidence_links": [
+    "docs/auto_sweep_2026-11-25-0600.md"
+   ]
   }
  ],
  "edges": [
@@ -33409,6 +33438,41 @@
    "target": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
    "type": "grounds",
    "description": "This session's own bounded-worker design (WORKER_LOOP.md: one increment, exit after 6h, restart clean) is a structural mitigation for exactly this curve - it keeps every worker's step count far below the 16-step collapse point rather than trying to out-engineer the decay within one long session."
+  },
+  {
+   "id": "edge_finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session__refines__concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "source": "finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session",
+   "target": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "type": "refines",
+   "description": "Narrows 'every' (already softened once by run 472) to 'every Class A property' - a single wrong step at an identifiable point. Class B properties (accumulated drift) are explicitly out of scope for a boundary check by construction, not by a gap yet to be closed."
+  },
+  {
+   "id": "edge_finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session__verifies__concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "source": "finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session",
+   "target": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "type": "verifies",
+   "description": "Run 476 challenged the boundary-check family with a case that seemed to have no boundary. Run 477/478 built one (content, not action). This closes the loop: the challenge is answered, the family holds for Class A, credential leak included."
+  },
+  {
+   "id": "edge_finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session__verifies__artifact_commit_guard",
+   "source": "finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session",
+   "target": "artifact_commit_guard",
+   "type": "verifies",
+   "description": "The concrete evidence the challenge is answered: a real, wired, self-applied check at the content boundary owner-harm said didn't exist."
+  },
+  {
+   "id": "edge_finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session__grounds__concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "source": "finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session",
+   "target": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "type": "grounds",
+   "description": "The Class B instance. No boundary check in this project's toolkit addresses it; the only working answer found anywhere is architectural (bound the session, restart), which this finding names as a distinct mitigation category rather than another check to build."
+  },
+  {
+   "id": "edge_finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session__informs__concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "source": "finding_two_classes_of_reliability_threat_a_single_wrong_step_fixed_by_a_boundary_check_and_accumulated_drift_fixed_only_by_bounding_the_session",
+   "target": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "type": "informs",
+   "description": "kill_reconcile is Class A (a specific wrong state at the run-open boundary). WORKER_LOOP.md's 6h bounded-exit design, wired into the SAME board this session built, is Class B's mitigation running alongside it - two different failure classes, two different fixes, one operating loop."
   }
  ]
 }
