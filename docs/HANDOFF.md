@@ -221,6 +221,36 @@ looks like a live token, key, or password into a response, log, or commit — ma
 (`ya29.AAA...xyz`) the way `secret_scan.py`'s own selftest does, and say plainly that you found
 one without reproducing it.
 
+## 9a. Dashboard status (added 2026-09-10, later) — wmux installed, unified view still open
+
+- **`wmux` installed and running**: `C:\Agents\wmux\wmux.exe` (portable, MIT,
+  github.com/amirlehmam/wmux v2.10.3). Auto-starts at logon (Startup folder
+  shortcut). Confirmed: WSL shell integration + `wmux ssh user@host` for VPS
+  panes (creates a fresh connection — still need `tmux attach -t vps-agents`
+  once inside for poly-bot's existing session, wmux doesn't auto-attach to a
+  pre-existing remote tmux). Its Claude/OpenCode/Kiro hook integration was
+  **declined** ("Not now") — that installs `PreToolUse`/`PostToolUse`/etc.
+  hooks into `~/.claude/settings.json` across every agent, which is a real
+  behavioral change, not just a terminal view; revisit deliberately later via
+  Settings → General if wanted, don't enable it by default.
+- **`\\wsl$\Ubuntu\home\dev\.agentic\dashboard.html`** (via `dashboard.py`)
+  still exists as the fallback static status page — memory, guard state, next
+  queue task, each agent's last board report. Auto-generates + opens at logon
+  (separate Startup entry, `dashboard_autostart.bat`).
+- **Owner ask, not yet done**: one unified dashboard — owner overview + agent
+  overview + the `/home/dev/.agentic/board` message board + wmux's panes, in
+  one place, possibly as tabs. Also asked for a fresh web search on trending
+  "agent OS" UI design (Sept 2026) to inform this — **not done**, deferred for
+  token/time reasons in the session that added this note.
+  - Closest existing piece: wmux itself is already the multi-pane container
+    (Windows + WSL + SSH-to-VPS in one workspace). The actual gap is that it
+    shows terminals only — the board/outbox files aren't rendered inside it.
+  - A cheap next step, not yet attempted: check whether wmux supports a
+    "watch a file / tail a log in a pane" pattern (it already renders Claude
+    Code's markdown output per the integration dialog, so a pane running
+    `tail -f` on `board/outbox/*.md` might just work without any wmux-side
+    development) before assuming a custom integration is needed.
+
 ## 9. The orchestration harness + the real agent estate
 
 `docs/CONSOLIDATION_PLAN.md` is the full account; `orchestration/README.md` covers the harness
