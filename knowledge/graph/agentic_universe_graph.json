@@ -14030,6 +14030,34 @@
    "evidence_links": [
     "docs/auto_sweep_2026-11-25-0600.md"
    ]
+  },
+  {
+   "id": "concept_buzz_gives_every_agent_a_real_cryptographic_identity_on_nostr_not_just_the_lease_layer_olivares_shipped",
+   "label": "Buzz gives every agent a real cryptographic identity on Nostr - not just the lease layer Olivares shipped",
+   "type": "concept",
+   "status": "to_test",
+   "verification_state": "web_summary_multi_source",
+   "approach_family": "multi_agent_coordination",
+   "branch_key": "identity_and_authority",
+   "confidence": 0.55,
+   "source_date": "2026-07",
+   "source_generation": "Claude 4 / 2026 agent-harness era (Block/Jack Dorsey, launched 2026-07-21, built on the Nostr protocol; multi-source web summary, not yet a direct fetch of the spec or repo)",
+   "description": "Buzz (Block, 2026-07-21) is an open-source, decentralized group-chat workspace for mixed human+agent teams, built on Nostr - a protocol where every message carries a cryptographic signature proving who sent it. Each agent gets its own Nostr account: real keypair, real permissions, not a display name. Operates on the Agent Client Protocol (ACP), model-agnostic - supports Claude Code, Codex, Block's own goose framework. Channels, threads, DMs, voice, media, code repos, automated workflows. This is the SECOND shipped answer this project has found to the unauthenticated-agent-field gap (after Olivares' fenced-lease + Cedar identity layer, run 468) but a DIFFERENT half of the problem: Olivares authenticates identity for TOOL-CALL enforcement inside one IDE session; Buzz authenticates identity for MESSAGING across a fleet of independent agents and humans - closer to what this session's own file-based board (pheromone.py, /home/dev/.agentic/board/) actually needed and does not have. The board's `agent` field in every inbox/outbox/BOARD.md entry is exactly the plain unauthenticated string this project has flagged for ~40+ runs; Buzz is evidence that a real fix now exists as installable, dated, open-source software rather than a build-it-yourself problem.",
+   "tags": [
+    "identity",
+    "capability_token",
+    "nostr",
+    "cryptographic_signing",
+    "buzz",
+    "messaging_substrate",
+    "external_instantiation"
+   ],
+   "derived_from": [
+    "https://block.xyz/inside/introducing-buzz-where-humans-and-agents-work-together"
+   ],
+   "evidence_links": [
+    "https://block.xyz/inside/introducing-buzz-where-humans-and-agents-work-together"
+   ]
   }
  ],
  "edges": [
@@ -33494,6 +33522,27 @@
    "target": "concept_self_correction_is_mostly_format_repair_not_reasoning",
    "type": "informs",
    "description": "If 21% of long-horizon trajectory failures are format/tool-call-drift rather than reasoning failures, and self-correction is mostly format repair rather than reasoning repair, the two findings describe the same failure surface from opposite ends: a format-level intervention plausibly catches a real fraction of what looks like reasoning collapse."
+  },
+  {
+   "id": "edge_concept_buzz_gives_every_agent_a_real_cryptographic_identity_on_nostr_not_just_the_lease_layer_olivares_shipped__instantiates__concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+   "source": "concept_buzz_gives_every_agent_a_real_cryptographic_identity_on_nostr_not_just_the_lease_layer_olivares_shipped",
+   "target": "concept_the_substrates_four_residual_gaps_are_one_gap_unauthenticated_identity_and_one_fix_capability_token_binding",
+   "type": "instantiates",
+   "description": "A second, independent shipped fix for the exact gap this doc named - and a closer architectural match than Olivares, because Buzz's whole product IS multi-agent messaging with signed identity, not an IDE-enforcement layer that happens to include identity."
+  },
+  {
+   "id": "edge_concept_buzz_gives_every_agent_a_real_cryptographic_identity_on_nostr_not_just_the_lease_layer_olivares_shipped__refines__concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "source": "concept_buzz_gives_every_agent_a_real_cryptographic_identity_on_nostr_not_just_the_lease_layer_olivares_shipped",
+   "target": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "type": "refines",
+   "description": "Olivares (run 468) pairs a lease with identity for TOOL-CALL enforcement. Buzz pairs identity with MESSAGING for fleet coordination. Neither is a superset of the other - a real deployment plausibly wants Olivares inside one agent's session and Buzz across the fleet's shared channel."
+  },
+  {
+   "id": "edge_concept_buzz_gives_every_agent_a_real_cryptographic_identity_on_nostr_not_just_the_lease_layer_olivares_shipped__challenges__concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
+   "source": "concept_buzz_gives_every_agent_a_real_cryptographic_identity_on_nostr_not_just_the_lease_layer_olivares_shipped",
+   "target": "concept_the_substrate_emits_six_report_not_block_signals_all_advisory_for_the_same_reason_unauthenticated_identity",
+   "type": "challenges",
+   "description": "If Buzz's Nostr signing genuinely authenticates who posted a channel message, the same argument run 468 made for Olivares applies here: advisory-only was a tooling gap, not a law, for the messaging layer specifically - this session's board could inherit real identity by adopting the same signing primitive rather than staying string-based."
   }
  ]
 }

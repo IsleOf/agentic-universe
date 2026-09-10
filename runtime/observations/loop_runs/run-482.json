@@ -1,0 +1,39 @@
+{
+  "run": 482,
+  "increment": "Run 482, fold, owner-directed research on T3 Code / Hermes Agent / Buzz to evaluate architecture change. Only Buzz folded as a node; T3 Code and Hermes Agent recorded as findings without new nodes (web-summary only, no direct fetch). Buzz (Block/Jack Dorsey, 2026-07-21): open-source decentralized group-chat workspace for mixed human+agent teams on Nostr - every agent gets a real Nostr keypair/permissions, not a display name. Model-agnostic via ACP (Claude Code, Codex, goose). Second shipped fix for the unauthenticated-agent-field gap after Olivares (468) but closer match: Olivares = tool-call enforcement in one session, Buzz = messaging across a fleet, exactly what this session board (pheromone.py, /home/dev/.agentic/board/) needs and lacks - every agent field in every inbox/outbox/BOARD.md entry is the plain string this project has flagged 40+ runs. +1 node (479) / +3 edges (2023): instantiates four-residual-gaps (second independent fix, closer match); refines Olivares (neither a superset, a real deployment wants both); CHALLENGES six-advisory-signals (if Nostr signing authenticates a post, advisory-only was a tooling gap for messaging specifically). validate VALID, 78 recency (+2, correctly flagged). selftest_all GREEN at 478. Next, not folded: T3 Code (21084 stars, wraps Codex/Claude/OpenCode/Cursor/Grok/Antigravity + mobile + git worktree - matches this estates exact provider mix including Antigravity which wmux does not name); Hermes Agent (Nous Research, persistent memory + 20+ messaging platforms - UNCONFIRMED whether same software as owners desktop Hermes, needs a direct check not a name-match assumption).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 3,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 3
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-482.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 482 OK · VALID · graph +1n/+3e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.78 · files +1~3-0 · novelty 0.67 · acts fold30% · audit cov!"
+}
