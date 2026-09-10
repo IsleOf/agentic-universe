@@ -1,0 +1,46 @@
+{
+  "run": 475,
+  "increment": "Run 475, fold, fresh axis (genuine emergence - a phase transition - after 7 harness-side runs). Folded arXiv:2608.02827 (Emergence of Biased Consensus in Multi-Agent LLM Debates, ICML 2026): debating LLM agents undergo a real phase transition from unbiased to collectively-biased consensus when conformity pressure crosses a critical threshold set by initial bias and debate noise (temperature); finite-size crossover is the critical-point signature; AGENT HETEROGENEITY rounds off the transition, keeping a heterogeneous fleet out of locked-in bias even under high conformity. Validated on investment decisions + LLM-as-judge. Operational: debate is a bias amplifier in the supercritical regime; fix is more heterogeneity (a design parameter) not less debate. +1 node (473) / +7 edges (1998): refines information-cascades (order parameter + threshold) and Anthropics conformity failure family; grounds principle_diversity_maintenance (heterogeneity loss = crossing a critical point); extends showing-votes-causes-herding (herding is the supercritical phase); supports misaligned-biased-equilibrium, run-444 re-correlation finding, ArcticSwarm. verification_state abstract_read_plus_second_fetch. validate VALID, 75 recency unchanged. selftest_all GREEN at 474. Next: probe_emergent_synergy + a conformity sweep for the finite-size crossover in-sim; ties to the estate (near-identical CLI agents on one board = low heterogeneity, shared state = conformity channel).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2608.02827",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2608.02827"
+  ],
+  "trace_file": "runtime\\traces\\loop-475.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 475 OK · VALID · graph +1n/+7e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +1~3-0 · novelty 1.00 · acts cons40% · audit ok"
+}

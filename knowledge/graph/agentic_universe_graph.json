@@ -13864,6 +13864,34 @@
     "tools/loop_session.py",
     "tools/kill_reconcile.py"
    ]
+  },
+  {
+   "id": "concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off",
+   "label": "Multi-agent debate has a phase transition to collective bias above a conformity threshold; heterogeneity rounds it off",
+   "type": "concept",
+   "status": "to_test",
+   "verification_state": "abstract_read_plus_second_fetch",
+   "approach_family": "emergent_behaviour",
+   "branch_key": "conformity_dynamics",
+   "confidence": 0.6,
+   "source_date": "2026-08",
+   "source_generation": "2026 mid-year, ICML 2026 (Maya Okawa); physics-inspired social-dynamics model, validated on investment decisions + LLM-as-judge; no model family named — the transition is a property of the interaction, not the model",
+   "description": "Emergence of Biased Consensus in Multi-Agent LLM Debates (arXiv:2608.02827, ICML 2026). A group of debating LLM agents undergoes a genuine PHASE TRANSITION from unbiased to collectively-biased consensus when conformity pressure crosses a critical threshold set by the agents' initial bias and the debate noise (sampling temperature). Below the threshold, individual biases wash out; above it, they lock in and amplify. The transition shows a finite-size crossover — sharper as the group grows — which is the signature of a real critical point, not a gradual drift. The key control: AGENT HETEROGENEITY smooths (rounds off) the transition, so a heterogeneous fleet does not lock into biased consensus even under high conformity. Validated on investment decisions and LLM-as-a-judge. The operational reading: 'debate improves answers' is regime-dependent — in the supercritical regime (high conformity, low heterogeneity, non-trivial temperature) debate is a bias amplifier, and the fix is not less debate but more heterogeneity, which is a design parameter.",
+   "tags": [
+    "emergent_behaviour",
+    "phase_transition",
+    "conformity",
+    "heterogeneity",
+    "collective_bias",
+    "statistical_physics",
+    "abstract_read"
+   ],
+   "derived_from": [
+    "https://arxiv.org/abs/2608.02827"
+   ],
+   "evidence_links": [
+    "https://arxiv.org/abs/2608.02827"
+   ]
   }
  ],
  "edges": [
@@ -33125,6 +33153,55 @@
    "target": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
    "type": "instantiates",
    "description": "The run-open boundary now carries a second must-hold check (a kill is reconciled) alongside the ledger claim - the run-471 pattern, one more instance."
+  },
+  {
+   "id": "edge_concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off__refines__emergent_information_cascades",
+   "source": "concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off",
+   "target": "emergent_information_cascades",
+   "type": "refines",
+   "description": "Information cascades / entrenched consensus is the qualitative version. This gives it an order parameter: the cascade is the supercritical phase, and there is a specific conformity threshold (a function of initial bias and temperature) below which cascades do not form."
+  },
+  {
+   "id": "edge_concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off__grounds__principle_diversity_maintenance",
+   "source": "concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off",
+   "target": "principle_diversity_maintenance",
+   "type": "grounds",
+   "description": "'Diversity is maintained, not assumed' gets a mechanism and a stake: heterogeneity is the parameter that ROUNDS OFF the bias phase transition, so losing it is not a mild degradation — it moves the system across a critical point into locked-in collective bias."
+  },
+  {
+   "id": "edge_concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off__extends__concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+   "source": "concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off",
+   "target": "concept_orchestration_can_beat_the_strongest_model_but_showing_votes_causes_herding",
+   "type": "extends",
+   "description": "Showing votes causes herding — this says herding is a phase, entered when conformity crosses a threshold, and predicts when: high initial shared bias, non-zero temperature, low heterogeneity. 'Hide the votes' is one way to keep conformity subcritical."
+  },
+  {
+   "id": "edge_concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off__supports__concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+   "source": "concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off",
+   "target": "concept_misaligned_agent_interaction_converges_to_a_predictable_biased_equilibrium",
+   "type": "supports",
+   "description": "Two agents under misaligned objectives reach a biased equilibrium; this scales it to N and names the transition. The biased equilibrium is the supercritical fixed point."
+  },
+  {
+   "id": "edge_concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off__supports__finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy",
+   "source": "concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off",
+   "target": "finding_adding_a_coordination_mechanism_can_re_correlate_a_differentiated_fleet_trading_aggregate_diversity_for_synergy",
+   "type": "supports",
+   "description": "Run 444's probe found a coordination mechanism re-correlates a differentiated fleet. This paper says why that matters: re-correlation reduces heterogeneity, which is exactly the parameter holding the fleet on the subcritical side of the bias transition."
+  },
+  {
+   "id": "edge_concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off__supports__concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains",
+   "source": "concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off",
+   "target": "concept_deferring_early_consensus_by_gated_isolation_and_a_mandatory_alternative_hypothesis_task_is_worth_large_accuracy_gains",
+   "type": "supports",
+   "description": "ArcticSwarm defers early consensus and mandates an alternative hypothesis. Both moves keep conformity subcritical — isolation lowers conformity pressure directly, the alternative-hypothesis task injects heterogeneity."
+  },
+  {
+   "id": "edge_concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off__refines__concept_emerging_multi_agent_systems_fail_in_four_families_conformity_epistemic_coordination_goal_incompatibility",
+   "source": "concept_multi_agent_debate_has_a_phase_transition_to_collective_bias_above_a_conformity_threshold_and_heterogeneity_rounds_it_off",
+   "target": "concept_emerging_multi_agent_systems_fail_in_four_families_conformity_epistemic_coordination_goal_incompatibility",
+   "type": "refines",
+   "description": "Anthropic's field report names 'conformity' as one of four failure families. This gives that family an order parameter and a threshold, and identifies heterogeneity as the lever."
   }
  ]
 }
