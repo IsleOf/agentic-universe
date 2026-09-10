@@ -13751,6 +13751,36 @@
    "evidence_links": [
     "https://arxiv.org/abs/2609.06059"
    ]
+  },
+  {
+   "id": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "label": "Every reliability property that must hold regardless of model judgment lives in code at a named boundary",
+   "type": "concept",
+   "status": "to_test",
+   "verification_state": "synthesis_of_folded_nodes",
+   "approach_family": "harness_design",
+   "branch_key": "deterministic_spine",
+   "confidence": 0.65,
+   "source_date": "2026-09",
+   "source_generation": "synthesis (runs 464-470 + this session's built orchestration harness); no single external source",
+   "description": "Consolidation of a thread that ran across runs 464-470 and the orchestration harness this session actually built. Each of the following is the same move - take a property that must hold even when the model's judgment is wrong, and enforce it in deterministic code at one specific boundary, not in the prompt: (1) dispatch/task state -> a deterministic task ledger (run 244 / orchestration_ledger); (2) 'you no longer hold this work' -> a fenced lease with takeover/revoke (Olivares, run 468); (3) 'you already did this' -> an idempotency key on the tool call (run 469); (4) 'this action is not permitted' -> code-owned enforcement at the tool boundary, not a bolt-on guardrail; (5) 'this session outlived its purpose' -> orphan_scan.is_reapable() at the process boundary (this session, after the reap incident); (6) 'the box is too loaded to start work' -> guard.sh at the dispatch boundary; (7) 'which model for this workload' -> DAREBench's per-workload Pareto, computed not asserted (run 470). The pattern: name the boundary, put the check in code there, and let the check return a REASON so a refusal is auditable. Prose rules at any of these boundaries do not bind - this session proved it twice (the reap rule that lived only in QUEUE.md and was bypassed; the 'let agent-farm confirm' that only held because it was written as a gated sequence, not a hope).",
+   "tags": [
+    "synthesis",
+    "deterministic_spine",
+    "harness_owned",
+    "named_boundary",
+    "reliability",
+    "consolidation",
+    "auditable_refusal"
+   ],
+   "derived_from": [
+    "docs/loop_environment_model.md",
+    "docs/CONSOLIDATION_PLAN.md",
+    "orchestration/README.md"
+   ],
+   "evidence_links": [
+    "docs/CONSOLIDATION_PLAN.md"
+   ]
   }
  ],
  "edges": [
@@ -32865,6 +32895,55 @@
    "target": "concept_capability_is_a_model_harness_config_property",
    "type": "extends",
    "description": "Capability is a model-harness-config property. DAREBench adds deployment MODE (local / API / air-gapped) as a config axis that changes the ranking, so the property is model x harness x deployment-mode x workload."
+  },
+  {
+   "id": "edge_concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary__refines__concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+   "source": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "target": "concept_deterministic_spine_generative_edge_is_the_load_bearing_split",
+   "type": "refines",
+   "description": "The spine/edge split says deterministic code carries the load-bearing part. This names WHICH parts and WHERE: the load-bearing parts are exactly the reliability properties that must survive a wrong model judgment, and each lives at one identifiable boundary (dispatch, work-item, tool-call, action, process, resource)."
+  },
+  {
+   "id": "edge_concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary__extends__pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+   "source": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "target": "pattern_deterministic_task_ledger_is_the_orchestration_source_of_truth",
+   "type": "extends",
+   "description": "The task ledger is instance (1). The synthesis is that the ledger is not special - it is one of ~7 boundaries where the same code-owned-check-with-a-reason pattern applies."
+  },
+  {
+   "id": "edge_concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary__extends__concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "source": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "target": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "type": "extends",
+   "description": "Instance (4), and the closest existing statement of the general rule. This generalises it from 'action permission' to every must-hold property, and adds: the check returns a reason, so the refusal is auditable rather than opaque."
+  },
+  {
+   "id": "edge_concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary__instantiates__concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "source": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "target": "concept_tool_call_reliability_is_a_non_atomic_failure_problem_idempotency_keys_and_verify_before_retry_not_a_better_model",
+   "type": "instantiates",
+   "description": "Instance (3): the idempotency key is a code-owned check at the tool-call boundary. Folded run 469; here it is placed in the pattern."
+  },
+  {
+   "id": "edge_concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary__instantiates__concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "source": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "target": "concept_a_shipped_governance_plane_pairs_fenced_leases_with_deny_closed_per_agent_identity_the_capability_token_gap_closed_in_product",
+   "type": "instantiates",
+   "description": "Instance (2) + (4) shipped together: Olivares puts the lease check at the work-item boundary and the identity check at four action boundaries, all deny-closed in code."
+  },
+  {
+   "id": "edge_concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary__grounds__observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "source": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "target": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "type": "grounds",
+   "description": "Instance (5)'s evidence: the boundary that was MISSING. Nothing checked 'this session outlived its purpose' at the process boundary, so four classes of session leaked for hours. orphan_scan.is_reapable() is that missing check, added in code with a reason."
+  },
+  {
+   "id": "edge_concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary__supports__concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+   "source": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "target": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+   "type": "supports",
+   "description": "BCO says write the belief down. This says: for the beliefs that are *invariants* (must-hold properties), writing them down is not enough - move them into code at a boundary, because a written rule at a boundary was bypassed twice this session."
   }
  ]
 }

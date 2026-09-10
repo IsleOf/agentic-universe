@@ -1,0 +1,39 @@
+{
+  "run": 471,
+  "increment": "Run 471, CONSOLIDATION. Synthesised the harness-owns-reliability thread (runs 464-470 + the orchestration harness built this session) into one node: every reliability property that must hold regardless of model judgment lives in code at a named boundary, with the check returning a reason so refusal is auditable. Seven instances tabulated (task ledger/dispatch, fenced lease/work-item, idempotency key/tool-call, code-owned enforcement/action, orphan_scan.is_reapable/process, guard.sh/dispatch, DAREBench Pareto/selection). Corollary proven twice this session: a prose rule at a boundary does not bind (the QUEUE.md reap rule bypassed -> three editor agents killed; the Aether cutover held only because written as a gated sequence). +1 node (469) / +7 edges (1977): refines deterministic-spine/edge-split, extends task-ledger + code-owned-enforcement, instantiates from run-469 idempotency and run-468 Olivares nodes, grounds on idle-prompted observation (the missing boundary), supports BCO (for invariants, code not prose). validate VALID, 75 recency unchanged. selftest_all GREEN at 468, not re-run. Action mix 465-471 consolidate-heavy; 472 should be probe or fresh-axis fold.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 3,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 7
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-471.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 471 OK · VALID · graph +1n/+7e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +1~3-0 · novelty 1.00 · acts cons40% · audit cov!"
+}
