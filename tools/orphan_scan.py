@@ -85,6 +85,56 @@ SESSION_PATTERNS = (
     "browser_use", "skill_cli.daemon", "hermes", "ollama",
 )
 
+# Long-lived infrastructure that MATCHES a session pattern but is not a session.
+# 2026-09-10: three VS Code Codex extension servers (.vscode-server/extensions/
+# openai.chatgpt-*) were reaped by hand because they matched "codex" and were
+# flagged `stale` - which means nothing but "older than the age budget", which is
+# normal for an editor language server. They were the live working agents for
+# poster-studio and poly-bot. Both editors died.
+#
+# `stale` alone is NEVER grounds to reap. It is an age fact, not a fault.
+NEVER_REAP_MARKERS = (
+    ".vscode-server/extensions",   # editor language/extension servers
+    "vscode-server/bin",
+    "--type=extensionHost",
+    "language-server",
+    "lsp-server",
+)
+
+# Signals that indicate an actual fault, as opposed to mere age. A reaper MUST
+# require at least one of these; see is_reapable().
+FAULT_SIGNALS = (SPINNING, IDLE_PROMPTED_BUT_BUSY)
+
+
+def is_reapable(entry, min_age_s=7200.0):
+    """Would a reaper be justified in killing this? Conservative by construction.
+
+    Requires ALL of:
+      - at least one FAULT signal (spinning / idle-prompted-but-busy) - age alone
+        is never enough, that is the 2026-09-10 mistake
+      - STALE as well (a fault in a young process may just be startup)
+      - age > min_age_s
+      - not matching NEVER_REAP_MARKERS
+
+    Returns (bool, reason).
+    """
+    cmd = (entry.get("cmdline") or "") + " " + (entry.get("comm") or "")
+    for m in NEVER_REAP_MARKERS:
+        if m in cmd:
+            return False, "protected: matches %r" % m
+    sig = entry.get("signals", [])
+    faults = [s for s in sig if s in FAULT_SIGNALS]
+    if not faults:
+        return False, "no fault signal (stale alone is an age fact, not a fault)"
+    if STALE not in sig:
+        return False, "fault present but not stale - may be starting up"
+    age = entry.get("detail", {}).get("age_s")
+    if age is None:
+        return False, "age unknown - refusing to reap"
+    if age <= min_age_s:
+        return False, "age %.0fs <= %.0fs budget" % (age, min_age_s)
+    return True, "stale + %s + age %.0fs" % (",".join(faults), age)
+
 
 def classify(procs, now_s, max_age_s=None, spin_ctx_per_s=None, idle_cpu_pct=None,
              session_patterns=SESSION_PATTERNS):
@@ -355,6 +405,44 @@ def _selftest():
             for t in range(1, 60)]
     ck("spin verdict monotone as threshold rises",
        seen == sorted(seen, reverse=True))
+
+    # 6b. is_reapable - the 2026-09-10 regression. Three VS Code Codex extension
+    # servers were reaped by hand on `stale` alone. `stale` is an age fact, not a
+    # fault. Editors died. These checks must never both pass again.
+    editor = {"pid": 20, "ppid": 9, "comm": "codex",
+              "cmdline": "/home/dev/.vscode-server/extensions/openai.chatgpt-26.5901/server",
+              "start_s": now - 69000, "voluntary_ctxt": 10, "cpu_pct": 0.0}
+    e = classify([editor], now)[20]
+    ck("editor server is stale", STALE in e["signals"])
+    ok_r, why = is_reapable(dict(e, cmdline=editor["cmdline"], comm=editor["comm"]))
+    ck("...but NOT reapable (protected marker)", ok_r is False and "protected" in why)
+
+    plain_stale = {"pid": 21, "ppid": 9, "comm": "agy-real", "cmdline": "agy-real --serve",
+                   "start_s": now - 69000, "voluntary_ctxt": 10, "cpu_pct": 0.0}
+    e2 = classify([plain_stale], now)[21]
+    ok_r2, why2 = is_reapable(dict(e2, cmdline=plain_stale["cmdline"], comm="agy-real"))
+    ck("stale-only is never reapable", ok_r2 is False and "no fault signal" in why2)
+
+    stuck = {"pid": 22, "ppid": 9, "comm": "agy-real",
+             "cmdline": "agy-real --prompt-interactive Reply READY only. do nothing",
+             "start_s": now - 20000, "voluntary_ctxt": 700000, "cpu_pct": 213.9}
+    e3 = classify([stuck], now)[22]
+    ok_r3, why3 = is_reapable(dict(e3, cmdline=stuck["cmdline"], comm="agy-real"))
+    ck("stale + fault + old IS reapable", ok_r3 is True)
+
+    young = dict(stuck, pid=23, start_s=now - 60)
+    e4 = classify([young], now)[23]
+    ok_r4, _ = is_reapable(dict(e4, cmdline=young["cmdline"], comm="agy-real"))
+    ck("a young process with a fault is not reapable", ok_r4 is False)
+
+    # age-budget sweep: reapability must be monotone in age, never flip back
+    seen_r = []
+    for age in range(1000, 40001, 500):
+        p = dict(stuck, pid=24, start_s=now - age,
+                 voluntary_ctxt=int(35.0 * age))
+        ee = classify([p], now)[24]
+        seen_r.append(is_reapable(dict(ee, cmdline=p["cmdline"], comm="agy-real"))[0])
+    ck("reapability monotone in age", seen_r == sorted(seen_r))
 
     # 7. report() hides clean processes but shows flagged ones
     mixed = [{"pid": 10, "ppid": 9, "comm": "clean", "cmdline": S,
