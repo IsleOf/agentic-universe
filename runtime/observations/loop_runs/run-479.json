@@ -1,0 +1,46 @@
+{
+  "run": 479,
+  "increment": "Run 479, fold, fresh axis (empirical reliability measurement). Folded arXiv:2609.01660 (How Fast Do Agents Rot?, Mittal, submitted 2026-08-31): 9 models 1.2B-671B + 3 proprietary, 4 task families, 5 horizons, 3 context regimes, 10664 trajectories. Task success follows a GEOMETRIC law on a single per-step reliability parameter that rises with scale but SATURATES BELOW 1 even for the strongest models -> eventual collapse guaranteed at long enough horizon. Every model falls from near-perfect to near-zero within 16 STEPS on agentic tool-use. Production (100-step) success = 0.24 vs 0.42 at GAIA length. Counterintuitive: degradation is step-accumulation not context-length, and BOUNDING the context window STEEPENS decay (-0.69 vs -0.44 slope), contradicting lost-in-the-middle theories - the compaction EVENT itself, not the resulting shorter context, seems to accelerate collapse. +1 node (477) / +4 edges (2012): refines compaction_cliff (quantitative form); supports reliability-is-separate-axis (functional form: geometric, saturating below 1); extends Horizon Gap survey (the curve its signals fail to track); GROUNDS this session own bounded-worker design (WORKER_LOOP.md one increment + 6h exit keeps step count far below the 16-step collapse point). validate VALID, 76 recency unchanged. selftest_all GREEN at 478. Next: bounding-steepens-decay directly challenges any future more-aggressive-compaction fix for this projects own long sessions. Action mix 471-479 build/fold-heavy, one probe; a 3-way consolidation (boundary-check family + owner-harm limit case + this decay curve) is due.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.01660",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01660"
+  ],
+  "trace_file": "runtime\\traces\\loop-479.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 479 OK · VALID · graph +1n/+4e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.79 · files +1~3-0 · novelty 1.00 · acts fold30% · audit ok"
+}

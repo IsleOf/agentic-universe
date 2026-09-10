@@ -13973,6 +13973,34 @@
    "evidence_links": [
     "tools/commit_guard.py"
    ]
+  },
+  {
+   "id": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "label": "Task success decays geometrically per-step, and bounding the context window steepens the decay, not eases it",
+   "type": "concept",
+   "status": "to_test",
+   "verification_state": "abstract_and_second_fetch",
+   "approach_family": "reliability",
+   "branch_key": "long_horizon_decay",
+   "confidence": 0.65,
+   "source_date": "2026-08",
+   "source_generation": "Claude 4 / 2026 agent-harness era (Shubhra Mittal, arXiv:2609.01660, submitted 2026-08-31; 9 models 1.2B-671B + 3 proprietary, 4 task families, 5 horizons, 3 context regimes, 10,664 trajectories)",
+   "description": "How Fast Do Agents Rot? An Empirical Study of Long-Horizon Degradation in LLM Agents for Production Decision-Making (arXiv:2609.01660, 2026-08-31). Task success follows a GEOMETRIC law governed by a single per-step reliability parameter: it rises with model scale but saturates well below 1 even for the strongest models tested, guaranteeing eventual collapse at a sufficiently long horizon. On agentic tool-use tasks every model tested fell from near-perfect to near-zero success within SIXTEEN STEPS. At production-length (100-step) horizons, success sits at 0.24 vs 0.42 at GAIA-benchmark length - the benchmark-to-production gap is the horizon itself. The counterintuitive headline: degradation comes from STEP ACCUMULATION, not context length, and bounding the context window STEEPENS the decay rather than easing it (slope -0.69 bounded vs -0.44 unbounded) - directly contradicting lost-in-the-middle-style theories that predict compaction helps. Something about the compaction/eviction act itself, not the resulting shorter context, accelerates collapse.",
+   "tags": [
+    "reliability",
+    "long_horizon",
+    "geometric_decay",
+    "compaction",
+    "empirical",
+    "production_gap",
+    "abstract_read"
+   ],
+   "derived_from": [
+    "https://arxiv.org/abs/2609.01660"
+   ],
+   "evidence_links": [
+    "https://arxiv.org/abs/2609.01660"
+   ]
   }
  ],
  "edges": [
@@ -33353,6 +33381,34 @@
    "target": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
    "type": "instantiates",
    "description": "The concrete, wired fix for the incident that grounded the fold: a diagnostic cat printed a token into context; this is the check that would refuse the commit if that token had made it into a staged diff."
+  },
+  {
+   "id": "edge_concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it__refines__concept_compaction_cliff",
+   "source": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "target": "concept_compaction_cliff",
+   "type": "refines",
+   "description": "Compaction preferentially destroys the rules - qualitative. This paper adds a quantitative twist: bounding/compacting the context doesn't just risk dropping specific rules, it measurably STEEPENS the whole decay curve (-0.69 vs -0.44 slope). The mechanism may be the compaction event itself (a lossy rewrite/summary step), not the resulting shorter context."
+  },
+  {
+   "id": "edge_concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it__supports__concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+   "source": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "target": "concept_reliability_is_a_separate_axis_from_capability_and_memory_scaffolds_degrade_long_horizon_performance",
+   "type": "supports",
+   "description": "Gives the reliability axis a functional form: geometric decay with a per-step parameter that saturates below 1 for every model tested, so 'more capable model' narrows the gap to collapse but never removes it."
+  },
+  {
+   "id": "edge_concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it__extends__concept_horizon_gap_outcome_signals_decay",
+   "source": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "target": "concept_horizon_gap_outcome_signals_decay",
+   "type": "extends",
+   "description": "The Horizon Gap survey says outcome-only signals grow uninformative over a long horizon. This measures the underlying success curve those signals are failing to track: 0.42 at benchmark length vs 0.24 at 100 steps."
+  },
+  {
+   "id": "edge_concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it__grounds__concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "source": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "target": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "type": "grounds",
+   "description": "This session's own bounded-worker design (WORKER_LOOP.md: one increment, exit after 6h, restart clean) is a structural mitigation for exactly this curve - it keeps every worker's step count far below the 16-step collapse point rather than trying to out-engineer the decay within one long session."
   }
  ]
 }
