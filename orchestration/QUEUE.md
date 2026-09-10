@@ -10,60 +10,56 @@ move the block to the bottom.
 
 ---
 
-## TASK bx-07 — evaluate Olivares AI (unblocks bx-01)
+## TASK bx-09 — spike: Olivares AI as the lease + identity layer
 blocked:
-kind: research
+kind: build
+cwd: /home/dev/poster-studio
 
-agent-farm is silent, so its Q-AF-2 is now a conductor task. Answer, in the
-worker's outbox line and a short note at `/home/dev/.agentic/notes/olivares.md`:
+bx-07 (done, see `/home/dev/.agentic/notes/olivares.md`) concluded ADOPT-PARTIAL.
+Olivares (github.com/olivaresai/olivares, AGPL core) provides fenced leases
+(atomic, takeover/revoke) AND a deny-closed per-agent identity + Claude Code
+hook enforcement layer — the two hardest things bx-01/bx-02 were going to build.
+WSL2-supported.
 
-Olivares AI v26.8.0, released 2026-09-01, self-hosted single Go binary, AGPL —
-https://www.reddit.com/r/ClaudeCode/comments/1w4cr50/ and its repo/site.
+Spike, do NOT roll out:
+1. Install Olivares in WSL2 per its Linux docs (home-server mode: one binary,
+   SQLite, loopback-bound). Report the install footprint (binary size, RAM,
+   ports it binds).
+2. Wire ONE agent — poster-studio — through it. Create a work item, take a
+   fenced lease, launch a session against it, verify a second claim is refused.
+3. Verify the Claude Code PreToolUse/PostToolUse hook enforcement actually
+   blocks an unauthorized action (deny-closed).
+4. **Critical check:** does Olivares' inline `/v1/messages` inference proxy
+   collide with Aether's `/v1/chat/completions` on port 8317 or on routing?
+   If yes, that is a blocker — report it and STOP.
+5. Does it interfere with `--dangerously-skip-permissions` agy sessions?
 
-(a) Is its "durable work plane" real atomic single-claim task leasing, or only
-    session persistence?
-(b) Does its signed audit ledger *authenticate* agent identity (real keys), or is
-    it origin-*labelling* like everything else surveyed (amux, pheromone)?
-(c) Does AGPL constrain anything in this estate (the graph is a research artifact,
-    not distributed software — but check)?
-
-VERDICT line: adopt / adopt-partial / build-our-own, three sentences.
-If "adopt" or "adopt-partial", set bx-01 `blocked: SKIP` and explain. Do NOT
-install anything. Research + web only.
+Report all five to `outbox/conductor.md`. Do NOT route Hermes through it. Do NOT
+wire a second agent. Do NOT touch agent-farm's quota layer — Olivares does not
+do multi-account rotation, agent-farm stays underneath.
 
 ---
 
 ## TASK bx-01 — SQLite work ledger with atomic lease
-blocked: bx-07
+blocked: SKIP
 kind: build
 
-Port the `claim` / `complete` / expire semantics from
-`C:\Agents\agentic-universe\repo\tools\orchestration_ledger.py` to a SQLite table
-at `/home/dev/.agentic/ledger.db`:
-`work_items(id, payload, account_hint, state, claimed_by, claimed_at,
-lease_expires_at, heartbeat_at, result)`.
-
-- Claiming = a single `UPDATE ... WHERE state='queued'` compare-and-swap; the
-  loser sees 0 rows affected. NOT read-then-write.
-- Lease TTL. If `heartbeat_at` goes stale past `lease_expires_at`, the row
-  returns to `queued`.
-- NO tight polling loop — Anthropic 2026-08-16 measured 2.4M requests for 117
-  jobs from ~30/sec pollers. Use backoff-with-jitter or an inotify watch.
-- New file `tools/work_ledger.py`. REPORT/return only, no kill path.
-- Selftest: CAS single-winner under concurrent claim; lease-expiry re-queue;
-  param sweep on the TTL. Add to `selftest_all.py` JOBS.
-
-Deliver: the file, selftest GREEN, a one-line note in outbox saying where the
-db lives and the CLI verbs.
+SUPERSEDED by bx-09. bx-07 found Olivares AI provides fenced leases (stronger
+than the compare-and-swap this specified) plus an identity layer. Do not build
+`tools/work_ledger.py` unless bx-09 finds Olivares unusable here (e.g. its
+inference proxy collides with Aether). If bx-09 fails, un-skip this.
 
 ---
 
-## TASK bx-02 — tier-1 cron scripts
-blocked: bx-01
+## TASK bx-02 — tier-1 cron scripts (reaper + digest only)
+blocked: bx-09
 kind: build
 
 Create `/home/dev/.agentic/reaper.sh` and `/home/dev/.agentic/digest.sh`.
 (`guard.sh` already exists — read it for house style.)
+Wanted regardless of the lease outcome — a reaper for stuck sessions and a
+one-screen STATUS.md. Blocked on bx-09 only so the spike's findings can inform
+whether the reaper should also drive Olivares session-stop.
 
 - `reaper.sh`: **must call `orphan_scan.is_reapable()` and act on nothing else.**
   Do NOT re-implement the predicate in shell — on 2026-09-10 the rule existed
