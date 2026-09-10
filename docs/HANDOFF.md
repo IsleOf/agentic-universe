@@ -1,23 +1,45 @@
-# Handoff — Agentic Universe, as of run 461 (2026-11-20)
+# Handoff — Agentic Universe, as of run 468 (2026-09-10)
 
-Rewrites the run-294 handoff wholesale. This is the single doc a fresh session should read first,
-then `docs/graph_state_2026-09.md` (the graph map) and `docs/loop_environment_model.md` (the
-loop's model of its own environment). Written because the account is hitting its weekly usage
-limit and the loop is paused.
+This is the single doc a fresh session should read first, then `docs/graph_state_2026-09.md`
+(the graph map), `docs/loop_environment_model.md` (the loop's model of its own environment),
+and `docs/CONSOLIDATION_PLAN.md` + `orchestration/README.md` (the real-agent-estate work, new
+this session — see §9).
 
 ---
+
+## 0. What changed since run 461 (read this first)
+
+Runs 462–468 happened during a long interactive session that pivoted, at the owner's direction,
+into **consolidating the owner's actual fleet of agents** (Hermes, poly-bot, poster-studio,
+agent-farm, the WSL "agy" fleet) under one roof — while still folding literature.
+
+- **Graph:** 466 nodes / 1958 edges (was 459/1924). Runs 462–468 folded: Anthropic's
+  *Patterns and problems in emerging multi-agent systems* (466), recency-field triage (467),
+  Olivares AI as shipped capability-token binding (468), plus live observations from the estate.
+- **New: recency is now enforced.** `knowledge_graph.py` has `source_date` / `source_generation`
+  node fields, an `EDGE_TYPES` frozenset (closes the unvalidated-edge-type hole), a `supersedes`
+  edge type, and a `recency_check` that warns when an older-sourced node `refines`/`challenges` a
+  newer one (75 such edges exist; 69 are legitimately foundational, 3 stale, 3 unclear — triaged
+  run 467). `check_patch()` runs the same check so the loop can't introduce a stale-dominant edge.
+- **New: `tools/orphan_scan.py`** — finds agent sessions that outlived their parent/prompt/task.
+  REPORT-only, no kill path. `is_reapable()` requires a fault signal AND stale AND age>2h AND no
+  protected marker; `concerning()` is the softer gate for the conductor. Built after a live
+  incident (see §9).
+- **New: `orchestration/`** — a guarded conductor + worker-loop + queue for autonomous build-out
+  (see §9). This is separate from the research loop but shares `orchestration_ledger.py`.
+- **selftest_all GREEN** as of run 468 (63 jobs incl. `orphan_scan`, `orchestration_ledger`).
 
 ## 1. What this is
 
 A **versioned knowledge graph** on emergent multi-agent LLM behaviour and self-improving agent
 harnesses, plus the **tested stdlib harness** that maintains and reasons over it. One graph:
-`knowledge/graph/agentic_universe_graph.json` — **459 nodes / 1924 edges**, validated by
-`python tools/knowledge_graph.py validate` → VALID, no orphans, no dangling edges.
+`knowledge/graph/agentic_universe_graph.json` — **466 nodes / 1958 edges**, validated by
+`python tools/knowledge_graph.py validate` → VALID, no orphans, no dangling edges (75 non-fatal
+recency warnings are expected — see §0).
 
 - **Repo:** local `C:\Agents\agentic-universe\repo`, GitHub `IsleOf/agentic-universe`.
 - **Working branch:** `proposals/2026-09-01-emergent-behaviour-cluster`. **Never commit to
-  `main`.** HEAD at handoff: `2979abc` (run 461). A run 462 Sonnet subagent was dispatched just
-  before the pause and may add one more commit.
+  `main`.** HEAD at handoff: `d8a79d7` (run 468 + orchestration).
 - **Posture:** emergence-first (`docs/emergence_first_posture.md`). Ideas enter the graph on
   interest, not evidence; unverified material stays low-confidence, status `to_test`. Record
   tensions as `challenges` edges, don't resolve them. Verify every citation three ways (exists /
@@ -146,15 +168,46 @@ epistemic independence, aggregate diversity).
 
 1. `cd C:\Agents\agentic-universe\repo && git checkout proposals/2026-09-01-emergent-behaviour-cluster && git pull --ff-only`
 2. Read this file, `docs/graph_state_2026-09.md`, `docs/loop_environment_model.md`,
-   `docs/habitat_charter.md`.
-3. `python tools/knowledge_graph.py validate` and `python tools/selftest_all.py` — both must be
-   GREEN before any increment.
-4. Read the "Next" section of `docs/auto_sweep_2026-11-20-1800.md` (and run 462's sweep if it
-   landed).
-5. To restart the cron: `mcp__scheduled-tasks__update_scheduled_task` with `enabled: true` —
-   it will spawn a Sonnet subagent per run.
-6. To run an increment interactively: follow §3, or spawn a Sonnet subagent with the SKILL.md
-   prompt. Do the increment work on Sonnet, not Opus.
+   `docs/habitat_charter.md`, and (new) `docs/CONSOLIDATION_PLAN.md` + `orchestration/README.md`.
+3. `python tools/knowledge_graph.py validate` (VALID + ~75 recency warnings is normal) and
+   `python tools/selftest_all.py` (GREEN as of run 468) before any code increment.
+4. Read the "Next" section of the newest `docs/auto_sweep_*.md` (run 468 = `2026-11-22-1200`).
+5. **The research loop and the orchestration harness are two things now.** The research loop is
+   §3 (fold/probe/build increments into the graph). The orchestration harness (§9) is
+   `orchestration/conductor.py` on a 12h cron, working `orchestration/QUEUE.md`. They share
+   `tools/orchestration_ledger.py`. The conductor's `bx-05` task IS a research increment — so
+   once the estate build-out (`bx-09`, `bx-02`, `bx-03`, `bx-08`, `bx-10`) is done, the conductor
+   runs one research increment per tick on its own.
+6. To run an increment interactively: follow §3. Do the work on Sonnet, not Opus.
+
+## 9. The orchestration harness + the real agent estate (new, runs 462–468)
+
+`docs/CONSOLIDATION_PLAN.md` is the full account. Short version:
+
+- **The owner runs ~5 disconnected agent systems** on one Win11+WSL box: Hermes (desktop,
+  routes through Aether), poly-bot + poster-studio (WSL, VS Code Codex agents), agent-farm (the
+  WSL "agy" fleet controller), and this repo. They contended for the same 4 Google accounts and
+  had no coordination substrate.
+- **`/home/dev/.agentic/board/`** — a zero-install file board (README / BOARD.md / inbox/ /
+  outbox/ / WORKER_LOOP.md / AGENT_BOOTSTRAP.md). Each agent runs the WORKER_LOOP prompt: read
+  board + own inbox + own `.agent/HANDOFF.md`, do ONE queued unit, validate, report to outbox,
+  update handoff, sleep, loop; exit after 6h so a restart clears context.
+- **`orchestration/` (in this repo)** — versioned copy of the board + `guard.sh` (blocks
+  dispatch when WSL RAM <1.5GB or a session has been faulting >30min) + `conductor.py` (12h
+  cron, picks the first unblocked `QUEUE.md` task, fires ONE `claude -p` worker) +
+  `WORKER_CONTRACT.md`. Conductor cron is installed in WSL, self-skips until guard passes.
+- **Decisions made (on the board):** agent-farm stays the agy account/quota authority (that
+  capability is absent market-wide); Aether stays as Hermes' REST→CLI translation layer but
+  loses its duplicate token store; Olivares AI (fenced leases + deny-closed identity) is being
+  spiked (`bx-09`) as the coordination layer instead of hand-building one.
+- **Two incidents this session, both recorded in `loop_environment_model.md` §3:**
+  (1) killing a subagent leaves its file writes, and the next `git add -A` absorbs them
+  unreviewed; (2) a hand-written reap script acted on `stale` alone and killed three VS Code
+  Codex extension servers — the live agents for two projects. `orphan_scan.is_reapable()` now
+  makes that impossible in code.
+- **Blocker at handoff:** the WSL `claude` CLI OAuth is expired, so `conductor.py` workers fail
+  to authenticate. Owner must re-auth (`claude` → `/login` in WSL). Until then, research
+  increments are done directly in-session; estate tasks needing an install wait.
 
 ## 8. Security constraints (persist across all sessions)
 
