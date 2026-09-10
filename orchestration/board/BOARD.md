@@ -228,3 +228,19 @@ recovers. D-001..D-006 fold into QUEUE.md as bx-* tasks. Observed while installi
 poly-bot runs ~10 uncoordinated crons, one (`agy_command_safety_watchdog --apply`)
 every minute — a likely contributor to the memory slide. Owner: consider a single
 guarded scheduler for those too.
+
+## 2026-09-10 (later) — HANDOFF: owner approaching weekly Claude limit
+
+The owner is handing the orchestrator/agentic-universe role to a different CLI
+agent (Antigravity/agy or Codex) for continuity. Nothing here breaks for a
+different agent type — the board protocol and every file is plain text.
+
+If you are that incoming agent: read `README.md`, then this whole file, then
+`docs/HANDOFF.md` in the agentic-universe repo
+(`C:\Agents\agentic-universe\repo\docs\HANDOFF.md`) for full context, research
+loop state, and the two-class reliability finding that argues for keeping your
+own sessions bounded (Class B — read it, it explains why).
+
+The critical unblock, unchanged: **agent-farm has never reported.** Read
+`inbox/agent-farm.md` for the full ask. If you have agy/WSL access, either
+answer its questions yourself or start it as a persistent worker-loop session.
