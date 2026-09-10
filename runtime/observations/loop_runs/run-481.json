@@ -1,0 +1,46 @@
+{
+  "run": 481,
+  "increment": "Run 481, VERIFY (citation upgrade), first verify-class run in 12+. Full-text read of run 479 fold (arXiv:2609.01660) after WebFetch could not parse the binary PDF and no HTML mirror existed. Built tools/pdf-extract/extract.py (pdfplumber/pypdf wrapper) in C:/Agents/skills. Identity-checked first: owner flagged possible hallucination when the HTML mirror 404d; verified independently via arXiv export API (different code path) - paper is real, title/author/timestamp match. Upgraded the run-479 node abstract_read -> full_text_verified_run_481, confidence 0.6->0.75, real numbers: geometric decay wins AIC in 28/36 cells; Table 2 shows every model collapsing by H=16 (Qwen2.5-72B 1.00/1.00/0.87/0.13); hazard ACCELERATES within trajectory (0.58->0.44 first-to-last third, errors absorbing); slopes confirmed natural -0.44 vs compressed -0.69 (p=3e-6) vs padded -0.40 (p=0.51 indistinguishable); mechanism = 21% format/tool-call drift rising with horizon; H=16 is a stated LOWER BOUND not ceiling (API budget ran out); authors own recommendation is step-level verification wherever cheap - matches this project boundary-check family independently. +3 edges (2020): supports kill_reconcile, grounds idle-prompted observation (format drift as a mechanism for the stuck bootstraps), informs self-correction-is-format-repair. validate VALID, 76 recency unchanged. selftest_all GREEN at 478, not re-run (graph-only). Next: pdf-extract available for future citation upgrades; keep verify class non-zero.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 0,
+    "edges": 3
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2609.01660",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2609.01660"
+  ],
+  "trace_file": "runtime\\traces\\loop-481.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 481 OK · VALID · graph +0n/+3e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.79 · files +1~3-0 · novelty 1.00 · acts fold30% · audit cov!"
+}

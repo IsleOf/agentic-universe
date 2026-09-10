@@ -13979,13 +13979,13 @@
    "label": "Task success decays geometrically per-step, and bounding the context window steepens the decay, not eases it",
    "type": "concept",
    "status": "to_test",
-   "verification_state": "abstract_and_second_fetch",
+   "verification_state": "full_text_verified_run_481",
    "approach_family": "reliability",
    "branch_key": "long_horizon_decay",
-   "confidence": 0.65,
+   "confidence": 0.75,
    "source_date": "2026-08",
-   "source_generation": "Claude 4 / 2026 agent-harness era (Shubhra Mittal, arXiv:2609.01660, submitted 2026-08-31; 9 models 1.2B-671B + 3 proprietary, 4 task families, 5 horizons, 3 context regimes, 10,664 trajectories)",
-   "description": "How Fast Do Agents Rot? An Empirical Study of Long-Horizon Degradation in LLM Agents for Production Decision-Making (arXiv:2609.01660, 2026-08-31). Task success follows a GEOMETRIC law governed by a single per-step reliability parameter: it rises with model scale but saturates well below 1 even for the strongest models tested, guaranteeing eventual collapse at a sufficiently long horizon. On agentic tool-use tasks every model tested fell from near-perfect to near-zero success within SIXTEEN STEPS. At production-length (100-step) horizons, success sits at 0.24 vs 0.42 at GAIA-benchmark length - the benchmark-to-production gap is the horizon itself. The counterintuitive headline: degradation comes from STEP ACCUMULATION, not context length, and bounding the context window STEEPENS the decay rather than easing it (slope -0.69 bounded vs -0.44 unbounded) - directly contradicting lost-in-the-middle-style theories that predict compaction helps. Something about the compaction/eviction act itself, not the resulting shorter context, accelerates collapse.",
+   "source_generation": "Claude 4 / 2026 agent-harness era (Shubhra Mittal, Independent Researcher / Principal SWE Microsoft AI; arXiv:2609.01660, published 2026-08-31T19:11:47Z, confirmed via arXiv export API; 9 models 1.2B-671B open + 3 proprietary, 4 task families, 5 horizons, 3 context regimes, 10,664 trajectories, code+data+seeds released)",
+   "description": "Verified full text, run 481 (WebFetch could not parse the binary PDF; extracted via tools/pdf-extract/extract.py using pdfplumber). Geometric decay wins by AIC in 28 of 36 model-task cells. Table 2 (toolqa, natural regime) shows every one of 9 models collapsing by H=16: e.g. Qwen2.5-72B goes 1.00/1.00/0.87/0.13 at H=2/4/8/16 - perfect at the horizons a typical benchmark samples, ~1-in-8 at production-relevant length. Per-step reliability rises with scale (Pearson r=+0.36 vs log10(params)) but no model reaches 1 on any non-trivial task. The hazard ACCELERATES within a trajectory: mean per-step accuracy falls from 0.58 (first third) to 0.44 (last third) - the first error lands ~1/3 through, and models rarely recover after (errors are absorbing states). Context-regime slopes, confirmed: natural -0.44, compressed -0.69 (p=3e-6 vs natural, significant), padded -0.40 (p=0.51, statistically indistinguishable from natural) - bounding context is the ONLY intervention that measurably makes things worse; collapsing to one prompt does not. Mechanism: format/tool-call drift (an output that can't be parsed as a valid action) affects 21% of trajectories and RISES with horizon - an interface-level failure compounding alongside reasoning failures. Projected benchmark gap (r=0.61 mean per-step): 0.42 at GAIA-length (8 steps) down to 0.24 at 100-step production length. LIMITATION the abstract omitted: the H=16 agentic collapse is a LOWER BOUND, not a ceiling - the API budget ran out before the longest-horizon condition completed, so the true collapse point may be earlier still. The authors' own practitioner recommendation: 'step-level verification, wherever an oracle or a cheap consistency check can be inserted, is likely to catch failures far earlier and far more cheaply than waiting for end-to-end task failure' - this is the boundary-check family (471/473/474/477/478) recommended independently by the paper's own authors, not just inferred from it.",
    "tags": [
     "reliability",
     "long_horizon",
@@ -33473,6 +33473,27 @@
    "target": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
    "type": "informs",
    "description": "kill_reconcile is Class A (a specific wrong state at the run-open boundary). WORKER_LOOP.md's 6h bounded-exit design, wired into the SAME board this session built, is Class B's mitigation running alongside it - two different failure classes, two different fixes, one operating loop."
+  },
+  {
+   "id": "edge_concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it__supports__artifact_kill_reconcile",
+   "source": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "target": "artifact_kill_reconcile",
+   "type": "supports",
+   "description": "The paper's own closing recommendation - step-level verification wherever a cheap check can be inserted, because end-to-end failure is caught too late - is exactly the boundary-check family's design principle, stated independently by the paper's authors rather than only inferred by this project."
+  },
+  {
+   "id": "edge_concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it__grounds__observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "source": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "target": "observation_an_idle_prompted_agent_session_is_not_an_idle_process_measured_live",
+   "type": "grounds",
+   "description": "The paper's format/tool-call-drift mechanism (21% of trajectories, rising with horizon - an output that cannot be parsed as a valid action) is a plausible mechanism for exactly this session's own stuck-bootstrap observation: an agy-real session that received READY and then never produced a parseable next action, spinning instead of erroring."
+  },
+  {
+   "id": "edge_concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it__informs__concept_self_correction_is_mostly_format_repair_not_reasoning",
+   "source": "concept_task_success_decays_geometrically_per_step_and_bounding_the_context_window_steepens_the_decay_not_eases_it",
+   "target": "concept_self_correction_is_mostly_format_repair_not_reasoning",
+   "type": "informs",
+   "description": "If 21% of long-horizon trajectory failures are format/tool-call-drift rather than reasoning failures, and self-correction is mostly format repair rather than reasoning repair, the two findings describe the same failure surface from opposite ends: a format-level intervention plausibly catches a real fraction of what looks like reasoning collapse."
   }
  ]
 }

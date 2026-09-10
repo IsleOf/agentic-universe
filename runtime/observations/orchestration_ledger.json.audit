@@ -36,3 +36,5 @@
 {"ts": 1789030180.603, "event": "complete 479 @ pending"}
 {"ts": 1789030269.985, "event": "claim 480 by conductor"}
 {"ts": 1789030270.455, "event": "complete 480 @ pending"}
+{"ts": 1789035080.942, "event": "claim 481 by conductor"}
+{"ts": 1789035081.494, "event": "complete 481 @ pending"}
