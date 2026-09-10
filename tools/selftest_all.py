@@ -75,6 +75,7 @@ JOBS = [
     ("orphan_scan.py", ["selftest"]),
     ("kill_reconcile.py", ["selftest"]),
     ("secret_scan.py", ["selftest"]),
+    ("commit_guard.py", ["selftest"]),
     ("supervisor.py", ["selftest"]),
     ("project_graph_scaffold.py", ["selftest"]),
     ("epistemic_constitution.py", ["selftest"]),

@@ -13947,6 +13947,32 @@
    "evidence_links": [
     "tools/secret_scan.py"
    ]
+  },
+  {
+   "id": "artifact_commit_guard",
+   "label": "tools/commit_guard.py - refuses a commit whose staged diff or message contains credential-shaped content",
+   "type": "artifact",
+   "status": "active",
+   "verification_state": "selftest_green_10_10_self_applied",
+   "approach_family": "agent_safety",
+   "branch_key": "owner_harm",
+   "confidence": 0.65,
+   "source_date": "2026-09",
+   "source_generation": "run 478 - wires secret_scan (477) into the commit boundary, closing its own Next section the same day",
+   "description": "staged_diff() reads git diff --cached (None, not empty, if git is unreadable - an instrument that cannot measure must say so). check() scans the diff plus the commit message with secret_scan.scan() and returns (ok, reason, findings); False blocks. Deliberately REPORT-only unlike secret_scan.redact() - a git diff is structured (hunks, line numbers) and rewriting it post-hoc risks a diff that no longer applies, so the right fix is to correct the SOURCE FILE and re-stage, not patch the diff text. 10/10 selftest incl. secret-in-diff, secret-in-message-only, multi-pattern counting, and git-unreadable-blocks-not-passes. Added to selftest_all JOBS. Self-applied to its own introducing commit as a live test.",
+   "tags": [
+    "owner_harm",
+    "commit_guard",
+    "content_boundary",
+    "report_not_block",
+    "named_boundary"
+   ],
+   "derived_from": [
+    "docs/auto_sweep_2026-11-24-1800.md"
+   ],
+   "evidence_links": [
+    "tools/commit_guard.py"
+   ]
   }
  ],
  "edges": [
@@ -33306,6 +33332,27 @@
    "target": "artifact_kill_reconcile",
    "type": "extends",
    "description": "Same file, same session two runs apart: kill_reconcile guards the commit boundary against leftover PROCESS effects; secret_scan guards it against leftover CONTENT effects. Natural next integration: wire secret_scan into the same commit path kill_reconcile already gates."
+  },
+  {
+   "id": "edge_artifact_commit_guard__implements__artifact_secret_scan",
+   "source": "artifact_commit_guard",
+   "target": "artifact_secret_scan",
+   "type": "implements",
+   "description": "Wires secret_scan into an actual boundary - the commit - closing run 477 own Next section the same day it was written."
+  },
+  {
+   "id": "edge_artifact_commit_guard__extends__concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "source": "artifact_commit_guard",
+   "target": "concept_the_kill_reconcile_check_now_gates_run_open_the_way_the_ledger_gates_dispatch",
+   "type": "extends",
+   "description": "Same two-step pattern as kill_reconcile (473 build -> 474 wire), one run compressed to one: build the predicate and give it a real boundary to guard in the same commit."
+  },
+  {
+   "id": "edge_artifact_commit_guard__instantiates__concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "source": "artifact_commit_guard",
+   "target": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "type": "instantiates",
+   "description": "The concrete, wired fix for the incident that grounded the fold: a diagnostic cat printed a token into context; this is the check that would refuse the commit if that token had made it into a staged diff."
   }
  ]
 }
