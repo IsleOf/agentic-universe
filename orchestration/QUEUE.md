@@ -80,6 +80,34 @@ Report node/edge counts and edge-ratio delta to `outbox/conductor.md`.
 
 ---
 
+## TASK bx-06 — poly-bot: one guarded scheduler for the data crons
+blocked:
+kind: build
+cwd: /home/dev/poly-bot
+
+Per poly-bot's own Q-PB-1 answer. Fold these into ONE guarded scheduler on
+5–20 min tiers (guard = health check before each tier fires, same shape as
+`/home/dev/.agentic/guard.sh`):
+  - VPS pull-research (daily 3am — keep as its own tier)
+  - candidate-queue sync (10 min)
+  - ev_hunter local merge (5 min)
+  - tailscale proxy healthcheck (5 min)
+  - drive offload (20 min)
+  - wsl_gdrive_migration (15 min)
+
+KEEP SEPARATE (do not fold in):
+  - `agy_command_safety_watchdog.py --apply` (minute-level compensating control)
+    BUT first: profile its actual CPU + RSS over 10 runs and report the number.
+    1,440 executions/day on a memory-starved box is currently unjustified.
+
+Do NOT touch `ev_hunter_checklist_watchdog`'s direct agy dispatch yet — it
+retires only after agent-farm's lease (bx-01) exists.
+
+Commit to a `proposals/` or `mapping/` branch. Report the before/after cron
+count and the watchdog profile numbers to outbox.
+
+---
+
 ## TASK bx-05 — research increment (filler, re-runnable)
 blocked:
 kind: research

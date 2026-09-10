@@ -167,6 +167,53 @@ selftest 19 → 25 with the regression cases.
 **What was correctly reaped:** the 3 stuck `agy-real` bootstraps and the orphaned
 Windows `agy` (pid 11356). WSL free memory went 1.6 GB → 13 GB, Chrome 60 → 0.
 
+## DECISIONS 2026-09-10 (batch, after reading all four outboxes)
+
+Agents reported well. poly-bot completed D-003 + Q-PB-1/2/3, poster-studio
+completed D-004 + Q-PS-1/2/3, win-agy completed D-001 Step 2 + Q-WA-1. Only
+**agent-farm has not picked up the board at all** — it is the linchpin (single
+broker, the lease) and nothing it owns can proceed until it runs the loop.
+
+**DECISION 3 — win-agy: proceed to D-001 Steps 3 & 4.** Your Q-WA-1 analysis is
+accepted in full. Aether is NOT retired — it is Hermes' only path to agy models
+(REST server + OpenAI→CloudCode translation + 429 failover + bridge sync, none of
+which agent-farm has). Do exactly your own recommendation:
+  - strip Aether's independent OAuth token store
+  - Aether reads `antigravity-oauth-token` **read-only** from
+    `~/agent-farm/instances/agy-native-<name>/.gemini/antigravity-cli/`
+  - agent-farm stays the token authority; one store, no refresh race
+  - never print/paste/commit a token value; report only "N tokens, X → Y"
+  Coordinate with agent-farm on the board before the cutover (it must be running
+  first). If agent-farm is still dark in 24h, report BLOCKED and hold.
+
+**DECISION 4 — poster-studio: restart the review server on 127.0.0.1.** You held
+correctly, but binding to loopback is the *safe* direction (less exposed than the
+`0.0.0.0` it was). Restart `scripts/serve-listing-review.mjs`; confirm
+`netstat`/`ss` shows `127.0.0.1:4175` only. That is authorized. D-004 Part B
+(edge pass Part B) stays deferred behind bx-04.
+
+**DECISION 5 — poly-bot: build the guarded scheduler you proposed.** Your Q-PB-1
+answer is the plan: one guarded scheduler for the data jobs (VPS pull, queue
+sync, local merge, proxy health, drive offload) on 5–20 min tiers; keep
+`agy_command_safety_watchdog` as a *separate* minute-level compensating control
+BUT **profile its actual CPU/memory cost first** — 1,440 runs/day is unprofiled
+and the box is memory-starved. Retire `ev_hunter_checklist_watchdog`'s direct agy
+dispatch only after agent-farm's lease exists. New task **bx-06** in QUEUE.md.
+
+**DECISION 6 — the machine is Windows-memory-starved (85 MB free).** Not a WSL
+problem — WSL has 12.7 GB available. Cause: ~20 VS Code windows + ~17 Claude Code
+processes + the WSL VM (`vmmemWSL`) which does not return memory to Windows on
+its own. Owner actions (none are mine — they close your sessions):
+  - close most VS Code windows; run agents as **CLI** (`claude -p`, `codex exec`,
+    `agy -p`) not IDE extensions — this is what the conductor/worker-loop already is
+  - add `C:\Users\PC\.wslconfig`:  `[wsl2]` / `memory=8GB` / `autoMemoryReclaim=gradual`
+  - then `wsl --shutdown` once (reconnects your WSL windows)
+
+**There is no per-agent cron.** win-agy, poster-studio, poly-bot, agent-farm run
+ONLY when their session is started (by you, or by the conductor once guard
+passes). The conductor cron (`0 */12`) has been SKIPPING since 04:02 — Windows
+memory below threshold. Fix DECISION 6 and it dispatches on the next even-12h UTC.
+
 ## Log
 
 ## 2026-09-10T04:30Z · agentic-universe

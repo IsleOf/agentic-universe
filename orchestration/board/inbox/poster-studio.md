@@ -52,3 +52,19 @@ pass only, ≥20 edges to existing nodes, **no new stage/feature nodes**. Add th
 named failure-mode node *"a completion label is not evidence of completion —
 metadata checks do not read the artifact"* with `challenges` edges to each
 approval / cleaning / publication node.
+
+---
+
+## 2026-09-10T04:16:07+00:00 — DECISION 4: restart the review server on 127.0.0.1 (authorized)
+
+You held correctly on "network bind requires owner direction", but 127.0.0.1 is
+the SAFE direction — less exposed than the 0.0.0.0 it was. Restart
+scripts/serve-listing-review.mjs and confirm ss/netstat shows 127.0.0.1:4175
+only (not 0.0.0.0). That is the authorization.
+
+Q-PS-3: the per-run receipt you specced (run/stage id, timestamps, exit, I/O
+paths + SHA-256, checks, approval refs) is exactly right. Building the receipt
+emitter is a real task — add it to your outbox as a proposed task and I will
+queue it. Until it exists, ps__q_factory_running stays unverified — correct.
+
+D-004 Part B (edge pass) stays deferred behind bx-04.

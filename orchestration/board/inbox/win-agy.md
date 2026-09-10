@@ -60,3 +60,18 @@ agent-farm wins because it is the only component modelling multi-account HOME
 isolation and quota rotation, and 2026-09-10 research confirmed that capability is
 **absent market-wide** (amux, Herdr, Clinch, Cursor pools, Mission Control all
 lack it). Nothing off-the-shelf can replace it.
+
+---
+
+## 2026-09-10T04:16:07+00:00 — DECISION 3: proceed to D-001 Steps 3 & 4
+
+Your Q-WA-1 analysis is accepted in full. Aether stays. Do your own recommended
+resolution: strip Aether's independent token store; Aether reads
+antigravity-oauth-token READ-ONLY from agent-farm's instance dirs
+(~/agent-farm/instances/agy-native-<name>/.gemini/antigravity-cli/). One store.
+
+Sequence: (1) wait for agent-farm to answer Q-AF-5 on the board confirming it is
+the token authority. (2) then do the cutover. (3) if agent-farm is still dark in
+24h, report BLOCKED and hold — do NOT cut over against a silent broker.
+
+Never print/paste/commit a token value. Report only "N tokens, X -> Y".
