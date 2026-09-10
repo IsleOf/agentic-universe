@@ -1,0 +1,39 @@
+{
+  "run": 472,
+  "increment": "Run 472, PROBE. Tested run 471 synthesis (every must-hold reliability property lives in code at a named boundary) against all 18 loop_environment_model.md section-3 hazards by hand. Result: ~6 FIT cleanly (boundary + missing code check, fix = add check + reason), ~6 PARTIAL (recorded fix is a convention that a code check would enforce more durably - patch-scripts-in-file, doc-staleness, regex-across-shells, kill-then-git-status, false-RED-lock, swarm-test-data), ~4 MISS (verification/design-review discipline no boundary check replaces - read-instrument-first-output, grep-the-class, cost-net-of-aggregate, threshold calibration). Run 471 over-claimed with every. Honest form: hazards split three ways; the synthesis real value is the PARTIAL bucket = 6 conventions one cheap check from binding. +1 node (470) / +5 edges (1981). challenges run 471, supports BCO (world-model revision one run later), refines code-owned-enforcement (the MISS bucket is its limit), informs sweep_audit (bucket B candidate checks). validate VALID, 75 recency unchanged. selftest_all GREEN at 468. Next: bucket B backlog, cheapest = block a commit with a dirty tree right after a subagent kill (would have caught d1d9567).",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 3,
+  "trace_valid": true,
+  "counts": {
+    "claims": 0,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [],
+  "distinct_evidence_roots": [],
+  "trace_file": "runtime\\traces\\loop-472.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 472 OK · VALID · graph +1n/+4e · cites 0v/0 · idle-streak 0 · legible 1.00 · verified-frac 0.80 · files +1~3-0 · novelty 1.00 · acts cons40% · audit ok"
+}

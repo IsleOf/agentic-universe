@@ -13781,6 +13781,33 @@
    "evidence_links": [
     "docs/CONSOLIDATION_PLAN.md"
    ]
+  },
+  {
+   "id": "finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "label": "Tested against the §3 table, the boundary-check synthesis covers ~1/3 of hazards, upgrades the fix for ~1/3, and misses ~1/4",
+   "type": "finding",
+   "status": "to_test",
+   "verification_state": "classified_18_of_18_hazards_by_hand",
+   "approach_family": "harness_design",
+   "branch_key": "deterministic_spine",
+   "confidence": 0.6,
+   "source_date": "2026-09",
+   "source_generation": "probe run 472 - hand-classification of the 18 loop_environment_model.md section 3 hazards against run 471's claim; no external source",
+   "description": "Run 471 claimed 'every reliability property that must hold regardless of model judgment lives in code at a named boundary'. Classifying all 18 section-3 hazards against it: (A) FITS - a boundary with a missing or weak code-owned check, fix = add check + reason: the instrument-must-say-so hazard, the gitignored-baseline snapshot, the auto-extractor guard, the orchestration-ledger, the command-that-cannot-proceed, and the prose-rule-bypassed hazard (which is run 471's own corollary). ~6 of 18. (B) PARTIAL - the recorded fix is a convention, and the synthesis says a code check would be more durable: patch-scripts-in-a-file (could lint), orientation-doc-staleness (could flag by age), swarm-tool-test-data, regex-across-shells (could lint), kill-then-git-status (could block a dirty commit after a kill), false-RED-from-concurrency (could lock). ~6 of 18 - and this is the actionable half: six conventions that should become checks. (C) MISS - genuinely a verification or design-review discipline that no boundary check replaces: read-a-new-instrument's-first-output, grep-for-the-class-after-a-fix, cost-net-of-the-aggregate-score before adding a coordination mechanism, and threshold calibration (scale-don't-fix is parameter tuning, not a missing check). ~4 of 18. So run 471 should not say 'every'. The honest form: hazards split three ways, and the synthesis's real value is (B) - it names six conventions that are one code check away from binding.",
+   "tags": [
+    "synthesis_test",
+    "hazard_classification",
+    "boundary_check",
+    "probe",
+    "refines_a_claim",
+    "actionable"
+   ],
+   "derived_from": [
+    "docs/loop_environment_model.md"
+   ],
+   "evidence_links": [
+    "docs/loop_environment_model.md"
+   ]
   }
  ],
  "edges": [
@@ -32944,6 +32971,34 @@
    "target": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
    "type": "supports",
    "description": "BCO says write the belief down. This says: for the beliefs that are *invariants* (must-hold properties), writing them down is not enough - move them into code at a boundary, because a written rule at a boundary was bypassed twice this session."
+  },
+  {
+   "id": "edge_finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter__challenges__concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "source": "finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "target": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "type": "challenges",
+   "description": "Run 471 said 'every'. Hand-classifying all 18 section-3 hazards: only ~6 fit cleanly, ~4 are verification/design-review disciplines with no boundary, and ~6 are conventions the synthesis would upgrade to code checks. 'Every' is wrong; 'a third, plus a third that should be' is right."
+  },
+  {
+   "id": "edge_finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter__supports__concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+   "source": "finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "target": "concept_a_scaffold_optimiser_should_write_its_world_model_of_how_edits_change_the_environment_into_a_persistent_revisable_document",
+   "type": "supports",
+   "description": "BCO: revise the world model when evidence lands. This is that revision - run 471's claim, tested one run later against the hazard table, needs 'every' softened to 'a third fit, a third should, a quarter never will'."
+  },
+  {
+   "id": "edge_finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter__refines__concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "source": "finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "target": "concept_only_code_owned_enforcement_preserves_both_safety_and_utility_a_bolt_on_guardrail_over_refuses",
+   "type": "refines",
+   "description": "Code-owned enforcement is the right fix WHERE there is a boundary and a must-hold property. The ~4 MISS hazards show the limit: a verification habit (check your instrument's first output) or a design-review question (what does this coordination step cost net of the score) is not something a code check at a boundary can carry."
+  },
+  {
+   "id": "edge_finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter__informs__artifact_sweep_audit",
+   "source": "finding_the_boundary_check_synthesis_covers_a_third_of_hazards_suggests_a_stronger_fix_for_a_third_and_genuinely_misses_a_quarter",
+   "target": "artifact_sweep_audit",
+   "type": "informs",
+   "description": "The 6 PARTIAL hazards are candidate sweep_audit-style checks: doc-staleness by age, a dirty-tree-after-kill flag, a recorder/selftest lock. Each is a convention today that a cheap deterministic check would enforce."
   }
  ]
 }
