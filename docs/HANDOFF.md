@@ -223,16 +223,22 @@ one without reproducing it.
 
 ## 9a. Dashboard status (added 2026-09-10, later) — wmux installed, unified view still open
 
-- **`wmux` installed and running**: `C:\Agents\wmux\wmux.exe` (portable, MIT,
-  github.com/amirlehmam/wmux v2.10.3). Auto-starts at logon (Startup folder
-  shortcut). Confirmed: WSL shell integration + `wmux ssh user@host` for VPS
-  panes (creates a fresh connection — still need `tmux attach -t vps-agents`
-  once inside for poly-bot's existing session, wmux doesn't auto-attach to a
-  pre-existing remote tmux). Its Claude/OpenCode/Kiro hook integration was
-  **declined** ("Not now") — that installs `PreToolUse`/`PostToolUse`/etc.
-  hooks into `~/.claude/settings.json` across every agent, which is a real
-  behavioral change, not just a terminal view; revisit deliberately later via
-  Settings → General if wanted, don't enable it by default.
+- **`wmux` — CORRECTION: was already installed and running, not a fresh
+  install.** `~/.wmux/` has a live daemon (own pipe, own pid file) with logs
+  going back to **2026-07-09** and 8 tracked sessions in `sessions.json` (+4
+  backup rotations) — real prior history, unrelated to this project. The
+  session that "installed" it (`C:\Agents\wmux\wmux.exe`, v2.10.3, portable,
+  MIT) added a second copy and an auto-start shortcut without first checking
+  for an existing instance. **Do not touch `~/.wmux/sessions.json` or
+  `%APPDATA%\wmux\session.json` blindly** — that's the owner's real data.
+  Its Claude/OpenCode/Kiro hook integration was **declined** ("Not now") —
+  that installs `PreToolUse`/`PostToolUse`/etc. hooks into
+  `~/.claude/settings.json` across every agent, a real behavioral change, not
+  just a terminal view; revisit deliberately later via Settings → General.
+  **Screen-control access to configure it was requested and denied by the
+  owner** — panes were not set up programmatically. Manual steps (WSL panes
+  for poly-bot/poster-studio, SSH+tmux for the VPS) were handed to the owner
+  as a short paste-in block instead.
 - **`\\wsl$\Ubuntu\home\dev\.agentic\dashboard.html`** (via `dashboard.py`)
   still exists as the fallback static status page — memory, guard state, next
   queue task, each agent's last board report. Auto-generates + opens at logon
