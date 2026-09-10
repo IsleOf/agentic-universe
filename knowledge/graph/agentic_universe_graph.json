@@ -13892,6 +13892,35 @@
    "evidence_links": [
     "https://arxiv.org/abs/2608.02827"
    ]
+  },
+  {
+   "id": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "label": "Owner-harm is a distinct threat model from third-party harm; credential leak through normal operation is its central case",
+   "type": "concept",
+   "status": "to_test",
+   "verification_state": "abstract_and_pdf_read",
+   "approach_family": "agent_safety",
+   "branch_key": "owner_harm",
+   "confidence": 0.6,
+   "source_date": "2026-04",
+   "source_generation": "2026 mid-year (Dongcheng Zhang, Yiqing Jiang, arXiv:2604.18658, April 2026); pre-dates this session's agent generation, but the threat model is architectural, not model-capability-dependent",
+   "description": "Owner-Harm: A Missing Threat Model for AI Agent Safety (Zhang, Jiang, arXiv:2604.18658, 2026-04). Current agent-safety framing almost entirely protects THIRD PARTIES from an agent (the conventional threat model); owner-harm inverts the question and asks how a well-intentioned agent, operating entirely within normal parameters, damages its own principal's interests - through information disclosure, unauthorized action, or compromised decision-making. Credential leak is the paper's central example: an agent inadvertently exposes API keys, OAuth tokens, or session credentials while doing exactly what it was asked. This is not misuse and not misalignment in the usual sense - the agent did the task correctly and the harm was a side effect of doing it. GROUNDED LIVE, same day as the fold: a diagnostic script in this session ran `cat config.yaml` to check Aether's server-host setting (a completely legitimate, requested read) and the file's plaintext live OAuth access token + refresh token printed into the tool output and this session's own context. No policy was violated, no third party was harmed, and the owner's own credential was still exposed to a wider surface than intended - textbook owner-harm, not caught by any check this project has built, because every safety check so far (gates.py, orphan_scan, kill_reconcile) is oriented at whether an ACTION is permitted, not at what a permitted action's OUTPUT contains.",
+   "tags": [
+    "agent_safety",
+    "owner_harm",
+    "credential_leak",
+    "threat_model",
+    "self_implicating",
+    "diagnostic_output",
+    "abstract_read"
+   ],
+   "derived_from": [
+    "https://arxiv.org/abs/2604.18658",
+    "docs/CONSOLIDATION_PLAN.md"
+   ],
+   "evidence_links": [
+    "https://arxiv.org/abs/2604.18658"
+   ]
   }
  ],
  "edges": [
@@ -33202,6 +33231,34 @@
    "target": "concept_emerging_multi_agent_systems_fail_in_four_families_conformity_epistemic_coordination_goal_incompatibility",
    "type": "refines",
    "description": "Anthropic's field report names 'conformity' as one of four failure families. This gives that family an order parameter and a threshold, and identifies heterogeneity as the lever."
+  },
+  {
+   "id": "edge_concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case__challenges__concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "source": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "target": "concept_every_reliability_property_that_must_hold_regardless_of_model_judgment_lives_in_code_at_a_named_boundary",
+   "type": "challenges",
+   "description": "The run-471 synthesis says a must-hold property lives in code at a named boundary. Owner-harm via credential-in-output has NO clear boundary to put a check at: the harmful thing is not the action (reading a config file is legitimate) but a PROPERTY OF THE OUTPUT, discovered only after the fact. This is a genuine limit case for the boundary-check pattern, not an instance of it."
+  },
+  {
+   "id": "edge_concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case__refines__concept_frontier_models_can_scheme_in_context",
+   "source": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "target": "concept_frontier_models_can_scheme_in_context",
+   "type": "refines",
+   "description": "Scheming is deliberate owner-harm by a misaligned agent. This paper's case is the opposite and, on this evidence, the more common one: harm from a compliant, non-scheming agent doing exactly the requested task."
+  },
+  {
+   "id": "edge_concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case__informs__concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+   "source": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "target": "concept_reputation_disciplines_an_agent_only_when_identity_reset_is_costly_and_the_substrate_makes_reset_free",
+   "type": "informs",
+   "description": "The identity/reputation thread assumes the thing worth protecting is trust IN the agent from others. Owner-harm names a symmetric gap: nothing in that thread protects the owner's OWN secrets from the agent's own legitimate operation."
+  },
+  {
+   "id": "edge_concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case__extends__artifact_kill_reconcile",
+   "source": "concept_owner_harm_is_a_distinct_threat_model_from_third_party_harm_and_credential_leak_through_normal_operation_is_its_central_case",
+   "target": "artifact_kill_reconcile",
+   "type": "extends",
+   "description": "kill_reconcile and orphan_scan both check process/action state at a boundary. Owner-harm's credential-leak case argues for a companion class of check that scans OUTPUT before it is retained or forwarded (a secret-scan on tool results), not process state - a different boundary shape."
   }
  ]
 }

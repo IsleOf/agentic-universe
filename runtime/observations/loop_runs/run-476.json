@@ -1,0 +1,46 @@
+{
+  "run": 476,
+  "increment": "Run 476, fold, fresh axis (safety framing). Folded arXiv:2604.18658 (Owner-Harm: A Missing Threat Model for AI Agent Safety, Zhang/Jiang, 2026-04): current safety framing protects third parties FROM an agent; owner-harm inverts it - a well-intentioned agent operating within normal parameters can damage its own principal, credential leak through normal operation being the central case (agent did the task correctly, harm was a side effect). Grounded live same day: a diagnostic cat config.yaml (legitimate, requested) printed a live Aether OAuth access+refresh token into this session own tool output and context - textbook owner-harm, no policy violated, harm was in the OUTPUT of a permitted action. +1 node (474) / +4 edges (2002): CHALLENGES the run-471 boundary-check synthesis (genuine limit case - no action-level boundary exists when the harm is a property of output not action); refines frontier-scheming (owner-harm is usually the compliant agent); informs identity/reputation thread (symmetric gap: nothing protects the owners secrets FROM the agent); extends kill_reconcile/orphan_scan (argues for a companion check class scanning OUTPUT not state). validate VALID, 76 recency warnings (correctly +1, genuine older-threat-model-challenges-newer-synthesis tension). selftest_all GREEN at 474. Next: a secret-pattern scan on tool output before retention/commit would have caught todays incident - concrete build candidate, different boundary shape (content not state) than the run 471-474 family.",
+  "ok": true,
+  "harness_manifest_hash": "0229416691aebcc9",
+  "trace_events": 4,
+  "trace_valid": true,
+  "counts": {
+    "claims": 1,
+    "tools": 0,
+    "artifacts": 0,
+    "notes": 0
+  },
+  "graph_delta": {
+    "nodes": 1,
+    "edges": 4
+  },
+  "file_footprint": {
+    "added": 1,
+    "modified": 3,
+    "deleted": 0,
+    "deleted_paths": [],
+    "unexpected_paths": [],
+    "n_unexpected": 0,
+    "harness": {
+      "expanded": false,
+      "paths": [],
+      "n_paths": 0,
+      "new_harness_files": [],
+      "retention_evaluated": false,
+      "unevaluated_expansion": false
+    }
+  },
+  "citations": [
+    {
+      "id": "arXiv:2604.18658",
+      "verified": false
+    }
+  ],
+  "distinct_evidence_roots": [
+    "arXiv:2604.18658"
+  ],
+  "trace_file": "runtime\\traces\\loop-476.jsonl",
+  "note": "raw trace gitignored (rule 9); this summary is committed",
+  "status_line": "run 476 OK · VALID · graph +1n/+4e · cites 0v/1 · idle-streak 0 · legible 1.00 · verified-frac 0.79 · files +1~3-0 · novelty 1.00 · acts cons30% · audit ok"
+}
