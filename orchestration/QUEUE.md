@@ -4,16 +4,37 @@ conductor.py picks the FIRST `## TASK` block whose `blocked:` line is empty.
 Owner edits this file freely. Workers mark COMPLETED and (for one-shot tasks)
 move the block to the bottom.
 
-Priority: consolidation tasks first; the research increment is filler that runs
-once everything above it is done, then keeps running daily.
-
 `blocked:` — a task-id that must be DONE first, or empty.
 `kind:` — build | mapping | research | docs-only
+`cwd:`  — optional; the repo the worker runs in (default: agentic-universe)
+
+---
+
+## TASK bx-07 — evaluate Olivares AI (unblocks bx-01)
+blocked:
+kind: research
+
+agent-farm is silent, so its Q-AF-2 is now a conductor task. Answer, in the
+worker's outbox line and a short note at `/home/dev/.agentic/notes/olivares.md`:
+
+Olivares AI v26.8.0, released 2026-09-01, self-hosted single Go binary, AGPL —
+https://www.reddit.com/r/ClaudeCode/comments/1w4cr50/ and its repo/site.
+
+(a) Is its "durable work plane" real atomic single-claim task leasing, or only
+    session persistence?
+(b) Does its signed audit ledger *authenticate* agent identity (real keys), or is
+    it origin-*labelling* like everything else surveyed (amux, pheromone)?
+(c) Does AGPL constrain anything in this estate (the graph is a research artifact,
+    not distributed software — but check)?
+
+VERDICT line: adopt / adopt-partial / build-our-own, three sentences.
+If "adopt" or "adopt-partial", set bx-01 `blocked: SKIP` and explain. Do NOT
+install anything. Research + web only.
 
 ---
 
 ## TASK bx-01 — SQLite work ledger with atomic lease
-blocked:
+blocked: bx-07
 kind: build
 
 Port the `claim` / `complete` / expire semantics from
@@ -69,17 +90,6 @@ selftest for both. `selftest_all` stays GREEN.
 
 ---
 
-## TASK bx-04 — poly-bot graph edge pass
-blocked:
-kind: mapping
-
-Repo `~/poly-bot` (NOT agentic-universe). Execute D-003 Part A from
-`/home/dev/.agentic/board/inbox/poly-bot.md`: edge pass only, ≥25 edges to
-existing nodes, no new nodes, `validate` VALID, commit to a `mapping/` branch.
-Report node/edge counts and edge-ratio delta to `outbox/conductor.md`.
-
----
-
 ## TASK bx-06 — poly-bot: one guarded scheduler for the data crons
 blocked:
 kind: build
@@ -108,20 +118,45 @@ count and the watchdog profile numbers to outbox.
 
 ---
 
+## TASK bx-08 — poster-studio: per-run receipt emitter
+blocked:
+kind: build
+cwd: /home/dev/poster-studio
+
+poster-studio's Q-PS-3 answer specced this: the factory writes no per-run
+receipt, so `ps__q_factory_running` cannot be verified. Build the emitter.
+
+Receipt (one JSON per run, append to `reports/run_receipts.jsonl`):
+run id, stage id, start/end ISO timestamps, exit status, input paths + SHA-256,
+output paths + SHA-256, checks performed, approval references.
+
+Wire it into the stage runner so every stage execution emits one. Add a
+`verify_receipts.py` that reads the log and reports last-run-per-stage with age.
+Then `ps__q_factory_running` can be answered from data. Commit to the
+poster-studio working branch. selftest/validate as the repo requires.
+
+---
+
 ## TASK bx-05 — research increment (filler, re-runnable)
 blocked:
 kind: research
+cwd: /mnt/c/Agents/agentic-universe/repo
 
-Repo `C:\Agents\agentic-universe\repo`. Run ONE knowledge-graph loop increment
-per `docs/HANDOFF.md` §3 — one fold OR one probe, not both. Run
-`python tools/loop_action_class.py report -n 10` first and prefer a non-dominant
-class. Full discipline: validate; selftest_all (backgrounded, recorder AFTER it
-returns); regenerate `docs/source_register.md` if `derived_from` changed;
-`LoopSession(run_no=<next>)`; write the next `docs/auto_sweep_*.md`; commit; push.
+Run ONE knowledge-graph loop increment per `docs/HANDOFF.md` §3 — one fold OR one
+probe, not both. Run `python tools/loop_action_class.py report -n 10` first and
+prefer a non-dominant class. Full discipline: validate; selftest_all
+(backgrounded, recorder AFTER it returns); regenerate `docs/source_register.md`
+if `derived_from` changed; `LoopSession(run_no=<next>)`; write the next
+`docs/auto_sweep_*.md`; commit; push.
 
-This task is NOT moved to COMPLETED — it stays and runs every conductor tick
-once bx-01..bx-04 are done.
+NOT moved to COMPLETED — runs every conductor tick once everything above is done.
 
 ---
 
 ## COMPLETED
+
+## TASK bx-04 — poly-bot graph edge pass
+DONE by poly-bot in-session as commit `d4448e98` on
+`proposals/consolidate-agy-fleet-controller-2026-09-09` (2026-09-09T21:02Z).
+Graph 80 nodes, 137→172 edges (+35), ratio 1.71→2.15, VALID, 0 orphans/dangling.
+2 of 6 questions resolved, 4 remain explicit unverified with resolving artifacts.
