@@ -54,7 +54,13 @@ WORKER_TIMEOUT_S = 3600
 WORKER_BACKEND = os.environ.get("WORKER_BACKEND", "agy")
 WORKER_AGY_ACCOUNT = os.environ.get("WORKER_AGY_ACCOUNT")  # e.g. "agy3", or None
 AGY_BIN = "/home/dev/.local/bin/agy-real"
-AGY_FLAGS = ["--print", "--mode", "accept-edits",
+# Flags FIRST, then -p <prompt> LAST. Do not put bare `--print` before other
+# flags: agy-real consumes the next token as the prompt, so `--print --mode ...`
+# silently takes "--mode" as the prompt and drops the real one. It exits rc=0
+# while doing nothing, which is why every dispatch before 2026-09-11 was a
+# silent no-op. Verified: this form works, `--print='<prompt>'` also works,
+# `--print <flags> <prompt>` does not.
+AGY_FLAGS = ["--mode", "accept-edits",
             "--print-timeout", "%ds" % WORKER_TIMEOUT_S]
 # claude fallback
 CLAUDE_FLAGS = ["--model", MODEL, "--permission-mode", "acceptEdits"]
@@ -173,7 +179,7 @@ def main():
     log(f"dispatching worker for {tid} (cwd={cwd}, backend={WORKER_BACKEND})")
     prompt = CONTRACT.read_text(encoding="utf-8") + "\n\n---\n\n" + block
     if WORKER_BACKEND == "agy":
-        cmd = [AGY_BIN] + AGY_FLAGS + [prompt]
+        cmd = [AGY_BIN] + AGY_FLAGS + ["-p", prompt]
         env = dict(os.environ, AGY_LAUNCHED_VIA_WRAPPER="1")
         if WORKER_AGY_ACCOUNT:
             # matches agy-instance's own HOME-isolation convention
