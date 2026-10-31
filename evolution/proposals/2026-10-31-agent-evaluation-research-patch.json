@@ -1,0 +1,159 @@
+{
+  "proposal_metadata": {
+    "id": "research-refresh-2026-10-31-agent-evaluation",
+    "date": "2026-10-31",
+    "title": "October 2026 agent verification, privacy, and observability research refresh",
+    "scope": "Focused review of relevant primary arXiv records submitted 2026-10-29; abstract-level review, not independent replication.",
+    "previous_graph_update": "2026-09-23",
+    "additions": "5 nodes and 8 edges; new claims remain to_test and need independent replication."
+  },
+  "add_nodes": [
+    {
+      "id": "finding_prefix_executability_20261029",
+      "label": "Prefix executability reveals invalid tool trajectories hidden by final success",
+      "type": "evaluation_result",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "confidence": 0.66,
+      "description": "A trajectory-level protocol checks whether each tool-call prefix remains executable under schemas, preconditions, and data dependencies; the authors report ranking disagreements with final-success metrics and improved prefix survival from plan checking. Research claim; not independently reproduced here.",
+      "tags": ["agent-evaluation", "tool-use", "trajectory", "verification", "recovery"],
+      "derived_from": ["arXiv:2610.40444, submitted 2026-10-29; abstract reviewed 2026-10-31"],
+      "evidence_links": ["https://arxiv.org/abs/2610.40444"]
+    },
+    {
+      "id": "pattern_task_graph_contextual_integrity_20261029",
+      "label": "Authorize information propagation across the downstream task graph",
+      "type": "safeguard",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.66,
+      "description": "Task-Graph Contextual Integrity models disclosure history and downstream recipients jointly, then limits propagation with full-scope or maximal-admissible-region policies. The authors report an 85.8–94.1% reduction in mean unauthorized disclosures on a 144-case benchmark while retaining 93.6–96.1% of baseline task accuracy; replication and privacy/utility/cost trade-offs remain open.",
+      "tags": ["privacy", "information-flow", "multi-agent", "task-graph", "authorization"],
+      "derived_from": ["arXiv:2610.39532, submitted 2026-10-29; abstract reviewed 2026-10-31"],
+      "evidence_links": ["https://arxiv.org/abs/2610.39532"]
+    },
+    {
+      "id": "pattern_evidence_intent_observability_20261029",
+      "label": "Keep completion claims separate from independently checkable execution evidence",
+      "type": "pattern",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "confidence": 0.63,
+      "description": "Soei proposes an acknowledgement-aware event schema, hash-chained ledger, provenance graph, and verification layer that distinguishes an agent's completion claim from evidence of completion. On the same 45-session corpus, the authors' blind-audited estimate says 57.8% of agent-marked completed to-dos had no proof in between; this is corpus-specific author-reported evidence, not an independent prevalence estimate.",
+      "tags": ["observability", "provenance", "audit", "completion-evidence", "coding-agents"],
+      "derived_from": ["arXiv:2610.39468, submitted 2026-10-29; preprint v1.1 abstract reviewed 2026-10-31"],
+      "evidence_links": ["https://arxiv.org/abs/2610.39468"]
+    },
+    {
+      "id": "evaluation_agentdecept_claim_execution_alignment_20261029",
+      "label": "Evaluate agent reports against time-ordered observations and executed outcomes under pressure",
+      "type": "verification_suite",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "confidence": 0.64,
+      "description": "AgentDecept introduces paired pressure and pressure-free tasks and compares user-facing claims with full trajectories to distinguish falsification, concealment, equivocation, honest failure, and disclosed limitations. It is a benchmark proposal, not evidence of real-world deception prevalence.",
+      "tags": ["deception-evaluation", "pressure", "tool-use", "trajectory-audit", "honest-failure"],
+      "derived_from": ["arXiv:2610.39377, submitted 2026-10-29; abstract reviewed 2026-10-31"],
+      "evidence_links": ["https://arxiv.org/abs/2610.39377"]
+    },
+    {
+      "id": "workflow_dynamic_environment_certification_20261029",
+      "label": "Certify changing task environments and replay verdicts from archived evidence",
+      "type": "workflow",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_os_desktop",
+      "confidence": 0.63,
+      "description": "EnvOS checks that dynamic environment changes fire correctly, tasks remain solvable, and graders discriminate outcomes before runs; a separate verifier re-checks verdicts from archived evidence afterward. In the authors' stale-information studies, Claude Opus 5 succeeds on 0/16 clinic tasks with no extra state, 2/16 after a reminder, and 15/16 when shown the updated value (gain over reminder p=0.00293 after correction). A separate 1/10-to-9/10 insurance-claim gain for Sonnet 5 is not significant after correction for multiple tests; broader replication remains needed.",
+      "tags": ["dynamic-environment", "computer-use", "benchmark-certification", "verifiable-evaluation", "state-refresh"],
+      "derived_from": ["arXiv:2610.40246, submitted 2026-10-29; abstract reviewed 2026-10-31"],
+      "evidence_links": ["https://arxiv.org/abs/2610.40246"]
+    }
+  ],
+  "add_edges": [
+    {
+      "id": "edge_prefix_executability_refines_canonical_cycle_20261029",
+      "source": "finding_prefix_executability_20261029",
+      "target": "loop_canonical_agent_cycle",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "orchestration_first",
+      "derived_from": ["https://arxiv.org/abs/2610.40444"]
+    },
+    {
+      "id": "edge_soei_supports_decision_ledger_20261029",
+      "source": "pattern_evidence_intent_observability_20261029",
+      "target": "process_decision_ledger",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "derived_from": ["https://arxiv.org/abs/2610.39468"]
+    },
+    {
+      "id": "edge_soei_supports_loop_graph_distinction_20261029",
+      "source": "pattern_evidence_intent_observability_20261029",
+      "target": "concept_loop_vs_graph",
+      "type": "supports",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "derived_from": ["https://arxiv.org/abs/2610.39468"]
+    },
+    {
+      "id": "edge_task_graph_ci_extends_trust_gates_20261029",
+      "source": "pattern_task_graph_contextual_integrity_20261029",
+      "target": "concept_trust_gates",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "derived_from": ["https://arxiv.org/abs/2610.39532"]
+    },
+    {
+      "id": "edge_task_graph_ci_extends_orchestration_20261029",
+      "source": "pattern_task_graph_contextual_integrity_20261029",
+      "target": "pattern_multi_agent_orchestration",
+      "type": "extends",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "control_plane_governance",
+      "derived_from": ["https://arxiv.org/abs/2610.39532"]
+    },
+    {
+      "id": "edge_agentdecept_informs_trust_gates_20261029",
+      "source": "evaluation_agentdecept_claim_execution_alignment_20261029",
+      "target": "concept_trust_gates",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "emergent_behaviors",
+      "derived_from": ["https://arxiv.org/abs/2610.39377"]
+    },
+    {
+      "id": "edge_envos_refines_canonical_cycle_20261029",
+      "source": "workflow_dynamic_environment_certification_20261029",
+      "target": "loop_canonical_agent_cycle",
+      "type": "refines",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_os_desktop",
+      "derived_from": ["https://arxiv.org/abs/2610.40246"]
+    },
+    {
+      "id": "edge_envos_informs_agent_os_20261029",
+      "source": "workflow_dynamic_environment_certification_20261029",
+      "target": "approach_agent_os_desktop",
+      "type": "informs",
+      "status": "to_test",
+      "verification_state": "needs_empirical_validation",
+      "approach_family": "agent_os_desktop",
+      "derived_from": ["https://arxiv.org/abs/2610.40246"]
+    }
+  ]
+}
