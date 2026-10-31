@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "graph_name": "Agentic Universe high-level orientation GraphRAG",
+  "abstraction": "high",
+  "prepared": "2026-10-31",
+  "purpose": "Orientation and routing only; not an evidence substitute or execution authority.",
+  "source_of_truth": ["README.md", "knowledge/graph/agentic_universe_graph.json", "tools/README.md", "docs/source_register.md"],
+  "rules": [
+    "Every factual claim must link to a source or verified runtime observation.",
+    "Unknown and stale facts remain explicitly unknown/stale; never infer completion from a page visit or status snapshot.",
+    "This graph is intentionally lossy; consult linked canonical artifacts before modifying code or making operational claims."
+  ],
+  "nodes": [
+    {"id":"mission","type":"mission","label":"Evidence-aware study and engineering of agentic systems","summary":"Maintain a versioned research model of emergent agent behaviour and self-improving agent systems, with a tested supporting toolchain.","evidence":["README.md"]},
+    {"id":"research-model","type":"knowledge_system","label":"Canonical research graph","summary":"Curated mechanism-level claims spanning model, harness, swarm, habitat, governance, and orchestration; tensions and counterevidence are retained.","evidence":["knowledge/graph/agentic_universe_graph.json","docs/source_register.md"]},
+    {"id":"toolchain","type":"implementation","label":"Research and self-improving-harness toolchain","summary":"Python tools implement graph validation, research loops, proposal/evidence flow, and tested orchestration primitives.","evidence":["tools/README.md","tools/selftest_all.py"]},
+    {"id":"runtime-evidence","type":"evidence_boundary","label":"Runtime outputs are proposals, not canonical truth","summary":"Traces and observations may inform proposals but must not silently rewrite stable graph knowledge.","evidence":["README.md",".gitignore"]},
+    {"id":"governance","type":"governance","label":"Evidence, challenge, and retraction discipline","summary":"Claims retain provenance and uncertainty; counterclaims are preserved; promotion requires review and verifiable evidence.","evidence":["README.md","docs/source_register.md","docs/what_would_make_this_wrong.md"]},
+    {"id":"ops","type":"operations","label":"Live operations and watchdogs","summary":"Cron/watchdog, queue, and service state are dynamic and must be refreshed from their live source before action.","evidence":["tools/dynamic_tasks_graphrag.py","docs/dynamic_tasks_graphrag.md"]},
+    {"id":"google-connection","type":"integration","label":"Google connection is gated and currently incomplete","summary":"Personal Data Portability requires user OAuth, test-user approval, exact scopes, and a successful API call; Drive upload needs valid write authorization.","evidence":["knowledge/google_connection_graph.json","docs/google_connection_graphrag.md"]},
+    {"id":"collaboration","type":"handover","label":"Safe agent collaboration","summary":"Use task branches, inspect staged diffs, run validators/tests, avoid secrets/raw traces, and document proof and unresolved blockers.","evidence":["handover/github/AGENTIC_UNIVERSE_HANDOVER.md"]}
+  ],
+  "edges": [
+    {"from":"mission","to":"research-model","relation":"expressed_as"},
+    {"from":"mission","to":"toolchain","relation":"implemented_with"},
+    {"from":"research-model","to":"governance","relation":"constrained_by"},
+    {"from":"runtime-evidence","to":"research-model","relation":"may_propose_changes_to"},
+    {"from":"governance","to":"runtime-evidence","relation":"prevents_unverified_promotion"},
+    {"from":"ops","to":"collaboration","relation":"requires_fresh_state_for"},
+    {"from":"google-connection","to":"governance","relation":"inherits_security_and_evidence_gates"},
+    {"from":"collaboration","to":"research-model","relation":"routes_agents_to_canonical_sources"}
+  ]
+}
