@@ -49,8 +49,8 @@ Then inspect the active queue and live cron state, identify one highest-priority
 - The repository is private and the authenticated GitHub identity has Admin permission.
 - The current local branch is `proposals/2026-09-01-emergent-behaviour-cluster`, with 12 commits ahead of its origin tracking branch and substantial uncommitted/untracked work. Do not push this working tree wholesale or assume it is review-ready.
 - The baseline README describes the graph/toolchain and its validation commands; its counts and status are dated and should be refreshed before quoting.
-- The Google connection GraphRAG validates and its selftest was last observed green at 24 nodes/24 edges. The Workspace token check returned `TOKEN_REVOKED`; no Drive write access is verified.
-- Google Drive upload remains blocked until a valid, least-privilege upload authorization is established. Do not ask for passwords, tokens, OAuth codes, or 2FA values in chat.
+- The Google connection GraphRAG validates and its selftest was last observed green at 24 nodes/24 edges. The separate Workspace OAuth token check returned `TOKEN_REVOKED`; it is not the Drive transfer credential.
+- Drive snapshot `Agentic Universe Project Snapshot 2026-10-31` was uploaded via the existing rclone `gd:` remote (folder ID `18T9HmlSYhS0xOFFQEfkviJSNFvCTkNcb`); full `rclone check --download --one-way` returned zero differences across six files. See `handover/drive/DRIVE_ARCHIVE_MANIFEST.json` in the Drive bundle for archive inventory and hash.
 
 ## Collaboration contract
 
