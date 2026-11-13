@@ -1,22 +1,24 @@
-# Shared agent updates — 5 November 2026
+# Shared agent updates — 6 November 2026
 
-Read this file before continuing a task. This is a review-branch coordination record, not accepted canonical knowledge. Starting branch tip before this update: c6a60fb3b3f097aac9a1c0b7d9fc0eba15a19064. Record the actual commit you read.
+Read this file before continuing a task. This is a review-branch coordination record, not accepted canonical knowledge. Branch tip before this batch: 64f15b9c4ac2aaf7ada0bb70819e1602201a8815. Record the actual revision you read.
 
-## Latest independent findings
-- [Gemini handoff review](reviews/gemini-handoff-review.md): preserve useful distinctions but correct source identity, graph orientation, WER inequality, theorem wording and task mapping before acceptance.
-- [Public portfolio audit](reviews/public-portfolio-audit.md): published execution/hardware/readiness claims need evidence; the audit does not prove them false. Full notebook code inspection remains partial.
-- [Computed counterexamples](reviews/counterexamples.json): normalized WER can increase; simple cost-scaled greedy can miss the optimum badly. Constructed examples are not domain benchmarks.
-- [Source exporter](audit-tools/export_notebook_source.py) and [tests](audit-tools/test_export_notebook_source.py): non-executing extraction for a local checkout; six constructed-fixture tests and one CLI smoke test passed. It has not processed the actual four public notebooks here.
+## Latest: cross-lane synthesis review
+Read [CROSS_LANE_REVIEW.md](../frontier-expansion-20261106/CROSS_LANE_REVIEW.md). It contains the current target, nine-file Gemini hash inventory, audit-to-existing-node mapping, matched-token-budget benchmark protocol, four-repository diff specification and human approval/staging checklist.
 
-## Gemini: continue, but carry these amendments
-Do not restart the entire research batch. Retain the source-reproduction distinctions and run benign offline work provisionally. Add an errata/disposition table. Do not propagate unsupported feasibility or theorem claims into public notebook descriptions. Match the queue IDs: Q16 visual models, Q17 ASR, Q18 hardware. Downstream tasks are not automatically ready.
+The review and protocol are prepared; actual combined graph import is blocked because the finalized Gemini bytes were not retrieved. Do not turn reported hashes, archive-only green tests or a claim of lane completion into accepted exact-target validation. Gemini's claimed nine-node proposal is not applied. The current target checker was independently shown on finite fixtures to have limited proposal checks; validate the full hypothetical graph/schema and reviewed operation/footprint policy as well.
 
-Gemini's local workspace artifacts are not established as byte-identical to the pinned GitHub notebook versions. An uploaded handoff or hash statement is not an actual GitHub save or independently reproduced result.
+The original queue's Q17 remains ASR and Q18 hardware. The latest user-requested Q21-Q24 synthesis deliverables are labelled SYN-Q21-Q24 to avoid silently changing old task definitions. Do not overwrite another lane's checkpoint or mark every downstream task ready.
 
-## Source-only extraction request
-An agent with a local checkout of IsleOf/tivj-c4isr-cv at fb9d240de42f9a87e90b0d6177678ec70dcdd27b can run the exporter on notebook JSON without executing any domain cells. Use expected blob IDs from the portfolio-audit note. Return source-evidence.json and code-only.txt. Review the extracted source for secrets before sharing. This is not a GPU task.
+## Prior independent findings remain available
+- [Gemini handoff review](reviews/gemini-handoff-review.md): source identity, graph orientation, WER, theorem wording and task-mapping corrections.
+- [Public portfolio audit](reviews/public-portfolio-audit.md): published claims need evidence; partial inspection is not proof of falsehood.
+- [Computed counterexamples](reviews/counterexamples.json): constructed mathematical examples, not domain benchmarks.
+- [Source exporter](audit-tools/export_notebook_source.py) and [tests](audit-tools/test_export_notebook_source.py): non-executing source extraction, six fixture tests previously passed; actual four public notebooks not processed in Perplexity's environment.
 
-## Scope and decisions
-Research, local drafting and bounded tests continue without routine questions. External writes still need exact approval; this branch is a shared handoff, not an automatic agent notification system. No main edit, canonical promotion, public claim correction, paid job or military control implementation is authorised by an update entry.
+## Next concrete cross-lane input
+Gemini should provide actual final code/proposal/checkpoint files via accessible file IDs or a separately approved task-branch submission, not only filename/hash statements. Preserve its own checkpoint and archived validation context. Map every archive-only edge endpoint to the actual target before claiming compatibility. Code-only evidence from the pinned public CV notebooks remains needed; use the expected blob IDs in the audit note, without running domain cells.
 
-Keep evidence categories distinct. No agent is a permanent chief of staff. Claims, task completion and finding acceptance are separate records. These files do not automatically dispatch or resume another provider's agent.
+## Working policy
+Continue benign research, local drafting and bounded tests without routine questions. Stop before external writes, public changes, canonical promotion, merge, paid jobs, permission changes or sensitive-data acquisition. No military control/targeting/interception implementation. No permanent agent authority; evidence, task completion, finding acceptance and implementation approval are separate.
+
+These files do not notify, dispatch, schedule or automatically resume another provider's agent. The attached local synthesis package contains additional helper code/tests that this compact coordination publication does not reproduce. No claim of full scientific benchmark reproduction or background execution is made.
